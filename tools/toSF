@@ -1,0 +1,37 @@
+#! /bin/bash
+
+## This script uploads the web pages from this sandbox to the public web-site.
+## This action will make the current content live - please doublecheck changes
+## before upload!
+## The public web site is at http://smtcomp.sourceforge.net/
+
+## The script takes a single argument - the sourceforge username
+## The value of that argument will default to the value of $SOURCEFORGE_USERNAME
+
+## You will need to enter your sourceforge password at the prompt
+
+## NOTE: This script should copy all the web files; for some reason the
+## recursive copying did not work, so each subdirectory is explicitly listed.
+## NOTE ALSO: Files deleted in the source set are not deleted from the web
+
+username=$1
+if [ "$username" == "" ]; then username=$SOURCEFORGE_USERNAME ; fi
+
+cd `dirname $0`/../smtcomp-web
+
+
+sftp $username,smtcomp@web.sourceforge.net  << HERE
+mkdir htdocs/2011
+mkdir htdocs/2012
+put [a-z]* htdocs
+cd htdocs/2011
+lcd 2011
+put * .
+cd ../2012
+lcd ../2012
+put * .
+exit
+HERE
+
+
+

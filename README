@@ -1,0 +1,6 @@
+This source tree contains files and tools for SMT-COMP, the annual competition
+among SMT solvers - see the web pages hosted here for more information.
+
+trunk/files - contains all of the public web pages
+
+trunk/tools - contains some development tools

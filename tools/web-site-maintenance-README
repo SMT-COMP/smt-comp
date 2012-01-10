@@ -1,0 +1,68 @@
+This text file documents the public web pages of the SMT-COMP web site.
+Particularly it describes changes needed when creating a new website for a 
+new year.
+
+Created: David R. Cok - 9 January 2012
+
+Top-level organization:
+
+The top-level (in smtcomp-web) holds a directory for each year and a set of
+utility files. The utility files are images and css files; these do not
+change from year to year. The files in a subdirectory for a given year are
+not changed after that year's competition is complete; rather, a new copy of the
+files is created and appropriate edits are performed.
+
+To create a web-site for a new year:
+- create the subdirectory for that year
+- change the link in smtcomp-web/index.html so that the new year is the default
+- copy all the files from the previous year
+- edit the files as described below
+
+WHAT ABOUT THESE:
+bench_selection.shtml
+select_benchmarks_20XX.c
+TreeLimitedRun.c
+
+Major edits needed
+
+application.shtml - edit any changes to the benchmark sets
+
+callXX.txt - rename the file for the current year and edit as appropriate for
+  the new call
+
+rules.shtml
+rules.pdf
+
+Minor edits needed:
+
+acknowledgements.shtml - change date, organiers, and any other competition
+  details that are changing
+
+docs.shtml - no year-dependent edits; new papers should be added as they are
+  published
+
+index.shtml - update the date and the organizers; the page also includes
+  news and other progress, so is likely updated frequently throughout the 
+  time leading up to the competition (and after)
+
+introduction.shtml - update the list of previous competitions
+
+navbar.html - the link to the list of competitors and the link to Results may 
+  need updating
+
+notfound.shtml - update the name of the web-site contact
+
+participants.shtml - update to the new list of participants
+
+previous.shtml - add the previous year to the list of previous year links
+
+smt-comp-prelude.shtml - change the author list as needed
+tools.shtml - lists tools available for working with SMT-COMP and SMT-LIB files;
+  no changes are needed year-by-year, but add entries as new tools are
+  announced
+
+No edits needed:
+smt-comp-postlude.shtml
+smt-style.css
+valid-css.png
+valid-xhtml10.png
