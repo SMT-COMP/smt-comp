@@ -10,8 +10,10 @@
 
 \date{\small This version revised \the\year-\the\month-\the\day}
 
-\title{DRAFT DRAFT Satisfiability Modulo Theories Competition (SMT-COMP) 2012: Rules and 
-Procedures
+\title{Satisfiability Modulo Theories Competition (SMT-COMP) 2012: Rules and 
+Procedures \\
+\small{Draft for comment \\
+(comments due to organizers by 31 January 2012)}
 }
 
 % [morgan] do our own layout of authors; the four-author layout spacing
@@ -25,12 +27,12 @@ Procedures
 
 \author{
 Roberto Bruttomesso\\
-Computer Science\\
-USI, Lugano (Switzerland)
+Dept. of Computer Science\\
+University of Milan, Milan (Italy)
 \and
 David R. Cok \\
 GrammaTech, Inc. \\
-Ithaca, NY USA \\
+Ithaca, NY (USA) \\
 \and
 Alberto Griggio\\
 ES Division\\
@@ -41,6 +43,11 @@ FBK, Trento (Italy)
 
 \def\eg{\textit{e.g.}}
 \def\ie{\textit{i.e.}}
+
+\noindent This is a preliminary version of the 2012 SMT-COMP rules, issued for comment
+by potential participants. Comments should be emailed to the smtcomp mailing
+list or, if necessary, directly to the organizers. To receive full consideration,
+comments must be received by 31 January 2012.
 
 \section{Introduction}
 \label{sec:intro}
@@ -58,33 +65,41 @@ competitions~(\cite{SMTCOMP-2008,BDOS08,SMTCOMP-FMSD,SMTCOMP-JAR}).
 SMT-COMP 2012 is affiliated with the SMT workshop (\url {http://smt2012.loria.fr/}) at the 6th International
 Joint Conference on Automated Reasoning~(IJCAR) (\url{http://ijcar.cs.manchester.ac.uk/}).
 
+Accordingly, researchers are highly encouraged to submit both new benchmarks
+and new or improved solvers to raise the level of competition and advance
+the state-of-the-art in automated SMT problem solving.
+
+Note that SMTCOMP 2012 has several tracks: a main track, a parallel track, an
+application track, an unsat-core track, and a proof-generation track.
+Within a track there are one or more divisions, where each division
+uses benchmarks from a specific SMT-LIB logic (or group of logics).
+
 The rest of this document, updated from the last year's
 version\footnote{Earlier versions of this document include contributions from
 Clark Barrett, Albert Oliveras, Aaron Stump, and Morgan Deters.},
 describes the rules and competition procedures for SMT-COMP~2012.
 The principal changes from last year's version are the following:
-
 \begin{itemize}
 
-\item We are concentrating on just a few of the benchmark divisions this year.
+\item In the main and parallel competition, we are concentrating on just a few of the benchmark divisions this year.
   Some divisions, such as QF\_UF, are subsumed into more expressive
   logics; others have received only light interest in past competitions. Our goal is to
   focus the competition on divisions of particular interest to
-  applications. To encourage new entrants, we will also accept
-  solvers against any benchmark class in an exhibition category:
+  applications. Solvers requesting to be run against other benchmark divisions are
+  welcome and will be run in exhibition mode:
   results will be displayed and publicly reported.
 
 \item We are retaining and accenting last year's ``application track" and
-  encourage submission of benchmarks and competition against these
+  encourage submission of benchmarks for this track and competition against these
   benchmarks.
 
 \item The penalty for producing an incorrect result is increased. Competitors
   producing all correct results are ranked above those producing
   incorrect results (a ``soft" disqualification for unsound tools).
 
-\item We are adding an ``unsat core" division of QF\_BV.
+\item We are adding an ``unsat core" track.
 
-\item We will have an exhibition division of solvers that produce proofs.
+\item We will have an exhibition track of solvers that produce proofs.
 
 \item The competition will be run with a new StarExec service, replacing
   the previous SMT-Exec service. At this writing, the new service is
@@ -93,7 +108,7 @@ The principal changes from last year's version are the following:
 
 \end{itemize}
 
-Additionally, non-competitive divisions and tracks will not be exhibited as
+Additionally, non-competitive divisions will not be exhibited as
 part of the competition: at least two competitors must be entered
 into a division for it to run as part of the competition.
 If necessary, and based on final submissions, the organizers may elect to
@@ -139,7 +154,7 @@ uploaded as a ``competition'' solver via the StarExec upload
 mechanism, or, alternatively, a previously-uploaded solver may be
 marked as a ``competition'' solver.  In either case, \emph{uploads
 must be marked for competition before the deadline;} uploading a solver
-to StarExec is not sufficient for competition entry if it's not marked
+to StarExec is not sufficient for competition entry if it is not marked
 as being a competition entrant.  The md5 checksums of competition
 submissions will be public immediately after the deadline for competition
 entry has passed to ensure transparency, and the submissions themselves
@@ -235,7 +250,7 @@ The versions that are present on StarExec at the conclusion of the
 grace period will be the ones used for the competition, and versions
 submitted after this time will not be used.  The organizers reserve
 the right to start the competition itself at any time after the open
-of the New York Stock Exchange on the morning of June~22.  See
+of the New York Stock Exchange on the morning of June~20.  See
 Section~\ref{sec:timeline} below for a full timeline.
 
 \paragraph{Application track.} %
@@ -275,12 +290,11 @@ or to connect them with a parser for the SMT-LIB version 2.0 format
 \label{sec:exec}
 
 Solvers will be publicly evaluated in the following tracks, listed here and 
-described in detail below. In exhibition tracks, solvers are evaluated and results posted, but no awards are announced. The other tracks are competition tracks; if there are sufficient entrants, a winner will be announced.
+described in detail below. In exhibition divisions of these tracks, solvers are evaluated and results posted, but no awards are announced. The other divisions are competition divisions; if there are sufficient entrants, a winner will be announced.
 \begin{itemize}
-\item a main track: sequential execution evaluated separately on benchmarks from each of several different logics
-\item a parallel track: parallel execution evaluated on the same benchmarks and the same divisions as the main track
-\item application track: evaluation on command scripts [TODO: FOR WHICH LOGICS]
-\item exhibition track: solvers (particularly new entrants) may be submitted against any benchmark division; the solver will be evaluated and the results posted, though not included in competition
+\item a main track: sequential execution evaluated separately on benchmarks from each of several different logics (some competitive and some exhibition divisions)
+\item a parallel track: parallel execution evaluated on the same benchmarks and the same divisions as the main track (some competitive and some exhibition divisions)
+\item application track: evaluation on command scripts (all divisions with sufficient benchmarks and entrants are competitive)
 \item unsat-core track: a competition among solvers capable of computing unsat cores
 \item proof-generation exhibition: an exhibition track for solvers capable of generating proofs
 \end{itemize}
@@ -298,7 +312,8 @@ runs.
 
 If there are enough competitors to run the parallel track, we intend
 to run it before or after the main competition (depending on the
-estimated duration of the track).
+estimated duration of the track). We may choose to use an NYSE seed from a different date
+to accommodate an early start.
 
 The organizers will prioritize the running of the competition tracks, and may shift the
 time period or order of the competition or exhibition tracks in order to complete SMT-COMP
@@ -315,15 +330,20 @@ of a benchmark from the version 1.2 specification.  In more detail, a
 
 \begin{enumerate}
 \item The (single) $\akey{set-logic}$ command setting the benchmark's
-logic is the first command.
+logic is the first command after any $\akey{set-option}$ commands described below.
 % rb 25/3: added
 % \item A (single) \akey{set-option :print-success false} command, sent just
 %       after $\akey{set-logic}$. This is to
 %       avoid the output ``\texttt{success}'' to interfere with the
 %       answer of the solver to the benchmark. 
 \item The $\akey{exit}$ command is the last command.
-\item There is exactly one $\akey{check-sat}$ command,
+\item For tracks other than the application track, there is exactly one $\akey{check-sat}$ command,
 following possibly several $\akey{assert}$ commands.
+\item For the application track, there are one or more \akey{check-sat} commands, 
+  each preceded by one or more \akey{assert} commands 
+  and zero or more \akey{push 1} commands, 
+  and followed by zero or more \akey{pop 1} commands.
+\item Scripts for the application track will have an initial $\akey{set-option :print-success true}$ command.
 \item There is at most one $\akey{set-info}$ command for \texttt{status}.
 %%%%%%%%%%%%%%%%%%% TODO: Need to define the set-info command.
 \item The formulas in the script belong to the benchmark's logic, with
@@ -335,18 +355,17 @@ any free symbols declared in the script.
   or $\akey{declare-fun}$.
   They must be part of the allowed signature expansion for the logic.
   Moreover, all sorts declared with a $\akey{declare-sort}$ command must have zero arity.
-\item In the unsat-core competition, the $\akey{set-logic}$ command is preceded by a 
+\item In the unsat-core competition, the $\akey{set-logic}$ command is preceded by a \\
 $\akey{set-option :produce-unsat-cores true}$ command and the 
 $\akey{check-sat}$ command is followed by a $\akey{get-unsat-core}$ command.
 Also, some or all of the $\akey{assert}$ commands will assert named formula
 (for example, \akey{assert (! P :named F1)}). The $\akey{get-unsat-core}$
 command must return a parenthesized list of formula names, as specified by the 
 SMTLIBv2 standard.
-\item In the proof generation competition, the $\akey{set-logic}$ command is preceded by a 
+\item In the proof generation competition, the $\akey{set-logic}$ command is preceded by a \\
 $\akey{set-option :produce-proofs true}$ command and the 
 $\akey{check-sat}$ command is followed by a $\akey{get-proof}$ command.
-The $\akey{get-proof}$ command must return a proof in a solver-dependent format as an
-S-expression.
+The $\akey{get-proof}$ command must return a proof in a solver-dependent format made known to the organizers.
 \item No other commands besides the ones just mentioned may be used.
 
 \end{enumerate}
@@ -376,11 +395,16 @@ to indicate that it cannot determine satisfiability of the formula.
 For more detailed information on the output format, see the
 description on the StarExec ``Upload a Solver'' page.  %%%%%%% TODO: CHeck this and all referecnes to StarExec
 
+Solvers that register in non-competition logic divisions (cf. section \ref{sec:theories})
+will be run in an exhibition mode: results will be generated and publicly
+posted, but no awards will be announced.
+
 \header{Timeouts.} %
 Each SMT-COMP solver will be executed on an
 unloaded competition machine for each given formula, up to a fixed
 time limit.  The time limit is yet to be determined, but it is
-anticipated to be 20 minutes, as it was in 2011.  Solvers that take more than this
+anticipated to be 20 minutes, as it was in 2011.\footnote{The time limit may be adjusted once we understand the resources and capabilities of the StarExec service.} 
+Solvers that take more than this
 time limit will be killed.  Solvers are allowed to spawn other
 processes.  These will be killed at approximately the same time as the
 first started process, using the TreeLimitedRun script, developed for
@@ -398,14 +422,14 @@ An abort scores the same as if the output is ``\texttt{unknown}''.
 % rb 25/3: added
 Also, as a further measure to prevent misjudgments of solvers,
 any  ``\texttt{success}'' outputs will be 
-ignored\footnote{
+ignored.\footnote{
 Note that SMT-LIBv2 requires to produce a ``\texttt{success}'' answer
 after each \akey{set-logic}, \akey{declare-sort}, \akey{declare-fun} and
 \akey{assert} command (among others), unless the option
 \akey{:print-success} is set to false; ignoring the
 \texttt{success} outputs therefore allows for submitting fully-compliant
 solvers without the need of a wrapper script, while still allowing entrants
-of previous competitions to run without changes.}.
+of previous competitions to run without changes.}
 
 \header{Persistent state.} %
 Solvers are allowed to create and write to
@@ -446,17 +470,8 @@ Participating solvers will be connected to a trace executor
 which will incrementally send commands to the standard input channel of the solver
 and read responses from the standard output channel of the solver.
 The commands will be taken from an \textbf{incremental benchmark script},
-which is an SMT-LIB 2.0 script which satisfies points 1., 2., 4.--7. of the definition of benchmark script given in \S\ref{sec:exec:main}, plus the following:
-
-\begin{enumerate}
-\item[3'.] There are one or more \akey{check-sat} commands, 
-  each preceded by one or more \akey{assert} commands 
-  and zero or more \akey{push 1} commands, 
-  and followed by zero or more \akey{pop 1} commands.
-\end{enumerate}
-
-\noindent
-Furthermore, the trace executor will send a single 
+which is an SMT-LIB 2.0 script which satisfies the rules for an application script given above.
+Note also that the trace executor will send a single 
 \akey{set-option :print-success true} command to the solver before 
 sending commands from the incremental benchmark script.
 
@@ -465,27 +480,21 @@ Solvers must respond immediately to the commands sent by the trace executor,
 with the answers defined in the SMT-LIB 2.0 format specification, that is,
 with a \texttt{success} answer for 
 \akey{set-option}, 
+\akey{set-logic}, 
 \akey{declare-sort}, 
 \akey{declare-fun}, 
 \akey{assert}, 
 \akey{push 1}, 
 and \akey{pop 1} 
 commands,
-and with a \texttt{sat}, \texttt{unsat}, or \texttt{unknown} 
-for \akey{check-sat} commands.
+ with a \texttt{sat}, \texttt{unsat}, or \texttt{unknown} 
+for \akey{check-sat} commands, and with the defined responses for \akey{get-unsat-core} and \akey{get-proof} commands.
 
 \header{Timeouts.}
 A time limit is set for the whole execution of each application
 benchmark (consisting of multiple queries).  We anticipate the
-timeout to be around 30~minutes (as it was in 2011).
+timeout to be around 30~minutes (as it was in 2011).\footnote{The timeout may be adjusted once we have experience with the abilities and resources of the StarExec service.}
 
-\subsection{Exhibition track}
-
-To encourage new entrants in any logic, we will have an exhibition track.
-Any solver submitted for ``competition'' in a non-competitive track will
-be executed on benchmarks for the logic divisions chosen for that solver.
-The results will be made public and the solver acknowledged. Any logic divisions
-for which there are benchmarks may be specified.
 
 \subsection{Unsat-core and proof-generation tracks}
 
@@ -504,20 +513,23 @@ returned unsat-core is well-defined and is still unsatisfiable.
 Similarly, the competition will feature an exhibition track of proof-generating solvers. This is
 simply an exhibition track because there is as yet no SMT-LIB standard way to express proofs. We hope
 that encouraging the capability in solvers will also encourage a common proof format. The exhibition
-will count the number of benchmarks for which a solver successfully generates a proof; the proofs 
-themselves may be spot checked by hand or in a semi-automated fashion, depending on the format.
+will count the number of benchmarks for which a solver successfully generates a proof.
+Solvers submitted against this track must be accompanied by a description of the format of the 
+generated proofs. The organizers are considering how and whether to check the proofs (with automated tools);
+comment from teams submitting proof-generating solvers is welcome. %%TODO
 
-TODO: What benchmark logics will be used. 
-
+The organizers are still reviewing which logic divisions will be supported for the unsat-core and proof generating tracks; 
+those divisions will be announced later.
+Input from teams considering submitting unsat-core or proof generating solvers is welcome.
+%% TODO
 
 \section{Benchmarks and Problem Divisions}
 \label{sec:theories}
 
 
-We expect the problem divisions for SMT-COMP 2012 to include the following
+The competition divisions for SMT-COMP 2012 are planned to be the following
 SMT-LIB \emph{logics}.  These logics are specified in SMT-LIB format on the
-SMT-LIB web page.  Note that the ``QF\_'' prefix means the division's
-formulas are quantifier-free.  However, the organizers reserve the right to add
+SMT-LIB web page.  However, the organizers reserve the right to add
 (remove) divisions if (not) enough benchmarks and solvers exist for a
 particular division.
 
@@ -533,6 +545,12 @@ functions. This logic is also key to software model-checking, but adds arrays (w
 
 \item QF\_UFLIA: uninterpreted functions and linear integer arithmetic (benchmarks may also be taken from  QF\_LIA). This division evaluates reasoning about integers.
 \item QF\_UFLRA: uninterpreted functions and linear real arithmetic (benchmarks may also be taken from  QF\_LRA). This division evaluates reasoning about real numbers.
+
+\item QF\_IDL: quantifier-free formulas to be
+  tested for satisfiability modulo a background theory of integer
+  arithmetic.  The syntax of atomic formulas is restricted to
+  difference logic, i.e. x - y op c, where op is either equality or
+  inequality and c is an integer constant. This division is included because it was highly popular in 2011.
 
 \item AUFLIA$+p$: (quantified) arrays, uninterpreted functions and 
 linear integer arithmetic, patterns included. This and the subsequent divisions evaluate solvers' abilities to handle quantified formula.
@@ -639,8 +657,7 @@ at the low end.
 %%\end{figure}
 
 When 5 or more solvers are used for the
-calculation, two times are dropped from the calculation of the average
-(one at the maximum and one at the minimum).  Solvers giving an
+calculation, the maximum and the minimum times are dropped from the calculation of the average.  Solvers giving an
 incorrect answer are not counted in the average; solvers crashing,
 timing out, or giving an unknown result are considered as taking 30
 minutes (which, with the above formula, pulls the difficulty
@@ -767,6 +784,13 @@ benchmarks.  Some divisions may have fewer than 200 non-\emph{check}
 benchmarks, in which case all of them are included using this selection
 scheme.
 
+Once the StarExec service is evaluated, and if the organizers decide that
+the service has sufficient resources, the target number of benchmarks for 
+a division may be increased above 200, with all subpopulations being enlarged
+proportionately, insofar as there are sufficient benchmarks. The target number
+of benchmarks will not be raised if that requires reducing the timeout limits
+below the values used in 2011.
+
 The main purpose of the algorithm above is to have a balanced and complete set
 of benchmarks.  The one built-in bias is towards industrial rather than crafted
 or random benchmarks.  This reflects a desire by the organizers and agreed upon
@@ -778,7 +802,7 @@ sum, modulo $2^{30}$, of the numbers provided in the system
 descriptions (see Section~\ref{sec:entrants} above) by all SMT-COMP
 entrants other than the organizers.  Additionally, the integer part of
 the opening value of the New York Stock Exchange Composite Index on
-June~25
+a publicized day
 will be added to the other seeding values.  This helps provide transparency,
 by guaranteeing that the organizers cannot manipulate the seed in
 favor of or against any particular submitted solver.  Benchmarks will also be slightly
@@ -812,12 +836,16 @@ All the available benchmarks will be used for the competition.
 As was the case in 2011, no difficulty will be assigned to the benchmarks for the application track.
 Benchmarks will be slightly scrambled before the competition, using the same scrambler and 
 random seed as the main track. 
-% rb 25/3: added
-For this year, the selection algorithm for the application track will be chosen after the
+The selection algorithm for the application track will be chosen after the
  April 15th deadline, when the exact demographic of the benchmarks (collected with a usual
 ``call for benchmarks'') will be available.
 
-TODO: Divisions for unsat core and proof tracks
+\subsection{Benchmarks for the unsat-core and proof-generation tracks}
+
+These benchmarks will be selected from the pool of available and newly submitted benchmarks,
+adjusted to add formula naming for the unsat-core track. The organizers are still discussing
+which logic divisions to use.
+%%TODO: Divisions for unsat core and proof tracks
 
 \section{Judging and Scoring}
 \label{sec:judging}
@@ -827,7 +855,7 @@ The score for each benchmark is a triple $\langle e,n,m\rangle$, with
 $e$ a non-negative number of erroneous results,
 $n\in[0,N]$ an integral number of points scored for the benchmark,
 where $N$ is the number of \akey{check-sat} commands
-in the benchmark, and $m\in[0,T]$ is the (real-valued) time is seconds, where $T$ is
+in the benchmark, and $m\in[0,T]$ is the (real-valued) time in seconds, where $T$ is
 the timeout.  Recall that main track benchmarks will have just one \akey{check-sat} command;
 application track benchmarks may have multiple \akey{check-sat} commands.
 The score for the benchmark is initialized with
@@ -894,7 +922,7 @@ $\langle0,0,0\rangle$ and then computed as follows.
 Scores are summed and ordered as for the main track, except that lower $n$ values are preferred, rather than higher values.
 
 \header{Number of competitors}
-Winners in each Problem Division for which there are at least three
+Winners in each competition Problem Division for which there are at least three
 entrants from distinct research groups competing will be taken to be
 those with the highest score and no erroneous results. In addition to recognizing the overall
 winner in each division, the top solver that provides its source code will also be
@@ -922,7 +950,7 @@ declared.
 \item[June 18 (7pm EDT)] Final versions due, fixing any last-minute
  bugs (this marks the end of the grace period for
  submissions).
-\item[June 22] Opening value of NYSE Composite Index used to complete random seed.
+\item[June 20] Opening value of NYSE Composite Index used to complete random seed.
 \item[June 25--29] Anticipated dates for SMT-COMP 2012.
 \end{description}}
 
@@ -947,9 +975,9 @@ in industrial settings and is keenly interested to know which are the best.
 were also co-organizers in 2011. They are responsible for bringing 
 recommendations from the previous year's experience. They will also 
 be validating the competition setup, checking benchmarks, and
-operating the competition. They are associated with solver groups
-that will be submitting the solvers 
-MathSat and OpenSMT, respectively.
+operating the competition. They have been associated with solver groups
+that have submitted solvers to the competition, and may again in 2012 (in 2011, 
+MathSat and OpenSMT, respectively).
 \end{itemize}
 \bibliographystyle{plain}
 \bibliography{biblio}
