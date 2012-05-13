@@ -18,6 +18,9 @@ To create a web-site for a new year:
 - copy all the files from the previous year
 - edit the files as described below
 
+New files edited in your svn sandbox must be uploaded to the public website.
+Do this using the tools/toSF script.
+
 WHAT ABOUT THESE:
 bench_selection.shtml
 select_benchmarks_20XX.c

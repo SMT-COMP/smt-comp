@@ -11,10 +11,8 @@
 \date{\small This version revised \the\year-\the\month-\the\day}
 
 \title{Satisfiability Modulo Theories Competition (SMT-COMP) 2012: Rules and 
-Procedures \\
-\small{Draft for comment \\
-(comments due to organizers by 31 January 2012)}
-}
+Procedures}
+
 
 % [morgan] do our own layout of authors; the four-author layout spacing
 % was screwed up...
@@ -44,10 +42,8 @@ FBK, Trento (Italy)
 \def\eg{\textit{e.g.}}
 \def\ie{\textit{i.e.}}
 
-\noindent This is a preliminary version of the 2012 SMT-COMP rules, issued for comment
-by potential participants. Comments should be emailed to the smtcomp mailing
-list or, if necessary, directly to the organizers. To receive full consideration,
-comments must be received by 31 January 2012.
+\noindent Comments on this document should be emailed to the smtcomp mailing
+list or, if necessary, directly to the organizers.
 
 \section{Introduction}
 \label{sec:intro}
@@ -82,8 +78,8 @@ The principal changes from last year's version are the following:
 \begin{itemize}
 
 \item In the main and parallel competition, we are concentrating on just a few of the benchmark divisions this year.
-  Some divisions, such as QF\_UF, are subsumed into more expressive
-  logics; others have received only light interest in past competitions. Our goal is to
+  Some divisions, such as QF\_LIA, are subsumed into more expressive
+  logics (QF\_UFLIA for QF\_LIA); others have received only light interest in past competitions. Our goal is to
   focus the competition on divisions of particular interest to
   applications. Solvers requesting to be run against other benchmark divisions are
   welcome and will be run in exhibition mode:
@@ -101,10 +97,10 @@ The principal changes from last year's version are the following:
 
 \item We will have an exhibition track of solvers that produce proofs.
 
-\item The competition will be run with a new StarExec service, replacing
-  the previous SMT-Exec service. At this writing, the new service is
-  still being completed and tested; it will be announced later. (The
-  previous service will be maintained in reserve.)
+\item The competition will be run with the SMT-Exec service used last year.
+  The organizers had expected to use a new StarExec service, replacing
+  the previous SMT-Exec service. However, at this writing the new service
+  is not yet available.
 
 \end{itemize}
 
@@ -127,34 +123,32 @@ list, as clarifications and any updates to these rules will be posted there.
 
 \header{Solver format.} %
 An entrant to SMT-COMP is an SMT solver
-submitted using the StarExec\footnote{StarExec is still under development as of 21 January 2012;
-updates on its progress and use will be posted on www.smtcomp.org and through
-the SMT-COMP mailing list. Statements in these rules may need correction once the UI for the service is completed.} service.  
-StarExec enables members of the
+submitted using the SMT-Exec\footnote{The organizers may switch to StarExec, 
+though Star-Exec is still under development as of 12 May 2012.} service.  
+The execution service enables members of the
 SMT research community to run solvers on jobs consisting of benchmarks
-from the SMT-LIB benchmark library.  Jobs are run on a computer
-cluster purchased with funds from a National Science Foundation
-Computing Research Infrastructure grant.  StarExec is provided free of
+from the SMT-LIB benchmark library.  Jobs are run on a shared computer
+cluster.  The execution service is provided free of
 charge, but it does require a minimal registration, which verifies an
 email address and prevents misuse of the service.  Registered users
 may then upload their own solvers to run, or may run public solvers
-already uploaded to StarExec.  StarExec provides a variety of tabular
+already uploaded to the service.  The service provides a variety of tabular
 and graphical displays of results of solver executions, for
 comparison. For the main (sequential-solver)
 % rb 23/3: I guess also application track runs on 
 % the same clusters as sequential
 and application tracks 
-of SMT-COMP 2012, StarExec will be configured so that jobs are run on a 64-bit,
+of SMT-COMP 2012, the service will be configured so that jobs are run on a 64-bit,
 uniprocessor Linux kernel.  For the parallel-solver track, StarExec
 will be configured so that jobs are run on a 64-bit, multiprocessor
 Linux kernel.
 
 For participation in SMT-COMP, a solver must be
-uploaded as a ``competition'' solver via the StarExec upload
+uploaded as a ``competition'' solver via the service's upload
 mechanism, or, alternatively, a previously-uploaded solver may be
 marked as a ``competition'' solver.  In either case, \emph{uploads
-must be marked for competition before the deadline;} uploading a solver
-to StarExec is not sufficient for competition entry if it is not marked
+must be marked for competition before the deadline}; uploading a solver
+to the service is not sufficient for competition entry if it is not marked
 as being a competition entrant.  The md5 checksums of competition
 submissions will be public immediately after the deadline for competition
 entry has passed to ensure transparency, and the submissions themselves
@@ -166,7 +160,7 @@ for uploading solvers and machine specifications will be posted as soon
 as they are available.
 
 \header{System description.} %
-As part of their submission via StarExec,
+As part of their submission,
 SMT-COMP entrants must also include a short (1--2 pages) description of
 the system.  This should include a list of all authors of the system
 and their present institutional affiliations.  The programming
@@ -179,7 +173,7 @@ integer.  These numbers, collected from all submissions, are used
 to seed the pseudo-random benchmark selection algorithm, as well
 as the benchmark scrambler.
 
-The StarExec upload system will ask for the system description and
+The upload system will ask for the system description and
 the random seed when a solver is marked for competition, so
 their inclusion in the uploaded archive itself is optional.
 
@@ -236,8 +230,8 @@ participate or win.
 \subsection*{Deadlines} %
 
 \paragraph{Main competition track.} %
-SMT-COMP entries must be submitted via StarExec by 7pm, Eastern U.S.
-time, June~15, 2012.  At that time the StarExec service will be
+SMT-COMP entries must be submitted via SMTExec by 7pm, Eastern U.S.
+time, June~15, 2012.  At that time the service will be
 closed to the public to prepare for the competition, with the
 exception that resubmissions of existing entries will be accepted
 until 7pm, Eastern U.S. time, June~18, 2012.  We strongly encourage
@@ -246,7 +240,7 @@ purpose of fixing any bugs that may be discovered and not for adding
 new features as there will be no opportunity to do extensive testing
 using StarExec after the original deadline on June~15.
 
-The versions that are present on StarExec at the conclusion of the
+The versions that are present on the execution service at the conclusion of the
 grace period will be the ones used for the competition, and versions
 submitted after this time will not be used.  The organizers reserve
 the right to start the competition itself at any time after the open
@@ -265,7 +259,7 @@ competition.
 
 \paragraph{Parallel solver track.} %
 Solvers employing concurrency are invited to participate in a
-demonstration that will be run before the regular competition.
+demonstration that will be run in conjunction with the regular competition.
 Parallel solvers must be submitted by the same June~15th deadline,
 with the same grace period for resubmission as in the regular
 competition.  Submissions to both the parallel solver track
@@ -296,7 +290,7 @@ described in detail below. In exhibition divisions of these tracks, solvers are 
 \item a parallel track: parallel execution evaluated on the same benchmarks and the same divisions as the main track (some competitive and some exhibition divisions)
 \item application track: evaluation on command scripts (all divisions with sufficient benchmarks and entrants are competitive)
 \item unsat-core track: a competition among solvers capable of computing unsat cores
-\item proof-generation exhibition: an exhibition track for solvers capable of generating proofs
+\item proof-generation exhibition: an exhibition track for solvers capable of generating proofs (this track is tentative, given that the organizers must work with the SMT-Exec service)
 \end{itemize}
 
 \subsection{Logistics}
@@ -511,16 +505,18 @@ is returned consists of a list of names of formula. In the competition we will c
 returned unsat-core is well-defined and is still unsatisfiable.
 
 Similarly, the competition will feature an exhibition track of proof-generating solvers. This is
-simply an exhibition track because there is as yet no SMT-LIB standard way to express proofs. We hope
+simply an exhibition track because there is as yet no SMT-LIB standard way to express proofs and no
+means of checking the proofs. We hope
 that encouraging the capability in solvers will also encourage a common proof format. The exhibition
 will count the number of benchmarks for which a solver successfully generates a proof.
 Solvers submitted against this track must be accompanied by a description of the format of the 
-generated proofs. The organizers are considering how and whether to check the proofs (with automated tools);
-comment from teams submitting proof-generating solvers is welcome. %%TODO
+generated proofs. 
 
 The organizers are still reviewing which logic divisions will be supported for the unsat-core and proof generating tracks; 
 those divisions will be announced later.
-Input from teams considering submitting unsat-core or proof generating solvers is welcome.
+Input from teams considering submitting unsat-core or proof generating solvers is welcome. In addition, because
+the competition has had to revert to the SMT-Exec, the organizers may simply make the proof genreation demonstration 
+informational or omit it.
 %% TODO
 
 \section{Benchmarks and Problem Divisions}
@@ -721,7 +717,7 @@ be available at \url{www.smtcomp.org}.
   others.  This process is iterated so that it is guaranteed that 200
   benchmarks from the benchmark family are in the selection pool, in
   equal numbers from each subdivision, so far as possible.
-  (In cases where \eg\ there are only two available slots and
+  (In cases where, \eg, there are only two available slots and
   they can be allocated to one of three subdivisions, they are allocated
   randomly but are guaranteed to be allocated to \emph{distinct}
   subdivisions.)
@@ -944,7 +940,7 @@ declared.
 \item[April 15] No new benchmarks can be added after this date, but
   problems with existing benchmarks may be fixed.
 \item[June 1] Benchmark libraries are frozen.
-\item[June 15 (7pm EDT)] Solvers due via StarExec (for
+\item[June 15 (7pm EDT)] Solvers due via SMTExec (for
   all tracks), including system
   descriptions and magic numbers for benchmark scrambling.
 \item[June 18 (7pm EDT)] Final versions due, fixing any last-minute

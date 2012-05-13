@@ -4,7 +4,8 @@
 ## This action will make the current content live - please doublecheck changes
 ## before upload!
 ## The public web site is at http://smtcomp.sourceforge.net/
-## This script only does 2012 pages!!!
+
+## This script uploads all years
 
 ## The script takes a single argument - the sourceforge username
 ## The value of that argument will default to the value of $SOURCEFORGE_USERNAME
@@ -25,8 +26,42 @@ cd `dirname $0`/../smtcomp-web
 
 sftp $username,smtcomp@web.sourceforge.net  << HERE
 put [a-z]* htdocs
-cd htdocs/2012
+cd htdocs
+mkdir 2010
+mkdir 2009
+mkdir 2008
+mkdir 2007
+mkdir 2006
+mkdir 2005
+cd 2012
+rmdir 2010
+rmdir 2009
+rmdir 2008
+rmdir 2007
+rmdir 2006
+rmdir 2005
 lcd 2012
+put * .
+cd ../2011
+lcd ../2011
+put * .
+cd ../2010
+lcd ../2010
+put * .
+cd ../2009
+lcd ../2009
+put * .
+cd ../2008
+lcd ../2008
+put * .
+cd ../2007
+lcd ../2007
+put * .
+cd ../2006
+lcd ../2006
+put * .
+cd ../2005
+lcd ../2005
 put * .
 exit
 HERE
