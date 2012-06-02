@@ -533,14 +533,18 @@ Note that this year we are reducing the number of competitive benchmark division
 Our reasons are to concentrate the competition and to focus development and attention
 on benchmarks that are more challenging and relevant to applications.
 
+In addition, the organizers reserve the right to include in the benchmark population benchmarks
+from subsumed logics. For example, QF\_UFLIA may include some samples from QF\_LIA, and QF\_UFLRA may include some from QF\_LRA.
+We will not use benchmarks from QF\_UF in other divisions.
+
 \begin{itemize}
 
 \item QF\_BV: fixed-width bitvectors. This logic is important to ``bit-blasting'' model checking of software.
 \item QF\_AUFBV: arrays, fixed-width bitvectors and uninterpreted
 functions. This logic is also key to software model-checking, but adds arrays (which can be used for memory models) and uninterpreted functions.
 
-\item QF\_UFLIA: uninterpreted functions and linear integer arithmetic (benchmarks may also be taken from  QF\_LIA). This division evaluates reasoning about integers.
-\item QF\_UFLRA: uninterpreted functions and linear real arithmetic (benchmarks may also be taken from  QF\_LRA). This division evaluates reasoning about real numbers.
+\item QF\_UFLIA: uninterpreted functions and linear integer arithmetic. This division evaluates reasoning about integers.
+\item QF\_UFLRA: uninterpreted functions and linear real arithmetic. This division evaluates reasoning about real numbers.
 
 \item QF\_IDL: quantifier-free formulas to be
   tested for satisfiability modulo a background theory of integer
@@ -895,7 +899,7 @@ That is, fewer errors takes precedence over more correct solutions, which takes 
 
 The unsat-core track will be scored as follows. The score for each benchmark is a triple $\langle e,n,m\rangle$, with
 $e$ a non-negative number of erroneous results,
-$n$ the number of formula in the unsat core for the benchmark,
+$n$ the reduction in number of formula in the unsat core for the benchmark,
 and $m\in[0,T]$ is the (real-valued) time is seconds, where $T$ is
 the timeout. 
 The score for the benchmark is initialized with
@@ -904,18 +908,19 @@ $\langle0,0,0\rangle$ and then computed as follows.
 \item A correctly-reported unsat-core answer after
   $s$~seconds (counting from the beginning of this particular
   \akey{check-sat}) contributes $\langle0,n,s\rangle$ to the running
-  score, where $n$ is the number of formula in the unsat core.
+  score, where $n$ is the reduction in number of formula in the unsat core (number of named formula in the benchmark minus
+  the number reported as the unsat core).
 \item An answer of \texttt{unknown}, an unexpected answer, a crash, or a memory-out during
   execution of the query, or a benchmark timeout, aborts the execution
-  of the benchmark and assigns a score of $\langle0,N,T\rangle$ for the benchmark, where
-  $N$ is the number of named asserted formula in the benchmark and $T$ is the timeout value.
+  of the benchmark and assigns a score of $\langle0,0,T\rangle$ for the benchmark, where
+  $T$ is the timeout value.
   
-\item The score for an incorrect answer to a \akey{check-sat} or \akey{get-unsat-core} command 
-  will be $\langle1,N,T\rangle$, where
-  $N$ is the number of named asserted formula in the benchmark and $T$ is the timeout value.
+\item The score for an incorrect answer to a \akey{check-sat} command 
+  will be $\langle1,0,T\rangle$, where
+  $T$ is the timeout value.
 \end{itemize}
 
-Scores are summed and ordered as for the main track, except that lower $n$ values are preferred, rather than higher values.
+Scores are summed and ordered as for the main track.
 
 \header{Number of competitors}
 Winners in each competition Problem Division for which there are at least three
