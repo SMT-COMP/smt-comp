@@ -28,6 +28,10 @@ put [a-z]* htdocs
 cd htdocs/2012
 lcd 2012
 put * .
+cd reports
+lcd reports
+put * .
+put .htaccess .
 exit
 HERE
 
