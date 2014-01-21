@@ -4,7 +4,7 @@
 ## This action will make the current content live - please doublecheck changes
 ## before upload!
 ## The public web site is at http://smtcomp.sourceforge.net/
-## This script only does 2012 pages!!!
+## This script only does pages for a single year ($year)!!!
 
 ## The script takes a single argument - the sourceforge username
 ## The value of that argument will default to the value of $SOURCEFORGE_USERNAME
@@ -16,6 +16,7 @@
 ## NOTE ALSO: Files deleted in the source set are not deleted from the web
 
 username=$1
+year=2014
 if [ "$username" == "" ]; then username=$SOURCEFORGE_USERNAME ; fi
 if [ "$username" == "" ]; then echo Specify your sourceforge username either on the command line or by setting the environment variable SOURCEFORGE_USERNAME ; exit 1; fi
 
@@ -25,8 +26,8 @@ cd `dirname $0`/../smtcomp-web
 
 sftp $username,smtcomp@web.sourceforge.net  << HERE
 put [a-z]* htdocs
-cd htdocs/2012
-lcd 2012
+cd htdocs/$year
+lcd $year
 put * .
 cd reports
 lcd reports
