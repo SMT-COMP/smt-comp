@@ -26,6 +26,7 @@ cd `dirname $0`/../smtcomp-web
 
 sftp $username,smtcomp@web.sourceforge.net  << HERE
 put [a-z]* htdocs
+mkdir htdocs/$year
 cd htdocs/$year
 lcd $year
 put * .

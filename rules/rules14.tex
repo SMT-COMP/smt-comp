@@ -10,7 +10,7 @@
 
 \date{\small This version revised \the\year-\the\month-\the\day}
 
-\title{Satisfiability Modulo Theories Competition (SMT-COMP) 2012: Rules and 
+\title{Satisfiability Modulo Theories Competition (SMT-COMP) 2014: Rules and 
 Procedures}
 
 
@@ -24,18 +24,23 @@ Procedures}
 \def\header#1{\medskip\noindent\textbf{#1}}
 
 \author{
-Roberto Bruttomesso\\
-Dept. of Computer Science\\
-University of Milan, Milan (Italy)
-\and
 David R. Cok \\
 GrammaTech, Inc. \\
 Ithaca, NY (USA) \\
+cok@frontiernet.net \\
 \and
-Alberto Griggio\\
-ES Division\\
-FBK, Trento (Italy)
+David Deharbe \\
+Federal University of Rio Grande do Norte \\
+Brazil \\
+David.Deharbe@loria.fr \\
+\and
+Tjark Weber \\
+Uppsala University, \\
+Sweden, \\
+tjark.weber@it.uu.se \\ 
 }
+
+
 
 \maketitle
 
@@ -44,6 +49,17 @@ FBK, Trento (Italy)
 
 \noindent Comments on this document should be emailed to the smtcomp mailing
 list or, if necessary, directly to the organizers.
+
+\section{Important dates and information}
+\begin{itemize}
+\item May 15 - deadline for new benchmarks
+\item May 25 - deadline for solver entrants
+\item June 1 - deadline for final versions of solvers (but no new entrants after May 25).
+\item June 17 - SMT workshop; completion of competition.
+\item SMT COMP mailing list: smt-comp@cs.nyu.edu
+\item signup site for mailing list: \url{cs.nyu.edu/mailman/listinfo/smt-comp}
+\item competition web site: \url{www.smtcomp.org}  or \url{smtcomp.sourceforge.net/2014}
+\end{itemize}
 
 \section{Introduction}
 \label{sec:intro}
@@ -57,63 +73,44 @@ propositional reasoning tools, respectively, have spurred significant
 innovation in their fields~\cite{PSS02,leberre+03}.  More information
 on the history and motivation for SMT-COMP can be found at the
 SMT-COMP web site, \url{www.smtcomp.org}, and in reports on previous
-competitions~(\cite{SMTCOMP-2008,BDOS08,SMTCOMP-FMSD,SMTCOMP-JAR}).
-SMT-COMP 2012 is affiliated with the SMT workshop (\url {http://smt2012.loria.fr/}) at the 6th International
-Joint Conference on Automated Reasoning~(IJCAR) (\url{http://ijcar.cs.manchester.ac.uk/}).
+competitions~(\cite{SMTCOMP-2008,BDOS08,SMTCOMP-FMSD,SMTCOMP-JAR,TBD-2012,TBD-2013}).
+SMT-COMP 2014 is affiliated with the SMT workshop (\url {http://smt2014.it.uu.se/}) at the co-located meetings of CAV, IJCAR, and SAT at FLoC 2014 (\url{http://vsl2014.at/}); the competition is part of the
+Olympic Games (\url{http://vsl2014.at/olympics/}).
 
 Accordingly, researchers are highly encouraged to submit both new benchmarks
 and new or improved solvers to raise the level of competition and advance
 the state-of-the-art in automated SMT problem solving.
 
-Note that SMTCOMP 2012 has several tracks: a main track, a parallel track, an
-application track, an unsat-core track, and a proof-generation track.
+SMTCOMP 2014 will have two tracks: the conventional main track and a repeat of 2012's application track.
 Within a track there are one or more divisions, where each division
 uses benchmarks from a specific SMT-LIB logic (or group of logics).
 
-The rest of this document, updated from the last year's
+The rest of this document, revised from the previous year's
 version\footnote{Earlier versions of this document include contributions from
-Clark Barrett, Albert Oliveras, Aaron Stump, and Morgan Deters.},
-describes the rules and competition procedures for SMT-COMP~2012.
-The principal changes from last year's version are the following:
+Clark Barrett, Albert Oliveras, Aaron Stump, Morgan Deters, David Cok, Alberto Griggio, and Roberto Bruttomesso.},
+describes the rules and competition procedures for SMT-COMP~2014.
+The principal changes from last competition are the following:
 \begin{itemize}
-
-\item In the main and parallel competition, we are concentrating on just a few of the benchmark divisions this year.
-  Some divisions, such as QF\_LIA, are subsumed into more expressive
-  logics (QF\_UFLIA for QF\_LIA); others have received only light interest in past competitions. Our goal is to
-  focus the competition on divisions of particular interest to
-  applications. Solvers requesting to be run against other benchmark divisions are
-  welcome and will be run in exhibition mode:
-  results will be displayed and publicly reported.
+\item The competition will be run with StarExec. Accordingly we are simplifying the competition somewhat, since some of the infrastructure needs to be recreated.
+\item We will hold just a main and application track. [ The demonstration parallel solvers, unsat core, and proof generation tracks will be deferred until benchmarks and result analysis tools are reorganized.]
+\item In the main track, we will measure comparative performance within all divisions to which sufficient solvers are submitted.
 
 \item We are retaining and accenting last year's ``application track" and
   encourage submission of benchmarks for this track and competition against these
   benchmarks.
 
-\item The penalty for producing an incorrect result is increased. Competitors
-  producing all correct results are ranked above those producing
-  incorrect results (a ``soft" disqualification for unsound tools).
-
-\item We are adding an ``unsat core" track.
-
-\item We will have an exhibition track of solvers that produce proofs.
-
-\item The competition will be run with the SMT-Exec service used last year.
-  The organizers had expected to use a new StarExec service, replacing
-  the previous SMT-Exec service. However, at this writing the new service
-  is not yet available.
+\item In addition to the traditional SMTCOMP winners, we will recognize winners in other categories, as described below. 
+Also, importantly, the Olympic Games has an award ceremony (with actual medals). A selection of the SMTCOMP winners (as described below) will be awarded Olympic Games medals.
 
 \end{itemize}
 
-Additionally, non-competitive divisions will not be exhibited as
-part of the competition: at least two competitors must be entered
-into a division for it to run as part of the competition.
+All results of the competition will be made public. However, 
+winners will be declared only for divisions in which at least two solvers are submitted.
+Although the organizers may add other solvers for comparison purposes, only solvers that
+are explicitly submitted by their authors' are eligible to be designated as winners.
 If necessary, and based on final submissions, the organizers may elect to
 combine competition divisions to make them competitive (such decisions will
 be made with input from the community).
-
-As in SMT-COMP 2011, the 2012 version will incorporate a small number of
-random ``fuzzer-generated" instances (see below) to help promote
-attention to solver correctness.
 
 It is important for competitors to track discussions on the SMT-COMP mailing
 list, as clarifications and any updates to these rules will be posted there.
@@ -123,104 +120,50 @@ list, as clarifications and any updates to these rules will be posted there.
 
 \header{Solver format.} %
 An entrant to SMT-COMP is an SMT solver
-submitted using the SMT-Exec\footnote{The organizers may switch to StarExec, 
-though Star-Exec is still under development as of 12 May 2012.} service.  
+submitted by its authors using the Star-Exec (\url{http://www.starexec.org}) service.  
 The execution service enables members of the
 SMT research community to run solvers on jobs consisting of benchmarks
 from the SMT-LIB benchmark library.  Jobs are run on a shared computer
 cluster.  The execution service is provided free of
-charge, but it does require a minimal registration, which verifies an
-email address and prevents misuse of the service.  Registered users
+charge, but it does require registration to create a login account.  Registered users
 may then upload their own solvers to run, or may run public solvers
-already uploaded to the service.  The service provides a variety of tabular
-and graphical displays of results of solver executions, for
-comparison. For the main (sequential-solver)
-% rb 23/3: I guess also application track runs on 
-% the same clusters as sequential
-and application tracks 
-of SMT-COMP 2012, the service will be configured so that jobs are run on a 64-bit,
-uniprocessor Linux kernel.  For the parallel-solver track, StarExec
-will be configured so that jobs are run on a 64-bit, multiprocessor
-Linux kernel.
+already uploaded to the service.  
+
 
 For participation in SMT-COMP, a solver must be
-uploaded as a ``competition'' solver via the service's upload
-mechanism, or, alternatively, a previously-uploaded solver may be
-marked as a ``competition'' solver.  In either case, \emph{uploads
-must be marked for competition before the deadline}; uploading a solver
-to the service is not sufficient for competition entry if it is not marked
-as being a competition entrant.  The md5 checksums of competition
-submissions will be public immediately after the deadline for competition
-entry has passed to ensure transparency, and the submissions themselves
-will be made public after the competition.  Source code need not be
-provided.  However, in order to encourage sharing of source code, extra
-recognition will be given to solvers providing source code distributions
-including recognition for the top such solver in each division.  Instructions
-for uploading solvers and machine specifications will be posted as soon
-as they are available.
+uploaded to Star-Exec, made publicly available, and the organizers informed of its presence {|em and thte logic divisions in which it is participating}.
+
+A submission must also include a 32-bit unsigned
+integer.  These numbers, collected from all submissions, are used
+to seed the pseudo-random benchmark selection algorithm, as well
+as the benchmark scrambler.
 
 \header{System description.} %
-As part of their submission,
-SMT-COMP entrants must also include a short (1--2 pages) description of
+As part of a submission,
+SMT-COMP entrants are encouraged to provide a short (1--2 pages) description of
 the system.  This should include a list of all authors of the system
 and their present institutional affiliations.  The programming
 language(s) and basic SMT solving approach employed should be
 described (\eg, lazy integration of a Nelson-Oppen combination with
 SAT, translation to SAT, etc.).  System descriptions are encouraged to
 include a URL for a web site for the submitted tool, but this is
-optional.  System descriptions must also include a 32-bit unsigned
-integer.  These numbers, collected from all submissions, are used
-to seed the pseudo-random benchmark selection algorithm, as well
-as the benchmark scrambler.
-
-The upload system will ask for the system description and
-the random seed when a solver is marked for competition, so
-their inclusion in the uploaded archive itself is optional.
+optional.  
 
 \header{Other systems.} %
 As in previous years, due to limitations on
 computational resources, the organizers reserve the right not to
 accept multiple versions of the same solver (defined as sharing 50\%
 or more of its source code).  The organizers reserve the right to
-submit their own systems, or other systems of interest, to the
+include other systems of interest (such as entrants in previous competitions), to the
 competition.
 
 \header{Wrapper tools.} %
 A \emph{wrapper tool} is defined as any tool
-which calls an SMT solver not written by the author of the wrapper
-tool.  The other solver is called the \emph{wrapped tool}.  There are
-several rules governing wrapper tools that wrap tools that have been or could be submitted as independent entrants.\footnote{A wrapper
-for a wrapped tool that does not accept SMT-LIBv2 format is considered to simply be an SMT version of the underlying tool.}
-For the purposes of these rules,
-multiple versions of a wrapped tool are considered different tools.
-The goal of these rules is to require wrapper tools to outperform the
-tools they wrap (since otherwise, there is no apparent quantitative
-way to argue that the wrapper tool improves upon the wrapped tool).
-
-\begin{itemize}
-\item The name of the wrapper tool must end with ``+name'', where name
-is the name of the wrapped tool (\eg\ ``Flash+CVC3'' for a tool
-wrapping CVC3).
-
-\item If the wrapped tool is from last year's SMT-COMP or earlier, then for
-each division entered by the wrapper tool, if the wrapper tool does not place ahead, according to the scoring
-rules below, of last year's winner in that division, it will be disqualified
-from that division (but not necessarily from the whole competition).
-
-\item If the wrapped tool was released after last year's SMT-COMP,
-then the wrapper tool can be entered only if
-
-\begin{itemize}
-\item Permission has been given by the author of the wrapped tool
-
-\item The wrapped tool is submitted and entered in every division
-      in which the wrapper tool is entered.
-\end{itemize}
-
-For each division entered by the wrapper tool, if the wrapper tool
-does not place ahead of the wrapped tool in that division, it will be
-disqualified from that division.
-\end{itemize}
+which calls one or more SMT solvers not written by the author of the wrapper
+tool.  The other solvers are is called the \emph{wrapped} tools.  
+A wrapper tool must explicitly acknowledge any tools that it wraps.
+Its system description should make clear the technical innovations  by which the
+wrapper tool expects to improve on the wrapped tools.
 
 \header{Attendance.} %
 As with previous SMT-COMPs, submitters of an SMT-COMP entrant need not 
@@ -230,22 +173,25 @@ participate or win.
 \subsection*{Deadlines} %
 
 \paragraph{Main competition track.} %
-SMT-COMP entries must be submitted via SMTExec by 7pm, Eastern U.S.
-time, June~15, 2012.  At that time the service will be
+SMT-COMP entries must be submitted via StarExec and email to the organizers by 7pm, Eastern U.S.
+time, May~25, 2014.  At that time new entrants will be
 closed to the public to prepare for the competition, with the
 exception that resubmissions of existing entries will be accepted
-until 7pm, Eastern U.S. time, June~18, 2012.  We strongly encourage
-participants to use this weekend grace period \emph{only} for the
+until 7pm, Eastern U.S. time, June~1, 2014.  We strongly encourage
+participants to use this grace period \emph{only} for the
 purpose of fixing any bugs that may be discovered and not for adding
 new features as there will be no opportunity to do extensive testing
-using StarExec after the original deadline on June~15.
+using StarExec after the original deadline on May~25.
 
 The versions that are present on the execution service at the conclusion of the
 grace period will be the ones used for the competition, and versions
 submitted after this time will not be used.  The organizers reserve
 the right to start the competition itself at any time after the open
-of the New York Stock Exchange on the morning of June~20.  See
+of the New York Stock Exchange on the morning of June~2.  See
 Section~\ref{sec:timeline} below for a full timeline.
+
+\paragraph{Parallel track}
+StarExec reports both cpu time and wall clock time. The main competition will be measured by cpu time taken across all processes and threads that are spawned by the starting process. For single-process executions the wall-clock time is typically slightly larger than the cpu time. Multi-threaded solvers will see reduced wall-clock times. While we will not run an explicit parallel track in 2014. We will recognize the solvers with the best wall-clock time in each division.
 
 \paragraph{Application track.} %
 The same deadlines and procedure for submitting to the main track will be used
@@ -257,40 +203,16 @@ for this division, using the same scrambler and seed as the main track.
 Entrants should still include a system description, as for the regular
 competition.
 
-\paragraph{Parallel solver track.} %
-Solvers employing concurrency are invited to participate in a
-demonstration that will be run in conjunction with the regular competition.
-Parallel solvers must be submitted by the same June~15th deadline,
-with the same grace period for resubmission as in the regular
-competition.  Submissions to both the parallel solver track
-and the main competition are independent: participants must submit
-explicitly to both events to participate in both, and they may submit
-different (or differently configured) solvers to each.  Benchmarks may
-or may not be scrambled for this division.  Entrants should still
-include a system description, as for the regular competition.
-
-\medskip
-\noindent
-Note that the SMT-COMP organizers may include
-other (``historical'' or otherwise relevant) solvers in all the competition tracks for
-demonstration and comparison.  The organizers reserve the right to
-include or exclude such solvers, and to make simple modifications
-to historical sequential solvers to (na\"ively) take advantage of
-multiple processors 
-or to connect them with a parser for the SMT-LIB version 2.0 format
-(\eg\ by implementing a wrapper tool).
+The infrastructure for the application track is in the process of being recreated for StarExec.
+If it is not ready in time, the organizers may choose to drop this track or only run it as a demonstration track.
 
 \section{Execution of Solvers}
 \label{sec:exec}
 
-Solvers will be publicly evaluated in the following tracks, listed here and 
-described in detail below. In exhibition divisions of these tracks, solvers are evaluated and results posted, but no awards are announced. The other divisions are competition divisions; if there are sufficient entrants, a winner will be announced.
+Solvers will be publicly evaluated in the following tracks. In exhibition divisions of these tracks, solvers are evaluated and results posted, but no awards are announced. The other divisions are competition divisions; if there are sufficient entrants, a winner will be announced.
 \begin{itemize}
-\item a main track: sequential execution evaluated separately on benchmarks from each of several different logics (some competitive and some exhibition divisions)
-\item a parallel track: parallel execution evaluated on the same benchmarks and the same divisions as the main track (some competitive and some exhibition divisions)
+\item a main track: sequential execution evaluated separately on benchmarks from each of the logics for which there are benchmarks in StarExec.
 \item application track: evaluation on command scripts (all divisions with sufficient benchmarks and entrants are competitive)
-\item unsat-core track: a competition among solvers capable of computing unsat cores
-\item proof-generation exhibition: an exhibition track for solvers capable of generating proofs (this track is tentative, given that the organizers must work with the SMT-Exec service)
 \end{itemize}
 
 \subsection{Logistics}
@@ -298,29 +220,24 @@ described in detail below. In exhibition divisions of these tracks, solvers are 
 \header{Dates of competition.}
 %
 We anticipate that the bulk of the main track of the competition will take place during
-the course of IJCAR 2012, from June~26 to the 29th.  Results will be
-announced in a special session of IJCAR, on the last day of the
-conference, as well as at the SMT workshop and on the SMT-COMP web site.  Intermediate results
+the weeks leading up to SMT 2014, from about June~2 to the July~17.  Results will be
+announced at SMT 2014 and in an awards ceremony scheduled by the Olympic Games coordinator.
+  Intermediate results
 will be regularly posted to the SMT-COMP website as the competition
 runs.
 
-If there are enough competitors to run the parallel track, we intend
-to run it before or after the main competition (depending on the
-estimated duration of the track). We may choose to use an NYSE seed from a different date
-to accommodate an early start.
 
 The organizers will prioritize the running of the competition tracks, and may shift the
 time period or order of the competition or exhibition tracks in order to complete SMT-COMP
-in the course of the IJCAR conference.
+prior to the SMT workshop and awards ceremony.
 
 \header{Input and Output.}
 %
 Participating solvers must read a single benchmark script (defined
 below, not part of the 2.0 standard), presented on its standard input
 channel. The script is in the concrete syntax of the SMT-LIB format,
-version 2.0.  A benchmark script is essentially just the translation
-of a benchmark from the version 1.2 specification.  In more detail, a
-\textbf{benchmark script} is just a script where:
+version 2.0.   A
+\textbf{benchmark script} is just a text file containing a sequence of SMTLIBv2 commands in which:
 
 \begin{enumerate}
 \item The (single) $\akey{set-logic}$ command setting the benchmark's
@@ -349,17 +266,8 @@ any free symbols declared in the script.
   or $\akey{declare-fun}$.
   They must be part of the allowed signature expansion for the logic.
   Moreover, all sorts declared with a $\akey{declare-sort}$ command must have zero arity.
-\item In the unsat-core competition, the $\akey{set-logic}$ command is preceded by a \\
-$\akey{set-option :produce-unsat-cores true}$ command and the 
-$\akey{check-sat}$ command is followed by a $\akey{get-unsat-core}$ command.
-Also, some or all of the $\akey{assert}$ commands will assert named formula
-(for example, \akey{assert (! P :named F1)}). The $\akey{get-unsat-core}$
-command must return a parenthesized list of formula names, as specified by the 
-SMTLIBv2 standard.
-\item In the proof generation competition, the $\akey{set-logic}$ command is preceded by a \\
-$\akey{set-option :produce-proofs true}$ command and the 
-$\akey{check-sat}$ command is followed by a $\akey{get-proof}$ command.
-The $\akey{get-proof}$ command must return a proof in a solver-dependent format made known to the organizers.
+
+
 \item No other commands besides the ones just mentioned may be used.
 
 \end{enumerate}
@@ -375,19 +283,19 @@ please refer to the SMT-LIB format specification
 and the above definition of benchmark script for the official specification 
 of the input format for SMT-COMP.
 
-\subsection{Main track and parallel track}
+\subsection{Main track}
 \label{sec:exec:main}
 
 The main track competition will consist of selected benchmarks in each of the
-logic divisions given below.
+logic divisions.
 Each benchmark script will be presented to the standard input of the solver.
 Each SMT-COMP entrant is then expected to attempt to report on its
 standard output channel whether the formula is satisfiable
 (``\texttt{sat}'', in lowercase, without the quotation marks) or unsatisfiable
 (``\texttt{unsat}'').  An entrant may also report ``\texttt{unknown}''
 to indicate that it cannot determine satisfiability of the formula.
-For more detailed information on the output format, see the
-description on the StarExec ``Upload a Solver'' page.  %%%%%%% TODO: CHeck this and all referecnes to StarExec
+
+The main track competition uses a StarExec postprocessor (SMT2 results conserv) to accumulate the results.
 
 Solvers that register in non-competition logic divisions (cf. section \ref{sec:theories})
 will be run in an exhibition mode: results will be generated and publicly
@@ -397,14 +305,14 @@ posted, but no awards will be announced.
 Each SMT-COMP solver will be executed on an
 unloaded competition machine for each given formula, up to a fixed
 time limit.  The time limit is yet to be determined, but it is
-anticipated to be 20 minutes, as it was in 2011.\footnote{The time limit may be adjusted once we understand the resources and capabilities of the StarExec service.} 
+anticipated to be 1500 seconds (25 minutes) of wall clock time and 6000 seconds of CPU time.\footnote{The time limit may be adjusted once we understand the resources and capabilities of the StarExec service and the number of competition solvers.} 
+% TBD- TODO - how to constrain solvers to single processes?
 Solvers that take more than this
 time limit will be killed.  Solvers are allowed to spawn other
 processes.  These will be killed at approximately the same time as the
-first started process, using the TreeLimitedRun script, developed for
-the CASC competition and available on the SMT-COMP web page.  A
+first started process.  A
 timeout scores the same as if the output is ``\texttt{unknown}''.
-%%%%%%%%%%% TODO: Clarify time limit
+
 
 \header{Aborts and unparsable output.} %
 Solvers which exit before the time
@@ -413,11 +321,10 @@ or producing output other than \texttt{sat}, \texttt{unsat}, or
 \texttt{unknown})
 will be considered to have aborted. 
 An abort scores the same as if the output is ``\texttt{unknown}''. 
-% rb 25/3: added
 Also, as a further measure to prevent misjudgments of solvers,
 any  ``\texttt{success}'' outputs will be 
 ignored.\footnote{
-Note that SMT-LIBv2 requires to produce a ``\texttt{success}'' answer
+Note that SMT-LIBv2 requires that a solver produce a ``\texttt{success}'' answer
 after each \akey{set-logic}, \akey{declare-sort}, \akey{declare-fun} and
 \akey{assert} command (among others), unless the option
 \akey{:print-success} is set to false; ignoring the
@@ -444,7 +351,7 @@ answers either \texttt{sat} or \texttt{unsat}.  In this interaction an SMT-solve
 required to accept queries incrementally via its standard input channel.
 
 In order to facilitate the evaluation of the solvers in this track, we
-will set up a ``simulation'' of the aforementioned interaction, as was done in 2011. In
+will set up a ``simulation'' of the aforementioned interaction, as was done in 2012. In
 particular each benchmark in the application track represents a realistic
 communication trace, containing multiple \akey{check-sat} commands (possibly
 with corresponding \akey{push 1}/\akey{pop 1} commands), which
@@ -487,94 +394,36 @@ for \akey{check-sat} commands, and with the defined responses for \akey{get-unsa
 \header{Timeouts.}
 A time limit is set for the whole execution of each application
 benchmark (consisting of multiple queries).  We anticipate the
-timeout to be around 30~minutes (as it was in 2011).\footnote{The timeout may be adjusted once we have experience with the abilities and resources of the StarExec service.}
+timeout to be around 25~minutes (as it has been in the past).\footnote{The timeout may be adjusted once we have experience with the abilities and resources of the StarExec service.}
 
 
-\subsection{Unsat-core and proof-generation tracks}
-
-Applications such as software verification and model checking are enhanced by having
-proofs and unsatisfiable cores available from SMT solvers. Accordingly we are 
-encouraging solvers to add such capabilities by recognizing them in SMTCOMP 2012.
-
-The unsat-core track will evaluate solvers' capability to generate unsatisfiable cores for
-problems that are known to be unsatisfiable. Solvers will be measured by the smallness of
-the unsat core they return. The SMT-LIBv2 language accommodates this functionality by 
-providing two features: the ability to name top-level (asserted) formula and the ability to
-request an unsat-core after a check-sat command returns \texttt{unsat}. The unsat-core that
-is returned consists of a list of names of formula. In the competition we will check that the
-returned unsat-core is well-defined and is still unsatisfiable.
-
-Similarly, the competition will feature an exhibition track of proof-generating solvers. This is
-simply an exhibition track because there is as yet no SMT-LIB standard way to express proofs and no
-means of checking the proofs. We hope
-that encouraging the capability in solvers will also encourage a common proof format. The exhibition
-will count the number of benchmarks for which a solver successfully generates a proof.
-Solvers submitted against this track must be accompanied by a description of the format of the 
-generated proofs. 
-
-The organizers are still reviewing which logic divisions will be supported for the unsat-core and proof generating tracks; 
-those divisions will be announced later.
-Input from teams considering submitting unsat-core or proof generating solvers is welcome. In addition, because
-the competition has had to revert to the SMT-Exec, the organizers may simply make the proof genreation demonstration 
-informational or omit it.
-%% TODO
 
 \section{Benchmarks and Problem Divisions}
 \label{sec:theories}
 
+In 2012 the competition ran only some logics as competitive divisions.
+In 2014 we will revert to previous practice and run all logics as competitive divisions, if there are multiple solvers submitted.
 
-The competition divisions for SMT-COMP 2012 are planned to be the following
-SMT-LIB \emph{logics}.  These logics are specified in SMT-LIB format on the
-SMT-LIB web page.  However, the organizers reserve the right to add
-(remove) divisions if (not) enough benchmarks and solvers exist for a
-particular division.
-
-Note that this year we are reducing the number of competitive benchmark divisions.
-Our reasons are to concentrate the competition and to focus development and attention
-on benchmarks that are more challenging and relevant to applications.
-
-In addition, the organizers reserve the right to include in the benchmark population benchmarks
+The organizers reserve the right to include in the benchmark population for a given logic benchmarks
 from subsumed logics. For example, QF\_UFLIA may include some samples from QF\_LIA, and QF\_UFLRA may include some from QF\_LRA.
 We will not use benchmarks from QF\_UF in other divisions.
-
-\begin{itemize}
-
-\item QF\_BV: fixed-width bitvectors. This logic is important to ``bit-blasting'' model checking of software.
-\item QF\_AUFBV: arrays, fixed-width bitvectors and uninterpreted
-functions. This logic is also key to software model-checking, but adds arrays (which can be used for memory models) and uninterpreted functions.
-
-\item QF\_UFLIA: uninterpreted functions and linear integer arithmetic. This division evaluates reasoning about integers.
-\item QF\_UFLRA: uninterpreted functions and linear real arithmetic. This division evaluates reasoning about real numbers.
-
-\item QF\_IDL: quantifier-free formulas to be
-  tested for satisfiability modulo a background theory of integer
-  arithmetic.  The syntax of atomic formulas is restricted to
-  difference logic, i.e. x - y op c, where op is either equality or
-  inequality and c is an integer constant. This division is included because it was highly popular in 2011.
-
-\item AUFLIA$+p$: (quantified) arrays, uninterpreted functions and 
-linear integer arithmetic, patterns included. This and the subsequent divisions evaluate solvers' abilities to handle quantified formula.
-\item AUFLIA$-p$: (quantified) arrays, uninterpreted functions and 
-linear integer arithmetic, patterns not included.
-\item AUFNIRA: (quantified) arrays, uninterpreted functions and 
-mixed nonlinear integer and real arithmetic
-
-\end{itemize}
 
 \subsection{Main and parallel tracks}
 
 \header{Benchmark sources.} %
 Benchmark formulas for these divisions
-will be drawn from the SMT-LIB library.  Any benchmarks added to
-SMT-LIB by the April 15th release (see the timeline in
-Section~\ref{sec:timeline}) will be considered eligible.  SMT-COMP
+will be drawn from the SMT-LIB library. The deadline for new benchmarks is
+May 15. The organizers will be checking and curating these until June 1;
+the organizers reserve the option to exclude new benchmarks if any prove problematic for some reason.
+SMT-COMP
 attempts to give preference to benchmarks that are ``real-world,'' in
 the sense of coming from or having some intended application outside
 SMT.
 
-\header{Benchmark availability.} % A first release of the competition
-Benchmarks will be made available by April 15, 2012.
-% A second and almost final release will be available on June 1st. 
+\header{Benchmark availability.} % 
+A first release of the competition
+benchmarks will be made available by May 15, 2014.
+A second and almost final release will be available on June 1st. 
 No additional
 benchmarks will be added after this date, but benchmarks may be
 modified or removed to fix possible bugs or other issues, or to adjust their difficulty score (see below). 
@@ -602,22 +451,23 @@ categories:
   cannot be represented beyond some maximum value, such as
   $2^{31}-1$).
 
-  \noindent%\textbf{New for 2010:} 
-  Using the same random seed as
-  for benchmark selection and scrambling, 5 ``check'' benchmarks will
-  be randomly generated using Robert Brummayer's SMT fuzzing
-  tool~\cite{brummayer+09}.  The (exact version of this) tool will be
-  publicly available from the SMT-COMP~2012 web site before the
-  competition.  Since these benchmarks are generated after the random
-  seed is fixed, they cannot be known in advance to any competitors,
-  including the organizers.  The rationale for including these
-  benchmarks is to try to take a step towards stronger certification
-  that solvers are correct.  In future years, we envision SMT-COMP
-  requiring that solvers pass some kind of pre-qualifying round based
-  on SMT fuzzing.  The inclusion of these fuzzing benchmarks that are
-  not known in advance is intended to encourage (without requiring)
-  solver implementors to test their solvers using fuzzing or similar
-  bug-discovery techniques.
+%  \noindent%\textbf{New for 2010:} 
+%  Using the same random seed as
+%  for benchmark selection and scrambling, 5 ``check'' benchmarks will
+%  be randomly generated using Robert Brummayer's SMT fuzzing
+%  tool~\cite{brummayer+09}.  The (exact version of this) tool will be
+%  publicly available from the SMT-COMP~2012 web site before the
+%  competition.  Since these benchmarks are generated after the random
+%  seed is fixed, they cannot be known in advance to any competitors,
+%  including the organizers.  The rationale for including these
+%  benchmarks is to try to take a step towards stronger certification
+%  that solvers are correct.  In future years, we envision SMT-COMP
+%  requiring that solvers pass some kind of pre-qualifying round based
+%  on SMT fuzzing.  The inclusion of these fuzzing benchmarks that are
+%  not known in advance is intended to encourage (without requiring)
+%  solver implementors to test their solvers using fuzzing or similar
+%  bug-discovery techniques.
+  
 \item \emph{industrial.} These benchmarks come from some real application
       and are produced by tools such as bounded model checkers, static analyzers, extended
       static checkers, etc.
@@ -628,67 +478,20 @@ categories:
 \end{itemize}
 
 \header{Benchmark selection.} %
-Before the selection process, each benchmark will be assigned a
-\emph{difficulty:} a number between 0.0 and 5.0 inclusive, calculated as in 2011.  The
-difficulty for a particular benchmark will be assigned by running SMT
-solvers from previous competitions that finished in good
-standing and using the formula:
 
-\[\mathrm{difficulty} = {5\cdot\ln\!\left(1+A^2\right) \over \ln\!\left(1+30^2\right)}\]
+The benchmarks are assigned a difficulty. For 2014, the difficulty measure is the
+cpu time taken by the best performing solver in the 2013 SMTEVAL. These times will be posted 
+as soon after May 15 as possible.
 
-\noindent
-where $A$ is the average time for the solvers to correctly solve the
-instance (in minutes).  This computation of difficulties
-replaces a simpler formulation in earlier SMT-COMPs that didn't take
-into account the time solvers take.  This calculation of difficulty
-recognizes that problems requiring more time by many solvers are
-more difficult problems.  The logarithm is used to
-mark a larger change in difficulty (given a corresponding increase in
-solver average time) at smaller time scales than at higher ones (if $A=1$,
-difficulty is 0.5; at $A=1.7$, difficulty is 1.0; but a difficulty of 2.0
-requires that $A=4$); the square is used to flatten out this curve sightly
-at the low end.  
-%%Figure~\ref{difficultyplot} shows this curve.
-%%
-%%\begin{figure}
-%%  \centerline{\epsffile{difficultyplot.eps}}
-%%  \caption{The shape of the difficulty assignment curve.}
-%%  \label{difficultyplot}
-%%\end{figure}
-
-When 5 or more solvers are used for the
-calculation, the maximum and the minimum times are dropped from the calculation of the average.  Solvers giving an
-incorrect answer are not counted in the average; solvers crashing,
-timing out, or giving an unknown result are considered as taking 30
-minutes (which, with the above formula, pulls the difficulty
-toward~5.0).  If there are available solvers, but no average is
-defined under these rules, the difficulty shall be 5.0.  For new
-divisions, where there are no available solvers to compute the
-difficulty, the difficulty will be computed using whatever means are
-available to the organizers for that purpose.
-
-The following scheme will be used to choose competition benchmarks
-within each division.  Unknown-status benchmarks from SMT-LIB are
-considered ineligible for competition and are not used.
-%
-The selection
-is implemented by our benchmark selection tool, source for which will
-be available at \url{www.smtcomp.org}.
-%%% TODO: Make sure this tool is available.
-
+The selection of benchmarks for the competition will be biased towards more difficult benchmarks
+as follows. First, the benchmark pool is culled as follows:
 \begin{enumerate}
 
-\item \textbf{Check benchmarks included.} %
-  All benchmarks in category \emph{check} are included.
-
 \item \textbf{Retire very easy benchmarks.} %
-  The most difficult~300 non-check non-unknown benchmarks in each
-  division are always included, together with all benchmarks on which
-  at least one 2011 solver required more than 5~seconds.  \emph{This
-    is intended to have the effect of retiring ``very easy''
-    benchmarks that were solved by every 2011 solver in less
-    than 5~seconds, \emph{unless} doing so reduces the pool of
-    benchmarks for the division to less than~300.}
+  Eliminate benchmarks for which all of the current solvers in SMTEVAL-2103
+  solved the benchmark in under 5 seconds,
+  \emph{unless} doing so reduces the pool of
+    benchmarks for the division to less than~300.
 
 \item \textbf{Retire inappropriate benchmarks.} %
   The competition organizers will remove from the eligibility pool
@@ -696,104 +499,188 @@ be available at \url{www.smtcomp.org}.
   for competition, or cut the size of certain benchmark families to
   avoid their over-representation.
 
-\item\label{step:pool} \textbf{Division selection pools created.} %
-  For non-\emph{check} benchmarks, selection pools are created.
-  For benchmark families with $\leq200$ eligible,
-  non-\emph{check} benchmarks, all are added to this pool;
-  otherwise, 200 such benchmarks are added to the pool with the
-  following distribution:
-%
-  \begin{itemize}
-  \item 20 with solution \textbf{sat} and difficulty on $\left[0,1\right]$
-  \item 20 with solution \textbf{sat} and difficulty on $\left(1,2\right]$
-  \item 20 with solution \textbf{sat} and difficulty on $\left(2,3\right]$
-  \item 20 with solution \textbf{sat} and difficulty on $\left(3,4\right]$
-  \item 20 with solution \textbf{sat} and difficulty on $\left(4,5\right]$
-  \item 20 with solution \textbf{unsat} and difficulty on $\left[0,1\right]$
-  \item 20 with solution \textbf{unsat} and difficulty on $\left(1,2\right]$
-  \item 20 with solution \textbf{unsat} and difficulty on $\left(2,3\right]$
-  \item 20 with solution \textbf{unsat} and difficulty on $\left(3,4\right]$
-  \item 20 with solution \textbf{unsat} and difficulty on $\left(4,5\right]$
-  \end{itemize}
-%
-  If 20 are not available in one of these subdivisions, all that are
-  available are added, and remaining slots are reallocated to the
-  others.  This process is iterated so that it is guaranteed that 200
-  benchmarks from the benchmark family are in the selection pool, in
-  equal numbers from each subdivision, so far as possible.
-  (In cases where, \eg, there are only two available slots and
-  they can be allocated to one of three subdivisions, they are allocated
-  randomly but are guaranteed to be allocated to \emph{distinct}
-  subdivisions.)
-
-\item\textbf{Category slot allocation.} %
-  Next, 200 slots are allocated for the division as follows:\footnote{The
-  number ``200'' is a guideline, and is expected to be used.  However, the
-  SMT-COMP organizers reserve the right to reduce this to an appropriate
-  value to ensure a timely end to the competition, and may do so on a
-  per-division basis.  The category allotments, etc., will remain the same
-  proportion of the total.}
-%
-  \begin{itemize}
-  \item 170 from category \emph{industrial}
-  \item 20 from category \emph{crafted}
-  \item 10 from category \emph{random}
-  \end{itemize}
-%
-  If there are fewer than 20 (respectively, 10) \emph{crafted} or
-  \emph{random} benchmarks in the division pool, more
-  \emph{industrial} slots are allocated to make 200 total for the
-  division.  If there are too few \emph{industrial} benchmarks in the
-  division pool, more \emph{crafted} slots are allocated to make 200
-  total for the division.  (In no division are there not enough of
-  both industrial and crafted benchmarks.)
-
-\item\textbf{Category subdivision slot allocation.} %
-  For each category, given that it has $n$ slots allocated to it,
-  the slot allocation is further subdivided as follows:
-%
-  \begin{itemize}
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left[0,1\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left(1,2\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left(2,3\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left(3,4\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left(4,5\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left[0,1\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left(1,2\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left(2,3\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left(3,4\right]$
-  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left(4,5\right]$
-  \end{itemize}
-%
-  Remaining slots are allocated randomly to distinct subdivisions.
-  If there aren't enough benchmarks in the pool meeting one or more of
-  the above subdivision requirements for the category, the subdivision
-  allocation is reduced to the number available in the pool that meet
-  the requirements.  To make up the full category allotment, remaining
-  slots are allocated equally to subdivisions with enough benchmarks
-  in the pool meeting their requirements.  This process ensures that
-  all slots can be filled with benchmarks from the pool.
-
-\item\textbf{Benchmark selection.} %
-  Benchmarks from the pool are assigned randomly to slots.
 \end{enumerate}
-%
-In the end, up to 200 non-\emph{check} benchmarks per division are
-included in the competition, together with all the \emph{check}
-benchmarks.  Some divisions may have fewer than 200 non-\emph{check}
-benchmarks, in which case all of them are included using this selection
-scheme.
 
-Once the StarExec service is evaluated, and if the organizers decide that
-the service has sufficient resources, the target number of benchmarks for 
-a division may be increased above 200, with all subpopulations being enlarged
-proportionately, insofar as there are sufficient benchmarks. The target number
-of benchmarks will not be raised if that requires reducing the timeout limits
-below the values used in 2011.
+Then, for each division, the benchmarks are divided into quintiles according to the difficulty measure.
+Then a random selection of N competition benchmarks is made as follows:
+\begin{itemize}
+\item N*40\% are taken from the top quintile, if sufficient benchmarks are available
+\item additional benchmarks are taken from the second quintile, to produce N*55\% benchmarks, if sufficient benchmarks are available
+\item additional benchmarks are taken from the third quintile, to produce N*70\% benchmarks, if sufficient benchmarks are available
+\item additional benchmarks are taken from the fourth quintile, to produce N*85\% benchmarks, if sufficient benchmarks are available
+\item any remaining needed benchmarks are taken from the bottom quintile.
+\end{itemize}
+Within each quintile selection, if sufficient benchmarks are available, 85\% will be chosen from the industrial benchmarks,
+
+Since the organizers at this point are unsure how long a set of benchmarks may take (which will depend also on the number of solvers submitted), the competition will be run in {\em heats}. Some number $N$ of benchmarks will be selected and the competition run. If there is time, an additional $N_1$ benchmarks will be run, etc., until the end of the competition is reached.
+
+%Before the selection process, each benchmark will be assigned a
+%\emph{difficulty:} a number between 0.0 and 5.0 inclusive, calculated as in previous years.  The
+%difficulty for a particular benchmark will be assigned by running SMT
+%solvers from previous competitions that finished in good
+%standing and using the formula:
+%
+%\[\mathrm{difficulty} = {5\cdot\ln\!\left(1+A^2\right) \over \ln\!\left(1+30^2\right)}\]
+%
+%\noindent
+%where $A$ is the average time for the solvers to correctly solve the
+%instance (in minutes).  This computation of difficulties
+%replaces a simpler formulation in earlier SMT-COMPs that didn't take
+%into account the time solvers take.  This calculation of difficulty
+%recognizes that problems requiring more time by many solvers are
+%more difficult problems.  The logarithm is used to
+%mark a larger change in difficulty (given a corresponding increase in
+%solver average time) at smaller time scales than at higher ones (if $A=1$,
+%difficulty is 0.5; at $A=1.7$, difficulty is 1.0; but a difficulty of 2.0
+%requires that $A=4$); the square is used to flatten out this curve sightly
+%at the low end.  
+%%%Figure~\ref{difficultyplot} shows this curve.
+%%%
+%%%\begin{figure}
+%%%  \centerline{\epsffile{difficultyplot.eps}}
+%%%  \caption{The shape of the difficulty assignment curve.}
+%%%  \label{difficultyplot}
+%%%\end{figure}
+%
+%When 5 or more solvers are used for the
+%calculation, the maximum and the minimum times are dropped from the calculation of the average.  Solvers giving an
+%incorrect answer are not counted in the average; solvers crashing,
+%timing out, or giving an unknown result are considered as taking 30
+%minutes (which, with the above formula, pulls the difficulty
+%toward~5.0).  If there are available solvers, but no average is
+%defined under these rules, the difficulty shall be 5.0.  For new
+%divisions, where there are no available solvers to compute the
+%difficulty, the difficulty will be computed using whatever means are
+%available to the organizers for that purpose.
+%
+%The following scheme will be used to choose competition benchmarks
+%within each division.  Unknown-status benchmarks from SMT-LIB are
+%considered ineligible for competition and are not used.
+%
+%The selection
+%is implemented by our benchmark selection tool, source for which will
+%be available at \url{www.smtcomp.org}.
+%%%% TODO: Make sure this tool is available.
+%
+%\begin{enumerate}
+%
+%\item \textbf{Check benchmarks included.} %
+%  All benchmarks in category \emph{check} are included.
+%
+%\item \textbf{Retire very easy benchmarks.} %
+%  The most difficult~300 non-check non-unknown benchmarks in each
+%  division are always included, together with all benchmarks on which
+%  at least one 2011 solver required more than 5~seconds.  \emph{This
+%    is intended to have the effect of retiring ``very easy''
+%    benchmarks that were solved by every 2011 solver in less
+%    than 5~seconds, \emph{unless} doing so reduces the pool of
+%    benchmarks for the division to less than~300.}
+%
+%\item \textbf{Retire inappropriate benchmarks.} %
+%  The competition organizers will remove from the eligibility pool
+%  certain SMT-LIB benchmarks that are inappropriate or uninteresting
+%  for competition, or cut the size of certain benchmark families to
+%  avoid their over-representation.
+%
+%\item\label{step:pool} \textbf{Division selection pools created.} %
+%  For non-\emph{check} benchmarks, selection pools are created.
+%  For benchmark families with $\leq200$ eligible,
+%  non-\emph{check} benchmarks, all are added to this pool;
+%  otherwise, 200 such benchmarks are added to the pool with the
+%  following distribution:
+%%
+%  \begin{itemize}
+%  \item 20 with solution \textbf{sat} and difficulty on $\left[0,1\right]$
+%  \item 20 with solution \textbf{sat} and difficulty on $\left(1,2\right]$
+%  \item 20 with solution \textbf{sat} and difficulty on $\left(2,3\right]$
+%  \item 20 with solution \textbf{sat} and difficulty on $\left(3,4\right]$
+%  \item 20 with solution \textbf{sat} and difficulty on $\left(4,5\right]$
+%  \item 20 with solution \textbf{unsat} and difficulty on $\left[0,1\right]$
+%  \item 20 with solution \textbf{unsat} and difficulty on $\left(1,2\right]$
+%  \item 20 with solution \textbf{unsat} and difficulty on $\left(2,3\right]$
+%  \item 20 with solution \textbf{unsat} and difficulty on $\left(3,4\right]$
+%  \item 20 with solution \textbf{unsat} and difficulty on $\left(4,5\right]$
+%  \end{itemize}
+%%
+%  If 20 are not available in one of these subdivisions, all that are
+%  available are added, and remaining slots are reallocated to the
+%  others.  This process is iterated so that it is guaranteed that 200
+%  benchmarks from the benchmark family are in the selection pool, in
+%  equal numbers from each subdivision, so far as possible.
+%  (In cases where, \eg, there are only two available slots and
+%  they can be allocated to one of three subdivisions, they are allocated
+%  randomly but are guaranteed to be allocated to \emph{distinct}
+%  subdivisions.)
+%
+%\item\textbf{Category slot allocation.} %
+%  Next, 200 slots are allocated for the division as follows:\footnote{The
+%  number ``200'' is a guideline, and is expected to be used.  However, the
+%  SMT-COMP organizers reserve the right to reduce this to an appropriate
+%  value to ensure a timely end to the competition, and may do so on a
+%  per-division basis.  The category allotments, etc., will remain the same
+%  proportion of the total.}
+%%
+%  \begin{itemize}
+%  \item 170 from category \emph{industrial}
+%  \item 20 from category \emph{crafted}
+%  \item 10 from category \emph{random}
+%  \end{itemize}
+%%
+%  If there are fewer than 20 (respectively, 10) \emph{crafted} or
+%  \emph{random} benchmarks in the division pool, more
+%  \emph{industrial} slots are allocated to make 200 total for the
+%  division.  If there are too few \emph{industrial} benchmarks in the
+%  division pool, more \emph{crafted} slots are allocated to make 200
+%  total for the division.  (In no division are there not enough of
+%  both industrial and crafted benchmarks.)
+%
+%\item\textbf{Category subdivision slot allocation.} %
+%  For each category, given that it has $n$ slots allocated to it,
+%  the slot allocation is further subdivided as follows:
+%%
+%  \begin{itemize}
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left[0,1\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left(1,2\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left(2,3\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left(3,4\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{sat} with difficulty on $\left(4,5\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left[0,1\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left(1,2\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left(2,3\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left(3,4\right]$
+%  \item $\left\lfloor n\over10\right\rfloor$ slots for solution \textbf{unsat} with difficulty on $\left(4,5\right]$
+%  \end{itemize}
+%%
+%  Remaining slots are allocated randomly to distinct subdivisions.
+%  If there aren't enough benchmarks in the pool meeting one or more of
+%  the above subdivision requirements for the category, the subdivision
+%  allocation is reduced to the number available in the pool that meet
+%  the requirements.  To make up the full category allotment, remaining
+%  slots are allocated equally to subdivisions with enough benchmarks
+%  in the pool meeting their requirements.  This process ensures that
+%  all slots can be filled with benchmarks from the pool.
+%
+%\item\textbf{Benchmark selection.} %
+%  Benchmarks from the pool are assigned randomly to slots.
+%\end{enumerate}
+%%
+%In the end, up to 200 non-\emph{check} benchmarks per division are
+%included in the competition, together with all the \emph{check}
+%benchmarks.  Some divisions may have fewer than 200 non-\emph{check}
+%benchmarks, in which case all of them are included using this selection
+%scheme.
+%
+%Once the StarExec service is evaluated, and if the organizers decide that
+%the service has sufficient resources, the target number of benchmarks for 
+%a division may be increased above 200, with all subpopulations being enlarged
+%proportionately, insofar as there are sufficient benchmarks. The target number
+%of benchmarks will not be raised if that requires reducing the timeout limits
+%below the values used in 2011.
 
 The main purpose of the algorithm above is to have a balanced and complete set
-of benchmarks.  The one built-in bias is towards industrial rather than crafted
-or random benchmarks.  This reflects a desire by the organizers and agreed upon
+of benchmarks.  The  built-in bias is towards industrial rather than crafted
+or random benchmarks and towards more difficult benchmarks.
+  This reflects a desire by the organizers and agreed upon
 by the SMT community to emphasize problems that come from real applications.
 
 Pseudo-random numbers will be generated using the standard C library
@@ -818,13 +705,12 @@ cheating).
 
 \header{Benchmark sources.} %
 Benchmarks for the application track will be collected by the SMT-COMP organizers.
-Any benchmark available to the organizers by April 15th (see the timeline in
-Section~\ref{sec:timeline}) will be considered eligible.
+Any benchmark available to the organizers by June 1st will be considered eligible.
 
 \header{Benchmark availability.} 
 A first release of the application track
-benchmarks will be made available March 15, 2012.
-More benchmarks can be collected, until April 15.
+benchmarks will be made available May 15, 2014.
+More benchmarks can be collected, until June 1.
 No additional
 benchmarks will be added after this date, but benchmarks can be
 modified or removed to fix possible bugs or other issues. 
@@ -832,30 +718,22 @@ The final release that will be used for the competition will be posted on
 June 1.
 
 \header{Benchmark demographics and selection.} 
-All the available benchmarks will be used for the competition. 
-As was the case in 2011, no difficulty will be assigned to the benchmarks for the application track.
+A random selection of all the available benchmarks will be used for the competition. 
+As was the case in 2012, no difficulty will be assigned to the benchmarks for the application track.
 Benchmarks will be slightly scrambled before the competition, using the same scrambler and 
 random seed as the main track. 
-The selection algorithm for the application track will be chosen after the
- April 15th deadline, when the exact demographic of the benchmarks (collected with a usual
-``call for benchmarks'') will be available.
-
-\subsection{Benchmarks for the unsat-core and proof-generation tracks}
-
-These benchmarks will be selected from the pool of available and newly submitted benchmarks,
-adjusted to add formula naming for the unsat-core track. The organizers are still discussing
-which logic divisions to use.
-%%TODO: Divisions for unsat core and proof tracks
+If the organizers determine that there is adequate time to complete the competition, all of the benchmarks will be used. Otherwise a unbiased random subset will be used to ensure timely completion of the competition.
 
 \section{Judging and Scoring}
 \label{sec:judging}
 
-\header{Main and application tracks}
+\subsection{Main and application tracks}
+\header{Scoring}
 The score for each benchmark is a triple $\langle e,n,m\rangle$, with
 $e$ a non-negative number of erroneous results,
 $n\in[0,N]$ an integral number of points scored for the benchmark,
 where $N$ is the number of \akey{check-sat} commands
-in the benchmark, and $m\in[0,T]$ is the (real-valued) time in seconds, where $T$ is
+in the benchmark, and $m\in[0,T]$ is the (real-valued) (TBD - which kind of time) time in seconds, where $T$ is
 the timeout.  Recall that main track benchmarks will have just one \akey{check-sat} command;
 application track benchmarks may have multiple \akey{check-sat} commands.
 The score for the benchmark is initialized with
@@ -895,32 +773,6 @@ Total scores are compared lexicographically---a score $\langle e,n,m\rangle$ is 
 $\langle e',n',m'\rangle$ iff $e < e'$ or ($e = e'$ and $n > n'$) or ($e = e'$ and $n = n'$ and $m < m'$).
 That is, fewer errors takes precedence over more correct solutions, which takes precedence over less time taken.
 
-\header{Unsat-core track}
-
-The unsat-core track will be scored as follows. The score for each benchmark is a triple $\langle e,n,m\rangle$, with
-$e$ a non-negative number of erroneous results,
-$n$ the reduction in number of formula in the unsat core for the benchmark,
-and $m\in[0,T]$ is the (real-valued) time is seconds, where $T$ is
-the timeout. 
-The score for the benchmark is initialized with
-$\langle0,0,0\rangle$ and then computed as follows.
-\begin{itemize}
-\item A correctly-reported unsat-core answer after
-  $s$~seconds (counting from the beginning of this particular
-  \akey{check-sat}) contributes $\langle0,n,s\rangle$ to the running
-  score, where $n$ is the reduction in number of formula in the unsat core (number of named formula in the benchmark minus
-  the number reported as the unsat core).
-\item An answer of \texttt{unknown}, an unexpected answer, a crash, or a memory-out during
-  execution of the query, or a benchmark timeout, aborts the execution
-  of the benchmark and assigns a score of $\langle0,0,T\rangle$ for the benchmark, where
-  $T$ is the timeout value.
-  
-\item The score for an incorrect answer to a \akey{check-sat} command 
-  will be $\langle1,0,T\rangle$, where
-  $T$ is the timeout value.
-\end{itemize}
-
-Scores are summed and ordered as for the main track.
 
 \header{Number of competitors}
 Winners in each competition Problem Division for which there are at least three
@@ -932,6 +784,17 @@ For Problem Divisions with fewer than three
 entrants, the results will be reported but no winner officially
 declared.
 
+\subsection{Other recognitions}
+The organizers will also recognize the following contribution:
+\begin{itemize}
+\item {\em Best new entrant}. The best performing entrant from a new solver implementation team. as measured by the average of 
+(solver time)/(winning solver time) over the competition benchmarks.
+\item Others TBD
+\end{itemize}
+
+\subsection{Olympic Games medals}
+
+TBD
 
 \section{Timeline}
 \label{sec:timeline}
@@ -939,46 +802,39 @@ declared.
 \nobreak
 \vbox{% no page break here, please!
 \begin{description}
-\item[March 15] First version of the benchmark library for the application track posted for comment.
-  First version of the benchmark scrambler, benchmark selector and trace exector made available.
-\item[April 15] Final version of the benchmark scrambler, benchmark selector and trace exector made available.
-\item[April 15] No new benchmarks can be added after this date, but
-  problems with existing benchmarks may be fixed.
-\item[June 1] Benchmark libraries are frozen.
-\item[June 15 (7pm EDT)] Solvers due via SMTExec (for
-  all tracks), including system
+\item[May 15] Deadline for benchmark contributions.
+  First version of the benchmark scrambler, benchmark selector and trace executor made available.
+\item[May 25] First versions of solver competitors are due to the organizers.
+\item[June 1] Final version of the benchmark scrambler, benchmark selector and trace executor made available.
+\item[June 1] Benchmark libraries are frozen; final versions of solver competitors due.
+\item[June 1 (7pm EDT)] Final versions of solvers due via StarExec (for
+  all tracks), including divisions being entered, system
   descriptions and magic numbers for benchmark scrambling.
-\item[June 18 (7pm EDT)] Final versions due, fixing any last-minute
- bugs (this marks the end of the grace period for
- submissions).
-\item[June 20] Opening value of NYSE Composite Index used to complete random seed.
-\item[June 25--29] Anticipated dates for SMT-COMP 2012.
+\item[June 2] Opening value of NYSE Composite Index used to complete random seed.
+\item[July 17] SMT 2014; end of competition.
 \end{description}}
 
 \section{Mailing List}
 \label{sec:ps}
 
-Interested parties should subscribe to the SMT-COMP mailing list, a
-link to which is found at \url{www.smtcomp.org}.  Important
+Interested parties should subscribe to the SMT-COMP mailing list:
+.  Important
 late-breaking news and any necessary clarifications and edits to these
 rules will be announced there, and it is the primary way that such
 announcements will be communicated.
 
 \section{Disclaimer}
 \begin{itemize}
-\item David Cok is the chief organizer of SMT-COMP 2012. He is 
+\item David Cok is the chief organizer of SMT-COMP 2014. He is 
 responsible for all policy and procedure decisions, such as these
 rules. He is not associated 
 with any group creating or submitting solvers. He has used solvers
 in industrial settings and is keenly interested to know which are the best.
 
-\item Alberto Griggio and Roberto Bruttomesso are co-organizers. They 
-were also co-organizers in 2011. They are responsible for bringing 
-recommendations from the previous year's experience. They will also 
+\item David Deharbe and Tjark Weber are co-organizers. 
+They will  
 be validating the competition setup, checking benchmarks, and
-operating the competition. They have been associated with solver groups
-that have submitted solvers to the competition, and may again in 2012 (in 2011, 
-MathSat and OpenSMT, respectively).
+operating the competition. Deharbe is associated with the solver group producing the veriT solver.
 \end{itemize}
 \bibliographystyle{plain}
 \bibliography{biblio}
