@@ -1,0 +1,35 @@
+#! /bin/bash
+
+## This script uploads the web pages from this sandbox to the public web-site.
+## This action will make the current content live - please doublecheck changes
+## before upload!
+## The public web site is at http://smtcomp.sourceforge.net/
+
+## This script uploads just the material that is common to all years,
+## in the parent directory of the various year subdirectories
+
+## The script takes a single argument - the sourceforge username
+## The value of that argument will default to the value of $SOURCEFORGE_USERNAME
+
+## You will need to enter your sourceforge password at the prompt
+## (or have a private key setup)
+
+## NOTE: Files deleted in the source set are not deleted from the web
+
+
+username=$1
+if [ "$username" == "" ]; then username=$SOURCEFORGE_USERNAME ; fi
+if [ "$username" == "" ]; then echo Specify your sourceforge username either on the command line or by setting the environment variable SOURCEFORGE_USERNAME ; exit 1; fi
+
+
+cd `dirname $0`/../smtcomp-web
+
+
+sftp $username,smtcomp@web.sourceforge.net  << HERE
+cd htdocs
+put [a-z]*
+exit
+HERE
+
+
+
