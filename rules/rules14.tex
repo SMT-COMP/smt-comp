@@ -134,6 +134,9 @@ integer.  These numbers, collected from all submissions, are used
 to seed the pseudo-random benchmark selection algorithm, as well
 as the benchmark scrambler.
 
+Information about how to configure and upload a solver is contained in the StarExec user guide on its wiki:
+\url{https://wiki.uiowa.edu/display/stardev/User+Guide}.
+
 \header{System description.} %
 As part of a submission,
 SMT-COMP entrants are encouraged to provide a short (1--2 pages) description of
@@ -223,8 +226,12 @@ prior to the SMT workshop and awards ceremony.
 
 \header{Input and Output.}
 %
-Participating solvers must read a single benchmark script presented on its standard input
-channel. The script is in the concrete syntax of the SMT-LIB format,
+Participating solvers must read a single benchmark script presented as its first argument.
+Note that previous competitions presented benchmarks to a solver on its standard input
+channel, and that the application track will send command inputs to the solver's standard input.
+Accordingly, solvers are advised to support both input mechanisms.
+
+ The script is in the concrete syntax of the SMT-LIB format,
 version 2.0, though with a restricted set of commands.   A
 \textbf{benchmark script} is just a text file containing a sequence of SMTLIBv2 commands in which:
 
@@ -272,7 +279,7 @@ Problem Divisions indicated during their submission to SMT-COMP.
 
 The main track competition will consist of selected benchmarks in each of the
 logic divisions.
-Each benchmark script will be presented to the standard input of the solver.
+Each benchmark script will be presented to the solver as its first command-line argument.
 Each SMT-COMP entrant is then expected to attempt to report on its
 standard output channel whether the formula is satisfiable
 (``\texttt{sat}'', in lowercase, without the quotation marks) or unsatisfiable
@@ -328,7 +335,7 @@ checker. This interaction, ideally, happens by means of an online
 communication between the model checker and the solver: the model
 checker repeatedly sends queries to the SMT solver, which in turn
 answers either \texttt{sat} or \texttt{unsat}.  In this interaction an SMT-solver is
-required to accept queries incrementally via its standard input channel.
+required to accept queries incrementally via its {\em standard input channel}.
 
 In order to facilitate the evaluation of the solvers in this track, we
 will set up a ``simulation'' of the aforementioned interaction, as was done in 2012. In
