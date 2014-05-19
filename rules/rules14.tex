@@ -92,12 +92,8 @@ describes the rules and competition procedures for SMT-COMP~2014.
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
 \item The competition will be run with StarExec (\url{www.starexec.org}). Accordingly we are simplifying the competition somewhat, since some of the infrastructure needs to be recreated.
-\item We will hold just a main and application track. [ The demonstration unsat core, and proof generation tracks will be deferred until benchmarks and result analysis tools are reorganized.]
+\item We will hold just a main and application track. [ The demonstration unsat core, and proof generation tracks will be deferred until benchmarks and result analysis tools are reorganized.] We encourage submission of solvers and benchmarks for both tracks.
 \item In the main track, we will measure comparative performance within all divisions to which at least two solvers are submitted. We will use the data to determine both sequential and parallel winners.
-
-\item We are retaining and accenting last year's ``application track" and
-  encourage submission of benchmarks for this track and competition against these
-  benchmarks.
 
 \item We will recognize winners as measured by number of benchmarks solved; we will also recognize best open source contributions and best new entrants, as described below. 
 Also, importantly, the FLoC Olympic Games is sponsoring award ceremonies (with actual medals). A selection of the SMT-COMP winners (as described below) will be awarded FLoC Olympic Games medals.
@@ -145,7 +141,7 @@ the system.  This should include a list of all authors of the system,
 language(s) and basic SMT solving approach employed should be
 described (\eg, lazy integration of a Nelson-Oppen combination with
 SAT, translation to SAT, etc.).  System descriptions are encouraged to
-include a URL for a web site for the submitted tool.  
+include a URL for a web site for the submitted tool.  System descriptions may be submitted after the solver deadline, but to be useful should be sent to the organizers before the competition ends (July 16).
 
 \header{Other systems.} %
 The organizers' intent is to promote as wide a comparison among solver options as possible.
@@ -160,7 +156,7 @@ A \emph{wrapper tool} is defined as any tool
 which calls one or more SMT solvers not written by the author of the wrapper
 tool.  The other solvers are called the \emph{wrapped} tools.  
 A wrapper tool must explicitly acknowledge any tools that it wraps.
-Its system description should make clear the technical innovations  by which the
+Its system description should make clear the technical innovations by which the
 wrapper tool expects to improve on the wrapped tools.
 
 \header{Attendance.} %
@@ -173,20 +169,20 @@ participate or win.
 %%%%%% Make main and parallel competitions together.
 
 \paragraph{Main competition track.} %
-SMT-COMP entries must be submitted via StarExec and email to the organizers by the end of May~25, 2014 (anywhere on earth).  At that time new entrants will be
+SMT-COMP entries must be submitted via StarExec and email to the organizers by the end of June~1, 2014 (anywhere on earth).  At that time new entrants will be
 closed to the public to prepare for the competition, with the
 exception that resubmissions of existing entries will be accepted
-until the end of June~1, 2014 (anywhere on earth).  We strongly encourage
+until the end of June~15, 2014 (anywhere on earth).  We strongly encourage
 participants to use this grace period \emph{only} for the
 purpose of fixing any bugs that may be discovered and not for adding
 new features as there will be no opportunity to do extensive testing
-using StarExec after the original deadline on May~25.
+using StarExec after the initial deadline.
 
 The versions that are present on the execution service at the conclusion of the
 grace period will be the ones used for the competition, and versions
 submitted after this time will not be used.  The organizers reserve
 the right to start the competition itself at any time after the open
-of the New York Stock Exchange on the morning of June~2.  See
+of the New York Stock Exchange on the day after the final solver deadline.  See
 Section~\ref{sec:timeline} below for a full timeline.
 
 \paragraph{Application track.} %
@@ -213,7 +209,7 @@ All divisions with at least two solver entrants are competition divisions, i.e.,
 \header{Dates of competition.}
 %
 We anticipate that the bulk of the main track of the competition will take place during
-the weeks leading up to SMT 2014, from about June~2 to July~17.  Results will be
+the weeks leading up to SMT 2014, from about June~16 to July~17.  Results will be
 announced at SMT 2014 and in an awards ceremony scheduled by the FLoC Olympic Games coordinator.
   Intermediate results
 will be regularly posted to the SMT-COMP website as the competition
@@ -229,7 +225,7 @@ prior to the SMT workshop and awards ceremony.
 Participating solvers must read a single benchmark script presented as its first argument.
 Note that previous competitions presented benchmarks to a solver on its standard input
 channel, and that the application track will send command inputs to the solver's standard input.
-Accordingly, solvers are advised to support both input mechanisms.
+Accordingly, solvers are advised to support both input mechanisms. The organizers have easily adapted solvers that use only the standard input to Star-Exec with a simple wrapper script.
 
  The script is in the concrete syntax of the SMT-LIB format,
 version 2.0, though with a restricted set of commands.   A
@@ -238,11 +234,9 @@ version 2.0, though with a restricted set of commands.   A
 \begin{enumerate}
 \item The (single) $\akey{set-logic}$ command setting the benchmark's
 logic is the first command after any $\akey{set-option}$ commands described below.
-% rb 25/3: added
-% \item A (single) \akey{set-option :print-success false} command, sent just
-%       after $\akey{set-logic}$. This is to
-%       avoid the output ``\texttt{success}'' to interfere with the
-%       answer of the solver to the benchmark. 
+\item In the main track, there may be a (single) \akey{set-option :print-success ...} command. Note that {\tt success} outputs are ignored by the post-processor used by the competition.
+\item Scripts for the application track will have an initial $\akey{set-option :print-success true}$ command.
+\item The script next optionally contains (any number of) $\akey{set-info}$ commands, which may be ignored by the solver.
 \item The $\akey{exit}$ command is the last command.
 \item For tracks other than the application track, there is exactly one $\akey{check-sat}$ command,
 following possibly several $\akey{assert}$ commands.
@@ -250,8 +244,7 @@ following possibly several $\akey{assert}$ commands.
   each preceded by one or more \akey{assert} commands 
   and zero or more \akey{push 1} commands, 
   and followed by zero or more \akey{pop 1} commands.
-\item Scripts for the application track will have an initial $\akey{set-option :print-success true}$ command.
-\item There is at most one $\akey{set-info}$ command for \texttt{status}.
+
 %%%%%%%%%%%%%%%%%%% TODO: Need to define the set-info command.
 \item The formulas in the script belong to the benchmark's logic, with
 any free symbols declared in the script.
@@ -263,8 +256,8 @@ any free symbols declared in the script.
   They must be part of the allowed signature expansion for the logic.
   Moreover, all sorts declared with a $\akey{declare-sort}$ command must have zero arity.
 
-
 \item No other commands besides the ones just mentioned may be used.
+\item Named formulas are not used in benchmark scripts.
 
 \end{enumerate}
 
@@ -293,7 +286,6 @@ Each SMT-COMP solver will be executed on an
 unloaded competition machine for each given benchmark, up to a fixed
 time limit.  The time limit is yet to be determined, but it is
 anticipated to be 1500 seconds (25 minutes) of CPU time and the same limit on wall clock time.\footnote{The time limit may be adjusted once we understand the resources and capabilities of the StarExec service and the number of competition solvers.} 
-% TBD- TODO - how to constrain solvers to single processes?
 Solvers that take more than this
 time limit will be killed.  Solvers are allowed to spawn other
 processes.  These will be killed at approximately the same time as the
@@ -325,6 +317,10 @@ files and directories during the course of an execution, but they are
 not allowed to read such files back during later executions.  Any
 files written should be put in the directory in which the tool is
 started, or in a subdirectory.
+
+The solver is executed with a temporary directory as the current working directory.
+Any generated files should be produced there, not, for example, in the system tmp area.
+The temporary directory and its contents are deleted after the job is complete.
 
 \subsection{Application track}
 \label{sec:exec:application}
@@ -376,7 +372,7 @@ with a \texttt{success} answer for
 and \akey{pop 1} 
 commands,
  with a \texttt{sat}, \texttt{unsat}, or \texttt{unknown} 
-for \akey{check-sat} commands. There should be no \akey{get-unsat-core} or \akey{get-proof} commands in these benchmarks.
+for \akey{check-sat} commands. There should be no \akey{get-unsat-core}, \akey{get-proof}, \akey{get-model}, \akey{get-assignments}, or \akey{get-values}commands in these benchmarks.
 
 \header{Timeouts.}
 A time limit is set for the whole execution of each application
@@ -407,7 +403,7 @@ SMT.
 The deadline for new benchmarks is May 15, 2014.
 The benchmarks will be made available as soon as possible after that, as they are checked and curated.
 The goal for completing the set of benchmarks is June 1.
-The set of selected benchmarks will be published when the
+The set of benchmarks selected for the competition will be published when the
 competition begins.
 
 \header{Benchmark demographics.} %
@@ -459,8 +455,12 @@ categories:
 \header{Benchmark selection.} %
 
 The benchmarks are assigned a difficulty. For 2014, the difficulty measure is the
-CPU time taken by the best performing solver in the 2013 SMT-EVAL. These times will be posted 
+CPU time taken by the best performing solver in the 2013 SMT-EVAL. 
+ For new benchmarks, we will determine an approximate difficulty
+using trial runs.
+The difficulty values will be posted 
 as soon after May 15 as possible.
+The difficulty values are best estimates by the organizers and may not always completely correlate with actual difficulty.
 
 The selection of benchmarks for the competition will be biased towards more difficult benchmarks
 as follows. First, the benchmark pool is culled as follows:
@@ -481,13 +481,13 @@ as follows. First, the benchmark pool is culled as follows:
 \end{enumerate}
 
 Then, for each division, the benchmarks are divided into quintiles according to the difficulty measure.
-Then a random selection of N competition benchmarks is made as follows:
+Next a random selection of N competition benchmarks is made as follows:
 \begin{itemize}
-\item N*40\% are taken from the top quintile, if sufficient benchmarks are available
-\item additional benchmarks are taken from the second quintile, to produce N*60\% benchmarks, if sufficient benchmarks are available
-\item additional benchmarks are taken from the third quintile, to produce N*75\% benchmarks, if sufficient benchmarks are available
-\item additional benchmarks are taken from the fourth quintile, to produce N*90\% benchmarks, if sufficient benchmarks are available
-\item any remaining needed benchmarks are taken from the bottom quintile.
+\item N*40\% are randomly selected from the top quintile, if sufficient benchmarks are available
+\item additional benchmarks are randomly selected from the second quintile, to produce N*60\% benchmarks, if sufficient benchmarks are available
+\item additional benchmarks are randomly selected from the third quintile, to produce N*75\% benchmarks, if sufficient benchmarks are available
+\item additional benchmarks are randomly selected from the fourth quintile, to produce N*90\% benchmarks, if sufficient benchmarks are available
+\item any remaining needed benchmarks are randomly selected from the bottom quintile.
 \end{itemize}
 Within each quintile selection,
 \begin{itemize}
@@ -495,7 +495,7 @@ Within each quintile selection,
 \item if the industrial benchmarks comprise at least 85\% of the benchmarks in that quintile, the benchmarks are chosen at random from the population of industrial, random and crafted benchmarks in that quintile.
 \end{itemize}
 
-Since the organizers at this point are unsure how long a set of benchmarks may take (which will depend also on the number of solvers submitted), the competition will be run in {\em heats}. For each division, some number $N$ of benchmarks will be selected as described and randomly divided into a number of heats. The heats will be run in order. If the competition ends before all heats have completed, the remaining heats will be ignored. All benchmarks will be chosen at the beginning (that is, without reference to the results of any given heat).
+Since the organizers at this point are unsure how long a set of benchmarks may take (which will depend also on the number of solvers submitted), the competition will be run in {\em heats}. For each division, some number $N$ of benchmarks will be selected as described and randomly divided into a number of (possibly unequal-sized) heats. The heats will be run in order. If the competition ends before all heats have completed, the remaining heats will be ignored. All benchmarks will be chosen at the beginning (that is, without reference to the results of any given heat).
 
 The main purpose of the algorithm above is to have a balanced and complete set
 of benchmarks.  The  built-in bias is towards industrial rather than crafted
@@ -509,7 +509,7 @@ sum, modulo $2^{30}$, of the numbers provided in the system
 descriptions (see Section~\ref{sec:entrants} above) by all SMT-COMP
 entrants other than the organizers.  Additionally, the integer part of
 the opening value of the New York Stock Exchange Composite Index on
-the first day the exchange is open on or after June 2
+the first day the exchange is open on or after the date specified in the timeline
 will be added to the other seeding values.  This helps provide transparency,
 by guaranteeing that the organizers cannot manipulate the seed in
 favor of or against any particular submitted solver.  Benchmarks will also be slightly
@@ -529,7 +529,7 @@ Any benchmark available to the organizers by May 15 will be considered eligible.
 
 \header{Benchmark availability.} 
 A first release of the application track
-benchmarks will be made available May 15, 2014.
+benchmarks will be made available as soon after the benchmark deadline as the organizers can arrange.
 No additional
 benchmarks will be added after this date, but benchmarks can be
 modified or removed to fix possible bugs or other issues. 
@@ -585,6 +585,7 @@ that relatively ``easier'' queries are hidden behind more difficult
 ones located at the middle of the query sequence. We will not perform a parallel performance analysis of the application track.
 
 \header{Competition scoring.}
+\label{scoring}
 Benchmarks' scores are summed component-wise to form a solver's total
 score for that division of the competition.
 Total scores are compared lexicographically---a score $\langle e,n,m\rangle$ is better than 
@@ -597,8 +598,7 @@ The organizers will also recognize the following contributions:
 \item {\em Open source}. In addition to recognizing the overall
 winner in each division, the top solver that provides its source code as open source will also be
 recognized in each division.  
-\item {\em Best new entrant}. The best performing entrant from a new solver implementation team, as measured by the average of 
-(solver time)/(winning solver time) over the competition benchmarks.
+\item {\em Best new entrant}. The best performing entrant from a new solver implementation team, as measured by the Olympic Games metric defined below.
 \item {\em Breadth of logics}. Tools that cover the most theories and logics.
 \item {\em Benchmarks}. Contributors of new benchmarks.
 \item The organizers reserve the right to recognize other outstanding contributions that become apparent in the competition results.
@@ -606,10 +606,20 @@ recognized in each division.
 
 \subsection{FLoC Olympic Games medals}
 
-The FLoC Olympics games medals will be awarded based on competition-wide critera. The organizers are still determining what those criteria should be. Comments are welcome.
+The FLoC Olympics games medals will be awarded based on competition-wide critera.
 
+We define a competition-wide metric M as follows. Each solver competing in a division receives a number of points for its performance in that division: $(n/N)^2$, where $n$ is the number of benchmarks solved correctly and $N$ is the number of benchmarks used in that division. A solver's score for the whole competition is the sum of these values over all the 
+divisions in which the solver participates.
 
-%% TBD: DD suggestion: We could have a system similar to that of the Diamond's league. For each problem division with at least three entrants, attribute 4, 2 and 1 points to the first three solvers. The medals will be awarded based on the total number of points.
+The Olympic Games medals will be awarded as follows.
+\begin{itemize}
+\item The gold medal we will be awarded to the solver with the best competition-wide value of M.
+\item The silver medal will be awarded to the solver that wins the (sequential) QF\_BV division according to the usual $\langle e',n',m'\rangle$ metric of subsection \ref{scoring}.
+\item The bronze medal will be awarded to the solver with the second-best  competition-wide value of M.
+\end{itemize}
+
+{\em Rationale.} The metric M purposely emphasizes breadth of solver participation - a solver participating in many logics need not be the best in any one of them. The use of the square in the metric limits that somewhat - a solver still needs to do reasonably well compared to winners to be able to catch up by breadth of participation. The non-linear metric also gives added weight to completing close to all benchmarks in a division. The metric is also quite simple and the metric for a solver is independent of the performance of other solvers.
+
 
 \section{Timeline}
 \label{sec:timeline}
@@ -618,14 +628,14 @@ The FLoC Olympics games medals will be awarded based on competition-wide critera
 \vbox{% no page break here, please!
 \begin{description}
 \item[May 15] Deadline for benchmark contributions.
-  First version of the benchmark scrambler, benchmark selector and trace executor made available.
-\item[May 25] First versions of solver competitors are due to the organizers.
-\item[June 1] Final version of the benchmark scrambler, benchmark selector and trace executor made available.
-\item[June 1] Benchmark libraries are frozen; final versions of solver competitors due.
-\item[June 1] Final versions of solvers due via StarExec (for
+\item[June 1] First versions of solver competitors are due to the organizers, including divisions being entered.
+  Versions of the benchmark scrambler, benchmark selector and trace executor made available.
+\item[June 8] Final version of the benchmark scrambler, benchmark selector and trace executor made available.
+\item[June 8] Benchmark libraries are frozen.
+\item[June 15] Final versions of solvers due via StarExec (for
   all tracks), including divisions being entered, system
   descriptions and magic numbers for benchmark scrambling.
-\item[June 2] Opening value of NYSE Composite Index used to complete random seed.
+\item[June 16] Opening value of NYSE Composite Index used to complete random seed.
 \item[July 17] SMT 2014; end of competition.
 \end{description}}
 
@@ -645,7 +655,7 @@ David Cok is the lead and is
 responsible for policy and procedure decisions, such as these
 rules, with input from the co-organizers. He is not associated 
 with any group creating or submitting solvers. He has used solvers
-in industrial settings and is keenly interested to know which are the best.
+in industrial settings and is keenly interested to know which are the best for various applications.
 
 \item David Deharbe is associated with the solver group producing the veriT solver.
 \end{itemize}
