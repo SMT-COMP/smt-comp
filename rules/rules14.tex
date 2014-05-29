@@ -53,8 +53,8 @@ list or, if necessary, directly to the organizers (cf. email addresses in the fo
 \section{Important dates and information}
 \begin{itemize}
 \item May 15 - deadline for new benchmarks
-\item May 25 - deadline for solver entrants
-\item June 1 - deadline for final versions of solvers (but no new entrants after May 25).
+\item June 1 - deadline for solver entrants
+\item June 15 - deadline for final versions of solvers (but no new entrants after May 25).
 \item July 17 - SMT workshop; completion of competition.
 \item SMT-COMP mailing list: smt-comp@cs.nyu.edu
 \item signup site for mailing list: \url{cs.nyu.edu/mailman/listinfo/smt-comp}
@@ -92,7 +92,7 @@ describes the rules and competition procedures for SMT-COMP~2014.
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
 \item The competition will be run with StarExec (\url{www.starexec.org}). Accordingly we are simplifying the competition somewhat, since some of the infrastructure needs to be recreated.
-\item We will hold just a main and application track. [ The demonstration unsat core, and proof generation tracks will be deferred until benchmarks and result analysis tools are reorganized.] We encourage submission of solvers and benchmarks for both tracks.
+\item We will hold just a main and application track. [The demonstration unsat core, and proof generation tracks will be deferred until benchmarks and result analysis tools are reorganized.] We encourage submission of solvers and benchmarks for both tracks.
 \item In the main track, we will measure comparative performance within all divisions to which at least two solvers are submitted. We will use the data to determine both sequential and parallel winners.
 
 \item We will recognize winners as measured by number of benchmarks solved; we will also recognize best open source contributions and best new entrants, as described below. 
@@ -105,15 +105,12 @@ winners will be declared only for divisions in which at least two solvers are su
 Although the organizers may add other solvers for comparison purposes, only solvers that
 are explicitly submitted by their authors are eligible to be designated as winners.
 
-It is important for competitors to track discussions on the SMT-COMP mailing
-list, as clarifications and any updates to these rules will be posted there.
-
 \section{Entrants}
 \label{sec:entrants}
 
 \header{Solver format.} %
 An entrant to SMT-COMP is an SMT solver
-submitted by its authors using the Star-Exec (\url{http://www.starexec.org}) service.  
+submitted by its authors using the StarExec (\url{http://www.starexec.org}) service.  
 The execution service enables members of the
 SMT research community to run solvers on jobs consisting of benchmarks
 from the SMT-LIB benchmark library.  Jobs are run on a shared computer
@@ -124,7 +121,7 @@ already uploaded to the service.
 
 
 For participation in SMT-COMP, a solver must be
-uploaded to Star-Exec, made publicly available, and the organizers informed of its presence {\em and the logic divisions in which it is participating}.
+uploaded to StarExec, made publicly available, and the organizers informed of its presence {\em and the logic divisions in which it is participating}. For clarity, the solver should have just one configuration, or at least, that the default configuration is the one to be used for competition.
 A submission must also include a 32-bit unsigned
 integer.  These numbers, collected from all submissions, are used
 to seed the pseudo-random benchmark selection algorithm, as well
@@ -178,6 +175,9 @@ purpose of fixing any bugs that may be discovered and not for adding
 new features as there will be no opportunity to do extensive testing
 using StarExec after the initial deadline.
 
+Competition solvers should be submitted with just one StarExec configuration so that it is
+clear what configuration should be used for the competition. Separately named StarExec solvers can wrap the same underlying tool with a different configuration, if needed, for the application track.
+
 The versions that are present on the execution service at the conclusion of the
 grace period will be the ones used for the competition, and versions
 submitted after this time will not be used.  The organizers reserve
@@ -222,10 +222,10 @@ prior to the SMT workshop and awards ceremony.
 
 \header{Input and Output.}
 %
-Participating solvers must read a single benchmark script presented as its first argument.
+A participating solver must read a single benchmark script presented as its first argument.
 Note that previous competitions presented benchmarks to a solver on its standard input
 channel, and that the application track will send command inputs to the solver's standard input.
-Accordingly, solvers are advised to support both input mechanisms. The organizers have easily adapted solvers that use only the standard input to Star-Exec with a simple wrapper script.
+Accordingly, solvers are advised to support both input mechanisms. The organizers have easily adapted solvers that use only the standard input to StarExec with a simple wrapper script.
 
  The script is in the concrete syntax of the SMT-LIB format,
 version 2.0, though with a restricted set of commands.   A
@@ -234,28 +234,25 @@ version 2.0, though with a restricted set of commands.   A
 \begin{enumerate}
 \item The (single) $\akey{set-logic}$ command setting the benchmark's
 logic is the first command after any $\akey{set-option}$ commands described below.
-\item In the main track, there may be a (single) \akey{set-option :print-success ...} command. Note that {\tt success} outputs are ignored by the post-processor used by the competition.
-\item Scripts for the application track will have an initial $\akey{set-option :print-success true}$ command.
-\item The script next optionally contains (any number of) $\akey{set-info}$ commands, which may be ignored by the solver.
+\item In the main track, there may be a (single) \akey{set-option :print-success ...} command. Note that {\tt success} outputs are ignored by the post-processor used by the competition; in 
+the application track, the :print-success option may not be disabled.
+\item The application track executor will send an initial $\akey{set-option :print-success true}$ command to the solver. 
+\item The script next optionally contains (any number of) $\akey{set-info}$ commands, which may be ignored by the solver. Benchmarks are expected to have the following \akey{set-info} commands: \akey{(set-info :smt-lib-version 2.0)}, \akey{(set-info :category ...)}, \akey{(set-info :source ...)} (indicating the authorship or tool that produced the benchmark), and \akey{(set-info :status ...)}.
 \item The $\akey{exit}$ command is the last command.
 \item For tracks other than the application track, there is exactly one $\akey{check-sat}$ command,
 following possibly several $\akey{assert}$ commands.
 \item For the application track, there are one or more \akey{check-sat} commands, 
-  each preceded by one or more \akey{assert} commands 
-  and zero or more \akey{push 1} commands, 
-  and followed by zero or more \akey{pop 1} commands.
+  each preceded by one or more \akey{assert} commands; 
+  there may also be zero or more \akey{push 1} commands, 
+  and zero or more \akey{pop 1} commands, consistent with the uses of those commands in
+  the SMT-LIB standard. Each \akey{check-sat} command may be preceded by a \akey{set-info :status} command that indicates the expected result of the 
+  \akey{check-sat} command.
 
-%%%%%%%%%%%%%%%%%%% TODO: Need to define the set-info command.
 \item The formulas in the script belong to the benchmark's logic, with
 any free symbols declared in the script.
-\item Extra symbols are declared exactly once before any
-  use, using $\akey{declare-sort}$
-  %, $\akey{define-sort}$,
-  %$\akey{declare-fun}$, or $\akey{define-fun}$.  
-  or $\akey{declare-fun}$.
-  They must be part of the allowed signature expansion for the logic.
-  Moreover, all sorts declared with a $\akey{declare-sort}$ command must have zero arity.
+\item All sorts declared with a $\akey{declare-sort}$ command must have zero arity.
 
+\item Application track scripts may have $\akey{define-sort}$ and $\akey{define-sort}$ commands. 
 \item No other commands besides the ones just mentioned may be used.
 \item Named formulas are not used in benchmark scripts.
 
@@ -289,9 +286,9 @@ anticipated to be 1500 seconds (25 minutes) of CPU time and the same limit on wa
 Solvers that take more than this
 time limit will be killed.  Solvers are allowed to spawn other
 processes.  These will be killed at approximately the same time as the
-first started process.  A
-timeout scores the same as if the output is ``\texttt{unknown}''.
+first started process.
 
+The StarExec service also limits the memory consumption of the solver processes. We expect the limit per solver-benchmark job-pair to be quite high, on the order of 100GB. The values of both the timeout limit and the memory limit are available to a solver process through environment variables defined and set by the StarExec service (see the StarExec user guide for more information).
 
 \header{Aborts and unparsable output.} %
 Solvers which exit before the time
@@ -299,7 +296,6 @@ limit without reporting a result (\ie\ due to exhausting memory, crashing,
 or producing output other than \texttt{sat}, \texttt{unsat}, or
 \texttt{unknown})
 will be considered to have aborted. 
-An abort scores the same as if the output is ``\texttt{unknown}''. 
 Also, as a further measure to prevent misjudgments of solvers,
 any  ``\texttt{success}'' outputs will be 
 ignored.\footnote{
@@ -342,19 +338,20 @@ is parsed by a {\em trace executor}. The trace executor serves the following pur
 \begin{itemize}
 \item it simulates the online interaction by sending single queries to the SMT solver
       (through stdin);
-\item it prevents ``look-ahead'' behaviours of SMT solvers;
+\item it prevents ``look-ahead'' behaviors of SMT solvers;
 \item it records time and answers for each call, possibly aborting the execution
       in case of a wrong answer;
 \item it guarantees a fair execution for all solvers by abstracting from any possible
-      crash, misbehaviour, etc. that may happen on the model checker side.
+      crash, misbehavior, etc. that may happen on the model checker side.
 \end{itemize}
+Note that the executor terminates processing the script upon receiving an incorrect response.
 
 \header{Input and Output.}
 Participating solvers will be connected to a trace executor 
 which will incrementally send commands to the standard input channel of the solver
 and read responses from the standard output channel of the solver.
 The commands will be taken from an \textbf{incremental benchmark script},
-which is an SMT-LIB 2.0 script which satisfies the rules for an application script given above.
+which is an SMT-LIBv2 script which satisfies the rules for an application script given above.
 Note also that the trace executor will send a single 
 \akey{set-option :print-success true} command to the solver before 
 sending commands from the incremental benchmark script.
@@ -367,12 +364,14 @@ with a \texttt{success} answer for
 \akey{set-logic}, 
 \akey{declare-sort}, 
 \akey{declare-fun}, 
+\akey{define-sort}, 
+\akey{define-fun}, 
 \akey{assert}, 
 \akey{push 1}, 
 and \akey{pop 1} 
 commands,
  with a \texttt{sat}, \texttt{unsat}, or \texttt{unknown} 
-for \akey{check-sat} commands. There should be no \akey{get-unsat-core}, \akey{get-proof}, \akey{get-model}, \akey{get-assignments}, or \akey{get-values}commands in these benchmarks.
+for \akey{check-sat} commands. There will be no \akey{get-unsat-core}, \akey{get-proof}, \akey{get-model}, \akey{get-assignments}, or \akey{get-values} commands in these benchmarks.
 
 \header{Timeouts.}
 A time limit is set for the whole execution of each application
@@ -559,15 +558,17 @@ application track benchmarks may have multiple \akey{check-sat} commands.
 For the main track, the score on a given benchmark is the single $\langle e,n,m\rangle$ triple, with $m$ being the CPU time it takes to process the benchmark, that is, until the solver process terminates, and
 \begin{itemize}
 \item $e=0, n=1$ if the result of the check-sat command is correct,
-\item $e=0, n=0$ if the result is {\tt unknown}, and
 \item $e=1, n=0$ if the result is incorrect.
+\item $e=0, n=0$ if the result is {\tt unknown} or the solver times-out or otherwise aborts without a response, and
 \end{itemize}
 
 \header{Main track - parallel mode.}
-The Star-Exec infrastructure reports both wall-clock time and CPU time for a given benchmark-solver job-pair. Each Star-Exec node has multiple (currently 4) cores; a multi-threaded solver can in principle make use of these cores to reduce its wall-clock time. Since the competition has not to date emphasized parallel solvers, we will use total CPU time (across all cores and subprocesses) as the measure of performance in the sequential mode of the main track; the imposed time out will also be on the CPU time.
+The StarExec infrastructure reports both wall-clock time and CPU time for a given benchmark-solver job-pair. Each StarExec node has multiple (currently 4) cores; a multi-threaded solver can in principle make use of these cores to reduce its wall-clock time. Since the competition has not to date emphasized parallel solvers, we will use total CPU time (across all cores and subprocesses) as the measure of performance in the sequential mode of the main track; the imposed time out will also be on the CPU time.
 
 However, we can also measure the performance using wall-clock time, the key performance criterion for a parallel solver.
 We will use the same competition data to determine a parallel-solver winner as follows. The competition will be run with a timeout T for both CPU time and wall-clock time. Since the computation nodes have C=4 cores, we can simulate a competition that had a time out of T CPU seconds and T/C wall-clock seconds by simply declaring that any solver taking more than T/C wall-clock time has timed out for the parallel competition. We then recompute the scoring as above but using wall-clock time and a timeout value of T/C. 
+
+Parallel track scores are not directly comparable to the sequential track scores. However, we will use them to determine a parallel-track winner in each division.
 
 \header{Application track.}
 An application benchmark may have multiple check-sat commands and may partially solve the benchmark before timing out.
@@ -592,6 +593,11 @@ Total scores are compared lexicographically---a score $\langle e,n,m\rangle$ is 
 $\langle e',n',m'\rangle$ iff $e < e'$ or ($e = e'$ and $n > n'$) or ($e = e'$ and $n = n'$ and $m < m'$).
 That is, fewer errors takes precedence over more correct solutions, which takes precedence over less time taken.
 
+\subsection{Judging}
+
+It may happen that faulty benchmarks are discovered in the course of the competition. The judges reserve the right, with careful deliberation, to remove a benchmark from the competition
+results if it is determined that the benchmark is faulty (e.g., syntactically invalid in a way that affects some solvers but not others). Organizers on solver teams will be recused from such decisions. Solver teams may appeal to the organizers if they suspect that a benchmark is faulty or otherwise not within the rules.
+
 \subsection{Other recognitions}
 The organizers will also recognize the following contributions:
 \begin{itemize}
@@ -608,17 +614,18 @@ recognized in each division.
 
 The FLoC Olympics games medals will be awarded based on competition-wide critera.
 
-We define a competition-wide metric M as follows. Each solver competing in a division receives a number of points for its performance in that division: $(n/N)^2$, where $n$ is the number of benchmarks solved correctly and $N$ is the number of benchmarks used in that division. A solver's score for the whole competition is the sum of these values over all the 
-divisions in which the solver participates.
+We define a competition-wide metric M as follows. Each solver competing in a division receives a number of points for its performance in that division: $\langle e,(n/N)^2 \rangle$, where $e$ is the number of wrong answers to benchmarks, $n$ is the number of benchmarks solved correctly, and $N$ is the number of benchmarks used in that division. A solver's score for the whole competition is the sum of these tuples over all the 
+divisions in which the solver participates. The best value of M is the one with the least total value of $e$, secondly, the largest total value for the second component of the tuple, and thirdly, the least value of $m$.
 
 The Olympic Games medals will be awarded as follows.
 \begin{itemize}
 \item The gold medal we will be awarded to the solver with the best competition-wide value of M.
-\item The silver medal will be awarded to the solver that wins the (sequential) QF\_BV division according to the usual $\langle e',n',m'\rangle$ metric of subsection \ref{scoring}.
-\item The bronze medal will be awarded to the solver with the second-best  competition-wide value of M.
+\item The silver medal will be awarded to the solver with the second-best competition-wide value of M.
+\item The bronze medal will be awarded to the solver that wins the (sequential) QF\_BV division according to the usual $\langle e,n,m\rangle$ metric of subsection \ref{scoring}. 
+\item The winner of the gold medal is excluded from consideration for the silver medal; the winners of the gold and silver medals are excluded from consideration for the bronze medal.
 \end{itemize}
 
-{\em Rationale.} The metric M purposely emphasizes breadth of solver participation - a solver participating in many logics need not be the best in any one of them. The use of the square in the metric limits that somewhat - a solver still needs to do reasonably well compared to winners to be able to catch up by breadth of participation. The non-linear metric also gives added weight to completing close to all benchmarks in a division. The metric is also quite simple and the metric for a solver is independent of the performance of other solvers.
+{\em Rationale.} The metric M purposely emphasizes breadth of solver participation - a solver participating in many logics need not be the best in any one of them. The use of the square in the metric limits that somewhat - a solver still needs to do reasonably well compared to winners to be able to catch up by breadth of participation. The non-linear metric also gives added weight to completing close to all benchmarks in a division. The metric is also quite simple and the metric for a solver is independent of the performance of other solvers. Time is omitted from the metric both to simplify the metric and because it is only of third importance in the regular competition metric and is difficult to compare across divisions.
 
 
 \section{Timeline}

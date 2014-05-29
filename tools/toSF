@@ -28,12 +28,16 @@ sftp $username,smtcomp@web.sourceforge.net  << HERE
 put [a-z]* htdocs
 mkdir htdocs/$year
 cd htdocs/$year
+mkdir systemDescriptions
 lcd $year
 put * .
 cd reports
 lcd reports
 put * .
 put .htaccess .
+cd ../systemDescriptions
+lcd ../systemDescriptions
+put * .
 exit
 HERE
 
