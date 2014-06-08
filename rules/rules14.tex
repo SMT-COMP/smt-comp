@@ -10,7 +10,7 @@
 
 \date{\small This version revised \the\year-\the\month-\the\day}
 
-\title{DRAFT\\Satisfiability Modulo Theories Competition (SMT-COMP) 2014: Rules and 
+\title{Satisfiability Modulo Theories Competition (SMT-COMP) 2014: Rules and 
 Procedures}
 
 
@@ -316,6 +316,7 @@ started, or in a subdirectory.
 
 The solver is executed with a temporary directory as the current working directory.
 Any generated files should be produced there, not, for example, in the system tmp area.
+The StarExec system sets a limit on the amount of disk storage permitted - typically 20GB (cf. the User Guide).
 The temporary directory and its contents are deleted after the job is complete.
 
 \subsection{Application track}
@@ -345,6 +346,8 @@ is parsed by a {\em trace executor}. The trace executor serves the following pur
       crash, misbehavior, etc. that may happen on the model checker side.
 \end{itemize}
 Note that the executor terminates processing the script upon receiving an incorrect response.
+
+The disk space and memory limits on the application track are the same as for the main track.
 
 \header{Input and Output.}
 Participating solvers will be connected to a trace executor 
@@ -476,6 +479,9 @@ as follows. First, the benchmark pool is culled as follows:
   certain SMT-LIB benchmarks that are inappropriate or uninteresting
   for competition, or cut the size of certain benchmark families to
   avoid their over-representation.
+
+\item \textbf{Eliminate benchmarks whose status is unknown.} %
+  The selection process ignores any benchmark whose expected output is neither sat nor unsat. There is a significant number of `unknown' benchmarks in the library; these are certainly interesting and are a challenge to solve, but they are not used in the competition.
 
 \end{enumerate}
 
@@ -615,17 +621,19 @@ recognized in each division.
 The FLoC Olympics games medals will be awarded based on competition-wide critera.
 
 We define a competition-wide metric M as follows. Each solver competing in a division receives a number of points for its performance in that division: $\langle e,(n/N)^2 \rangle$, where $e$ is the number of wrong answers to benchmarks, $n$ is the number of benchmarks solved correctly, and $N$ is the number of benchmarks used in that division. A solver's score for the whole competition is the sum of these tuples over all the 
-divisions in which the solver participates. The best value of M is the one with the least total value of $e$, secondly, the largest total value for the second component of the tuple, and thirdly, the least value of $m$.
+divisions in which the solver participates. The best value of M is the one with the least total value of $e$, and secondly, the largest total value for the second component of the tuple.
 
 The Olympic Games medals will be awarded as follows.
 \begin{itemize}
 \item The gold medal we will be awarded to the solver with the best competition-wide value of M.
 \item The silver medal will be awarded to the solver with the second-best competition-wide value of M.
 \item The bronze medal will be awarded to the solver that wins the (sequential) QF\_BV division according to the usual $\langle e,n,m\rangle$ metric of subsection \ref{scoring}. 
-\item The winner of the gold medal is excluded from consideration for the silver medal; the winners of the gold and silver medals are excluded from consideration for the bronze medal.
+\item The team winning the gold medal is excluded from consideration for the silver medal; the teams winning the gold and silver medals are excluded from consideration for the bronze medal.
 \end{itemize}
 
 {\em Rationale.} The metric M purposely emphasizes breadth of solver participation - a solver participating in many logics need not be the best in any one of them. The use of the square in the metric limits that somewhat - a solver still needs to do reasonably well compared to winners to be able to catch up by breadth of participation. The non-linear metric also gives added weight to completing close to all benchmarks in a division. The metric is also quite simple and the metric for a solver is independent of the performance of other solvers. Time is omitted from the metric both to simplify the metric and because it is only of third importance in the regular competition metric and is difficult to compare across divisions.
+
+The gold and silver medals emphasize breadth of logic support; the organizers chose to award the bronze medal to excellence in a single logic. Rather than try to compare performance across logics, we selected on logic, QF\_BV, for this award. This logic is a commonly supported logic and many solvers concentrate on BV problems alone.
 
 
 \section{Timeline}
@@ -655,7 +663,7 @@ late-breaking news and any necessary clarifications and edits to these
 rules will be announced there, and it is the primary way that such
 announcements will be communicated.
 
-\section{Disclaimer}
+\section{Acknlwedgements and Disclaimer}
 \begin{itemize}
 \item David Cok, David Deharbe and Tjark Weber are the organizers of SMT-COMP 2014. 
 David Cok is the lead and is 
@@ -663,6 +671,10 @@ responsible for policy and procedure decisions, such as these
 rules, with input from the co-organizers. He is not associated 
 with any group creating or submitting solvers. He has used solvers
 in industrial settings and is keenly interested to know which are the best for various applications.
+
+\item Many others have contributed benchmarks, effort, and feedback. In particular, Clark Barrett and Morgan Deters processed the many benchmark submissions and completed the work of transitioning benchmarks from SMTExec to StarExec. Aaron Stump field many questions and diagnosed and managed the fixing of bugs in Star Exec.
+
+\item The StarExec cluster is supported by NSF grants \#1058748 and \#1058925.
 
 \item David Deharbe is associated with the solver group producing the veriT solver.
 \end{itemize}
