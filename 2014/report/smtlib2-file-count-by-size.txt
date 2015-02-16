@@ -1,0 +1,9 @@
+# metrics on SMT-LIB2 2014-06-03
+# file size in bytes
+# geq-lt quantity
+set xrange [1:8]
+set yrange [10:100000]
+set logscale y
+set xtics ("10^2-10^3" 1, "10^3-10^4" 2, "10^4-10^5" 3, "10^5-10^6" 4, "10^6-10^7" 5, "10^7-10^8" 6, "10^8-10^9" 7, "10^9-10^10" 8)
+plot 16578, 58320, 42264, 14846, 5338, 280, 31, 10
+plot 
