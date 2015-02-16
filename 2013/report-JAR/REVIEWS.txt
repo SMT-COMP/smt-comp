@@ -1,0 +1,192 @@
+Reviewer #1: Instead of the 2013 SMT competition, this paper presents an in-depth analysis
+of SMT solvers and benchmarks available at the time. The authors ran all
+available and suitable solvers on all benchmarks from SMT-LIB. In this report,
+they present those results and interpret them. Perhaps the most significant
+observation is that previous SMT competition results are quite sensitive to the
+random selection of benchmark subsets. All the data and their interpretation in
+this paper are highly interesting. Of course, one can always find some particular
+number that would be have been nice if added, but I think this paper easily
+contains enough information to be of significant interest to the SMT and JAR
+communities. Some of the data already available could be presented in a more
+digestible form though, thus I suggest acceptance with minor revision.
+
+Details:
+
+Fig 1: There was no competition in 2013, but maybe add "SMT-EVAL" in the
+figure, and the number of benchmarks that were available at the time.
+
+1.3: In this section I think it would be the right place to note that this
+report was not compiled by the solver developers, but by "independent
+investigators".
+
+Fig 2: The caption mentions *'s but the table doesn't have any of those. 
+
+2.3, pg 6: I'm not sure what the SMT2 standard says about that, but he fact
+that star-exec conflates stdout and stderr seems a fixable issue. 
+
+2.4, pg 6: An investigation into the effects of scrambling would be very
+interesting too. I suppose that would mean that a lot more benchmarks would
+have to be run though.
+
+3.1, pg 8: QF_: quantification. Maybe change to `quantifier freeness'?
+
+Fig 4: Q is included as a node, but N (non-linear) isn't. Instead of referring
+to the lattice on smtlib.org, I think it would be nicer to include that one
+instead of the one currently in Fig 4. 
+
+Fig 5: The font in this table is smaller than in other tables. 
+
+Fig 6: This plot takes a lot of space that isn't used at all. I think it would
+be okay to cut it off at y=0.5 or something like that. Perhaps a logarithmic
+y-axis would also show the gaps between the years more clearly. Perhaps the
+x-axis could also start at 0.01 or 0.1.
+
+Fig 7: This is interesting data, but it's very hard to read. Bar-graphs (four
+for each logic) would be much easier to read, and the actual percentages are
+not really necessary (except perhaps as appendix).
+
+3.5: As stated here, there is a very real risk of the benchmarks not being
+representative of any particular application area. This would indeed be a very
+interesting thing to investigate. Some evidence could perhaps be mined from the
+data, e.g., by comparison of "industrial" benchmarks to "crafted" ones.
+
+3.5.1, pg 14: It is expected that timing variation averages out over many
+benchmarks, but it is not stated whether the number of benchmarks (~200?) used
+in previous competitions qualifies as "many".
+
+Fig 8, 9, 10: These tables waste a lot of space, especially the repetition of
+Z3's version number. Perhaps bar-graphs would again make this easier to digest.  
+
+3.5.2 , pg 17: It's very interesting to see that the random benchmark
+selection has such a big impact on the competition results. Fig 12, 13, 14 are
+again very hard to read (and far away from the accompanying
+interpretation). Perhaps a matrix with solver names on the Y axis (and
+repetition of the logic names) would be easier to read. Another way to compress
+this is to put solvers on Y axis and logics on the X axis and filling the table
+with the position number in the competition in the cells (perhaps also #
+benchmarks, # seconds in small fonts below that).
+
+Fig 11, 15: I would again use bar-graphs for these. The actual numbers are not
+that important and a graphical representation makes this a lot easier to read. 
+
+Fig 16, 17: There's a lot of empty space in this figure, and it's another
+instance where bar graphs would work much better. (E.g., four bars for every
+logic/year, each of which is split into three parts according to the quartile
+positions.)
+
+Fig 18: Same again, this data would look good in a bar-graph.
+
+Fig 21: Sorting this table by SOTAC would help readability. 
+
+Pg 28: '... we did not have time...' Sounds awkward, as this is a journal
+paper, there would have been enough time for this. The suggestion of finding
+discriminating benchmarks is actually very good and, I think, worth the
+additional time required to do so, especially as it should be possible to get
+that from the existing data.
+
+4, pg 30: It seems there was a significantly larger improvement in efficiency
+between 2010 and 2011. I don't know whether there is a reason or possible
+explanation for this, but if so, it would be great if that could be added.
+
+Overall: Given that all the figures and tables use a lot of space, it may make
+sense to move them to an appendix. Having to flick back and forth between text
+and figures is a bit annoying. Also, some pages (e.g., 19, 20) have very little
+text on them, so perhaps moving that into dedicated figure pages would
+help. The solver version numbers are also repeated many times, they can be
+abbreviated in most places I think.
+
+
+Typos:
+
+multiple instances of ...\cite{} without space before the \.
+pg 7 top: wall time -> wall-clock time
+pg 7 and later: cpu -> CPU, sat -> SAT, unsat -> UNSAT (I prefer the
+capitalized versions) 
+
+
+Reviewer #2: 
+* SUMMARY 
+
+This paper presents a report of the 2013 SMT-Evaluation. The authors
+describe with details benchmarks, participant tools, adopted criteria,
+actions performed in the running of this (quite large) activity; they
+present and analyze in detail the results from many perspectives;
+finally they draw a list of conclusions, and provide a list of
+suggestions for future competitions.
+
+* EVALUATION
+
+On the positive side, the paper provides lots of data and a extensive
+analysis with many insights, and propose a list of future discussion
+issues, which can be of interest for both SMT developers and SMT
+users.  Moreover, the paper is well written and it is easy to read and
+understand.
+
+On the negative side, this paper suffers for some weaknesses.
+
+My first concern is that, having this report been submitted after 2014
+FLOC Olympic games may make its content out of date.
+
+My major concern, however, is the following. My understanding from
+section 3.7 (page 23 from row 42: "For this evaluation...")  is that:
+(i) each solver was given the possibility of running in multi-threaded
+    mode with 4 cores for 25 minutes (wall-clock timeout, that is 100
+    minute cpu-time timeout), so that solvers admitting multi-threaded
+    computation are given 4 times the CPU time resources than the others;
+(ii) you do not report which solver runs in which mode;
+(iii) all the data of this paper (e.g., these in figures 8-10, 12-13) mix
+    together the data of solvers running in multi-threaded mode with those
+    of solvers running in single-threaded.
+- If not so, please clarify.
+- If so, IMO that's a major flaw in the evaluation, in particular because
+  --unless in particular situations-- solvers in the various
+  competitions were not asked for running in multi-threaded mode, and
+  hence were not designed for it. 
+This issue cannot be left "for further study", rather it must be
+properly addressed in this paper.
+
+Another issue is the following. I notice first that the statement of page 15
+row 48 "[In past competitions] the distribution is constrained to have
+roughly equal representation of various categories of difficulty."  is
+not completely accurate, since this was not simply an issue of
+difficulty.  In fact, past competitions also took care of avoiding
+distributions having unequal representations of "families" of
+benchmarks. This was due to the fact that the benchmarks in each logic
+are grouped in "families", each having been added by single
+contributors. These families, which often create a bias in favour of
+some tools, vary a lot in size. Thus, a purely-random sampling would
+have favoured the choice of very-large families wrt. small ones.  This
+said, (i) by considering *all* benchmarks and (ii) by considering
+randomly-picked benchmarks, big families have a much stronger role
+than they used to have with the "balanced" choices of the past
+competitions, producing a bias in favour of those tools which run
+better on big families.
+
+Finally, here is one suggestion. 
+It could be interesting to expand this evaluation by
+analyzing the effect of the *redundancy* of the unsatisfiable
+formulas, that is, to 
+(i) compute an unsat core of each unsatisfiable formula 
+(ii) evaluate how  "redundant" formula are by analyzing the distribution
+    of the reduction in size
+(iii) run the solvers also on unsat cores
+(iv) analyze the difference in performances by passing from a formula
+to its core. 
+
+*  LOCAL POINTS
+
+pag. 4 "By using all available benchmarks in the evaluation, we intend that any
+comparative assessments across years or solvers be more accurate."
+This is disputable, see above.
+
+pag. 7 rows 15-18 "Each job pair...memory." 
+This sentence is incomprehensible until one reads section 3.7.
+
+pag 14 rows 8 onward:
+Please specify that "Qxx" refers to the xx-th quartile, and 
+that "Q3-Q1 spread" refers to inter-quartile range.
+(Maybe explain what it is in a footnote.)
+
+pag 15 "row 48 "[In part competitions] the distribution
+is constrained to have roughly equal representation of various
+categories of difficulty." See above.
