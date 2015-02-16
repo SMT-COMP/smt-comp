@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\date{}
+\date{\small This version revised \the\year-\the\month-\the\day}
 
 \title{Satisfiability Modulo Theories Competition (SMT-COMP) 2011: Rules and 
 Procedures
@@ -79,6 +79,20 @@ The principal change from last year's version is:
 %  These will be included in the competition, to help promote attention
 %  to the problem of solver correctness (cf.~\cite{brummayer+09}).
 \end{itemize}
+
+Additionally, non-competitive divisions and tracks will not be exhibited as
+part of the competition: at least two competitors must be entered
+into a division for it to run as part of the competition.
+If necessary, and based on final submissions, the organizers may elect to
+combine competition divisions to make them competitive (such decisions will
+be made with input from the community).
+
+As in SMT-COMP 2010, the 2011 version will incorporate a small number of
+random "fuzzer-generated" instances (see below) to help promote
+attention to solver correctness.
+
+It is important for competitors to track discussions on the SMT-COMP mailing
+list, as clarifications and any updates to these rules will be posted there.
 
 \section{Entrants}
 \label{sec:entrants}
@@ -414,7 +428,8 @@ for \akey{check-sat} commands.
 
 \header{Timeouts.}
 A time limit is set for the whole execution of each application
-benchmark (consisting of multiple queries).
+benchmark (consisting of multiple queries).  We anticipate the
+timeout to be around 30~minutes.
 
 \header{Scoring.}
 The score for each benchmark is a pair $\langle n,m\rangle$, with
@@ -478,6 +493,7 @@ particular division.
 \item QF\_UFNRA: uninterpreted functions and nonlinear real arithmetic.
 \item QF\_LRA: linear real arithmetic.
 \item QF\_LIA: linear integer arithmetic.
+\item QF\_NRA: nonlinear real arithmetic.
 \item QF\_NIA: nonlinear integer arithmetic.
 \item QF\_AX: arrays with extensionality.
 \item QF\_AUFLIA: arrays, uninterpreted functions and linear integer 
@@ -608,11 +624,6 @@ available to the organizers for that purpose.
 The following scheme will be used to choose competition benchmarks
 within each division.  Unknown-status benchmarks from SMT-LIB are
 considered ineligible for competition and are not used.
-%
-Additionally, certain benchmarks deemed inappropriate for competition
-may be cut by the organizers, and in some cases, representative subsets
-of benchmarks from a certain source may be included for the selection
-instead of all benchmarks from that source.
 %
 The selection
 is implemented by our benchmark selection tool, source for which will
