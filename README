@@ -1,6 +1,7 @@
-This source tree contains files and tools for SMT-COMP, the annual competition
-among SMT solvers - see the web pages hosted here for more information.
+This source tree contains files and tools for SMT-COMP, the
+International Satisfiability Modulo Theories Competition.
+See the web pages hosted here for more information.
 
-trunk/smtcomp-web - contains all of the public web pages
-
-trunk/tools - contains some development tools
+rules       - contains LaTeX sources for the competition rules
+smtcomp-web - contains all of the public web pages
+tools       - contains some development tools
