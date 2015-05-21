@@ -373,8 +373,8 @@ unsatisfiable (\texttt{unsat}).  An entrant may also report
 \texttt{unknown} to indicate that it cannot determine satisfiability
 of the formula.
 
-The main track competition uses a StarExec postprocessor (named ``SMT2
-results conserv") to accumulate the results.
+The main track competition uses a StarExec post-processor (named
+``SMT-COMP 2015 Main Track Postprocessor") to accumulate the results.
 
 \header{Aborts and unparsable output.}
 %
@@ -504,9 +504,11 @@ The benchmark pool is culled as follows:
 \begin{enumerate}
 \item \emph{Retire inappropriate benchmarks.} The competition
   organizers may remove from the eligibility pool certain benchmarks
-  that are inappropriate or uninteresting for competition, or cut the
-  size of certain benchmark families to avoid their
-  over-representation.
+  that are inappropriate\footnote{In 2015, this (again) includes all
+    benchmarks that use bit-vector division or remainder, because of
+    an unresolved discussion about the semantics of division by zero.}
+  or uninteresting for competition, or cut the size of certain
+  benchmark families to avoid their over-representation.
 \item \emph{Eliminate benchmarks whose status is unknown.} Any
   benchmark whose expected output is neither {\tt sat} nor {\tt unsat}
   is removed.  There is a significant number of benchmarks with {\tt
