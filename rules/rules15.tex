@@ -319,13 +319,14 @@ which:
 \item In the main track, there is exactly one $\akey{check-sat}$
   command, following possibly several $\akey{assert}$ commands.
 \item In the application track, there are one or more \akey{check-sat}
-  commands, each preceded by one or more \akey{assert} commands; there
-  may also be zero or more \akey{push 1} commands, and zero or more
-  \akey{pop 1} commands, consistent with the uses of those commands in
-  the SMT-LIB standard. Each \akey{check-sat} command may be preceded
-  by a \akey{set-info :status} command that indicates the expected
-  result of the \akey{check-sat} command.
-\item The $\akey{exit}$ command is the last command.
+  commands, each preceded by one or more \akey{assert} commands.
+  There may also be zero or more \akey{push 1} commands, and zero or
+  more \akey{pop 1} commands, consistent with the uses of those
+  commands in the SMT-LIB standard. Each \akey{check-sat} command may
+  be preceded by a \akey{set-info :status} command that indicates the
+  expected result of the \akey{check-sat} command.
+\item Optionally, the script may contain an $\akey{exit}$ command as
+  its last command.
 \item The formulas in the script belong to the benchmark's logic, with
   any free symbols declared in the script.
 \item All sorts declared with a $\akey{declare-sort}$ command must
