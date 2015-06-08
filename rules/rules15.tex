@@ -325,8 +325,9 @@ which:
   commands in the SMT-LIB standard. Each \akey{check-sat} command may
   be preceded by a \akey{set-info :status} command that indicates the
   expected result of the \akey{check-sat} command.
-\item Optionally, the script may contain an $\akey{exit}$ command as
-  its last command.
+\item The script may optionally contain an $\akey{exit}$ command as
+  its last command.  In the application track, this command must not
+  be omitted.
 \item The formulas in the script belong to the benchmark's logic, with
   any free symbols declared in the script.
 \item All sorts declared with a $\akey{declare-sort}$ command must
