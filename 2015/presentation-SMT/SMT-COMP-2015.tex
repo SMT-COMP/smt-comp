@@ -47,11 +47,11 @@ SMT-COMP 2015\\[3em]}
       \node [left] at (0,0) {\footnotesize Application track};
       \draw [fill=fg] (0,.35) rectangle (3,.65);
       \node [left,white] at (3,.5) {\footnotesize 21};
-      \draw [fill=fg!40!white] (3,.35) rectangle (3.285714286,.65);
+      \draw [fill=fg!30!white] (3,.35) rectangle (3.285714286,.65);
       \node [right] at (3.285714286,.5) {\tiny 2 non-competitive};
       \draw [fill=fg] (0,-.15) rectangle (1.428571429,.15);
       \node [left,white] at (1.428571429,0) {\footnotesize 10};
-      \draw [fill=fg!40!white] (1.428571429,-.15) rectangle (1.857142858,.15);
+      \draw [fill=fg!30!white] (1.428571429,-.15) rectangle (1.857142858,.15);
       \node [right] at (1.857142858,0) {\tiny 3 non-competitive};
     \end{tikzpicture}
   \item Logics:\\
@@ -105,9 +105,9 @@ SMT-COMP 2015\\[3em]}
       \node [left,gray] at (0,.9) {\tiny 300,000};
       \node [left,gray] at (0,1.8) {\tiny 600,000};
       \node [left,gray] at (0,2.7) {\tiny 900,000};
-      \draw [fill=fg] (1,0) rectangle (3,1.019142);
+      \draw [fill=fg!30!white] (1,0) rectangle (3,1.019142);
       \draw [fill=fg] (4,0) rectangle (6,3.085845);
-      \node [below] at (2,0) {\footnotesize SMT-COMP 2014};
+      \node [below,gray] at (2,0) {\footnotesize SMT-COMP 2014};
       \node [below] at (5,0) {\footnotesize SMT-COMP 2015};
     \end{tikzpicture}
   \end{center}
@@ -141,7 +141,27 @@ SMT-COMP 2015\\[3em]}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Machine Specifications}
+  Hardware:
+  \begin{itemize}
+  \item Intel Xeon CPU E5-2609 @ 2.40GHz
+  \item 2 processors per node, 4 cores per processor
+  \item Main memory capped at 60~GB per job pair
+  \end{itemize}
 
+  \medskip
+  
+  Software:
+  \begin{itemize}
+  \item Red Hat Enterprise Linux Workstation release 6.3
+  \item Kernel 2.6.32, gcc 4.4.6, glibc 2.12 ($\sim$ 2009-2011)
+  \item Virtual machine image available before the competition
+  \end{itemize}
+
+  \bigskip
+  
+  Problems with \structure{missing libraries} (due to dynamic linking)
+  in several solvers resolved during pre-competition testing in early
+  June.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
