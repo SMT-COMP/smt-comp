@@ -759,6 +759,8 @@ UFLRA & 5358 & 223820 & 2 & 201 & 41.8 \\
 \resizebox{!}{294pt}{\input{apptrack-results.tex}}
 \end{table}
 
+We can also consider the effect of the choice of timeout on the application track. This effect is more complicated than for the main track since an application track benchmark can have partial results. For example, if a benchmark contains 100 check-sat commands, a solver may report correct answers on 0 to 100 of them prior to timing out. Furthermore the seven divisions that have results show very different characteristics. In four of the divisions (QF\_AUFLIA, QF\_UFLIA, QF\_UFLRA, UFLRA) over 90\% of the solver-benchmarks jobs were completed before the timeout; for QF\_UFLRA it was over 99\%. The other three divisions had much harder benchmarks. For example, for QF\_BF, only 1\% of solver-benchmark pairs were completely solved by 1 second and only 42\% by the timeout.  These three divisions also have many fewer benchmarks---a few hundred, rather than several thousand. Changing the timeouts further might affect the results of these divisions significantly, but not those of the four divisions with many more benchmarks.
+
 \section{FLoC Olympic Games}
 \label{sec:floc}
 
