@@ -9,6 +9,7 @@ set xrange [1:10]
 set xtics ("" 1, "[10^2,10^3[" 2, "[10^3,10^4[" 3, "[10^4,10^5[" 4, "[10^5,10^6[" 5, "[10^6,10^7[" 6, "[10^7,10^8[" 7, "[10^8,10^9[" 8, "[10^9,10^{10}[" 9, "" 10)
 set yrange [0.1:100000]
 set logscale y
+set ytics ("1" 1, "10" 10, "100" 100, "1000" 1000, "10000" 10000, "100000" 100000)
 set boxwidth 0.25
 set style fill solid 0.25 noborder
 set xlabel "File size (in bytes)."
