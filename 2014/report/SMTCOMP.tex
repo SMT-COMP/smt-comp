@@ -564,7 +564,12 @@ In the end, in 2014, there was sufficient time to use all eligible benchmarks an
 
 The competition used the NSF-funded StarExec~\cite{DBLP:conf/cade/StumpST14} computational cluster at U.~Iowa for executing solvers on benchmarks. Past instances of SMT-COMP used a previous SMT-Exec infrastructure. StarExec was used for several other competitions in 2014 as well.
 
-StarExec consists of 192 2.4\,GHz computational nodes, running Red Hat Linux~6.3. Each node has a dual-processor, quad-core CPU (model Intel Xeon CPU E5-2609 at 2.4GHz), 10240 KB cache, and either 129022\,MB (32 nodes) or 258294\,MB of memory (160 nodes). In competition, processes were limited to 100\,GB memory. To avoid interference among job-pairs, only one job-pair was executed at a time on each node.
+StarExec consists of 192 2.4\,GHz computational nodes, running Red Hat Linux~6.3. Each node has a dual-processor, quad-core CPU (model Intel Xeon CPU E5-2609 at 2.4GHz), 10240 KB cache, and either 129022\,MB (32 nodes) or 258294\,MB of memory (160 nodes). In competition, processes were limited to 100\,GB memory. To avoid interference among job-pairs, only one job-pair was executed at a time on each node. The software configuration contains
+\begin{itemize}
+\item Linux kernel 2.6.32-573.1.1.el6.x86_64
+\item GNU C Library stable release version 2.12
+\item gcc (GCC) 4.4.7 20120313 (Red Hat 4.4.7-11)
+\end{itemize}
 
 For comparison, the previous computational cluster (SMT-Exec) had just 11 nodes:
 \begin{itemize}
