@@ -824,7 +824,7 @@ UFLRA & 5358 & 223820 & 2 & 201 & 41.8 \\
 
 We can also consider the effect of the choice of timeout on the application track. This effect is more complicated than for the main track since an application track benchmark can have partial results. For example, if a benchmark contains 100 check-sat commands, a solver may report correct answers on 0 to 100 of them prior to timing out. Furthermore the seven divisions that have results show very different characteristics. In four of the divisions (QF\_AUFLIA, QF\_UFLIA, QF\_UFLRA, UFLRA) over 90\% of the solver-benchmarks jobs were completed before the timeout; for QF\_UFLRA it was over 99\%. The other three divisions (QF\_BV, QF\_LIA, QF\_LRA) had much harder benchmarks. For example, for QF\_BV, only 1\% of solver-benchmark pairs were completely solved by 1 second and only 42\% by the timeout.  These three divisions also have many fewer benchmarks---a few hundred, rather than several thousand. Changing the timeouts further might affect the results of these divisions significantly, but not those of the four divisions with many more benchmarks.
 
-\section{FLoC Olympic Games}
+\section{FLoC Olympic Games Scoring}
 \label{sec:floc}
 
 The main track and the application track described in previous sections are staples of recent SMT Competitions. The 2014 edition was unique in also being associated with the FLoC Olympic Games~\cite{FLoCGames}.
@@ -835,7 +835,7 @@ One additional aspect that resulted from the Olympic Games was the awarding of t
 The metrics for doing so were the subject of significant discussion both before and after the competition.
 The metrics were decided by the organizers before the competition began (and before the deadline for solver registration) and were maintained unchanged after the competition.
 
-The organizers chose to award the bronze medal for the best performance in a single division. We chose  the QF\_BV division for this medal because it is significant to applications and because it traditionally received the most solver submissions. Indeed in 2014, there were 8 participants. Determining the winner was straightforward: we used the same metric as is used for each division\textemdash the most problems solved without errors, with ties broken by speed of solution. The Boolector~\cite{boolector} solver won this division and the bronze medal. The results for all participating solvers are shown in Table \ref{Table:bronze}.
+The organizers chose to award the bronze medal for the best performance in a single division. We chose  the QF\_BV division for this medal because it is significant to applications and because it traditionally received the most solver submissions. Indeed in 2014, there were 8 participants. Determining the winner was straightforward: we used the same metric as is used for each division\textemdash the most problems solved without errors, with ties broken by speed of solution. The Boolector~\cite{boolector} solver won this division and therefore the bronze medal. The results for all participating solvers are shown in Table \ref{Table:bronze}.
 
 The organizers chose to award the silver and gold medals for best performance across the most divisions. Thus we needed a metric that combined the results across divisions. We considered two metrics. For a given solver, let
 \begin{itemize}[noitemsep,nolistsep]
