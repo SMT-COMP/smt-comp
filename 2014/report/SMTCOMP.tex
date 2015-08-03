@@ -589,7 +589,7 @@ Dec. 2013 & D\'{e}harbe and Weber appointed as co-organizers\\
 
 The competition used the NSF-funded StarExec~\cite{DBLP:conf/cade/StumpST14} computational cluster at the University of Iowa for executing solvers on benchmarks. Past instances of SMT-COMP used a previous SMT-Exec infrastructure. StarExec was used for several other competitions in 2014 as well.
 
-StarExec currently consists of 192 2.4\,GHz computational nodes, running Red Hat Linux~6.3. Each node has a dual-processor, quad-core CPU (model Intel Xeon CPU E5-2609), 10240~KB cache, and either 129022\,MB (32 nodes) or 258294\,MB of memory (160 nodes). In competition, processes were limited to 100\,GB memory. To avoid interference among job-pairs, only one job-pair was executed at a time on each node. The software configuration contains
+StarExec currently consists of 192 2.4\,GHz computational nodes, running Red Hat Linux~6.3. Each node has two quad-core CPUs (model Intel Xeon E5-2609, 2.4\,GHz, 10\,MB cache), and either 129022\,MB (32 nodes) or 258294\,MB of memory (160 nodes). In competition, processes were limited to 100\,GB memory. To avoid interference among job-pairs, only one job-pair was executed at a time on each node. The software configuration contains
 \begin{itemize}[noitemsep,nolistsep]
 \item Linux kernel 2.6.32-573.1.1.el6.x86\_64
 \item GNU C Library stable release version 2.12
@@ -598,12 +598,12 @@ StarExec currently consists of 192 2.4\,GHz computational nodes, running Red Hat
 
 For comparison, the previous computational cluster (SMT-Exec) had just 11 nodes:
 \begin{itemize}[noitemsep,nolistsep]
-\item Nine are 2.4\,GHz AMD Opteron 250s, configured for single core, 64-bit processing, 1 MB cache, 4 GB main memory
-\item Two are 2.53\,GHz Intel Xeon E5540s, configured for single core, 64-bit processing, 8 MB cache, 12 GB main memory
+\item Nine were 2.4\,GHz AMD Opteron 250s, configured for single core, 64-bit processing, 1 MB cache, 4 GB main memory
+\item Two were 2.53\,GHz Intel Xeon E5540s, configured for single core, 64-bit processing, 8 MB cache, 12 GB main memory
 \end{itemize}
-All eleven execution nodes were running Red Hat Enterprise Linux Client release 5.2 (Tikanga) , with the following software configuration:
+All SMT-Exec nodes had been running Red Hat Enterprise Linux Client release 5.2 (Tikanga), with the following software configuration:
 \begin{itemize}[noitemsep,nolistsep]
-\item Linux, kernel version 2.6.18-128.2.1.el5
+\item Linux kernel 2.6.18-128.2.1.el5
 \item glibc-2.5-24.el5\_2.2
 \item runtime libraries from gcc-4.1.2-42.el5
 \end{itemize}
