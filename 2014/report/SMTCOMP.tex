@@ -518,13 +518,14 @@ The competition rules are largely the same from year to year, but each year ther
 \end{itemize}
 The organizers also received and adjudicated an appeal after the competition completed (cf.~\S\ref{sec:floc}).
 
-\paragraph{Undefined Behavior.} During the testing period prior to the competition beginning, different solvers exhibited different behavior on some benchmarks. Investigation revealed that these differences were the result of different treatments of partial operations, divide by zero, in particular. The question is what should be the definition of divide by zero in SMT-LIB's logic of total functions. This question had been discussed at length over previous years, with proposals to clarify the SMT-LIB standard.
-There was certainly not time to resolve this matter prior to the competition, not to mention correcting solvers to the agreed behavior.\footnote{The discussion this time around can be found in the archives of the \url{smtcomp-discussion@lists.sourceforge.net} mailing list, in the few days near 2014-06-16.}
-Thus, for the competition, we decided to omit all benchmarks (6060 of them, 1348 of which were otherwise eligible) that were affected by divide-by-zero behavior. This question, however, remains open.
+\paragraph{Undefined behavior.} \label{par:undefined} During the testing period prior to the competition beginning, different solvers exhibited different behavior on some benchmarks. Investigation revealed that these differences were the result of different treatments of partial operations; in particular, divide by zero.  The semantics of SMT-LIB is based on a logic of total functions, meaning that division by zero cannot raise an exception (or the like), but must have \emph{some} value.  The SMT-LIB standard leaves this value unspecified (i.e., it could be anything).  In contrast, some solvers assume a specific, fixed value.  This question had been discussed at length over previous years, with proposals to clarify the SMT-LIB standard.  There was certainly not time to resolve this matter prior to the competition, not to mention correcting solvers to the agreed behavior.\footnote{The discussion this time around can be found in the archives of the \url{smtcomp-discussion@lists.sourceforge.net} mailing list, in the few days near 2014-06-16.}  Thus, for the competition, we decided to omit all benchmarks (6060 of them, 1348 of which were otherwise eligible) that were potentially affected by divide-by-zero behavior.  This question, however, remains open.
 
 \paragraph{Invite and validate solver submissions.} The 2014 competition saw the first use of the StarExec computational cluster (cf. \S\ref{sec:starexec}) for executing the competition. Each solver had to be wrapped in appropriate scripts to be able to run in the StarExec environment. Though this was largely the responsibility of the solver submitter, teams submitting solvers for the first time required guidance and assistance from the organizers and the StarExec development team. This was a significant hurdle; not all solver teams were able to complete it in time. The most significant problem was the need to create a fully statically linked version of the solver that ran on the particular version of Linux used by StarExec. The organizers stipulated a first solver submission deadline and a final solver submission deadline, separated by two weeks, to enable (and encourage) trials and debugging of solver submissions.
 
-Solver submissions comprise the solver itself, a short system description outlining what is new or novel about the solver, and an integer seed used as input to the scrambler (as described in~\S\ref{sec:benchmark-selection}).
+Solver submissions comprise the solver itself, a short system
+description outlining what is new or novel about the solver, and an
+integer seed used as input to the scrambler (as described
+in~\S\ref{sec:benchmark-selection}).
 %% [DD] removed following sentence to reduce redundancy
 %%
 %% All the submitted seeds and an additional seed derived from a value
@@ -553,7 +554,7 @@ In past competitions, the competition was timed to have its last portion overlap
 
 \paragraph{Report the results.} The results of the competition were reported at the SMT Workshop and in this paper.
 
-\paragraph{Competition Timeline}
+\paragraph{Competition timeline.}
 
 The preparation and execution of SMT-COMP 2014 took place over about 7 months,
 relying on the experience of previous competitions, the 2013 SMT Evaluation, and
@@ -586,9 +587,9 @@ Dec. 2013 & D\'{e}harbe and Weber appointed as co-organizers\\
 \section{StarExec}
 \label{sec:starexec}
 
-The competition used the NSF-funded StarExec~\cite{DBLP:conf/cade/StumpST14} computational cluster at U.~Iowa for executing solvers on benchmarks. Past instances of SMT-COMP used a previous SMT-Exec infrastructure. StarExec was used for several other competitions in 2014 as well.
+The competition used the NSF-funded StarExec~\cite{DBLP:conf/cade/StumpST14} computational cluster at the University of Iowa for executing solvers on benchmarks. Past instances of SMT-COMP used a previous SMT-Exec infrastructure. StarExec was used for several other competitions in 2014 as well.
 
-StarExec consists of 192 2.4\,GHz computational nodes, running Red Hat Linux~6.3. Each node has a dual-processor, quad-core CPU (model Intel Xeon CPU E5-2609 at 2.4GHz), 10240 KB cache, and either 129022\,MB (32 nodes) or 258294\,MB of memory (160 nodes). In competition, processes were limited to 100\,GB memory. To avoid interference among job-pairs, only one job-pair was executed at a time on each node. The software configuration contains
+StarExec currently consists of 192 2.4\,GHz computational nodes, running Red Hat Linux~6.3. Each node has a dual-processor, quad-core CPU (model Intel Xeon CPU E5-2609), 10240~KB cache, and either 129022\,MB (32 nodes) or 258294\,MB of memory (160 nodes). In competition, processes were limited to 100\,GB memory. To avoid interference among job-pairs, only one job-pair was executed at a time on each node. The software configuration contains
 \begin{itemize}[noitemsep,nolistsep]
 \item Linux kernel 2.6.32-573.1.1.el6.x86\_64
 \item GNU C Library stable release version 2.12
@@ -996,7 +997,7 @@ Benchmarks representative of application scenarios are particularly important.
 \item Various competition tracks used in the past should be rejuvenated: parallel processing, computation of unsat cores, production of proofs, computation of symbolic models, and computation of concrete counterexamples.
 \item One missing tool is a standard SMT-LIB syntax checker. jSMTLIB~\cite{cok2011jsmtlib} has been proposed for this purpose, but is not yet integrated into StarExec. The tool also needs to be updated to include the proposed new SMT-LIB features.
 \item The difficulty in preparing a new solver for submission to StarExec for participation in SMT-COMP should be reduced.
-\item Resolve the definition of divide-by-zero behavior in SMT-LIB.
+\item Resolve the definition of divide-by-zero behavior in SMT-LIB (cf.~\S\ref{par:undefined}).
 \item An item for study is the effect of benchmark scrambling on the outcome of solver comparisons.
 \item Clearly define the subset of SMT-LIB~v2 that solvers must support for a competition and that benchmarks must use.
 \end{itemize}
