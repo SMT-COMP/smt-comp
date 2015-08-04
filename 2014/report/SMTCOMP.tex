@@ -144,12 +144,8 @@ In planning the 2014 competition, the organizers' overall goal was to encourage 
 \begin{itemize}
 \item In 2012 the competition was narrowed to a smaller number of more significant logics. In response to feedback, in 2014 we reverted to the practice of evaluating solvers in all available divisions.
 \item A significant result of the 2013 Evaluation was that the results of previous competitions were highly sensitive to the selection of benchmarks: different random selections of benchmarks resulted in different winning orders in a large fraction of samples. Hence, an aim for 2014 was to use as large a benchmark set as possible in the competition to minimize this effect. We were able to run the competition with all eligible benchmarks. This point is discussed further in~\S\ref{sec:benchmark-selection}.
-\item In 2012 some experimental tracks were held: parallel performance, unsat cores, and proof generation. The participation in those tracks was light. Since in 2014 we also had to migrate to using the new StarExec cluster to execute the competition, we held only a main track and an application (incremental) track in the 2014 competition. The organizers still appreciate the value of measuring the performance of solvers on new features such as model generation, unsat core determination, and proof generation, and recommend that these tracks be reinstated in some future edition of the competition.
-\item A significant change in 2014 was to increase the timeout limit for a solver processing a given benchmark from 25 minutes (in 2012) to 40 minutes (see \S\ref{sec:procedure} for details on the competition parameters and \S\ref{sec:timeouts} for a discussion on their effects).
-
-
-
-
+\item In 2012 some experimental tracks were held: parallel performance, unsat cores, and proof generation. The participation in those tracks was light. Since in 2014 we also had to migrate to using the new StarExec cluster to execute the competition, we held only a main track and an application (incremental) track in the 2014 competition. The organizers still appreciate the value of measuring the performance of solvers on new features such as parallel processing, model generation, unsat core determination, and proof generation, and recommend that these tracks be reinstated in some future edition of the competition.
+\item An additional goal was to be able to evaluate the effect of the timeout setting on the competition. Thus a change in 2014 was to increase the timeout limit for a solver processing a given benchmark from 25 minutes (in 2012) to 40 minutes (see \S\ref{sec:procedure} for details on the competition parameters and \S\ref{sec:timeouts} for a discussion on their effects).
 \end{itemize}
 
 An important difference between the 2014 competition and previous competitions was that this year's competition was executed on the StarExec cluster, described below in \S\ref{sec:starexec}. All the supporting tools and related procedures needed to be ported to this new framework. With watchful eyes by the organizers and the StarExec team, and with some debugging, the StarExec framework worked well and enabled a larger scale of competition than in previous years.
@@ -850,7 +846,7 @@ of an answer is shown in Fig.~\ref{Fig:timeouts}. This figure shows the number o
 Most of the benchmarks are solved quickly: 39\% in less than a second, more than half in under 3.5 seconds,
 62\% by 10 seconds, and then a slow increase to 88\% by 2400 seconds. There is continual improvement for long timeouts, but the return on time invested certainly decreases.
 
-There are two caveats to this observation. First, the results depend heavily on the character of the benchmarks set. Some logics have only easy benchmarks, some have purposefully crafted difficult benchmarks, others are a mix. The benchmarks are not a representative sampling of problems that might be encountered in practice.  Second, the results described are obtained by observing the wall-clock solution time when the timeout value is set at 2400 seconds. Solvers, if told what the timeout value is, have the option to adjust their search strategies based on the timeout; the solvers might then exhibit better behavior for shorter timeout.\footnote{Though solvers could use the timeout value, current versions of those queried\textemdash Yices2, Z3, Boolector\textemdash do not do so. However, CVC4 and CVC3 do build in the stated timeout into the script used for competition (though it is not used by the core solver) and so might show differences from the behavior stated here.}
+There are two caveats to this observation. First, the results depend heavily on the character of the benchmarks set. Some logics have only easy benchmarks, some have purposefully crafted difficult benchmarks, others are a mix. The benchmarks are not a representative sampling of problems that might be encountered in practice.  Second, the results described are obtained by observing the wall-clock solution time when the timeout value is set at 2400 seconds. Solvers, if told what the timeout value is, have the option to adjust their search strategies based on the timeout; the solvers might then exhibit better behavior for shorter timeout.\footnote{Though solvers could use the timeout value to alter their processing algorithms, current versions of those queried\textemdash Yices2, Z3, Boolector\textemdash do not do so. However, CVC4 and CVC3 do build in the stated timeout into the script used for competition (though it is not used by the core solver) and so might show differences from the behavior stated here.}
 
 Table~\ref{Fig:winners} shows a different view of the same data. Here we present the number of problems solved by each solver within a given wall-clock solution time, subject to the same caveats. The point to observe is that the winning solver changes depending on the timeout chosen. For these benchmarks and this set of solvers Yices2 performs best for timeouts under a second, CVC4 does best in the middle range from 1 to 200 seconds, and Boolector does best above 400 seconds. Other logics, but not all, show changes in winning order as well. This phenomenon could be a result of differences in engineering of the individual solvers or it could be a result of characteristics of the benchmark set.
 
@@ -860,7 +856,7 @@ by 1 second and 10 seconds, respectively, even though by 2400 seconds it solves 
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=.95\textwidth]{QF_BV-timeout-logscale.pdf}
+\includegraphics[width=.95\textwidth]{QF_BV-timeout-logscale2.png}
 \end{center}
 \caption{Solver success for QF\_BV benchmarks over time.}
 \label{Fig:timeouts}
@@ -1090,7 +1086,16 @@ SMT-COMP 2014 successfully executed the comparison among solvers that is the mai
 
 The SMT steering committee is proposing that SMT-COMP 2015 will be held in association with the SMT Workshop, which itself will be affiliated with CAV 2015 in San Franciso, CA, USA from July 18-24, 2015.  The SMT Workshop is being organized by Vijay Ganesh and Dejan Jovanovi\'c; the organizers of the competition are Tjark Weber, David D\'eharbe, and Sylvain Conchon.
 
-Based on the experience of 2014, the 2014 organizers have the following recommendations or topics for consideration for future competitions.
+\paragraph{Observations}
+
+Solver implementors continue to focus primarily on raw numbers of problems solved. We think that future competitions can 
+help broaden the focus to encompass breadth of problems addressed, fast solutions on simple problems, and other features provided by the SMT-LIB command language.
+
+An unexpected observation is that there is indeed a difference in outcome of even a straightforward competition depending on the value of timeout chosen. As a result, there might indeed be an interest and valuable result from trying a competition track focused on fast solving of relatively simple problems.
+
+A satisfying observation is that there is indeed reasonable competition among several highly-performing solvers, as measured by the unique contributions each makes and the distribution of fastest times.
+
+\paragraph{Recommendations.} Based on the experience of 2014, the 2014 organizers have the following recommendations or topics for consideration for future competitions.
 \begin{itemize}
 \item The 2014 competition used all available benchmarks; though the computation resources enable using all benchmarks, future competitions should consider how to make a principled selection to avoid over-representing benchmarks of particular types or origin.
 \item The competition has used numbers of solved benchmarks as the primary success criterion. Time to solve benchmarks should be considered more strongly. In particular, a separate track that emphasizes fast solution of fairly simple problems might be informative.
@@ -1106,7 +1111,7 @@ Benchmarks representative of application scenarios are particularly important.
 \item Various competition tracks used in the past should be rejuvenated: parallel processing, computation of unsat cores, production of proofs, computation of symbolic models, and computation of concrete counterexamples.
 \item One missing tool is a standard SMT-LIB syntax checker. jSMTLIB~\cite{cok2011jsmtlib} has been proposed for this purpose, but is not yet integrated into StarExec. The tool also needs to be updated to include the proposed new SMT-LIB features.
 \item The difficulty in preparing a new solver for submission to StarExec for participation in SMT-COMP should be reduced.
-\item Resolve the definition of divide-by-zero behavior in SMT-LIB (cf.~\S\ref{par:undefined}).
+\item A general means to resolve questions surrounding partial definitions is needed in SMT-LIB, e.g., for divide-by-zero  (cf.~\S\ref{par:undefined}).
 \item An item for study is the effect of benchmark scrambling on the outcome of solver comparisons.
 \item Clearly define the subset of SMT-LIB~v2 that solvers must support for a competition and that benchmarks must use.
 \end{itemize}
