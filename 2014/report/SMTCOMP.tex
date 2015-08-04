@@ -640,8 +640,6 @@ defined and the relationship between the logic used in SL-COMP and the SMT-LIB l
 did express its benchmark problems in the same syntax as SMT-COMP, used the same StarExec hardware, and used similar 
 organization and scoring rules. 
 
-\davidc{Update the reference for SLCOMP}
-\davidd{Added a journla submission on SLCOMP 2014}
 \davidc{Add other solvers, SV-COMP?}
 
 \paragraph{SL-COMP} Besides the subject material, the most interesting difference among competitions is in scoring. (The scoring procedure for
@@ -663,11 +661,21 @@ single error in a division caused the solver to be scored lower than any other s
 
 Table \ref{Table:maintrack} shows a summary of the main track results. The detailed data for each division is on the competition website: \url{http://smtcomp.sourceforge.net/2014/results-toc.shtml}.
 
-Unfortunately, we cannot make a useful comparison with previous years for a number of reasons. First, until the evaluation in 2013, the competition was run on a different computation infrastructure, so solution times are not comparable. The SMT evaluation in 2013 and the competition in 2014 were both run on StarExec but with different timeouts and different configurations of nodes. Finally the early data from StarExec only captured wall-clock time, not CPU time. The organizers are confident that the 2014 data will be a solid baseline for evaluating progress in solver performance in future years.
+The results of the competition per se were not surprising. The solvers that performed best in previous years continued to do so. Boolector wins those divisions that focus on bit-vector problems; CVC4 has the most breadth of application and wins most of the other divisions, with Yices2 also having a strong showing. Solvers that were optimized with particular decision procedures for particular logics can capture individual wins: AProVE for QF\_NIA; veriT for UFLRA. If Z3 had competed, with the current version entered by the organizers, it would have won many divisions, but not all; CVC4 is 
+definitely competitive with it. Table \ref{Table:maintrack} does not show the computation time used by the solvers; however, that data is available in the detailed results and shows that of the leading contenders for broad application across logics, Z3 is the most efficient and is the solver to beat in future competitions.
 
-\davidc{Revise the paragraph above per review comments}
+In the medal ceremony for the competition at the SMT workshop, the organizers took care not to focus only on the winning solvers. The competition was also successful in attracting new interest and many new entrants, even when the new entrants did not score highly or had errors in their submissions. In that sense the decision of the SMT steering committee to pause
+the competition for a year, to 'reboot' it and give contestants some breathing room, was also successful.
 
-\davidc{More assessment needed}
+The organizers chose not to try to make a detailed comparison with previous years' results. Such a comparison had just been
+completed in the 2013 Evaluation exercise. Furthermore, with the change in computation hardware, an accurate comparison
+would have required running all of the 2012 solvers along with the 2014 solvers and making a comparison on just the
+benchmarks used in the 2012 competition. While this is certainly possible, the organizers were not confident enough of the
+ability of the new StarExec to complete even the 2014 competition to contemplate doubling the computational load.
+In addition, such an exercise was out of the scope of their mandate and would have required considerable extra effort.
+However, knowing now that StarExec is fully capable of executing all of the competition benchmarks, such a
+comparative exercise would be definitely possible in the future.
+The organizers are confident that the 2014 data will be a solid baseline for evaluating progress in solver performance in future years.
 
 \begin{table}[H]
 \caption{Main track results}
