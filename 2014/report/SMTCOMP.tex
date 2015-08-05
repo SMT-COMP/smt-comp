@@ -411,7 +411,7 @@ The competition registration requires participants to submit information about e
 \item SMTInterpol~\cite{DBLP:conf/spin/ChristHN12,DBLP:conf/spin/2012} -- submitted by Jochen Hoenicke, J\"urgen Christ (U.~Freiburg)
 \item SONOLAR~\cite{Peleska:2011:ATC:1986308.1986333} -- submitted by Florian Lapschies (U.~Bremen)
 \item STP-CryptoMiniSat4~\cite{DBLP:conf/cav/GaneshD07,DBLP:conf/cav/2007} -- submitted by Mate Soos (Security Research Lab.), based on previous work by Trevor Hansen (U.~Melbourne) and Vijay Ganesh (Massachusetts Institute of Technology)
-\item veriT~\cite{veriT} -- submitted by David D\'{e}harbe (UFRN - Universidade Federal do Rio Grande do Norte), Pascal Fontaine (U.~Lorraine, INRIA - Institut national de recherche en informatique et en automatique)
+\item veriT~\cite{veriT} -- submitted by David D\'{e}harbe (UFRN - Universidade Federal do Rio Grande do Norte) and Pascal Fontaine (U.~Lorraine, INRIA - Institut national de recherche en informatique et en automatique)
 \item Yices2~\cite{Dutertre:cav2014} -- submitted by Bruno Dutertre (SRI)
 \end{itemize}
 
@@ -626,7 +626,7 @@ As this was the first year SMT-COMP used StarExec, a variety of tools and proced
 %% running the application track, and tools for creating real-time
 %% summaries of results in progress.  These are now available to be
 %% reused in future years.
-The execution of SMT-COMP on StarExec went well, though not flawlessly. As this was a first major use of StarExec for a competition there were some bugs to work through.
+The execution of SMT-COMP on StarExec went well, though not flawlessly: there were some bugs to work through.
 The organizers had some bugs of their own: the scripts to create sets of benchmarks and jobs did not account for spaces in filenames; some initial report generation was incorrect; the postprocessor for translating textual output from solvers into official results needed fine-tuning. These problems were all fixed before or early in the competition. The main issue with StarExec itself was that sometimes jobs would hang or the StarExec infrastructure would fail to make
 progress or would report results incorrectly. Bugs in scheduling were
 fixed during the competition but are not entirely resolved. Accordingly, jobs need regular monitoring to insure they are making progress.
@@ -646,8 +646,6 @@ defined and the relationship between the logic used in SL-COMP and the SMT-LIB l
 did express its benchmark problems in the same syntax as SMT-COMP, used the same StarExec hardware, and used similar 
 organization and scoring rules. 
 
-\davidc{Add other solvers, SV-COMP?}
-
 \paragraph{SL-COMP} Besides the subject material, the most interesting difference among competitions is in scoring. (The scoring procedure for
 SMT-COMP is described in detail in section \ref{sec:floc}.)
 Competitions are currently mostly focused on raw solver capability---that is, the numbers and difficulty of problems that can be solved. Thus competition winners are primarily determined by the total number of problems solved correctly,
@@ -656,8 +654,7 @@ for example.
 
 \paragraph{Scoring differences.} A more significant issue is how solver errors are taken into account in the metrics. A solver error indicates an unsoundness in the tool, which is highly undesirable; however, highly penalizing errors may discourage new entrants whose tools are not yet mature. Different competitions vary on this aspect. SMT-COMP has historically emphasized soundness; a
 single error in a division caused the solver to be scored lower than any other solver with no errors, even if the other solvers solved very few problems. In its inaugural edition, the Separation Logic Competition (SL-COMP) adopted the same rules as SMT-COMP. For the SAT competition, however, an error outright disqualifies a tool in the category it occurs\footnote{See \url{http://satcompetition.org/2014/rules.shtml}.}. In the QBF Gallery, a competitive evaluation of solvers for Quantified Boolean Logic, the score is the number of solved instances. In contrast, in the SV-competition~\cite{svcomp-2015}, successful runs account positively towards the final score, while errors count negatively (with an increased weight). 
-
-\davidc{Research a wider set of competitions}
+A few other sibling competitions with scoring variations are the Answer-Set Programming competition (ASP-COMP: wrong answers receive a 0 score), the Confluence Competition (CoCo: implausible answers disqualify from winning), and Syntax-Guided Synthesis (SyGuS-COMP: no points for wrong answers, extra points for succinct answers).
 
 \section{Results}
 \label{sec:results}
@@ -744,7 +741,7 @@ UFNIA & 	3 & 	1587 & 	[Z3]; \win{CVC4}; CVC3. \\
 \paragraph{Fastest solvers.} The competition does not weight time to solve a problem significantly. However, this is an important characteristic to any user. Hence we analyzed the competition results for each division to answer this question: 
 for each solver, what fraction of the benchmarks for the division does that solver solve the fastest? 
 The data answering this question is shown in Table \ref{tab:speed}. For each division and each benchmark, we determined the solver that solved that benchmark the fastest, and for each solver counted the number of benchmarks for which it was the fastest. The table lists the three solvers with the most such benchmarks, with the fraction of benchmarks that it won.
-The winning solvers are a mix of Z3, CVC, Yices2, and a few for veriT. In some division, the winning solver does dominate teh competition. Yices2, for example tends to win in those divisions in which it participates, with Z3 winning most of the others. Note that this analysis does not take into account the margin by which the times are better. The times used here are cpu-times; usinjg wall-clock times changes the fractions and sometimes the order, but not the overall observation.
+The winning solvers are a mix of Z3, CVC, Yices2, and a few for veriT. In some divisions, the winning solver does dominate the competition. Yices2, for example tends to win in those divisions in which it participates, with Z3 winning most of the others. Note that this analysis does not take into account the margin by which the times are better. The times used here are cpu-times; using wall-clock times changes the fractions and sometimes the order, but not the overall observation.
 
 
 \begin{table}
@@ -792,7 +789,7 @@ UFNIA & 80\% [Z3] & 10\% CVC3 & 9\% CVC4 \\
 \end{table}
 
 \paragraph{Solver contribution.} A second comparison that can be made is to determine what a solver adds in addition to 
-what other solvers contribute. We measure this `solver contribution' as follows. For each benchmark in a division, we award each solver that solves the benchmarks $1/n$ points, where $n$ is the number of solvers that solved the benchmark (within the timeout). These points are then summed over all the benchmarks in the division and scaled by the number of benchmarks. The sum is a measure of the
+what other solvers contribute. We measure this `solver contribution' as follows. For each benchmark in a division, we award each solver that solves the benchmark $1/n$ points, where $n$ is the number of solvers that solved the benchmark (within the timeout). These points are then summed over all the benchmarks in the division and scaled by the number of benchmarks. The sum is a measure of the
 unique contribution provided by a solver; a value of 1.0 would indicate that that solver was the only solver to solve all of the benchmarks in the division. The results are shown in Table \ref{tab:cont}. The results show again that no one solver dominates in all categories, but that there are several contributing solvers among which users can choose.
 
 \begin{table}
@@ -846,21 +843,22 @@ of an answer is shown in Fig.~\ref{Fig:timeouts}. This figure shows the number o
 Most of the benchmarks are solved quickly: 39\% in less than a second, more than half in under 3.5 seconds,
 62\% by 10 seconds, and then a slow increase to 88\% by 2400 seconds. There is continual improvement for long timeouts, but the return on time invested certainly decreases.
 
-There are two caveats to this observation. First, the results depend heavily on the character of the benchmarks set. Some logics have only easy benchmarks, some have purposefully crafted difficult benchmarks, others are a mix. The benchmarks are not a representative sampling of problems that might be encountered in practice.  Second, the results described are obtained by observing the wall-clock solution time when the timeout value is set at 2400 seconds. Solvers, if told what the timeout value is, have the option to adjust their search strategies based on the timeout; the solvers might then exhibit better behavior for shorter timeout.\footnote{Though solvers could use the timeout value to alter their processing algorithms, current versions of those queried\textemdash Yices2, Z3, Boolector\textemdash do not do so. However, CVC4 and CVC3 do build in the stated timeout into the script used for competition (though it is not used by the core solver) and so might show differences from the behavior stated here.}
-
-Table~\ref{Fig:winners} shows a different view of the same data. Here we present the number of problems solved by each solver within a given wall-clock solution time, subject to the same caveats. The point to observe is that the winning solver changes depending on the timeout chosen. For these benchmarks and this set of solvers Yices2 performs best for timeouts under a second, CVC4 does best in the middle range from 1 to 200 seconds, and Boolector does best above 400 seconds. Other logics, but not all, show changes in winning order as well. This phenomenon could be a result of differences in engineering of the individual solvers or it could be a result of characteristics of the benchmark set.
-
-The data in Table~\ref{Fig:winners} also shows that most solvers have a similar trend in success as the timeout is increased. For example, most solvers solve about 50\% (ranging from 40\% to 62\%) of the benchmarks that solver solves by 2400 seconds by 1.0 second and
-about 75\% (ranging from 65\% to 79\%) of those solved by 2400 seconds by 10 seconds. However, some solvers, such as Boolector, are outliers: Boolector is slow off the mark - solving only 33\% and 61\% of the benchmarks it eventually solves
-by 1 second and 10 seconds, respectively, even though by 2400 seconds it solves more benchmarks than any other tool, in this division.
-
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=.95\textwidth]{QF_BV-timeout-logscale2.png}
 \end{center}
 \caption{Solver success for QF\_BV benchmarks over time.}
 \label{Fig:timeouts}
 \end{figure}
+
+There are two caveats to this observation. First, the results depend heavily on the character of the benchmarks set. Some logics have only easy benchmarks, some have purposefully crafted difficult benchmarks, others are a mix. The benchmarks are not a representative sampling of problems that might be encountered in practice.  Second, the results described are obtained by observing the wall-clock solution time when the timeout value is set at 2400 seconds. Solvers, if told what the timeout value is, have the option to adjust their search strategies based on the timeout; the solvers might then exhibit better behavior for shorter timeout.\footnote{Though solvers could use the timeout value to alter their processing algorithms, current versions of those queried\textemdash Yices2, Z3, Boolector\textemdash do not do so. However, CVC4 and CVC3 do build in the stated timeout into the script used for competition (though it is not used by the core solver) and so might show differences from the behavior stated here.}
+
+Table~\ref{Fig:winners} shows a different view of the same data. Here we present the number of problems solved by each solver within a given wall-clock solution time, subject to the same caveats. The point to observe is that the winning solver changes depending on the timeout chosen. For these benchmarks and this set of solvers Yices2 performs best for timeouts under a second, CVC4 does best in the middle range from 1 to 200 seconds, and Boolector does best above 400 seconds. Other logics, but not all, show changes in winning order as well. This phenomenon could be a result of differences in engineering of the individual solvers or it could be a result of characteristics of the benchmark set.
+
+The data in Table~\ref{Fig:winners} also shows that most solvers have a similar trend in success as the timeout is increased. For example, most solvers solve about 50\% (ranging from 40\% to 62\%) of the benchmarks that solver solves within the timeout by 1.0 second and
+about 75\% (ranging from 65\% to 79\%) of those solved within the timeout by 10 seconds. However, some solvers, such as Boolector, are outliers: Boolector is slow off the mark - solving only 33\% and 61\% of the benchmarks it eventually solves
+by 1 second and 10 seconds, respectively, even though by 2400 seconds it solves more benchmarks than any other tool, in this division.
+
 
 \begin{table}
 \caption{Solver success per individual solver for 2488 QF\_BV benchmarks, for different timeouts (in seconds).}
@@ -888,7 +886,7 @@ In 2014, the SMT-LIB contains 9,926 benchmarks that  specifically  exercise the 
 
 Four solvers participated in this competition track: CVC3, CVC4, SMTInterpol, and Yices2; Z3 was added as a demonstration-only historical comparison. The track was run for 8 divisions; the results are shown in Table \ref{Fig:apptrack-results}. Within each division, solvers are listed in winning order: Yices2 won six of the eight divisions, all of the ones in which it participated. The winner is the solver that solved the most \lstinline{check-sat} commands correctly within the timeout period. No solver produced an erroneous result. The time out (40 minutes) is applied to the entire benchmark, not to individual commands. Since the previous execution of the application track was in 2012 and not on StarExec, we did not attempt a comparison with previous results.
 
-\begin{table}
+\begin{table}[H]
 \caption{Numbers of application benchmarks and distribution of \lstinline{check-sat} commands for different logics.}
 \label{Fig:apptrack-benchmarks}
 \centering
@@ -1082,9 +1080,9 @@ Total & & 47866 & 13861 & 22062 & 1042 & 852 & 10045 \\
 \section{Concluding Observations and Recommendations}
 \label{sec:conclusions}
 
-SMT-COMP 2014 successfully executed the comparison among solvers that is the main goal of the competition. The new computational infrastructure, StarExec, worked very well for the purpose. The competition saw a renewed interest in participation\textemdash there were record numbers of teams participating, solvers entered, teams and solvers that had never before participated, benchmarks used, and amount of computation performed. Although the 2014 results are not readily comparable to previous years (because of changes in benchmarks and equipment), the detailed performance of each solver on each benchmark from this first year using StarExec will be a solid baseline to measure improvements in the state-of-the-art of solver performance in future years. As a partial comparison, solvers that performed well in previous years were included in this year's competition. However, rerunning the competition on the old hardware or on the old benchmarks was out of the scope of the organizers' task.
+SMT-COMP 2014 successfully executed the comparison among solvers that is the main goal of the competition. The new computational infrastructure, StarExec, worked very well for the purpose. The competition saw a renewed interest in participation\textemdash there were record numbers of teams participating, solvers entered, teams and solvers that had never before participated, benchmarks used, and amount of computation performed. Although the 2014 results are not readily comparable to previous years (because of changes in benchmarks and equipment), the detailed performance of each solver on each benchmark from this first year using StarExec will be a solid baseline to measure improvements in the state-of-the-art of solver performance in future years. As a partial comparison, solvers that performed well in previous years were included in this year's competition.
 
-The SMT steering committee is proposing that SMT-COMP 2015 will be held in association with the SMT Workshop, which itself will be affiliated with CAV 2015 in San Franciso, CA, USA from July 18-24, 2015.  The SMT Workshop is being organized by Vijay Ganesh and Dejan Jovanovi\'c; the organizers of the competition are Tjark Weber, David D\'eharbe, and Sylvain Conchon.
+The SMT steering committee proposed that SMT-COMP 2015 be held in association with the SMT Workshop, which itself will be affiliated with CAV 2015 in San Franciso, CA, USA from July 18-24, 2015.  The SMT Workshop is being organized by Vijay Ganesh and Dejan Jovanovi\'c; the organizers of the competition are Tjark Weber, David D\'eharbe, and Sylvain Conchon.
 
 \paragraph{Observations}
 
@@ -1093,7 +1091,7 @@ help broaden the focus to encompass breadth of problems addressed, fast solution
 
 An unexpected observation is that there is indeed a difference in outcome of even a straightforward competition depending on the value of timeout chosen. As a result, there might indeed be an interest and valuable result from trying a competition track focused on fast solving of relatively simple problems.
 
-A satisfying observation is that there is indeed reasonable competition among several highly-performing solvers, as measured by the unique contributions each makes and the distribution of fastest times.
+A satisfying observation is that there is reasonable competition among several highly-performing solvers, as measured by the unique contributions each makes and the distribution of fastest times.
 
 \paragraph{Recommendations.} Based on the experience of 2014, the 2014 organizers have the following recommendations or topics for consideration for future competitions.
 \begin{itemize}
