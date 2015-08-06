@@ -880,9 +880,10 @@ response to each command. The driver presents commands only one at a time to emu
 indicate the expected result for subsequent \lstinline{check-sat} commands; status information is used only by the driver program and not passed on to the solver. Such \lstinline{set-info} command might indicate a status of \lstinline{unknown}; in that case, the driver
 considers the benchmark to end after the \emph{previous} \lstinline{check-sat} command for competition purposes.
 The driver originally used to collect the answers had a bug that was
-detected and reported by Kshitij Bansal~\cite{bansal2015email}, which
+detected and reported by Kshitij Bansal~\cite{bansal2015email}, who
 also provided a corrected version of the driver. The results discussed
-in this section were obtained with this new driver.
+in this section were obtained with this new driver and differ from those reported
+earlier, such as at the 2014 SMT workshop.
 
 The application track was first introduced in 2011; a report on that year's application track and the overall design was presented by Griggio and Bruttomesso at the 2012 COMPARE Workshop~\cite{ag+rb+12}. A significantly adapted driver was implemented by the organizers for 2014 on the StarExec framework.
 
