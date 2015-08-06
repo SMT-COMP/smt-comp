@@ -1,56 +1,72 @@
-\begin{tabular}{|p{.1in}l|rrr|}
+\begin{tabular}{|p{.1in}l|r|}
 \hline
- & Solver & Commands & Wall time & CPU time \\
+ & Solver & Commands \\
 \hline
-\multicolumn{5}{|l|}{QF\_BV (18 benchmarks, 2141 commands)} \\
-& \textbf{Yices} & 1397 & 33712.3 & 33717.1 \\
-& [MathSAT] & 1171 & 27308.7 & 27311.7 \\
-& CVC4 & 831 & 36146.2 & 36150.9 \\
-& [Z3] & 254 & 38818.0 & 38819.2 \\
 \hline
-\multicolumn{5}{|l|}{AUFNIRA (165 benchmarks, 0 commands)} \\
-& \textbf{CVC4} & 0 & 3.0 & 0.34 \\
-& [Z3] & 0 & 3.5 & 0.75 \\
-& CVC3 & 0 & 3.4 & 0.52 \\
+\multicolumn{3}{|l|}{QF\_BV (18 benchmarks, 2141 commands)} \\
 \hline
-\multicolumn{5}{|l|}{QF\_AUFLIA (72 benchmarks, 4699864 commands)} \\
-& \textbf{Yices} & 3244375 & 2182.6 & 2192.2 \\
-& [Z3] & 3244375 & 8564.3 & 8335.6 \\
-& SMTInterpol & 3244375 & 9442.9 & 9703.8 \\
-& CVC4 & 114063 & 38840.4 & 38835.8 \\
-& [MathSAT] & 377 & 115201.7 & 115200.5 \\
+& [MathSAT] & 2022 \\
+& \textbf{Yices} & 1749 \\
+& CVC4 & 1706 \\
+& [Z3] & 1621 \\
 \hline
-\multicolumn{5}{|l|}{QF\_LIA (65 benchmarks, 19689957 commands)} \\
-& \textbf{Yices} & 19689907 & 36664.0 & 36745.5 \\
-& [Z3] & 19688439 & 58239.0 & 57902.7 \\
-& SMTInterpol & 19687199 & 72449.4 & 73946.1 \\
-& [MathSAT] & 15214533 & 58005.2 & 57747.8 \\
-& CVC4 & 4265295 & 97269.3 & 97410.6 \\
 \hline
-\multicolumn{5}{|l|}{QF\_LRA (10 benchmarks, 795 commands)} \\
-& \textbf{Yices} & 742 & 9592.5 & 9536.6 \\
-& [MathSAT] & 688 & 7569.4 & 7571.7 \\
-& SMTInterpol & 445 & 12104.9 & 12295.4 \\
-& [Z3] & 410 & 17398.3 & 17400.1 \\
-& CVC4 & 222 & 19521.0 & 19522.0 \\
+\multicolumn{3}{|l|}{AUFNIRA (165 benchmarks, 0 commands)} \\
 \hline
-\multicolumn{5}{|l|}{QF\_UFLIA (905 benchmrks, 766079 commands)} \\
-& [Z3] & 766050 & 35438.9 & 35422.1 \\
-& \textbf{Yices} & 762593 & 432909.7 & 432549.4 \\
-& CVC4 & 762579 & 175681.8 & 173808.4 \\
-& SMTInterpol & 761675 & 202682.2 & 208723.0 \\
-& [MathSAT] & 757329 & 256114.4 & 255888.5 \\
+& CVC4 & 0 \\
+& [Z3] & 0 \\
+& CVC3 & 0 \\
 \hline
-\multicolumn{5}{|l|}{QF\_UFLRA (3333 benchmarks, 22066 commands)} \\
-& \textbf{Yices} & 22053 & 55654.4 & 55151.1 \\
-& [Z3] & 22043 & 37848.1 & 37596.8 \\
-& SMTInterpol & 21658 & 120249.0 & 130229.8 \\
-& [MathSAT] & 21514 & 35899.4 & 35711.5 \\
-& CVC4 & 20295 & 104716.5 & 103715.5 \\
 \hline
-\multicolumn{5}{|l|}{UFLRA (5358 benchmarks, 223820 commands)} \\
-& [Z3] & 222579 & 370913.4 & 368869.9 \\
-& \textbf{CVC3} & 67802 & 194697.8 & 192840.6 \\
-& CVC4 & 65360 & 2816349.8 & 2802724.6 \\
+\multicolumn{3}{|l|}{QF\_AUFLIA (72 benchmarks, 4699864 commands)} \\
+\hline
+& \textbf{Yices} & 3244375 (CPU time: 2182.6s)\\
+& [Z3] & 3244375 (CPU time: 8564.3) \\
+& SMTInterpol & 3244375 (CPU time: 9442.9) \\
+& CVC4 & 1051256 \\
+& [MathSAT] & 377 \\
+\hline
+\hline
+\multicolumn{3}{|l|}{QF\_LIA (65 benchmarks, 19689957 commands)} \\
+\hline
+& \textbf{Yices} & 19689907\\
+& [Z3] & 19689683 \\
+& SMTInterpol & 19689059 \\
+& [MathSAT] & 17619155 \\
+& CVC4 & 12648373 \\
+\hline
+\hline
+\multicolumn{3}{|l|}{QF\_LRA (10 benchmarks, 795 commands)} \\
+\hline
+& [MathSAT] & 793 \\
+& \textbf{SMTInterpol} & 746 \\
+& Yices & 742 \\
+& [Z3] & 728 \\
+& CVC4 & 651 \\
+\hline
+\hline
+\multicolumn{3}{|l|}{QF\_UFLIA (905 benchmarks, 766079 commands)} \\
+\hline
+& [Z3] & 766078 \\
+& \textbf{CVC4} & 765522 \\
+& SMTInterpol & 764699 \\
+& Yices & 762831 \\
+& [MathSAT] & 761910 \\
+\hline
+\hline
+\multicolumn{3}{|l|}{QF\_UFLRA (3333 benchmarks, 22066 commands)} \\
+\hline
+& \textbf{Yices} & 22054 \\
+& [Z3] & 22053 \\
+& SMTInterpol & 22006 \\
+& CVC4 & 21775 \\
+& [MathSAT] & 21515 \\
+\hline
+\hline
+\multicolumn{3}{|l|}{UFLRA (5358 benchmarks, 223820 commands)} \\
+\hline
+& [Z3] & 223365 \\
+& \textbf{CVC3} & 67802 \\
+& CVC4 & 66315 \\
 \hline
 \end{tabular}
