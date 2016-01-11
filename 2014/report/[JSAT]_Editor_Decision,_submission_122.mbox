@@ -1,0 +1,121 @@
+From: Matti Jarvisalo <matti.jarvisalo@cs.helsinki.fi>
+Subject: [JSAT] Editor Decision, submission 122
+Date: Mon, 7 Dec 2015 09:21:43 +0100
+To: Tjark Weber <tjark.weber@it.uu.se>
+CC: "David R. Cok" <cok@frontiernet.net>, David =?UTF-8?B?RMOpaGFyYmU=?=
+ <david@dimap.ufrn.br>, <marijn@cs.utexas.edu>
+
+Dear authors,
+
+Thank you for submitting a revised manuscript "The 2014 SMT
+Competition" for publication in the forthcoming Journal of
+Satisfiability, Boolean Modeling and Computation Special Issue on SAT
+2014 Competitions and Evaluations.
+
+The second-round reviews for your submission are attached.
+The reviewers are mostly happy with the revised version and your response
+letter. We hence accept the paper for publication subject to your
+addressing all comments made by the reviewers in the second-round reviews.
+
+Due to email problems we have been experiencing, kindly acknowledge
+that you have received this notification by replying to this email,
+and also make sure all your co-authors have received this notification.
+
+To proceed with publication of your article, please send without
+unnecessary delays all necessary revised source files by email to
+marijn@cs.utexas.edu
+
+Note that, as the JSAT publication process does not involve professional
+copy-editing, we warmly recommend that you thoroughly proof-read the
+camera-ready copy of your article before submitting the source files.
+We may also return with further required improvements also in the
+copy-editing phase.
+
+Thanks again for submitting, and congratulations.
+
+Best regards,
+Marijn Heule and Matti Jarvisalo
+Special Issued Editors
+
+
+REVIEW A
+
+The paper looks good to me now. The comments have been taken into
+consideration appropriately. Just a few minor points should be changed,
+as indicated below.
+
+- p.3, 1st par. of sec. 3: I would still say that to use quantification 
+you need variables, so I would prefer the sentence to read something
+like: "Each problem is a set of closed formulas over a set of constant,
+function and variable symbols, ..."
+
+- p. 3, 1st par. of sec. 3, last sentence: "...potential solution that 
+may be marked as possibly incomplete."
+  I do not really understand what you mean by a "solution being 
+incomplete" (admittedly not knowing how the output of solvers on
+quantified formulas looks like). Don't they just output something like
+"UNKNOWN"?
+
+- p. 3, 2nd par. of sec. 3: perhaps "kind of" (in "kind of typed first 
+order logic") and "cryptic" (in "cryptic combinations of initials) could
+be dropped.
+
+- p. 4, tab. 1: "Unidentified Functions" -> "Uninterpreted Functions"
+
+- p. 4, example: why is the let-clause in line 7 needed?
+
+- p. 5, fig. 1, caption: "Application benchmarks" -> "Incremental 
+Application Benchmarks" ?
+
+- p. 6, sec. 4.1: "Benchmarks problems" -> "Benchmark problems"
+
+- p. 7, tab. 2: perhaps you could highlight (e.g. with bold) the column 
+that was selected for SMT-COMP
+
+- p. 9, 3rd par.: "...are also labeled by category": The category is not 
+shown anywhere? Perhaps you could mention that by adding something like
+"(not shown in the tables)".
+
+- p. 9, 3rd par.: "...favor industrial benchmarks": How exactly?
+
+- p. 15, 1st par.: "by the large of number" -> "by the large number"
+
+- p. 15, 1st par.: "...as also observed by the SAT community": 
+scrambling is not used in SAT competitions anymore, as runtimes were
+much worse than on unscrambled instances. I would say that this was the
+main observation on scrambling in SAT. (Is it similar for SMT? Perhaps
+you could clarify.)
+
+- p. 35ff: The capitalization in some paper titles is missing, e.g. in 
+ref. 11 ("smt"). Could you please check?
+
+
+
+REVIEW B
+
+The authors implemented all reviewer's suggestions carefully.
+
+I recommend acceptance.
+
+Please check this issue:
+In page 18 it is said that in ASPCOMP wrong answers receive 0 points
+without any penalty, this sounds very unlikely to me, so after checking
+the ASPCOMP rules I found:
+
+"The overall score for a problem P is set to zero if the system produces
+an incorrect answer for some instance of P"
+
+This should mean that wrong solvers get zero points for all instances of
+a problem, which should roughly correspond to a division in SMT.
+
+In page 18 there is an ugly space between two paragraphs
+
+
+
+REVIEW C
+
+The authors addressed all my comments and revised their paper accordingly.
+
+The revised paper is (even) nicer to read, well written, ready to be
+published. I have nothing else to add.
+________________________________________________________________________
