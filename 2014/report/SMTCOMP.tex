@@ -646,14 +646,14 @@ did express its benchmark problems in the same syntax as SMT-COMP, used the same
 organization and scoring rules. 
 
 \paragraph{SL-COMP} Besides the subject material, the most interesting difference among competitions is in scoring. (The scoring procedure for
-SMT-COMP is described in detail in section \ref{sec:floc}.)
+SMT-COMP is described in detail in Section~\ref{sec:floc}.)
 Competitions are currently mostly focused on raw solver capability---that is, the numbers and difficulty of problems that can be solved. Thus competition winners are primarily determined by the total number of problems solved correctly,
 with the time taken to produce the solutions used only as a tie-breaker. This is the case for SMT-COMP, SAT, and SV-COMP,
 for example.
 
 \paragraph{Scoring differences.} A more significant issue is how solver errors are taken into account in the metrics. A solver error indicates an unsoundness in the tool, which is highly undesirable; however, highly penalizing errors may discourage new entrants whose tools are not yet mature. Different competitions vary on this aspect. SMT-COMP has historically emphasized soundness; a
-single error in a division caused the solver to be scored lower than any other solver with no errors, even if the other solvers solved very few problems. In its inaugural edition, the Separation Logic Competition (SL-COMP) adopted the same rules as SMT-COMP. For the SAT competition, however, an error outright disqualifies a tool in the category it occurs\footnote{See \url{http://satcompetition.org/2014/rules.shtml}.}. In the QBF Gallery, a competitive evaluation of solvers for Quantified Boolean Logic, the score is the number of solved instances. In contrast, in the SV-competition~\cite{svcomp-2015}, successful runs account positively towards the final score, while errors count negatively (with an increased weight). 
-A few other sibling competitions with scoring variations are the Answer-Set Programming competition (ASP-COMP: wrong answers receive a 0 score), the Confluence Competition (CoCo: implausible answers disqualify from winning), and Syntax-Guided Synthesis (SyGuS-COMP: no points for wrong answers, extra points for succinct answers).
+single error in a division caused the solver to be scored lower than any other solver with no errors, even if the other solvers solved very few problems. In its inaugural edition, the Separation Logic Competition (SL-COMP) adopted the same rules as SMT-COMP. For the SAT competition, however, an error outright disqualifies a tool in the category it occurs.\footnote{See \url{http://satcompetition.org/2014/rules.shtml}.} In the QBF Gallery, a competitive evaluation of solvers for Quantified Boolean Logic, the score is the number of solved instances. In contrast, in the SV-competition~\cite{svcomp-2015}, successful runs account positively towards the final score, while errors count negatively (with an increased weight). 
+A few other sibling competitions with scoring variations are the Answer-Set Programming competition (ASP-COMP: wrong answers for some problem instance cause an overall score of zero for the problem), the Confluence Competition (CoCo: implausible answers disqualify from winning), and Syntax-Guided Synthesis (SyGuS-COMP: no points for wrong answers, extra points for succinct answers).
 
 \section{Results}
 \label{sec:results}
