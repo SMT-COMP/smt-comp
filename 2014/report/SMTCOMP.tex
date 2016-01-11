@@ -128,10 +128,10 @@ In the succeeding sections we describe
 the competition goals (\S\ref{sec:goals}), 
 the SMT-LIB language that is the basis for the competition (\S\ref{sec:context}), 
 the competition benchmarks (\S\ref{sec:benchmarks}), 
-participants (\S\ref{sec:participants}), 
+participants~(\S\ref{sec:participants}), 
 procedure (\S\ref{sec:procedure}),
 computational infrastructure (\S\ref{sec:starexec}), 
-comparisons with other competitions (\S\ref{sec:OtherCompetitions}), 
+comparisons with other competitions~(\S\ref{sec:OtherCompetitions}), 
 the results (\S\ref{sec:results}), 
 the place of SMT-COMP in the FLoC Olympic Games (\S\ref{sec:floc}), 
 and post-competition activities (\S\ref{sec:post}). 
@@ -153,10 +153,10 @@ An important difference between the 2014 competition and previous competitions w
 \section{SMT-LIB Logic, Language and Solvers}
 \label{sec:context}
 
-The SMT Competition is a competition among SMT solvers on a set of benchmark logic problems. Each benchmark problem is a combination of definitions and logical assertions expressed with respect to an underlying logical theory and, perhaps, some constraints on the kinds of expressions in that theory. For example,  the logic of linear arithmetic includes the multiplication operation, but only allows multiplication by constants. Each problem is a set of closed formulas over a set of constant or function symbols, possibly including quantification; a solution to the problem is an assignment of each constant and function evaluation to values in a way that satisfies all the problem's assertions. That is, the task is to find a \emph{satisfying assignment} for the benchmark problem or to determine that there is no such assignment. Since the presence of quantified expressions introduces incompleteness, solvers may also produce a potential solution that may be marked as possibly incomplete.
+The SMT Competition is a competition among SMT solvers on a set of benchmark logic problems. Each benchmark problem is a combination of definitions and logical assertions expressed with respect to an underlying logical theory and, perhaps, some constraints on the kinds of expressions in that theory. For example,  the logic of linear arithmetic includes the multiplication operation, but only allows multiplication by constants. Each problem is a set of closed formulas (possibly including quantification over variables) over a set of constant or function symbols; a solution to the problem is an assignment of each constant and function evaluation to values in a way that satisfies all the problem's assertions. That is, the task is to find a \emph{satisfying assignment} for the benchmark problem or to determine that there is no such assignment. Since the presence of quantified expressions introduces incompleteness, solvers may also produce a potential solution that may be marked as possibly spurious.
 
-As stated, the goal of SMT-COMP is similar to the goal of the SAT competition. The SMT logic extends SAT by incorporating defined theories, such as the theory of arrays, or of uninterpreted functions, or of arithmetic, or of bit-vectors. In addition, there may be constraints on the set of expressions allowed, such as only linear arithmetic, or only integer difference arithmetic. The theories also define \emph{sorts}, which make the theories a kind of typed first-order logic. Examples of sorts used in current theories are Boolean, Int, Real, bit-vectors of various lengths, and arrays with arbitrary sorts as index and value. Each combination of underlying theories and language constraints is a \emph{logic}.
-The names of the logics as used in SMT-LIB are cryptic combinations of initials. For example, AUFLIA is the logic with a
+As stated, the goal of SMT-COMP is similar to the goal of the SAT competition. The SMT logic extends SAT by incorporating defined theories, such as the theory of arrays, or of uninterpreted functions, or of arithmetic, or of bit-vectors. In addition, there may be constraints on the set of expressions allowed, such as only linear arithmetic, or only integer difference arithmetic. The theories also define \emph{sorts}, which make the theories a typed first-order logic. Examples of sorts used in current theories are Boolean, Int, Real, bit-vectors of various lengths, and arrays with arbitrary sorts as index and value. Each combination of underlying theories and language constraints is a \emph{logic}.
+The names of the logics as used in SMT-LIB are combinations of initials. For example, AUFLIA is the logic with a
 combination of Arrays (A), Uninterpreted Functions (UF), and linear integer arithmetic (LIA). Table \ref{logicAbbreviations} can be used to interpret these names.
 \begin{table}
 \begin{center}
@@ -164,7 +164,7 @@ combination of Arrays (A), Uninterpreted Functions (UF), and linear integer arit
 \hline
 QF\_ & Quantifier-Free \\
 A & Arrays \\
-UF & Unidentified Functions \\
+UF & Uninterpreted Functions \\
 BV & Bit-Vector \\
 L & Linear (arithmetic) \\
 N & Non-Linear (arithmetic) \\
@@ -207,7 +207,7 @@ The following example illustrates part of the language's concrete syntax:
       (and (>= m x) (>= m y) (or (= m x) (= m y))))))
 (assert (not (forall ((x Int) (y Int))
    (let ((m (max x y)))
-      (= (max (max x y) x) (max x y))))))
+      (= (max m x) m)))))
 (check-sat)
 \end{lstlisting}
 \end{quote}
@@ -254,7 +254,7 @@ distribution of the benchmarks by file size.
 \includegraphics[width=.47\textwidth]{smtlib2-app-file-count-by-size.png}
 \\
 \\
-Non-incremental benchmarks & Application benchmarks
+Non-incremental benchmarks & Incremental benchmarks
 \end{tabular}
 \end{center}
 \caption{Distribution of SMT-LIB benchmarks by file size.
@@ -272,7 +272,7 @@ different solvers solve the benchmark and report the same result. However, for b
 
 The second consideration is that the benchmark must be \emph{non-trivial}; a benchmark is deemed trivial if all solvers managed to solve it in less than five seconds during SMT-EVAL 2013.
 
-The numbers of unknown, trivial, and remaining eligible benchmarks are shown in Table \ref{Table:benchmarks}. Note that these numbers vary widely from division to division.
+The numbers of unknown, trivial, and remaining eligible benchmarks are shown in Table~\ref{Table:benchmarks}.  Note that these numbers vary widely from division to division.  As we discuss in Section~\ref{sec:benchmark-selection} below, all eligible benchmarks were actually used in the competition; these numbers are shown in bold.  
 
 
 \begin{table}
@@ -282,44 +282,44 @@ The numbers of unknown, trivial, and remaining eligible benchmarks are shown in 
 \begin{tabular}{|l|r|r|r|r|r|}
 \hline
        & \multicolumn{1}{|c|}{\# of} & \multicolumn{4}{|c|}{\# of benchmarks} \\
- Logic & solvers & eligible & unknown  & trivial & total  \\
+ Logic & solvers & {\bf eligible} & unknown  & trivial & total  \\
 \hline
-ALIA & 3+[1] & 29 & 0 & 13 & 42 \\
-AUFLIA & 3+[1] & 4 & 0 & 0 & 4\\
-AUFLIRA & 3+[1] & 10791 & 168 & 9055 & 20014 \\
-AUFNIRA & 2+[2] & 564 & 468 & 463 & 1495 \\
-BV & 2+[1] & 0 & 191 & 0 & 191 \\
-LIA & 3+[1] & 46 & 0 & 0 & 46 \\
-LRA & 3+[1] & 171 & 450 & 0 & 621\\
-NIA & 2+[1] & 9 & 0 & 0 & 9\\
-NRA & 2+[1] & 3747 & 66 & 0 & 3813 \\
-QF\_ABV & 7+[2] & 6457* & 4191 & 4423 & 15091 \\
-QF\_ALIA & 3+[2] & 97 & 0 & 29 & 126 \\
-QF\_AUFBV & 2+[2] & 37 & 0 & 0 & 37 \\
-QF\_AUFLIA & 4+[2] & 610 & 0 & 399 & 1009\\
-QF\_AX & 3+[2] & 335 & 0 & 216 & 551 \\
-QF\_BV & 8+[3] & 2488* & 28138 & 546 & 32500 \\
-QF\_IDL & 3+[1] & 1315 & 537 & 337 & 2189 \\
-QF\_LIA & 4+[3] & 4381 & 1279 & 481 & 6141 \\
-QF\_LRA & 4+[2] & 1343 & 208 & 131 & 1682\\
-QF\_NIA & 3+[1] & 8327 & 927 & 105 & 9359 \\
-QF\_NRA & 3+[1] & 10121 & 1392 & 27 & 11540 \\
-QF\_RDL & 3+[1] & 132 & 85 & 38 & 255 \\
-QF\_UF & 5+[2] & 4124 & 4 & 2522 & 6650 \\
-QF\_UFBV & 2+[2] & 31 & 0 & 0 & 31 \\
-QF\_UFIDL & 3+[1] & 311 & 0 & 130 & 441\\
-QF\_UFLIA & 4+[2] & 484 & 0 & 114 & 598 \\
-QF\_UFLRA & 4+[2] & 1176 & 87 & 367 & 1630 \\
-QF\_UFNIA & 2+[1] & 7 & 0 &0 & 7 \\
-QF\_UFNRA & 2+[1] & 32 & 11 & 0 & 43\\
-UF & 3+[1] & 2830 & 2911 & 7 & 5748 \\
-UFBV & 2+[1] & 0 & 191 & 0 & 191 \\
-UFIDL & 2+[1] & 49 & 12 & 19 & 80 \\
-UFLIA & 3+[1] & 5766 & 5499 & 873 & 12138 \\
-UFLRA & 3+[1] & 25 & 0 & 0 & 25\\
-UFNIA & 2+[1] & 1587 & 1052 & 712 & 3351 \\
+ALIA & 3+[1] & {\bf 29} & 0 & 13 & 42 \\
+AUFLIA & 3+[1] & {\bf 4} & 0 & 0 & 4\\
+AUFLIRA & 3+[1] & {\bf 10791} & 168 & 9055 & 20014 \\
+AUFNIRA & 2+[2] & {\bf 564} & 468 & 463 & 1495 \\
+BV & 2+[1] & {\bf 0} & 191 & 0 & 191 \\
+LIA & 3+[1] & {\bf 46} & 0 & 0 & 46 \\
+LRA & 3+[1] & {\bf 171} & 450 & 0 & 621\\
+NIA & 2+[1] & {\bf 9} & 0 & 0 & 9\\
+NRA & 2+[1] & {\bf 3747} & 66 & 0 & 3813 \\
+QF\_ABV & 7+[2] & {\bf 6457}* & 4191 & 4423 & 15091 \\
+QF\_ALIA & 3+[2] & {\bf 97} & 0 & 29 & 126 \\
+QF\_AUFBV & 2+[2] & {\bf 37} & 0 & 0 & 37 \\
+QF\_AUFLIA & 4+[2] & {\bf 610} & 0 & 399 & 1009\\
+QF\_AX & 3+[2] & {\bf 335} & 0 & 216 & 551 \\
+QF\_BV & 8+[3] & {\bf 2488}* & 28138 & 546 & 32500 \\
+QF\_IDL & 3+[1] & {\bf 1315} & 537 & 337 & 2189 \\
+QF\_LIA & 4+[3] & {\bf 4381} & 1279 & 481 & 6141 \\
+QF\_LRA & 4+[2] & {\bf 1343} & 208 & 131 & 1682\\
+QF\_NIA & 3+[1] & {\bf 8327} & 927 & 105 & 9359 \\
+QF\_NRA & 3+[1] & {\bf 10121} & 1392 & 27 & 11540 \\
+QF\_RDL & 3+[1] & {\bf 132} & 85 & 38 & 255 \\
+QF\_UF & 5+[2] & {\bf 4124} & 4 & 2522 & 6650 \\
+QF\_UFBV & 2+[2] & {\bf 31} & 0 & 0 & 31 \\
+QF\_UFIDL & 3+[1] & {\bf 311} & 0 & 130 & 441\\
+QF\_UFLIA & 4+[2] & {\bf 484} & 0 & 114 & 598 \\
+QF\_UFLRA & 4+[2] & {\bf 1176} & 87 & 367 & 1630 \\
+QF\_UFNIA & 2+[1] & {\bf 7} & 0 &0 & 7 \\
+QF\_UFNRA & 2+[1] & {\bf 32} & 11 & 0 & 43\\
+UF & 3+[1] & {\bf 2830} & 2911 & 7 & 5748 \\
+UFBV & 2+[1] & {\bf 0} & 191 & 0 & 191 \\
+UFIDL & 2+[1] & {\bf 49} & 12 & 19 & 80 \\
+UFLIA & 3+[1] & {\bf 5766} & 5499 & 873 & 12138 \\
+UFLRA & 3+[1] & {\bf 25} & 0 & 0 & 25\\
+UFNIA & 2+[1] & {\bf 1587} & 1052 & 712 & 3351 \\
 \hline
-Total & 18+[3] & 67426 & 47867 & 21007 & 137648 \\
+Total & 18+[3] & {\bf 67426} & 47867 & 21007 & 137648 \\
 \hline
 \end{tabular}
 \end{table}
@@ -370,7 +370,7 @@ The language includes commands that allow a fine-grained interaction
 with the solver, whereby client tools may incrementally push and pop
 symbol declarations and assertions while running various
 satisfiability checks, inspecting models, or obtaining unsatisfiability
-proofs. Benchmarks problems that have more than one
+proofs. Benchmark problems that have more than one
 \lstinline{check-sat} command are called \emph{application} or \emph{incremental
   benchmarks}. Not all SMT solvers support all of these interaction
 facilities, and the main track of the competition does not use such
@@ -384,7 +384,7 @@ Due to the mismatch between the amount of available compute time and the number 
 
 Each benchmark is assigned a \emph{difficulty rating}; in 2014, we used the time taken to solve the benchmark by the best performing solver in the 2013 SMT Evaluation. These values were publicly available prior to the competition. The difficulty ratings are used to divide the benchmarks into 5 quintiles. The rules describe a procedure for randomly selecting $N$ out of the eligible benchmarks for a division, with the intent of selecting roughly equal numbers, if they are available, from each of the quintiles.  The seed for the random number generator used for selection is obtained by summing a number supplied by each solver team and the integer portion of the New York Stock Exchange Composite Index at its opening on the day the competition begins.
 
-Benchmarks are also labeled by \emph{category}: simple checks, randomly generated problems from some template (e.g., N-queens problems for various values of N), problems crafted to test a certain capability, and problems obtained from industrial applications. The selection rules favor industrial benchmarks.
+Benchmarks are also labeled by \emph{category} (not shown in the tables): simple checks, randomly generated problems from some template (e.g., N-queens problems for various values of N), problems crafted to test a certain capability, and problems obtained from industrial applications. The selection rules in previous years favored industrial benchmarks.
 
 Another selection criterion, though not used historically, is to balance the numbers of \textit{sat} and \textit{unsat} benchmarks.
 
@@ -548,7 +548,7 @@ in~\S\ref{sec:benchmark-selection}).
 
 The scrambling does not change the semantic meaning of the benchmark. It does rename identifiers, alter the order of assertions and the position of the arguments in the application of associative-commutative operators.
 
-The scrambling had another effect, previously unappreciated. Although most of the solvers are deterministic for a given input, scrambling can change the order of search. For example, iterating over the contents of a hashed set may occur in a different order if identifiers have different names. Consequently, the success of the solver on a given benchmark, the time it takes to find an answer, and even whether a latent bug in the solver is triggered may all depend on just how the benchmark is scrambled. Thus the scrambling adds a measure of uncertainty to the competition and prevents full testing on the benchmark set before the competition. Indeed, one solver encountered a bug during the competition that was directly related to the specific, randomly-chosen scrambling used during the competition. The effect of the possible variations in performance caused by scrambling is expected to be balanced by the large of number of benchmarks employed in the competition to compare the solvers, as also observed in the SAT community~\cite{leberre+03}. Nevertheless, this point is worthy of future further investigation.
+The scrambling had another effect, previously unappreciated. Although most of the solvers are deterministic for a given input, scrambling can change the order of search. For example, iterating over the contents of a hashed set may occur in a different order if identifiers have different names. Consequently, the success of the solver on a given benchmark, the time it takes to find an answer, and even whether a latent bug in the solver is triggered may all depend on just how the benchmark is scrambled. Thus the scrambling adds a measure of uncertainty to the competition and prevents full testing on the benchmark set before the competition. Indeed, one solver encountered a bug during the competition that was directly related to the specific, randomly-chosen scrambling used during the competition. The effect of the possible variations in performance caused by scrambling is expected to be balanced by the large number of benchmarks employed in the competition to compare the solvers, as also observed in the SAT community~\cite{leberre+03}. Nevertheless, this point is worthy of future further investigation.
 
 \paragraph{Prepare the real-time results display.} The participants are interested in the progress of the competition as it proceeds. The organizers also need to know if the competition is proceeding correctly and at a reasonable pace. As the competition takes several days, an automatic real-time display of results is helpful and encourages interest.  StarExec does not have such a facility, since different competitions have different needs. Instead the organizers used StarExec's command-line API to regularly (every 10 minutes or so) download the status of all of the executing jobs, extract the results for each solver-benchmark pair, create HTML web pages displaying the current status, and upload them to the competition website. The current (now final) status of each division and a summary page can be seen at \url{http://smtcomp.sourceforge.net/2014/results-toc.shtml}.
 
@@ -744,6 +744,8 @@ The winning solvers are a mix of Z3, CVC, Yices2, and a few for veriT. In some d
 
 
 \begin{table}
+\caption{Fraction of benchmarks solved fastest (cpu-time) by each solver (top 3)}
+\label{tab:speed}
 \centering\begin{tabular}{|l|lll|}
 \hline
 Logic & Fraction solved fastest & & \\ \hline
@@ -782,8 +784,6 @@ UFNIA & 80\% [Z3] & 10\% CVC3 & 9\% CVC4 \\
 
 \hline
 \end{tabular}
-\caption{Fraction of benchmarks solved fastest (cpu-time) by each solver (top 3)}
-\label{tab:speed}
 \end{table}
 
 \paragraph{Solver contribution.} A second comparison that can be made is to determine what a solver adds in addition to 
@@ -791,6 +791,8 @@ what other solvers contribute. We measure this `solver contribution' as follows.
 unique contribution provided by a solver; a value of 1.0 would indicate that that solver was the only solver to solve all of the benchmarks in the division. The results are shown in Table \ref{tab:cont}. The results show again that no one solver dominates in all categories, but that there are several contributing solvers among which users can choose.
 
 \begin{table}
+\caption{Contribution from each solver (top 3)}
+\label{tab:cont}
 \centering\begin{tabular}{|l|lll|}
 \hline
 Logic & Unique contribution & & \\
@@ -829,8 +831,6 @@ UFLRA & 0.2857 [Z3] & 0.2381 CVC4 & 0.2381 veriT \\
 UFNIA & 0.4156 [Z3] & 0.3860 CVC4 & 0.1984 CVC3 \\
 \hline
 \end{tabular}
-\caption{Contribution from each solver (top 3)}
-\label{tab:cont}
 \end{table}
 
 \paragraph{Effect of timeout.}
@@ -841,7 +841,7 @@ of an answer is shown in Fig.~\ref{Fig:timeouts}. This figure shows the number o
 Most of the benchmarks are solved quickly: 39\% in less than a second, more than half in under 3.5 seconds,
 62\% by 10 seconds, and then a slow increase to 88\% by 2400 seconds. There is continual improvement for long timeouts, but the return on time invested certainly decreases.
 
-\begin{figure}[H]
+\begin{figure}
 \begin{center}
 \includegraphics[width=.95\textwidth]{QF_BV-timeout-logscale2.png}
 \end{center}
@@ -853,8 +853,8 @@ There are two caveats to this observation. First, the results depend heavily on 
 
 Table~\ref{Fig:winners} shows a different view of the same data. Here we present the number of problems solved by each solver within a given wall-clock solution time, subject to the same caveats. The point to observe is that the winning solver changes depending on the timeout chosen. For these benchmarks and this set of solvers Yices2 performs best for timeouts under a second, CVC4 does best in the middle range from 1 to 200 seconds, and Boolector does best above 400 seconds. Other logics, but not all, show changes in winning order as well. This phenomenon could be a result of differences in engineering of the individual solvers or it could be a result of characteristics of the benchmark set.
 
-The data in Table~\ref{Fig:winners} also shows that most solvers have a similar trend in success as the timeout is increased. For example, most solvers solve about 50\% (ranging from 40\% to 62\%) of the benchmarks that solver solves within the timeout by 1.0 second and
-about 75\% (ranging from 65\% to 79\%) of those solved within the timeout by 10 seconds. However, some solvers, such as Boolector, are outliers: Boolector is slow off the mark - solving only 33\% and 61\% of the benchmarks it eventually solves
+The data in Table~\ref{Fig:winners} also shows that most solvers have a similar trend in success as the timeout is increased. For example, most solvers solve about 50\% (ranging from 40\% to~62\%) of the benchmarks that solver solves within the timeout by 1.0 second and
+about 75\% (ranging from 65\% to 79\%) of those solved within the timeout by 10 seconds. However, some solvers, such as Boolector, are outliers: Boolector is slow off the mark---solving only~33\% and 61\% of the benchmarks it eventually solves
 by 1 second and 10 seconds, respectively, even though by 2400 seconds it solves more benchmarks than any other tool, in this division.
 
 
@@ -1039,7 +1039,7 @@ abziz\_all\_features &	9  &		2093 	 &	 	122540.04 \\
 \section{Post-Competition Activity}
 \label{sec:post}
 
-After the competition, David Cok (competition chair) and Clark Barrett and Morgan Deters (SMT-LIB coordinators) collaborated, with the assistance of Aaron Stump (StarExec lead), in attempting to discover the status of the SMT-LIB benchmarks that were marked as unknown. For this computation, the timeout was set to 10 hours. This activity required several weeks of computation. A result confirmed by at least two solvers was obtained for 75\% of the unknown benchmarks, with another 4\% having a tentative result from just one solver.
+After the competition, David Cok (competition chair) and Clark Barrett and Morgan Deters (SMT-LIB coordinators) collaborated, with the assistance of Aaron Stump (StarExec lead), in attempting to discover the status of the SMT-LIB benchmarks that were marked as unknown. For this computation, the timeout was set to 10 hours. This activity required several weeks of computation. A result confirmed by at least two solvers was obtained for~75\% of the unknown benchmarks, with another 4\% having a tentative result from just one solver.
 The results are shown in Table~\ref{Fig:post}.
 
 The unknown incremental benchmarks have yet to be resolved.
