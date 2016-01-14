@@ -3,23 +3,34 @@
 %%\documentclass[12pt,oneside]{report}
 \documentclass[twoside,11pt]{article}
 
-\sloppy
+%\sloppy
+
+\newif\ifsystemdescription
+\systemdescriptionfalse            % should only be true for system descriptions
+
+\newif\ifblackandwhite              
+\blackandwhitefalse                  % should only be true for the hard copy by IOS Press
+
+\usepackage{jsat_pdf}
+
+\input epsf 
+\special{papersize=8.5in,11in}
 
 %% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\usepackage[USenglish]{babel} %francais, polish, spanish, ...
-\usepackage[T1]{fontenc}
+%\usepackage[T1]{fontenc}
 %\usepackage{textcomp}
 %\usepackage[ansinew]{inputenc}
 %\usepackage{makeidx}	  %% needed to create an index
-\usepackage{jsat}
+%\usepackage{jsat}
 \usepackage{here}
-\usepackage{hyperref}   %% sets hyperlinks within a pdf
+%\usepackage{hyperref}   %% sets hyperlinks within a pdf
 \usepackage{graphicx}
-\usepackage{epstopdf}
-\usepackage{parskip}
-\usepackage{subcaption}
+%\usepackage{epstopdf}
+%\usepackage{parskip}
+%\usepackage{subcaption}
 \usepackage{enumitem}
-\usepackage{xcolor}
+%\usepackage{xcolor}
 \usepackage{rotating}
 \usepackage{pbox}
 \usepackage{listings}
@@ -37,7 +48,6 @@ keywordstyle={[2]\small\bfseries\sffamily\underbar}
 \usepackage{pifont}
 %%\usepackage{lmodern} %Type1-font for non-english texts and characters
 
-
 %% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
 %\usepackage{graphicx} %%For loading graphic files
 %\usepackage{subfig} %%Subfigures inside a figure
@@ -54,9 +64,9 @@ keywordstyle={[2]\small\bfseries\sffamily\underbar}
 \newcommand{\rot}[1]{\begin{turn}{90}#1\end{turn}}
 
 
-\jsatheading{number}{year}{startpage-endpage}
+\jsatheading{9}{2016}{207-242}
 \ShortHeadings{The 2014 SMT Competition}{D.\ Cok et al.}
-\firstpageno{1}
+\firstpageno{207}
 
 \begin{document}
 
@@ -65,14 +75,20 @@ keywordstyle={[2]\small\bfseries\sffamily\underbar}
 \author{\name{David R. Cok (chair of organizing committee)}
 \email{dcok@grammatech.com} \\
 \addr GrammaTech, Inc. \\
+Ithaca, New York\\
+United States
 \AND
 \name{David D\'{e}harbe (co-organizer)}
 \email{david@dimap.ufrn.br} \\
-\addr Federal University of Rio Grande do Norte, Brazil \\
+\addr Federal University of Rio Grande do Norte\\
+Natal\\
+Brazil 
 \AND
 \name{Tjark Weber (co-organizer)}
 \email{tjark.weber@it.uu.se} \\
-\addr Uppsala University, Sweden}
+\addr Uppsala University\\
+Uppsala\\
+ Sweden}
 
 \maketitle
 
@@ -83,7 +99,7 @@ The 2014 edition of the SMT Competition was executed for the first time on the S
 
 \keywords{SMT solver, SMT-COMP, SMT-LIB, Satisfiability Modulo Theories, competitions}
 
-%\published{December 2014}{revision date}{publication date}
+\published{December 2014}{October 2015}{January 2016}
 
 %\davidc{Material to include, from the call: Full articles by competition organizers reporting on SAT-related competitions
   %within FLoC Olympic Games 2014. The articles should describe the competition,
@@ -121,7 +137,7 @@ have spurred significant innovation in their fields~\cite{satwebsite,jarvisalo20
 The competition is sponsored by the SMT Workshop, which was held in conjunction with the
 CAV, IJCAR, and SAT conferences at FLoC 2014~\cite{FLoC2014}, at the Vienna Summer of Logic~\cite{VSL} in July 2014.
 Information about the winners
-and results of the competition is summarized in this report and is available online at \url{www.smtcomp.org}.  Information
+and results of the competition is summarized in this report and is available online at \url{http://www.smtcomp.org}.  Information
 about previous years' competitions is also available at that website and in published summary reports~\cite{springerlink:10.1007/s10817-012-9246-5,DBLP:conf/cade/CokGBD12,it:2014-017}.
 
 In the succeeding sections we describe 
@@ -159,7 +175,9 @@ As stated, the goal of SMT-COMP is similar to the goal of the SAT competition. T
 The names of the logics as used in SMT-LIB are combinations of initials. For example, AUFLIA is the logic with a
 combination of Arrays (A), Uninterpreted Functions (UF), and linear integer arithmetic (LIA). Table \ref{logicAbbreviations} can be used to interpret these names.
 \begin{table}
-\begin{center}
+\caption{Abbreviations used in logic names}
+\label{logicAbbreviations}
+\centering
 \begin{tabular}{|l|l|}
 \hline
 QF\_ & Quantifier-Free \\
@@ -172,9 +190,6 @@ IA/RA/IRA & Integer/Real/Mixed arithmetic \\
 IDL/RDL & Integer/Real Difference Logic \\
 \hline
 \end{tabular}
-\end{center}
-\caption{Abbreviations used in logic names}
-\label{logicAbbreviations}
 \end{table}
 
 A competition based on benchmark problems needs a standard language in which to express those problems.
@@ -247,7 +262,7 @@ bytes to several gigabytes. Fig.~\ref{fig:smtlib-bysize} shows the
 distribution of the benchmarks by file size.
 
 \begin{figure}
-\begin{center}
+\centering
 \begin{tabular}{cc}
 \includegraphics[width=.47\textwidth]{smtlib2-file-count-by-size.png}
 &
@@ -256,13 +271,12 @@ distribution of the benchmarks by file size.
 \\
 Non-incremental benchmarks & Incremental benchmarks
 \end{tabular}
-\end{center}
 \caption{Distribution of SMT-LIB benchmarks by file size.
 \label{fig:smtlib-bysize}}
 \end{figure}
 
 
-A sizeable number of benchmarks, on the order of 30,000, were added during the lead up to the competition. Some of these were submitted in previous years but never assessed and uploaded. Many others were supplied by solver developers (including some competitors). All of them went through an iterative curation process to be sure that they were syntactically valid, appropriate metadata was included, and a correct result was established. (Not all of these submissions were through the competition organizers.)
+A sizable number of benchmarks, on the order of 30,000, were added during the lead up to the competition. Some of these were submitted in previous years but never assessed and uploaded. Many others were supplied by solver developers (including some competitors). All of them went through an iterative curation process to be sure that they were syntactically valid, appropriate metadata was included, and a correct result was established. (Not all of these submissions were through the competition organizers.)
 
 The SMT-LIB coordinators performed a curation step on the entire benchmark library prior to the competition, determining the actual logic to which a benchmark belonged, rather than the super-logic to which it had previously been assigned. This resulted in an expansion of logics with benchmarks from 23 to 34, and also created a number of divisions with only a very few benchmarks. Two divisions were not held because they had no eligible benchmarks.
 
@@ -400,25 +414,45 @@ In the end, in 2014, there was sufficient time to use all eligible benchmarks an
 The competition registration requires participants to submit information about each competing solver. In addition, some solver groups provided summaries of their solvers and their recent technical advances.
  Note that although one person is listed as the ``submitter,'' there is generally a team of contributors behind each tool. Some teams submitted more than one tool. The 2014 participants were the following:
 \begin{itemize}
-\item 4Simp -- submitted by Trevor Hansen (U. Melbourne)
-\item AbzizPortfolio -- two versions -- submitted by Mohammed Adbul Aziz (U. Cairo). This solver is atypical in that it is a portfolio solver: based on automated learning over benchmark characteristics, it chooses among other solvers to apply to the problem at hand.
-\item AProVe~\cite{AProVE2014} -- submitted by Carsten Fuhs (University College London)
-\item Boolector~\cite{Boolector2015} -- three versions: Boolector (default),  Boolector-d (dual propagation), Boolector-j (justification) -- submitted by Armin Biere, Aina Niemetz, Mathias Preiner (Johnnes Kepler University)
-\item CVC3 v. 2.4.3~\cite{BT07} -- submitted by Morgan Deters (New York University)
-\item CVC4 v. 1.4~\cite{BCD+11} -- submitted by the ACSys Group (New York University)
-\item Kleaver -- 2 versions -- submitted by Hristina Palikareva, Cristian Cadar (Imperial College)
-\item OpenSMT2 -- submitted by Antti Hyv\"arinen (U.~Lugano)
-\item raSAT~\cite{DBLP:conf/smt/KhanhVO14} -- submitted by Xuan-Tung Vu (Japan Advanced Insitute of Science and Technology)
-\item SMTInterpol~\cite{DBLP:conf/spin/ChristHN12,DBLP:conf/spin/2012} -- submitted by Jochen Hoenicke, J\"urgen Christ (U.~Freiburg)
-\item SONOLAR~\cite{Peleska:2011:ATC:1986308.1986333} -- submitted by Florian Lapschies (U.~Bremen)
-\item STP-CryptoMiniSat4~\cite{DBLP:conf/cav/GaneshD07,DBLP:conf/cav/2007} -- submitted by Mate Soos (Security Research Lab.), based on previous work by Trevor Hansen (U.~Melbourne) and Vijay Ganesh (Massachusetts Institute of Technology)
-\item veriT~\cite{veriT} -- submitted by David D\'{e}harbe (UFRN - Universidade Federal do Rio Grande do Norte) and Pascal Fontaine (U.~Lorraine, INRIA - Institut national de recherche en informatique et en automatique)
+\item 4Simp -- submitted by Trevor Hansen (U. Melbourne)\\[-15pt]
+\item AbzizPortfolio -- two versions -- submitted by Mohammed Adbul Aziz (U. Cairo). This solver is atypical in that it is a portfolio solver: based on automated learning over benchmark characteristics, it chooses among other solvers to apply to the problem at hand.\\[-15pt]
+\item AProVe~\cite{AProVE2014} -- submitted by Carsten Fuhs (University College London)\\[-15pt]
+\item Boolector~\cite{Boolector2015} -- three versions: Boolector (default),  Boolector-d (dual propagation), Boolector-j (justification) -- submitted by Armin Biere, Aina Niemetz, Mathias Preiner (Johnnes Kepler University)\\[-15pt]
+\item CVC3 v. 2.4.3~\cite{BT07} -- submitted by Morgan Deters (New York University)\\[-15pt]
+\item CVC4 v. 1.4~\cite{BCD+11} -- submitted by the ACSys Group (New York University)\\[-15pt]
+\item Kleaver -- 2 versions -- submitted by Hristina Palikareva, Cristian Cadar (Imperial College)\\[-15pt]
+\item OpenSMT2 -- submitted by Antti Hyv\"arinen (U.~Lugano)\\[-15pt]
+\item raSAT~\cite{DBLP:conf/smt/KhanhVO14} -- submitted by Xuan-Tung Vu (Japan Advanced Insitute of Science and Technology)\\[-15pt]
+\item SMTInterpol~\cite{DBLP:conf/spin/ChristHN12,DBLP:conf/spin/2012} -- submitted by Jochen Hoenicke, J\"urgen Christ (U.~Freiburg)\\[-15pt]
+\item SONOLAR~\cite{Peleska:2011:ATC:1986308.1986333} -- submitted by Florian Lapschies (U.~Bremen)\\[-15pt]
+\item STP-CryptoMiniSat4~\cite{DBLP:conf/cav/GaneshD07,DBLP:conf/cav/2007} -- submitted by Mate Soos (Security Research Lab.), based on previous work by Trevor Hansen (U.~Melbourne) and Vijay Ganesh (Massachusetts Institute of Technology)\\[-15pt]
+\item veriT~\cite{veriT} -- submitted by David D\'{e}harbe (UFRN - Universidade Federal do Rio Grande do Norte) and Pascal Fontaine (U.~Lorraine, INRIA - Institut national de recherche en informatique et en automatique)\\[-15pt]
 \item Yices2~\cite{Dutertre:cav2014} -- submitted by Bruno Dutertre (SRI)
 \end{itemize}
 
 There were a few solvers that the organizers hoped would be submitted but were not: Tiffany de Wintermonte was submitted in the past by Trevor Hansen, but could not be prepared in time for this competition; similarly SMT-RAT was withdrawn because of last minute bugs; MathSat has been a frequent competitor in the past, but changes in priorities of the development team caused it not to compete in 2014; MiniSMT also was not able to be submitted; similarly, the Z3 team, from Microsoft Research, though Z3 is a strong tool, has chosen not to take the time to prepare competition versions.
 
 Other than those omissions, every competitive solver known to the organizers was represented. Indeed, the participation by solver teams was a record high in 2014. In addition, four teams submitting five solvers had not participated in previous competitions.
+
+\begin{table}[b!]
+\caption{Changes in participation}
+\label{Table:changes}
+\centering
+\resizebox{\textwidth}{!}{\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+ & 2005 & 2006 & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2014\\
+\hline
+Participants                 & 12 & 12 & 9 & 13 & 12 & 10 & 11 & 10 & 18 \\
+New in given year            & 12 &  4 & 4 &  6 &  2 &  6 &  1 &  4 & 5 \\
+Continuing to the next year  &  8 &  6 & 7 & 10 &  4 &  7 &  7 &  6 & 10 \\
+Not ever participating again &  4 &  5 & 2 &  2 &  6 &  3 &  4 &  4 &  \\
+\hline
+\end{tabular}}
+\end{table}
+
+As in past competitions, the organizers included some publicly available historical solvers. These solvers are run in the competition for comparison, but are designated as demonstration only and are not eligible for any awards or designations of having won the competition. In result tables, these solvers are listed with their names in square brackets (e.g., [MathSat]). The organizers included current versions of MathSat and Z3. Also, during the competition, a bug-fix release of CVC4 (named CVC4-with-bugfix) was submitted and included as a demonstration only version (cf. \S\ref{sec:floc}).
+
+
 
 \begin{table}[H]
 \caption{History of solver participation (numbers in parenthesis indicate
@@ -477,33 +511,17 @@ Total & & 11 & 11 & 9 & 13 & 12 & 10 & 11 & 11 & 18 \\
 \end{tabular}}
 \end{table}
 
-As in past competitions, the organizers included some publicly available historical solvers. These solvers are run in the competition for comparison, but are designated as demonstration only and are not eligible for any awards or designations of having won the competition. In result tables, these solvers are listed with their names in square brackets (e.g., [MathSat]). The organizers included current versions of MathSat and Z3. Also, during the competition, a bug-fix release of CVC4 (named CVC4-with-bugfix) was submitted and included as a demonstration only version (cf. \S\ref{sec:floc}).
 
-\begin{table}
-\caption{Changes in participation}
-\label{Table:changes}
-\centering
-\resizebox{\textwidth}{!}{\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
-\hline
- & 2005 & 2006 & 2007 & 2008 & 2009 & 2010 & 2011 & 2012 & 2014\\
-\hline
-Participants                 & 12 & 12 & 9 & 13 & 12 & 10 & 11 & 10 & 18 \\
-New in given year            & 12 &  4 & 4 &  6 &  2 &  6 &  1 &  4 & 5 \\
-Continuing to the next year  &  8 &  6 & 7 & 10 &  4 &  7 &  7 &  6 & 10 \\
-Not ever participating again &  4 &  5 & 2 &  2 &  6 &  3 &  4 &  4 &  \\
-\hline
-\end{tabular}}
-\end{table}
 
 \paragraph{History.} Table~\ref{Table:participants} shows the
  historical participation of each solver. Note that sometimes versions and names change, or there are multiple related versions from the same team; generally speaking, though not always, a solver is improved from year to year.
 Table~\ref{Table:changes} summarizes that data in numbers of continuing participants. Except for the record turnout in
- 2014, there has been a steady 9-13 participants each year; each year there are an average of 4 new
+ 2014, there has been a steady 9-13 participants each year: an average of 4 new
  participants, about the same number of drop-outs, and an average of 7 continuing participants.
 
 The introduction in 2010 of SMT-LIB~v2 as the standard language for benchmarks was a significant event. The new language required solvers to revise their front-ends and to add new capabilities.
-As a result, some solvers did not continue participating, at least not immediately. The added expressivity of the command language permitted to add benchmarks representing the needs of industrial applications, and 
-the application track of the competition was added to demonstrate the interactive capability and the corresponding abilities of solvers.
+As a result, some solvers did not continue participating, at least not immediately. The added expressivity of the command language permitted benchmarks representing the needs of industrial applications. 
+The application track of the competition was added to demonstrate the interactive capability and the corresponding abilities of solvers.
 
 
 \section{Competition Procedure}
@@ -550,7 +568,7 @@ The scrambling does not change the semantic meaning of the benchmark. It does re
 
 The scrambling had another effect, previously unappreciated. Although most of the solvers are deterministic for a given input, scrambling can change the order of search. For example, iterating over the contents of a hashed set may occur in a different order if identifiers have different names. Consequently, the success of the solver on a given benchmark, the time it takes to find an answer, and even whether a latent bug in the solver is triggered may all depend on just how the benchmark is scrambled. Thus the scrambling adds a measure of uncertainty to the competition and prevents full testing on the benchmark set before the competition. Indeed, one solver encountered a bug during the competition that was directly related to the specific, randomly-chosen scrambling used during the competition. The effect of the possible variations in performance caused by scrambling is expected to be balanced by the large number of benchmarks employed in the competition to compare the solvers, as also observed in the SAT community~\cite{leberre+03}. Nevertheless, this point is worthy of future further investigation.
 
-\paragraph{Prepare the real-time results display.} The participants are interested in the progress of the competition as it proceeds. The organizers also need to know if the competition is proceeding correctly and at a reasonable pace. As the competition takes several days, an automatic real-time display of results is helpful and encourages interest.  StarExec does not have such a facility, since different competitions have different needs. Instead the organizers used StarExec's command-line API to regularly (every 10 minutes or so) download the status of all of the executing jobs, extract the results for each solver-benchmark pair, create HTML web pages displaying the current status, and upload them to the competition website. The current (now final) status of each division and a summary page can be seen at \url{http://smtcomp.sourceforge.net/2014/results-toc.shtml}.
+\paragraph{Prepare the real-time results display.} The participants are interested in the progress of the competition as it proceeds. The organizers also need to know if the competition is proceeding correctly and at a reasonable pace. As the competition takes several days, an automatic real-time display of results is helpful and encourages interest.  StarExec does not have such a facility, since different competitions have different needs. Instead the organizers used StarExec's command-line API to regularly (every 10 minutes or so) download the status of all of the executing jobs, extract the results for each solver-benchmark pair, create HTML web pages displaying the current status, and upload them to the competition website. The current (now final) status of each division and a summary page can be seen online at \url{http://smtcomp.sourceforge.net/2014/results-toc.shtml}.
 
 \paragraph{Execute the competition.} Executing the competition required preparing a StarExec job for each
 division. A job executes the cross-product of a set of solvers and a set of benchmarks. Because each division has different sets of solvers and benchmarks, each division was represented by one or more jobs. Splitting a division into multiple jobs allowed a restart of portions of the competition if a particular division was incorrectly configured or if a StarExec job stalled for some reason (both of which happened).
@@ -889,7 +907,7 @@ In 2014, the SMT-LIB contains 9,926 benchmarks that  specifically  exercise the 
 
 Four solvers participated in this competition track: CVC3, CVC4, SMTInterpol, and Yices2; Z3 was added as a demonstration-only historical comparison. The winner is the solver that solved the most \lstinline{check-sat} commands correctly within the timeout period. No solver produced an erroneous result. The time out (40 minutes) is applied to the entire benchmark, not to individual commands. The track was run for 8 divisions; the results are shown in Table \ref{Fig:apptrack-results}. Within each division, solvers are listed in winning order: Yices2 won four of the eight divisions, out of six in which it participated. CVC3, CVC4 and SMTInterpol won one division each. Since the previous execution of the application track was in 2012 and not on StarExec, we did not attempt a comparison with previous results.
 
-\begin{table}[H]
+\begin{table}[ht]
 \caption{Numbers of application benchmarks and distribution of \lstinline{check-sat} commands for different logics.}
 \label{Fig:apptrack-benchmarks}
 \centering
