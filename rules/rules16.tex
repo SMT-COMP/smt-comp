@@ -44,6 +44,12 @@ David D{\'e}harbe \\
 Clearsy, France \& Federal University\\ of Rio Grande do Norte, Brazil \\
 {\small\href{mailto:david.deharbe@clearsy.com}{\texttt{david.deharbe@clearsy.com}}} \\
 \and
+Matthias Heizmann \\
+University of Freiburg \\
+Germany \\
+{\small\href{mailto:heizmann@informatik.uni-freiburg.de}{\texttt{heizmann@informatik.uni-freiburg.de}}} \\
+{\small\textsc{(Unsat Core Track)}} \\
+\and
 Tjark Weber \\
 Uppsala University \\
 Sweden \\
@@ -143,8 +149,8 @@ from the previous competition rules are the following:
 \item Benchmarks will use (a subset of) version~2.5 of the SMT-LIB
   language.  \emph{Rationale:} This is the latest version of the
   SMT-LIB language.  It was released on 2015-06-28, and is largely
-  backwards-compatible to version~2.0, which was used in the 2015 SMT
-  Competition.
+  backwards-compatible to version~2.0, which was used for SMT-COMP
+  2015.
 \item Solver output may affect the score even when the solver does not
   terminate within the time limit.  (In 2015, main track solver output
   was ignored if the solver subsequently timed out.)  Solvers should
@@ -159,23 +165,22 @@ from the previous competition rules are the following:
   2015.  By now, their definition is sufficiently stable, and they are
   supported by several solvers.
 \item Division scores will be based on a weighted sum of scores for
-  benchmark families.  \emph{Rationale:} For some years now, the SMT
-  Competition has had sufficient computational resources to evaluate
-  all solver entrants on all eligible benchmarks.  As a side-effect,
-  the weighting of benchmark families that was achieved in early
-  SMT-COMPs through a careful selection of benchmarks (based on
-  benchmark difficulty and category) was lost.  We believe that a
-  careful weighting (see Section~\ref{sec:division-scoring}), which
-  de-emphasizes large benchmark families, will lead to more meaningful
+  benchmark families.  \emph{Rationale:} For some years now, SMT-COMPs
+  have had sufficient computational resources to evaluate all solver
+  entrants on all eligible benchmarks.  As a side-effect, the
+  weighting of benchmark families that was achieved in early SMT-COMPs
+  through a careful selection of benchmarks (based on benchmark
+  difficulty and category) was lost.  Since there are vast differences
+  in size between benchmark families, we believe that a weighting that
+  de-emphasizes large benchmark families (see
+  Section~\ref{sec:division-scoring}) will lead to more meaningful
   competition results.
 \item Best industrial performance will no longer be recognized
   separately.  \emph{Rationale:} While there is agreement in the SMT
   community to emphasize problems that come from real applications,
   industrial performance largely coincided with overall performance in
-  previous SMT-COMPs (except in some divisions that had a very small
-  number of industrial benchmarks).  Therefore, industrial performance
-  has very limited significance, and we consider the overhead to
-  determine and report it separately not justified.
+  SMT-COMP 2015.  We consider the effort to determine and report it
+  separately no longer justified.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -333,25 +338,27 @@ satisfies the following requirements:
 \item The script may contain any number of $\akey{declare-sort}$
   commands.  All sorts declared with a $\akey{declare-sort}$ command
   must have zero arity.
-\item Application track scripts may contain $\akey{define-sort}$
-  commands.  \textcolor{red}{TODO: Some main track benchmarks also
-    appear to contain \akey{define-sort} and \akey{define-fun}
-    commands.}
+\item The script may contain any number of $\akey{define-sort}$
+  commands.  All sorts defined with a $\akey{define-sort}$ command
+  must have zero arity.
 \item The script may contain any number of $\akey{declare-fun}$
-  commands.  All formulas in the script belong to the benchmark's
-  logic, with any free symbols declared in the script.
+  commands.
+\item The script may contain any number of $\akey{define-fun}$
+  commands.
+\item The script may contain any number of $\akey{assert}$ commands.
+  All formulas in the script belong to the benchmark's logic, with any
+  free symbols declared in the script.
+\item Named formulas are not used in benchmark scripts.
 \item In the main track, there is exactly one $\akey{check-sat}$
-  command, following possibly several $\akey{assert}$ commands.
+  command.
 \item In the application track, there are one or more \akey{check-sat}
-  commands, each preceded by one or more \akey{assert} commands.
-  There may also be zero or more \akey{push 1} commands, and zero or
-  more \akey{pop 1} commands, consistent with the use of those
-  commands in the SMT-LIB standard.
+  commands.  There may also be zero or more \akey{push 1} commands,
+  and zero or more \akey{pop 1} commands, consistent with the use of
+  those commands in the SMT-LIB standard.
 \item The script may optionally contain an $\akey{exit}$ command as
   its last command.  In the application track, this command must not
   be omitted.
 \item No other commands besides the ones just mentioned may be used.
-\item Named formulas are not used in benchmark scripts.
 \end{enumerate}
 %
 The SMT-LIB format specification is available from the ``Standard''
@@ -679,7 +686,7 @@ and then summed component-wise.
 For a given competition benchmark~$b$, let~$F_b \geq 1$ be the total
 number of benchmarks in $b$'s benchmark family that were used in the
 competition.  We define the weight for benchmark~$b$ as $\alpha_b = (1
-+ \log F_b) / F_b$.\footnote{See Section~\ref{sec:competition-wide}
++ \log_e F_b) / F_b$.\footnote{See Section~\ref{sec:competition-wide}
   for a motivating discussion of log scaling.}  We define the
 \emph{normalized weight} for benchmark~$b$ as $\alpha'_b = \alpha_b /
 (\sum_{b'} \alpha_{b'})$, where the sum is over all benchmarks in the
@@ -727,7 +734,7 @@ total number of benchmarks in division~$i$ that were used in the
 competition, and let $\langle e_i, n_i, w_i, c_i\rangle$ be a solver's
 raw score for this division (Section~\ref{sec:division-scoring}).  The
 solver's competition-wide raw score is $\sum_i (e_i == 0 \,?\,
-(n_i/N_i)^2 : -e_i) \log N_i$, where the sum is over all competitive
+(n_i/N_i)^2 : -e_i) \log_e N_i$, where the sum is over all competitive
 divisions into which the solver was
 entered.\footnote{\emph{Rationale:} This metric purposely emphasizes
   breadth of solver participation---a solver participating in many
@@ -795,6 +802,10 @@ Committee. The organizing team is
 \item \href{https://www.sites.google.com/site/deharbe/}{David
   D{\'e}harbe}~-- Clearsy, France, and Federal University of Rio
   Grande do Norte, Brazil (co-organizer)
+\item
+  \href{https://swt.informatik.uni-freiburg.de/staff/heizmann}{Matthias
+    Heizmann}~-- University of Freiburg, Germany (co-organizer, unsat
+  core track)
 \item \href{http://user.it.uu.se/~tjawe125/}{Tjark Weber}~-- Uppsala
   University, Sweden (chair)
 \end{itemize}
@@ -804,15 +815,14 @@ these rules, with input from the co-organizers. He is not associated
 with any group creating or submitting solvers.
 
 Many others have contributed benchmarks, effort, and feedback.  Clark
-Barrett
-% processed the newly submitted benchmarks.
-is maintaining the SMT-LIB benchmark library.  The competition uses
-the \href{https://www.starexec.org/}{StarExec} service, which is
+Barrett is maintaining the SMT-LIB benchmark library.  The competition
+uses the \href{https://www.starexec.org/}{StarExec} service, which is
 hosted at the \href{http://www.cs.uiowa.edu/}{University of Iowa}.
 Aaron Stump is providing essential StarExec support.
 
 David D{\'e}harbe is associated with the solver group producing the
-veriT solver.
+veriT solver.  Matthias Heizmann is associated with the solver group
+producing the SMTInterpol solver.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -827,5 +837,5 @@ veriT solver.
 %% mode: latex
 %% mode: flyspell
 %% ispell-local-dictionary: "american"
-%% LocalWords: Conchon logics satisfiability SMT Sylvain Tjark
+%% LocalWords: arity Conchon logics satisfiability SMT Sylvain Tjark
 %% End:
