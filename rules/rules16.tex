@@ -131,12 +131,14 @@ benchmarks and new or improved solvers to raise the level of
 competition and advance the state-of-the-art in automated SMT problem
 solving.
 
-SMT-COMP 2016 will have two tracks: the conventional main track and an
-application (i.e., incremental) track.  Within each track there are
-multiple divisions, where each division uses benchmarks from a
-specific SMT-LIB logic (or group of logics).  We will recognize
-winners as measured by number of benchmarks solved; we will also
-recognize solvers based on additional criteria.
+SMT-COMP 2016 will have three tracks: the conventional main track, an
+application (i.e., incremental) track, and an unsat-core track.  The
+unsat-core track will be experimental in 2016.
+
+Within each track there are multiple divisions, where each division
+uses benchmarks from a specific SMT-LIB logic (or group of logics).
+We will recognize winners as measured by number of benchmarks solved;
+we will also recognize solvers based on additional criteria.
 
 The rest of this document, revised from the previous
 version,\footnote{Earlier versions of this document include
@@ -175,6 +177,15 @@ from the previous competition rules are the following:
   de-emphasizes large benchmark families (see
   Section~\ref{sec:division-scoring}) will lead to more meaningful
   competition results.
+\item The unsat-core track that was introduced in SMT-COMP 2012, but
+  discontinued in 2013-2015 (partly because of the competition's move
+  to StarExec), is back.  It will be experimental in 2016; its results
+  will be reported, but no official winners will be announced.
+  \emph{Rationale:} Unsat cores are important in many applications of
+  SMT solving.  The track was discontinued primarily for
+  infrastructure and resource reasons.  We are pleased that we can
+  finally offer it again, but we ask for your understanding in case of
+  mishaps while we port the required tools.
 \item Best industrial performance will no longer be recognized
   separately.  \emph{Rationale:} While there is agreement in the SMT
   community to emphasize problems that come from real applications,
@@ -305,11 +316,11 @@ Workshop.
 
 \header{Input and output.}
 %
-In the main track, a participating solver must read a single benchmark
-script, whose filename is presented as the solver's first command-line
-argument.  In the application track, a trace executor will send
-commands from a benchmark script to the solver's standard input
-channel.
+In the main and unsat-core track, a participating solver must read a
+single benchmark script, whose filename is presented as the solver's
+first command-line argument.  In the application track, a trace
+executor will send commands from a benchmark script to the solver's
+standard input channel.
 
 The benchmark script is in the concrete syntax of the SMT-LIB format,
 version~2.5, though with a restricted set of commands.  A benchmark
@@ -317,47 +328,57 @@ script is a text file containing a sequence of SMT-LIB commands that
 satisfies the following requirements:
 %
 \begin{enumerate}
-\item In the main track, there may be a (single) \akey{set-option
-  :print-success ...} command.  Note that \texttt{success} outputs are
-  ignored by the post-processor used by the
-  competition.\footnote{SMT-LIB~2.5 requires solvers to produce a
-    \texttt{success} answer after each \akey{set-logic},
-    \akey{declare-sort}, \akey{declare-fun} and \akey{assert} command
-    (among others), unless the option \akey{:print-success} is set to
-    false.  Ignoring the \texttt{success} outputs allows for
-    submitting fully SMT-LIB~2.5 compliant solvers without the need
-    for a wrapper script, while still allowing entrants of previous
-    competitions to run without changes.}
-\item In the application track, the \akey{:print-success} option must
-  not be disabled.  The trace executor will send an initial
-  $\akey{set-option :print-success true}$ command to the solver.
-\item The (single) $\akey{set-logic}$ command setting the benchmark's
-  logic is the first command after any $\akey{set-option}$ commands.
-\item The script may contain any number of $\akey{set-info}$ commands.
-  These may be ignored by solvers.
-\item The script may contain any number of $\akey{declare-sort}$
-  commands.  All sorts declared with a $\akey{declare-sort}$ command
-  must have zero arity.
-\item The script may contain any number of $\akey{define-sort}$
-  commands.  All sorts defined with a $\akey{define-sort}$ command
-  must have zero arity.
-\item The script may contain any number of $\akey{declare-fun}$
-  commands.
-\item The script may contain any number of $\akey{define-fun}$
-  commands.
-\item The script may contain any number of $\akey{assert}$ commands.
+\item
+  \begin{enumerate}
+  \item In the main and unsat-core track, there may be a single
+    \akey{set-option :print-success ...} command.  Note that
+    \texttt{success} outputs are ignored by the post-processor used by
+    the competition.\footnote{SMT-LIB~2.5 requires solvers to produce
+      a \texttt{success} answer after each \akey{set-logic},
+      \akey{declare-sort}, \akey{declare-fun} and \akey{assert}
+      command (among others), unless the option \akey{:print-success}
+      is set to false.  Ignoring the \texttt{success} outputs allows
+      for submitting fully SMT-LIB~2.5 compliant solvers without the
+      need for a wrapper script, while still allowing entrants of
+      previous competitions to run without changes.}
+  \item In the application track, the \akey{:print-success} option
+    must not be disabled.  The trace executor will send an initial
+    \akey{set-option :print-success true} command to the solver.
+  \end{enumerate}
+\item In the unsat-core track, there is a single \akey{set-option
+  :produce-unsat-cores true} command.
+\item The (single) \akey{set-logic} command setting the benchmark's
+  logic is the first command after any \akey{set-option} commands.
+\item The script may contain any number of \akey{set-info} commands.
+\item The script may contain any number of \akey{declare-sort} and
+  \akey{define-sort} commands.  All sorts declared or defined with
+  these commands must have zero arity.
+\item The script may contain any number of \akey{declare-fun} and
+  \akey{define-fun} commands.
+\item The script may contain any number of \akey{assert} commands.
   All formulas in the script belong to the benchmark's logic, with any
   free symbols declared in the script.
-\item Named formulas are not used in benchmark scripts.
-\item In the main track, there is exactly one $\akey{check-sat}$
-  command.
-\item In the application track, there are one or more \akey{check-sat}
-  commands.  There may also be zero or more \akey{push 1} commands,
-  and zero or more \akey{pop 1} commands, consistent with the use of
-  those commands in the SMT-LIB standard.
-\item The script may optionally contain an $\akey{exit}$ command as
-  its last command.  In the application track, this command must not
-  be omitted.
+\item
+  \begin{enumerate}
+    \item In the main and application track, named formulas are not
+      used.
+    \item In the unsat core track, top-level assertions may be named.
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \item In the main and unsat-core track, there is exactly one
+    \akey{check-sat} command.
+  \item In the application track, there are one or more
+    \akey{check-sat} commands.  There may also be zero or more
+    \akey{push 1} commands, and zero or more \akey{pop 1} commands,
+    consistent with the use of those commands in the SMT-LIB standard.
+  \end{enumerate}
+\item In the unsat-core track, the \akey{check-sat} command (which is
+  always issued in an unsatisfiable context) is followed by a single
+  \akey{get-unsat-core} command.
+\item The script may optionally contain an \akey{exit} command as its
+  last command.  In the application track, this command must not be
+  omitted.
 \item No other commands besides the ones just mentioned may be used.
 \end{enumerate}
 %
@@ -470,6 +491,38 @@ an answer of \texttt{sat}, \texttt{unsat}, or \texttt{unknown} for
 \akey{check-sat} commands, and with a \texttt{success} answer for
 other commands.
 
+\subsection{Unsat-core track}
+\label{sec:exec:unsat-core}
+
+The unsat-core track will evaluate the capability of solvers to
+generate unsatisfiable cores (for problems that are known to be
+unsatisfiable).  Solvers will be measured by the smallness of the
+unsatisfiable core they return.
+
+The SMT-LIB language accommodates this functionality by providing two
+features: the ability to name top-level (asserted) formulas, and the
+ability to request an unsatisfiable core after a \akey{check-sat}
+command returns \texttt{unsat}.  The unsatisfiable core that is
+returned must consist of a list of names of formulas, in the format
+prescribed by the SMT-LIB standard.
+
+The result of a solver is considered erroneous if the response to the
+\akey{check-sat} command is \texttt{sat}, or if the returned
+unsatisfiable core is not well-formed (e.g., contains names of
+formulas that have not been asserted before), or if the returned
+unsatisfiable core is not, in fact, unsatisfiable.  The organizers
+intend to check unsatisfiability by running an SMT solver on a
+benchmark that asserts only those formulas in the reported core.  The
+details of the checking procedure, which will be the same for all
+solvers and benchmarks in the unsat-core track, are still to be
+determined.
+
+Solvers must respond to each command in the benchmark script with the
+answers defined in the SMT-LIB format specification.  In particular,
+solvers that respond \texttt{unknown} to the \akey{check-sat} command
+must respond with an error to the following \akey{get-unsat-core}
+command.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Benchmarks and Problem Divisions}
@@ -479,7 +532,9 @@ other commands.
 Benchmarks for each division will be drawn from the SMT-LIB benchmark
 library.  The main track will use a subset of all
 \emph{non-incremental} benchmarks; the application track will use a
-subset of all \emph{incremental} benchmarks.
+subset of all \emph{incremental} benchmarks.  The unsat-core track
+will use unsatisfiable main track benchmarks, modified to use named
+top-level assertions.
 
 \header{New benchmarks.}
 %
@@ -622,8 +677,8 @@ the solver process terminates.
 \end{itemize}
 %
 Note that a (correct or incorrect) response is taken into
-consideration even when the the solver process terminates abnormally,
-or does not terminate within the time limit.  Solvers should take care
+consideration even when the solver process terminates abnormally, or
+does not terminate within the time limit.  Solvers should take care
 not to accidentally produce output that contains \texttt{sat} or
 \texttt{unsat}.
 
@@ -646,6 +701,20 @@ processing.  For the application track, we have
 \item otherwise, $e=0$, and $n$ is the number of correct results for
   \akey{check-sat} commands returned by the solver before the time
   limit is reached.
+\end{itemize}
+
+\header{Unsat-core track.}
+%
+For the unsat-core track, we instead have $0 \leq n \leq A$, where~$A$
+is the number of named top-level assertions in the benchmark, and
+\begin{itemize}
+\item $e=0$, $n=0$ if the solver aborts without a response, or the
+  result of the \akey{check-sat} command is \texttt{unknown},
+\item $e=1$, $n=0$ if the result is erroneous according to
+  Section~\ref{sec:exec:unsat-core},
+\item otherwise, $e=0$, and $n$ is the reduction in the number of
+  formulas, i.e., $n = A$ minus the number of formula names in the
+  reported unsatisfiable core.
 \end{itemize}
 
 \subsection{Sequential performance}
@@ -685,24 +754,25 @@ and then summed component-wise.
 
 For a given competition benchmark~$b$, let~$F_b \geq 1$ be the total
 number of benchmarks in $b$'s benchmark family that were used in the
-competition.  We define the weight for benchmark~$b$ as $\alpha_b = (1
-+ \log_e F_b) / F_b$.\footnote{See Section~\ref{sec:competition-wide}
-  for a motivating discussion of log scaling.}  We define the
-\emph{normalized weight} for benchmark~$b$ as $\alpha'_b = \alpha_b /
-(\sum_{b'} \alpha_{b'})$, where the sum is over all benchmarks in the
-division.
+competition track to which the division belongs.  We define the weight
+for benchmark~$b$ as $\alpha_b = (1 + \log_e F_b) / F_b$.\footnote{See
+  Section~\ref{sec:competition-wide} for a motivating discussion of
+  log scaling.}  We define the \emph{normalized weight} for
+benchmark~$b$ as $\alpha'_b = \alpha_b / (\sum_{b'} \alpha_{b'})$,
+where the sum is over all benchmarks in the division.
 
-For main track divisions, we will separately compute the weighted sum
-of all raw scores (Section~\ref{sec:benchmark-scoring}) $$\sum_b
-\alpha'_b \cdot \langle e_b, n_b, w_b, c_b\rangle$$ where the sum is
-over all benchmarks in the division to assess parallel performance,
-and the weighted sum of all sequential scores
-(Section~\ref{sec:sequential}) to assess sequential performance.  For
-application track divisions, division scores will be based on raw
-scores only.\footnote{Since application track benchmarks may be
-  partially solved, defining a useful sequential score for the
-  application track would require information not provided by the raw
-  score, e.g., detailed timing information for each result.}
+For main track and unsat-core track divisions, we will separately
+compute the weighted sum of all raw scores
+(Section~\ref{sec:benchmark-scoring}) $$\sum_b \alpha'_b \cdot \langle
+e_b, n_b, w_b, c_b\rangle$$ where the sum is over all benchmarks in
+the division to assess parallel performance, and the weighted sum of
+all sequential scores (Section~\ref{sec:sequential}) to assess
+sequential performance.  For application track divisions, division
+scores will be based on raw scores only.\footnote{Since application
+  track benchmarks may be partially solved, defining a useful
+  sequential score for the application track would require information
+  not provided by the raw score, e.g., detailed timing information for
+  each result.}
 
 Division scores are compared lexicographically:
 \begin{itemize}
