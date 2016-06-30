@@ -759,20 +759,21 @@ for benchmark~$b$ as $\alpha_b = (1 + \log_e F_b) / F_b$.\footnote{See
   Section~\ref{sec:competition-wide} for a motivating discussion of
   log scaling.}  We define the \emph{normalized weight} for
 benchmark~$b$ as $\alpha'_b = \alpha_b / (\sum_{b'} \alpha_{b'})$,
-where the sum is over all benchmarks in the division.
+where the sum is over all benchmarks in the division.  Let~$N$ be the
+total number of benchmarks in the division.
 
 For main track and unsat-core track divisions, we will separately
 compute the weighted sum of all raw scores
 (Section~\ref{sec:benchmark-scoring}) $$\sum_b \alpha'_b \cdot \langle
-e_b, n_b, w_b, c_b\rangle$$ where the sum is over all benchmarks in
-the division to assess parallel performance, and the weighted sum of
-all sequential scores (Section~\ref{sec:sequential}) to assess
-sequential performance.  For application track divisions, division
-scores will be based on raw scores only.\footnote{Since application
-  track benchmarks may be partially solved, defining a useful
-  sequential score for the application track would require information
-  not provided by the raw score, e.g., detailed timing information for
-  each result.}
+e_b \cdot N, n_b \cdot N, w_b, c_b\rangle$$ where the sum is over all
+benchmarks in the division to assess parallel performance, and the
+weighted sum of all sequential scores (Section~\ref{sec:sequential})
+to assess sequential performance.  For application track divisions,
+division scores will be based on raw scores only.\footnote{Since
+  application track benchmarks may be partially solved, defining a
+  useful sequential score for the application track would require
+  information not provided by the raw score, e.g., detailed timing
+  information for each result.}
 
 Division scores are compared lexicographically:
 \begin{itemize}
