@@ -832,11 +832,11 @@ was entered.\footnote{\emph{Rationale:} This metric purposely
 
   The constant penalty for errors reflects the fact that any error (in
   a particular division) renders a solver untrustworthy for that
-  division.  The value~$-4$ balances the community's interest in
+  division.  The value~$4$ balances the community's strong interest in
   correct (thoroughly tested) solvers against the risk of stifling
-  innovation: entering a perfect (but possibly buggy) solver into a
-  division has a positive expected value if the probability of a
-  soundness bug is below $\frac{1}{1+4} = 20$\,\%.
+  innovation: entering a (possibly buggy) solver that can solve all
+  benchmarks into a division has a positive expected value if the
+  probability of a soundness bug is below $\frac{1}{1+4} = 20$\,\%.
   
   The log scaling is a (somewhat arbitrary) means to adjust the scores
   for the wide variety of numbers of benchmarks in different
