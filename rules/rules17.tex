@@ -150,6 +150,20 @@ following:
   Email submissions were often incomplete, leading to ambiguity and
   further inquiries.  The form provides a more structured way of
   submitting information.
+\item Benchmarks may use (a subset of) version~2.5 of the SMT-LIB
+  language.  \emph{Rationale:} This is the latest version of the
+  SMT-LIB language.  Its use had been announced for SMT-COMP 2016
+  already, but was delayed because the SMT-LIB benchmark collection
+  had not been updated.  Solvers should ideally support both
+  versions~2.0 and~2.5; the latter is largely backwards-compatible.
+\item Benchmarks that use partial bit-vector functions, such as
+  \texttt{bvudiv}, or underspecified floating-point functions, such as
+  \texttt{fp.min}, may become eligible for the competition again,
+  provided (i)~the semantics of these functions agrees with existing
+  solver implementations, and (ii)~the status of affected benchmarks
+  in SMT-LIB is not incorrect.  \emph{Rationale:} The semantics of
+  these functions had been under discussion, and it appears that a
+  conclusion has finally been reached.
 \item Benchmarks with unknown status will be eligible for the
   competition's main track.  In 2016, solver performance on benchmarks
   with unknown status was evaluated but reported separately; in 2017,
@@ -157,25 +171,11 @@ following:
   Using only benchmarks with known status (i.e., benchmarks that have
   been solved before) to determine the competition results unjustly
   favors imitation of existing solvers over true innovation.
-\item Benchmarks will likely use (a subset of) version~2.5 of the
-  SMT-LIB language.  \emph{Rationale:} This is the latest version of
-  the SMT-LIB language.  Its use had been announced for SMT-COMP 2016
-  already, but was delayed because the SMT-LIB benchmark collection
-  had not been updated.  Solvers should ideally support both
-  versions~2.0 and~2.5; the latter is largely backwards-compatible.
-\item Benchmarks that use partial bit-vector functions, such as
-  \texttt{bvudiv}, may become eligible for the competition again,
-  provided the semantics of these functions (according to SMT-LIB) is
-  changed to agree with existing solver implementations, and the
-  status of affected SMT-LIB benchmarks is updated accordingly.
-  \emph{Rationale:} The semantics of these functions has been
-  discussed for a long time, and it appears that a conclusion has
-  finally been reached.
-\item The penalty for erroneous results in the competition-wide
-  scoring is changed from the number of errors to a fixed constant
-  (multiplied by the weight of the respective division).
+\item In the competition-wide scoring, the (per-division) penalty for
+  erroneous results is changed from the number of errors to a fixed
+  constant (multiplied by the weight of the respective division).
   \emph{Rationale:} The weight already takes the number of benchmarks
-  in a division into account; multiplying it by the number of errors
+  in the division into account; multiplying it by the number of errors
   overemphasizes large divisions.
 \item The unsat-core track, which was re-introduced in 2016, is no
   longer experimental.  Its divisions will be considered competitive
@@ -559,10 +559,10 @@ benchmark pool is culled as follows:
 \begin{enumerate}
 \item \emph{Remove inappropriate benchmarks.} The competition
   organizers may remove benchmarks that are deemed
-  inappropriate\footnote{In 2017, this may (again) include all
+  inappropriate\footnote{In previous years, this included all
     benchmarks that use partial or underspecified functions, e.g.,
-    \texttt{bvudiv}, \texttt{fp.min}, unless their semantics can be
-    resolved in time for the competition.}  or uninteresting for
+    \texttt{bvudiv}, \texttt{fp.min}.  Whether these benchmarks are
+    included in 2017 is yet to be decided.} or uninteresting for
   competition, or cut the size of certain benchmark families to avoid
   their over-representation.  SMT-COMP attempts to give preference to
   benchmarks that are ``real-world,'' in the sense of coming from or
