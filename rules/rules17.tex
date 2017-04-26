@@ -746,15 +746,17 @@ score is defined as~$\langle e_S, n_S, c_S\rangle$, where
 %
 Before division scores are computed for the main track, benchmarks
 with unknown status are removed from the competition results if two
-(or more) sound solvers disagree on their result.  More specifically,
-a solver (including a solver that was entered into the competition by
-the organizers for comparison purposes) is \emph{sound} for a division
-if its raw score (Section~\ref{sec:benchmark-scoring}) is of the form
-$\langle 0, n, w, c\rangle$ for each benchmark in the division, i.e.,
-if it did not produce any erroneous results.  Two solvers
-\emph{disagree} on a benchmark if one of them reported \texttt{sat}
-and the other reported \texttt{unsat}.  Only the remaining benchmarks
-are used in the following computation of division scores.
+(or more) solvers that are sound on benchmarks with known status
+disagree on their result.  More specifically, a solver (including a
+solver that was entered into the competition by the organizers for
+comparison purposes) is \emph{sound on benchmarks with known status}
+for a division if its raw score (Section~\ref{sec:benchmark-scoring})
+is of the form $\langle 0, n, w, c\rangle$ for each benchmark in the
+division, i.e., if it did not produce any erroneous results.  Two
+solvers \emph{disagree} on a benchmark if one of them reported
+\texttt{sat} and the other reported \texttt{unsat}.  Only the
+remaining benchmarks are used in the following computation of division
+scores.
 
 \medskip
 
