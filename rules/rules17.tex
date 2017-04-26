@@ -510,12 +510,18 @@ The result of a solver is considered erroneous if the response to the
 \akey{check-sat} command is \texttt{sat}, or if the returned
 unsatisfiable core is not well-formed (e.g., contains names of
 formulas that have not been asserted before), or if the returned
-unsatisfiable core is not, in fact, unsatisfiable.  The organizers
-intend to check unsatisfiability by running an SMT solver on a
-benchmark that asserts only those formulas in the reported core.  The
-details of the checking procedure, which will be the same for all
-solvers and benchmarks in the unsat-core track, are still to be
-determined.
+unsatisfiable core is not, in fact, unsatisfiable.
+
+In order to perform this unsatisfiability check, the organizers will
+use a selection of SMT solvers that have been sound (i.e., not
+produced any erroneous result) in the corresponding division of the
+main track.  The unsatisfiability of a produced unsatisfiable core is
+refuted if the number of checking solvers whose result is \textt{sat}
+exceeds the number of checking solvers whose result is \textt{unsat},
+or if the unsat-core producing solver is used as a checking solver and
+its result is \textt{sat}.  The time limit for checking unsatisfiable
+cores is yet to be determined, but is anticipated to be around 5
+minutes of wall-clock time per solver.
 
 Solvers must respond to each command in the benchmark script with the
 answers defined in the SMT-LIB format specification.  In particular,
