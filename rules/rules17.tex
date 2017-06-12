@@ -5,7 +5,7 @@
 \usepackage{fullpage}
 \usepackage{hyperref}
 
-\usepackage{draftwatermark}
+%\usepackage{draftwatermark}
 
 \hyphenation{data-types}
 
@@ -150,20 +150,16 @@ following:
   Email submissions were often incomplete, leading to ambiguity and
   further inquiries.  The form provides a more structured way of
   submitting information.
-\item Benchmarks may use (a subset of) version~2.5 of the SMT-LIB
+\item Benchmarks will use (a subset of) version~2.6 of the SMT-LIB
   language.  \emph{Rationale:} This is the latest version of the
-  SMT-LIB language.  Its use had been announced for SMT-COMP 2016
-  already, but was delayed because the SMT-LIB benchmark collection
-  had not been updated.  Solvers should ideally support both
-  versions~2.0 and~2.5; the latter is largely backwards-compatible.
+  SMT-LIB language.  It is largely backwards-compatible with earlier
+  versions (in particular~2.0 and~2.5).
 \item Benchmarks that use partial bit-vector functions, such as
   \texttt{bvudiv}, or underspecified floating-point functions, such as
-  \texttt{fp.min}, may become eligible for the competition again,
-  provided (i)~the semantics of these functions agrees with existing
-  solver implementations, and (ii)~the status of affected benchmarks
-  in SMT-LIB is not incorrect.  \emph{Rationale:} The semantics of
-  these functions had been under discussion, and it appears that a
-  conclusion has finally been reached.
+  \texttt{fp.min}, will be eligible for the competition again.
+  \emph{Rationale:} A conclusion on the semantics of these functions
+  has finally been reached, and the status of affected SMT-LIB
+  benchmarks has been updated accordingly.
 \item Benchmarks with unknown status will be eligible for the
   competition's main track.  In 2016, solver performance on benchmarks
   with unknown status was evaluated but reported separately; in 2017,
@@ -182,12 +178,12 @@ following:
   if the necessary requirements (see Section~\ref{sec:scoring}) are
   met.  \emph{Rationale:} Rules and tool support for the unsat-core
   track proved sufficiently stable in 2016.
-\item The competition may feature experimental divisions for
-  benchmarks that use algebraic datatypes, provided suitable
-  benchmarks are available.  \emph{Rationale:} Algebraic datatypes are
-  specified in the draft SMT-LIB~2.6 standard, which is expected to
-  become official in the near future, and are already supported by
-  some solvers.
+\item The competition will feature experimental divisions for
+  benchmarks that use algebraic datatypes.  \emph{Rationale:}
+  Algebraic datatypes are specified in the draft SMT-LIB~2.6 standard,
+  which is expected to become official in the near future, and are
+  already supported by some solvers.  Benchmarks that use datatypes
+  have recently been added to SMT-LIB.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -321,7 +317,7 @@ executor will send commands from a benchmark script to the solver's
 standard input channel.
 
 The benchmark script is in the concrete syntax of the SMT-LIB format,
-version~2.5, though with a restricted set of commands.  A benchmark
+version~2.6, though with a restricted set of commands.  A benchmark
 script is a text file containing a sequence of SMT-LIB commands that
 satisfies the following requirements:
 %
@@ -331,12 +327,12 @@ satisfies the following requirements:
   \item In the main and unsat-core track, there may be a single
     \akey{set-option :print-success ...} command.  Note that
     \texttt{success} outputs are ignored by the post-processor used by
-    the competition.\footnote{SMT-LIB~2.5 requires solvers to produce
+    the competition.\footnote{SMT-LIB~2.6 requires solvers to produce
       a \texttt{success} answer after each \akey{set-logic},
       \akey{declare-sort}, \akey{declare-fun} and \akey{assert}
       command (among others), unless the option \akey{:print-success}
       is set to false.  Ignoring the \texttt{success} outputs allows
-      for submitting fully SMT-LIB~2.5 compliant solvers without the
+      for submitting fully SMT-LIB~2.6 compliant solvers without the
       need for a wrapper script, while still allowing entrants of
       previous competitions to run without changes.}
   \item In the application track, the \akey{:print-success} option
@@ -564,15 +560,11 @@ The competition will use a large subset of SMT-LIB benchmarks.  The
 benchmark pool is culled as follows:
 \begin{enumerate}
 \item \emph{Remove inappropriate benchmarks.} The competition
-  organizers may remove benchmarks that are deemed
-  inappropriate\footnote{In previous years, this included all
-    benchmarks that use partial or underspecified functions, e.g.,
-    \texttt{bvudiv}, \texttt{fp.min}.  Whether these benchmarks are
-    included in 2017 is yet to be decided.} or uninteresting for
-  competition, or cut the size of certain benchmark families to avoid
-  their over-representation.  SMT-COMP attempts to give preference to
-  benchmarks that are ``real-world,'' in the sense of coming from or
-  having some intended application outside SMT.
+  organizers may remove benchmarks that are deemed inappropriate or
+  uninteresting for competition, or cut the size of certain benchmark
+  families to avoid their over-representation.  SMT-COMP attempts to
+  give preference to benchmarks that are ``real-world,'' in the sense
+  of coming from or having some intended application outside SMT.
 \item \emph{Remove incremental benchmarks whose first \akey{check-sat}
   command has unknown status.}  Incremental benchmarks may contain
   multiple \akey{check-sat} commands, each with its own status.  If an
@@ -912,10 +904,11 @@ these rules, with input from the co-organizers. He is not associated
 with any group creating or submitting solvers.
 
 Many others have contributed benchmarks, effort, and feedback.  Clark
-Barrett is maintaining the SMT-LIB benchmark library.  The competition
-uses the \href{https://www.starexec.org/}{StarExec} service, which is
-hosted at the \href{http://www.cs.uiowa.edu/}{University of Iowa}.
-Aaron Stump is providing essential StarExec support.
+Barrett and Pascal Fontaine are maintaining the SMT-LIB benchmark
+library.  The competition uses the
+\href{https://www.starexec.org/}{StarExec} service, which is hosted at
+the \href{http://www.cs.uiowa.edu/}{University of Iowa}.  Aaron Stump
+is providing essential StarExec support.
 
 \header{Disclosure.}
 %
