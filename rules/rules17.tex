@@ -349,6 +349,9 @@ satisfies the following requirements:
   these commands must have zero arity.
 \item The script may contain any number of \akey{declare-fun} and
   \akey{define-fun} commands.
+\item If the benchmark's logic features algebraic datatypes, the
+  script may contain any number of \akey{declare-datatype(s)}
+  commands.
 \item The script may contain any number of \akey{assert} commands.
   All formulas in the script belong to the benchmark's logic, with any
   free symbols declared in the script.
