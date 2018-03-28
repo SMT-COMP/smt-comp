@@ -3,5 +3,12 @@ International Satisfiability Modulo Theories Competition.
 See the web pages hosted here for more information.
 
 rules       - contains LaTeX sources for the competition rules
+
 smtcomp-web - contains all of the public web pages
+
 tools       - contains some development tools
+
+[YEAR]      - contains files specific to that year that are not published
+              on the web site; e.g., source files for the competition
+              presentation at the SMT Workshop, or source files for a
+              competition report
