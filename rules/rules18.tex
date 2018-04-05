@@ -512,13 +512,15 @@ formulas that have not been asserted before), or if the returned
 unsatisfiable core is not, in fact, unsatisfiable.
 
 In order to perform this unsatisfiability check, the organizers will
-use a selection of SMT solvers that have been sound (i.e., not
-produced any erroneous result) in the corresponding division of the
-main track.  The unsatisfiability of a produced unsatisfiable core is
+use a selection of SMT solvers that participate in the main track
+of this competition. For each division, the organizers will
+use only solvers that have been sound (i.e., not
+produced any erroneous result) in test runs of the
+main track for this division.
+The unsatisfiability of a produced unsatisfiable core is
 refuted if the number of checking solvers whose result is \texttt{sat}
-exceeds the number of checking solvers whose result is \texttt{unsat},
-or if the unsat-core producing solver is used as a checking solver and
-its result is \texttt{sat}.  The time limit for checking unsatisfiable
+exceeds the number of checking solvers whose result is \texttt{unsat}.
+The time limit for checking unsatisfiable
 cores is yet to be determined, but is anticipated to be around 5
 minutes of wall-clock time per solver.
 
