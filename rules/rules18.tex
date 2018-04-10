@@ -18,14 +18,16 @@
   \setlength{\itemsep}{1.5pt plus 0.3ex}
 }
 
+\newcommand{\rem}[1]{\textcolor{red}{[#1]}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
 \date{\small This version revised \the\year-\the\month-\the\day}
 
-\title{12th International Satisfiability Modulo Theories Competition
-  (SMT-COMP 2017): Rules and Procedures}
+\title{13th International Satisfiability Modulo Theories Competition
+  (SMT-COMP 2018): Rules and Procedures}
 
 % [morgan] do our own layout of authors; the four-author layout spacing
 % was screwed up...
@@ -82,7 +84,7 @@ way that such announcements will be communicated.
 
 \noindent Additional material will be made available at the
 competition web site, \url{www.smtcomp.org} or
-\url{smtcomp.sourceforge.net/2017}.
+\url{smtcomp.sourceforge.net/2018}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -122,10 +124,11 @@ competition web site, \url{www.smtcomp.org}, and in reports on
 previous
 competitions~(\cite{SMTCOMP-JAR,SMTCOMP-FMSD,BDOS08,SMTCOMP-2008,CDW14,SMTCOMP-2012,CSW15}).
 
-SMT-COMP~2017 is part of the SMT Workshop~2017
-(\url{http://smt-workshop.cs.uiowa.edu/2017/}), which is affiliated
-with CAV~2017 (\url{http://cavconference.org/2017/}).  The SMT
-Workshop will include a block of time to present the results of the
+SMT-COMP~2018 is part of the SMT Workshop~2018
+(\url{http://smt-workshop.cs.uiowa.edu/2018/}),
+which is affiliated with IJCAR~2018 (\url{http://ijcar2018.org/}),
+part of FLoC 2018 (\url{http://www.floc2018.org/}).
+The SMT Workshop will include a block of time to present the results of the
 competition.
 
 Accordingly, researchers are highly encouraged to submit both new
@@ -133,7 +136,7 @@ benchmarks and new or improved solvers to raise the level of
 competition and advance the state-of-the-art in automated SMT problem
 solving.
 
-SMT-COMP 2017 will have three tracks: the conventional main track, an
+SMT-COMP 2018 will have three tracks: the conventional main track, an
 application (i.e., incremental) track, and an unsat-core track.
 
 Within each track there are multiple divisions, where each division
@@ -146,7 +149,7 @@ version,\footnote{Earlier versions of this document include
   contributions from Clark Barrett, Roberto Bruttomesso, David Cok,
   Sylvain Conchon, David D{\'e}harbe, Morgan Deters, Alberto Griggio,
   Matthias Heizmann, Albert Oliveras, Aaron Stump, and Tjark Weber.}
-describes the rules and competition procedures for SMT-COMP~2017.  The
+describes the rules and competition procedures for SMT-COMP~2018.  The
 principal changes from the previous competition rules are the
 following:
 \begin{itemize}
@@ -217,6 +220,7 @@ for clarity, \emph{each submitted solver must have one configuration
 presence \emph{and the tracks and divisions in which it is
   participating} via the web form at
 \begin{center}
+  \rem{TODO, this is still the old link}
   \url{https://goo.gl/forms/HL6rbOywqW4sFo1D2}
 \end{center}
 A submission must also include a 32-bit unsigned integer.  These
@@ -271,10 +275,10 @@ the competition or the SMT Workshop to participate or win.
 
 SMT-COMP entrants must be submitted via StarExec (solvers) \emph{and}
 the above web form (accompanying information) until the end of {\bf
-  June~4, 2017} anywhere on earth.  After this date no new entrants
-will be accepted.  However, updates to existing entrants on StarExec
-will be accepted until the end of {\bf June~19, 2017} anywhere on
-earth.
+  May~27, 2018} anywhere on earth.
+After this date no new entrants will be accepted.
+However, updates to existing entrants on StarExec
+will be accepted until the end of {\bf June~10, 2018} anywhere on earth.
 
 We strongly encourage participants to use this grace period
 \emph{only} for the purpose of fixing any bugs that may be discovered,
@@ -305,7 +309,7 @@ made public.
 \header{Dates of competition.}
 %
 The bulk of the computation will take place during the weeks leading
-up to SMT 2017.  Intermediate results will be regularly posted to the
+up to SMT 2018.  Intermediate results will be regularly posted to the
 SMT-COMP website as the competition runs.
 
 The organizers reserve the right to prioritize certain competition
@@ -424,7 +428,7 @@ unsatisfiable (\texttt{unsat}).  A solver may also report
 of the formula.
 
 The main track competition uses a StarExec post-processor (named
-``SMT-COMP 2017") to accumulate the results.
+``SMT-COMP 2018") to accumulate the results.
 
 \header{Aborts and unparsable output.}
 %
@@ -550,9 +554,9 @@ top-level assertions.
 
 \header{New benchmarks.}
 %
-The deadline for submission of new benchmarks is {\bf May~1, 2017}.
+The deadline for submission of new benchmarks is {\bf April~8, 2018}.
 The organizers, in collaboration with the SMT-LIB maintainers, will be
-checking and curating these until {\bf June~1, 2017}.  The SMT-LIB
+checking and curating these until {\bf May~1, 2018}.  The SMT-LIB
 maintainers intend to make a new release of the benchmark library
 publicly available on or close to this date.
 
@@ -895,19 +899,19 @@ be recused from these decisions.  The organizers' decisions are final.
 
 \section{Acknowledgments}
 
-SMT-COMP 2017 is organized under the direction of the SMT Steering
+SMT-COMP 2018 is organized under the direction of the SMT Steering
 Committee. The organizing team is
 %
 \begin{itemize}
 \setlength{\itemsep}{0pt}
-\item \href{http://www.cs.man.ac.uk/~regerg/}{Giles Reger}~--
-  University of Manchester, UK (co-organizer)
 \item
   \href{https://swt.informatik.uni-freiburg.de/staff/heizmann}{Matthias
     Heizmann}~-- University of Freiburg, Germany (co-organizer)
 \item
   \href{http://cs.stanford.edu/people/niemetz}{Aina
     Niemetz}~-- Stanford University, USA (co-organizer)
+\item \href{http://www.cs.man.ac.uk/~regerg/}{Giles Reger}~--
+  University of Manchester, UK (co-organizer)
 \item \href{http://user.it.uu.se/~tjawe125/}{Tjark Weber}~-- Uppsala
   University, Sweden (chair)
 \end{itemize}
