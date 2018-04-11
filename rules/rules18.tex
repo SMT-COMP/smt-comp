@@ -143,6 +143,9 @@ Within each track there are multiple divisions, where each division
 uses benchmarks from a specific SMT-LIB logic (or group of logics).
 We will recognize winners as measured by number of benchmarks solved;
 we will also recognize solvers based on additional criteria.
+\rem{Aina: Is this up to date? We do use weighting to determine a score that
+determines the winner, right? So, it is actually not the number of solved
+benchmarks that determines the winner.}
 
 The rest of this document, revised from the previous
 version,\footnote{Earlier versions of this document include
@@ -152,6 +155,8 @@ version,\footnote{Earlier versions of this document include
 describes the rules and competition procedures for SMT-COMP~2018.  The
 principal changes from the previous competition rules are the
 following:
+\rem{Aina: All of this bullets are not new in 2018 anymore, maybe move them
+elsewhere? This information should not be lost.}
 \begin{itemize}
 \item Submission of accompanying information for solvers is via a web
   form (rather than by email to the organizers).  \emph{Rationale:}
@@ -193,6 +198,7 @@ following:
   already supported by some solvers.  Benchmarks that use datatypes
   have recently been added to SMT-LIB.
 \end{itemize}
+\rem{Aina: Are we going to introduce an experimental strings divisions?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -227,10 +233,19 @@ A submission must also include a 32-bit unsigned integer.  These
 integer numbers, collected from all submissions, are used to seed the
 benchmark scrambler.
 
+\rem{Aina: Why are there no restrictions as to who can submit which solver?
+Shouldn't we maybe introduce the requirement that only authors can submit
+solvers? Else someone could, e.g., submit CVC4 or Z3 as their solver.}
+
 \header{System description.}
 %
 As part of a submission, SMT-COMP entrants are encouraged to provide a
-short (1--2 pages) description of the system.  This should include a
+short (1--2 pages) description of the system.
+\rem{Aina: I would actually make the submission of the system description a
+requirement, if possible. I would also require that if entrants are based
+on an already existing solver, this must be mentioned in the system description
+and appropriate acknowledgement is due, same as with wrapper tools.}
+This should include a
 list of all authors of the system, their present institutional
 affiliations, and any appropriate acknowledgements.  The programming
 language(s) and basic SMT solving approach employed should be
@@ -263,6 +278,8 @@ solvers are called the \emph{wrapped} solvers.  A wrapper tool must
 explicitly acknowledge any solvers that it wraps.  Its system
 description should make clear the technical innovations by which the
 wrapper tool expects to improve on the wrapped solvers.
+\rem{Aina: Again, I'd like to make the submission of system descriptions
+mandatory. SAT competition does that as well, btw.}
 
 \header{Attendance.}
 %
@@ -334,7 +351,7 @@ satisfies the following requirements:
 \item
   \begin{enumerate}
   \item In the main and unsat-core track, there may be a single
-    \akey{set-option :print-success ...} command.  Note that
+    \akey{(set-option :print-success ...)} command.  Note that
     \texttt{success} outputs are ignored by the post-processor used by
     the competition.\footnote{SMT-LIB~2.6 requires solvers to produce
       a \texttt{success} answer after each \akey{set-logic},
@@ -346,10 +363,10 @@ satisfies the following requirements:
       previous competitions to run without changes.}
   \item In the application track, the \akey{:print-success} option
     must not be disabled.  The trace executor will send an initial
-    \akey{set-option :print-success true} command to the solver.
+      \akey{(set-option :print-success true)} command to the solver.
   \end{enumerate}
-\item In the unsat-core track, there is a single \akey{set-option
-  :produce-unsat-cores true} command.
+\item In the unsat-core track, there is a single \akey{(set-option
+  :produce-unsat-cores true)} command.
 \item The (single) \akey{set-logic} command setting the benchmark's
   logic is the first command after any \akey{set-option} commands.
 \item The script may contain any number of \akey{set-info} commands.
@@ -769,6 +786,22 @@ solvers \emph{disagree} on a benchmark if one of them reported
 \texttt{sat} and the other reported \texttt{unsat}.  Only the
 remaining benchmarks are used in the following computation of division
 scores.
+\rem{Aina: I strongly suggest that we make disagreements visible.
+I would add a table to the bottom of the division results page, where
+we list the benchmarks we removed due to disagreements and which results
+which solvers reported. Silently dropping benchmarks on which solvers
+disagree is potentially unfair and dangerous, since people who want to use
+a solver, tend to only
+look at the SMT-COMP results and pick a solver based on this results.
+They will certainly not go through the competition results on StarExec,
+in particular since this is quite tedious.
+For users it is interesting (and might be actually crucial) to know
+if a solver disagreed with other solvers.
+The same is true for solver developers, since they certainly want to know
+if their solver disagreed with other solvers on a certain benchmark.
+They usually run preliminary tests with existing solvers beforehand,
+but not all solvers are available in the newest version.
+Not to mention new solvers.}
 
 \medskip
 
@@ -882,6 +915,27 @@ The organizers will also recognize the following contributions:
 The organizers reserve the right to recognize other outstanding
 contributions that become apparent in the competition results.
 
+\rem{Aina: Do we already know how many medals FLOC is going to sponsor?
+Clark offered to pay for printing proper and beautiful certificates for each
+division if we don't have funds for that.
+As for medals, it might be a little late to get sponsors (and the funds
+from SMT-LIB went to the travel fund).}
+
+\rem{Aina: Depending on the number of medals we get from FLOC we should
+decide on how to categorize for prizes. Some ideas:
+\begin{itemize}
+  \item Competition-wide, main track, best solver
+  \item Quantified divisions, best solver
+  \item Either QF\_BV best solver, or QF\_BV + QF\_ABV + QF\_AUFBV + QF\_UFBV
+  \item Comptetition-wide, application track, best solver
+  \item Comptetition-wide, unsat-core track, best solver
+  \item Best newcomer
+\end{itemize}
+Floating-point is currently only officially supported by Z3,
+inofficially also by CVC4, if we expect more than 2 entrants, then FP logics
+would also be a candidate.
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Judging}
@@ -929,11 +983,13 @@ is providing essential StarExec support.
 
 \header{Disclosure.}
 %
-Aina Niemetz is part of the developing teams of the SMT solvers Boolector
-and CVC4.
+Aina Niemetz is part of the developing teams of the SMT solvers
+Boolector~\cite{boolector}
+and CVC4~\cite{cvc4}.
 Matthias Heizmann is associated with the group producing the
-SMTInterpol solver.  Giles Reger is associated with the group
-producing the Vampire system.
+SMTInterpol~\cite{smtinterpol} solver.
+Giles Reger is associated with the group
+producing the Vampire system\rem{TODO for Giles: cite Vampire}~\cite{vampire}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
