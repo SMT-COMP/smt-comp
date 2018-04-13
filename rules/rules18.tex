@@ -102,7 +102,7 @@ competition web site, \url{www.smtcomp.org} or
   entered, and magic numbers for benchmark scrambling.
 \item[June~10] Deadline for final versions of solvers, including
   system descriptions.
-\item[\rem{June~20 TODO update}] Opening value of NYSE Composite Index used to complete
+\item[June~11] Opening value of NYSE Composite Index used to complete
   random seed for benchmark scrambling.
 \item[July~12/13] SMT Workshop; end of competition, presentation of
   results.
@@ -141,22 +141,21 @@ application (i.e., incremental) track, and an unsat-core track.
 
 Within each track there are multiple divisions, where each division
 uses benchmarks from a specific SMT-LIB logic (or group of logics).
-We will recognize winners as measured by number of benchmarks solved;
-we will also recognize solvers based on additional criteria.
-\rem{Aina: Is this up to date? We do use weighting to determine a score that
-determines the winner, right? So, it is actually not the number of solved
-benchmarks that determines the winner.}
+We will recognize winners as measured by number of benchmarks solved
+(taking into account the weighting detailed in
+Section~\ref{sec:scoring}); we will also recognize solvers based on
+additional criteria.
 
 The rest of this document, revised from the previous
 version,\footnote{Earlier versions of this document include
   contributions from Clark Barrett, Roberto Bruttomesso, David Cok,
   Sylvain Conchon, David D{\'e}harbe, Morgan Deters, Alberto Griggio,
-  Matthias Heizmann, Albert Oliveras, Aaron Stump, and Tjark Weber.}
-describes the rules and competition procedures for SMT-COMP~2018.  The
-principal changes from the previous competition rules are the
-following:
-\rem{Aina: All of this bullets are not new in 2018 anymore, maybe move them
-elsewhere? This information should not be lost.}
+  Matthias Heizmann, Albert Oliveras, Giles Reger, Aaron Stump, and
+  Tjark Weber.}  describes the rules and competition procedures for
+SMT-COMP~2018.  The principal changes from the previous competition
+rules are the following: \rem{Aina: All of this bullets are not new in
+  2018 anymore, maybe move them elsewhere? This information should not
+  be lost.}
 \begin{itemize}
 \item Submission of accompanying information for solvers is via a web
   form (rather than by email to the organizers).  \emph{Rationale:}
@@ -226,31 +225,22 @@ for clarity, \emph{each submitted solver must have one configuration
 presence \emph{and the tracks and divisions in which it is
   participating} via the web form at
 \begin{center}
-  \rem{TODO, this is still the old link}
-  \url{https://goo.gl/forms/HL6rbOywqW4sFo1D2}
+  \rem{TODO, this is still the old link: https://goo.gl/forms/HL6rbOywqW4sFo1D2}
+  {\tt TBA}
 \end{center}
 A submission must also include a 32-bit unsigned integer.  These
 integer numbers, collected from all submissions, are used to seed the
 benchmark scrambler.
 
-\rem{Aina: Why are there no restrictions as to who can submit which solver?
-Shouldn't we maybe introduce the requirement that only authors can submit
-solvers? Else someone could, e.g., submit CVC4 or Z3 as their solver.}
-
 \header{System description.}
 %
-As part of a submission, SMT-COMP entrants are encouraged to provide a
-short (1--2 pages) description of the system.
-\rem{Aina: I would actually make the submission of the system description a
-requirement, if possible. I would also require that if entrants are based
-on an already existing solver, this must be mentioned in the system description
-and appropriate acknowledgement is due, same as with wrapper tools.}
-This should include a
-list of all authors of the system, their present institutional
-affiliations, and any appropriate acknowledgements.  The programming
-language(s) and basic SMT solving approach employed should be
-described (e.g., lazy integration of a Nelson-Oppen combination with
-SAT, translation to SAT, etc.).  System descriptions are encouraged to
+As part of a submission, SMT-COMP entrants are strongly encouraged to
+provide a short (1--2 pages) description of the system.  This should
+include a list of all authors of the system, their present
+institutional affiliations, and any appropriate acknowledgements.  The
+programming language(s) and basic SMT solving approach employed should
+be described (e.g., lazy integration of a Nelson-Oppen combination
+with SAT, translation to SAT, etc.).  System descriptions should also
 include a URL for a web site for the submitted tool.  System
 descriptions may be submitted after the solver deadline, but to be
 useful should be sent to the organizers before the competition ends.
@@ -272,14 +262,13 @@ e.g., for comparison purposes.
 
 \header{Wrapper tools.}
 %
-A \emph{wrapper tool} is defined as any solver which calls one or more
-SMT solvers not written by the author of the wrapper tool.  The other
-solvers are called the \emph{wrapped} solvers.  A wrapper tool must
-explicitly acknowledge any solvers that it wraps.  Its system
-description should make clear the technical innovations by which the
-wrapper tool expects to improve on the wrapped solvers.
-\rem{Aina: Again, I'd like to make the submission of system descriptions
-mandatory. SAT competition does that as well, btw.}
+A \emph{wrapper tool} is defined as any solver which calls (or is in
+some other way based on) one or more SMT solvers not written by the
+author of the wrapper tool.  The other solvers are called the
+\emph{wrapped} solvers.  A wrapper tool must explicitly acknowledge
+any solvers that it wraps.  Its system description should make clear
+the technical innovations by which the wrapper tool expects to improve
+on the wrapped solvers.
 
 \header{Attendance.}
 %
@@ -417,14 +406,12 @@ wall-clock time limit~$T$.  Each processor has 4 cores.  Detailed
 machine specifications are available on the competition web site.
 
 The time limit~$T$ is yet to be determined, but it is anticipated to
-be at most 40~minutes of wall-clock time per solver/benchmark
+be at most 20~minutes of wall-clock time per solver/benchmark
 pair.\footnote{The time limit may be adjusted once we know the number
-  of competition entrants and eligible benchmarks.  Because of the
-  inclusion of benchmarks with unknown status, the time limit may be
-  lower than in previous years.}  Solvers that take more than this
-time limit will be killed.  Solvers are allowed to spawn other
-processes; these will be killed at approximately the same time as the
-first started process.
+  of competition entrants and eligible benchmarks.}  Solvers that take
+more than this time limit will be killed.  Solvers are allowed to
+spawn other processes; these will be killed at approximately the same
+time as the first started process.
 
 The StarExec service also limits the memory consumption of the solver
 processes.  We expect the memory limit per solver/benchmark pair to be
@@ -538,17 +525,15 @@ formulas that have not been asserted before), or if the returned
 unsatisfiable core is not, in fact, unsatisfiable.
 
 In order to perform this unsatisfiability check, the organizers will
-use a selection of SMT solvers that participate in the main track
-of this competition. For each division, the organizers will
-use only solvers that have been sound (i.e., not
-produced any erroneous result) in test runs of the
-main track for this division.
-The unsatisfiability of a produced unsatisfiable core is
-refuted if the number of checking solvers whose result is \texttt{sat}
-exceeds the number of checking solvers whose result is \texttt{unsat}.
-The time limit for checking unsatisfiable
-cores is yet to be determined, but is anticipated to be around 5
-minutes of wall-clock time per solver.
+use a selection of SMT solvers that participate in the main track of
+this competition.  For each division, the organizers will use only
+solvers that have been sound (i.e., not produced any erroneous result)
+in the main track for this division.  The unsatisfiability of a
+produced unsatisfiable core is refuted if the number of checking
+solvers whose result is \texttt{sat} exceeds the number of checking
+solvers whose result is \texttt{unsat}.  The time limit for checking
+unsatisfiable cores is yet to be determined, but is anticipated to be
+around 5 minutes of wall-clock time per solver.
 
 Solvers must respond to each command in the benchmark script with the
 answers defined in the SMT-LIB format specification.  In particular,
@@ -785,23 +770,23 @@ division, i.e., if it did not produce any erroneous results.  Two
 solvers \emph{disagree} on a benchmark if one of them reported
 \texttt{sat} and the other reported \texttt{unsat}.  Only the
 remaining benchmarks are used in the following computation of division
-scores.
-\rem{Aina: I strongly suggest that we make disagreements visible.
-I would add a table to the bottom of the division results page, where
-we list the benchmarks we removed due to disagreements and which results
-which solvers reported. Silently dropping benchmarks on which solvers
-disagree is potentially unfair and dangerous, since people who want to use
-a solver, tend to only
-look at the SMT-COMP results and pick a solver based on this results.
-They will certainly not go through the competition results on StarExec,
-in particular since this is quite tedious.
-For users it is interesting (and might be actually crucial) to know
-if a solver disagreed with other solvers.
-The same is true for solver developers, since they certainly want to know
-if their solver disagreed with other solvers on a certain benchmark.
-They usually run preliminary tests with existing solvers beforehand,
-but not all solvers are available in the newest version.
-Not to mention new solvers.}
+scores (but the organizers may report disagreements for informational
+purposes).
+\rem{Aina: I strongly suggest that we make disagreements visible.  I
+  would add a table to the bottom of the division results page, where
+  we list the benchmarks we removed due to disagreements and which
+  results which solvers reported. Silently dropping benchmarks on
+  which solvers disagree is potentially unfair and dangerous, since
+  people who want to use a solver, tend to only look at the SMT-COMP
+  results and pick a solver based on this results.  They will
+  certainly not go through the competition results on StarExec, in
+  particular since this is quite tedious.  For users it is interesting
+  (and might be actually crucial) to know if a solver disagreed with
+  other solvers.  The same is true for solver developers, since they
+  certainly want to know if their solver disagreed with other solvers
+  on a certain benchmark.  They usually run preliminary tests with
+  existing solvers beforehand, but not all solvers are available in
+  the newest version.  Not to mention new solvers.}
 
 \medskip
 
@@ -927,8 +912,8 @@ decide on how to categorize for prizes. Some ideas:
   \item Competition-wide, main track, best solver
   \item Quantified divisions, best solver
   \item Either QF\_BV best solver, or QF\_BV + QF\_ABV + QF\_AUFBV + QF\_UFBV
-  \item Comptetition-wide, application track, best solver
-  \item Comptetition-wide, unsat-core track, best solver
+  \item Competition-wide, application track, best solver
+  \item Competition-wide, unsat-core track, best solver
   \item Best newcomer
 \end{itemize}
 Floating-point is currently only officially supported by Z3,
