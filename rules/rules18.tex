@@ -5,7 +5,7 @@
 \usepackage{fullpage}
 \usepackage{hyperref}
 
-%\usepackage{draftwatermark}
+\usepackage{draftwatermark}
 
 \hyphenation{data-types}
 
@@ -153,51 +153,44 @@ version,\footnote{Earlier versions of this document include
   Matthias Heizmann, Albert Oliveras, Giles Reger, Aaron Stump, and
   Tjark Weber.}  describes the rules and competition procedures for
 SMT-COMP~2018.  The principal changes from the previous competition
-rules are the following: \rem{Aina: All of this bullets are not new in
-  2018 anymore, maybe move them elsewhere? This information should not
-  be lost.}
+rules are the following:
 \begin{itemize}
-\item Submission of accompanying information for solvers is via a web
-  form (rather than by email to the organizers).  \emph{Rationale:}
-  Email submissions were often incomplete, leading to ambiguity and
-  further inquiries.  The form provides a more structured way of
-  submitting information.
-\item Benchmarks will use (a subset of) version~2.6 of the SMT-LIB
-  language.  \emph{Rationale:} This is the latest version of the
-  SMT-LIB language.  It is largely backwards-compatible with earlier
-  versions (in particular~2.0 and~2.5).
-\item Benchmarks that use partial bit-vector functions, such as
-  \texttt{bvudiv}, or underspecified floating-point functions, such as
-  \texttt{fp.min}, will be eligible for the competition again.
-  \emph{Rationale:} A conclusion on the semantics of these functions
-  has finally been reached, and the status of affected SMT-LIB
-  benchmarks has been updated accordingly.
-\item Benchmarks with unknown status will be eligible for the
-  competition's main track.  In 2016, solver performance on benchmarks
-  with unknown status was evaluated but reported separately; in 2017,
-  it will directly affect the competition results.  \emph{Rationale:}
-  Using only benchmarks with known status (i.e., benchmarks that have
-  been solved before) to determine the competition results unjustly
-  favors imitation of existing solvers over true innovation.
-\item In the competition-wide scoring, the (per-division) penalty for
-  erroneous results is changed from the number of errors to a fixed
-  constant (multiplied by the weight of the respective division).
-  \emph{Rationale:} The weight already takes the number of benchmarks
-  in the division into account; multiplying it by the number of errors
-  overemphasizes large divisions.
-\item The unsat-core track, which was re-introduced in 2016, is no
-  longer experimental.  Its divisions will be considered competitive
-  if the necessary requirements (see Section~\ref{sec:scoring}) are
-  met.  \emph{Rationale:} Rules and tool support for the unsat-core
-  track proved sufficiently stable in 2016.
-\item The competition will feature experimental divisions for
-  benchmarks that use algebraic datatypes.  \emph{Rationale:}
-  Algebraic datatypes are specified in the draft SMT-LIB~2.6 standard,
-  which is expected to become official in the near future, and are
-  already supported by some solvers.  Benchmarks that use datatypes
-  have recently been added to SMT-LIB.
+\item The organizers plan to recognize additional special
+  contributions.  These might include:
+  \begin{itemize}
+  \item Best application track solver (awarded based on a
+    competition-wide scoring for the application track)
+  \item Best unsat-core track solver (awarded based on a
+    competition-wide scoring for the unsat-core track)
+  \item Best complementary solver (awarded to the solver that performs
+    best when all benchmarks solved by the winning solver are removed)
+  \item Most unique solver (awarded to the solver that performs best
+    on benchmarks solved by only one solver)
+  \item The Prophet (awarded to the solver that performs best on
+    benchmarks with unknown status)
+  \item The 10 Second Wonder (awarded to the solver that would have
+    won if the time limit was 10 seconds)
+  \end{itemize}
+  The details are still being discussed and subject to change.
+\item In the unsat-core track, the unsatisfiability check for the
+  returned core will be based on a simple majority vote.  The case
+  that a solver finds its own core satisfiable will no longer be
+  treated specially.  \emph{Rationale:} This allows to simplify the
+  post-processing of unsat-core track results considerably.
+
+\item In 2017, the competition featured experimental divisions for
+  benchmarks that use algebraic datatypes.  Provided the competition
+  tools can be enhanced in time to support datatypes, these divisions
+  may become regular (non-experimental) in 2018. \emph{Rationale:}
+  Algebraic datatypes are specified in the latest official release
+  (Version~2.6) of the SMT-LIB standard.
+  
+\item The competition may feature experimental divisions for
+  benchmarks that use strings, and for benchmarks that use
+  transcendental functions.  \emph{Rationale:} Corresponding theories
+  and benchmarks are expected to be added to SMT-LIB in the near
+  future.
 \end{itemize}
-\rem{Aina: Are we going to introduce an experimental strings divisions?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -225,8 +218,7 @@ for clarity, \emph{each submitted solver must have one configuration
 presence \emph{and the tracks and divisions in which it is
   participating} via the web form at
 \begin{center}
-  \rem{TODO, this is still the old link: https://goo.gl/forms/HL6rbOywqW4sFo1D2}
-  {\tt TBA}
+  \rem{{\tt TBA}}
 \end{center}
 A submission must also include a 32-bit unsigned integer.  These
 integer numbers, collected from all submissions, are used to seed the
@@ -772,21 +764,6 @@ solvers \emph{disagree} on a benchmark if one of them reported
 remaining benchmarks are used in the following computation of division
 scores (but the organizers may report disagreements for informational
 purposes).
-\rem{Aina: I strongly suggest that we make disagreements visible.  I
-  would add a table to the bottom of the division results page, where
-  we list the benchmarks we removed due to disagreements and which
-  results which solvers reported. Silently dropping benchmarks on
-  which solvers disagree is potentially unfair and dangerous, since
-  people who want to use a solver, tend to only look at the SMT-COMP
-  results and pick a solver based on this results.  They will
-  certainly not go through the competition results on StarExec, in
-  particular since this is quite tedious.  For users it is interesting
-  (and might be actually crucial) to know if a solver disagreed with
-  other solvers.  The same is true for solver developers, since they
-  certainly want to know if their solver disagreed with other solvers
-  on a certain benchmark.  They usually run preliminary tests with
-  existing solvers beforehand, but not all solvers are available in
-  the newest version.  Not to mention new solvers.}
 
 \medskip
 
@@ -899,27 +876,6 @@ The organizers will also recognize the following contributions:
 %
 The organizers reserve the right to recognize other outstanding
 contributions that become apparent in the competition results.
-
-\rem{Aina: Do we already know how many medals FLOC is going to sponsor?
-Clark offered to pay for printing proper and beautiful certificates for each
-division if we don't have funds for that.
-As for medals, it might be a little late to get sponsors (and the funds
-from SMT-LIB went to the travel fund).}
-
-\rem{Aina: Depending on the number of medals we get from FLOC we should
-decide on how to categorize for prizes. Some ideas:
-\begin{itemize}
-  \item Competition-wide, main track, best solver
-  \item Quantified divisions, best solver
-  \item Either QF\_BV best solver, or QF\_BV + QF\_ABV + QF\_AUFBV + QF\_UFBV
-  \item Competition-wide, application track, best solver
-  \item Competition-wide, unsat-core track, best solver
-  \item Best newcomer
-\end{itemize}
-Floating-point is currently only officially supported by Z3,
-inofficially also by CVC4, if we expect more than 2 entrants, then FP logics
-would also be a candidate.
-}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
