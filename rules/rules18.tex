@@ -172,6 +172,14 @@ rules are the following:
     won if the time limit was 10 seconds)
   \end{itemize}
   The details are still being discussed and subject to change.
+
+\item The time limit per solver/benchmark pair is anticipated to be at
+  most 20 minutes in the main track, and at most 40 minutes in the
+  other tracks.  \emph{Rationale:} Already in 2017, the time limit for
+  the main track was reduced to 20 minutes (down from 40 minutes in
+  earlier years) to cope with the inclusion of a large number of
+  benchmarks with unknown status.
+
 \item In the unsat-core track, the unsatisfiability check for the
   returned core will be based on a simple majority vote.  The case
   that a solver finds its own core satisfiable will no longer be
@@ -254,7 +262,7 @@ e.g., for comparison purposes.
 
 \header{Wrapper tools.}
 %
-A \emph{wrapper tool} is defined as any solver which calls (or is in
+A \emph{wrapper tool} is defined as any solver that calls (or is in
 some other way based on) one or more SMT solvers not written by the
 author of the wrapper tool.  The other solvers are called the
 \emph{wrapped} solvers.  A wrapper tool must explicitly acknowledge
@@ -397,13 +405,14 @@ competition machine, for each given benchmark, up to a fixed
 wall-clock time limit~$T$.  Each processor has 4 cores.  Detailed
 machine specifications are available on the competition web site.
 
-The time limit~$T$ is yet to be determined, but it is anticipated to
-be at most 20~minutes of wall-clock time per solver/benchmark
-pair.\footnote{The time limit may be adjusted once we know the number
-  of competition entrants and eligible benchmarks.}  Solvers that take
-more than this time limit will be killed.  Solvers are allowed to
-spawn other processes; these will be killed at approximately the same
-time as the first started process.
+The time limit~$T$ is yet to be determined.  It is anticipated to be
+at most 20~minutes of wall-clock time per solver/benchmark pair in the
+main track, and at most 40~minutes in the other tracks.\footnote{The
+  time limit may be adjusted once we know the number of competition
+  entrants and eligible benchmarks.}  Solvers that take more than this
+time limit will be killed.  Solvers are allowed to spawn other
+processes; these will be killed at approximately the same time as the
+first started process.
 
 The StarExec service also limits the memory consumption of the solver
 processes.  We expect the memory limit per solver/benchmark pair to be
