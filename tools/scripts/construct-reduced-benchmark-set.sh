@@ -8,7 +8,7 @@
 # This script allows you to pick n benchmarks from each benchmark folder.
 # (Note that this does NOT necessarily give you n files per 
 # "benchmark family" since a benchmark family consists of all benchmarks
-# inside a top-level subfolder.)
+# inside a top-level subfolder of a division.)
 #
 # Naive solution for this problem:
 # Download all benchmarks from StarExec (huge!), do some filering on your
