@@ -157,32 +157,26 @@ let col_names = [
 "wallclock time";
 "memory usage";
 "result";
-(*
 "expected";
 "validation-check-sat-time_cvc4";
+"validation-solvers";
 "validation-check-sat-result_z3";
+"ucpp-version";
 "validation-check-sat-time_z3";
 "validation-check-sat-result_mathsat";
+"unsat-core-rejections";
 "unsat-core-validated";
 "validation-check-sat-time_vampire";
+"unsat-core-confirmations";
 "result-is-erroneous";
 "parsable-unsat-core";
 "validation-check-sat-result_cvc4";
-"validation-check-sat-time_mathsat";
 "size-unsat-core";
+"validation-check-sat-time_mathsat";
 "number-of-assert-commands";
 "check-sat-result-is-erroneous";
 "reduction";
-"validation-check-sat-result_vampire";
-"REVISED_validation-check-sat-result_cvc4";
-"REVISED_validation-check-sat-result_mathsat";
-"REVISED_validation-check-sat-result_vampire";
-"REVISED_validation-check-sat-result_z3";
-"REVISED_unsat-core-validated";
-"REVISED_result-is-erroneous";
-"REVISED_reduction"
-*)
-"output-size"
+"validation-check-sat-result_vampire"
 ]
 
 let split_csv s = Str.split (Str.regexp ",") s
@@ -267,10 +261,11 @@ let init_divs cin =
 
 let solver_short_names = 
   [
-"CVC4-smtcomp2017-unsat-cores-fixed", "CVC4";
-"SMTInterpol", "SMTInterpol";
-"mathsat-5.4.1-linux-x86_64-Unsat-Core", "mathsat-5.4.1";
-"z3-4.5.0", "z3-4.5.0";
+"master-2018-06-10-b19c840-proofs-unsat_cores", "CVC4";
+"SMTInterpol-2.5-19-g0d39cdee", "SMTInterpol";
+"mathsat-5.5.2-linux-x86_64-Unsat-Core", "mathsat-5.5.2";
+"Yices 2.6.0","Yices 2.6.0";
+"z3-4.7.1", "z3-4.7.1";
     "No winner", "No (competitive) winner"
   ]
 
@@ -359,10 +354,12 @@ let print_header_results fmt d =
                            <td>Sequential Performances</td>
                            <td>Parallel Performances</td>
                            </tr>";
+          try
           fprintf fmt
             "<tr><td>%s</td><td>%s</td>"
             (List.assoc d.winner_seq solver_short_names)
             (List.assoc d.winner_par solver_short_names);
+          with Not_found -> printf "Missing %s\n" d.winner_seq; printf "Missing %s\n"  d.winner_par; raise Not_found;
 
           fprintf fmt "</table><p><p>";
 
@@ -377,14 +374,16 @@ let print_header_results fmt d =
 
 
   let non_competitive_solver s = 
-    s = "mathsat-5.4.1-linux-x86_64-Unsat-Core" ||
-    s = "z3-4.5.0"
+    s = "mathsat-5.5.2-linux-x86_64-Unsat-Core" ||
+    s = "z3-4.7.1"
 
   let print_solver fmt s = 
+    try
     let b = non_competitive_solver s in
     let s = List.assoc s solver_short_names in
     if b then fprintf fmt "%s<SUP><a href=\"#fn\">n</a></SUP>" s 
     else fprintf fmt "%s" s
+    with Not_found -> printf "Missing %s\n" s; raise Not_found
 
   let compare_solver_names (n1, _) (n2, _) =
     compare n1 n2
@@ -690,8 +689,8 @@ let families =
   t
 
 let non_competitive_solver s =
-  s = "mathsat-5.4.1-linux-x86_64-Unsat-Core" ||
-  s = "z3-4.5.0"
+  s = "mathsat-5.5.2-linux-x86_64-Unsat-Core" ||
+  s = "z3-7.1.0"
 
 let competitive_solvers_only l =
   List.filter (fun (s,_) -> not (non_competitive_solver s)) l

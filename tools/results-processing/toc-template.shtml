@@ -1,0 +1,119 @@
+<!--#set var="title" value="SMT-COMP 2018 Results"
+--><!--#include virtual="smt-comp-prelude.shtml" -->
+
+<p>
+Individual results pages can be found from this list:
+<ul>
+<li><a href="results-control.shtml?v=DDD">Auto-cycle through all pages</a>
+<li>Summary (<a href="results-summary.shtml?v=DDD">main
+    track</a>, <a href="results-app-summary.shtml?v=DDD">application
+    track</a>, <a href="results-ucore-summary.shtml?v=DDD">unsat core
+    track</a>)
+
+<li>Competition-Wide Scoring
+  (<a href="results-competition-main.shtml?v=DDD">main
+  track</a>)
+
+
+<li>ABVFP (<a href="results-ABVFP.shtml?v=DD">main track</a>,<a href="results-ABVFP-app.shtml?v=DD">application track</a>)
+<li>ALIA (<a href="results-ALIA.shtml?v=DDD">main track</a>, 
+  <a href="results-ALIA-app.shtml?v=DDD">application track</a>, <a href="results-ALIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>ANIA (<a href="results-ANIA-app.shtml?v=DDD">application track</a>)
+
+<li>AUFBVDTLIA (<a href="results-AUFBVDTLIA.shtml?v=DDD">main track</a>,<a href="results-AUFBVDTLIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>AUFDTLIA (<a href="results-AUFDTLIA.shtml?v=DDD">main track</a>,<a href="results-AUFDTLIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>AUFLIA (<a href="results-AUFLIA.shtml?v=DDD">main track</a>, 
+  <a href="results-AUFLIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>AUFLIRA (<a href="results-AUFLIRA.shtml?v=DDD">main track</a>, <a href="results-AUFLIRA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>AUFNIRA (<a href="results-AUFNIRA.shtml?v=DDD">main track</a>, <a href="results-AUFNIRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>BV (<a href="results-BV.shtml?v=DDD">main track</a>, <a href="results-BV-app.shtml?v=DDD">application track</a>, <a href="results-BV-ucore.shtml?v=DDD">unsat core track</a>)
+<li>BVFP (<a href="results-BVFP.shtml?v=DDD">main track</a>,<a href="results-BVFP-app.shtml?v=DDD">application track</a>)
+<li>FP (<a href="results-FP.shtml?v=DDD">main track</a>)
+<li>LIA (<a href="results-LIA.shtml?v=DDD">main track</a>, <a href="results-LIA-app.shtml?v=DDD">application
+track</a>,  <a href="results-LIA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>LRA (<a href="results-LRA.shtml?v=DDD">main track</a>,  <a href="results-LRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>NIA (<a href="results-NIA.shtml?v=DDD">main track</a>)
+
+<li>NRA (<a href="results-NRA.shtml?v=DDD">main track</a>,  <a href="results-NRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_ABV (<a href="results-QF_ABV.shtml?v=DDD">main track</a>, <a href="results-QF_ABV-app.shtml?v=DDD">application track</a>,   <a href="results-QF_ABV-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_ABVFP (<a href="results-QF_ABVFP.shtml?v=DDD">main track</a>,<a href="results-QF_ABVFP-app.shtml?v=DDD">application track</a>,<a href="results-QF_ABVFP-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_ALIA (<a href="results-QF_ALIA.shtml?v=DDD">main
+track</a>, <a href="results-QF_ALIA-app.shtml?v=DDD">application
+    track</a>,  <a href="results-QF_ALIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_ANIA (<a href="results-QF_ANIA.shtml?v=DDD">main
+track</a>, <a href="results-QF_ANIA-app.shtml?v=DDD">application
+    track</a>, <a href="results-QF_ANIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_AUFBV (<a href="results-QF_AUFBV.shtml?v=DDD">main track</a>, <a href="results-QF_AUFBV-app.shtml?v=DDD">application track</a>, <a href="results-QF_AUFBV-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_AUFLIA (<a href="results-QF_AUFLIA.shtml?v=DDD">main
+    track</a>, <a href="results-QF_AUFLIA-app.shtml?v=DDD">application
+    track</a>, <a href="results-QF_AUFLIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_AUFNIA (<a href="results-QF_AUFNIA.shtml?v=DDD">main track</a>, <a href="results-QF_AUFNIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_AX (<a href="results-QF_AX.shtml?v=DDD">main track</a>, <a href="results-QF_AX-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_BV (<a href="results-QF_BV.shtml?v=DDD">main
+track</a>, <a href="results-QF_BV-app.shtml?v=DDD">application
+    track</a>,  <a href="results-QF_BV-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_BVFP (<a href="results-QF_BVFP.shtml?v=DDD">main track</a>, <a href="results-QF_BVFP-app.shtml?v=DDD">application track</a>, <a href="results-QF_BVFP-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_DT (<a href="results-QF_DT.shtml?v=DD">main track</a>,<a href="results-QF_DT-ucore.shtml?v=DD">unsat core track</a>)
+
+<li>QF_FP (<a href="results-QF_FP.shtml?v=DDD">main track</a>, <a href="results-QF_FP-app.shtml?v=DDD">application track</a>, <a href="results-QF_FP-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_IDL (<a href="results-QF_IDL.shtml?v=DDD">main track</a>, <a href="results-QF_IDL-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_LIA (<a href="results-QF_LIA.shtml?v=DDD">main
+track</a>, <a href="results-QF_LIA-app.shtml?v=DDD">application
+    track</a>, <a href="results-QF_LIA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_LIRA (<a href="results-QF_LIRA.shtml?v=DDD">main track</a>, <a href="results-QF_LIRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_LRA (<a href="results-QF_LRA.shtml?v=DDD">main
+track</a>, <a href="results-QF_LRA-app.shtml?v=DDD">application
+track</a>, <a href="results-QF_LRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_NIA (<a href="results-QF_NIA.shtml?v=DDD">main
+track</a>, <a href="results-QF_NIA-app.shtml?v=DDD">application
+track</a>, <a href="results-QF_NIA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_NIRA (<a href="results-QF_NIRA.shtml?v=DDD">main track</a>, <a href="results-QF_NIRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_NRA (<a href="results-QF_NRA.shtml?v=DDD">main track</a>, <a href="results-QF_NRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_RDL (<a href="results-QF_RDL.shtml?v=DDD">main track</a>, <a href="results-QF_RDL-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_SLIA (<a href="results-QF_SLIA.shtml?v=DDD">main track</a>)
+<li>QF_UF (<a href="results-QF_UF.shtml?v=DDD">main track</a>, <a href="results-QF_UF-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_UFBV (<a href="results-QF_UFBV.shtml?v=DDD">main track</a>, <a href="results-QF_UFBV-app.shtml?v=DDD">application track</a>, <a href="results-QF_UFBV-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_UFIDL (<a href="results-QF_UFIDL.shtml?v=DDD">main track</a>, <a href="results-QF_UFIDL-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_UFLIA (<a href="results-QF_UFLIA.shtml?v=DDD">main
+track</a>, <a href="results-QF_UFLIA-app.shtml?v=DDD">application
+track</a>, <a href="results-QF_UFLIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_UFLRA (<a href="results-QF_UFLRA.shtml?v=DDD">main
+track</a>, <a href="results-QF_UFLRA-app.shtml?v=DDD">application
+    track</a>, <a href="results-QF_UFLRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>QF_UFNIA (<a href="results-QF_UFNIA.shtml?v=DDD">main
+track</a>, <a href="results-QF_UFNIA-app.shtml?v=DDD">application
+    track</a>, <a href="results-QF_UFNIA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>QF_UFNRA (<a href="results-QF_UFNRA.shtml?v=DDD">main track</a>, <a href="results-QF_UFNRA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>UF (<a href="results-UF.shtml?v=DDD">main track</a>, <a href="results-UF-ucore.shtml?v=DDD">unsat core track</a>)
+<li>UFBV (<a href="results-UFBV.shtml?v=DDD">main track</a>, <a href="results-UFBV-ucore.shtml?v=DDD">unsat core track</a>)
+<li>UFDT (<a href="results-UFDT.shtml?v=DDD">main track</a>,<a href="results-UFDT-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>UFDTLIA (<a href="results-UFDTLIA.shtml?v=DDD">main track</a>)
+
+<li>UFIDL (<a href="results-UFIDL.shtml?v=DDD">main track</a>, <a href="results-UFIDL-ucore.shtml?v=DDD">unsat core track</a>)
+<li>UFLIA (<a href="results-UFLIA.shtml?v=DDD">main track</a>, <a href="results-UFLIA-ucore.shtml?v=DDD">unsat core track</a>)
+<li>UFLRA (<a href="results-UFLRA.shtml?v=DDD">main
+track</a>, <a href="results-UFLRA-app.shtml?v=DDD">application
+    track</a>, <a href="results-UFLRA-ucore.shtml?v=DDD">unsat core track</a>)
+
+<li>UFNIA (<a href="results-UFNIA.shtml?v=DDD">main track</a>, <a href="results-UFNIA-ucore.shtml?v=DDD">unsat core track</a>)
+</ul>
+</p>
+
+<!--#include virtual="smt-comp-postlude.shtml" -->

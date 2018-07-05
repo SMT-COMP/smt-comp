@@ -32,8 +32,10 @@ jobsunknown="16264"
 
 #rm  -rf results
 #mkdir results
-rm  -rf results-app
-mkdir results-app
+#rm  -rf results-app
+#mkdir results-app
+#rm -rf results-ucore
+#mkdir results-ucore
 
 
 dt=`date +%s`
@@ -43,10 +45,10 @@ wall=1200
 
 #echo "Main track"
 #./competition $dt $wall
-echo "App track"
-./compute_app_html $dt $wall
-echo "Ucore track"
-./compute_ucore_html $dt $wall
+#echo "App track"
+#./compute_app_html $dt $wall
+#echo "Ucore track"
+#./compute_ucore_html $dt $wall
 #echo "Exp track"
 #./compute_exp_html $dt $wall
 
