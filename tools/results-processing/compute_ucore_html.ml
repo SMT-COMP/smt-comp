@@ -201,13 +201,13 @@ let split_csv_line s =
 	  | "memory usage" -> c.memory_usage <- float_of_string v
 	  | "result" -> c.result <- result_of_string v
 	  | "expected" -> c.expected <- result_of_string v
-	  | "REVISED_result-is-erroneous" -> c.result_is_erroneous<- ((int_of_string v)=1)
+	  | "result-is-erroneous" -> c.result_is_erroneous<- ((int_of_string v)=1)
 	  | "parsable-unsat-core" -> if v <> "-" then c.parsable_unsat_core <- bool_of_string v
 	  | "size-unsat-core" -> 
 	    if v <> "-" then  c.size_unsat_core <- int_of_string v
 	  | "number-of-assert-commands" -> 
 	    c.number_of_assert_commands <- int_of_string v
-	  | "REVISED_reduction" -> c.reduction <- int_of_string v
+	  | "reduction" -> c.reduction <- int_of_string v
 	  | _ -> () 
       ) 
       col_names l;
