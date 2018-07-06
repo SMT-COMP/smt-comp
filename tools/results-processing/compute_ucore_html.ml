@@ -271,7 +271,7 @@ let solver_short_names =
 
 let test_filter s = 
   s = "mathsat-5.4.1-linux-x86_64-Unsat-Core" ||
-  s = "z3-4.5.0" 
+  s = "z3-4.7.1" 
 
 let filter_solvers l = 
   List.filter (fun (s,_) -> not (test_filter s)) l
@@ -690,7 +690,7 @@ let families =
 
 let non_competitive_solver s =
   s = "mathsat-5.5.2-linux-x86_64-Unsat-Core" ||
-  s = "z3-7.1.0"
+  s = "z3-4.7.1"
 
 let competitive_solvers_only l =
   List.filter (fun (s,_) -> not (non_competitive_solver s)) l

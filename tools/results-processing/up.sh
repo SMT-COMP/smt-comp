@@ -48,7 +48,7 @@ wall=1200
 #echo "App track"
 #./compute_app_html $dt $wall
 #echo "Ucore track"
-#./compute_ucore_html $dt $wall
+./compute_ucore_html $dt $wall
 #echo "Exp track"
 #./compute_exp_html $dt $wall
 
