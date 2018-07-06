@@ -58,7 +58,7 @@ exp:
 ##########
 
 clean:
-	rm -f *~ *.log *.aux *.cm* *.o
+	rm -f *~ *.log *.aux *.cm* *.o *.annot .depend *.byte
 
 dist-clean: clean
 	rm -f $(EXE) $(EXE).byte

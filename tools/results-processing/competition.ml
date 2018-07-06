@@ -285,6 +285,8 @@ let compute_prover_perfs d rsc_l =
   let remaining = ref 0 in
   let not_solved = ref nb_benchs in
   let not_solved_seq = ref nb_benchs in
+  let solved = ref 0 in
+  let solved_seq = ref 0 in
   let fnb = float nb_benchs in
   List.iter 
     (fun sc ->
@@ -303,6 +305,8 @@ let compute_prover_perfs d rsc_l =
       pp.w_pending <- pp.w_pending + sc.pending;
 
       remaining := pp.w_pending;
+      solved := !solved + sc.correct;
+      solved_seq := !solved + seq_sc.correct;
       not_solved := !not_solved - sc.correct;
       not_solved_seq := !not_solved_seq - seq_sc.correct
     )
@@ -322,6 +326,8 @@ let compute_prover_perfs d rsc_l =
     parall_perf = pp;
     not_solved = !not_solved ;
     not_solved_seq = !not_solved_seq ;
+    solved = !solved ;
+    solved_seq = !solved_seq ;
     remaining = !remaining ;  
   }
     

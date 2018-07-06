@@ -11,7 +11,7 @@ let month_of = function
   | 4 -> "May"  | 5 -> "Jun" | 6 -> "Jul" | 7 -> "Aug"
   | 8 -> "Sep"  | 9 -> "Oct" | 10 -> "Nov" | 11 -> "Dec"
   | _ -> assert false
-    
+
 let print_date fmt d = 
   fprintf fmt "%s %s %d %02d:%02d:%02d GMT" 
     (day_of d.Unix.tm_wday) 
@@ -73,12 +73,12 @@ let print_header_results fmt d =
 	fprintf fmt "<h3> Non-Competitive division </h3>"
       else
 	begin
-	  fprintf fmt "<h3>Winners: </h3>";
-	  fprintf fmt "<table>";
-	  fprintf fmt "<tr>
-                           <td>Sequential Performances</td>
-                           <td>Parallel Performances</td>
-                           </tr>";
+    fprintf fmt "<h3>Winners: </h3>\n";
+	  fprintf fmt "<table class=\"result\">\n";
+    fprintf fmt "<tr>";
+    fprintf fmt "<td>Sequential Performances</td>";
+    fprintf fmt "<td>Parallel Performances</td>";
+    fprintf fmt "</tr>\n";
 	  fprintf fmt 
 	    "<tr><td>%s</td><td>%s</td>" 
 	    (short_name d.winner_seq)
@@ -109,54 +109,62 @@ let compare_solver_names (n1, _) (n2, _) =
     eprintf "error : compare_solver_names not found %s | %s@." n1 n2; raise Not_found 
 
 let print_prover_line fmt d = 
-  fprintf fmt
-    "<style> 
-       table{ table-layout:fixed; border-collapse:collapse; 
-              border-spacing:0; border:1px solid black; } 
-             td { padding:0.5em; border: 1px solid black } </style>@.";
-  fprintf fmt "<table>\n";
-  fprintf fmt 
-    "<tr><td rowspan=\"2\">Solver</td>
-             <td colspan=\"3\" align=center>Sequential performance</td>
-             <td colspan=\"4\" align=center>Parallel performance</td>
-             <td colspan=\"2\" align=center>Unsolved benchmarks</td>
-         </tr>
-         <tr>
-             <td>Error Score</td>
-             <td>Correctly Solved Score</td>
-             <td>CPU time Score</td>
-
-             <td>Errors</td>
-             <td>Correct Score</td>
-             <td>CPU Score</td>
-             <td>WALL Score</td>
-
-             <td>Overall</td>
-             <td>In Sequential</td>
-         </tr>";
+  fprintf fmt "<h4>Sequential Performance</h4>\n\n";
+  fprintf fmt "<table class=\"result sorted\">\n";
+  fprintf fmt "<tr>\n";
+  fprintf fmt "  <th>Solver</th>\n";
+  fprintf fmt "  <th>Error Score</th>\n";
+  fprintf fmt "  <th>Correctly Solved Score</th>\n";
+  fprintf fmt "  <th>CPU time Score</th>\n";
+  fprintf fmt "  <th>Solved</th>\n";
+  fprintf fmt "  <th>Unsolved</th>\n";
+  fprintf fmt "</tr>";
   List.iter 
     (fun (p, i) ->
       fprintf fmt "<tr>\n";
-      fprintf fmt "<td>%a</td>\n" print_solver p;
+      fprintf fmt "  <td>%a</td>\n" print_solver p;
 
-      fprintf fmt "<td>%.3f</td>" i.seq_perf.w_error;
-      fprintf fmt "<td>%.3f</td>" i.seq_perf.w_correct;
-      fprintf fmt "<td>%.3f</td>" i.seq_perf.w_cpu;
+      fprintf fmt "  <td>%.3f</td>\n" i.seq_perf.w_error;
+      fprintf fmt "  <td>%.3f</td>\n" i.seq_perf.w_correct;
+      fprintf fmt "  <td>%.3f</td>\n" i.seq_perf.w_cpu;
 
+      fprintf fmt "<td>%d</td>\n" i.solved_seq;
+      fprintf fmt "<td>%d</td>\n" i.not_solved_seq;
+
+      fprintf fmt "</tr>"
+    )
+    (List.sort compare_solver_names d.table);
+  fprintf fmt "</table>\n";
+
+  fprintf fmt "<h4>Parallel Performance</h4>\n\n";
+  fprintf fmt "<table class=\"result sorted\">\n";
+  fprintf fmt "<tr>\n";
+  fprintf fmt "  <th>Solver</th>\n";
+  fprintf fmt "  <th>Error Score</th>\n";
+  fprintf fmt "  <th>Correctly Solved Score</th>\n";
+  fprintf fmt "  <th>CPU time Score</th>\n";
+  fprintf fmt "  <th>WALL time Score</th>\n";
+  fprintf fmt "  <th>Solved</th>\n" ;
+  fprintf fmt "  <th>Unsolved</th>\n" ;
+  fprintf fmt "</tr>";
+  List.iter 
+    (fun (p, i) ->
+      fprintf fmt "<tr>\n";
+      fprintf fmt "  <td>%a</td>\n" print_solver p;
+    
       fprintf fmt "<td>%.3f</td>" i.parall_perf.w_error;
       fprintf fmt "<td>%.3f</td>" i.parall_perf.w_correct;
       fprintf fmt "<td>%.3f</td>" i.parall_perf.w_cpu;
       fprintf fmt "<td>%.3f</td>" i.parall_perf.w_wall;
 
-
+      fprintf fmt "<td>%d</td>" i.solved;
       fprintf fmt "<td>%d</td>" i.not_solved;
-      fprintf fmt "<td>%d</td>" i.not_solved_seq;
 
       fprintf fmt "</tr>"
     )
     (List.sort compare_solver_names d.table);
   fprintf fmt "</table>\n"
-    
+
 let print_division d  = 
   printf "HERE\n";
   let res_name = results_dir^"/results-"^d.name^".shtml" in

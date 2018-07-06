@@ -21,6 +21,8 @@ type weighted_raw_score = {
 type perf = {
   seq_perf : weighted_raw_score ; 
   parall_perf : weighted_raw_score;
+  solved : int;
+  solved_seq : int;
   not_solved : int;
   not_solved_seq : int;
   remaining : int;
