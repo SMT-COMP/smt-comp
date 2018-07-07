@@ -306,7 +306,7 @@ let compute_prover_perfs d rsc_l =
 
       remaining := pp.w_pending;
       solved := !solved + sc.correct;
-      solved_seq := !solved + seq_sc.correct;
+      solved_seq := !solved_seq + seq_sc.correct;
       not_solved := !not_solved - sc.correct;
       not_solved_seq := !not_solved_seq - seq_sc.correct
     )
