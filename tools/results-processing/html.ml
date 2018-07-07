@@ -110,15 +110,15 @@ let compare_solver_names (n1, _) (n2, _) =
 
 let print_prover_line fmt d = 
   fprintf fmt "<h4>Sequential Performance</h4>\n\n";
-  fprintf fmt "<table class=\"result sorted\">\n";
-  fprintf fmt "<tr>\n";
+  fprintf fmt "<table id=\"sequential\" class=\"result sorted\">\n";
+  fprintf fmt "<thead><tr>\n";
   fprintf fmt "  <th>Solver</th>\n";
   fprintf fmt "  <th>Error Score</th>\n";
   fprintf fmt "  <th>Correctly Solved Score</th>\n";
   fprintf fmt "  <th>CPU time Score</th>\n";
   fprintf fmt "  <th>Solved</th>\n";
   fprintf fmt "  <th>Unsolved</th>\n";
-  fprintf fmt "</tr>";
+  fprintf fmt "</tr></thead>";
   List.iter 
     (fun (p, i) ->
       fprintf fmt "<tr>\n";
@@ -137,8 +137,8 @@ let print_prover_line fmt d =
   fprintf fmt "</table>\n";
 
   fprintf fmt "<h4>Parallel Performance</h4>\n\n";
-  fprintf fmt "<table class=\"result sorted\">\n";
-  fprintf fmt "<tr>\n";
+  fprintf fmt "<table id=\"parallel\" class=\"result sorted\">\n";
+  fprintf fmt "<thead><tr>\n";
   fprintf fmt "  <th>Solver</th>\n";
   fprintf fmt "  <th>Error Score</th>\n";
   fprintf fmt "  <th>Correctly Solved Score</th>\n";
@@ -146,7 +146,7 @@ let print_prover_line fmt d =
   fprintf fmt "  <th>WALL time Score</th>\n";
   fprintf fmt "  <th>Solved</th>\n" ;
   fprintf fmt "  <th>Unsolved</th>\n" ;
-  fprintf fmt "</tr>";
+  fprintf fmt "</tr></thead>";
   List.iter 
     (fun (p, i) ->
       fprintf fmt "<tr>\n";
