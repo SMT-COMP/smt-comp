@@ -204,11 +204,11 @@ module Html = struct
   let print_prover_line fmt d = 
       fprintf fmt "<table id=\"parallel\" class=\"result sorted\">\n"; 
       fprintf fmt 
-	"<thead><td >Solver</td>
-             <td>Error Score</td>
-             <td>Correctly Solved Score</td>
-             <td>avg. CPU time</td>
-             <td>avg. WALL time</td>
+	"<thead><th >Solver</th>
+             <th>Error Score</th>
+             <th>Correctly Solved Score</th>
+             <th>avg. CPU time</th>
+             <th>avg. WALL time</th>
          </tr></thead>";
       List.iter 
 	(fun (p, i) ->
@@ -220,7 +220,7 @@ module Html = struct
 	  fprintf fmt "<td>%.2f</td>" i.parall_perf.wall;
 	  fprintf fmt "</tr>"
 	)
-	(List.sort compare_solver_names d.table);
+  (List.sort compare_solver_names d.table);
       fprintf fmt "</table>\n"
 	
   let print_division d = 
