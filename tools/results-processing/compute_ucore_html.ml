@@ -359,11 +359,11 @@ let print_header_results fmt d =
             "<tr><td>%s</td><td>%s</td>"
             (List.assoc d.winner_seq solver_short_names)
             (List.assoc d.winner_par solver_short_names);
-          with Not_found -> printf "Missing %s\n" d.winner_seq; printf "Missing %s\n"  d.winner_par; raise Not_found;
-
           fprintf fmt "</table><p><p>";
 
           fprintf fmt "<h3>Result table<sup><a href=\"#fn1\">1</a></sup></h3>@.";
+          with Not_found -> printf "Missing %s\n" d.winner_seq; printf "Missing %s\n"  d.winner_par; raise Not_found;
+
         end
     end
 
