@@ -56,7 +56,8 @@ SMT-COMP 2018\\[3em]}
     \smallskip
 
     \begin{itemize}
-    \item TODO: Solver names in alphabetical order
+    \item Alt-Ergo, Boolector, Ctrl-Ergo, CVC4, OpenSMT, SPASS-SATT,
+      Yices
     \end{itemize}
 
     \vfill
@@ -139,9 +140,9 @@ SMT-COMP 2018\\[3em]}
     \node (maintrackscript) at (-4.1,0) {
       \begin{minipage}{23mm}
         \tiny
-        
+
         Main Track benchmark
-        
+
         \fbox{
           \parbox{20mm}{
             \strut\\
@@ -162,35 +163,35 @@ SMT-COMP 2018\\[3em]}
         }}
       \end{minipage}
     };
-    
+
     \node[anchor=west] at (-3.1,0) {
       $\left.\begin{array}{l}\\ \\ \\ \\ \\ \\\end{array}\right\}$
         \parbox{60mm}{any number of\\ {\footnotesize ${}$\quad \smtc{set-info}, \smtc{declare-sort}, \smtc{define-sort},\\ ${}$\quad \smtc{declare-fun}, \smtc{define-fun}, \smtc{assert}}\\
           commands}
     };
-    
+
     \node[anchor=west] at (-2.7,-1.5) {$\leftarrow$ one \smtc{check-sat} command};
-    
+
     \pause
-    
+
     \node (solveroutput) at (0,-3.2) {
       \begin{minipage}{40mm}
         {\tiny Solver output}
-        
+
         \fbox{\smtc{sat}} /
         \fbox{\smtc{unsat}}
       \end{minipage}
     };
     \draw[->, bend right, out=-90] (maintrackscript.south) to node[left,pos=0.25]{\footnotesize\textbf{timeout: 20 min}} (solveroutput.west);
-    
+
     \pause
-    
+
     \node[fill=white,draw=red, line width=1mm, anchor=west] (scoring) at (-6.3,-.5) {
       \begin{minipage}{99mm}
         Scoring
-        
+
         \medskip
-        
+
         \begin{tabular}{ll}
           n = 1 & if the solver correctly responds \smtc{sat} or \smtc{unsat}\\
           e = 1 & if the solver incorrectly responds \smtc{sat} or \smtc{unsat}\\[.3em]
@@ -249,7 +250,7 @@ SMT-COMP 2018\\[3em]}
     }
 
     \pause
-    
+
     \node (timeout) at (1.8,-3) {
       \begin{minipage}{80mm}
         \centering
@@ -263,7 +264,7 @@ SMT-COMP 2018\\[3em]}
       \begin{minipage}{40mm}
         \tiny
 
-        \phantom{Application Track}\\
+        \phantom{Application Track\\}
         Solver input
 
         \fbox{
@@ -278,8 +279,8 @@ SMT-COMP 2018\\[3em]}
       \end{minipage}
     };
 
-    \draw[->, bend left, out=-50] (applicationtrackscript.east) to (solverinput1.west);
-    
+   \draw[->, bend left, out=-50] (applicationtrackscript.east) to (solverinput1.west);
+
     \pause
 
     \node (solveroutput1) at (5,0.7) {
@@ -294,7 +295,7 @@ SMT-COMP 2018\\[3em]}
     \draw[->] (solverinput1) to (solveroutput1.west);
 
     \pause
-    
+
     \node (solverinput2) at (0,0.125) {
       \begin{minipage}{40mm}
         \tiny
@@ -321,7 +322,7 @@ SMT-COMP 2018\\[3em]}
     \draw[->] (solverinput2) to (solveroutput2.west);
 
     \pause
-    
+
     \node (solverinput3) at (0,-0.58) {
       \begin{minipage}{40mm}
         \tiny
@@ -348,7 +349,7 @@ SMT-COMP 2018\\[3em]}
     \draw[->] (solverinput3) to (solveroutput3.west);
 
     \pause
-    
+
     \node (solverinput4) at (0,-1.285) {
       \begin{minipage}{40mm}
         \tiny
@@ -364,14 +365,14 @@ SMT-COMP 2018\\[3em]}
     };
 
     \pause
-    
+
     \node (solveroutput4) at (5,-1.5) {
       \begin{minipage}{40mm}
         \fbox{\smtc{sat}} /
         \fbox{\smtc{unsat}}
       \end{minipage}
     };
-    
+
     \draw[->] (solverinput4) to (solveroutput4.west);
 
     \pause
@@ -388,7 +389,7 @@ SMT-COMP 2018\\[3em]}
         }
       \end{minipage}
     };
-    
+
     \pause
 
     \node[fill=white, draw=red, line width=1mm] (scoring) at (0.15,0) {
@@ -440,7 +441,7 @@ SMT-COMP 2018\\[3em]}
       \begin{minipage}{46mm}
         \tiny
 
-        \phantom{Main Track benchmark}\\
+        \phantom{Main Track benchmark\\}
         Solver input
 
         \fbox{
@@ -463,7 +464,7 @@ SMT-COMP 2018\\[3em]}
         }}
       \end{minipage}
     };
-    
+
     \draw[->] (maintrackscript) to (solverinput);
 
     \pause
@@ -789,20 +790,24 @@ SMT-COMP 2018\\[3em]}
     \vfill
   \end{center}
 
-  that sent us slides.
+  that sent us slides:
 
   \vfill
 
   \begin{center}
-    TODO: Solver names in alphabetical order
+    Alt-Ergo, Boolector, Ctrl-Ergo, CVC4, \\ OpenSMT, SPASS-SATT, Yices
   \end{center}
 \end{frame}
 
 {
   \setbeamercolor{background canvas}{bg=}
-  %\includepdf[pages={1-}]{solvers/SolverA.pdf}
-  %\includepdf[pages={1-}]{solvers/SolverB.pdf}
-  %\includepdf[pages={1-}]{solvers/SolverC.pdf}
+  \includepdf[pages={1}]{solvers/Alt-Ctrl-Ergo.pdf}
+  \includepdf{solvers/Boolector.pdf}
+  \includepdf[pages={2}]{solvers/Alt-Ctrl-Ergo.pdf}
+  \includepdf{solvers/CVC4.pdf}
+  \includepdf{solvers/OpenSMT.pdf}
+  \includepdf{solvers/SPASS-SATT.pdf}
+  \includepdf{solvers/Yices.pdf}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -823,18 +828,55 @@ SMT-COMP 2018\\[3em]}
   \item 16 competitive divisions (out of 44)
   \end{itemize}
 
-  \bigskip\pause
+  \bigskip
 
-  \begin{center}
+  \only<1>{\begin{center}
     \begin{tabular}{lp{.7\textwidth}}
     Solver      & Divisions won \\ \hline \\[-1.5ex]
-    CVC4        & XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \\
+    CVC4        & \\
+    \\
     \\[-1.5ex]
-    SMTInterpol & XXXXX, XXXXX, XXXXX, XXXXX \\
+    SMTInterpol & \\
     \\[-1.5ex]
-    Yices-2.6.0 & XXXXX, XXXXX, XXXXX, XXXXX
+    Yices-2.6.0 & \\
+    \\
+    \\
     \end{tabular}
-  \end{center}
+  \end{center}}
+  \only<2>{\begin{center}
+    \begin{tabular}{lp{.7\textwidth}}
+    Solver      & Divisions won \\ \hline \\[-1.5ex]
+    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{p}$, QF\_RDL, QF\_UF \\
+    \\[-1.5ex]
+    SMTInterpol & \\
+    \\[-1.5ex]
+    Yices-2.6.0 & \\
+    \\
+    \\
+    \end{tabular}
+  \end{center}}
+  \only<3>{\begin{center}
+    \begin{tabular}{lp{.7\textwidth}}
+    Solver      & Divisions won \\ \hline \\[-1.5ex]
+    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{p}$, QF\_RDL, QF\_UF \\
+    \\[-1.5ex]
+    SMTInterpol & QF\_LIA, QF\_LRA, QF\_UFLIA \\
+    \\[-1.5ex]
+    Yices-2.6.0 & \\
+    \\
+    \\
+    \end{tabular}
+  \end{center}}
+  \only<4>{\begin{center}
+    \begin{tabular}{lp{.7\textwidth}}
+    Solver      & Divisions won \\ \hline \\[-1.5ex]
+    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{p}$, QF\_RDL, QF\_UF \\
+    \\[-1.5ex]
+    SMTInterpol & QF\_LIA, QF\_LRA, QF\_UFLIA \\
+    \\[-1.5ex]
+    Yices-2.6.0 & QF\_ABV, QF\_ALIA, QF\_AUFBV, QF\_AX, QF\_BV, QF\_LIRA$^\text{s}$, QF\_UFBV, QF\_UFIDL, QF\_UFLRA
+    \end{tabular}
+  \end{center}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -845,20 +887,72 @@ SMT-COMP 2018\\[3em]}
   \item 12 competitive divisions (out of 21)
   \end{itemize}
 
-  \bigskip\pause
+  \bigskip
 
-  \begin{center}
+  \only<1>{\begin{center}
     \begin{tabular}{lp{.7\textwidth}}
-    Solver      & Divisions won \\ \hline \\[-1.5ex]
-    Boolector   & XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \\
-    \\[-1.5ex]
-    CVC4        & XXXXX, XXXXX, XXXXX, XXXXX, \\
-    \\[-1.5ex]
-    SMTInterpol & XXXXX, XXXXX, XXXXX \\
-    \\[-1.5ex]
-    Yices-2.6.0 & XXXXX, XXXXX, XXXXX
+      Solver      & Divisions won \\ \hline \\[-1.5ex]
+      Boolector   & \\
+      \\[-1.5ex]
+      CVC4        & \\
+      \\[-1.5ex]
+      SMTInterpol & \\
+      \\[-1.5ex]
+      Yices-2.6.0 & \\
+      \\
     \end{tabular}
-  \end{center}
+  \end{center}}
+  \only<2>{\begin{center}
+    \begin{tabular}{lp{.7\textwidth}}
+      Solver      & Divisions won \\ \hline \\[-1.5ex]
+      Boolector   & QF\_ABV, QF\_UFBV\\
+      \\[-1.5ex]
+      CVC4        & \\
+      \\[-1.5ex]
+      SMTInterpol & \\
+      \\[-1.5ex]
+      Yices-2.6.0 & \\
+      \\
+    \end{tabular}
+  \end{center}}
+  \only<3>{\begin{center}
+    \begin{tabular}{lp{.7\textwidth}}
+      Solver      & Divisions won \\ \hline \\[-1.5ex]
+      Boolector   & QF\_ABV, QF\_UFBV\\
+      \\[-1.5ex]
+      CVC4        & QF\_NIA, QF\_UFNIA\\
+      \\[-1.5ex]
+      SMTInterpol & \\
+      \\[-1.5ex]
+      Yices-2.6.0 & \\
+      \\
+    \end{tabular}
+  \end{center}}
+  \only<4>{\begin{center}
+    \begin{tabular}{lp{.7\textwidth}}
+      Solver      & Divisions won \\ \hline \\[-1.5ex]
+      Boolector   & QF\_ABV, QF\_UFBV\\
+      \\[-1.5ex]
+      CVC4        & QF\_NIA, QF\_UFNIA\\
+      \\[-1.5ex]
+      SMTInterpol & QF\_ALIA, QF\_UFLIA\\
+      \\[-1.5ex]
+      Yices-2.6.0 & \\
+      \\
+    \end{tabular}
+  \end{center}}
+  \only<5>{\begin{center}
+    \begin{tabular}{lp{.7\textwidth}}
+      Solver      & Divisions won \\ \hline \\[-1.5ex]
+      Boolector   & QF\_ABV, QF\_UFBV\\
+      \\[-1.5ex]
+      CVC4        & QF\_NIA, QF\_UFNIA\\
+      \\[-1.5ex]
+      SMTInterpol & QF\_ALIA, QF\_UFLIA\\
+      \\[-1.5ex]
+      Yices-2.6.0 & QF\_AUFBV, QF\_AUFLIA, QF\_BV, QF\_LIA, QF\_LRA, QF\_UFLRA\\
+    \end{tabular}
+  \end{center}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -869,18 +963,19 @@ SMT-COMP 2018\\[3em]}
   \item 41 competitive divisions (out of 50)
   \end{itemize}
 
-  \bigskip\pause
-
+  \vspace{-.5cm}
+  
   \begin{center}
     \begin{tabular}{lp{.7\textwidth}}
-      Solver      & Divisions won \\ \hline \\[-1.5ex]
-      Boolector   & XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \\
-      \\[-1.5ex]
-      CVC4        & XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX \\
-      \\[-1.5ex]
-      SMTInterpol & XXXXX, XXXXX, XXXXX \\
-      \\[-1.5ex]
-      Yices-2.6.0 & XXXXX, XXXXX, XXXXX
+      Solver        & Divisions won \\ \hline
+      \uncover<2->{Boolector     & {\small QF\_ABV, QF\_BV$^\text{s}$, QF\_UFBV}}\\
+      \uncover<3->{COLIBRI       & {\small QF\_FP}}\\
+      \uncover<4->{CVC4          & {\small ALIA, AUFDTLIA, AUFLIA, AUFLIRA, AUFNIRA, BV, LIA, LRA, NIA, QF\_ABVFP, QF\_AUFBV, QF\_BVFP, QF\_LRA, QF\_NIA, UF$^\text{s}$, UFDT, UFDTLIA, UFIDL, UFLIA, UFLRA}}\\
+      \uncover<5->{Minkeyrink-MT & {\small QF\_BV$^\text{p}$}}\\
+      \uncover<6->{SMTRAT-Rat    & {\small QF\_NIRA}}\\
+      \uncover<7->{SPASS-SATT    & {\small QF\_LIA}}\\
+      \uncover<8->{Vampire       & {\small NRA, UF$^\text{p}$, UFNIA}}\\
+      \uncover<9->{Yices-2.6.0   & {\small QF\_ALIA, QF\_AUFLIA, QF\_AX, QF\_IDL, QF\_LIRA, QF\_NRA, QF\_RDL, QF\_UF, QF\_UFIDL, QF\_UFLIA, QF\_UFLRA, QF\_UFNIA, QF\_UFNRA}}
     \end{tabular}
   \end{center}
 \end{frame}
@@ -910,13 +1005,14 @@ SMT-COMP 2018\\[3em]}
   \end{itemize}
 
   \bigskip
+  \bigskip
 
   \begin{center}
     FLoC Olympic Games Award Ceremony
 
     \medskip
 
-    tomorrow at XX:XX in room L3 (Mathematical Institute)
+    tomorrow at 14:00 in room L3 (Mathematical Institute)
   \end{center}
 \end{frame}
 
