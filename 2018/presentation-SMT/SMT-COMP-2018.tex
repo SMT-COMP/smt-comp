@@ -847,7 +847,7 @@ SMT-COMP 2018\\[3em]}
   \only<2>{\begin{center}
     \begin{tabular}{lp{.7\textwidth}}
     Solver      & Divisions won \\ \hline \\[-1.5ex]
-    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{p}$, QF\_RDL, QF\_UF \\
+    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{par}$, QF\_RDL, QF\_UF \\
     \\[-1.5ex]
     SMTInterpol & \\
     \\[-1.5ex]
@@ -859,7 +859,7 @@ SMT-COMP 2018\\[3em]}
   \only<3>{\begin{center}
     \begin{tabular}{lp{.7\textwidth}}
     Solver      & Divisions won \\ \hline \\[-1.5ex]
-    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{p}$, QF\_RDL, QF\_UF \\
+    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{par}$, QF\_RDL, QF\_UF \\
     \\[-1.5ex]
     SMTInterpol & QF\_LIA, QF\_LRA, QF\_UFLIA \\
     \\[-1.5ex]
@@ -871,11 +871,11 @@ SMT-COMP 2018\\[3em]}
   \only<4>{\begin{center}
     \begin{tabular}{lp{.7\textwidth}}
     Solver      & Divisions won \\ \hline \\[-1.5ex]
-    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{p}$, QF\_RDL, QF\_UF \\
+    CVC4        & QF\_AUFLIA, QF\_IDL, QF\_LIRA$^\text{par}$, QF\_RDL, QF\_UF \\
     \\[-1.5ex]
     SMTInterpol & QF\_LIA, QF\_LRA, QF\_UFLIA \\
     \\[-1.5ex]
-    Yices-2.6.0 & QF\_ABV, QF\_ALIA, QF\_AUFBV, QF\_AX, QF\_BV, QF\_LIRA$^\text{s}$, QF\_UFBV, QF\_UFIDL, QF\_UFLRA
+    Yices-2.6.0 & QF\_ABV, QF\_ALIA, QF\_AUFBV, QF\_AX, QF\_BV, QF\_LIRA$^\text{seq}$, QF\_UFBV, QF\_UFIDL, QF\_UFLRA
     \end{tabular}
   \end{center}}
 \end{frame}
@@ -969,13 +969,13 @@ SMT-COMP 2018\\[3em]}
   \begin{center}
     \begin{tabular}{lp{.7\textwidth}}
       Solver        & Divisions won \\ \hline
-      \uncover<2->{Boolector     & {\small QF\_ABV, QF\_BV$^\text{s}$, QF\_UFBV}}\\
+      \uncover<2->{Boolector     & {\small QF\_ABV, QF\_BV$^\text{seq}$, QF\_UFBV}}\\
       \uncover<3->{COLIBRI       & {\small QF\_FP}}\\
-      \uncover<4->{CVC4          & {\small ALIA, AUFDTLIA, AUFLIA, AUFLIRA, AUFNIRA, BV, LIA, LRA, NIA, QF\_ABVFP, QF\_AUFBV, QF\_BVFP, QF\_LRA, QF\_NIA, UF$^\text{s}$, UFDT, UFDTLIA, UFIDL, UFLIA, UFLRA}}\\
-      \uncover<5->{Minkeyrink-MT & {\small QF\_BV$^\text{p}$}}\\
+      \uncover<4->{CVC4          & {\small ALIA, AUFDTLIA, AUFLIA, AUFLIRA, AUFNIRA, BV, LIA, LRA, NIA, QF\_ABVFP, QF\_AUFBV, QF\_BVFP, QF\_LRA, QF\_NIA, UF$^\text{seq}$, UFDT, UFDTLIA, UFIDL, UFLIA, UFLRA}}\\
+      \uncover<5->{Minkeyrink-MT & {\small QF\_BV$^\text{par}$}}\\
       \uncover<6->{SMTRAT-Rat    & {\small QF\_NIRA}}\\
       \uncover<7->{SPASS-SATT    & {\small QF\_LIA}}\\
-      \uncover<8->{Vampire       & {\small NRA, UF$^\text{p}$, UFNIA}}\\
+      \uncover<8->{Vampire       & {\small NRA, UF$^\text{par}$, UFNIA}}\\
       \uncover<9->{Yices-2.6.0   & {\small QF\_ALIA, QF\_AUFLIA, QF\_AX, QF\_IDL, QF\_LIRA, QF\_NRA, QF\_RDL, QF\_UF, QF\_UFIDL, QF\_UFLIA, QF\_UFLRA, QF\_UFNIA, QF\_UFNRA}}
     \end{tabular}
   \end{center}
