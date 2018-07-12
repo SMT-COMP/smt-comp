@@ -349,7 +349,7 @@ let print_header_results fmt d =
       else
         begin
           fprintf fmt "<h3>Winners: </h3>";
-          fprintf fmt "<table>";
+          fprintf fmt "<table class=\"result\">\n";
           fprintf fmt "<tr>
                            <td>Sequential Performances</td>
                            <td>Parallel Performances</td>
@@ -389,28 +389,16 @@ let print_header_results fmt d =
     compare n1 n2
 
 let print_prover_line fmt d =
-  fprintf fmt
-    "<style> 
-       table{ table-layout:fixed; border-collapse:collapse; 
-              border-spacing:0; border:1px solid black; } 
-             td { padding:0.5em; border: 1px solid black } </style>@.";
-  fprintf fmt "<table>\n";
-  fprintf fmt
-    "<tr><td rowspan=\"2\">Solver</td>
-             <td colspan=\"3\" align=center>Sequential performance</td>
-             <td colspan=\"4\" align=center>Parallel performance</td>
-         </tr>
-         <tr>
-             <td>Error Score</td>
-             <td>Reduction Score</td>
-             <td>avg. CPU time</td>
-
-             <td>Errors</td>
-             <td>Reduction Score</td>
-             <td>avg. CPU time</td>
-             <td>avg. WALL time</td>
-
-         </tr>";
+  fprintf fmt "<h4>Sequential Performance</h4>\n\n";
+  fprintf fmt "<table id=\"sequential\" class=\"result sorted\">\n";
+  fprintf fmt "<thead><tr>\n";
+  fprintf fmt "  <th>Solver</th>\n";
+  fprintf fmt "  <th>Error Score</th>\n";
+  fprintf fmt "  <th>Reduction Score</th>\n";
+  fprintf fmt "  <th>avg. CPU time</th>\n";
+  (*fprintf fmt "  <th>Solved</th>\n";*)
+  (*fprintf fmt "  <th>Unsolved</th>\n";*)
+  fprintf fmt "</tr></thead>";
   List.iter
     (fun (p, i) ->
       fprintf fmt "<tr>\n";
@@ -419,8 +407,25 @@ let print_prover_line fmt d =
       fprintf fmt "<td>%.3f</td>" i.seq_perf.w_error;
       fprintf fmt "<td>%.3f</td>" i.seq_perf.w_correct;
       fprintf fmt "<td>%.3f</td>" i.seq_perf.w_cpu;
-
-      fprintf fmt "<td>%.3f</td>" i.parall_perf.w_error;
+  )
+    (List.sort compare_solver_names d.table);
+  fprintf fmt "</table>\n";
+  fprintf fmt "<h4>Parallel Performance</h4>\n\n";
+  fprintf fmt "<table id=\"parallel\" class=\"result sorted\">\n";
+  fprintf fmt "<thead><tr>\n";
+  fprintf fmt "  <th>Solver</th>\n";
+  fprintf fmt "  <th>Error Score</th>\n";
+  fprintf fmt "  <th>Reduction Score</th>\n";
+  fprintf fmt "  <th>avg. CPU time</th>\n";
+  fprintf fmt "  <th>avg. WALL time</th>\n";
+  (*fprintf fmt "  <th>Solved</th>\n";*)
+  (*fprintf fmt "  <th>Unsolved</th>\n";*)
+  fprintf fmt "</tr></thead>";
+  List.iter
+    (fun (p, i) ->
+      fprintf fmt "<tr>\n";
+      fprintf fmt "<td>%a</td>\n" print_solver p;
+fprintf fmt "<td>%.3f</td>" i.parall_perf.w_error;
       fprintf fmt "<td>%.3f</td>" i.parall_perf.w_correct;
       fprintf fmt "<td>%.3f</td>" i.parall_perf.w_cpu;
       fprintf fmt "<td>%.3f</td>" i.parall_perf.w_wall;
@@ -429,6 +434,7 @@ let print_prover_line fmt d =
     )
     (List.sort compare_solver_names d.table);
   fprintf fmt "</table>\n"
+
 	
   let print_division d = 
     let res_name = results_dir^"/results-"^d.name^"-ucore.shtml" in
@@ -750,7 +756,8 @@ let summary () =
       let chan = open_out summary_name in
       let fmt = formatter_of_out_channel chan in
       Html.print_summary_header fmt ();
-      Hashtbl.iter (fun _ d -> Html.print_summary_division fmt d) divs;
+      let div_list = List.sort compare (Hashtbl.fold (fun k v acc ->  v :: acc) divs []) in
+      List.iter (Html.print_summary_division fmt) div_list;
       Html.print_summary_footer fmt ();
       fprintf fmt "@.";
       printf "@. Summary UCORE : OK\n@.";

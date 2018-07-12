@@ -46,7 +46,7 @@ wall=1200
 #echo "Main track"
 #./competition $dt $wall
 #echo "App track"
-#./compute_app_html $dt $wall
+./compute_app_html $dt $wall
 #echo "Ucore track"
 ./compute_ucore_html $dt $wall
 #echo "Exp track"

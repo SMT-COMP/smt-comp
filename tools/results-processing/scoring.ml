@@ -88,7 +88,7 @@ let solver_short_names =
 "STP-CMS-mt-2018","STP-CMS-mt-2018";
 "STP-CMS-st-2018","STP-CMS-st-2018";
 "STP-Riss-st-2018","STP-Riss-st-2018";
-"vampire-4.3-smt","vampire 4.3 (test)";
+"vampire-4.3-smt","Vampire 4.3";
 "veriT","veriT";
 "veriT+raSAT+Reduce","veriT+raSAT+Reduce";
 "Yices 2.6.0","Yices 2.6.0";

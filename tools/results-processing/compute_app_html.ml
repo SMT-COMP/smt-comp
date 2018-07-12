@@ -140,7 +140,7 @@ module Html = struct
                       border-spacing:0; border:1px solid black; } 
                       td { padding:0.25em; border: 1px solid black } </style>";
     
-    fprintf fmt "<p><table>
+    fprintf fmt "<p><table> 
                  <tr>
                  <td>Logic</td>
                  <td>Solvers</td>
@@ -202,22 +202,14 @@ module Html = struct
     compare n1 n2
 
   let print_prover_line fmt d = 
-    fprintf fmt
-      "<style> 
-       table{ table-layout:fixed; border-collapse:collapse; 
-              border-spacing:0; border:1px solid black; } 
-             td { padding:0.5em; border: 1px solid black } </style>@.";
-      fprintf fmt "<table>\n";
+      fprintf fmt "<table id=\"parallel\" class=\"result sorted\">\n"; 
       fprintf fmt 
-	"<tr><td rowspan=\"2\">Solver</td>
-             <td colspan=\"4\" align=center>Parallel performance</td>
-         </tr>
-         <tr>
+	"<thead><td >Solver</td>
              <td>Error Score</td>
              <td>Correctly Solved Score</td>
              <td>avg. CPU time</td>
              <td>avg. WALL time</td>
-         </tr>";
+         </tr></thead>";
       List.iter 
 	(fun (p, i) ->
 	  fprintf fmt "<tr>\n";
@@ -643,7 +635,8 @@ let summary () =
       let chan = open_out summary_name in
       let fmt = formatter_of_out_channel chan in
       Html.print_summary_header fmt ();
-      Hashtbl.iter (fun _ d -> Html.print_summary_division fmt d) divs;
+      let div_list = List.sort compare (Hashtbl.fold (fun k v acc ->  v :: acc) divs []) in
+      List.iter (Html.print_summary_division fmt) div_list;
       Html.print_summary_footer fmt ();
       fprintf fmt "@.";
       printf "@. Summary : OK\n@.";

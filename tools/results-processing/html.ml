@@ -166,7 +166,6 @@ let print_prover_line fmt d =
   fprintf fmt "</table>\n"
 
 let print_division d  = 
-  printf "HERE\n";
   let res_name = results_dir^"/results-"^d.name^".shtml" in
   try
     let chan = open_out res_name in
