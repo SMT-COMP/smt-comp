@@ -66,7 +66,7 @@ let print_competition_footer fmt () =
   fprintf fmt "<!--#include virtual=\"smt-comp-postlude.shtml\" -->"
 
 let print_header_results fmt d = 
-  fprintf fmt "<p><B>Benchmarks in this division : %d</B> @." d.nb_benchs;
+  fprintf fmt "<p><B>Benchmarks in this division : %d<br/>Time limit: 1200s</B> @." d.nb_benchs;
   if d.complete then
     begin
       if d.winner_seq = "No winner" then

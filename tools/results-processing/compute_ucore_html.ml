@@ -341,11 +341,11 @@ module Html = struct
     fprintf fmt "<!--#include virtual=\"smt-comp-postlude.shtml\" -->"
 
 let print_header_results fmt d =
-  fprintf fmt "<p><B>Benchmarks in this division : %d</B> @." (Hashtbl.length d.benchs);
+  fprintf fmt "<p><B>Benchmarks in this division : %d<br/>Time limit: 2400s</B> @." (Hashtbl.length d.benchs);
   if d.complete then
     begin
       if d.winner_seq = "No winner" then
-        fprintf fmt "<h3> Non-Competitive division </h3>"
+        fprintf fmt "<h3> Non-Competitive Division </h3>"
       else
         begin
           fprintf fmt "<h3>Winners: </h3>";

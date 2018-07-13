@@ -89,7 +89,7 @@ let solver_short_names =
     "SMTInterpol", "SMTInterpol";
     "Yices", "Yices2";
     "Z3", "z3-4.7.1";
-    "No winner", "No (competing) winner"
+    "No winner", "No (competing) Winner"
   ]
 
 let split_csv s = Str.split (Str.regexp ",") s
@@ -167,12 +167,14 @@ module Html = struct
 
   let print_header_results fmt d = 
     try
-    fprintf fmt "<p><B>Benchmarks in this division : %d</B> @." 
+    fprintf fmt "<p><B>Benchmarks in this division : %d<br/>Time limit: 2400s</B> @." 
       (Hashtbl.length d.benchs);
     if d.complete then
       begin
 	if d.winner_parall = "" then
-	  fprintf fmt "<h3> Non-Competitive division </h3>"
+	  fprintf fmt "<h3> Non-Competitive Division </h3>"
+  else if d.winner_parall = "No winner" then
+	  fprintf fmt "<h3> Non-Competitive Division </h3>"
 	else
 	  fprintf fmt 
 	    "<h3> Winner : %s </h3>" 
