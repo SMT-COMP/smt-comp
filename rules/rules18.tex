@@ -5,7 +5,7 @@
 \usepackage{fullpage}
 \usepackage{hyperref}
 
-\usepackage{draftwatermark}
+%\usepackage{draftwatermark}
 
 \hyphenation{data-types}
 
@@ -153,24 +153,6 @@ version,\footnote{Earlier versions of this document include
 SMT-COMP~2018.  The principal changes from the previous competition
 rules are the following:
 \begin{itemize}
-\item The organizers plan to recognize additional special
-  contributions.  These might include:
-  \begin{itemize}
-  \item Best application track solver (awarded based on a
-    competition-wide scoring for the application track)
-  \item Best unsat-core track solver (awarded based on a
-    competition-wide scoring for the unsat-core track)
-  \item Best complementary solver (awarded to the solver that performs
-    best when all benchmarks solved by the winning solver are removed)
-  \item Most unique solver (awarded to the solver that performs best
-    on benchmarks solved by only one solver)
-  \item The Prophet (awarded to the solver that performs best on
-    benchmarks with unknown status)
-  \item The 10 Second Wonder (awarded to the solver that would have
-    won if the time limit was 10 seconds)
-  \end{itemize}
-  The details are still being discussed and subject to change.
-
 \item The time limit per solver/benchmark pair is anticipated to be at
   most 20 minutes in the main track, and at most 40 minutes in the
   other tracks.  \emph{Rationale:} Already in 2017, the time limit for
@@ -185,17 +167,15 @@ rules are the following:
   post-processing of unsat-core track results considerably.
 
 \item In 2017, the competition featured experimental divisions for
-  benchmarks that use algebraic datatypes.  Provided the competition
-  tools can be enhanced in time to support datatypes, these divisions
-  may become regular (non-experimental) in 2018. \emph{Rationale:}
-  Algebraic datatypes are specified in the latest official release
-  (Version~2.6) of the SMT-LIB standard.
+  benchmarks that use algebraic datatypes.  These divisions will be
+  regular (non-experimental) in 2018. \emph{Rationale:} Algebraic
+  datatypes are specified in the latest official release (Version~2.6)
+  of the SMT-LIB standard.
   
-\item The competition may feature experimental divisions for
-  benchmarks that use strings, and for benchmarks that use
-  transcendental functions.  \emph{Rationale:} Corresponding theories
-  and benchmarks are expected to be added to SMT-LIB in the near
-  future.
+\item The competition will feature an experimental divisions for
+  benchmarks that use strings.  \emph{Rationale:} Corresponding
+  theories and benchmarks are expected to be added to SMT-LIB in the
+  near future.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -883,6 +863,20 @@ The organizers will also recognize the following contributions:
 %
 The organizers reserve the right to recognize other outstanding
 contributions that become apparent in the competition results.
+
+As part of the FLoC Olympic Games, Kurt G{\"o}del medals will be
+awarded to:
+%
+\begin{itemize}
+\item The best three solvers according to the competition-wide scoring
+  (main track);
+\item the solver that wins the most competitive divisions in the
+  application track;
+\item the solver that wins the most competitive divisions in the
+  unsat-core track;
+\item the solver that wins the QF\_BV division (separately for
+  parallel and sequential performance) in the main track.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
