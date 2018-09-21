@@ -5,6 +5,9 @@
 %\usepackage[pdf]{pstricks}
 %\usepackage{pst-tree}
 
+\usepackage{pifont}
+\usepackage{comment}
+
 %\input epsf
 \special{papersize=8.5in,11in}
 
@@ -12,6 +15,22 @@
 \ShortHeadings{The SMT Competition 2015--2018}
 {TODO et al.}
 \firstpageno{25}
+
+\specialcomment{tjark}{\begingroup\footnotesize\color{red}}{\color{black}\endgroup}
+\newcommand{\TODO}[0]{\textcolor{red}{TODO}}
+
+\renewcommand{\mark}[0]{\ding{51}}
+
+% TODO
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.7}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
@@ -55,8 +74,10 @@ Sweden}
 
 \maketitle
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{abstract}
-TODO
+\TODO
 \end{abstract}
 
 \keywords{SMT solver, SMT-COMP, SMT-LIB, Satisfiability Modulo Theories, competitions}
@@ -74,20 +95,351 @@ TODO
 %% contributions to the field, as well as discussions on lessons
 %% learned and suggestions for improvements for future competitions.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tjark}
+Changes 2015:
+\begin{itemize}
+\item All solvers will be run with $n=4$ cores available.  We will
+  recognize both best sequential and best parallel performance in all
+  main track divisions, using different CPU time limits.
+\item The division scoring will take time spent on unsolved benchmarks
+  into account.  Previous competitions only considered time spent on
+  solved benchmarks.  However, the number of solved benchmarks still
+  takes precedence over run-time.
+\item In addition to recognizing the best solver in each division, we
+  will recognize solvers that perform best according to
+  competition-wide criteria, emphasizing breadth of supported logics.
+  These criteria will be a refinement of the criteria used for the
+  FLoC Olympic Games medals in~2014.
+\item We plan to include new divisions for floating-point arithmetic.
+  These should be considered experimental in~2015, and will not be
+  included in the competition-wide ranking.
+\item We plan to run solvers on all eligible benchmarks.  Previous
+  competitions used a proper subset of eligible benchmarks, causing
+  competition results to be affected by a random selection process.
+\end{itemize}
+
+Changes 2016:
+\begin{itemize}
+\item Benchmarks will use (a subset of) version~2.5 of the SMT-LIB
+  language.  \emph{Rationale:} This is the latest version of the
+  SMT-LIB language.  It was released on 2015-06-28, and is largely
+  backwards-compatible to version~2.0, which was used for SMT-COMP
+  2015.
+\item Solver output may affect the score even when the solver does not
+  terminate within the time limit.  (In 2015, main track solver output
+  was ignored if the solver subsequently timed out.)  Solvers should
+  take care not to accidentally produce output that contains
+  \texttt{sat} or \texttt{unsat} even when they are killed.
+  \emph{Rationale:} Users are likely to trust solver responses even
+  when the solver continues to run for some time.
+\item Divisions for floating-point arithmetic are no longer
+  experimental, and will be considered competitive if the necessary
+  requirements (see Section~\ref{sec:scoring}) are met.
+  \emph{Rationale:} Floating-point divisions were experimental in
+  2015.  By now, their definition is sufficiently stable, and they are
+  supported by several solvers.
+\item Division scores will be based on a weighted sum of scores for
+  benchmark families.  \emph{Rationale:} For some years now, SMT-COMPs
+  have had sufficient computational resources to evaluate all solver
+  entrants on all eligible benchmarks.  As a side-effect, the
+  weighting of benchmark families that was achieved in early SMT-COMPs
+  through a careful selection of benchmarks (based on benchmark
+  difficulty and category) was lost.  Since there are vast differences
+  in size between benchmark families, we believe that a weighting that
+  de-emphasizes large benchmark families (see
+  Section~\ref{sec:division-scoring}) will lead to more meaningful
+  competition results.
+\item The unsat-core track that was introduced in SMT-COMP 2012, but
+  discontinued in 2013-2015 (partly because of the competition's move
+  to StarExec), is back.  It will be experimental in 2016; its results
+  will be reported, but no official winners will be announced.
+  \emph{Rationale:} Unsat cores are important in many applications of
+  SMT solving.  The track was discontinued primarily for
+  infrastructure and resource reasons.  We are pleased that we can
+  finally offer it again, but we ask for your understanding in case of
+  mishaps while we port the required tools.
+\item Best industrial performance will no longer be recognized
+  separately.  \emph{Rationale:} While there is agreement in the SMT
+  community to emphasize problems that come from real applications,
+  industrial performance largely coincided with overall performance in
+  SMT-COMP 2015.  We consider the effort to determine and report it
+  separately no longer justified.
+\end{itemize}
+
+Changes 2017:
+\begin{itemize}
+\item Submission of accompanying information for solvers is via a web
+  form (rather than by email to the organizers).  \emph{Rationale:}
+  Email submissions were often incomplete, leading to ambiguity and
+  further inquiries.  The form provides a more structured way of
+  submitting information.
+\item Benchmarks will use (a subset of) version~2.6 of the SMT-LIB
+  language.  \emph{Rationale:} This is the latest version of the
+  SMT-LIB language.  It is largely backwards-compatible with earlier
+  versions (in particular~2.0 and~2.5).
+\item Benchmarks that use partial bit-vector functions, such as
+  \texttt{bvudiv}, or underspecified floating-point functions, such as
+  \texttt{fp.min}, will be eligible for the competition again.
+  \emph{Rationale:} A conclusion on the semantics of these functions
+  has finally been reached, and the status of affected SMT-LIB
+  benchmarks has been updated accordingly.
+\item Benchmarks with unknown status will be eligible for the
+  competition's main track.  In 2016, solver performance on benchmarks
+  with unknown status was evaluated but reported separately; in 2017,
+  it will directly affect the competition results.  \emph{Rationale:}
+  Using only benchmarks with known status (i.e., benchmarks that have
+  been solved before) to determine the competition results unjustly
+  favors imitation of existing solvers over true innovation.
+\item In the competition-wide scoring, the (per-division) penalty for
+  erroneous results is changed from the number of errors to a fixed
+  constant (multiplied by the weight of the respective division).
+  \emph{Rationale:} The weight already takes the number of benchmarks
+  in the division into account; multiplying it by the number of errors
+  overemphasizes large divisions.
+\item The unsat-core track, which was re-introduced in 2016, is no
+  longer experimental.  Its divisions will be considered competitive
+  if the necessary requirements (see Section~\ref{sec:scoring}) are
+  met.  \emph{Rationale:} Rules and tool support for the unsat-core
+  track proved sufficiently stable in 2016.
+\item The competition will feature experimental divisions for
+  benchmarks that use algebraic datatypes.  \emph{Rationale:}
+  Algebraic datatypes are specified in the draft SMT-LIB~2.6 standard,
+  which is expected to become official in the near future, and are
+  already supported by some solvers.  Benchmarks that use datatypes
+  have recently been added to SMT-LIB.
+\end{itemize}
+
+Changes 2018:
+\begin{itemize}
+\item The time limit per solver/benchmark pair is anticipated to be at
+  most 20 minutes in the main track, and at most 40 minutes in the
+  other tracks.  \emph{Rationale:} Already in 2017, the time limit for
+  the main track was reduced to 20 minutes (down from 40 minutes in
+  earlier years) to cope with the inclusion of a large number of
+  benchmarks with unknown status.
+\item In the unsat-core track, the unsatisfiability check for the
+  returned core will be based on a simple majority vote.  The case
+  that a solver finds its own core satisfiable will no longer be
+  treated specially.  \emph{Rationale:} This allows to simplify the
+  post-processing of unsat-core track results considerably.
+\item In 2017, the competition featured experimental divisions for
+  benchmarks that use algebraic datatypes.  These divisions will be
+  regular (non-experimental) in 2018. \emph{Rationale:} Algebraic
+  datatypes are specified in the latest official release (Version~2.6)
+  of the SMT-LIB standard.
+\item The competition will feature an experimental divisions for
+  benchmarks that use strings.  \emph{Rationale:} Corresponding
+  theories and benchmarks are expected to be added to SMT-LIB in the
+  near future.
+\end{itemize}
+\end{tjark}
+
 \section{Introduction}
 \label{sec:intro}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The Competition Goals and Organization}
 \label{sec:goals}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{SMT-LIB Logic, Language and Solvers}
 \label{sec:context}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Competition Divisions and Benchmarks}
 \label{sec:benchmarks}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Participants}
 \label{sec:participants}
+
+Participants must upload their solvers to StarExec (see
+Section~\ref{sec:starexec}) to enter them into the competition, and
+additionally submit information about each competing solver---such as
+the tracks and divisions into which the solver is being entered---to
+the competition organizers.  Until 2016, this information was
+collected by email.  Since 2017, a web form is being used for this
+purpose.  This has greatly reduced the number of incomplete or
+ambiguous submissions.
+
+Table~\ref{table:participants} lists the solvers that participated
+between~2015 and~2018, together with their submitter(s) and
+institutional affiliations (which may have changed over time).  Note
+that most solvers were developed by a group of people; the table does
+not list all contributors but only submitters.
+%
+Participants are also encouraged to submit a short system description
+of their solver, including a list of its authors and an explanation of
+the SMT solving approach used.  System descriptions are published on
+the SMT-COMP website~\cite{smtcomp-web}.  They were submitted for
+about 60\,\% of all solver versions since 2015.
+
+\begin{table}
+  \caption{Participants (2015--2018)}
+  \label{table:participants}
+  \centering
+  \begin{tabular}{|l|p{13cm}|} %TODO: fix width
+    \hline
+    Solver & Submitters (Affiliations)\\
+    \hline
+    ABC [\TODO]       & Valera Balabanov
+                        (Mentor Graphics)\\
+    Alt-Ergo          & Albin Coquereau
+                        (CNRS and University of Paris-Sud)\\
+    AProVE            & Carsten Fuhs
+                        (University College London; Birkbeck, University of London)\\
+    Boolector         & Mathias Preiner
+                        (Johannes Kepler University)\\
+    COLIBRI           & Fran\c{c}ois Bobot
+                        (French Alternative Energies and Atomic Energy Commission)\\
+    Ctrl-Ergo         & Mohamed Iguernlala
+                        (CNRS and University of Paris-Sud)\\
+    CVC3              & Kshitij Bansal
+                        (New York University)\\
+    CVC4              & Kshitij Bansal, Clark Barrett, Andres N\"otzli, Duligur Ibeling
+                        (New York University; Stanford University)\\
+    MapleSTP          & Jimmy Liang
+                        (University of Waterloo)\\
+    MinkeyRink        & Trevor Hansen
+                        (University of Melbourne)\\
+    OpenSMT2          & Matteo Marescotti, Antti Hyv\"arinen
+                        (University of Lugano)\\
+    ProB              & Sebastian Krings
+                        (University of D\"usseldorf)\\
+    Q3B               & Martin Jon\'a\v{s}
+                        (Masaryk University)\\
+    raSAT             & Tung Vu Xuan
+                        (Japan Advanced Institute of Science and Technology)\\
+    Redlog            & Haniel Barbosa
+                        (Inria Nancy)\\
+    SMT-RAT           & Florian Corzilius, Gereon Kremer
+                        (RWTH Aachen University)\\
+    SMTInterpol       & J\"urgen Christ
+                        (University of Freiburg)\\
+    SPASS-SATT        & Martin Bromberger
+                        (Max Planck Institute for Informatics)\\
+    STP               & Mate Soos, Trevor Hansen, Norbert Manthey
+                        (National University of Singapore; University of Melbourne; Amazon Web Services)\\
+    toysmt            & Masahiro Sakai
+                        (\TODO)\\
+    Vampire           & Giles Reger
+                        (University of Manchester)\\
+    veriT             & David D\'eharbe, Haniel Barbosa, Hans-J\"org Schurr
+                        (Federal University of Rio Grande do Norte; Inria Nancy)\\
+    XSat              & Martin Velez
+                        (University of California, Davis)\\
+    Yices2            & Bruno Dutertre, Dejan Jovanovi\'c
+                        (SRI International)\\
+    Z3                & Christoph Wintersteiger, Aleksandar Zelji\'c
+                        (Microsoft Research; Uppsala University)\\
+    \hline
+  \end{tabular}  
+\end{table}
+
+Many of these solvers were submitted in multiple years.  Additionally,
+to promote a wide comparison between tools, developers are allowed to
+submit multiple versions of a solver, e.g., for different competition
+tracks or with differently tuned internal components.
+Table~\ref{table:participants-history} shows in more detail how many
+versions of each solver were submitted in each year.
+
+\begin{table}
+  \caption{Number of versions submitted for each solver (by year).
+    Numbers in square brackets indicate solver versions that were
+    participating hors concours.}
+  \label{table:participants-history}
+  \centering
+  \begin{tabular}{|l|r@{\,\,}r|r@{\,\,}r|r@{\,\,}r|r@{\,\,}r|}
+    \hline
+    Solver & \multicolumn{2}{c|}{2015} & \multicolumn{2}{c|}{2016} & \multicolumn{2}{c|}{2017} & \multicolumn{2}{c|}{2018} \\
+    \hline
+    ABC               &    &      &  2 &      &    &      &    &      \\
+    Alt-Ergo          &    &      &    &      &    &      &  1 &      \\
+    AProVE            &  1 &      &  1 &      &  1 &      &  1 &      \\
+    Boolector         &  3 & [+1] &  2 &      &  2 &      &  2 &      \\
+    COLIBRI           &    &      &    &      &  1 &      &  1 &      \\
+    Ctrl-Ergo         &    &      &    &      &    &      &  1 &      \\
+    CVC3              &  2 &      &    &      &    &      &    &      \\
+    CVC4              &  4 &      &  1 & [+1] &  3 &      &  3 & [+1] \\
+    MapleSTP          &    &      &  4 &      &    &      &    &      \\
+    {[}MathSAT{]}     &    & [+2] &    & [+3] &    & [+3] &    & [+3] \\
+    MinkeyRink        &    &      &  1 &      &  1 &      &  2 &      \\
+    OpenSMT2          &  2 &      &  1 &      &  1 &      &    & [+1] \\
+    ProB              &    &      &  1 &      &    &      &    &      \\
+    Q3B               &    &      &  1 &      &  1 &      &  1 &      \\
+    raSAT             &  1 &      &  2 &      &    &      &    &      \\
+    Redlog            &    &      &    &      &  1 &      &    &      \\
+    SMT-RAT           &  2 &      &  1 &      &  1 &      &  2 &      \\
+    SMTInterpol       &  1 &      &  1 &      &  1 &      &  1 &      \\
+    SPASS-SATT        &    &      &    &      &    &      &  1 &      \\
+    STP               &  4 &      &  8 &      &  2 &      &  3 &      \\
+    toysmt            &    &      &  1 &      &    &      &    &      \\
+    Vampire           &    &      &  2 &      &  1 &      &  1 &      \\
+    veriT             &  1 &      &  1 &      &  3 &      &  2 &      \\
+    XSat              &    &      &    &      &  1 &      &    &      \\
+    Yices2            &  3 &      &  2 &      &  2 &      &  3 &      \\
+    Z3                &  2 & [+1] &    & [+1] &    & [+1] &    & [+1] \\
+    \hline
+    Total             & 26 & [+4] & 32 & [+5] & 22 & [+4] & 25 & [+6] \\
+    \hline
+  \end{tabular}
+\end{table}
+
+In addition to the solvers that were submitted to the competition by
+their respective developers, the organizers included the most recent
+stable versions of MathSAT and Z3 for comparison purposes.  Both
+solvers are strong tools, but---except for two experimental versions
+of Z3 in 2015---their development teams chose not to prepare
+competition versions.  These solvers were therefore participating hors
+concours.  Moreover, in 2015 a bug was discovered in the application
+track version of Boolector and a fixed version was submitted after the
+deadline; in 2016, the CVC4 team did not enter their solver into the
+application track; and in 2018, an experimental version of CVC4 as
+well as the OpenSMT2 solver were submitted after the deadline.  These
+solvers were also participating hors concours.  In result tables, they
+are listed with their name in square brackets (e.g., [MathSAT]).
+
+Table~\ref{table:participation-by-track} summarizes these figures and
+shows how many solver versions were submitted to each track of the
+competition.  Note that solver versions may be entered into multiple
+tracks.  Therefore, the total number of solver versions for each year
+is typically less than the sum over all tracks.
+
+By number of solver versions submitted, the competitions in 2015--2018
+were the four largest in the history of SMT-COMP.  On average, 26
+solver versions were submitted each year since 2015.  In contrast, the
+competitions from 2005--2014 only received an average of 12
+submissions~\cite{smtcomp-2014}.
+
+\begin{table}
+  \caption{Participation by track and year.  Numbers in square
+    brackets indicate solver versions that were participating hors
+    concours.}
+  \label{table:participation-by-track}
+  \centering
+  \begin{tabular}{|l|r@{\,\,}r|r@{\,\,}r|r@{\,\,}r|r@{\,\,}r|}
+    \hline
+                      & \multicolumn{2}{c|}{2015} & \multicolumn{2}{c|}{2016} & \multicolumn{2}{c|}{2017} & \multicolumn{2}{c|}{2018} \\
+    \hline
+    Main track        & 21 &                [+2] & 25 & [+2] & 19 & [+2] & 20 & [+4] \\
+    Application track & 10 &                [+3] &  8 & [+3] &  4 & [+2] &  4 & [+2] \\
+    Unsat-core track  & \multicolumn{2}{c|}{---} &  1 & [+4] &  2 & [+2] &  3 & [+2] \\
+    \hline
+    Total             & 26 &                [+4] & 32 & [+5] & 22 & [+4] & 25 & [+6] \\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+
+
+
 
 \section{Competition Procedure}
 \label{sec:procedure}
@@ -104,13 +456,28 @@ TODO
 \section{FLoC Olympic Games Scoring}
 \label{sec:floc}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Post-Competition Activity}
 \label{sec:post}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Concluding Observations and Recommendations}
 \label{sec:conclusions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibliographystyle{plainbv}
 %\bibliography{SMT-COMP}
 
 \end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Local Variables:
+% ispell-local-dictionary: "american"
+% mode: LaTeX
+% mode: flyspell
+% LocalWords: concours hors satisfiability SMT Tjark
+% End:
