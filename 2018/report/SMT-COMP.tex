@@ -244,6 +244,67 @@ Changes 2018:
 \section{The Competition Goals and Organization}
 \label{sec:goals}
 
+The SMT Competition is organized under the direction of the SMT
+Steering Committee, which appoints the competition chair.  This
+appointment should happen ``within 30 days from the end of the current
+edition of the SMT workshop''~\cite{smt-bylaws} but in practice has
+often happened later.  It is then up to the competition chair to
+assemble a team of organizers, and to distribute the work for the next
+competition.
+
+Each year, the SMT Workshop includes a block of time to present the
+competitors and results of the competition.  The workshop is
+affiliated with a different conference each year: with CAV in 2015,
+with IJCAR in 2016, again with CAV in 2017, and with FLoC in 2018.
+Consequently, its date varies by several weeks.  Competition results
+were presented on July~19 in 2015, on July~2 in 2016, on July~23 in
+2017, and on July~13 in 2018.
+
+Important deadlines are effectively determined by calculating
+backwards from the date of the next SMT Workshop.  The competition's
+computational workload should be completed approximately two weeks
+before the workshop date, to give participants and other parties a
+chance to scrutinize the data for errors, allow partial re-runs of
+competition jobs if necessary, and give the organizers time to prepare
+the results presentation.  While making all data publicly available
+well in advance of the official results presentation may impact the
+suspense, it has on several occasions helped to uncover serious
+problems with the competition tools or the StarExec framework (see
+Section~\ref{sec:starexec}) that could have led to invalid results if
+they had gone unnoticed.
+\begin{tjark}
+  Discuss these issues somewhere, add (forward?) reference here.
+\end{tjark}
+
+It takes up to three weeks to run all competition jobs on the StarExec
+cluster, so the final submission deadline for solvers needs to be
+about five weeks before the workshop date.  The competition imposes a
+separate deadline for first versions of solvers about seven weeks
+before the workshop date.  This deadline has proved useful for the
+organizers to obtain an accurate estimate on the number of competing
+solvers, and to run preliminary tests with some of the submitted
+solvers to identify potential issues.  Participants can still make
+changes to their solver until the final deadline but are encouraged to
+use this period for bug-fixing only.
+
+Around the initial solver deadline, the organizers also aim to publish
+the latest version of the competition tools, and--in collaboration
+with the SMT-LIB maintainers--to release a new version of the SMT
+Library.
+
+\begin{tjark}
+  WIP
+
+  Also: Call for Comments in February/March\\
+  Draft rules in April
+   
+  SMT-LIB release dates:\\
+  2015-06-01 (vs. 06-01)\\
+  2016-05-23 (vs. 05-15)\\
+  2017-06-05 (vs. 06-04)\\
+  2018-05-20 (vs. 05-27)
+\end{tjark}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{SMT-LIB Logic, Language and Solvers}
