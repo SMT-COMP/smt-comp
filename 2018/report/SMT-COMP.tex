@@ -13,7 +13,7 @@
 
 \jsatheading{1}{2004}{25-30}
 \ShortHeadings{The SMT Competition 2015--2018}
-{TODO et al.}
+{Weber et al.}
 \firstpageno{25}
 
 \specialcomment{tjark}{\begingroup\footnotesize\color{red}}{\color{black}\endgroup}
@@ -36,48 +36,53 @@
 
 \title{The SMT Competition 2015--2018}
 
-\author{\name{Sylvain Conchon (co-organizer, 2015--2016)}
-\email{Sylvain.Conchon@lri.fr} \\
-\addr Affiliation \\
-City \\
-Country
-\AND
-\name{David D\'{e}harbe (co-organizer, 2015--2016)}
-\email{david@dimap.ufrn.br} \\
-\addr Federal University of Rio Grande do Norte \\
-Natal \\
-Brazil
-\AND
-\name{Matthias Heizmann (co-organizer, 2016--2018)}
-\email{heizmann@informatik.uni-freiburg.de} \\
-\addr Affiliation \\
-City \\
-Country
-\AND
-\name{Aina Niemetz (co-organizer, 2018)}
-\email{niemetz@cs.stanford.edu} \\
-\addr Affiliation \\
-City \\
-Country
-\AND
-\name{Giles Reger (co-organizer, 2017--2018)}
-\email{giles.reger@manchester.ac.uk} \\
-\addr Affiliation \\
-City \\
-Country
-\AND
-\name{Tjark Weber (competition chair, 2015--2018)}
-\email{tjark.weber@it.uu.se} \\
-\addr Uppsala University \\
-Uppsala \\
-Sweden}
+\author{%
+  \name{Tjark Weber (competition chair, 2015--2018)}
+  \email{tjark.weber@it.uu.se} \\
+  \addr Uppsala University \\
+  Uppsala \\
+  Sweden
+  \AND
+  \name{Sylvain Conchon (co-organizer, 2015--2016)}
+  \email{Sylvain.Conchon@lri.fr} \\
+  \addr Affiliation \\
+  City \\
+  Country
+  \AND
+  \name{David D\'{e}harbe (co-organizer, 2015--2016)}
+  \email{david@dimap.ufrn.br} \\
+  \addr Federal University of Rio Grande do Norte \\
+  Natal \\
+  Brazil
+  \AND
+  \name{Matthias Heizmann (co-organizer, 2016--2018)}
+  \email{heizmann@informatik.uni-freiburg.de} \\
+  \addr Affiliation \\
+  City \\
+  Country
+  \AND
+  \name{Aina Niemetz (co-organizer, 2018)}
+  \email{niemetz@cs.stanford.edu} \\
+  \addr Affiliation \\
+  City \\
+  Country
+  \AND
+  \name{Giles Reger (co-organizer, 2017--2018)}
+  \email{giles.reger@manchester.ac.uk} \\
+  \addr Affiliation \\
+  City \\
+  Country}
 
 \maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{abstract}
-\TODO
+  The International Satisfiability Modulo Theories Competition is an
+  annual competition between Satisfiability Modulo Theories solvers.
+  We report on the design and selected results of the competition
+  during the last FLoC Olympiad, from 2015 to 2018. \TODO: some
+  notable observations/conclusions?
 \end{abstract}
 
 \keywords{SMT solver, SMT-COMP, SMT-LIB, Satisfiability Modulo Theories, competitions}
@@ -238,6 +243,47 @@ Changes 2018:
 
 \section{Introduction}
 \label{sec:intro}
+
+Satisfiability Modulo Theories (SMT) is a generalization of Boolean
+satisfiability (SAT), the satisfiability decision problem for
+propositional logic.  In place of Boolean variables, SMT formulas may
+contain terms that are built from function and predicate symbols drawn
+from a number of background theories.  Background theories, which are
+typically motivated by application areas, include the theory of
+arrays, integer and real arithmetic, bit-vectors, and floating-point
+numbers among others.  For instance, the following is an SMT formula
+over the combination of integer arithmetic and uninterpreted
+functions:
+$$TODO$$
+Software tools to determine the satisfiability of such formulas are
+called SMT solvers.
+
+Internally, many SMT solvers employ SAT solving techniques to deal
+with the propositional structure of the formula, and combine these
+with (semi-)decision procedures for the background theories that the
+solver supports~\cite{TODO,TODO,TODO}.  Historically, SMT solvers have
+focused on quantifier-free formulas and decidable combinations of
+background theories.  Increasingly, however, SMT solvers also support
+quantified formulas.  Hence there is overlap between SMT solving and
+automated theorem proving for quantified Boolean formulas (QBF),
+first-order logic, and even higher-order logic~\cite{TODO}.
+
+The International Satisfiability Modulo Theories Competition
+(SMT-COMP) is an annual competition between SMT solvers.  It is
+affiliated with the International Workshop on Satisfiability Modulo
+Theories.  Solvers are submitted to the competition by their
+developers, and pitted against each other in a number of tracks and
+divisions.  The SMT Competition was part of the Federated Logic
+Conference (FLoC) Olympic Games in~2014, and again in~2018.  It was
+last described in a 2014 competition report~\cite{TODO}.  In this
+paper, we report on the design and selected results of the competition
+during the last FLoC Olympiad, from 2015 to 2018.
+
+\begin{tjark}
+  WIP
+
+  structure of the paper
+\end{tjark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
