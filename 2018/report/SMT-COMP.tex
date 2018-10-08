@@ -79,10 +79,12 @@
 
 \begin{abstract}
   The International Satisfiability Modulo Theories Competition is an
-  annual competition between Satisfiability Modulo Theories solvers.
-  We report on the design and selected results of the competition
-  during the last FLoC Olympiad, from 2015 to 2018. \TODO: some
-  notable observations/conclusions?
+  annual competition between Satisfiability Modulo Theories~(SMT)
+  solvers.  The 2018 edition of the competition was part of the FLoC
+  Olympic Games, which comprised 14 competitions in various areas of
+  computational logic.  We report on the design and selected results
+  of the SMT Competition during the last FLoC Olympiad, from 2015 to
+  2018. \TODO: some notable observations/conclusions?
 \end{abstract}
 
 \keywords{SMT solver, SMT-COMP, SMT-LIB, Satisfiability Modulo Theories, competitions}
@@ -249,14 +251,18 @@ satisfiability (SAT), the satisfiability decision problem for
 propositional logic.  In place of Boolean variables, SMT formulas may
 contain terms that are built from function and predicate symbols drawn
 from a number of background theories.  Background theories, which are
-typically motivated by application areas, include the theory of
-arrays, integer and real arithmetic, bit-vectors, and floating-point
-numbers among others.  For instance, the following is an SMT formula
-over the combination of integer arithmetic and uninterpreted
-functions:
-$$TODO$$
+typically motivated by application domains, include the theory of
+arrays~\cite{TODO}, integer and real arithmetic~\cite{TODO},
+bit-vectors~\cite{TODO}, and floating-point numbers~\cite{TODO} among
+others.  For instance, the following is an SMT formula over the
+combination of integer arithmetic and uninterpreted functions:
+%
+$$x \leq y \wedge y \leq x \wedge P (f(x) - f(y)) \wedge \neg P(0)$$
+%
 Software tools to determine the satisfiability of such formulas are
-called SMT solvers.
+called SMT solvers.  With its rich input language, SMT has
+applications in software engineering, optimization, and many other
+areas~\cite{DeMoura:2011:SMT}.
 
 Internally, many SMT solvers employ SAT solving techniques to deal
 with the propositional structure of the formula, and combine these
@@ -274,10 +280,12 @@ affiliated with the International Workshop on Satisfiability Modulo
 Theories.  Solvers are submitted to the competition by their
 developers, and pitted against each other in a number of tracks and
 divisions.  The SMT Competition was part of the Federated Logic
-Conference (FLoC) Olympic Games in~2014, and again in~2018.  It was
-last described in a 2014 competition report~\cite{TODO}.  In this
-paper, we report on the design and selected results of the competition
-during the last FLoC Olympiad, from 2015 to 2018.
+Conference (FLoC) Olympic Games, which comprised 14 competitions in
+various areas of computational logic, in Vienna in~2014, and again in
+Oxford~(UK) in~2018.  It was last described in a 2014 competition
+report~\cite{DBLP:journals/jsat/CokDW14}.  In this paper, we report on
+the design and selected results of the competition during the last
+FLoC Olympiad, from 2015 to~2018.
 
 \begin{tjark}
   WIP
@@ -301,7 +309,7 @@ competition.
 Each year, the SMT Workshop includes a block of time to present the
 competitors and results of the competition.  The workshop is
 affiliated with a different conference each year: with CAV in 2015,
-with IJCAR in 2016, again with CAV in 2017, and with FLoC in 2018.
+with IJCAR in 2016, again with CAV in 2017, and with FLoC in~2018.
 Consequently, its date varies by several weeks.  Competition results
 were presented on July~19 in 2015, on July~2 in 2016, on July~23 in
 2017, and on July~13 in 2018.
@@ -316,8 +324,8 @@ the results presentation.  While making all data publicly available
 well in advance of the official results presentation may impact the
 suspense, it has on several occasions helped to uncover serious
 problems with the competition tools or the StarExec framework (see
-Section~\ref{sec:starexec}) that could have led to invalid results if
-they had gone unnoticed.
+Section~\ref{sec:starexec}) that could have led to invalid results
+otherwise.
 \begin{tjark}
   Discuss these issues somewhere, add (forward?) reference here.
 \end{tjark}
@@ -543,25 +551,57 @@ submissions~\cite{smtcomp-2014}.
   \end{tabular}
 \end{table}
 
-
-
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Competition Procedure}
 \label{sec:procedure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{StarExec}
 \label{sec:starexec}
 
-\section{Other Competitions}
-\label{sec:OtherCompetitions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
 \label{sec:results}
 
-\section{FLoC Olympic Games Scoring}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{FLoC Olympic Games}
 \label{sec:floc}
+
+In 2014, the SMT Competition was part of the FLoC Olympic Games, which
+sponsored three Kurt G\"odel medals.  After substantial internal
+debate, the competition organizers decided to award these to the
+winner of the QF\_BV logic (which has historically been the logic with
+the largest number of solver submissions), as well as to the two best
+main-track solvers according to a competition-wide ranking that had
+been instituted especially for this
+purpose~\cite{DBLP:journals/jsat/CokDW14}.
+
+The 2018 edition of the competition was again part of the FLoC Olympic
+Games.  After last-minute negotiations with the Olympic Games
+organizers, it was decided that the SMT Competition would award seven
+Kurt G\"odel medals.  The competition organizers gave these to the
+following solvers:
+\begin{itemize}
+\item The best three main-track solvers according to the
+  competition-wide scoring (first place: CVC4, second place:
+  Yices-2.6.0, third place: SMTInterpol);
+\item the solver that won the most competitive divisions in the
+  application track (Yices-2.6.0);
+\item the solver that won the most competitive divisions in the
+  unsat-core track (Yices-2.6.0);
+\item the solver(s) that won the QF\_BV division in the main track
+  (sequential ranking: Boolector, parallel ranking: Minkeyrink-MT)
+\end{itemize}
+
+The competition-wide ranking that was used in~2018 was a refinement of
+the ranking scheme introduced in~2014.  A contentious issue has been
+the treatment of incorrect solver results in this ranking.  While
+incorrect answers cause a solver to be ranked behind all correct
+solvers in the per-division ranking (see \TODO )
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -570,13 +610,12 @@ submissions~\cite{smtcomp-2014}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Concluding Observations and Recommendations}
+\section{Conclusions}
 \label{sec:conclusions}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{plainbv}
-%\bibliography{SMT-COMP}
+\bibliographystyle{plainbv} \bibliography{SMT-COMP}
 
 \end{document}
 
