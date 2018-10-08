@@ -571,43 +571,53 @@ submissions~\cite{smtcomp-2014}.
 \section{FLoC Olympic Games}
 \label{sec:floc}
 
-In 2014, the SMT Competition was part of the FLoC Olympic Games, which
-sponsored three Kurt G\"odel medals.  After substantial internal
-debate, the competition organizers decided to award these to the
-winner of the QF\_BV logic (which has historically been the logic with
-the largest number of solver submissions), as well as to the two best
-main-track solvers according to a competition-wide ranking that had
-been instituted especially for this
-purpose~\cite{DBLP:journals/jsat/CokDW14}.
+In 2014, the SMT Competition was part of the FLoC Olympic Games.
+These gave the competition increased visibility and sponsored three
+Kurt G\"odel medals.  After substantial internal debate, the 2014
+competition organizers decided to award these to the winner of the
+main track's QF\_BV division (which has historically been the logic
+with the largest number of solver submissions), as well as to the two
+best main-track solvers according to a competition-wide ranking that
+had been instituted especially for this
+purpose~\cite{DBLP:journals/jsat/CokDW14}.  This ranking emphasizes
+breadth of solver participation---a solver participating in many
+logics need not be the best in any one of them to rank highly.
+
+The competition-wide ranking for the main track was retained and
+refined after~2014.  A contentious issue in this ranking has been the
+scoring of incorrect solver responses.  In the per-division rankings,
+an incorrect response causes a solver to be ranked behind all correct
+solvers~\cite{rules18}.  But the competition's main track consists of
+many independent divisions.  To balance the strong interest in correct
+solvers against the risk of stifling innovation, the competition-wide
+ranking was revised in~2017 to use a fixed numeric penalty for each
+division with incorrect responses.  The value of this penalty is
+chosen so that entering a (possibly buggy) solver that can solve all
+benchmarks into a division has a positive expected score if the
+probability of a soundness bug in the solver is below~$20\,\%$.
 
 The 2018 edition of the competition was again part of the FLoC Olympic
 Games.  After last-minute negotiations with the Olympic Games
 organizers, it was decided that the SMT Competition would award seven
-Kurt G\"odel medals.  The competition organizers gave these to the
-following solvers:
+Kurt G\"odel medals.  The 2018 competition organizers conferred these
+to the following solvers:
 \begin{itemize}
 \item The best three main-track solvers according to the
   competition-wide scoring (first place: CVC4, second place:
   Yices-2.6.0, third place: SMTInterpol);
+\item the solver(s) that won the QF\_BV division in the main track
+  (sequential ranking: Boolector, parallel ranking: Minkeyrink-MT);
 \item the solver that won the most competitive divisions in the
   application track (Yices-2.6.0);
 \item the solver that won the most competitive divisions in the
-  unsat-core track (Yices-2.6.0);
-\item the solver(s) that won the QF\_BV division in the main track
-  (sequential ranking: Boolector, parallel ranking: Minkeyrink-MT)
+  unsat-core track (Yices-2.6.0).
 \end{itemize}
 
-The competition-wide ranking that was used in~2018 was a refinement of
-the ranking scheme introduced in~2014.  A contentious issue has been
-the treatment of incorrect solver results in this ranking.  While
-incorrect answers cause a solver to be ranked behind all correct
-solvers in the per-division ranking (see \TODO )
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Post-Competition Activity}
-\label{sec:post}
-
+\begin{tjark}
+  Discuss competition-wide rankings for application and unsat-core
+  tracks.
+\end{tjark}
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusions}
