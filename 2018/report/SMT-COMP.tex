@@ -298,21 +298,35 @@ FLoC Olympiad, from 2015 to~2018.
 \section{The Competition Goals and Organization}
 \label{sec:goals}
 
-The SMT Competition is organized under the direction of the SMT
-Steering Committee, which appoints the competition chair.  This
-appointment should happen ``within 30 days from the end of the current
-edition of the SMT workshop''~\cite{smt-bylaws} but in practice has
-often happened later.  It is then up to the competition chair to
-assemble a team of organizers, and to distribute the work for the next
-competition.
+The SMT Competition was instituted in 2005.  It has been held annually
+since then (with the exception of 2013, when an
+evaluation~\cite{DBLP:journals/jar/CokSW15} was conducted instead of a
+competition).  The main goals of the competition were to spur adoption
+of the common, community-designed SMT-LIB formats (see
+Section~\ref{sec:smtlib}), and to spark further advances in SMT,
+especially for verification~\cite{smtcomp2005}.  These, together with
+providing a useful yardstick for users and developers of SMT solvers,
+are still its main goals today.  The competition has been successful
+in establishing SMT-LIB as the \emph{de facto} standard language for
+SMT solvers.  In recent years, the focus in this regard has shifted
+towards promoting some of the newer extensions of the SMT-LIB
+language, such as a floating-point theory~\cite{TODO} or algebraic
+datatypes~\cite{TODO}.
 
-Each year, the SMT Workshop includes a block of time to present the
-competitors and results of the competition.  The workshop is
-affiliated with a different conference each year: with CAV in 2015,
-with IJCAR in 2016, again with CAV in 2017, and with FLoC in~2018.
-Consequently, its date varies by several weeks.  Competition results
-were presented on July~19 in 2015, on July~2 in 2016, on July~23 in
-2017, and on July~13 in 2018.
+The competition is organized under the direction of the SMT Steering
+Committee, which appoints the competition chair.  This appointment
+should happen ``within 30 days from the end of the current edition of
+the SMT workshop''~\cite{smt-bylaws} but in practice has often
+happened later.  The competition chair then assembles a team of
+organizers, and distributes the work for the next competition.
+%
+The SMT Workshop includes a block of time to present the competitors
+and results of the competition.  The workshop is affiliated with a
+different conference each year: with CAV in 2015, with IJCAR in 2016,
+again with CAV in 2017, and with FLoC in~2018.  Consequently, its date
+varies by several weeks.  Competition results were presented on
+July~19 in 2015, on July~2 in 2016, on July~23 in 2017, and on July~13
+in~2018.
 
 Important deadlines are effectively determined by calculating
 backwards from the date of the next SMT Workshop.  The competition's
@@ -342,22 +356,27 @@ changes to their solver until the final deadline but are encouraged to
 use this period for bug-fixing only.
 
 Around the initial solver deadline, the organizers also aim to publish
-the latest version of the competition tools, and--in collaboration
-with the SMT-LIB maintainers--to release a new version of the SMT
-Library.
+the latest version of the competition tools, and---in collaboration
+with the SMT-LIB maintainers---to release a new version of the SMT
+Library.  SMT-LIB releases were made on June~1 in 2015, on May~23 in
+2016, on June~5 in 2017, and on May~20 in 2018.  Anyone may submit new
+benchmarks to the SMT Library, and competitors are permitted to tune
+their solvers accordingly.  Therefore it is important that all
+benchmarks eligible for the competition are released at least some
+time before the final solver submission deadline.  To give the SMT-LIB
+maintainers sufficient time for curation, the deadline for new
+benchmark contributions has usually been about four to six weeks
+before the initial solver deadline, typically in April or early May.
 
-\begin{tjark}
-  WIP
-
-  Also: Call for Comments in February/March\\
-  Draft rules in April
-   
-  SMT-LIB release dates:\\
-  2015-06-01 (vs. 06-01)\\
-  2016-05-23 (vs. 05-15)\\
-  2017-06-05 (vs. 06-04)\\
-  2018-05-20 (vs. 05-27)
-\end{tjark}
+The competition rules are revised each year, and a (near final) draft
+version of the rules is made public on the competition web site
+typically around mid-April.  The competition chair has ultimate
+responsibility for the rules, but changes are often preceded by
+discussions among the organizers or within the SMT community.  Such
+discussions are initiated by a Call for Comments that is typically
+sent out to the SMT-COMP mailing list~\cite{TODO} in February or early
+March.  Publicly, this call is the first harbinger of a new edition of
+the SMT Competition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -530,7 +549,7 @@ By number of solver versions submitted, the competitions in 2015--2018
 were the four largest in the history of SMT-COMP.  On average, 26
 solver versions were submitted each year since 2015.  In contrast, the
 competitions from 2005--2014 only received an average of 12
-submissions~\cite{smtcomp-2014}.
+submissions~\cite{DBLP:journals/jsat/CokDW14}.
 
 \begin{table}
   \caption{Participation by track and year.  Numbers in square
@@ -576,25 +595,25 @@ These gave the competition increased visibility and sponsored three
 Kurt G\"odel medals.  After substantial internal debate, the 2014
 competition organizers decided to award these to the winner of the
 main track's QF\_BV division (which has historically been the logic
-with the largest number of solver submissions), as well as to the two
-best main-track solvers according to a competition-wide ranking that
-had been instituted especially for this
+with the largest number of solver submissions and job pairs), as well
+as to the two best main-track solvers according to a competition-wide
+ranking that had been instituted especially for this
 purpose~\cite{DBLP:journals/jsat/CokDW14}.  This ranking emphasizes
 breadth of solver participation---a solver participating in many
 logics need not be the best in any one of them to rank highly.
 
 The competition-wide ranking for the main track was retained and
-refined after~2014.  A contentious issue in this ranking has been the
-scoring of incorrect solver responses.  In the per-division rankings,
-an incorrect response causes a solver to be ranked behind all correct
-solvers~\cite{rules18}.  But the competition's main track consists of
-many independent divisions.  To balance the strong interest in correct
-solvers against the risk of stifling innovation, the competition-wide
-ranking was revised in~2017 to use a fixed numeric penalty for each
-division with incorrect responses.  The value of this penalty is
-chosen so that entering a (possibly buggy) solver that can solve all
-benchmarks into a division has a positive expected score if the
-probability of a soundness bug in the solver is below~$20\,\%$.
+refined after~2014.  A contentious issue with this ranking has been
+the scoring of incorrect solver responses.  In the per-division
+rankings, an incorrect response causes a solver to be ranked behind
+all correct solvers~\cite{rules18}.  But the competition's main track
+consists of many independent divisions.  To balance the strong
+interest in correct solvers against the risk of stifling innovation,
+the competition-wide ranking was revised in~2017 to use a fixed
+numeric penalty for each division with incorrect responses.  The value
+of this penalty is set so that entering a (possibly buggy) solver that
+can solve all benchmarks into a division has a positive expected score
+if the probability of a soundness bug in the solver is below~$20\,\%$.
 
 The 2018 edition of the competition was again part of the FLoC Olympic
 Games.  After last-minute negotiations with the Olympic Games
@@ -603,7 +622,7 @@ Kurt G\"odel medals.  The 2018 competition organizers conferred these
 to the following solvers:
 \begin{itemize}
 \item The best three main-track solvers according to the
-  competition-wide scoring (first place: CVC4, second place:
+  competition-wide ranking (first place: CVC4, second place:
   Yices-2.6.0, third place: SMTInterpol);
 \item the solver(s) that won the QF\_BV division in the main track
   (sequential ranking: Boolector, parallel ranking: Minkeyrink-MT);
@@ -613,19 +632,32 @@ to the following solvers:
   unsat-core track (Yices-2.6.0).
 \end{itemize}
 
-\begin{tjark}
-  Discuss competition-wide rankings for application and unsat-core
-  tracks.
-\end{tjark}
-  
+In comparison to the competition-wide ranking for the main track, the
+metric used for the application and unsat-core track---simply counting
+the number of competitive divisions that a solver has won---was fairly
+unsophisticated.  Future editions of the competition should perhaps
+refine this to use a ranking scheme that is more similar to the
+main-track ranking, by weighing divisions according to their relative
+importance, and by also rewarding good performance by solvers other
+than division winners.  A difficulty in adapting the main-track
+ranking for the other tracks is that each main-track benchmark is
+worth one point (before weighing) if solved correctly, while
+benchmarks in the application and unsat-core track are worth a varying
+number of points.  Moreover, in the unsat-core track, the size of the
+smallest unsatisfiable core---and hence the number of points
+attainable on any given benchmark---may not be known precisely.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusions}
 \label{sec:conclusions}
 
+\TODO
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\bibliographystyle{plainbv} \bibliography{SMT-COMP}
+\bibliographystyle{plainbv}
+\bibliography{SMT-COMP}
 
 \end{document}
 
