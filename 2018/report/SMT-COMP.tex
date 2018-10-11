@@ -243,15 +243,17 @@ Changes 2018:
 \end{itemize}
 \end{tjark}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Introduction}
-\label{sec:intro}
+\label{sec:introduction}
 
 Satisfiability Modulo Theories (SMT) is a generalization of Boolean
 satisfiability (SAT), the satisfiability decision problem for
 propositional logic.  In place of Boolean variables, SMT formulas may
 contain terms that are built from function and predicate symbols drawn
 from a number of background theories.  Background theories, which are
-typically motivated by application domains, include the theory of
+motivated by application domains, include the theory of
 arrays~\cite{TODO}, integer and real arithmetic~\cite{TODO},
 bit-vectors~\cite{TODO}, and floating-point numbers~\cite{TODO} among
 others.  For instance, the following is an SMT formula over the
@@ -275,14 +277,15 @@ automated theorem proving for quantified Boolean formulas (QBF),
 first-order logic, and even higher-order logic~\cite{TODO}.
 
 The International Satisfiability Modulo Theories Competition
-(SMT-COMP) is an annual competition between SMT solvers.  It is
-affiliated with the International Workshop on Satisfiability Modulo
-Theories.  Solvers are submitted to the competition by their
-developers, and pitted against each other in a number of tracks and
-divisions.  The SMT Competition was part of the Federated Logic
-Conference (FLoC) Olympic Games, which comprised 14 competitions in
-various areas of computational logic, in Vienna in~2014, and again in
-Oxford~(UK) in~2018.  It was last described in a 2014 competition
+(SMT-COMP) is an annual competition between SMT solvers.  It was
+instituted in~2005~\cite{TODO}, and is affiliated with the
+International Workshop on Satisfiability Modulo Theories.  Solvers are
+submitted to the competition by their developers, and pitted against
+each other in a number of tracks and divisions.  The SMT Competition
+was part of the Federated Logic Conference (FLoC) Olympic Games, which
+comprised 14 competitions in various areas of computational logic, in
+Vienna in~2014, and again in Oxford~(UK) in~2018.  It was last
+described in a 2014 competition
 report~\cite{DBLP:journals/jsat/CokDW14}.  In this paper, we report on
 the design and selected results of the competition during the last
 FLoC Olympiad, from 2015 to~2018.
@@ -298,27 +301,25 @@ FLoC Olympiad, from 2015 to~2018.
 \section{The Competition Goals and Organization}
 \label{sec:goals}
 
-The SMT Competition was instituted in 2005.  It has been held annually
-since then (with the exception of 2013, when an
-evaluation~\cite{DBLP:journals/jar/CokSW15} was conducted instead of a
-competition).  The main goals of the competition were to spur adoption
-of the common, community-designed SMT-LIB formats (see
+The original goals of the competition were to spur adoption of the
+common, community-designed SMT-LIB formats (see
 Section~\ref{sec:smtlib}), and to spark further advances in SMT,
 especially for verification~\cite{smtcomp2005}.  These, together with
-providing a useful yardstick for users and developers of SMT solvers,
-are still its main goals today.  The competition has been successful
-in establishing SMT-LIB as the \emph{de facto} standard language for
-SMT solvers.  In recent years, the focus in this regard has shifted
-towards promoting some of the newer extensions of the SMT-LIB
-language, such as a floating-point theory~\cite{TODO} or algebraic
-datatypes~\cite{TODO}.
+providing a useful yardstick of performance for users and developers
+of SMT solvers, are still its main goals to date.  The competition has
+been successful in establishing SMT-LIB as the de~facto standard
+language for SMT solvers.  In recent years, the focus in this regard
+has shifted towards promoting some of the newer extensions of the
+SMT-LIB language~\cite{BarFT-RR-17}, such as its floating-point theory
+or algebraic datatypes.
 
 The competition is organized under the direction of the SMT Steering
 Committee, which appoints the competition chair.  This appointment
 should happen ``within 30 days from the end of the current edition of
 the SMT workshop''~\cite{smt-bylaws} but in practice has often
 happened later.  The competition chair then assembles a team of
-organizers, and distributes the work for the next competition.
+organizers, and distributes the work for the next edition of the
+competition.
 %
 The SMT Workshop includes a block of time to present the competitors
 and results of the competition.  The workshop is affiliated with a
@@ -328,32 +329,29 @@ varies by several weeks.  Competition results were presented on
 July~19 in 2015, on July~2 in 2016, on July~23 in 2017, and on July~13
 in~2018.
 
-Important deadlines are effectively determined by calculating
+Important competition deadlines are determined by calculating
 backwards from the date of the next SMT Workshop.  The competition's
 computational workload should be completed approximately two weeks
-before the workshop date, to give participants and other parties a
-chance to scrutinize the data for errors, allow partial re-runs of
-competition jobs if necessary, and give the organizers time to prepare
-the results presentation.  While making all data publicly available
-well in advance of the official results presentation may impact the
-suspense, it has on several occasions helped to uncover serious
-problems with the competition tools or the StarExec framework (see
-Section~\ref{sec:starexec}) that could have led to invalid results
-otherwise.
-\begin{tjark}
-  Discuss these issues somewhere, add (forward?) reference here.
-\end{tjark}
+before the workshop date.  This gives participants and other parties a
+chance to scrutinize the data for errors, allows partial re-runs of
+competition jobs if necessary, and gives the organizers time to
+prepare the results presentation.  While making all data publicly
+available well in advance of the official results presentation may
+impact the suspense, it has on several occasions helped to uncover
+serious problems with the competition tools or the StarExec framework
+(see Section~\ref{sec:starexec}) that could have led to invalid
+results otherwise.
 
-It takes up to three weeks to run all competition jobs on the StarExec
-cluster, so the final submission deadline for solvers needs to be
-about five weeks before the workshop date.  The competition imposes a
-separate deadline for first versions of solvers about seven weeks
-before the workshop date.  This deadline has proved useful for the
-organizers to obtain an accurate estimate on the number of competing
-solvers, and to run preliminary tests with some of the submitted
-solvers to identify potential issues.  Participants can still make
-changes to their solver until the final deadline but are encouraged to
-use this period for bug-fixing only.
+It typically takes up to three weeks to run all competition jobs on
+the StarExec cluster, so the final submission deadline for solvers
+needs to be about five weeks before the workshop date.  The
+competition imposes a separate deadline for first versions of solvers
+about two weeks before the final submission deadline.  This earlier
+deadline has proved useful for the organizers to obtain an accurate
+estimate on the number of competing solvers, and to run preliminary
+tests with some of the submitted solvers to identify potential issues.
+Participants can still make changes to their solver until the final
+deadline but are encouraged to use this period for bug-fixing only.
 
 Around the initial solver deadline, the organizers also aim to publish
 the latest version of the competition tools, and---in collaboration
@@ -370,18 +368,42 @@ before the initial solver deadline, typically in April or early May.
 
 The competition rules are revised each year, and a (near final) draft
 version of the rules is made public on the competition web site
-typically around mid-April.  The competition chair has ultimate
+usually around mid-April.  The competition chair has ultimate
 responsibility for the rules, but changes are often preceded by
 discussions among the organizers or within the SMT community.  Such
-discussions are initiated by a Call for Comments that is typically
-sent out to the SMT-COMP mailing list~\cite{TODO} in February or early
-March.  Publicly, this call is the first harbinger of a new edition of
-the SMT Competition.
+discussions are initiated by a Call for Comments that is sent out to
+the SMT-COMP mailing list~\cite{smtcomp-mailinglist} typically in
+February or early March.  Publicly, this call is the first harbinger
+of a new edition of the SMT Competition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{SMT-LIB Logic, Language and Solvers}
-\label{sec:context}
+\section{The SMT-LIB Language and Library}
+\label{sec:smtlib}
+
+All problems used in the SMT Competition come from the SMT Library
+(SMT-LIB).  This is a large collection of benchmark problems from
+various sources.  The SMT Library is available from a public
+repository~\cite{smtlib-repository}, and each new release is mirrored
+on StarExec (see Section~\ref{sec:starexec}), the cluster on which the
+competition runs.
+
+Benchmarks in the SMT Library are written in the SMT-LIB
+language~\cite{BarFT-RR-17}, a text-based language that defines the
+syntax and semantics of SMT solver input and output.  This includes a
+language for terms and formulas, and a command language for
+interacting with SMT solvers.  For instance,
+Figure~\ref{fig:smtlib-example} shows a possible representation of the
+example formula from Section~\ref{sec:introduction} as a benchmark in
+SMT-LIB syntax.
+
+\begin{figure}
+\begin{verbatim}
+foo
+\end{verbatim}
+\caption{A benchmark problem in SMT-LIB syntax.}
+\label{fig:smtlib-example}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -390,17 +412,24 @@ the SMT Competition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{StarExec}
+\label{sec:starexec}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Participants}
 \label{sec:participants}
 
-Participants must upload their solvers to StarExec (see
-Section~\ref{sec:starexec}) to enter them into the competition, and
-additionally submit information about each competing solver---such as
-the tracks and divisions into which the solver is being entered---to
-the competition organizers.  Until 2016, this information was
-collected by email.  Since 2017, a web form is being used for this
-purpose.  This has greatly reduced the number of incomplete or
-ambiguous submissions.
+Participants must upload their solvers to StarExec to enter them into
+the competition, and additionally submit information about each
+competing solver---such as the tracks and divisions into which the
+solver is being entered---to the competition organizers.  Until 2016,
+this information was collected by email.  Since 2017, a web form is
+being used for this purpose.  This has greatly reduced the number of
+incomplete or ambiguous submissions.
 
 Table~\ref{table:participants} lists the solvers that participated
 between~2015 and~2018, together with their submitter(s) and
@@ -461,7 +490,7 @@ about 60\,\% of all solver versions since 2015.
     STP               & Mate Soos, Trevor Hansen, Norbert Manthey
                         (National University of Singapore; University of Melbourne; Amazon Web Services)\\
     toysmt            & Masahiro Sakai
-                        (\TODO)\\
+                        (Toshiba Corporation)\\
     Vampire           & Giles Reger
                         (University of Manchester)\\
     veriT             & David D\'eharbe, Haniel Barbosa, Hans-J\"org Schurr
@@ -577,11 +606,6 @@ submissions~\cite{DBLP:journals/jsat/CokDW14}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{StarExec}
-\label{sec:starexec}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Results}
 \label{sec:results}
 
@@ -611,15 +635,14 @@ consists of many independent divisions.  To balance the strong
 interest in correct solvers against the risk of stifling innovation,
 the competition-wide ranking was revised in~2017 to use a fixed
 numeric penalty for each division with incorrect responses.  The value
-of this penalty is set so that entering a (possibly buggy) solver that
-can solve all benchmarks into a division has a positive expected score
-if the probability of a soundness bug in the solver is below~$20\,\%$.
+of this penalty is currently set so that entering a (possibly buggy)
+solver that can solve all benchmarks into a division has a positive
+expected score if the probability of a soundness bug in the solver is
+below~$20\,\%$.
 
 The 2018 edition of the competition was again part of the FLoC Olympic
-Games.  After last-minute negotiations with the Olympic Games
-organizers, it was decided that the SMT Competition would award seven
-Kurt G\"odel medals.  The 2018 competition organizers conferred these
-to the following solvers:
+Games, which sponsored seven Kurt G\"odel medals.  The competition
+organizers awarded these to the following solvers:
 \begin{itemize}
 \item The best three main-track solvers according to the
   competition-wide ranking (first place: CVC4, second place:
@@ -634,18 +657,18 @@ to the following solvers:
 
 In comparison to the competition-wide ranking for the main track, the
 metric used for the application and unsat-core track---simply counting
-the number of competitive divisions that a solver has won---was fairly
+the number of competitive divisions that a solver has won---was rather
 unsophisticated.  Future editions of the competition should perhaps
 refine this to use a ranking scheme that is more similar to the
 main-track ranking, by weighing divisions according to their relative
-importance, and by also rewarding good performance by solvers other
+importance, and also by rewarding good performance from solvers other
 than division winners.  A difficulty in adapting the main-track
 ranking for the other tracks is that each main-track benchmark is
 worth one point (before weighing) if solved correctly, while
-benchmarks in the application and unsat-core track are worth a varying
-number of points.  Moreover, in the unsat-core track, the size of the
-smallest unsatisfiable core---and hence the number of points
-attainable on any given benchmark---may not be known precisely.
+benchmarks in the application and unsat-core track are worth widely
+varying numbers of points.  Moreover, in the unsat-core track, the
+size of the smallest unsatisfiable core---and hence the number of
+points attainable on any given benchmark---may not be known precisely.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
