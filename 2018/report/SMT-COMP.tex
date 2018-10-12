@@ -7,6 +7,7 @@
 
 \usepackage{pifont}
 \usepackage{comment}
+\usepackage{multirow}
 
 %\input epsf
 \special{papersize=8.5in,11in}
@@ -278,7 +279,7 @@ first-order logic, and even higher-order logic~\cite{TODO}.
 
 The International Satisfiability Modulo Theories Competition
 (SMT-COMP) is an annual competition between SMT solvers.  It was
-instituted in~2005~\cite{TODO}, and is affiliated with the
+instituted in~2005~\cite{BdMS05}, and is affiliated with the
 International Workshop on Satisfiability Modulo Theories.  Solvers are
 submitted to the competition by their developers, and pitted against
 each other in a number of tracks and divisions.  The SMT Competition
@@ -302,22 +303,22 @@ FLoC Olympiad, from 2015 to~2018.
 \label{sec:goals}
 
 The original goals of the competition were to spur adoption of the
-common, community-designed SMT-LIB formats (see
+common, community-designed SMT-LIB format (see
 Section~\ref{sec:smtlib}), and to spark further advances in SMT,
-especially for verification~\cite{smtcomp2005}.  These, together with
+especially for verification~\cite{BdMS05}.  These, together with
 providing a useful yardstick of performance for users and developers
 of SMT solvers, are still its main goals to date.  The competition has
 been successful in establishing SMT-LIB as the de~facto standard
 language for SMT solvers.  In recent years, the focus in this regard
 has shifted towards promoting some of the newer extensions of the
-SMT-LIB language~\cite{BarFT-RR-17}, such as its floating-point theory
-or algebraic datatypes.
+SMT-LIB language, such as its floating-point theory or algebraic
+datatypes~\cite{BarFT-RR-17}.
 
 The competition is organized under the direction of the SMT Steering
-Committee, which appoints the competition chair.  This appointment
+Committee, which appoints the competition chair.  (This appointment
 should happen ``within 30 days from the end of the current edition of
 the SMT workshop''~\cite{smt-bylaws} but in practice has often
-happened later.  The competition chair then assembles a team of
+happened later.)  The competition chair then assembles a team of
 organizers, and distributes the work for the next edition of the
 competition.
 %
@@ -356,25 +357,26 @@ deadline but are encouraged to use this period for bug-fixing only.
 Around the initial solver deadline, the organizers also aim to publish
 the latest version of the competition tools, and---in collaboration
 with the SMT-LIB maintainers---to release a new version of the SMT
-Library.  SMT-LIB releases were made on June~1 in 2015, on May~23 in
-2016, on June~5 in 2017, and on May~20 in 2018.  Anyone may submit new
-benchmarks to the SMT Library, and competitors are permitted to tune
-their solvers accordingly.  Therefore it is important that all
-benchmarks eligible for the competition are released at least some
-time before the final solver submission deadline.  To give the SMT-LIB
-maintainers sufficient time for curation, the deadline for new
-benchmark contributions has usually been about four to six weeks
-before the initial solver deadline, typically in April or early May.
+Library (see Section~\ref{sec:smtlib}).  SMT-LIB releases were made on
+June~1 in 2015, on May~23 in 2016, on June~5 in 2017, and on May~20 in
+2018.  Anyone may submit new benchmarks to the SMT Library, and
+competitors are permitted to tune their solvers accordingly.
+Therefore all benchmarks eligible for the competition must be released
+at least some time before the final solver submission deadline.  To
+give the SMT-LIB maintainers sufficient time for curation, the
+deadline for new benchmark contributions has usually been about four
+to six weeks before the initial solver deadline, typically in April or
+early May.
 
 The competition rules are revised each year, and a (near final) draft
-version of the rules is made public on the competition web site
-usually around mid-April.  The competition chair has ultimate
-responsibility for the rules, but changes are often preceded by
-discussions among the organizers or within the SMT community.  Such
-discussions are initiated by a Call for Comments that is sent out to
-the SMT-COMP mailing list~\cite{smtcomp-mailinglist} typically in
-February or early March.  Publicly, this call is the first harbinger
-of a new edition of the SMT Competition.
+version of the rules is made public on the competition web site around
+mid-April.  The competition chair has ultimate responsibility for the
+rules, but changes are often preceded by discussions among the
+organizers or within the SMT community.  Such discussions are
+initiated by a Call for Comments that is sent out to the SMT-COMP
+mailing list~\cite{smtcomp-mailinglist} typically in February or early
+March.  Publicly, this call is the first harbinger of a new edition of
+the SMT Competition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -386,29 +388,104 @@ All problems used in the SMT Competition come from the SMT Library
 various sources.  The SMT Library is available from a public
 repository~\cite{smtlib-repository}, and each new release is mirrored
 on StarExec (see Section~\ref{sec:starexec}), the cluster on which the
-competition runs.
+competition runs.  Users of SMT solvers are encouraged to submit new
+and interesting benchmarks to the library, which has grown from 1,352
+benchmarks in 2005~\cite{BdMS05} to 347,011 benchmarks in 2018.
 
 Benchmarks in the SMT Library are written in the SMT-LIB
-language~\cite{BarFT-RR-17}, a text-based language that defines the
-syntax and semantics of SMT solver input and output.  This includes a
+language~\cite{BarFT-RR-17}, a text-based format that defines the
+syntax and semantics of solver input and output.  This includes a
 language for terms and formulas, and a command language for
 interacting with SMT solvers.  For instance,
-Figure~\ref{fig:smtlib-example} shows a possible representation of the
-example formula from Section~\ref{sec:introduction} as a benchmark in
-SMT-LIB syntax.
+Figure~\ref{fig:smtlib-example} shows the example formula from
+Section~\ref{sec:introduction} as a benchmark in SMT-LIB syntax.
 
 \begin{figure}
 \begin{verbatim}
-foo
+(set-info :smt-lib-version 2.6)
+(set-logic QF_UFLIA)
+(set-info :status unsat)
+(declare-fun x () Int)
+(declare-fun y () Int)
+(declare-fun f (Int) Int)
+(declare-fun P (Int) Bool)
+(assert (and (<= x y) (<= y x) (P (- (f x) (f y))) (not (P 0))))
+(check-sat)
+(exit)
 \end{verbatim}
 \caption{A benchmark problem in SMT-LIB syntax.}
 \label{fig:smtlib-example}
 \end{figure}
 
+The SMT Library classifies benchmarks according to their logic, that
+is, according to the specific combination of background theories that
+the benchmark uses.  Logic names are composed of letter groups that
+refer to these background theories: {\tt A} or {\tt AX} for the theory
+of arrays, {\tt BV} for the theory of bit-vectors, {\tt DT} for
+algebraic datatypes, {\tt FP} for the floating-point theory, {\tt IA}
+for integer arithmetic, {\tt RA} for real arithmetic, {\tt IRA} for
+mixed integer and real arithmetic, {\tt S} for the theory of strings,
+{\tt UF} for uninterpreted functions (i.e., free symbols).
+Additionally, logics may impose further syntactic restrictions, such
+as the absence of quantifiers ({\tt QF}), the restriction to
+difference logic over the integers ({\tt IDL}) or reals ({\tt RDL}),
+or to the (non-)linear fragment of arithmetic ({\tt L} or {\tt N},
+respectively, before {\tt IA}, {\tt RA} or {\tt IRA}).  For instance,
+the logic {\tt QF\_UFLIA} contains quantifier-free formulas with
+uninterpreted functions over linear integer arithmetic.  These
+restrictions are typically motivated by the existence of efficient
+decision procedures for certain syntactic fragments.
+
+Additionally, the SMT Library distinguishes between incremental and
+non-incremental benchmarks.  Non-incremental benchmarks contain a
+single {\tt check-sat} command, which instructs the SMT solver to
+determine the satisfiability of the benchmark.  (Valid solver
+responses are {\tt sat}, {\tt unsat}, and {\tt unknown}.)  Incremental
+benchmarks exercise additional solver features, such as the ability to
+retract assertions, and typically contain multiple {\tt check-sat}
+commands.  These benchmarks originate from applications such as
+bounded model checking~\cite{TODO}, where SMT solvers interact with
+other tools in a feedback loop.  The 2018 release of the SMT Library
+contained 336,844 non-incremental benchmarks in 51 logics, as well
+as~10,167 incremental benchmarks (with a total of nearly 32 million
+{\tt check-sat} commands) in 26 logics.  Table~\ref{table:smtlib}
+presents further data on the size of the SMT Library since~2015.
+While the library usually grows from one year to the next due to the
+inclusion of new benchmarks and logics, continuous curation efforts
+may also cause benchmarks to be removed or reclassified on occasion,
+thereby causing individual logics or even the entire library to
+shrink.
+
+\begin{table}
+  \caption{Number of benchmarks and logics in the SMT Library}
+  \label{table:smtlib}
+  \centering
+  \begin{tabular}{|r@{\ \ }l|r|r|r|r|}
+    \hline
+                               & & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
+    \hline
+    \multirow{2}{*}{Non-incremental $\{$} & benchmarks & 196,375 & 196,114 & 258,079 & 336,844 \\
+                                          & logics     &      40 &      40 &      49 &      51 \\
+    \multirow{2}{*}{Incremental $\{$}     & benchmarks &  10,019 &  10,024 &   6,262 &  10,167 \\
+                                          & logics     &      15 &      15 &      22 &      26 \\
+    \hline
+  \end{tabular}  
+\end{table}
+
+Benchmarks in the SMT Library are annotated with additional
+information, such as the source of the benchmark and its status (i.e.,
+whether the benchmark is satisfiable or unsatisfiable) if this is
+known.  (For incremental benchmarks, each {\tt check-sat} command has
+a separate status annotation.)  To prevent solvers from simply looking
+up the benchmark's status in the SMT Library, benchmarks in the
+competition are lightly scrambled before they are presented to
+solvers~\cite{DBLP:conf/cade/Weber16}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Competition Divisions and Benchmarks}
 \label{sec:benchmarks}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
