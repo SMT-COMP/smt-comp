@@ -399,6 +399,11 @@ language for terms and formulas, and a command language for
 interacting with SMT solvers.  For instance,
 Figure~\ref{fig:smtlib-example} shows the example formula from
 Section~\ref{sec:introduction} as a benchmark in SMT-LIB syntax.
+In~2016, benchmarks were updated from version~2.0 to version~2.5 of
+the SMT-LIB language, and since~2017, benchmarks are written in
+version~2.6.  Fortunately, versions~2.5 and~2.6 are largely
+backwards-compatible to 2.0, so that older solvers are still able to
+compete with at most minor modifications.
 
 \begin{figure}
 \begin{verbatim}
@@ -417,11 +422,11 @@ Section~\ref{sec:introduction} as a benchmark in SMT-LIB syntax.
 \label{fig:smtlib-example}
 \end{figure}
 
-The SMT Library classifies benchmarks according to their logic, that
-is, according to the specific combination of background theories that
-the benchmark uses.  Logic names are composed of letter groups that
-refer to these background theories: {\tt A} or {\tt AX} for the theory
-of arrays, {\tt BV} for the theory of bit-vectors, {\tt DT} for
+The SMT Library classifies benchmarks according to their \emph{logic},
+that is, according to the specific combination of background theories
+that the benchmark uses.  Logic names are composed of letter groups
+that refer to these background theories: {\tt A} or {\tt AX} for the
+theory of arrays, {\tt BV} for the theory of bit-vectors, {\tt DT} for
 algebraic datatypes, {\tt FP} for the floating-point theory, {\tt IA}
 for integer arithmetic, {\tt RA} for real arithmetic, {\tt IRA} for
 mixed integer and real arithmetic, {\tt S} for the theory of strings,
@@ -436,25 +441,25 @@ uninterpreted functions over linear integer arithmetic.  These
 restrictions are typically motivated by the existence of efficient
 decision procedures for certain syntactic fragments.
 
-Additionally, the SMT Library distinguishes between incremental and
-non-incremental benchmarks.  Non-incremental benchmarks contain a
-single {\tt check-sat} command, which instructs the SMT solver to
-determine the satisfiability of the benchmark.  (Valid solver
-responses are {\tt sat}, {\tt unsat}, and {\tt unknown}.)  Incremental
-benchmarks exercise additional solver features, such as the ability to
-retract assertions, and typically contain multiple {\tt check-sat}
-commands.  These benchmarks originate from applications such as
-bounded model checking~\cite{TODO}, where SMT solvers interact with
-other tools in a feedback loop.  The 2018 release of the SMT Library
-contained 336,844 non-incremental benchmarks in 51 logics, as well
-as~10,167 incremental benchmarks (with a total of nearly 32 million
-{\tt check-sat} commands) in 26 logics.  Table~\ref{table:smtlib}
-presents further data on the size of the SMT Library since~2015.
-While the library usually grows from one year to the next due to the
-inclusion of new benchmarks and logics, continuous curation efforts
-may also cause benchmarks to be removed or reclassified on occasion,
-thereby causing individual logics or even the entire library to
-shrink.
+Additionally, the SMT Library distinguishes between \emph{incremental}
+and \emph{non-incremental} benchmarks.  Non-incremental benchmarks
+contain a single {\tt check-sat} command, which instructs the SMT
+solver to determine the satisfiability of the benchmark.  (Valid
+solver responses are {\tt sat}, {\tt unsat}, and {\tt unknown}.)
+Incremental benchmarks exercise additional solver features, such as
+the ability to retract assertions, and typically contain multiple {\tt
+  check-sat} commands.  These benchmarks originate from applications
+such as bounded model checking~\cite{TODO}, where SMT solvers interact
+with other tools in a feedback loop.  The 2018 release of the SMT
+Library contained 336,844 non-incremental benchmarks in 51 logics, as
+well as~10,167 incremental benchmarks (with a total of nearly 32
+million {\tt check-sat} commands) in 26 logics.
+Table~\ref{table:smtlib} presents further data on the size of the SMT
+Library since~2015.  While the library usually grows from one year to
+the next due to the inclusion of new benchmarks and logics, continuous
+curation efforts may also cause benchmarks to be removed or
+reclassified on occasion, thereby causing individual logics or even
+the entire library to shrink.
 
 \begin{table}
   \caption{Number of benchmarks and logics in the SMT Library}
@@ -486,14 +491,61 @@ solvers~\cite{DBLP:conf/cade/Weber16}.
 \section{Competition Divisions and Benchmarks}
 \label{sec:benchmarks}
 
+The SMT Competition consists of several tracks.  The \emph{main
+  track}, which has been a staple of the competition since its
+inception in 2005, features non-incremental benchmarks.  The
+\emph{application track}, which has been part of the competition since
+2011~\cite{TODO}, features incremental benchmarks.  These benchmarks
+are passed to each solver one command at a time by a trace executor,
+which waits for the solver's response before passing the next
+benchmark command (to prevent look-ahead behavior).  The
+\emph{unsat-core track} uses main-track benchmarks that are known to
+be unsatisfiable, and solvers are evaluated on their ability to find
+small unsatisfiable cores (i.e., a small but unsatisfiable subset of
+the benchmark's assertions).  The unsat-core track had first been part
+of the competition in 2012~\cite{TODO}, but was then discontinued
+partly because of the competition's move to StarExec (see Section~5)
+and lacking tool support.  It was re-introduced as an experimental
+track in 2016, and has been a regular competition track since~2017.
+
+Each track is further split into (logic) \emph{divisions}, where each
+division corresponds to a logic from the SMT Library.  Participants
+can choose which tracks and divisions they want to enter, and
+competition results are reported separately for each track and
+division.  Thus, competing solvers need not support all logics, and
+may or may not support features such as incrementality or unsat-core
+generation.
+
+SMT Competitions until~2014 used a pseudo-random selection process to
+cull the number of benchmarks used in the competition.  However, a
+2013 evaluation found that this ``significantly lessens the ability of
+a competition to determine `best'
+solvers.''~\cite{DBLP:journals/jar/CokSW15} Together with the
+increased computational resources available for the competition since
+its move to StarExec, this prompted a paradigm shift.  Since 2015, the
+competition is evaluating all solvers on all eligible benchmarks.
+Some benchmarks from the SMT Library typically have to be excluded for
+syntactic reasons: in 2015 and 2016, 11,966 benchmarks were excluded
+because they contained partial or underspecified operations (e.g.,
+bit-vector division) whose precise semantics were being debated at the
+time.  Additionally in 2016, one benchmark was excluded because it
+contained incorrect status information.  In 2017, 1,104 benchmarks
+were excluded because their logic had been incorrectly classified, and
+8 benchmarks were excluded because of incorrect or missing status
+information.  In 2018, 3,603 benchmarks were excluded because they
+contained named terms (a feature of the SMT-LIB language that is not
+permitted in competition benchmarks), and 5 benchmarks were excluded
+because of missing status information.
+
+\begin{tjark}
+  WIP: benchmark selection, tables with numbers, excluded benchmarks,
+  unknown benchmarks
+\end{tjark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{StarExec}
 \label{sec:starexec}
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
