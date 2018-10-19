@@ -8,6 +8,7 @@
 \usepackage{pifont}
 \usepackage{comment}
 \usepackage{multirow}
+\usepackage{tikz}
 
 %\input epsf
 \special{papersize=8.5in,11in}
@@ -389,7 +390,7 @@ various sources.  The SMT Library is available from a public
 repository~\cite{smtlib-repository}, and each new release is mirrored
 on StarExec, the cluster on which the competition runs.  Users of SMT
 solvers are encouraged to submit new and interesting benchmarks to the
-library, which has grown from 1,352 benchmarks in 2005~\cite{BdMS05}
+library, which has grown from 1,352 benchmarks in~2005~\cite{BdMS05}
 to 347,011 benchmarks in 2018.
 
 Benchmarks in the SMT Library are written in the SMT-LIB
@@ -425,19 +426,18 @@ compete with at most minor modifications.
 The SMT Library classifies benchmarks according to their \emph{logic},
 that is, according to the specific combination of background theories
 that the benchmark uses.  Logic names are composed of letter groups
-that refer to these background theories: {\tt A} or {\tt AX} for the
-theory of arrays, {\tt BV} for the theory of bit-vectors, {\tt DT} for
-algebraic datatypes, {\tt FP} for the floating-point theory, {\tt IA}
-for integer arithmetic, {\tt RA} for real arithmetic, {\tt IRA} for
-mixed integer and real arithmetic, {\tt S} for the theory of strings,
-{\tt UF} for uninterpreted functions (i.e., free symbols).
-Additionally, logics may impose further syntactic restrictions, such
-as the absence of quantifiers ({\tt QF}), the restriction to
-difference logic over the integers ({\tt IDL}) or reals ({\tt RDL}),
-or to the (non-)linear fragment of arithmetic ({\tt L} or {\tt N},
-respectively, before {\tt IA}, {\tt RA} or {\tt IRA}).  For instance,
-the logic {\tt QF\_UFLIA} contains quantifier-free formulas with
-uninterpreted functions over linear integer arithmetic.  These
+that refer to these background theories: {A} or {AX} for the theory of
+arrays, {BV} for the theory of bit-vectors, {DT} for algebraic
+datatypes, {FP} for the floating-point theory, {IA} for integer
+arithmetic, {RA} for real arithmetic, {IRA} for mixed integer and real
+arithmetic, {S} for the theory of strings, {UF} for uninterpreted
+functions (i.e., free symbols).  Additionally, logics may impose
+further syntactic restrictions, such as the absence of quantifiers
+({QF\_}), the restriction to difference logic over the
+integers~({IDL}) or reals ({RDL}), or to the (non-)linear fragment of
+arithmetic ({L} or {N}, respectively, before {IA}, {RA} or {IRA}).
+For instance, the logic QF\_UFLIA contains quantifier-free formulas
+with uninterpreted functions over linear integer arithmetic.  These
 restrictions are typically motivated by the existence of efficient
 decision procedures for certain syntactic fragments.
 
@@ -460,11 +460,11 @@ the SMT Library since~2015.  While the library usually grows from one
 year to the next because of the inclusion of new benchmarks and
 logics, continuous curation efforts may also cause benchmarks to be
 removed or reclassified on occasion, thereby causing individual logics
-or even the entire library to shrink.  From 2015--2018, the total
-number of benchmarks has increased by 68\,\%.
+or even the entire library to shrink.  From~2015 to~2018, the total
+number of benchmarks has increased by~68\,\%.
 Figure~\ref{fig:benchmark-sizes} shows how the file size of individual
 benchmarks is distributed.  The largest benchmark in the 2018 release
-has a size of 993~MiB; the total size of the library is 85~GiB.
+had a size of 1,041~MB; the total size of the release was 91~GB.
 
 \begin{table}
   \caption{Number of benchmarks and logics in the SMT Library}
@@ -483,15 +483,47 @@ has a size of 993~MiB; the total size of the library is 85~GiB.
 \end{table}
 
 \begin{figure}
-  \TODO \\
-  \TODO \\
-  \TODO \\
-  \TODO \\
-  \TODO \\
-  \TODO \\
-  \TODO \\
+  \centering
+  \scalebox{.96}[.96]{\begin{tikzpicture}
+    \draw [gray] (0,0) -- (14,0);
+    \draw [gray] (0,.9) -- (14,.9);
+    \draw [gray] (0,1.8) -- (14,1.8);
+    \draw [gray] (0,2.7) -- (14,2.7);
+    \draw [gray] (0,3.6) -- (14,3.6);
+    \draw [gray] (0,4.5) -- (14,4.5);
+    \draw [gray] (0,5.4) -- (14,5.4);
 
-  \caption{Distribution of benchmark sizes in the SMT Library (2018).}
+    \node [left] at (0,0) {\footnotesize 0};
+    \node [left] at (0,.9) {\footnotesize 1};
+    \node [left] at (0,1.8) {\footnotesize 10};
+    \node [left] at (0,2.7) {\footnotesize 100};
+    \node [left] at (0,3.6) {\footnotesize 1000};
+    \node [left] at (0,4.5) {\footnotesize 10000};
+    \node [left] at (0,5.4) {\footnotesize 100000};
+
+    \node [rotate=90] at (-1.5,2.7) {\small Number of benchmarks};
+
+    \draw [fill=black] (0.5,0) rectangle (1.5,5.1630077857); % 54535
+    \draw [fill=black] (2.25,0) rectangle (3.25,5.5885514492); % 161995
+    \draw [fill=black] (4,0) rectangle (5,5.3624537158); % 90841
+    \draw [fill=black] (5.75,0) rectangle (6.75,4.9369959734); % 30588
+    \draw [fill=black] (7.5,0) rectangle (8.5,4.4297518088); % 8355
+    \draw [fill=black] (9.25,0) rectangle (10.25,3.3931037653); % 589
+    \draw [fill=black] (11,0) rectangle (12,2.7264453999); % 107
+    \draw [fill=black] (12.75,0) rectangle (13.75,0.9); % 1
+
+    \node [below] at (1,0) {\footnotesize $[10^2, 10^3[$};
+    \node [below] at (2.75,0) {\footnotesize $[10^3, 10^4[$};
+    \node [below] at (4.5,0) {\footnotesize $[10^4, 10^5[$};
+    \node [below] at (6.25,0) {\footnotesize $[10^5, 10^6[$};
+    \node [below] at (8,0) {\footnotesize $[10^6, 10^7[$};
+    \node [below] at (9.75,0) {\footnotesize $[10^7, 10^8[$};
+    \node [below] at (11.5,0) {\footnotesize $[10^8, 10^9[$};
+    \node [below] at (13.25,0) {\footnotesize $[10^9, 10^{10}[$};
+
+    \node [] at (7,-1) {\small File size in bytes};
+  \end{tikzpicture}}
+  \caption{Distribution of SMT-LIB benchmarks by file size (2018).}
   \label{fig:benchmark-sizes}
 \end{figure}
 
@@ -607,15 +639,17 @@ commands with unknown status.
 
 Tables~\ref{table:benchmarks-main-track}--\ref{table:benchmarks-unsat-core-track}
 show the number of benchmarks that were used in each competition track
-and division since 2015.  A dash indicates that no eligible benchmarks
+and division since~2015.  A dash indicates that no eligible benchmarks
 were available, and hence the corresponding SMT-LIB logic was not
-actually a competition division in that track and year.
+actually a competition division in that track and year.  The size of
+divisions varies widely, from just one benchmark in ABVFP to~72,705
+benchmarks in QF\_SLIA.
 
 \begin{table}
   \caption{Number of benchmarks used in the main track (by division)}
   \label{table:benchmarks-main-track}
   \centering
-  \scalebox{.9}[.83]{\begin{tabular}{|l|r|r|r|r|}
+  \scalebox{.9}[.82]{\begin{tabular}{|l|r|r|r|r|}
     \hline
     Division & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
     \hline
@@ -960,6 +994,9 @@ submissions~\cite{DBLP:journals/jsat/CokDW14}.
 
 \section{Competition Procedure}
 \label{sec:procedure}
+
+\TODO: explain those aspects of the procedure that are required to
+understand the results (e.g., time limits, scoring)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
