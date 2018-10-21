@@ -501,7 +501,7 @@ had a size of 1,041~MB; the total size of the release was 91~GB.
     \node [left] at (0,4.5) {\footnotesize 10000};
     \node [left] at (0,5.4) {\footnotesize 100000};
 
-    \node [rotate=90] at (-1.5,2.7) {\small Number of benchmarks};
+    \node [rotate=90] at (-1.5,2.7) {\small Benchmarks};
 
     \draw [fill=black] (0.5,0) rectangle (1.5,5.1630077857); % 54535
     \draw [fill=black] (2.25,0) rectangle (3.25,5.5885514492); % 161995
@@ -578,12 +578,11 @@ excluded because it contained incorrect status information.  In 2017,
 1,104 benchmarks were excluded because their logic had been classified
 incorrectly, and 8 benchmarks were excluded because of incorrect or
 missing status information.  Moreover, divisions containing datatypes
-({\tt DT})---which were new in~2017---were excluded from the
-unsat-core track because of lacking tool support.  In 2018, 3,603
-benchmarks were excluded because they contained named terms (a feature
-of the SMT-LIB language that is not permitted in competition
-benchmarks), and 5 benchmarks were excluded because of missing status
-information.
+({DT})---which were new in~2017---were excluded from the unsat-core
+track because of lacking tool support.  In 2018, 3,603 benchmarks were
+excluded because they contained named terms (a feature of the SMT-LIB
+language that is not permitted in competition benchmarks), and 5
+benchmarks were excluded because of missing status information.
 
 \begin{table}
   \caption{Number of divisions in each competition track}
@@ -602,10 +601,10 @@ information.
 
 SMT Competitions until~2014 employed a pseudo-random selection process
 to further cull the number of benchmarks used in the competition.
-However, a 2013 evaluation found that this ``significantly lessens the
-ability of a competition to determine `best'
-solvers.''~\cite{DBLP:journals/jar/CokSW15} Together with the
-increased computational resources available for the competition since
+However, a 2013 evaluation of SMT-COMP and SMT-LIB found that this
+``significantly lessens the ability of a competition to determine
+`best' solvers.''~\cite{DBLP:journals/jar/CokSW15} Together with the
+increased computational resources available to the competition since
 its move to StarExec, this prompted a paradigm shift.  Since 2015, the
 competition is evaluating all solvers on all eligible
 benchmarks. \TODO: benchmark weights
@@ -806,8 +805,145 @@ benchmarks in QF\_SLIA.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{StarExec}
+\section{Infrastructure}
 \label{sec:starexec}
+
+Since 2014 (and previously for the evaluation in
+2013~\cite{DBLP:journals/jar/CokSW15}), the computational workload of
+the competition is being run on StarExec, a ``cross-community
+infrastructure for logic solving''~\cite{DBLP:conf/cade/StumpST14}
+developed at the University of Iowa and supported by the National
+Science Foundation.  Each machine in the StarExec cluster is equipped
+with two E5-2609 Intel Xeon processors (10~MiB Cache, 2.4~GHz).  This
+hardware configuration has been unchanged since~2013.  Up to two
+solvers are run simultaneously on each machine: one solver on each
+processor, with four cores available.  Memory usage is limited
+to~60~GiB per solver.
+
+On the software side, the cluster is running Red Hat Enterprise Linux
+Workstation.  The~2015 competition was running on release~6.3
+(Santiago, kernel 2.6.32-431).  This was updated to~7.2 (Maipo, kernel
+3.10.0-327) before the~2016 competition, and the kernel was further
+updated to~3.10.0-514 before the~2017 competition.  The platform
+emphasizes stability over bleeding edge technology.  This has on
+occasion caused problems with solver binaries that had been compiled
+on other Linux distributions and linked against library versions not
+(yet) available on the cluster.  Usually, such problems are easily
+solved by building the solver on StarExec instead.  The StarExec
+developers have made a virtual machine image available to facilitate
+this and similar tasks.
+
+Interaction with StarExec is mostly via its web interface,
+\url{https://www.starexec.org}.  The interface allows registered users
+to upload and share benchmarks and solvers, to create and manage jobs
+that apply selected solvers to a selection of benchmarks, and to view
+and download job results.  Other features, such as pre-processing of
+benchmarks (e.g., for scrambling) and post-processing of solver
+output, are also supported.
+
+Jobs consist of individual \emph{job pairs}.  Each job pair
+corresponds to a specific solver-benchmark combination.
+Figure~\ref{fig:job-pairs} shows the total number of job pairs for the
+SMT Competition from~2015 to~2018.  Over this period, the number has
+grown by~72\,\%, from~1,028,615 job pairs in~2015 to~1,776,062 job
+pairs in~2018.  (This is the number of unique solver-benchmark
+combinations that were part of the competition.  The number of job
+pairs that were actually run is even higher: test jobs and job pairs
+that had to be re-run, e.g., because of issues with the StarExec
+infrastructure, are not included.)  For comparison, the~2014
+competition only ran~339,714 job
+pairs~\cite{DBLP:journals/jsat/CokDW14}.
+
+Also shown in Figure~\ref{fig:job-pairs} is the total wall-clock time
+(summed over all job pairs) for the competition.  This has more than
+doubled, from 3.5~years in~2015 to 7.6~years in~2018.  (These are
+solver run-times only.  Time that the cluster spent on pre- and
+post-processing of benchmarks and solver output or on other auxiliary
+tasks is not included.)  The increase in~2016 is largely due to the
+inclusion of non-incremental benchmarks with unknown status; these
+were evaluated with a wall-clock time limit of 10~minutes.  In~2017,
+when these benchmarks had become eligible for the main track,
+main-track job pairs were first run with a time limit of 10~minutes;
+when it became apparent to the organizers that there were sufficient
+resources to increase this limit, job pairs that had timed out were
+re-run with a time limit of 20~minutes.  Table~\ref{table:time-limits}
+shows the wall-clock time limits that were imposed for each track and
+year.
+
+\begin{table}
+  \caption{Wall-clock time limits}
+  \label{table:time-limits}
+  \centering
+  \begin{tabular}{|l|r|r|r|r|}
+    \hline
+    & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
+    \hline
+    Main track        & 40\,min & 40\,min & 20\,min & 20\,min \\
+    Application track & 40\,min & 40\,min & 40\,min & 40\,min \\
+    Unsat-core track  &      -- & 40\,min & 40\,min & 40\,min \\
+    \hline
+  \end{tabular}
+\end{table}
+
+StarExec typically reserves between~80 and~150 machines for the SMT
+Competition, allowing its workload to be completed within two to three
+weeks.  By these measures, the SMT Competition has become not only one
+of the heaviest users of StarExec, but also one of the largest
+competitions in automated reasoning.
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    \draw [gray] (0,0) -- (12,0);
+    \draw [gray] (0,1.5) -- (12,1.5);
+    \draw [gray] (0,3) -- (12,3);
+    \draw [gray] (0,4.5) -- (12,4.5);
+    \draw [gray] (0,6) -- (12,6);
+
+    \node [left] at (0,0) {\footnotesize 0};
+    \node [left] at (0,1.5) {\footnotesize 500,000};
+    \node [left] at (0,3) {\footnotesize 1,000,000};
+    \node [left] at (0,4.5) {\footnotesize 1,500,000};
+    \node [left] at (0,6) {\footnotesize 2,000,000};
+
+    \node [rotate=90] at (-2,3) {\small Job pairs};
+
+    \node [right] at (12,0) {\footnotesize 0};
+    \node [right] at (12,1.5) {\footnotesize 2};
+    \node [right] at (12,3) {\footnotesize 4};
+    \node [right] at (12,4.5) {\footnotesize 6};
+    \node [right] at (12,6) {\footnotesize 8};
+
+    \node [rotate=-90] at (12.9,3) {\small Wall-clock time (years)};
+
+    \draw [fill=black] (1,0) rectangle (2,3.085845); % 1,028,615
+    \draw [fill=black] (3.75,0) rectangle (4.75,4.687632); % 1,562,544
+    \draw [fill=black] (6.5,0) rectangle (7.5,4.366839); % 1,455,613
+    \draw [fill=black] (9.25,0) rectangle (10.25,5.328186); % 1,776,062
+
+    \draw [fill=white] (2,0) rectangle (3,2.6088709094); % 3,4784945459
+    \draw [fill=white] (4.75,0) rectangle (5.75,4.3030490392); % 5,7373987189
+    \draw [fill=white] (7.5,0) rectangle (8.5,5.6286127759); % 7,5048170345
+    \draw [fill=white] (10.25,0) rectangle (11.25,5.7280186691); % 7,6373582255
+
+    \node [below] at (2,0) {\footnotesize 2015};
+    \node [below] at (4.75,0) {\footnotesize 2016};
+    \node [below] at (7.5,0) {\footnotesize 2017};
+    \node [below] at (10.25,0) {\footnotesize 2018};
+  \end{tikzpicture}
+  \caption{Number of job pairs ($\blacksquare$) and total wall-clock time ($\square$).}
+  \label{fig:job-pairs}
+\end{figure}
+
+The StarExec infrastructure has been vitally important in allowing the
+competition to grow to its current size.  The competition organizers
+have given the StarExec developers comprehensive feedback, and filed
+dozens of feature requests and bug reports since~2013.  The
+infrastructure has become increasingly stable; serious issues are now
+rare.  When they did surface during an ongoing competition, they
+received a swift response by the StarExec team (under the lead of
+Aaron Stump).  This has been critical to the success of the
+competition on more than one occasion.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1070,6 +1206,12 @@ points attainable on any given benchmark---may not be known precisely.
 \label{sec:conclusions}
 
 \TODO
+
+inclusion of check-sat commands with unknown status in the application track
+
+competition-wide rankings for application and unsat-core track
+
+more benchmarks, especially for underrepresented (i.e., small) logics
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
