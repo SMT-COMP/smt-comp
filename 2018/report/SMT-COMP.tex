@@ -10,6 +10,19 @@
 \usepackage{multirow}
 \usepackage{tikz}
 
+\usepackage{listings}
+\lstdefinelanguage{smtlib2}
+  {alsoletter={-, =},
+   morekeywords={set-logic,declare-fun,assert,check-sat,set-info,exit},
+   sensitive=false,
+   morecomment=[l]{;}}
+\lstset{language=smtlib2,
+basicstyle=\sffamily,
+numbers=none,
+keywordstyle=\bfseries\sffamily,
+keywordstyle={[2]\bfseries\sffamily\underbar}
+}
+
 %\input epsf
 \special{papersize=8.5in,11in}
 
@@ -86,7 +99,9 @@
   Olympic Games, which comprised 14 competitions in various areas of
   computational logic.  We report on the design and selected results
   of the SMT Competition during the last FLoC Olympiad, from 2015 to
-  2018. \TODO: some notable observations/conclusions?
+  2018.  These competitions set several new records regarding the
+  number of participants, number of benchmarks used, and amount of
+  computation performed.
 \end{abstract}
 
 \keywords{SMT solver, SMT-COMP, SMT-LIB, Satisfiability Modulo Theories, competitions}
@@ -399,15 +414,16 @@ syntax and semantics of solver input and output.  This includes a
 language for terms and formulas, and a command language for
 interacting with SMT solvers.  For instance,
 Figure~\ref{fig:smtlib-example} shows the example formula from
-Section~\ref{sec:introduction} as a benchmark in SMT-LIB syntax.
-In~2016, benchmarks were updated from version~2.0 to version~2.5 of
-the SMT-LIB language.  Since~2017, benchmarks are written in
-version~2.6.  Fortunately, versions~2.5 and~2.6 are largely
-backwards-compatible to 2.0, so that older solvers are still able to
-compete with at most minor modifications.
+Section~\ref{sec:introduction} as a benchmark in SMT-LIB syntax, with
+commands to the SMT solver typeset in bold.  In~2016, benchmarks were
+updated from version~2.0 to version~2.5 of the SMT-LIB language.
+Since~2017, benchmarks are written in version~2.6.  Fortunately,
+versions~2.5 and~2.6 are largely backwards-compatible to 2.0, so that
+older solvers are still able to compete with at most minor
+modifications.
 
 \begin{figure}
-\begin{verbatim}
+\begin{lstlisting}
 (set-info :smt-lib-version 2.6)
 (set-logic QF_UFLIA)
 (set-info :status unsat)
@@ -418,7 +434,7 @@ compete with at most minor modifications.
 (assert (and (<= x y) (<= y x) (P (- (f x) (f y))) (not (P 0))))
 (check-sat)
 (exit)
-\end{verbatim}
+\end{lstlisting}
 \caption{A benchmark problem in SMT-LIB syntax.}
 \label{fig:smtlib-example}
 \end{figure}
@@ -503,15 +519,24 @@ had a size of 1,041~MB; the total size of the release was 91~GB.
 
     \node [rotate=90] at (-1.5,2.7) {\small Benchmarks};
 
-    \draw [fill=black] (0.5,0) rectangle (1.5,5.1630077857); % 54535
-    \draw [fill=black] (2.25,0) rectangle (3.25,5.5885514492); % 161995
-    \draw [fill=black] (4,0) rectangle (5,5.3624537158); % 90841
-    \draw [fill=black] (5.75,0) rectangle (6.75,4.9369959734); % 30588
-    \draw [fill=black] (7.5,0) rectangle (8.5,4.4297518088); % 8355
-    \draw [fill=black] (9.25,0) rectangle (10.25,3.3931037653); % 589
-    \draw [fill=black] (11,0) rectangle (12,2.7264453999); % 107
-    \draw [fill=black] (12.75,0) rectangle (13.75,0.9); % 1
+    \draw [fill=black] (0.5,0) rectangle (1,5.1629791157); % 54531
+    \draw [fill=black] (2.25,0) rectangle (2.75,5.5836542368); % 159978
+    \draw [fill=black] (4,0) rectangle (4.5,5.350394013); % 88081
+    \draw [fill=black] (5.75,0) rectangle (6.25,4.8786283826); % 26345
+    \draw [fill=black] (7.5,0) rectangle (8,4.3889077926); % 7526
+    \draw [fill=black] (9.25,0) rectangle (9.75,3.1918883971); % 352
+    \draw [fill=black] (11,0) rectangle (11.5,2.2422255245); % 31
+    %\draw [fill=black] (12.75,0) rectangle (13.25,0); % 0
 
+    \draw [fill=white] (1,0) rectangle (1.5,1.4418539922); % 4
+    \draw [fill=white] (2.75,0) rectangle (3.25,3.8742353084); % 2017
+    \draw [fill=white] (4.5,0) rectangle (5,3.9968181739); % 2760
+    \draw [fill=white] (6.25,0) rectangle (6.75,4.1649057286); % 4243
+    \draw [fill=white] (8,0) rectangle (8.5,3.5266990775); % 829
+    \draw [fill=white] (9.75,0) rectangle (10.25,3.0372735114); % 237 
+    \draw [fill=white] (11.5,0) rectangle (12,2.5927322331); % 76
+    \draw [fill=white] (13.25,0) rectangle (13.75,0.9); % 1
+    
     \node [below] at (1,0) {\footnotesize $[10^2, 10^3[$};
     \node [below] at (2.75,0) {\footnotesize $[10^3, 10^4[$};
     \node [below] at (4.5,0) {\footnotesize $[10^4, 10^5[$};
@@ -523,7 +548,9 @@ had a size of 1,041~MB; the total size of the release was 91~GB.
 
     \node [] at (7,-1) {\small File size in bytes};
   \end{tikzpicture}}
-  \caption{Distribution of SMT-LIB benchmarks by file size (2018).}
+  \caption{Distribution of SMT-LIB benchmarks by file size (2018), for
+    non-incremental~($\blacksquare$) and incremental~($\square$)
+    benchmarks.}
   \label{fig:benchmark-sizes}
 \end{figure}
 
@@ -878,9 +905,9 @@ year.
     \hline
     & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
     \hline
-    Main track        & 40\,min & 40\,min & 20\,min & 20\,min \\
-    Application track & 40\,min & 40\,min & 40\,min & 40\,min \\
-    Unsat-core track  &      -- & 40\,min & 40\,min & 40\,min \\
+    Main track        & 40~min & 40~min & 20~min & 20~min \\
+    Application track & 40~min & 40~min & 40~min & 40~min \\
+    Unsat-core track  &     -- & 40~min & 40~min & 40~min \\
     \hline
   \end{tabular}
 \end{table}
