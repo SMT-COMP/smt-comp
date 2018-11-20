@@ -313,7 +313,7 @@ from 2015 to~2018.
 
 For space reasons, the discussion in this paper is necessarily
 limited.  Complete data about past competitions since 2015 (and partly
-for earlier competitions) is available from the competition web site,
+for earlier competitions) is available from the competition website,
 \url{http://www.smtcomp.org}.  This includes detailed results for each
 solver/benchmark combination, totaling nearly 6 million data records
 (about 1.1~GB in CSV format).
@@ -352,7 +352,7 @@ Committee, which appoints the competition chair.  (This appointment
 should happen ``within 30 days from the end of the current edition of
 the SMT workshop''~\cite{smt-bylaws} but in practice has often
 happened later.)  The competition chair then assembles a team of
-organizers, and distributes the work for the next edition of the
+organizers, and oversees the work for the next edition of the
 competition.
 %
 The SMT Workshop includes a block of time to present the competitors
@@ -402,7 +402,7 @@ to six weeks before the initial solver deadline, typically in April or
 early May.
 
 The competition rules are revised each year, and a (near final) draft
-version of the rules is made public on the competition web site around
+version of the rules is made public on the competition website around
 mid-April.  The competition chair has ultimate responsibility for the
 rules, but changes are often preceded by discussions among the
 organizers or within the SMT community.  Such discussions are
@@ -420,10 +420,9 @@ All problems used in the SMT Competition come from the SMT Library
 (SMT-LIB).  This is a large collection of benchmark problems from
 various sources.  The SMT Library is available from a public
 repository~\cite{smtlib-repository}, and each new release is mirrored
-on StarExec, the cluster on which the competition runs.  Users of SMT
-solvers are encouraged to submit new and interesting benchmarks to the
-library, which has grown from 1,352 benchmarks in~2005~\cite{BdMS05}
-to 347,011 benchmarks in 2018.
+on StarExec.  Users of SMT solvers are encouraged to submit new and
+interesting benchmarks to the library, which has grown from 1,352
+benchmarks in~2005~\cite{BdMS05} to 347,011 benchmarks in 2018.
 
 Benchmarks in the SMT Library are written in the SMT-LIB
 language~\cite{BarFT-RR-17}, a text-based format that defines the
@@ -432,12 +431,13 @@ language for terms and formulas, and a command language for
 interacting with SMT solvers.  For instance,
 Figure~\ref{fig:smtlib-example} shows the example formula from
 Section~\ref{sec:introduction} as a benchmark in SMT-LIB syntax, with
-commands to the SMT solver typeset in bold.  In~2016, benchmarks were
-updated from version~2.0 to version~2.5 of the SMT-LIB language.
-Since~2017, benchmarks are written in version~2.6.  Fortunately,
-versions~2.5 and~2.6 are largely backwards-compatible to 2.0, so that
-older solvers are still able to compete with at most minor
-modifications.
+commands to the SMT solver typeset in bold.
+
+In~2016, benchmarks were updated from version~2.0 to version~2.5 of
+the SMT-LIB language.  Since~2017, benchmarks are written in
+version~2.6.  Fortunately, versions~2.5 and~2.6 are largely
+backwards-compatible to 2.0, so that older solvers are still able to
+compete with at most minor modifications.
 
 \begin{figure}
 \begin{lstlisting}
@@ -482,8 +482,9 @@ solver responses are {\tt sat}, {\tt unsat}, and {\tt unknown}.)
 Incremental benchmarks exercise additional solver features, such as
 the ability to retract assertions, and typically contain multiple {\tt
   check-sat} commands.  These benchmarks originate from applications
-such as bounded model checking~\cite{TODO}, where SMT solvers interact
-with other tools in a feedback loop.
+such as bounded model
+checking~\cite{Gunther:2014:IBS:2632362.2632374}, where SMT solvers
+interact with other tools in a feedback loop.
 
 The 2018 release of the SMT Library contained 336,844 non-incremental
 benchmarks in 51 logics, as well as~10,167 incremental benchmarks
@@ -589,15 +590,15 @@ The SMT Competition consists of several tracks.  The \emph{main
   track}, which has been a staple of the competition since its
 inception in 2005, features non-incremental benchmarks.  The
 \emph{application track}, which has been part of the competition since
-2011~\cite{TODO}, features incremental benchmarks.  These benchmarks
-are passed to each solver one command at a time by a trace executor,
-which waits for the solver's response before passing the next
-benchmark command (to prevent look-ahead behavior).  The
+2011~\cite{BDdMOS13}, features incremental benchmarks.  These
+benchmarks are passed to each solver one command at a time by a trace
+executor, which waits for the solver's response before passing the
+next benchmark command (to prevent look-ahead behavior).  The
 \emph{unsat-core track} uses main-track benchmarks that are known to
 be unsatisfiable, and solvers are evaluated on their ability to find
 small unsatisfiable cores (i.e., a small but still unsatisfiable
 subset of the benchmark's assertions).  The unsat-core track had first
-been part of the competition in 2012~\cite{TODO}, but was then
+been part of the competition in 2012~\cite{CGBD12}, but was then
 discontinued partly because of the competition's move to StarExec and
 lacking tool support.  It was re-introduced as an experimental track
 in 2016, and has been a regular competition track again since~2017.
@@ -647,7 +648,7 @@ SMT Competitions until~2014 employed a pseudo-random selection process
 to further cull the number of benchmarks used in the competition.
 However, a 2013 evaluation of SMT-COMP and SMT-LIB found that this
 ``significantly lessens the ability of a competition to determine
-`best' solvers.''~\cite{CSW15} rTogether with the increased
+`best' solvers.''~\cite{CSW15} Together with the increased
 computational resources available to the competition since its move to
 StarExec, this prompted a paradigm shift.  Since 2015, the competition
 is evaluating all solvers on all eligible benchmarks. \TODO: benchmark
@@ -885,11 +886,11 @@ benchmarks (e.g., for scrambling) and post-processing of solver
 output, are also supported.
 
 Jobs consist of individual \emph{job pairs}.  Each job pair
-corresponds to a specific solver-benchmark combination.
+corresponds to a specific solver/benchmark combination.
 Figure~\ref{fig:job-pairs} shows the total number of job pairs for the
 SMT Competition from~2015 to~2018.  Over this period, the number has
 grown by~72\,\%, from~1,028,615 job pairs in~2015 to~1,776,062 job
-pairs in~2018.  (This is the number of unique solver-benchmark
+pairs in~2018.  (This is the number of unique solver/benchmark
 combinations that were part of the competition.  The number of job
 pairs that were actually run is even higher: test jobs and job pairs
 that had to be re-run, e.g., because of issues with the StarExec
@@ -908,24 +909,28 @@ when these benchmarks had become eligible for the main track,
 main-track job pairs were first run with a time limit of 10~minutes;
 when it became apparent to the organizers that there were sufficient
 resources to increase this limit, job pairs that had timed out were
-re-run with a time limit of 20~minutes.  Table~\ref{table:time-limits}
-shows the wall-clock time limits that were imposed for each track and
-year.
+re-run with a time limit of 20~minutes.  (In this way, about 2.9 years
+of wall-clock time in 2017 were spent on job pairs that were then
+re-run.  This time is not included in Figure~\ref{fig:job-pairs}.)
+Table~\ref{table:time-limits} shows the wall-clock time limits that
+were imposed on job pairs for each track and year.
 
 \begin{table}
-  \caption{Wall-clock time limits}
+  \caption{Wall-clock time limits.}
   \label{table:time-limits}
   \centering
   \begin{tabular}{|l|r|r|r|r|}
     \hline
     & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
     \hline
-    Main track        & 40~min & 40~min & 20~min & 20~min \\
-    Application track & 40~min & 40~min & 40~min & 40~min \\
-    Unsat-core track  &     -- & 40~min & 40~min & 40~min \\
+    Main track        & 40~min & 40~min & 20~min\protect\footnotemark & 20~min \\
+    Application track & 40~min & 40~min & 40~min\phantom{$^{1.}$} & 40~min \\
+    Unsat-core track  &     -- & 40~min & 40~min\phantom{$^{1.}$} & 40~min \\
     \hline
   \end{tabular}
 \end{table}
+\footnotetext{These job pairs were first run with a time limit of
+  10~minutes.  See the text for details.}
 
 StarExec typically reserves between~80 and~150 machines for the SMT
 Competition, allowing its workload to be completed within two to three
@@ -977,16 +982,6 @@ competitions in automated reasoning.
   \label{fig:job-pairs}
 \end{figure}
 
-The StarExec infrastructure has been vitally important in allowing the
-competition to grow to its current size.  The competition organizers
-have given the StarExec developers comprehensive feedback, and filed
-dozens of feature requests and bug reports since~2013.  The
-infrastructure has become increasingly stable; serious issues are now
-rare.  When they did surface during an ongoing competition, they
-received a swift response by the StarExec team (under the lead of
-Aaron Stump).  This has been critical to the success of the
-competition on more than one occasion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Participants}
@@ -1009,66 +1004,66 @@ not list all contributors but only submitters.
 Participants are also encouraged to submit a short system description
 of their solver, including a list of its authors and an explanation of
 the SMT solving approach used.  System descriptions are published on
-the SMT-COMP website~\cite{smtcomp-web}.  They were submitted for
-about 60\,\% of all solver versions since 2015.
+the SMT-COMP website.  They were submitted for about 60\,\% of all
+solver versions since 2015.
 
 \begin{table}
   \caption{Participants (2015--2018)}
   \label{table:participants}
   \centering
-  \begin{tabular}{|l|p{13cm}|} %TODO: fix width
+  \begin{tabular}{|l|p{11.7cm}|} %TODO: fix width
     \hline
     Solver & Submitters (Affiliations)\\
     \hline
-    ABC [\TODO]       & Valeriy Balabanov
+    ABC~\cite{DBLP:conf/cav/BraytonM10} & Valeriy Balabanov
                         (Mentor Graphics)\\
     Alt-Ergo          & Albin Coquereau
                         (CNRS and University of Paris-Sud)\\
-    AProVE            & Carsten Fuhs
+    AProVE~\cite{DBLP:conf/cade/GieslBEFFOPSSST14} & Carsten Fuhs
                         (University College London; Birkbeck, University of London)\\
-    Boolector         & Mathias Preiner
+    Boolector~\cite{DBLP:conf/cav/NiemetzPWB18} & Mathias Preiner
                         (Johannes Kepler University)\\
-    COLIBRI           & Fran\c{c}ois Bobot
+    COLIBRI~\cite{colibri} & Fran\c{c}ois Bobot
                         (French Alternative Energies and Atomic Energy Commission)\\
-    Ctrl-Ergo         & Mohamed Iguernlala
+    Ctrl-Ergo~\cite{ctrl-ergo} & Mohamed Iguernlala
                         (CNRS and University of Paris-Sud)\\
-    CVC3              & Kshitij Bansal
+    CVC3~\cite{cvc3}  & Kshitij Bansal
                         (New York University)\\
-    CVC4              & Kshitij Bansal, Clark Barrett, Andres N\"otzli, Duligur Ibeling
+    CVC4~\cite{DBLP:conf/cav/BarrettCDHJKRT11}  & Kshitij Bansal, Clark Barrett, Andres N\"otzli, Duligur Ibeling
                         (New York University; Stanford University)\\
-    MapleSTP          & Jimmy Liang
+    MapleSTP~\cite{maplestp} & Jimmy Liang
                         (University of Waterloo)\\
-    MinkeyRink        & Trevor Hansen
+    MinkeyRink~\cite{minkeyrink} & Trevor Hansen
                         (University of Melbourne)\\
-    OpenSMT2          & Matteo Marescotti, Antti Hyv\"arinen
+    OpenSMT2~\cite{opensmt2} & Matteo Marescotti, Antti Hyv\"arinen
                         (University of Lugano)\\
-    ProB              & Sebastian Krings
+    ProB~\cite{prob}  & Sebastian Krings
                         (University of D\"usseldorf)\\
-    Q3B               & Martin Jon\'a\v{s}
+    Q3B~\cite{q3b}    & Martin Jon\'a\v{s}
                         (Masaryk University)\\
-    raSAT             & Tung Vu Xuan
+    raSAT~\cite{rasat} & Tung Vu Xuan
                         (Japan Advanced Institute of Science and Technology)\\
-    Redlog            & Haniel Barbosa
+    Redlog~\cite{redlog} & Haniel Barbosa
                         (Inria Nancy)\\
-    SMT-RAT           & Florian Corzilius, Gereon Kremer
+    SMT-RAT~\cite{smt-rat} & Florian Corzilius, Gereon Kremer
                         (RWTH Aachen University)\\
-    SMTInterpol       & J\"urgen Christ
+    SMTInterpol~\cite{} & J\"urgen Christ
                         (University of Freiburg)\\
-    SPASS-SATT        & Martin Bromberger
+    SPASS-SATT~\cite{} & Martin Bromberger
                         (Max Planck Institute for Informatics)\\
-    STP               & Mate Soos, Trevor Hansen, Norbert Manthey
+    STP~\cite{}        & Mate Soos, Trevor Hansen, Norbert Manthey
                         (National University of Singapore; University of Melbourne; Amazon Web Services)\\
-    toysmt            & Masahiro Sakai
+    toysmt~\cite{}     & Masahiro Sakai
                         (Toshiba Corporation)\\
-    Vampire           & Giles Reger
+    Vampire~\cite{}    & Giles Reger
                         (University of Manchester)\\
-    veriT             & David D\'eharbe, Haniel Barbosa, Hans-J\"org Schurr
+    veriT~\cite{DBLP:conf/cade/BoutonODF09} & David D\'eharbe, Haniel Barbosa, Hans-J\"org Schurr
                         (Federal University of Rio Grande do Norte; Inria Nancy)\\
-    XSat              & Martin Velez
+    XSat~\cite{}       & Martin Velez
                         (University of California, Davis)\\
-    Yices2            & Bruno Dutertre, Dejan Jovanovi\'c
+    Yices2~\cite{}     & Bruno Dutertre, Dejan Jovanovi\'c
                         (SRI International)\\
-    Z3                & Christoph Wintersteiger, Aleksandar Zelji\'c
+    Z3~\cite{DBLP:conf/tacas/MouraB08} & Christoph Wintersteiger, Aleksandar Zelji\'c
                         (Microsoft Research; Uppsala University)\\
     \hline
   \end{tabular}
@@ -1174,58 +1169,111 @@ submissions~\cite{CDW14}.
 \label{sec:procedure}
 
 \TODO: explain those aspects of the procedure that are required to
-understand the results (e.g., time limits, scoring)
+understand the results (e.g., scoring)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
 \label{sec:results}
 
+\subsection{Division Rankings}
+\label{sec:division-rankings}
+
+\TODO
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{FLoC Olympic Games}
+\subsection{Competition-Wide Ranking}
 \label{sec:floc}
 
 In 2014, the SMT Competition was part of the FLoC Olympic Games.
 These gave the competition increased visibility and sponsored three
 Kurt G\"odel medals.  After substantial internal debate, the 2014
 competition organizers decided to award these to the winner of the
-main track's QF\_BV division (which has historically been the logic
+main track's QF\_BV division (which had historically been the logic
 with the largest number of solver submissions and job pairs), as well
 as to the two best main-track solvers according to a competition-wide
 ranking that had been instituted especially for this
-purpose~\cite{DBLP:journals/jsat/CokDW14}.  This ranking emphasizes
-breadth of solver participation---a solver participating in many
-logics need not be the best in any one of them to rank highly.
+purpose~\cite{CDW14}.  This ranking emphasizes breadth of solver
+participation---a solver participating in many logics need not be the
+best in any one of them to rank highly.
 
 The competition-wide ranking for the main track was retained and
-refined after~2014.  A contentious issue with this ranking has been
-the scoring of incorrect solver responses.  In the per-division
-rankings, an incorrect response causes a solver to be ranked behind
-all correct solvers~\cite{rules18}.  But the competition's main track
-consists of many independent divisions.  To balance the strong
-interest in correct solvers against the risk of stifling innovation,
-the competition-wide ranking was revised in~2017 to use a fixed
-numeric penalty for each division with incorrect responses.  The value
-of this penalty is currently set so that entering a (possibly buggy)
-solver that can solve all benchmarks into a division has a positive
-expected score if the probability of a soundness bug in the solver is
-below~$20\,\%$.
+refined after~2014.  Table~\ref{table:competition-wide-ranking} shows
+the best three solvers according to this ranking for 2015--2018.  Also
+shown is Z3, which ranked highly each year but was running hors
+concours.  Sequential and parallel performance are reported
+separately.
+%
+Note that scores are not directly comparable between different years:
+the set of benchmarks changes from one year to the next, and also the
+formula to compute the score changed (see below).  Moreover, readers
+should keep in mind that this ranking---like any method that maps the
+performance of solvers for a broad range of logics to a
+one-dimensional value---is inherently limited.  We refer to the
+individual division rankings (Section~\ref{sec:division-rankings}) for
+more detailed information.
+
+\begin{table}
+  \caption{Competition-wide ranking for the main track: best solvers (by year).}
+  \label{table:competition-wide-ranking}
+  \centering
+  \scalebox{.89}{\begin{tabular}{|c|p{2.2cm}|r|r|p{0cm}|c|p{2.2cm}|r|r|}
+    \cline{1-4} \cline{6-9}
+    \multicolumn{4}{|c|}{2015} & & \multicolumn{4}{c|}{2016} \\ \cline{1-4} \cline{6-9}
+    Rank & Solver & Score  & Score  & & Rank & Solver & Score & Score \\
+         &        & (sequential) & (parallel) & & & & (sequential) & (parallel) \\ \cline{1-4} \cline{6-9}
+         & [Z3]              & 159.36 & 159.36 & &    & [Z3]   & 185.09 & 185.09 \\
+      1. & CVC4              & 144.67 & 144.74 & & 1. & CVC4   & 180.95 & 181.19 \\
+      2. & CVC4(exp)\footnotemark & 140.47 & 140.51 & & 2. & Yices2 & 119.29 & 119.29 \\
+      3. & Yices             & 101.91 & 101.91 & & 3. & veriT  &  75.11 &  75.11 \\ \cline{1-4} \cline{6-9}
+  \end{tabular}}
+
+  \medskip
+  
+  \scalebox{.89}{\begin{tabular}{|c|p{2.2cm}|r|r|p{0cm}|c|p{2.2cm}|r|r|}
+    \cline{1-4} \cline{6-9}
+    \multicolumn{4}{|c|}{2017} & & \multicolumn{4}{c|}{2018} \\ \cline{1-4} \cline{6-9}
+    Rank & Solver & Score  & Score  & & Rank & Solver & Score & Score \\
+         &        & (sequential) & (parallel) & & & & (sequential) & (parallel) \\ \cline{1-4} \cline{6-9}
+         & [Z3]        & 171.99 & 171.99 & & 1. & CVC4        & 211.99 & 211.99 \\
+      1. & CVC4        & 161.38 & 161.76 & &    & [Z3]        & 186.19 & 186.19 \\
+      2. & Yices2      & 110.63 & 110.63 & & 2. & Yices2      & 115.26 & 115.26 \\
+      3. & SMTInterpol &  65.96 &  66.00 & & 3. & SMTInterpol &  65.32 &  65.38 \\ \cline{1-4} \cline{6-9}
+  \end{tabular}}
+\end{table}
+\footnotetext{This was a distinct version of CVC4 that was designated as experimental.}
+
+A contentious issue with this ranking has been the scoring of
+incorrect solver responses.  In the division rankings, an incorrect
+response causes a solver to be ranked behind all correct solvers for
+that division.  But the competition's main track consists of many
+independent divisions.  To balance the strong interest in correct
+solvers against the risk of stifling innovation, the competition-wide
+ranking was revised in~2017 to use a fixed numeric penalty for each
+division with incorrect responses.  The value of this penalty is
+currently set so that entering a (possibly buggy) solver that can
+solve all benchmarks into a division has a positive expected score if
+the probability of a soundness bug in the solver is
+below~$20\,\%$.~\cite{rules18}
 
 The 2018 edition of the competition was again part of the FLoC Olympic
 Games, which sponsored seven medals.  The competition organizers
 awarded these to the following solvers:
 \begin{itemize}
 \item The best three main-track solvers according to the
-  competition-wide ranking (first place: CVC4, second place:
-  Yices-2.6.0, third place: SMTInterpol);
-\item the solver(s) that won the QF\_BV division in the main track
-  (sequential ranking: Boolector, parallel ranking: Minkeyrink-MT);
+  competition-wide ranking (see
+  Table~\ref{table:competition-wide-ranking}),
+\item the solvers that won the QF\_BV division in the main track (see
+  Table~\ref{TODO}),
+  % TODO (sequential ranking: Boolector, parallel ranking: Minkeyrink-MT);
 \item the solver that won the most competitive divisions in the
-  application track (Yices-2.6.0);
+  application track (see Table~\ref{TODO}),
 \item the solver that won the most competitive divisions in the
-  unsat-core track (Yices-2.6.0).
+  unsat-core track (see Table~\ref{TODO}).
 \end{itemize}
+
+%TODO The latter two medals were won by Yices-2.6.0.
 
 In comparison to the competition-wide ranking for the main track, the
 metric used for the application and unsat-core track---simply counting
@@ -1236,11 +1284,20 @@ main-track ranking, by weighing divisions according to their relative
 importance, and also by rewarding good performance from solvers other
 than division winners.  A difficulty in adapting the main-track
 ranking for the other tracks is that each main-track benchmark is
-worth one point (before weighing) if solved correctly, while
-benchmarks in the application and unsat-core track are worth widely
-varying numbers of points.  Moreover, in the unsat-core track, the
-size of the smallest unsatisfiable core---and hence the number of
-points attainable on any given benchmark---may not be known precisely.
+worth one point (before benchmark weights are applied) if solved
+correctly, while benchmarks in the application and unsat-core track
+are worth widely varying numbers of points.  Moreover, in the
+unsat-core track, the size of the smallest unsatisfiable core---and
+hence the number of points attainable on any given benchmark---may not
+be known precisely.
+
+\subsection{Improvement Over Time}
+
+\TODO
+
+\subsection{Other Measures}
+
+\TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1254,6 +1311,18 @@ inclusion of check-sat commands with unknown status in the application track
 competition-wide rankings for application and unsat-core track
 
 more benchmarks, especially for underrepresented (i.e., small) logics
+
+
+The StarExec infrastructure has been vitally important in allowing the
+competition to grow to its current size.  The competition organizers
+have given the StarExec developers comprehensive feedback, and filed
+dozens of feature requests and bug reports since~2013.  The
+infrastructure has become increasingly stable; serious issues are now
+rare.  When they did surface during ongoing competitions, they
+received a swift response by the StarExec team (under the lead of
+Aaron Stump).  This has been critical to the success of the
+competition on more than one occasion.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
