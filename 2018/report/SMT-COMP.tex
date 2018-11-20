@@ -5,6 +5,8 @@
 %\usepackage[pdf]{pstricks}
 %\usepackage{pst-tree}
 
+%\usepackage[numbers,sort&compress]{natbib}
+
 \usepackage{pifont}
 \usepackage{comment}
 \usepackage{multirow}
@@ -270,11 +272,11 @@ satisfiability (SAT), the satisfiability decision problem for
 propositional logic.  In place of Boolean variables, SMT formulas may
 contain terms that are built from function and predicate symbols drawn
 from a number of background theories.  Background theories, which are
-motivated by application domains, include the theory of
-arrays~\cite{TODO}, integer and real arithmetic~\cite{TODO},
-bit-vectors~\cite{TODO}, and floating-point numbers~\cite{TODO} among
-others.  For instance, the following is an SMT formula over the
-combination of integer arithmetic and uninterpreted functions:
+motivated by application domains, include the theory of arrays,
+integer and real arithmetic, bit-vectors, and floating-point numbers
+among others~\cite{BarFT-RR-17}.  For instance, the following is an
+SMT formula over the combination of integer arithmetic and
+uninterpreted functions:
 %
 $$x \leq y \wedge y \leq x \wedge P (f(x) - f(y)) \wedge \neg P(0)$$
 %
@@ -286,32 +288,47 @@ areas~\cite{DeMoura:2011:SMT}.
 Internally, many SMT solvers employ SAT solving techniques to deal
 with the propositional structure of the formula, and combine these
 with (semi-)decision procedures for the background theories that the
-solver supports~\cite{TODO,TODO,TODO}.  Historically, SMT solvers have
-focused on quantifier-free formulas and decidable combinations of
-background theories.  Increasingly, however, SMT solvers also support
-quantified formulas.  Hence there is overlap between SMT solving and
-automated theorem proving for quantified Boolean formulas (QBF),
-first-order logic, and even higher-order logic~\cite{TODO}.
+solver
+supports~\cite{DBLP:conf/cav/BarrettCDHJKRT11,DBLP:conf/cade/BoutonODF09,DBLP:conf/tacas/MouraB08}.
+Historically, SMT solvers have focused on quantifier-free formulas and
+decidable combinations of background theories.  Increasingly, however,
+SMT solvers also support quantified formulas.  Hence there is overlap
+between SMT solving and automated theorem proving for quantified
+Boolean formulas (QBF), first-order logic, and even higher-order
+logic~\cite{DBLP:journals/corr/abs-1712-01486}.
 
 The International Satisfiability Modulo Theories Competition
-(SMT-COMP) is an annual competition between SMT solvers.  It was
-instituted in~2005~\cite{BdMS05}, and is affiliated with the
-International Workshop on Satisfiability Modulo Theories.  Solvers are
-submitted to the competition by their developers, and pitted against
-each other in a number of tracks and divisions.  The SMT Competition
-was part of the Federated Logic Conference (FLoC) Olympic Games, which
-comprised 14 competitions in various areas of computational logic, in
-Vienna in~2014, and again in Oxford~(UK) in~2018.  It was last
-described in a 2014 competition
-report~\cite{DBLP:journals/jsat/CokDW14}.  In this paper, we report on
-the design and selected results of the competition during the last
-FLoC Olympiad, from 2015 to~2018.
+(SMT-COMP)~\cite{BdMS05,BdMS07,BDdMOS13,BDOS08,BDOS10,CDW14,CGBD12} is
+an annual competition between SMT solvers.  It was instituted in~2005,
+and is affiliated with the International Workshop on Satisfiability
+Modulo Theories.  Solvers are submitted to the competition by their
+developers, and pitted against each other in a number of tracks and
+divisions.  The SMT Competition was part of the Federated Logic
+Conference (FLoC) Olympic Games, which comprised 14 competitions in
+various areas of computational logic, in Vienna in~2014, and again in
+Oxford~(UK) in~2018.  It was last described in a 2014 competition
+report~\cite{CDW14}.  In this paper, we report on the design and
+selected results of the competition during the last FLoC Olympiad,
+from 2015 to~2018.
 
-\begin{tjark}
-  WIP
+For space reasons, the discussion in this paper is necessarily
+limited.  Complete data about past competitions since 2015 (and partly
+for earlier competitions) is available from the competition web site,
+\url{http://www.smtcomp.org}.  This includes detailed results for each
+solver/benchmark combination, totaling nearly 6 million data records
+(about 1.1~GB in CSV format).
 
-  structure of the paper
-\end{tjark}
+The rest of this paper is structured as follows.  In
+Section~\ref{sec:goals}, we present the goals and organization of the
+competition.  Section~\ref{sec:smtlib} introduces the SMT-LIB language
+and library, and Section~\ref{sec:benchmarks} discusses competition
+divisions and benchmarks.  The competition is being run on StarExec,
+which is described in Section~\ref{sec:starexec}.
+Section~\ref{sec:participants} gives an overview of participating
+solvers.  The details of the competition procedure are described in
+Section~\ref{sec:procedure}, and selected results are presented and
+analyzed in Section~\ref{sec:results}.  We conclude with suggestions
+for future SMT Competitions in Section~\ref{sec:conclusions}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -630,11 +647,11 @@ SMT Competitions until~2014 employed a pseudo-random selection process
 to further cull the number of benchmarks used in the competition.
 However, a 2013 evaluation of SMT-COMP and SMT-LIB found that this
 ``significantly lessens the ability of a competition to determine
-`best' solvers.''~\cite{DBLP:journals/jar/CokSW15} Together with the
-increased computational resources available to the competition since
-its move to StarExec, this prompted a paradigm shift.  Since 2015, the
-competition is evaluating all solvers on all eligible
-benchmarks. \TODO: benchmark weights
+`best' solvers.''~\cite{CSW15} rTogether with the increased
+computational resources available to the competition since its move to
+StarExec, this prompted a paradigm shift.  Since 2015, the competition
+is evaluating all solvers on all eligible benchmarks. \TODO: benchmark
+weights
 
 Another paradigm shift concerns the treatment of benchmarks with
 unknown status.  Because of the difficulty to judge solver responses
@@ -835,17 +852,16 @@ benchmarks in QF\_SLIA.
 \section{Infrastructure}
 \label{sec:starexec}
 
-Since 2014 (and previously for the evaluation in
-2013~\cite{DBLP:journals/jar/CokSW15}), the computational workload of
-the competition is being run on StarExec, a ``cross-community
-infrastructure for logic solving''~\cite{DBLP:conf/cade/StumpST14}
-developed at the University of Iowa and supported by the National
-Science Foundation.  Each machine in the StarExec cluster is equipped
-with two E5-2609 Intel Xeon processors (10~MiB Cache, 2.4~GHz).  This
-hardware configuration has been unchanged since~2013.  Up to two
-solvers are run simultaneously on each machine: one solver on each
-processor, with four cores available.  Memory usage is limited
-to~60~GiB per solver.
+Since 2014 (and previously for the evaluation in 2013~\cite{CSW15}),
+the computational workload of the competition is being run on
+StarExec, a ``cross-community infrastructure for logic
+solving''~\cite{DBLP:conf/cade/StumpST14} developed at the University
+of Iowa and supported by the National Science Foundation.  Each
+machine in the StarExec cluster is equipped with two E5-2609 Intel
+Xeon processors (10~MiB Cache, 2.4~GHz).  This hardware configuration
+has been unchanged since~2013.  Up to two solvers are run
+simultaneously on each machine: one solver on each processor, with
+four cores available.  Memory usage is limited to~60~GiB per solver.
 
 On the software side, the cluster is running Red Hat Enterprise Linux
 Workstation.  The~2015 competition was running on release~6.3
@@ -878,8 +894,7 @@ combinations that were part of the competition.  The number of job
 pairs that were actually run is even higher: test jobs and job pairs
 that had to be re-run, e.g., because of issues with the StarExec
 infrastructure, are not included.)  For comparison, the~2014
-competition only ran~339,714 job
-pairs~\cite{DBLP:journals/jsat/CokDW14}.
+competition only ran~339,714 job pairs~\cite{CDW14}.
 
 Also shown in Figure~\ref{fig:job-pairs} is the total wall-clock time
 (summed over all job pairs) for the competition.  This has more than
@@ -1132,7 +1147,7 @@ By number of solver versions submitted, the competitions in 2015--2018
 were the four largest in the history of SMT-COMP.  On average, 26
 solver versions were submitted each year since 2015.  In contrast, the
 competitions from 2005--2014 only received an average of 12
-submissions~\cite{DBLP:journals/jsat/CokDW14}.
+submissions~\cite{CDW14}.
 
 \begin{table}
   \caption{Participation by track and year.  Numbers in square
