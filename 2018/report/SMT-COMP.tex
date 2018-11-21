@@ -932,7 +932,7 @@ were imposed on job pairs for each track and year.
 \footnotetext{These job pairs were first run with a time limit of
   10~minutes.  See the text for details.}
 
-StarExec typically reserves between~80 and~150 machines for the SMT
+StarExec typically reserves between~80 to~150 machines for the SMT
 Competition, allowing its workload to be completed within two to three
 weeks.  By these measures, the SMT Competition has become not only one
 of the heaviest users of StarExec, but also one of the largest
@@ -1254,8 +1254,8 @@ ranking was revised in~2017 to use a fixed numeric penalty for each
 division with incorrect responses.  The value of this penalty is
 currently set so that entering a (possibly buggy) solver that can
 solve all benchmarks into a division has a positive expected score if
-the probability of a soundness bug in the solver is
-below~$20\,\%$.~\cite{rules18}
+the probability that a soundness bug in the solver will be triggered
+is below~$20\,\%$.~\cite{rules18}
 
 The 2018 edition of the competition was again part of the FLoC Olympic
 Games, which sponsored seven medals.  The competition organizers
@@ -1304,25 +1304,92 @@ be known precisely.
 \section{Conclusions}
 \label{sec:conclusions}
 
-\TODO
+After 13 years, the SMT Competition is a well-established event that
+garners wide interest from developers and users of SMT solvers.  The
+competition continues to contribute to its original goals, including
+adoption of the SMT-LIB format and sparking further advances in SMT,
+and it provides a yardstick of performance for SMT solvers.
 
-inclusion of check-sat commands with unknown status in the application track
-
-competition-wide rankings for application and unsat-core track
-
-more benchmarks, especially for underrepresented (i.e., small) logics
-
+The last FLoC Olympiad was a period of significant growth for the SMT
+Competition.  The average number of solver submissions increased
+from~12 (for 2005--2014) to~26 (for 2015--2018).  The number of
+SMT-LIB benchmarks used in the competition increased from~77,352
+in~2014~\cite{CDW14} to 342,498 in 2018.  This is partly because new
+benchmarks were added to the SMT Library, but also because benchmarks
+with unknown status are now eligible for the competition, and because
+the earlier culling of benchmarks was abandoned.  Since the
+re-introduction of the unsat-core track in~2016, the competition again
+has three separate tracks.  This, together with new logics in the SMT
+Library, has brought the total number of competition divisions to 115
+in~2018, up from just 40 divisions in~2014~\cite{CDW14}.  The number
+of job pairs increased from 339,714 in~2014 to~1,776,062~in 2018, and
+the total wall-clock time in~2018 exceeded 7.6~years.  By these
+measures, the SMT Competition is one of the largest competitions in
+automated reasoning.
 
 The StarExec infrastructure has been vitally important in allowing the
 competition to grow to its current size.  The competition organizers
 have given the StarExec developers comprehensive feedback, and filed
-dozens of feature requests and bug reports since~2013.  The
+dozens of feature requests and bug reports since 2013.  The
 infrastructure has become increasingly stable; serious issues are now
 rare.  When they did surface during ongoing competitions, they
 received a swift response by the StarExec team (under the lead of
 Aaron Stump).  This has been critical to the success of the
 competition on more than one occasion.
 
+Despite the substantial amount of computational resources available to
+the competition through StarExec, the competition has reached a size
+where future organizers will have to carefully consider the number of
+participants and benchmarks each year, to determine whether the
+current time limits remain tenable.  (Otherwise, reducing the time
+limits would probably be a better solution than reverting to the
+pre-2014 practice of benchmark culling.)
+
+Further development of the competition should be undertaken with care,
+keeping in mind that any major changes require not just the
+competition organizers, but also participants to adapt.  Immediate
+action items for next year's organizers are
+\begin{itemize}
+\item the inclusion of {\tt check-sat} commands with unknown status in
+  the application track; and
+\item the definition of competition-wide rankings for the application
+  and unsat-core track.
+\end{itemize}
+
+For the inclusion of new tracks or divisions, a two-phase approach has
+proven successful.  A new division is first declared
+\emph{experimental}, meaning that results will be reported but no
+official winner will be announced.  This allows competition organizers
+and participants to gain valuable experience, while reducing the
+impact of mistakes.  If successful, the division may then become
+regular in the following year.
+
+Organizing the competition is a non-trivial amount of work.  Much of
+this happens behind the scenes.  For instance, the competition tools
+(such as the benchmark scrambler and trace executor) often require
+updating when new divisions are added, or when changes are made to
+StarExec.  One could imagine adding further tracks (e.g., for
+proof-producing SMT solvers, or for variants such as max-SMT) to the
+competition, but the effort required to support such tracks will need
+to be balanced against their added value.
+
+To ensure that the competition results are practically relevant, it is
+important that the SMT Library contains benchmarks that cover a wide
+range of applications.  To this end, we again encourage users of SMT
+solvers to submit new and interesting benchmarks to the library,
+especially for underrepresented logics.  This is not just a valuable
+contribution to the community, but also---since these benchmarks will
+then be used in the competition---a straightforward way to get solver
+developers to tune their solvers accordingly.
+
+\paragraph{Acknowledgments}
+
+We would like to thank Aaron Stump for allowing the SMT Competition to
+run on StarExec; the SMT-LIB maintainers, namely Clark Barrett, Pascal
+Fontaine, Aina Niemetz and Mathias Preiner, for preparing the annual
+SMT-LIB release; all contributors of new benchmarks to the SMT
+Library; and last but not least all solver developers who entered
+their solver into the competition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
