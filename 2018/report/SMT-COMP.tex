@@ -468,7 +468,7 @@ functions (i.e., free symbols).  Additionally, logics may impose
 further syntactic restrictions, such as the absence of quantifiers
 ({QF\_}), the restriction to difference logic over the
 integers~({IDL}) or reals ({RDL}), or to the (non-)linear fragment of
-arithmetic ({L} or {N}, respectively, before {IA}, {RA} or {IRA}).
+arithmetic ({N} or {L}, respectively, before {IA}, {RA} or {IRA}).
 For instance, the logic QF\_UFLIA contains quantifier-free formulas
 with uninterpreted functions over linear integer arithmetic.  These
 restrictions are typically motivated by the existence of efficient
@@ -618,13 +618,13 @@ eligible for the competition.  Some benchmarks typically have to be
 excluded for syntactic reasons: in 2015 and 2016, 11,966 benchmarks
 were excluded because they contained partial or underspecified
 operations (e.g., bit-vector division) whose precise semantics were
-being debated at the time.  Additionally in 2016, one benchmark was
-excluded because it contained incorrect status information.  In 2017,
+being debated at the time.  Additionally in~2016, one benchmark was
+excluded because it contained incorrect status information.  In~2017,
 1,104 benchmarks were excluded because their logic had been classified
 incorrectly, and 8 benchmarks were excluded because of incorrect or
 missing status information.  Moreover, divisions containing datatypes
 ({DT})---which were new in~2017---were excluded from the unsat-core
-track because of lacking tool support.  In 2018, 3,603 benchmarks were
+track because of lacking tool support.  In~2018, 3,603 benchmarks were
 excluded because they contained named terms (a feature of the SMT-LIB
 language that is not permitted in competition benchmarks), and 5
 benchmarks were excluded because of missing status information.
@@ -903,11 +903,11 @@ doubled, from 3.5~years in~2015 to 7.6~years in~2018.  (These are
 solver run-times only.  Time that the cluster spent on pre- and
 post-processing of benchmarks and solver output or on other auxiliary
 tasks is not included.)  The increase in~2016 is largely due to the
-inclusion of non-incremental benchmarks with unknown status; these
+inclusion of (non-incremental) benchmarks with unknown status; these
 were evaluated with a wall-clock time limit of 10~minutes.  In~2017,
 when these benchmarks had become eligible for the main track,
-main-track job pairs were first run with a time limit of 10~minutes;
-when it became apparent to the organizers that there were sufficient
+main-track job pairs were first run with a time limit of 10~minutes.
+When it became apparent to the organizers that there were sufficient
 resources to increase this limit, job pairs that had timed out were
 re-run with a time limit of 20~minutes.  (In this way, about 2.9 years
 of wall-clock time in 2017 were spent on job pairs that were then
@@ -916,7 +916,7 @@ Table~\ref{table:time-limits} shows the wall-clock time limits that
 were imposed on job pairs for each track and year.
 
 \begin{table}
-  \caption{Wall-clock time limits.}
+  \caption{Wall-clock time limits}
   \label{table:time-limits}
   \centering
   \begin{tabular}{|l|r|r|r|r|}
@@ -1004,7 +1004,7 @@ not list all contributors but only submitters.
 Participants are also encouraged to submit a short system description
 of their solver, including a list of its authors and an explanation of
 the SMT solving approach used.  System descriptions are published on
-the SMT-COMP website.  They were submitted for about 60\,\% of all
+the competition website.  They were submitted for about 60\,\% of all
 solver versions since 2015.
 
 \begin{table}
@@ -1025,7 +1025,7 @@ solver versions since 2015.
                         (Johannes Kepler University)\\
     COLIBRI~\cite{colibri} & Fran\c{c}ois Bobot
                         (French Alternative Energies and Atomic Energy Commission)\\
-    Ctrl-Ergo~\cite{ctrl-ergo} & Mohamed Iguernlala
+    Ctrl-Ergo         & Mohamed Iguernlala
                         (CNRS and University of Paris-Sud)\\
     CVC3~\cite{cvc3}  & Kshitij Bansal
                         (New York University)\\
@@ -1226,10 +1226,10 @@ should keep in mind that this ranking---like any method that maps the
 performance of solvers for a broad range of logics to a
 one-dimensional value---is inherently limited.  We refer to the
 individual division rankings (Section~\ref{sec:division-rankings}) for
-more detailed information.
+more detailed information about each solver.
 
 \begin{table}
-  \caption{Competition-wide ranking for the main track: best solvers (by year).}
+  \caption{Competition-wide ranking for the main track: best solvers (by year)}
   \label{table:competition-wide-ranking}
   \centering
   \scalebox{.89}{\begin{tabular}{|c|p{2.2cm}|r|r|p{0cm}|c|p{2.2cm}|r|r|}
@@ -1318,11 +1318,12 @@ be known precisely.
 \section{Conclusions}
 \label{sec:conclusions}
 
-After 13 years, the SMT Competition is a well-established event that
-garners wide interest from developers and users of SMT solvers.  The
-competition continues to contribute to its original goals, including
-adoption of the SMT-LIB format and sparking further advances in SMT,
-and provides a yardstick of performance for SMT solvers.
+Thirteen years after its inception, the SMT Competition is a
+well-established event that garners wide interest from developers and
+users of SMT solvers.  The competition continues to contribute to its
+original goals, including adoption of the SMT-LIB format and sparking
+further advances in SMT, and provides a yardstick of performance for
+SMT solvers.
 
 The last FLoC Olympiad was a period of significant growth for the SMT
 Competition.  The average number of solver submissions increased
@@ -1331,15 +1332,16 @@ SMT-LIB benchmarks used in the competition increased from~77,352
 in~2014~\cite{CDW14} to 342,498 in 2018.  This is partly because new
 benchmarks were added to the SMT Library, but also because benchmarks
 with unknown status are now eligible for the competition, and because
-the earlier culling of benchmarks was abandoned.  Since the
-re-introduction of the unsat-core track in~2016, the competition again
-has three separate tracks.  This, together with new logics in the SMT
-Library, has brought the total number of competition divisions to 115
-in~2018, up from just 40 divisions in~2014~\cite{CDW14}.  The number
-of job pairs increased from 339,714 in~2014 to~1,776,062~in 2018, and
-the total wall-clock time in~2018 exceeded 7.6~years.  By these
-measures, the SMT Competition is one of the largest competitions in
-automated reasoning.
+the competition now uses all eligible benchmarks (rather than a
+randomly selected subset).  Since the re-introduction of the
+unsat-core track in~2016, the competition again has three separate
+tracks.  This, together with new logics in the SMT Library, has
+brought the total number of competition divisions to 115 in~2018, up
+from just 40 divisions in~2014~\cite{CDW14}.  The number of job pairs
+increased from 339,714 in~2014 to~1,776,062~in 2018, and the total
+wall-clock time in~2018 exceeded 7.6~years.  By these measures, the
+SMT Competition is one of the largest competitions in automated
+reasoning.
 
 The StarExec infrastructure has been vitally important in allowing the
 competition to grow to its current size.  The competition organizers
@@ -1354,10 +1356,9 @@ competition on more than one occasion.
 Despite the substantial amount of computational resources available to
 the competition through StarExec, the competition has reached a size
 where future organizers will have to carefully consider the number of
-participants and benchmarks each year, to determine whether the
-current time limits remain tenable.  (Otherwise, reducing the time
-limits would probably be a better solution than reverting to the
-pre-2014 practice of benchmark culling.)
+participants and benchmarks each year, to determine time limits that
+will allow the computational workload to complete before the SMT
+Workshop.
 
 Further development of the competition should be undertaken with care,
 keeping in mind that major changes require not just the competition
@@ -1365,7 +1366,7 @@ organizers, but also participants to adapt.  Immediate action items
 for next year's organizers are
 \begin{itemize}
 \item the inclusion of {\tt check-sat} commands with unknown status in
-  the application track; and
+  the application track, and
 \item the definition of competition-wide rankings for the application
   and unsat-core track.
 \end{itemize}
@@ -1378,14 +1379,13 @@ and participants to gain valuable experience, while reducing the
 impact of mistakes.  If successful, the division may then become
 regular in the following year.
 
-Organizing the competition is a non-trivial amount of work.  Much of
-this happens behind the scenes.  For instance, the competition tools
-(such as the benchmark scrambler and trace executor) often require
-updating when new divisions are added, or when changes are made to
-StarExec.  One could imagine adding further tracks (e.g., for
-proof-producing SMT solvers, or for variants such as max-SMT) to the
-competition, but the effort required to support such tracks will need
-to be balanced against their added value.
+Organizing the competition is a non-trivial amount of work.  For
+instance, the competition tools (such as the benchmark scrambler and
+trace executor) often require updating when new divisions are added,
+or when changes are made to StarExec.  One could imagine adding
+further tracks to the competition (e.g., for proof-producing solvers,
+or for variants such as max-SMT), but the effort required to support
+such tracks will need to be balanced against their added value.
 
 To ensure that the competition results are practically relevant, it is
 important that the SMT Library contains benchmarks that cover a wide
@@ -1393,8 +1393,8 @@ range of applications.  To this end, we again encourage users of SMT
 solvers to submit new and interesting benchmarks to the library,
 especially for underrepresented logics.  This is not just a valuable
 contribution to the community, but also---since these benchmarks will
-then be used in the competition---a straightforward way to get solver
-developers to tune their solvers accordingly.
+then be used in the competition---a straightforward way to incentivize
+solver developers to tune their solvers accordingly.
 
 \paragraph{Acknowledgments}
 
