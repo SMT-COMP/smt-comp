@@ -2,7 +2,7 @@
 
 import os
 import sys
-from argparse import ArgumentParser #, REMAINDER, ArgumentDefaultsHelpFormatter
+from argparse import ArgumentParser
 
 winners_2018_main  = {
         "ABVFP" : "master-2018-06-10-b19c840-competition-default",
@@ -398,30 +398,21 @@ if __name__ == "__main__":
                         else (solvers_2017_main if p == "2017" \
                         else (solvers_2016_main if p == "2016" \
                         else solvers_2015_main))
-                #print(f)
-                #print(p)
                 for l in results[f]:
                     if len(common_benchmarks[l]) > 0:
                         if not l in tmp: tmp[l] = {}
                         assert (l in benchmarks)
                         r = results[f][l] if not args.winners_only else [winners[l]]
-                        #print(p)
-                        #print(winners[l])
                         for s in r:
                             s_name = s if not args.winners_only  else solvers[s]
                             outfile_name = "{}/{}-{}-Main_Track-{}.csv".format(
                                     path, p, l, s_name)
-                            #print("{}-{}".format(p,s))
-                            #print(outfile_name)
-                            #print(l + " " + str(len(common_benchmarks[l])))
                             tmp[l]["{}-{}".format(p,s_name)] = outfile_name
                             with open(outfile_name, 'w') as outfile:
                                 outfile.write(
                                     "# 1 solver, 2 benchmark, 3 time (wallclock)\n")
                                 for b in common_benchmarks[l]:
                                     assert (b in results[f][l][s])
-                                    #print(s)
-                                    #print(p)
                                     assert (s in solvers)
                                     outfile.write(
                                         "{},{},{}\n".format(
@@ -429,7 +420,6 @@ if __name__ == "__main__":
                                             b,
                                             results[f][l][s][b]))
             for l in tmp:
-                #print(str(l) + " "  + str(tmp))
                 makefile.write(
                         '\tRscript cactus_plot.r "{}" "{}" "{}"\n'.format(
                             l,
