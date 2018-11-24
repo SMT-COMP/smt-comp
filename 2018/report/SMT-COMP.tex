@@ -314,7 +314,8 @@ limited.  Complete data about past competitions since 2015 (and partly
 for earlier competitions) is available from the competition website,
 \url{http://www.smtcomp.org}.  This includes detailed results for each
 solver/benchmark combination, totaling nearly 6 million data records
-(about 1.1~GB in CSV format).
+(about 1.1~GB in CSV format).  Competition solvers and benchmarks may
+be downloaded from StarExec, \url{https://www.starexec.org}.
 
 The rest of this paper is structured as follows.  In
 Section~\ref{sec:goals}, we present the goals and organization of the
@@ -323,10 +324,10 @@ and library, and Section~\ref{sec:benchmarks} discusses competition
 divisions and benchmarks.  The competition is being run on StarExec,
 which is described in Section~\ref{sec:starexec}.
 Section~\ref{sec:participants} gives an overview of participating
-solvers.  The details of the competition procedure are described in
-Section~\ref{sec:procedure}, and selected results are presented and
-analyzed in Section~\ref{sec:results}.  We conclude with suggestions
-for future SMT Competitions in Section~\ref{sec:conclusions}.
+solvers.  Selected results are presented
+%TODO: and analyzed
+in Section~\ref{sec:results}.  We conclude with suggestions for future
+SMT Competitions in Section~\ref{sec:conclusions}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -648,9 +649,16 @@ However, a 2013 evaluation of SMT-COMP and SMT-LIB found that this
 ``significantly lessens the ability of a competition to determine
 `best' solvers.''~\cite{CSW15} Together with the increased
 computational resources available to the competition since its move to
-StarExec, this prompted a paradigm shift.  Since 2015, the competition
-is evaluating all solvers on all eligible benchmarks. \TODO: benchmark
-weights
+StarExec, this finding prompted a paradigm shift.  Since 2015, the
+competition is evaluating all solvers on all eligible benchmarks.
+This change had an unintended side effect: the pseudo-random selection
+process had been purposely constrained to choose benchmarks from
+different benchmark families (that is, groups of benchmarks with
+similar characteristics).  Since there are vast differences in size
+between benchmark families in the SMT Library, the competition
+since~2016 uses a scoring method that assigns a weight to each
+main-track benchmark in order to de-emphasize large benchmark
+families~\cite{rules18}.
 
 Another paradigm shift concerns the treatment of benchmarks with
 unknown status.  Because of the difficulty to judge solver responses
@@ -667,8 +675,10 @@ for the competition's main track regardless of status, and they
 directly affect the competition results.  Solver responses for such
 benchmarks are assumed to be correct, unless there is a disagreement
 between two or more (otherwise sound) solvers.  Benchmarks with
-disagreements are removed from the competition results (see
-Section~\ref{sec:results-disagreements} for further discussion).
+disagreements are removed from the competition results.  In 2016,
+there were disagreements on 79 benchmarks; in 2017, only one benchmark
+was removed; and in 2018, there were no disagreements between
+otherwise sound solvers.
 
 For incremental benchmarks, the situation is different: an incremental
 benchmark is ineligible for the application track if its first {\tt
@@ -897,10 +907,10 @@ competition only ran~339,714 job pairs~\cite{CDW14}.
 
 Also shown in Figure~\ref{fig:job-pairs} is the total wall-clock time
 (summed over all job pairs) for the competition.  This has more than
-doubled, from 3.5~years in~2015 to 7.6~years in~2018.  (These are
-solver run-times only.  Time that the cluster spent on pre- and
+doubled, from 3.5~years in~2015 to 7.6~years in~2018.  These are
+solver run-times only; time that the cluster spent on pre- and
 post-processing of benchmarks and solver output or on other auxiliary
-tasks is not included.)  The increase in~2016 is largely due to the
+tasks is not included.  The increase in~2016 is largely due to the
 inclusion of (non-incremental) benchmarks with unknown status; these
 were evaluated with a wall-clock time limit of 10~minutes.  In~2017,
 when these benchmarks had become eligible for the main track,
@@ -1163,19 +1173,36 @@ submissions~\cite{CDW14}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Competition Procedure}
-\label{sec:procedure}
-
-\TODO: explain those aspects of the procedure that are required to
-understand the results (e.g., scoring)
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Results}
 \label{sec:results}
 
 \subsection{Division Rankings}
 \label{sec:division-rankings}
+
+Solvers in each division (of each track) are ranked according to a
+metric that is based, first, on the number of erroneous responses
+(which is usually~0, but solvers that did give erroneous responses are
+ranked behind solvers that did not); second, on the number of correct
+responses; third, on the wall-clock and CPU time that the solver
+process consumed.  For the unsat-core track (which uses unsatisfiable
+benchmarks only), the reduction in the size of the unsatisfiable core
+is used instead of the number of correct responses.  A detailed
+description of the scoring regulations can be found in the competition
+rules~\cite{rules18}.
+
+As discussed in Section~\ref{sec:benchmarks}, main-track benchmarks
+with unknown status are removed from the competition results if two
+(or more) solvers that are sound on benchmarks with known status
+disagree on their result.  Otherwise, solver responses for benchmarks
+with unknown status are assumed to be correct.
+
+All solvers are run with four cores available, and the time limit~$T$
+that is imposed on each job pair (see Table~\ref{table:time-limits})
+is a wall-clock limit.  Thus, solvers that take advantage of
+parallelism might use up to~$4T$ CPU time.  For the main track and the
+unsat-core track, the competition reports parallel and sequential
+performance separately.  The latter is determined by imposing a
+(virtual) CPU time limit of~$T$.
 
 In tables~\ref{tab:winners-main-1},~\ref{tab:winners-main-2} and
 ~\ref{tab:winners-unsat-core}, entries $A/B$ indicate that solver $A$
@@ -1185,13 +1212,13 @@ both, which is most often the case, its name appears just once. All
 runs in the application track are sequential and therefore only
 sequential performance is used to determine the winners.
 
+\TODO: non-competitive divisions
+
 \include{table-winners-main}
 
 \include{table-winners-application}
 
 \include{table-winners-unsat-core}
-
-\TODO
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
