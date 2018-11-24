@@ -427,6 +427,7 @@ if __name__ == "__main__":
                             '" "'.join(tmp[l].keys())))
             makefile.write("clean:\n")
             makefile.write("\trm -r pdf\n")
+            makefile.write("\trm -r makefile\n")
 
 
     except BrokenPipeError:
