@@ -27,10 +27,10 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 %\input epsf
 \special{papersize=8.5in,11in}
 
-\jsatheading{1}{2004}{25-30}
+\jsatheading{1}{2004}{1-25}
 \ShortHeadings{The SMT Competition 2015--2018}
 {Weber et al.}
-\firstpageno{25}
+\firstpageno{1}
 
 % float layout
 \setcounter{topnumber}{2}
@@ -100,7 +100,7 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 
 \keywords{SMT solver, SMT-COMP, SMT-LIB, Satisfiability Modulo Theories, competitions}
 
-\published{September 2004}{October 2004}{November 2004}
+\published{November 2018}{November 2018}{November 2018}
 
 %% Expected content according to the JSAT Call for Papers:
 
@@ -1191,11 +1191,11 @@ All solvers are run with four cores available, and the time limit~$T$
 that is imposed on each job pair (see Table~\ref{table:time-limits})
 is a wall-clock limit.  Thus, solvers that take advantage of
 parallelism might use up to~$4T$ CPU time.  For the main track and the
-unsat-core track, the competition reports sequential and parallel
-performance separately.  The former is determined by imposing a
-(virtual) CPU time limit of~$T$.  For the application track,
-sequential performance is not recorded (because response times to
-individual {\tt check-sat} commands are not available).
+unsat-core track, the competition reports parallel and sequential
+performance separately.  The latter is determined by imposing a
+(virtual) CPU time limit of~$T$.  For the application track, only
+parallel performance is reported (because response times to individual
+{\tt check-sat} commands are not recorded by StarExec).
 
 Tables~\ref{tab:winners-main}--\ref{tab:winners-unsat-core} show the
 highest-ranked solver for each division from 2015--2018.  Entries
