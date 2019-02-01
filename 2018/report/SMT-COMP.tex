@@ -2,6 +2,7 @@
 
 \usepackage{jsat}
 \usepackage{amsmath, amsthm, amssymb}
+\usepackage{booktabs}
 %\usepackage[pdf]{pstricks}
 %\usepackage{pst-tree}
 
@@ -494,15 +495,15 @@ had a size of 1,041~MB; the total size of the release was 91~GB.
   \caption{Number of benchmarks and logics in the SMT Library}
   \label{table:smtlib}
   \centering
-  \begin{tabular}{|r@{\ \ }l|r|r|r|r|}
-    \hline
-                               & & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
-    \hline
+  \begin{tabular}{r@{\ \ }lrrrr}
+    \toprule
+                               & & \multicolumn{1}{c}{2015} & \multicolumn{1}{c}{2016} & \multicolumn{1}{c}{2017} & \multicolumn{1}{c}{2018} \\
+    \midrule
     \multirow{2}{*}{Non-incremental $\{$} & benchmarks & 196375 & 196114 & 258079 & 336844 \\
                                           & logics     &     40 &     40 &     49 &     51 \\
     \multirow{2}{*}{Incremental $\{$}     & benchmarks &  10019 &  10024 &   6262 &  10167 \\
                                           & logics     &     15 &     15 &     22 &     26 \\
-    \hline
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -623,14 +624,14 @@ benchmarks were excluded because of missing status information.
   \caption{Number of divisions in each competition track}
   \label{table:divisions}
   \centering
-  \begin{tabular}{|l|r|r|r|r|}
-    \hline
-    & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
-    \hline
+  \begin{tabular}{lcccc}
+    \toprule
+    & 2015 & 2016 & 2017 & 2018 \\
+    \midrule
     Main track        &  40 & 40 & 49 & 50 \\
     Application track &  14 & 14 & 16 & 21 \\
     Unsat-core track  &  -- & 40 & 41 & 44 \\
-    \hline
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -692,10 +693,10 @@ benchmarks in QF\_SLIA.
   \caption{Number of benchmarks used in the main track (by division)}
   \label{table:benchmarks-main-track}
   \centering
-  \scalebox{.9}[.82]{\begin{tabular}{|l|r|r|r|r|}
-    \hline
-    Division & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
-    \hline
+  \scalebox{.9}[.8]{\begin{tabular}{lrrrr}
+    \toprule
+    Division & \multicolumn{1}{c}{2015} & \multicolumn{1}{c}{2016} & \multicolumn{1}{c}{2017} & \multicolumn{1}{c}{2018} \\
+    \midrule
     ABVFP      &     -- &     -- &      1 &     1 \\
     ALIA       &     42 &     42 &     42 &    42 \\
     AUFBVDTLIA &     -- &     -- &   1709 &  1709 \\
@@ -746,9 +747,9 @@ benchmarks in QF\_SLIA.
     UFLIA      &   8404 &   8404 &  10137 & 10137 \\
     UFLRA      &     25 &     25 &     15 &    15 \\
     UFNIA      &   2319 &   2319 &   3308 &  3308 \\
-    \hline
+    \midrule
     Total      & 154238 & 154424 & 256973 & 333241 \\
-    \hline
+    \bottomrule
   \end{tabular}}
 \end{table}
 
@@ -757,10 +758,10 @@ benchmarks in QF\_SLIA.
     division)}
   \label{table:benchmarks-application-track}
   \centering
-  \begin{tabular}{|l|r|r|r|r|}
-    \hline
-    Division & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
-    \hline
+  \begin{tabular}{lrrrr}
+    \toprule
+    Division & \multicolumn{1}{c}{2015} & \multicolumn{1}{c}{2016} & \multicolumn{1}{c}{2017} & \multicolumn{1}{c}{2018} \\
+    \midrule
     ALIA       &   24 &   24 &   24 &   24 \\
     ANIA       &    3 &    3 &    3 &    3 \\
     AUFNIRA    &   -- &   -- &   -- &  117 \\
@@ -782,9 +783,9 @@ benchmarks in QF\_SLIA.
     QF\_UFLRA  & 3331 & 3331 & 3056 & 3058 \\
     QF\_UFNIA  &    1 &    1 &    1 &    1 \\
     UFLRA      & 5358 & 5358 & 1870 & 1870 \\
-    \hline
+    \midrule
     Total      & 9852 & 9856 & 5971 & 9257 \\
-    \hline
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -793,10 +794,10 @@ benchmarks in QF\_SLIA.
     division)}
   \label{table:benchmarks-unsat-core-track}
   \centering
-  \scalebox{1}[.93]{\begin{tabular}{|l|r|r|r|}
-    \hline
-    Division & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
-    \hline
+  \scalebox{1}[.91]{\begin{tabular}{lrrr}
+    \toprule
+    Division & \multicolumn{1}{c}{2016} & \multicolumn{1}{c}{2017} & \multicolumn{1}{c}{2018} \\
+    \midrule
     ALIA       &     41 &     41 &     41 \\
     AUFBVDTLIA &     -- &     -- &     25 \\
     AUFLIA     &      3 &      3 &      3 \\
@@ -841,9 +842,9 @@ benchmarks in QF\_SLIA.
     UFLIA      &   8377 &   7714 &   7743 \\
     UFLRA      &     20 &     10 &     10 \\
     UFNIA      &   2318 &   2432 &   2457 \\
-    \hline
+    \midrule
     Total      &  93241 & 114233 & 130705 \\
-    \hline
+    \bottomrule
   \end{tabular}}
 \end{table}
 
@@ -915,17 +916,17 @@ Table~\ref{table:time-limits} shows the wall-clock time limits that
 were imposed on job pairs for each track and year.
 
 \begin{table}
-  \caption{Wall-clock time limits}
+  \caption{Wall-clock time limits (in minutes)}
   \label{table:time-limits}
   \centering
-  \begin{tabular}{|l|r|r|r|r|}
-    \hline
-    & \multicolumn{1}{c|}{2015} & \multicolumn{1}{c|}{2016} & \multicolumn{1}{c|}{2017} & \multicolumn{1}{c|}{2018} \\
-    \hline
-    Main track        & 40~min & 40~min & 20~min\protect\footnotemark & 20~min \\
-    Application track & 40~min & 40~min & 40~min\phantom{$^{1.}$} & 40~min \\
-    Unsat-core track  &     -- & 40~min & 40~min\phantom{$^{1.}$} & 40~min \\
-    \hline
+  \begin{tabular}{lcccc}
+    \toprule
+    & 2015 & 2016 & 2017 & 2018 \\
+    \midrule
+    Main track        & 40 & 40 & 20\protect\footnotemark & 20 \\
+    Application track & 40 & 40 & 40\phantom{$^{1.}$}      & 40 \\
+    Unsat-core track  & -- & 40 & 40\phantom{$^{1.}$}      & 40 \\
+    \bottomrule
   \end{tabular}
 \end{table}
 \footnotetext{These job pairs were first run with a time limit of
@@ -1010,10 +1011,10 @@ solver versions since 2015.
   \caption{Participants (2015--2018)}
   \label{table:participants}
   \centering
-  \begin{tabular}{|l|p{11.5cm}|}
-    \hline
+  \begin{tabular}{lp{11.5cm}}
+    \toprule
     Solver & Submitters (Affiliations)\\
-    \hline
+    \midrule
     ABC~\cite{DBLP:conf/cav/BraytonM10} & Valeriy Balabanov
                         (Mentor Graphics)\\
     Alt-Ergo~\cite{conchon:hal-01960203} & Albin Coquereau
@@ -1064,7 +1065,7 @@ solver versions since 2015.
                         (SRI International)\\
     Z3~\cite{DBLP:conf/tacas/MouraB08} & Christoph Wintersteiger, Aleksandar Zelji\'c
                         (Microsoft Research; Uppsala University)\\
-    \hline
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -1081,10 +1082,10 @@ versions of each solver were submitted in each year.
     participating hors concours.}
   \label{table:participants-history}
   \centering
-  \begin{tabular}{|l|r@{\,\,}r|r@{\,\,}r|r@{\,\,}r|r@{\,\,}r|}
-    \hline
-    Solver & \multicolumn{2}{c|}{2015} & \multicolumn{2}{c|}{2016} & \multicolumn{2}{c|}{2017} & \multicolumn{2}{c|}{2018} \\
-    \hline
+  \begin{tabular}{lr@{\,\,}rr@{\,\,}rr@{\,\,}rr@{\,\,}r}
+    \toprule
+    Solver & \multicolumn{2}{c}{2015} & \multicolumn{2}{c}{2016} & \multicolumn{2}{c}{2017} & \multicolumn{2}{c}{2018} \\
+    \midrule
     ABC               &    &      &  2 &      &    &      &    &      \\
     Alt-Ergo          &    &      &    &      &    &      &  1 &      \\
     AProVE            &  1 &      &  1 &      &  1 &      &  1 &      \\
@@ -1111,9 +1112,9 @@ versions of each solver were submitted in each year.
     XSat              &    &      &    &      &  1 &      &    &      \\
     Yices2            &  3 &      &  2 &      &  2 &      &  3 &      \\
     Z3                &  2 & [+1] &    & [+1] &    & [+1] &    & [+1] \\
-    \hline
+    \midrule
     Total             & 26 & [+4] & 32 & [+5] & 22 & [+4] & 25 & [+6] \\
-    \hline
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -1149,16 +1150,16 @@ submissions~\cite{CDW14}.
     concours.}
   \label{table:participation-by-track}
   \centering
-  \begin{tabular}{|l|r@{\,\,}r|r@{\,\,}r|r@{\,\,}r|r@{\,\,}r|}
-    \hline
-                      & \multicolumn{2}{c|}{2015} & \multicolumn{2}{c|}{2016} & \multicolumn{2}{c|}{2017} & \multicolumn{2}{c|}{2018} \\
-    \hline
-    Main track        & 21 &                [+2] & 25 & [+2] & 19 & [+2] & 20 & [+4] \\
-    Application track & 10 &                [+3] &  8 & [+3] &  4 & [+2] &  4 & [+2] \\
-    Unsat-core track  & \multicolumn{2}{c|}{---} &  1 & [+4] &  2 & [+2] &  3 & [+2] \\
-    \hline
-    Total             & 26 &                [+4] & 32 & [+5] & 22 & [+4] & 25 & [+6] \\
-    \hline
+  \begin{tabular}{lr@{\,\,}rr@{\,\,}rr@{\,\,}rr@{\,\,}r}
+    \toprule
+                      & \multicolumn{2}{c}{2015} & \multicolumn{2}{c}{2016} & \multicolumn{2}{c}{2017} & \multicolumn{2}{c}{2018} \\
+    \midrule
+    Main track        & 21 &               [+2] & 25 & [+2] & 19 & [+2] & 20 & [+4] \\
+    Application track & 10 &               [+3] &  8 & [+3] &  4 & [+2] &  4 & [+2] \\
+    Unsat-core track  & \multicolumn{2}{c}{---} &  1 & [+4] &  2 & [+2] &  3 & [+2] \\
+    \midrule
+    Total             & 26 &               [+4] & 32 & [+5] & 22 & [+4] & 25 & [+6] \\
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -1252,28 +1253,28 @@ more detailed information about each solver.
   \caption{Competition-wide ranking for the main track: best solvers (by year)}
   \label{table:competition-wide-ranking}
   \centering
-  \scalebox{.89}{\begin{tabular}{|c|p{2.2cm}|r|r|p{0cm}|c|p{2.2cm}|r|r|}
-    \cline{1-4} \cline{6-9}
-    \multicolumn{4}{|c|}{2015} & & \multicolumn{4}{c|}{2016} \\ \cline{1-4} \cline{6-9}
+  \scalebox{.89}{\begin{tabular}{cp{2.2cm}rrp{0cm}cp{2.2cm}rr}
+    \cmidrule[\heavyrulewidth]{1-4} \cmidrule[\heavyrulewidth]{6-9}
+    \multicolumn{4}{c}{2015} & & \multicolumn{4}{c}{2016} \\ \cmidrule{1-4} \cmidrule{6-9}
     Rank & Solver & Score  & Score  & & Rank & Solver & Score & Score \\
-         &        & (sequential) & (parallel) & & & & (sequential) & (parallel) \\ \cline{1-4} \cline{6-9}
+         &        & (sequential) & (parallel) & & & & (sequential) & (parallel) \\ \cmidrule{1-4} \cmidrule{6-9}
          & [Z3]              & 159.36 & 159.36 & &    & [Z3]   & 185.09 & 185.09 \\
       1. & CVC4              & 144.67 & 144.74 & & 1. & CVC4   & 180.95 & 181.19 \\
       2. & CVC4(exp)\footnotemark & 140.47 & 140.51 & & 2. & Yices2 & 119.29 & 119.29 \\
-      3. & Yices             & 101.91 & 101.91 & & 3. & veriT  &  75.11 &  75.11 \\ \cline{1-4} \cline{6-9}
+      3. & Yices             & 101.91 & 101.91 & & 3. & veriT  &  75.11 &  75.11 \\ \cmidrule[\heavyrulewidth]{1-4} \cmidrule[\heavyrulewidth]{6-9}
   \end{tabular}}
 
   \medskip
 
-  \scalebox{.89}{\begin{tabular}{|c|p{2.2cm}|r|r|p{0cm}|c|p{2.2cm}|r|r|}
-    \cline{1-4} \cline{6-9}
-    \multicolumn{4}{|c|}{2017} & & \multicolumn{4}{c|}{2018} \\ \cline{1-4} \cline{6-9}
+  \scalebox{.89}{\begin{tabular}{cp{2.2cm}rrp{0cm}cp{2.2cm}rr}
+    \cmidrule[\heavyrulewidth]{1-4} \cmidrule[\heavyrulewidth]{6-9}
+    \multicolumn{4}{c}{2017} & & \multicolumn{4}{c}{2018} \\ \cmidrule{1-4} \cmidrule{6-9}
     Rank & Solver & Score  & Score  & & Rank & Solver & Score & Score \\
-         &        & (sequential) & (parallel) & & & & (sequential) & (parallel) \\ \cline{1-4} \cline{6-9}
+         &        & (sequential) & (parallel) & & & & (sequential) & (parallel) \\ \cmidrule{1-4} \cmidrule{6-9}
          & [Z3]        & 171.99 & 171.99 & & 1. & CVC4        & 211.99 & 211.99 \\
       1. & CVC4        & 161.38 & 161.76 & &    & [Z3]        & 186.19 & 186.19 \\
       2. & Yices2      & 110.63 & 110.63 & & 2. & Yices2      & 115.26 & 115.26 \\
-      3. & SMTInterpol &  65.96 &  66.00 & & 3. & SMTInterpol &  65.32 &  65.38 \\ \cline{1-4} \cline{6-9}
+      3. & SMTInterpol &  65.96 &  66.00 & & 3. & SMTInterpol &  65.32 &  65.38 \\ \cmidrule[\heavyrulewidth]{1-4} \cmidrule[\heavyrulewidth]{6-9}
   \end{tabular}}
 \end{table}
 \footnotetext{This was a distinct version of CVC4 that was designated as experimental.}
