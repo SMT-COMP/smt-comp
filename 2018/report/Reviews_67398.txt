@@ -1,0 +1,267 @@
+﻿====== Review 1 =========
+
+The SMT Competition 2015-2018
+Authors: Tjark Weber, Sylvain Conchon, David Déharbe, Matthias Heizmann, Aina Niemetz, Giles Reger
+
+Recommendation: Major revision
+
+This paper covers the last four years of SMT-COMP,
+and contains a general description of SMT-COMP,
+a more detailed explanation of what changed in these four years,
+and an overview over the results in these four years.
+Thus the paper is valuable to both outsiders of the SMT-COMP community
+as well as people familiar with it.
+The paper is nicely written and well understandable.
+It is clearly organized and follows a logical structure.
+
+In the CfP it is mentioned that competition reports
+should give a summary of the main technical contributions to the field.
+Are there any worthy new concepts or approaches
+(except for the mentioned additions of new logics)
+that have appeared in SMT-COMP in 2015-2018 and could be mentioned?
+
+
+There are also a few more points for which it would be good
+if they could be explained in more detail in the paper
+for readers who are not yet deeply familiar with SV-COMP.
+
+In Sect. 4, it is mentioned that a weighted scoring schema was introduced in 2016,
+but it is not explained how this weighting is computed.
+This is explained in [29], but please add it to this paper, too
+([29] is just an online PDF, not a publication).
+It would also be good to compare this weighting
+to the weighting used by other competitions, like for example SV-COMP.
+
+It is not defined what a "competitive" division is,
+please explain the rules for this.
+
+What are the requirements that a submission to SMT-COMP has to fulfill?
+For example, can anybody submit a tool,
+or do they need to be a developer of the tool?
+Are there any conditions on the license of the tool,
+such as allowing to redistribute the tool?
+
+To which extend is SMT-COMP reproducible?
+The SMT Library is available for everyone,
+can everyone download all tools, too
+(in the version that is guaranteed to be the same as in SMT-COMP)?
+Is everything else that is necessary (i.e., tool command lines etc.) archived?
+
+Is there anything known about why the number of participants
+in the application track is now much smaller compared to 2015,
+although the number of participants in the main track is similar?
+
+Are produced unsat cores checked for whether they are actually unsat cores,
+i.e., unsatisfiable and a subset of the input problem?
+
+
+In addition, it would also be interesting
+to have more comparisons with other big competitions, such as SV-COMP,
+but of course having too much of this would be out of scope for the current paper.
+
+
+Minor suggestions:
+The labels of the x-axis of Fig. 2 would be easier to read for humans
+if they would be written like "100 B - 1 kB" or something similar.
+Maybe there is also a way to keep the current labels
+and add some intuitive markers for the ranges of kB, MB, GB?
+
+In the third paragraph of Sect. 4,
+there should be no line break between "8" and "benchmarks".
+
+In the fifth paragraph of Sect. 4, the term "otherwise sound solvers" is used
+but not precisely defined.
+Does this refer to solvers that do not produce wrong answers
+for benchmarks with a known status?
+Please clarify in the paper.
+
+
+===== Reviewer 2 ======
+
+Title: The SMT Competition 2015-2018
+ Authors: Weber, Conchon, Déharbe, Heizmann, Niemetz, Reger
+
+ Recommendation: Major revision
+
+ ============================================================================================
+
+ The paper presents an overview of the SMT competition series since 2015, i.e. the year after the last participation of SMT Comp into the FLoC Olympic Games.
+
+ Design, participants and results are outlined for the various logics, divisions and track.
+
+ The paper follows the lines of competition reports submitted to journal in the SMT and related areas.
+
+ However, for the current report I have several concerns on different aspects:
+
+ * Organization
+
+ - Section 2 is basically only about organization, and to goals is devoted the first paragraph only. Please consider to rename. More in general to the section, the vast majority focuses on explaining the timeline and reasons for having deadline for milestones in the organization, that are basic rules and motivations when organizing such an event. So, I would avoid this information, and either deleting the section or significantly shrinking it.
+
+- first part of Section 4 refers to years earlier than 2015. Given the focus of the paper, I ll not mention this
+
+- again on Sec 4, it is not clear whether the central part (first paragraph of pg 7) reports about some sort of benchmarks classification. If this is the case, this part should be extended.
+
+
+* Quality
+
+- The paper contains many issues, minor or not, detailed at the end of this review
+
+* Contribution 
+
+- Authors state that (i) "for space reasons" details are missing. More, at the end of the paper in the "Further analysis" paragraph they state that (ii) "A deeper analysis ... goes beyond the immediate mandate of the competition organizers".
+
+About (i), as far as I know this is Full Submission, without space limits.
+
+About (ii), I think that a detailed analysis should be instead one of a main aim of a competition report (and independently from the fact that this is an immediate mandate or not of the organizers), going beyond overall results and raw numbers, by explaining e.g. what techniques have worked well on what logics/division, in order to support a more deep understanding of what's is going on in SMT solving.
+
+* Rules
+
+- "Benchmarks with disagreement are removed". What is about n-1 solvers give one response, and only one give another? Is not there a sort of "majority" outputs or the possibility to check responses? (for some logics there should be). If I understand correctly, the risk is of, instead of assigning a wrong answer to a solver,  removing the benchmark "ignoring" the issue.
+
+- what is the "competition-wide" ranking? please explain.
+
+* Significance of the results
+
+- From the global results (Table 13) I can see that in 2015, 2016 and 2017 the overall winner would have been Z3, running hors concourse. Perhaps, it is a solver not tuned for the (benchmarks of the) competition.
+
+In my opinion this questions about the significance of the results and the awards of the competition, given that the overall best solver is a non-participant non-tuned solver.
+
+Can you comment and argue about this?
+
+- the change of the scoring for competition-wise ranking is explained, but to me is (partially) in contrast to the (clear) motivations given before for strongly penalizing incorrect solvers.
+
+
+Minor points
+
+* Authors list
+
+In case, the information about the involvement of authors should be put in the main text
+
+* Abstract
+
+"FLoC Olympiad" -> "FLoC Olympic Games" as stated by FLoC ?
+
+Introduction
+
+. "among others" -> ", among others"
+
+. Intuitive meaning of the formula in page 2 should be given. And a "." should be added at its end
+
+. "Many SMT solvers employ SAT". Should we explicitly refer to the lazy SMT solving approach?
+
+Section 3
+
+. "to the next" -> "to the other" ? (This recurs later.)
+
+. "reclassified". Are you referring to a sort of benchmark classification? As stated above, in case this should be expanded
+
+. "if this is known" -> "if known"
+
+Section 4
+
+. "need not support all logics"?
+
+. "for favoring imitations" ?
+
+Section 5
+
+. is Table 6 needed? Basically all time limits have been of 40 min, other than for Unsat-core track in 2015 (but the track was not in place) and main track of 2017. A line in the text should suffice
+
+Section 7
+
+. "(because response ... are not recorded by StarExec)". Please clarify
+
+. "performance" -> "execution"
+
+. "we are including" -> "we include"
+
+. "awarded these to the" -> "awarded the"
+
+Acknowledge
+
+. "and last but not least" -> "and, last but not least,"
+
+References
+
+. Some work has to be done in order to have the references uniform, e.g.
+
+(i) conferences are mentioned in two different ways, e.g. "Proceedings of the ... " vs. "..., Proceedings," (see, e.g. [4] vs. [5])
+
+(ii) reference [7] is incomplete
+
+
+====== Review 3 =========
+
+Review for Weber, Conchon, Deharbe, Heizmann, Niemetz, Reger: The SMT
+Competition 2015-2018.
+
+Recommendation: major revision
+
+Summary: This paper presents a report on the SMT competitions between 2015 and
+2018 (with a focus on 2018). It provides a record/archive of the competitors
+and results, but it fails to provide any real value beyond that which is
+provided by the statistics on the SMT-COMP website. I recommend a major
+revision because I believe that this paper can be shortened significantly
+without loss of value, or alternatively, a more thorough analysis of the
+competition results can be added.
+
+Some details:
+
+Sec 1&2&3: I believe these two sections are completely unnecessary. They are
+not specific to the 2015-2018 time frame and the same information in greater
+detail is found elsewhere. This paper is really for readers that already know
+SMT; those that don't, would be served much better by references to the
+respective standards/tutorials/websites. The numbers in Sec 3 are somewhat
+interesting (as a record), but they are really more about SMT-LIB than
+SMT-COMP. Fig 2: The file size of benchmark problems is really only very
+vaguely interesting, as it is not in any relation with the complexity of the
+problems. Perhaps a scatter-plot that relates file size and average solver
+run-time (perhaps one for each competition year) would provide a better view of
+the complexity of SMT problems.
+
+Sec 5: "Since 2014 (and ... 2013)": Unclear why 2013 is singled out.
+
+Tbls 3/4: These tables could go into an appendix; they are really just for the
+archive, they don't add much to the reader's experience.
+
+Pg 11, Pg 21: "By these measures ... one of largest competition in automated
+reasoning": These statements are really unnecessary, especially if they are not
+backed up by data or references. Also, the "measures" in the two occurrences of
+this sentence are not the same!
+
+Pg 13/Tbl 7: I think listing the names of the solver submitters for each
+participating solver is a bit awkward. This paper, as a record of the
+competition results, really doesn't need this bit of information. Conversely,
+it would be much nicer if the whole development teams could be credited for
+their participation. This is to some degree implicit in the citations, but I'm
+sure the cited papers don't contain all team members either.
+
+Pg 16/Tbl 10: I find this very hard to read; I think it would be better not to
+use multi-column cells. For instance, just repeating the solver name in every
+cell would make it much easier to see how many participants there were in each
+of the years.
+
+Pg 19, Tbl 13: This table essentially shows that the parallel score has
+absolutely no effect on the competition at all. This should perhaps be
+mentioned in the text, or those scores could be removed altogether.
+
+Pg 20: "beyond the immediate mandate of the competition organizers": I think
+analyses of this sort certainly within the mandate of the paper authors - it's
+not clear which subsets of them are also (past) organizers. Given all of the
+data is readily available, it would have been trivial to add a plot of solver
+performance over the years, as suggested here. (And many other types of
+analyses too.)
+
+Pg 7, Pg 21: The fact that the trace executor doesn't support "unknown"
+annotations in the incremental track is mentioned twice. This seems a
+completely trivial issue to resolve (by simply implementing it), and the data
+can easily be re-analyzed without re-running the solvers. Clearly, something
+must be much harder than I imagine for this issue to persist over the last 4
+years, i.e. this needs to be explained much more thorough.
+
+Sec 8: This section is really a combined conclusion over the previous years,
+and an outlook to and recommendation for the next competition - perhaps this
+section could be split to emphasize that.
+
+
+
