@@ -1323,16 +1323,89 @@ unsat-core track, the size of the smallest unsatisfiable core---and
 hence the number of points attainable on any given benchmark---may not
 be known precisely.
 
-\medskip
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\paragraph{Further analysis.}
+\subsection{Further Analysis}
 
-A deeper analysis of the competition results, for example with a view
-to improvements in SMT solvers over time, would certainly be
-interesting, but goes beyond the immediate mandate of the competition
-organizers.  We leave it for future work, noting that all data needed
-for such an analysis is publicly available from the competition
-website.
+Beyond the competition rankings, the competition data provides ample
+opportunity for further analysis.  Here, we report on three additional
+aspects: progress in solver performance, number of uniquely solved
+benchmarks, and use of parallelism in SMT solvers.
+
+\paragraph{Progress in solver performance.}
+
+%TODO
+
+\paragraph{Unique solutions.}
+
+For each SMT solver, the number of uniquely solved benchmarks---that
+is, the number of benchmarks that were solved by this solver only---is
+a measure of how much the solver contributes to the state-of-the-art,
+and the extent to which it is complementary to other solvers.  In
+particular, if a solver that uniquely solves~$n$ benchmarks had not
+participated in the competition, the virtual best solver would have
+been able to solve~$n$ fewer benchmarks.
+Table~\ref{table:unique-solutions} shows the number of uniquely solved
+benchmarks for each main-track solver from 2015--2018.  (Multiple
+versions of a solver are consolidated in this table, and answers that
+were given by unsound solver versions are excluded.)
+
+Solvers that rank highly in the competition-wide ranking
+(Section~\ref{sec:floc}) often also solve many benchmarks uniquely,
+but there are exceptions.  For instance, SMTInterpol has relatively
+few unique solutions, despite achieving third place in the
+competition-wide ranking in~2017 and~2018.  However, almost every
+(sound) solver solves at least some benchmarks uniquely, and hence
+contributes to the state-of-the-art.
+
+The largest numbers in Table~\ref{table:unique-solutions} are due to
+divisions in which there was only one sound solver: in~2016, MathSAT
+was the only solver to support QF\_FP; in~2017, Z3 was the only sound
+solver in QF\_FP; and in~2018, CVC4 was the only solver to support
+QF\_SLIA, as well as the only sound solver in QF\_ABVFP.  Note that
+divisions with fewer than two competing solvers do not affect the
+competition-wide ranking.
+
+\begin{table}
+  \caption{Number of main-track benchmarks uniquely solved by each
+    solver (by year)}
+  \label{table:unique-solutions}
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    Solver & 2015 & 2016 & 2017 & 2018 \\
+    \midrule
+    ABC               &       & 3     &       &        \\
+    Alt-Ergo          &       &       &       & 1      \\
+    AProVE            & 1     & 0     & 413   & 553    \\
+    Boolector         & 37    & 23    & 97    & 62     \\
+    COLIBRI           &       &       & 3     & 22     \\
+    Ctrl-Ergo         &       &       &       & 12     \\
+    CVC3              & 69    &       &       &        \\
+    CVC4              & 4884  & 116   & 10258 & 100679 \\
+    MapleSTP          &       & 2     &       &        \\
+    {[}MathSAT{]}     & 13    & 28748 & 11    & 5      \\
+    MinkeyRink        &       & 27    & 27    & 16     \\
+    OpenSMT2          & 0     & 0     & 0     & 0      \\
+    ProB              &       & 1     &       &        \\
+    Q3B               &       & 0     & 89    & 0      \\
+    raSAT             & 3     & 14    &       &        \\
+    Redlog            &       &       & 4     &        \\
+    SMT-RAT           & 13    & 0     & 85    & 2      \\
+    SMTInterpol       & 2     & 2     & 5     & 4      \\
+    SPASS-SATT        &       &       &       & 34     \\
+    STP               & 4     & 2     & 4     & 5      \\
+    toysmt            &       & 0     &       &        \\
+    Vampire           &       & 139   & 753   & 652    \\
+    veriT             & 5     & 21    & 55    & 57     \\
+    XSat              &       &       & 0     &        \\
+    Yices2            & 88    & 146   & 2379  & 1535   \\
+    Z3                & 6139  & 242   & 40992 & 888    \\
+    \midrule
+    Total             & 11258 & 29486 & 55175 & 104527 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
