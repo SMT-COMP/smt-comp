@@ -1375,34 +1375,97 @@ competition-wide ranking.
     \toprule
     Solver & 2015 & 2016 & 2017 & 2018 \\
     \midrule
-    ABC               &       & 3     &       &        \\
+    ABC               &       & 7     &       &        \\
     Alt-Ergo          &       &       &       & 1      \\
-    AProVE            & 1     & 0     & 413   & 553    \\
-    Boolector         & 37    & 23    & 97    & 62     \\
+    AProVE            & 5     & 0     & 413   & 553    \\
+    Boolector         & 37    & 25    & 97    & 62     \\
     COLIBRI           &       &       & 3     & 22     \\
     Ctrl-Ergo         &       &       &       & 12     \\
-    CVC3              & 69    &       &       &        \\
-    CVC4              & 4884  & 116   & 10258 & 100679 \\
-    MapleSTP          &       & 2     &       &        \\
-    {[}MathSAT{]}     & 13    & 28748 & 11    & 5      \\
-    MinkeyRink        &       & 27    & 27    & 16     \\
+    CVC3              & 70    &       &       &        \\
+    CVC4              & 4863  & 113   & 10258 & 100679 \\
+    MapleSTP          &       & 0     &       &        \\
+    {[}MathSAT{]}     & 21    & 28745 & 11    & 5      \\
+    MinkeyRink        &       & 13    & 27    & 16     \\
     OpenSMT2          & 0     & 0     & 0     & 0      \\
-    ProB              &       & 1     &       &        \\
+    ProB              &       & 2     &       &        \\
     Q3B               &       & 0     & 89    & 0      \\
-    raSAT             & 3     & 14    &       &        \\
+    raSAT             & 0     & 14    &       &        \\
     Redlog            &       &       & 4     &        \\
-    SMT-RAT           & 13    & 0     & 85    & 2      \\
-    SMTInterpol       & 2     & 2     & 5     & 4      \\
+    SMT-RAT           & 12    & 0     & 85    & 2      \\
+    SMTInterpol       & 1     & 1     & 5     & 4      \\
     SPASS-SATT        &       &       &       & 34     \\
-    STP               & 4     & 2     & 4     & 5      \\
+    STP               & 4     & 1     & 4     & 5      \\
     toysmt            &       & 0     &       &        \\
-    Vampire           &       & 139   & 753   & 652    \\
-    veriT             & 5     & 21    & 55    & 57     \\
+    Vampire           &       & 130   & 753   & 652    \\
+    veriT             & 7     & 19    & 55    & 57     \\
     XSat              &       &       & 0     &        \\
-    Yices2            & 88    & 146   & 2379  & 1535   \\
-    Z3                & 6139  & 242   & 40992 & 888    \\
+    Yices2            & 86    & 128   & 2379  & 1535   \\
+    Z3                & 6118  & 244   & 40992 & 888    \\
     \midrule
-    Total             & 11258 & 29486 & 55175 & 104527 \\
+    Total             & 11224 & 29442 & 55175 & 104527 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Use of parallelism.}
+
+It is evident both from the division rankings
+(Section~\ref{sec:division-rankings}) and the competition-wide ranking
+(Section~\ref{sec:floc}) that there is very little difference between
+sequential and parallel performance.  Even though parallel solvers may
+use up to four times as much CPU time, sequential and parallel
+division winners are most often identical, as are sequential and
+parallel scores for the competition-wide ranking.
+
+%TODO: discuss whether this can be attributed to the hardness
+%distribution of benchmarks (cf. VBS plot)
+
+In Table~\ref{table:parallelism}, we report the quotient of CPU time
+over wall-clock time (summed up over all main-track benchmarks) for
+each solver, as well as for all solvers combined.  When there were
+multiple versions of a solver (such as a sequential and a parallel
+version), only the highest value is shown.  We note that this quotient
+is close to~1 for most solvers: only about 4--8 main-track solvers
+each year were participating with a version that made use of
+parallelism.
+
+\begin{table}
+  \caption{Quotient of CPU time over wall-clock time for each
+    main-track solver (by year).  Values below~1.1 are shown in gray.}
+  \label{table:parallelism}
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    Solver & 2015 & 2016 & 2017 & 2018 \\
+    \midrule
+    ABC               &     & \textcolor{gray}{1.0} &     &     \\
+    Alt-Ergo          &     &     &     & 3.0 \\
+    AProVE            & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{0.8} & \textcolor{gray}{0.8} \\
+    Boolector         & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & 1.1 & 1.3 \\
+    COLIBRI           &     &     & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
+    Ctrl-Ergo         &     &     &     & 4.0 \\
+    CVC3              & \textcolor{gray}{1.0} &     &     &     \\
+    CVC4              & 1.2 & 1.1 & 1.1 & \textcolor{gray}{1.0} \\
+    MapleSTP          &     & 3.8 &     &     \\
+    {[}MathSAT{]}     & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
+    MinkeyRink        &     & 3.6 & 2.0 & 3.9 \\
+    OpenSMT2          & 3.7 & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
+    ProB              &     & \textcolor{gray}{1.0} &     &     \\
+    Q3B               &     & 2.9 & 2.9 & 3.0 \\
+    raSAT             & \textcolor{gray}{1.0} & 2.0 &     &     \\
+    Redlog            &     &     & \textcolor{gray}{1.0} &     \\
+    SMT-RAT           & 1.3 & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
+    SMTInterpol       & 1.4 & 1.1 & 1.1 & 1.1 \\
+    SPASS-SATT        &     &     &     & \textcolor{gray}{1.0} \\
+    STP               & \textcolor{gray}{1.0} & 3.6 & 3.8 & 3.8 \\
+    toysmt            &     & \textcolor{gray}{1.0} &     &     \\
+    Vampire           &     & 3.4 & 3.9 & 4.0 \\
+    veriT             & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
+    XSat              &     &     & 1.8 &     \\
+    Yices2            & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
+    Z3                & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
+    \midrule
+    All solvers       & 1.0 & 1.3 & 1.3 & 1.3 \\
     \bottomrule
   \end{tabular}
 \end{table}
