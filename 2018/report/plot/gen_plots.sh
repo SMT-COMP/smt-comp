@@ -11,5 +11,5 @@ extract_script="$base_dir/extract_common_results.py"
 [ -e $file_2017 ] || tar xvf "$file_2017.tar.xz"
 [ -e $file_2016 ] || tar xvf "${file_2016%.*}.tar.xz" && mv Main_Track.csv $file_2016
 [ -e $file_2015 ] || tar xvf "${file_2015%.*}.tar.xz" && mv Main_Track.csv $file_2015
-python $extract_script -w $file_2018,$file_2017,$file_2016,$file_2015 2018,2017,2016,2015
+python $extract_script -w -v $file_2018,$file_2017,$file_2016,$file_2015 2018,2017,2016,2015
 make

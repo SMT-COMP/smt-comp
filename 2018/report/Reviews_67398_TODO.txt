@@ -1,0 +1,298 @@
+﻿(1) TODO:
+-------------------------------------------------------------------------------
+In the CfP it is mentioned that competition reports
+should give a summary of the main technical contributions to the field.
+Are there any worthy new concepts or approaches
+(except for the mentioned additions of new logics)
+that have appeared in SMT-COMP in 2015-2018 and could be mentioned?
+
+
+(2) TODO (Tjark): Add scoring schema, description, discussion
+-------------------------------------------------------------------------------
+R1:
+In Sect. 4, it is mentioned that a weighted scoring schema was introduced in
+2016, but it is not explained how this weighting is computed.
+This is explained in [29], but please add it to this paper, too
+([29] is just an online PDF, not a publication).
+It would also be good to compare this weighting
+to the weighting used by other competitions, like for example SV-COMP.
+R2:
+the change of the scoring for competition-wise ranking is explained, but to me
+is (partially) in contrast to the (clear) motivations given before for strongly
+penalizing incorrect solvers.
+
+(3) TODO:
+-------------------------------------------------------------------------------
+It is not defined what a "competitive" division is,
+please explain the rules for this.
+
+(4) TODO:
+-------------------------------------------------------------------------------
+What are the requirements that a submission to SMT-COMP has to fulfill?
+For example, can anybody submit a tool,
+or do they need to be a developer of the tool?
+Are there any conditions on the license of the tool,
+such as allowing to redistribute the tool?
+
+(5) TODO:
+-------------------------------------------------------------------------------
+To which extend is SMT-COMP reproducible?
+The SMT Library is available for everyone,
+can everyone download all tools, too
+(in the version that is guaranteed to be the same as in SMT-COMP)?
+Is everything else that is necessary (i.e., tool command lines etc.) archived?
+
+(6) TODO:
+-------------------------------------------------------------------------------
+Is there anything known about why the number of participants
+in the application track is now much smaller compared to 2015,
+although the number of participants in the main track is similar?
+
+(7) TODO:
+-------------------------------------------------------------------------------
+Are produced unsat cores checked for whether they are actually unsat cores,
+i.e., unsatisfiable and a subset of the input problem?
+
+(8) TODO:
+-------------------------------------------------------------------------------
+The labels of the x-axis of Fig. 2 would be easier to read for humans
+if they would be written like "100 B - 1 kB" or something similar.
+Maybe there is also a way to keep the current labels
+and add some intuitive markers for the ranges of kB, MB, GB?
+
+(9) TODO:
+-------------------------------------------------------------------------------
+In the third paragraph of Sect. 4,
+there should be no line break between "8" and "benchmarks".
+
+(10) TODO:
+-------------------------------------------------------------------------------
+In the fifth paragraph of Sect. 4, the term "otherwise sound solvers" is used
+but not precisely defined.
+Does this refer to solvers that do not produce wrong answers
+for benchmarks with a known status?
+Please clarify in the paper.
+
+
+(11) TODO:
+-------------------------------------------------------------------------------
+R1:
+Section 2 is basically only about organization, and to goals is devoted the
+first paragraph only. Please consider to rename. More in general to the
+section, the vast majority focuses on explaining the timeline and reasons for
+having deadline for milestones in the organization, that are basic rules and
+motivations when organizing such an event. So, I would avoid this information,
+and either deleting the section or significantly shrinking it.
+R3:
+Sec 1&2&3: I believe these two sections are completely unnecessary. They are
+not specific to the 2015-2018 time frame and the same information in greater
+detail is found elsewhere. This paper is really for readers that already know
+SMT; those that don't, would be served much better by references to the
+respective standards/tutorials/websites. The numbers in Sec 3 are somewhat
+interesting (as a record), but they are really more about SMT-LIB than
+SMT-COMP. Fig 2: The file size of benchmark problems is really only very
+vaguely interesting, as it is not in any relation with the complexity of the
+problems. Perhaps a scatter-plot that relates file size and average solver
+run-time (perhaps one for each competition year) would provide a better view of
+the complexity of SMT problems.
+
+(12) TODO:
+-------------------------------------------------------------------------------
+first part of Section 4 refers to years earlier than 2015. Given the focus of
+the paper, I ll not mention this
+
+(13) TODO:
+-------------------------------------------------------------------------------
+again on Sec 4, it is not clear whether the central part (first paragraph of pg
+7) reports about some sort of benchmarks classification. If this is the case,
+this part should be extended.
+
+
+(13) TODO: Analysis section
+-------------------------------------------------------------------------------
+Aina:
+
++ Fix representation of results tables
+  -> one entry per division and year,
+  -> empty cell for "didn't exist" and "-" for "no participants"
+
++ Try different representation for non-competing solvers as winners
+  in results tables
+  -> list actual division winners as winners but use superscript
+     identifying non-competing solvers that would have won (+ legend in
+     caption)
+
++ Progress plots, VBS over all tracks and time (pair-wise, 2014-2018)
+...............................................................................
+Giles:
+
++ Tables for Main track with winners for 24s/sat/unsat score
+  -> drop identical rows
+  -> indicate changes (some rows will not change entirely)
+  -> use same scoring per year as for the overall results tables
+
++ Parallelism:
+  -> numbers for CPU/Wallclock
+  -> score for  24s
+
++ scoring scripts for 2016 2017 2018 (new scripts to compute scores)
+
++ do the winners change if we use # solved instances instead of scoring
+
++ Z3 discussion
+...............................................................................
+Tjark:
+
++ "regret" (in the context of portfolio setting)
+   -> Pie chart with # uniquely solved instances (maybe + instances that
+      are solved significantly faster)
+   -> determine corresponding numbers for all divisions
+
++ include discussion and details about scoring scheme
+...............................................................................
+Matthias:
+
++ Unsat Core Track analysis
+...............................................................................
+
+
+(14) TODO: Analysis discussion
+-------------------------------------------------------------------------------
+I think that a detailed analysis should be instead one of a main aim of a
+competition report (and independently from the fact that this is an immediate
+mandate or not of the organizers), going beyond overall results and raw
+numbers, by explaining e.g. what techniques have worked well on what
+logics/division, in order to support a more deep understanding of what's is
+going on in SMT solving.
+
+
+(15) TODO
+-------------------------------------------------------------------------------
+"Benchmarks with disagreement are removed". What is about n-1 solvers give one
+response, and only one give another? Is not there a sort of "majority" outputs
+or the possibility to check responses? (for some logics there should be). If I
+understand correctly, the risk is of, instead of assigning a wrong answer to a
+solver,  removing the benchmark "ignoring" the issue.
+
+(16) TODO
+-------------------------------------------------------------------------------
+what is the "competition-wide" ranking? please explain.
+
+(17) TODO (Giles)
+-------------------------------------------------------------------------------
+From the global results (Table 13) I can see that in 2015, 2016 and 2017 the
+overall winner would have been Z3, running hors concourse. Perhaps, it is a
+solver not tuned for the (benchmarks of the) competition.
+In my opinion this questions about the significance of the results and the
+awards of the competition, given that the overall best solver is a
+non-participant non-tuned solver.
+
+
+(17) TODO
+-------------------------------------------------------------------------------
+* Authors list: In case, the information about the involvement of authors
+should be put in the main text
+
+
+(18) TODO
+-------------------------------------------------------------------------------
+* Abstract: "FLoC Olympiad" -> "FLoC Olympic Games" as stated by FLoC ?
+
+(19) TODO: Minor
+-------------------------------------------------------------------------------
+Introduction:
+. "among others" -> ", among others"
+. Intuitive meaning of the formula in page 2 should be given. And a "." should
+  be added at its end
+. "Many SMT solvers employ SAT". Should we explicitly refer to the lazy SMT
+  solving approach?
+Section 3:
+. "to the next" -> "to the other" ? (This recurs later.)
+. "reclassified". Are you referring to a sort of benchmark classification? As
+  stated above, in case this should be expanded
+. "if this is known" -> "if known"
+Section 4:
+. "need not support all logics"?
+. "for favoring imitations" ?
+
+(19) TODO
+-------------------------------------------------------------------------------
+Section 5:
+is Table 6 needed? Basically all time limits have been of 40 min, other than
+for Unsat-core track in 2015 (but the track was not in place) and main track of
+2017. A line in the text should suffice
+
+(19) TODO: Minor
+-------------------------------------------------------------------------------
+Section 7:
+. "(because response ... are not recorded by StarExec)". Please clarify
+. "performance" -> "execution"
+. "we are including" -> "we include"
+. "awarded these to the" -> "awarded the"
+Acknowledge:
+. "and last but not least" -> "and, last but not least,"
+
+(19) TODO: References
+-------------------------------------------------------------------------------
+References: Some work has to be done in order to have the references uniform,
+            e.g.
+(i) conferences are mentioned in two different ways, e.g. "Proceedings of the
+... " vs. "..., Proceedings," (see, e.g. [4] vs. [5])
+(ii) reference [7] is incomplete
+
+(20) TODO
+-------------------------------------------------------------------------------
+Sec 5: "Since 2014 (and ... 2013)": Unclear why 2013 is singled out.
+
+(21) TODO
+-------------------------------------------------------------------------------
+Tbls 3/4: These tables could go into an appendix; they are really just for the
+archive, they don't add much to the reader's experience.
+
+(22) TODO
+-------------------------------------------------------------------------------
+Pg 11, Pg 21: "By these measures ... one of largest competition in automated
+reasoning": These statements are really unnecessary, especially if they are not
+backed up by data or references. Also, the "measures" in the two occurrences of
+this sentence are not the same!
+
+(23) TODO (Aina)
+-------------------------------------------------------------------------------
+Pg 13/Tbl 7: I think listing the names of the solver submitters for each
+participating solver is a bit awkward. This paper, as a record of the
+competition results, really doesn't need this bit of information. Conversely,
+it would be much nicer if the whole development teams could be credited for
+their participation. This is to some degree implicit in the citations, but I'm
+sure the cited papers don't contain all team members either.
+
+(24) TODO
+-------------------------------------------------------------------------------
+Pg 16/Tbl 10: I find this very hard to read; I think it would be better not to
+use multi-column cells. For instance, just repeating the solver name in every
+cell would make it much easier to see how many participants there were in each
+of the years.
+
+(25) TODO: discuss
+-------------------------------------------------------------------------------
+Pg 19, Tbl 13: This table essentially shows that the parallel score has
+absolutely no effect on the competition at all. This should perhaps be
+mentioned in the text, or those scores could be removed altogether.
+
+
+(26) TODO
+-------------------------------------------------------------------------------
+Pg 7, Pg 21: The fact that the trace executor doesn't support "unknown"
+annotations in the incremental track is mentioned twice. This seems a
+completely trivial issue to resolve (by simply implementing it), and the data
+can easily be re-analyzed without re-running the solvers. Clearly, something
+must be much harder than I imagine for this issue to persist over the last 4
+years, i.e. this needs to be explained much more thorough.
+
+(26) TODO (Giles, Aina): Give outlook for 2019
+-------------------------------------------------------------------------------
+Sec 8: This section is really a combined conclusion over the previous years,
+and an outlook to and recommendation for the next competition - perhaps this
+section could be split to emphasize that.
+
+
+

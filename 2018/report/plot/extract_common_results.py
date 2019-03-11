@@ -301,6 +301,7 @@ solvers_2015_main = {
 results = {}
 benchmarks = {}
 common_benchmarks = {}
+vbs = {}
 
 if __name__ == "__main__":
     try:
@@ -323,6 +324,12 @@ if __name__ == "__main__":
                 dest="winners_only", default=False, action="store_true",
                 help="Generate output files for winners only"
             )
+        aparser.add_argument \
+            (
+                "-v",
+                dest="vbs_only", default=False, action="store_true",
+                help="Generate output files for vbs only"
+            )
         args = aparser.parse_args()
 
         path = "{}/results-files".format(os.getcwd())
@@ -330,8 +337,12 @@ if __name__ == "__main__":
 
         args.files = args.files.split(sep=',')
         args.years = args.years.split(sep=',')
+        common_benchmarks = {}
+        common_benchmarks_all = set()
+        benchmarks_all = {}
         for f in args.files:
             if f not in results: results[f] = {}
+            if f not in vbs: vbs[f] = {}
             with open(f, 'r') as infile:
                 lines = infile.readlines()
                 i = 0
@@ -355,10 +366,14 @@ if __name__ == "__main__":
                     assert (benchmark_name)
                     if logic not in results[f]:
                         results[f][logic] = {}
+                    #if logic not in vbs[f]:
+                    #    vbs[f][logic] = {}
                     if logic not in benchmarks:
                         benchmarks[logic] = {}
                     if f not in benchmarks[logic]:
                         benchmarks[logic][f] = set()
+                    if f not in benchmarks_all:
+                        benchmarks_all[f] = set()
                     solver = cols[3]
                     if solver not in results[f][logic]:
                         results[f][logic][solver] = {}
@@ -367,26 +382,102 @@ if __name__ == "__main__":
                                 "duplicate benchmark '{}' " \
                                 "for solver '{}'".format(benchmark, solver))
                     assert (logic in results[f])
+                    assert (solver in results[f][logic])
                     assert (logic in benchmarks)
                     assert (f in benchmarks[logic])
+                    assert (f in vbs)
+                    #assert (logic in vbs[f])
                     results[f][logic][solver][benchmark_name] = cols[9]
                     benchmarks[logic][f].add(benchmark_name)
+                    #if benchmark_name not in vbs[f][logic] \
+                    #   or vbs[f][logic][benchmark_name][1] < cols[9]:
+                    #       vbs[f][logic][benchmark_name] = [solver, cols[9]]
+                    if benchmark_name not in vbs[f] \
+                       or vbs[f][benchmark_name][1] < cols[9]:
+                           vbs[f][benchmark_name] = [solver, cols[9]]
+                    benchmarks_all[f].add(benchmark_name)
 
-        common_benchmarks = {}
-        for l in benchmarks:
-            i = 0
-            for s in benchmarks[l]:
-                if i == 0:
-                    common_benchmarks[l] = benchmarks[l][s]
-                else:
-                    common_benchmarks[l] = \
-                            common_benchmarks[l].intersection(benchmarks[l][s])
-                i += 1
+        for f in vbs:
+            print("@ " + str(f) + " " + str(len(vbs[f])))
+        i = 0
+        for f in benchmarks_all:
+            print("@@ " + str(f) + " " + str(len(benchmarks_all[f])))
+            if i == 0:
+                common_benchmarks_all = benchmarks_all[f]
+            else:
+                common_benchmarks_all = common_benchmarks_all.intersection(benchmarks_all[f])
+            i += 1
+
+        print("common " + str(len(common_benchmarks_all)))
+        #leny = {}
+        #lenz = {}
+        ##for l in benchmarks:
+        ##    i = 0
+        ##    for f in benchmarks[l]:
+        ##        if f not in leny:
+        ##            leny[f] = 0
+        ##        leny[f] += len(benchmarks[l][f])
+        ##        if i == 0:
+        ##            common_benchmarks[l] = benchmarks[l][f]
+        ##            lenz[f] = benchmarks[l][f]
+        ##        else:
+        ##            common_benchmarks[l] = \
+        ##                    common_benchmarks[l].intersection(benchmarks[l][f])
+        ##            assert(f in lenz)
+        ##            #if f not in lenz:
+        ##            #    lenz[f] = benchmarks[l][f]
+        ##            #else:
+        ##            lenz[f].update(benchmarks[l][f])
+        ##        i += 1
+        #for l in benchmarks:
+        #    i = 0
+        #    for f in benchmarks[l]:
+        #        if f not in leny:
+        #            leny[f] = 0
+        #        leny[f] += len(benchmarks[l][f])
+        #        assert(len(benchmarks[l][f]))
+        #        if f not in lenz or lenz[f] == None:
+        #            lenz[f] = benchmarks[l][f]
+        #        else:
+        #            assert(lenz[f])
+        #            lenz[f] = lenz[f].update(benchmarks[l][f])
+        #        if i == 0:
+        #            common_benchmarks[l] = benchmarks[l][f]
+        #        else:
+        #            common_benchmarks[l] = \
+        #                    common_benchmarks[l].intersection(benchmarks[l][f])
+        #        i += 1
+
+
+        #print(leny)
+        #common_benchmarks_all = {}
+        #i = 0
+        #for f in lenz:
+        #    print("# " + str(f) + " " + str(len(lenz[f])))
+        #    if i == 0:
+        #        common_benchmarks_all = lenz[f]
+        #    else:
+        #        common_benchmarks_all.intersection(lenz[f])
+        #    i += 1
+        #print("### " + str(len(common_benchmarks_all)))
+        #asdf = {}
+        #i = 0
+        #for l in common_benchmarks:
+        #    if i == 0:
+        #        asdf = common_benchmarks[l]
+        #    else:
+        #        asdf.update(common_benchmarks[l])
+        #    i += 1
+        #print("##- " + str(len(asdf)))
+
+
+            
 
         with open("makefile", 'w') as makefile:
             makefile.write("all:\n")
             makefile.write("\tmkdir -p pdf\n")
             tmp = {}
+            tmp_vbs = {}
             for i in range(0,len(args.files)):
                 f = args.files[i]
                 p = args.years[i]
@@ -398,37 +489,69 @@ if __name__ == "__main__":
                         else (solvers_2017_main if p == "2017" \
                         else (solvers_2016_main if p == "2016" \
                         else solvers_2015_main))
-                for l in results[f]:
-                    if len(common_benchmarks[l]) > 0:
-                        if not l in tmp: tmp[l] = {}
-                        assert (l in benchmarks)
-                        r = results[f][l] if not args.winners_only else [winners[l]]
-                        for s in r:
-                            s_name = s if not args.winners_only  else solvers[s]
-                            outfile_name = "{}/{}-{}-Main_Track-{}.csv".format(
-                                    path, p, l, s_name)
-                            tmp[l]["{}-{}".format(p,s_name)] = outfile_name
-                            with open(outfile_name, 'w') as outfile:
-                                outfile.write(
-                                    "# 1 solver, 2 benchmark, 3 time (wallclock)\n")
-                                for b in common_benchmarks[l]:
-                                    assert (b in results[f][l][s])
-                                    assert (s in solvers)
+
+                outfile_name = "{}/{}-Main_Track-VBS.csv".format(path, p)
+                tmp_vbs["VBS-{}".format(p)] = outfile_name
+                with open(outfile_name, 'w') as outfile:
+                    outfile.write(
+                            "# 1 solver, 2 benchmark, 3 time (wallclock)\n")
+                    #lenx = 0
+                    #for l in results[f]:
+                    #    for b in common_benchmarks[l]:
+                    #        if len(common_benchmarks[l]) > 0:
+                    #            outfile.write(
+                    #                "{},{},{}\n".format(
+                    #                    vbs[f][l][b][0],
+                    #                    b,
+                    #                    vbs[f][l][b][1]))
+                    #            lenx += 1
+                    #print(lenx)
+                    for b in common_benchmarks_all:
+                        outfile.write(
+                                "{},{},{}\n".format(
+                                vbs[f][b][0],
+                                b,
+                                vbs[f][b][1]))
+                if not args.vbs_only:
+                    for l in results[f]:
+                        if len(common_benchmarks[l]) > 0:
+                            if not l in tmp: tmp[l] = {}
+                            assert (l in benchmarks)
+                            r = results[f][l] \
+                                    if not args.winners_only else [winners[l]]
+                            for s in r:
+                                s_name = s if not args.winners_only \
+                                           else solvers[s]
+                                outfile_name = \
+                                        "{}/{}-{}-Main_Track-{}.csv".format(
+                                                path, p, l, s_name)
+                                tmp[l]["{}-{}".format(p,s_name)] = outfile_name
+                                with open(outfile_name, 'w') as outfile:
                                     outfile.write(
-                                        "{},{},{}\n".format(
-                                            s_name,
-                                            b,
-                                            results[f][l][s][b]))
-            for l in tmp:
-                makefile.write(
-                        '\tRscript cactus_plot.r "{}" "{}" "{}"\n'.format(
-                            l,
-                            '" "'.join(tmp[l].values()),
-                            '" "'.join(tmp[l].keys())))
+                                        "# 1 solver, "\
+                                        "2 benchmark, "\
+                                        "3 time (wallclock)\n")
+                                    for b in common_benchmarks[l]:
+                                        assert (b in results[f][l][s])
+                                        assert (s in solvers)
+                                        outfile.write(
+                                            "{},{},{}\n".format(
+                                                s_name,
+                                                b,
+                                                results[f][l][s][b]))
+            makefile.write(
+                    '\tRscript cactus_plot.r "VBS" "{}" "{}"\n'.format(
+                        '" "'.join(tmp_vbs.values()),
+                        '" "'.join(tmp_vbs.keys())))
+            if not args.vbs_only:
+                for l in tmp:
+                    makefile.write(
+                            '\tRscript cactus_plot.r "{}" "{}" "{}"\n'.format(
+                                l,
+                                '" "'.join(tmp[l].values()),
+                                '" "'.join(tmp[l].keys())))
             makefile.write("clean:\n")
             makefile.write("\trm -r pdf\n")
             makefile.write("\trm -r makefile\n")
-
-
     except BrokenPipeError:
         pass
