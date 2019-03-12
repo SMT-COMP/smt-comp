@@ -3,8 +3,8 @@
 set -e
 set -u
 
-# $1: CVS file containing a list of unsound solvers (DIVISION,SOLVER,SOLVER_ID)
-# $2: CVS file containing a list with job pair data
+# $1: CSV file containing unsound solvers (DIVISION,SOLVER,SOLVER_ID)
+# $2: CSV file containing job pair data
 
 declare -A UNSOUND
 
