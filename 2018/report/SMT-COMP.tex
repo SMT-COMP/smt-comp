@@ -8,9 +8,12 @@
 
 %\usepackage[numbers,sort&compress]{natbib}
 
+%\usepackage{showframe}   % debug
+
 \usepackage{pifont}
 \usepackage{multirow}
 \usepackage{tikz}
+\usepackage{subcaption}
 
 \usepackage{listings}
 \lstdefinelanguage{smtlib2}
@@ -1278,6 +1281,28 @@ more detailed information about each solver.
   \end{tabular}}
 \end{table}
 \footnotetext{This was a distinct version of CVC4 that was designated as experimental.}
+
+\begin{figure}
+  \begin{subfigure}[t]{0.5\textwidth}
+    \scalebox{.35}{\includegraphics{plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_2014-2015.pdf}}
+    \caption{2014 vs.~2015}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.5\textwidth}
+    \scalebox{.35}{\includegraphics{plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_2015-2016.pdf}}
+    \caption{2015 vs.~2016}
+  \end{subfigure}
+  \\[4ex]
+  \begin{subfigure}[t]{0.5\textwidth}
+    \scalebox{.35}{\includegraphics{plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_2016-2017.pdf}}
+    \caption{2016 vs.~2017}
+  \end{subfigure}
+  \begin{subfigure}[t]{0.5\textwidth}
+    \scalebox{.35}{\includegraphics{plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_2017-2018.pdf}}
+    \caption{2017 vs.~2018}
+  \end{subfigure}
+  \caption{Virtual Best Solver (VBS) on common benchmarks of all
+  logics in the Main Track.}
+\end{figure}
 
 A contentious issue with this ranking has been the scoring of
 incorrect solver responses.  In the division rankings, an incorrect

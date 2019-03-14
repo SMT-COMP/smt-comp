@@ -4,7 +4,10 @@ if(!dir.exists("pdf")) dir.create("pdf")
 args <- commandArgs(trailingOnly = TRUE)
 
 min_x=as.integer(args[1])
-fname_pdf=paste("pdf/cactus_plot-",args[2],".pdf",sep="")
+
+plot_title=args[2]
+fname=gsub(' ','_',plot_title,fixed=TRUE)
+fname_pdf=paste("pdf/cactus_plot-",fname,".pdf",sep="")
 pdf(fname_pdf,width=9)
 par(cex=1.2)
 
@@ -83,5 +86,5 @@ axis(2, at=ticks, labels=labels)
 
 title(ylab="Time [s]",line=4)
 title(xlab="# Benchmarks",line=3)
-title(args[2],outer=TRUE,line=-1,font.main=2)
+title(plot_title,outer=TRUE,line=-1,font.main=2)
 legend(x="topleft",xlegend,col=xcol,bty="n",lwd=lwidth,lty=ltypes,text.font=1)
