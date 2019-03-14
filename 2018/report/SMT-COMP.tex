@@ -172,7 +172,7 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 %%   de-emphasizes large benchmark families (see
 %%   Section~\ref{sec:division-scoring}) will lead to more meaningful
 %%   competition results.
-%% \item The unsat-core track that was introduced in SMT-COMP 2012, but
+%% \item The Unsat-Core track that was introduced in SMT-COMP 2012, but
 %%   discontinued in 2013-2015 (partly because of the competition's move
 %%   to StarExec), is back.  It will be experimental in 2016; its results
 %%   will be reported, but no official winners will be announced.
@@ -219,7 +219,7 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 %%   \emph{Rationale:} The weight already takes the number of benchmarks
 %%   in the division into account; multiplying it by the number of errors
 %%   overemphasizes large divisions.
-%% \item The unsat-core track, which was re-introduced in 2016, is no
+%% \item The Unsat-Core track, which was re-introduced in 2016, is no
 %%   longer experimental.  Its divisions will be considered competitive
 %%   if the necessary requirements (see Section~\ref{sec:scoring}) are
 %%   met.  \emph{Rationale:} Rules and tool support for the unsat-core
@@ -240,11 +240,11 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 %%   the main track was reduced to 20 minutes (down from 40 minutes in
 %%   earlier years) to cope with the inclusion of a large number of
 %%   benchmarks with unknown status.
-%% \item In the unsat-core track, the unsatisfiability check for the
+%% \item In the Unsat-Core track, the unsatisfiability check for the
 %%   returned core will be based on a simple majority vote.  The case
 %%   that a solver finds its own core satisfiable will no longer be
 %%   treated specially.  \emph{Rationale:} This allows to simplify the
-%%   post-processing of unsat-core track results considerably.
+%%   post-processing of Unsat-Core track results considerably.
 %% \item In 2017, the competition featured experimental divisions for
 %%   benchmarks that use algebraic datatypes.  These divisions will be
 %%   regular (non-experimental) in 2018. \emph{Rationale:} Algebraic
@@ -583,15 +583,15 @@ solvers~\cite{DBLP:conf/cade/Weber16}.
 The SMT Competition consists of several tracks.  The \emph{main
   track}, which has been a staple of the competition since its
 inception in 2005, features non-incremental benchmarks.  The
-\emph{application track}, which has been part of the competition since
+\emph{Application track}, which has been part of the competition since
 2011~\cite{BDdMOS13}, features incremental benchmarks.  These
 benchmarks are passed to each solver one command at a time by a trace
 executor, which waits for the solver's response before passing the
 next benchmark command (to prevent look-ahead behavior).  The
-\emph{unsat-core track} uses main-track benchmarks that are known to
+\emph{Unsat-Core track} uses Main-track benchmarks that are known to
 be unsatisfiable, and solvers are evaluated on their ability to find
 small unsatisfiable cores (i.e., a small but still unsatisfiable
-subset of the benchmark's assertions).  The unsat-core track had first
+subset of the benchmark's assertions).  The Unsat-Core track had first
 been part of the competition in 2012~\cite{CGBD12}, but was then
 discontinued partly because of the competition's move to StarExec and
 lacking tool support.  It was re-introduced as an experimental track
@@ -633,7 +633,7 @@ benchmarks were excluded because of missing status information.
     \midrule
     Main track        &  40 & 40 & 49 & 50 \\
     Application track &  14 & 14 & 16 & 21 \\
-    Unsat-core track  &  -- & 40 & 41 & 44 \\
+    Unsat-Core track  &  -- & 40 & 41 & 44 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -652,7 +652,7 @@ different benchmark families (that is, groups of benchmarks with
 similar characteristics).  Since there are vast differences in size
 between benchmark families in the SMT Library, the competition
 since~2016 uses a scoring method that assigns a weight to each
-main-track benchmark in order to de-emphasize large benchmark
+Main-track benchmark in order to de-emphasize large benchmark
 families~\cite{rules18}.
 
 Another paradigm shift concerns the treatment of benchmarks with
@@ -666,7 +666,7 @@ favoring imitation of existing solvers over true innovation.  In~2016,
 the SMT Library contained 29,724 non-incremental benchmarks with
 unknown status; solver performance on these was evaluated but reported
 separately.  Since 2017, all non-incremental benchmarks are eligible
-for the competition's main track regardless of status, and they
+for the competition's Main track regardless of status, and they
 directly affect the competition results.  Solver responses for such
 benchmarks are assumed to be correct, unless there is a disagreement
 between two or more (otherwise sound) solvers.  Benchmarks with
@@ -676,11 +676,11 @@ was removed; and in 2018, there were no disagreements between
 otherwise sound solvers.
 
 For incremental benchmarks, the situation is different: an incremental
-benchmark is ineligible for the application track if its first {\tt
+benchmark is ineligible for the Application track if its first {\tt
   check-sat} command has unknown status.  Otherwise, the prefix of the
 benchmark that only contains {\tt check-sat} commands with known
 status is eligible.  The main reason for this difference is that the
-competition tools for the application track (in particular, the trace
+competition tools for the Application track (in particular, the trace
 executor) have not been adapted yet to support {\tt check-sat}
 commands with unknown status.
 
@@ -693,7 +693,7 @@ divisions varies widely, from just one benchmark in ABVFP to~72,705
 benchmarks in QF\_SLIA.
 
 \begin{table}
-  \caption{Number of benchmarks used in the main track (by division)}
+  \caption{Number of benchmarks used in the Main track (by division)}
   \label{table:benchmarks-main-track}
   \centering
   \scalebox{.9}[.8]{\begin{tabular}{lrrrr}
@@ -757,7 +757,7 @@ benchmarks in QF\_SLIA.
 \end{table}
 
 \begin{table}
-  \caption{Number of benchmarks used in the application track (by
+  \caption{Number of benchmarks used in the Application track (by
     division)}
   \label{table:benchmarks-application-track}
   \centering
@@ -793,7 +793,7 @@ benchmarks in QF\_SLIA.
 \end{table}
 
 \begin{table}
-  \caption{Number of benchmarks used in the unsat-core track (by
+  \caption{Number of benchmarks used in the Unsat-Core track (by
     division)}
   \label{table:benchmarks-unsat-core-track}
   \centering
@@ -908,8 +908,8 @@ post-processing of benchmarks and solver output or on other auxiliary
 tasks is not included.  The increase in~2016 is largely due to the
 inclusion of (non-incremental) benchmarks with unknown status; these
 were evaluated with a wall-clock time limit of 10~minutes.  In~2017,
-when these benchmarks had become eligible for the main track,
-main-track job pairs were first run with a time limit of 10~minutes.
+when these benchmarks had become eligible for the Main track,
+Main-track job pairs were first run with a time limit of 10~minutes.
 When it became apparent to the organizers that there were sufficient
 resources to increase this limit, job pairs that had timed out were
 re-run with a time limit of 20~minutes.  (In this way, about 2.9 years
@@ -928,7 +928,7 @@ were imposed on job pairs for each track and year.
     \midrule
     Main track        & 40 & 40 & 20\protect\footnotemark & 20 \\
     Application track & 40 & 40 & 40\phantom{$^{1.}$}      & 40 \\
-    Unsat-core track  & -- & 40 & 40\phantom{$^{1.}$}      & 40 \\
+    Unsat-Core track  & -- & 40 & 40\phantom{$^{1.}$}      & 40 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1130,7 +1130,7 @@ competition versions.  These solvers were therefore participating hors
 concours.  Moreover, in 2015 a bug was discovered in the application
 track version of Boolector and a fixed version was submitted after the
 deadline; in 2016, the CVC4 team did not enter their solver into the
-application track; and in 2018, an experimental version of CVC4 as
+Application track; and in 2018, an experimental version of CVC4 as
 well as the OpenSMT2 solver were submitted after the deadline.  These
 solvers were also participating hors concours.  In result tables, they
 are listed with their name in square brackets (e.g., [MathSAT]).
@@ -1159,7 +1159,7 @@ submissions~\cite{CDW14}.
     \midrule
     Main track        & 21 &               [+2] & 25 & [+2] & 19 & [+2] & 20 & [+4] \\
     Application track & 10 &               [+3] &  8 & [+3] &  4 & [+2] &  4 & [+2] \\
-    Unsat-core track  & \multicolumn{2}{c}{---} &  1 & [+4] &  2 & [+2] &  3 & [+2] \\
+    Unsat-Core track  & \multicolumn{2}{c}{---} &  1 & [+4] &  2 & [+2] &  3 & [+2] \\
     \midrule
     Total             & 26 &               [+4] & 32 & [+5] & 22 & [+4] & 25 & [+6] \\
     \bottomrule
@@ -1179,13 +1179,13 @@ metric that is based, first, on the number of erroneous responses
 (which is usually~0, but solvers that did give erroneous responses are
 ranked below solvers that did not); second, on the number of correct
 responses; third, on the wall-clock and CPU time that the solver
-process consumed.  For the unsat-core track (which uses unsatisfiable
+process consumed.  For the Unsat-Core track (which uses unsatisfiable
 benchmarks only), the reduction in the size of the unsatisfiable core
 is used instead of the number of correct responses.  A detailed
 description of the scoring can be found in the competition
 rules~\cite{rules18}.
 
-As discussed in Section~\ref{sec:benchmarks}, main-track benchmarks
+As discussed in Section~\ref{sec:benchmarks}, Main-track benchmarks
 with unknown status are removed from the competition results if two
 (or more) solvers that are sound on benchmarks with known status
 disagree on their result.  Otherwise, solver responses for benchmarks
@@ -1194,10 +1194,10 @@ with unknown status are assumed to be correct.
 All solvers are run with four cores available, and the time limit~$T$
 that is imposed on each job pair (see Table~\ref{table:time-limits})
 is a wall-clock limit.  Thus, solvers that take advantage of
-parallelism might use up to~$4T$ CPU time.  For the main track and the
-unsat-core track, the competition reports parallel and sequential
+parallelism might use up to~$4T$ CPU time.  For the Main track and the
+Unsat-Core track, the competition reports parallel and sequential
 performance separately.  The latter is determined by imposing a
-(virtual) CPU time limit of~$T$.  For the application track, only
+(virtual) CPU time limit of~$T$.  For the Application track, only
 parallel performance is reported (because response times to individual
 {\tt check-sat} commands are not recorded by StarExec).
 
@@ -1228,15 +1228,15 @@ In 2014, the SMT Competition was part of the FLoC Olympic Games.
 These gave the competition increased visibility and sponsored three
 Kurt G\"odel medals.  After substantial internal debate, the 2014
 competition organizers decided to award these to the winner of the
-main track's QF\_BV division (which had historically been the logic
+Main track's QF\_BV division (which had historically been the logic
 with the largest number of solver submissions and job pairs), as well
-as to the two best main-track solvers according to a competition-wide
+as to the two best Main-track solvers according to a competition-wide
 ranking that had been instituted especially for this
 purpose~\cite{CDW14}.  This ranking emphasizes breadth of solver
 participation---a solver participating in many logics need not be the
 best in any one of them to rank highly.
 
-The competition-wide ranking for the main track was retained and
+The competition-wide ranking for the Main track was retained and
 refined after~2014.  Table~\ref{table:competition-wide-ranking} shows
 the best three solvers according to this ranking for 2015--2018.  Also
 shown is Z3, which ranked highly each year but was running hors
@@ -1253,7 +1253,7 @@ individual division rankings (Section~\ref{sec:division-rankings}) for
 more detailed information about each solver.
 
 \begin{table}
-  \caption{Competition-wide ranking for the main track: best solvers (by year)}
+  \caption{Competition-wide ranking for the Main track: best solvers (by year)}
   \label{table:competition-wide-ranking}
   \centering
   \scalebox{.89}{\begin{tabular}{cp{2.2cm}rrp{0cm}cp{2.2cm}rr}
@@ -1301,13 +1301,13 @@ more detailed information about each solver.
     \caption{2017 vs.~2018}
   \end{subfigure}
   \caption{Virtual Best Solver (VBS) on common benchmarks of all
-  logics in the Main Track.}
+  logics in the Main track.}
 \end{figure}
 
 A contentious issue with this ranking has been the scoring of
 incorrect solver responses.  In the division rankings, an incorrect
 response causes a solver to be ranked below all correct solvers for
-that division.  But the competition's main track consists of many
+that division.  But the competition's Main track consists of many
 independent divisions.  To balance the strong interest in correct
 solvers against the risk of stifling innovation, the competition-wide
 ranking was revised in~2017 to use a fixed numeric penalty for each
@@ -1321,30 +1321,30 @@ The 2018 edition of the competition was again part of the FLoC Olympic
 Games, which sponsored seven medals.  The competition organizers
 awarded these to the following solvers:
 \begin{itemize}
-\item The best three main-track solvers according to the
+\item The best three Main-track solvers according to the
   competition-wide ranking (CVC4, Yices2, and SMTInterpol; see
   Table~\ref{table:competition-wide-ranking}),
-\item the solvers that won the QF\_BV division in the main track
+\item the solvers that won the QF\_BV division in the Main track
   (Boolector and MinkeyRink; see Table~\ref{tab:winners-main}),
 \item the solver that won the most competitive divisions in the
-  application track (Yices2),
+  Application track (Yices2),
 \item the solver that won the most competitive divisions in the
-  unsat-core track (Yices2).
+  Unsat-Core track (Yices2).
 \end{itemize}
 
-In comparison to the competition-wide ranking for the main track, the
-metric used for the application and unsat-core track---simply counting
+In comparison to the competition-wide ranking for the Main track, the
+metric used for the application and Unsat-Core track---simply counting
 the number of competitive divisions that a solver has won---was rather
 unsophisticated.  Future editions of the competition should perhaps
 refine this to use a ranking scheme that is more similar to the
-main-track ranking, by weighing divisions according to their relative
+Main-track ranking, by weighing divisions according to their relative
 importance, and also by rewarding good performance from solvers other
-than division winners.  A difficulty in adapting the main-track
-ranking for the other tracks is that each main-track benchmark is
+than division winners.  A difficulty in adapting the Main-track
+ranking for the other tracks is that each Main-track benchmark is
 worth one point (before benchmark weights are applied) if solved
-correctly, while benchmarks in the application and unsat-core track
+correctly, while benchmarks in the application and Unsat-Core track
 are worth widely varying numbers of points.  Moreover, in the
-unsat-core track, the size of the smallest unsatisfiable core---and
+Unsat-Core track, the size of the smallest unsatisfiable core---and
 hence the number of points attainable on any given benchmark---may not
 be known precisely.
 
@@ -1371,7 +1371,7 @@ particular, if a solver that uniquely solves~$n$ benchmarks had not
 participated in the competition, the virtual best solver would have
 been able to solve~$n$ fewer benchmarks.
 Table~\ref{table:unique-solutions} shows the number of uniquely solved
-benchmarks for each main-track solver from 2015--2018.  (Multiple
+benchmarks for each Main-track solver from 2015--2018.  (Multiple
 versions of a solver are consolidated in this table, and answers that
 were given by unsound solver versions are excluded.)
 
@@ -1392,7 +1392,7 @@ divisions with fewer than two competing solvers do not affect the
 competition-wide ranking.
 
 \begin{table}
-  \caption{Number of main-track benchmarks uniquely solved by each
+  \caption{Number of Main-track benchmarks uniquely solved by each
     solver (by year)}
   \label{table:unique-solutions}
   \centering
@@ -1446,17 +1446,17 @@ parallel scores for the competition-wide ranking.
 %distribution of benchmarks (cf. VBS plot)
 
 In Table~\ref{table:parallelism}, we report the quotient of CPU time
-over wall-clock time (summed up over all main-track benchmarks) for
+over wall-clock time (summed up over all Main-track benchmarks) for
 each solver, as well as for all solvers combined.  When there were
 multiple versions of a solver (such as a sequential and a parallel
 version), only the highest value is shown.  We note that this quotient
-is close to~1 for most solvers: only about 4--8 main-track solvers
+is close to~1 for most solvers: only about 4--8 Main-track solvers
 each year were participating with a version that made use of
 parallelism.
 
 \begin{table}
   \caption{Quotient of CPU time over wall-clock time for each
-    main-track solver (by year).  Values below~1.1 are shown in gray.}
+    Main-track solver (by year).  Values below~1.1 are shown in gray.}
   \label{table:parallelism}
   \centering
   \begin{tabular}{lrrrr}
@@ -1517,7 +1517,7 @@ with unknown status are now eligible for the competition, and because
 the competition now uses all eligible benchmarks (rather than a
 randomly selected subset).
 
-Since the re-introduction of the unsat-core track in~2016, the
+Since the re-introduction of the Unsat-Core track in~2016, the
 competition again has three separate tracks.  This, together with new
 logics in the SMT Library, has brought the total number of competition
 divisions to 115 in~2018, up from just 40 divisions
@@ -1549,9 +1549,9 @@ organizers, but also participants to adapt.  Immediate action items
 for next year's organizers are
 \begin{itemize}
 \item the inclusion of {\tt check-sat} commands with unknown status in
-  the application track, and
+  the Application track, and
 \item the definition of competition-wide rankings for the application
-  and unsat-core track.
+  and Unsat-Core track.
 \end{itemize}
 
 For the inclusion of new tracks or divisions, a two-phase approach has
