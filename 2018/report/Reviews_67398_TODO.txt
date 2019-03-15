@@ -122,7 +122,7 @@ Aina:
      identifying non-competing solvers that would have won (+ legend in
      caption)
 
-+ Progress plots, VBS over all tracks and time (pair-wise, 2014-2018)
++ DONE: Progress plots, VBS over all tracks and time (pair-wise, 2014-2018)
 ...............................................................................
 Giles:
 
