@@ -74,7 +74,8 @@ for benchmarks with a known status?
 Please clarify in the paper.
 
 
-(11) TODO:
+(11) TODO: Relate some of the core decision items and how SMT-COMP is organized
+           to other competitions.
 -------------------------------------------------------------------------------
 R1:
 Section 2 is basically only about organization, and to goals is devoted the
