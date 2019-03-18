@@ -56,16 +56,17 @@ for (i in 1:nfiles)
   }
 }
 
-max_y=1450
-xlegend[1] <- as.expression(bquote(bold(.(args[nfiles+3]))))
+#max_y=1450
+max_y=1200
 xcol[1] <- colors[1]
 
 options("scipen"=100, "digits"=4)
 par(mar=c(5,5.2,2,3))
 plot(x,xlab="# Benchmarks",type="n",xaxt="n",yaxt="n",ann=FALSE,col=colors[1],xlim=c(min_x, max_x),ylim=c(0, max_y))
-abline(h=1200,col="gray")
-abline(v=max_x,col="gray")
+abline(h=1200,col="lightgray")
+abline(v=max_x,col="lightgray")
 lines(xvalues[[1]],col=colors[1],lwd=lwidth,lty=ltypes[1])
+xlegend[1] <- as.expression(bquote(bold(.(args[nfiles+3]))))
 
 if (nfiles >= 2)
 {
@@ -87,4 +88,4 @@ axis(2, at=ticks, labels=labels)
 title(ylab="Time [s]",line=4)
 title(xlab="# Benchmarks",line=3)
 title(plot_title,outer=TRUE,line=-1,font.main=2)
-legend(x="topleft",xlegend,col=xcol,bty="n",lwd=lwidth,lty=ltypes,text.font=1)
+legend(x="topleft",xlegend,col=xcol,bty="n",lwd=lwidth,lty=ltypes,text.font=1,inset=c(0,.02))
