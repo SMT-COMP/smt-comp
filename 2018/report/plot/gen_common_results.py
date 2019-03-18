@@ -39,9 +39,8 @@ if __name__ == "__main__":
         year = year.split(sep='.')[0]
         years = args.common_benchmarks.split('.')[-2]
         years = years.split('/')[-1]
-        years = years.split('_')
-        outfile_name = "{}/{}_vbs_{}-{}.csv".format(
-                path, year, years[-2], years[-1])
+        years = years.replace('Common_Benchmarks_', '')
+        outfile_name = "{}/{}_vbs_{}.csv".format(path, year, years)
         with open(outfile_name, 'w') as outfile:
             with open(args.vbs_data, 'r') as infile:
                 lines = infile.readlines()
