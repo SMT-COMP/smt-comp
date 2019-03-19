@@ -2,41 +2,41 @@
   \caption{Best application-track solvers (by division)}
   \label{tab:winners-application}
   \centering
+  \scalebox{.815}{%
   \begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.5em]}c}
     \toprule
     \rc
-    Division                     & 2015              & 2016                & 2017                & 2018                    \\
+    Division        & 2015                    & 2016                     & 2017                     & 2018                    \\
     \hline \hline
-    \cc ALIA                     & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *          \\
-    \cc ANIA                     & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 *              & CVC4 *                  \\
-    \cc AUFNIRA                  & \cc               & \cc                 & \cc                 & \cc CVC4 *              \\
-    \cc BV                       & \cc               & \cc                 & \cc                 & \cc CVC4 \nc{Z3} *      \\
-    \cc LIA                      & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *          \\
-    \cc QF\_ABV                  & \cc               & \cc                 & \cc                 & \cc Boolector           \\
+    \cc ALIA        & CVC4 \nc{Z3} *          & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *          \\
+    \cc ANIA        & CVC4 \nc{Z3} *          & CVC4 \nc{Z3} *           & CVC4 *                   & CVC4 *                  \\
+    \cc AUFNIRA     & \cc                     & \cc                      & \cc                      & \cc CVC4 *              \\
+    \cc BV          & \cc                     & \cc                      & \cc                      & \cc CVC4 \nc{Z3} *      \\
+    \cc LIA         & CVC4 \nc{Z3} *          & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *          \\
+    \cc QF\_ABV     & \cc                     & \cc                      & \cc                      & \cc Boolector           \\
     \drc
-    \cc QF\_ALIA                 & \cc Yices \nc{Z3} & SMTInterpol \nc{Z3} & SMTInterpol \nc{Z3} & SMTInterpol \nc{Z3}     \\
-    \cc QF\_ANIA                 & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *          \\
-    \cc QF\_AUFBV                & \cc               & \cc                 & \cc                 & \cc Yices2              \\
+    \cc QF\_ALIA    & \cc Yices \nc{Z3}       & SMTInterpol \nc{Z3}      & SMTInterpol \nc{Z3}      & SMTInterpol \nc{Z3}     \\
+    \cc QF\_ANIA    & CVC4 \nc{Z3} *          & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *          \\
+    \cc QF\_AUFBV   & \cc                     & \cc                      & \cc                      & \cc Yices2              \\
     \drc
-    \cc QF\_AUFLIA               & Yices2            & Yices2              & Yices2              & Yices2                  \\
+    \cc QF\_AUFLIA  & Yices2                  & Yices2                   & Yices2                   & Yices2                  \\
     \drc
-    \cc \multirow{2}{*}{QF\_BV}  & Yices2            &  Yices2             & Yices2              & Yices2                  \\
-                                 & \dcc \nc{MathSAT} &  \dcc \nc{MathSAT}  & \dcc \nc{MathSAT}   & \dcc \nc{MathSAT}       \\
-    \cc QF\_BVFP                 & \cc               & \cc                 & \cc \nc{Z3} *       & \cc CVC4 *              \\
-    \cc QF\_FP                   & \cc               & \cc                 & \cc \nc{Z3} *       & \cc CVC4 \nc{Z3} *      \\
+    \cc QF\_BV      & Yices2 \nc{MathSAT}     & Yices2 \nc{MathSAT}      & Yices2 \nc{MathSAT}      & Yices2 \nc{MathSAT}     \\
+    \cc QF\_BVFP    & \cc                     & \cc                      & \cc \nc{Z3} *            & \cc CVC4 *              \\
+    \cc QF\_FP      & \cc                     & \cc                      & \cc \nc{Z3} *            & \cc CVC4 \nc{Z3} *      \\
 
     \drc
-    \cc QF\_LIA                  & Yices2            & Yices2              & Yices2              & Yices2                  \\
-    \cc \multirow{2}{*}{QF\_LRA} & \cc Yices2        & SMTInterpol         & SMTInterpol         & \cc Yices2              \\
-                                 & \cc \nc{MathSAT}  & \nc{MathSAT}        & \nc{MathSAT}        & \cc \nc{MathSAT}        \\
+    \cc QF\_LIA     & Yices2                  & Yices2                   & Yices2                   & Yices2                  \\
+    \cc QF\_LRA     & \cc Yices2 \nc{MathSAT} & SMTInterpol \nc{MathSAT} & SMTInterpol \nc{MathSAT} & \cc Yices2 \nc{MathSAT} \\
     \drc
-    \cc QF\_NIA                  & CVC4 \nc{Z3}      & \nc{CVC4} *         &  CVC4 *             & CVC4                    \\
-    \cc QF\_UFBV                 & \cc               & \cc                 & \cc                 & \cc Boolector           \\
-    \cc QF\_UFLIA                & CVC4 \nc{Z3}      & CVC4 \nc{Z3}        & CVC4 \nc{Z3}        & \cc SMTInterpol \nc{Z3} \\
+    \cc QF\_NIA     & CVC4 \nc{Z3}            & \nc{CVC4} *              &  CVC4 *                  & CVC4                    \\
+    \cc QF\_UFBV    & \cc                     & \cc                      & \cc                      & \cc Boolector           \\
+    \cc QF\_UFLIA   & CVC4 \nc{Z3}            & CVC4 \nc{Z3}             & CVC4 \nc{Z3}             & \cc SMTInterpol \nc{Z3} \\
     \drc
-    \cc QF\_UFLRA                & Yices2 \nc{Z3}    & Yices2 \nc{Z3}      & Yices2              & Yices2 \nc{Z3}          \\
-    \cc QF\_UFNIA                & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3}            \\
-    \cc UFLRA                    & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *          \\
+    \cc QF\_UFLRA   & Yices2 \nc{Z3}          & Yices2 \nc{Z3}           & Yices2                   & Yices2 \nc{Z3}          \\
+    \cc QF\_UFNIA   & CVC4 \nc{Z3} *          & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *           & CVC4 \nc{Z3}            \\
+    \cc UFLRA       & CVC4 \nc{Z3} *          & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *           & CVC4 \nc{Z3} *          \\
     \bottomrule
   \end{tabular}
+  }
 \end{table}
