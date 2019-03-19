@@ -190,15 +190,21 @@ awards of the competition, given that the overall best solver is a
 non-participant non-tuned solver.
 
 
-(17) TODO
+(17)
 -------------------------------------------------------------------------------
-* Authors list: In case, the information about the involvement of authors
-should be put in the main text
+> * Authors list: In case, the information about the involvement of authors
+> should be put in the main text
 
+We have de-emphasized author roles by typesetting them in normal (non-bold)
+font. We think that this information is most naturally presented together with
+other author data (such as affiliation and e-mail address).
 
-(18) TODO
+(18)
 -------------------------------------------------------------------------------
-* Abstract: "FLoC Olympiad" -> "FLoC Olympic Games" as stated by FLoC ?
+> * Abstract: "FLoC Olympiad" -> "FLoC Olympic Games" as stated by FLoC?
+
+An "Olympiad" is the period of four years between two Olympic Games. The term
+is used with this meaning in the abstract.
 
 (19) TODO: Minor
 -------------------------------------------------------------------------------
