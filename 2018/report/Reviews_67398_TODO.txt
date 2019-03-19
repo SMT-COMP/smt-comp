@@ -221,7 +221,7 @@ Done.
 > . "Many SMT solvers employ SAT". Should we explicitly refer to the lazy SMT
 >   solving approach?
 
-We have added a reference ([36]) to explain the approach, but we do not think
+We have added a reference ([36]) that explains the approach. We do not think
 that it would be beneficial to introduce "lazy SMT solving" as a technical term
 at this point in the paper.
 
@@ -239,13 +239,19 @@ TODO
 
 TODO
 
-
-(19) TODO
+(19)
 -------------------------------------------------------------------------------
-Section 5:
-is Table 6 needed? Basically all time limits have been of 40 min, other than
-for Unsat-core track in 2015 (but the track was not in place) and main track of
-2017. A line in the text should suffice
+> Section 5:
+> is Table 6 needed? Basically all time limits have been of 40 min, other than
+> for Unsat-core track in 2015 (but the track was not in place) and main track
+> of 2017. A line in the text should suffice
+
+... and Main track of 2018.
+
+The time limit is important contextual information to interpret the competition
+results. There is some discussion of it in the text, but we think that the
+table is more accessible, and that this justifies the relatively small amount
+of additional space needed.
 
 (19) TODO: Minor
 -------------------------------------------------------------------------------
@@ -265,14 +271,20 @@ References: Some work has to be done in order to have the references uniform,
 ... " vs. "..., Proceedings," (see, e.g. [4] vs. [5])
 (ii) reference [7] is incomplete
 
-(20) TODO
+(20)
 -------------------------------------------------------------------------------
-Sec 5: "Since 2014 (and ... 2013)": Unclear why 2013 is singled out.
+> Sec 5: "Since 2014 (and ... 2013)": Unclear why 2013 is singled out.
 
-(21) TODO
+2013 is singled out because there was no competition in that year, but
+only an evaluation of SMT-COMP and SMT-LIB.
+
+(21)
 -------------------------------------------------------------------------------
-Tbls 3/4: These tables could go into an appendix; they are really just for the
-archive, they don't add much to the reader's experience.
+> Tbls 3/4: These tables could go into an appendix; they are really just for
+> the archive, they don't add much to the reader's experience.
+
+We agree that these tables contain information that should be archived. Hence,
+they cannot be relegated to an (unpublished) appendix.
 
 (22) TODO
 -------------------------------------------------------------------------------
