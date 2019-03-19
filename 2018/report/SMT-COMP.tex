@@ -501,10 +501,9 @@ year to the next because of the inclusion of new benchmarks and
 logics, continuous curation efforts may also cause benchmarks to be
 removed or reclassified on occasion, thereby causing individual logics
 or even the entire library to shrink.  From~2015 to~2018, the total
-number of benchmarks has increased by~68\,\%.
-Figure~\ref{fig:benchmark-sizes} shows how the file size of individual
-benchmarks is distributed.  The largest benchmark in the 2018 release
-had a size of 1,041~MB; the total size of the release was 91~GB.
+number of benchmarks has increased by~68\,\%.  The largest benchmark
+in the 2018 release had a size of 1,041~MB; the total size of the
+release was 91~GB.
 
 \begin{table}
   \caption{Number of benchmarks and logics in the SMT Library}
@@ -521,62 +520,6 @@ had a size of 1,041~MB; the total size of the release was 91~GB.
     \bottomrule
   \end{tabular}
 \end{table}
-
-\begin{figure}
-  \centering
-  \scalebox{.96}[.96]{\begin{tikzpicture}
-    \draw [gray] (0,0) -- (14,0);
-    \draw [gray] (0,.9) -- (14,.9);
-    \draw [gray] (0,1.8) -- (14,1.8);
-    \draw [gray] (0,2.7) -- (14,2.7);
-    \draw [gray] (0,3.6) -- (14,3.6);
-    \draw [gray] (0,4.5) -- (14,4.5);
-    \draw [gray] (0,5.4) -- (14,5.4);
-
-    \node [left] at (0,0) {\footnotesize 0};
-    \node [left] at (0,.9) {\footnotesize 1};
-    \node [left] at (0,1.8) {\footnotesize 10};
-    \node [left] at (0,2.7) {\footnotesize 100};
-    \node [left] at (0,3.6) {\footnotesize 1000};
-    \node [left] at (0,4.5) {\footnotesize 10000};
-    \node [left] at (0,5.4) {\footnotesize 100000};
-
-    \node [rotate=90] at (-1.5,2.7) {\small Benchmarks};
-
-    \draw [fill=black] (0.5,0) rectangle (1,5.1629791157); % 54531
-    \draw [fill=black] (2.25,0) rectangle (2.75,5.5836542368); % 159978
-    \draw [fill=black] (4,0) rectangle (4.5,5.350394013); % 88081
-    \draw [fill=black] (5.75,0) rectangle (6.25,4.8786283826); % 26345
-    \draw [fill=black] (7.5,0) rectangle (8,4.3889077926); % 7526
-    \draw [fill=black] (9.25,0) rectangle (9.75,3.1918883971); % 352
-    \draw [fill=black] (11,0) rectangle (11.5,2.2422255245); % 31
-    %\draw [fill=black] (12.75,0) rectangle (13.25,0); % 0
-
-    \draw [fill=white] (1,0) rectangle (1.5,1.4418539922); % 4
-    \draw [fill=white] (2.75,0) rectangle (3.25,3.8742353084); % 2017
-    \draw [fill=white] (4.5,0) rectangle (5,3.9968181739); % 2760
-    \draw [fill=white] (6.25,0) rectangle (6.75,4.1649057286); % 4243
-    \draw [fill=white] (8,0) rectangle (8.5,3.5266990775); % 829
-    \draw [fill=white] (9.75,0) rectangle (10.25,3.0372735114); % 237
-    \draw [fill=white] (11.5,0) rectangle (12,2.5927322331); % 76
-    \draw [fill=white] (13.25,0) rectangle (13.75,0.9); % 1
-
-    \node [below] at (1,0) {\footnotesize $[10^2, 10^3[$};
-    \node [below] at (2.75,0) {\footnotesize $[10^3, 10^4[$};
-    \node [below] at (4.5,0) {\footnotesize $[10^4, 10^5[$};
-    \node [below] at (6.25,0) {\footnotesize $[10^5, 10^6[$};
-    \node [below] at (8,0) {\footnotesize $[10^6, 10^7[$};
-    \node [below] at (9.75,0) {\footnotesize $[10^7, 10^8[$};
-    \node [below] at (11.5,0) {\footnotesize $[10^8, 10^9[$};
-    \node [below] at (13.25,0) {\footnotesize $[10^9, 10^{10}[$};
-
-    \node [] at (7,-1) {\small File size in bytes};
-  \end{tikzpicture}}
-  \caption{Distribution of SMT-LIB benchmarks by file size (2018), for
-    non-incremental~($\blacksquare$) and incremental~($\square$)
-    benchmarks.}
-  \label{fig:benchmark-sizes}
-\end{figure}
 
 Benchmarks in the SMT Library are annotated with additional
 information, such as the source of the benchmark and its status (i.e.,

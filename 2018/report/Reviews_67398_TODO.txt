@@ -53,12 +53,15 @@ although the number of participants in the main track is similar?
 Are produced unsat cores checked for whether they are actually unsat cores,
 i.e., unsatisfiable and a subset of the input problem?
 
-(8) TODO:
+(8)
 -------------------------------------------------------------------------------
-The labels of the x-axis of Fig. 2 would be easier to read for humans
-if they would be written like "100 B - 1 kB" or something similar.
-Maybe there is also a way to keep the current labels
-and add some intuitive markers for the ranges of kB, MB, GB?
+> The labels of the x-axis of Fig. 2 would be easier to read for humans if they
+> would be written like "100 B - 1 kB" or something similar.  Maybe there is
+> also a way to keep the current labels and add some intuitive markers for the
+> ranges of kB, MB, GB?
+
+Following another reviewer's suggestion, we have removed Figure 2 (Distribution
+of SMT-LIB benchmarks by file size).
 
 (9) TODO:
 -------------------------------------------------------------------------------
@@ -91,11 +94,15 @@ detail is found elsewhere. This paper is really for readers that already know
 SMT; those that don't, would be served much better by references to the
 respective standards/tutorials/websites. The numbers in Sec 3 are somewhat
 interesting (as a record), but they are really more about SMT-LIB than
-SMT-COMP. Fig 2: The file size of benchmark problems is really only very
-vaguely interesting, as it is not in any relation with the complexity of the
-problems. Perhaps a scatter-plot that relates file size and average solver
-run-time (perhaps one for each competition year) would provide a better view of
-the complexity of SMT problems.
+SMT-COMP.
+
+> Fig 2: The file size of benchmark problems is really only very vaguely
+> interesting, as it is not in any relation with the complexity of the
+> problems. Perhaps a scatter-plot that relates file size and average solver
+> run-time (perhaps one for each competition year) would provide a better view
+> of the complexity of SMT problems.
+
+We have removed Figure 2 (Distribution of SMT-LIB benchmarks by file size).
 
 (12) TODO:
 -------------------------------------------------------------------------------
@@ -314,7 +321,6 @@ of the years.
 Pg 19, Tbl 13: This table essentially shows that the parallel score has
 absolutely no effect on the competition at all. This should perhaps be
 mentioned in the text, or those scores could be removed altogether.
-
 
 (26) TODO
 -------------------------------------------------------------------------------
