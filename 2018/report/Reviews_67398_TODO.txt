@@ -63,10 +63,12 @@ i.e., unsatisfiable and a subset of the input problem?
 Following another reviewer's suggestion, we have removed Figure 2 (Distribution
 of SMT-LIB benchmarks by file size).
 
-(9) TODO:
+(9)
 -------------------------------------------------------------------------------
-In the third paragraph of Sect. 4,
-there should be no line break between "8" and "benchmarks".
+> In the third paragraph of Sect. 4, there should be no line break between "8"
+> and "benchmarks".
+
+Done.
 
 (10) TODO:
 -------------------------------------------------------------------------------
