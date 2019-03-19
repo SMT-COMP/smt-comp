@@ -1,32 +1,42 @@
-\newcommand{\nc}[1]{{[}#1{]}}
 \begin{table}
   \caption{Best application-track solvers (by division)}
   \label{tab:winners-application}
   \centering
-  \begin{tabular}{rcccc}
+  \begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.5em]}c}
     \toprule
-    Division                         & 2015                          & 2016  & 2017      & 2018      \\ \midrule \cline{2-5}
-    \multicolumn{1}{r|}{ALIA}       & \multicolumn{4}{c|}{\nc{Z3}}                    \\ \cline{2-5} 
-    \multicolumn{1}{r|}{ANIA}       & \multicolumn{2}{c|}{\nc{Z3}}                                   & \multicolumn{2}{c|}{CVC4}                                      \\ \cline{2-5} 
-    AUFNIRA                          &                               &                                 & \multicolumn{1}{l|}{}         & \multicolumn{1}{c|}{CVC4}      \\ \cline{5-5} 
-    BV                               &                               &                                 & \multicolumn{1}{l|}{}         & \multicolumn{1}{c|}{\nc{Z3}}  \\ \cline{2-5} 
-    \multicolumn{1}{r|}{LIA}        & \multicolumn{4}{c|}{\nc{Z3}}                                                                                                    \\ \cline{2-5} 
-    QF\_ABV                          & \multicolumn{1}{l}{}          &                                 & \multicolumn{1}{l|}{}         & \multicolumn{1}{c|}{Boolector} \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_ALIA}   & \multicolumn{4}{c|}{\nc{Z3}}                                                                                                    \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_ANIA}   & \multicolumn{4}{c|}{\nc{Z3}}                                                                                                    \\ \cline{2-5} 
-    QF\_AUFBV                        & \multicolumn{1}{l}{}          &                                 & \multicolumn{1}{l|}{}         & \multicolumn{1}{c|}{Yices2}    \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_AUFLIA} & \multicolumn{4}{c|}{Yices2}                                                                                                      \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_BV}     & \multicolumn{4}{c|}{\nc{MathSAT}}                                                                                               \\ \cline{2-5} 
-    QF\_BVFP                         & \multicolumn{1}{l}{}          & \multicolumn{1}{l|}{}           & \multicolumn{1}{c|}{\nc{Z3}} & \multicolumn{1}{c|}{CVC4}      \\ \cline{4-5} 
-    QF\_FP                           & \multicolumn{1}{l}{}          & \multicolumn{1}{l|}{}           & \multicolumn{2}{c|}{\nc{Z3}}                                  \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_LIA}    & \multicolumn{4}{c|}{Yices2}                                                                                                      \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_LRA}    & \multicolumn{4}{c|}{\nc{MathSAT}}                                                                                               \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_NIA}    & \multicolumn{1}{c|}{\nc{Z3}} & \multicolumn{1}{c|}{\nc{CVC4}} & \multicolumn{2}{c|}{CVC4}                                      \\ \cline{2-5} 
-    QF\_UFBV                         & \multicolumn{1}{l}{}          &                                 & \multicolumn{1}{l|}{}         & \multicolumn{1}{c|}{Boolector} \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_UFLIA}  & \multicolumn{4}{c|}{\nc{Z3}}                                                                                                    \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_UFLRA}  & \multicolumn{2}{c|}{\nc{Z3}}                                   & \multicolumn{1}{c|}{Yices2}   & \multicolumn{1}{c|}{\nc{Z3}}  \\ \cline{2-5} 
-    \multicolumn{1}{r|}{QF\_UFNIA}  & \multicolumn{4}{c|}{\nc{Z3}}                                                                                                    \\ \cline{2-5} 
-    \multicolumn{1}{r|}{UFLRA}      & \multicolumn{4}{c|}{\nc{Z3}} \\ \cline{2-5}
+    \rc
+    Division                     & 2015              & 2016                & 2017                & 2018                    \\
+    \hline \hline
+    \cc ALIA                     & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *          \\
+    \cc ANIA                     & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 *              & CVC4 *                  \\
+    \cc AUFNIRA                  & \cc               & \cc                 & \cc                 & \cc CVC4 *              \\
+    \cc BV                       & \cc               & \cc                 & \cc                 & \cc CVC4 \nc{Z3} *      \\
+    \cc LIA                      & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *          \\
+    \cc QF\_ABV                  & \cc               & \cc                 & \cc                 & \cc Boolector           \\
+    \drc
+    \cc QF\_ALIA                 & \cc Yices \nc{Z3} & SMTInterpol \nc{Z3} & SMTInterpol \nc{Z3} & SMTInterpol \nc{Z3}     \\
+    \cc QF\_ANIA                 & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *          \\
+    \cc QF\_AUFBV                & \cc               & \cc                 & \cc                 & \cc Yices2              \\
+    \drc
+    \cc QF\_AUFLIA               & Yices2            & Yices2              & Yices2              & Yices2                  \\
+    \drc
+    \cc \multirow{2}{*}{QF\_BV}  & Yices2            &  Yices2             & Yices2              & Yices2                  \\
+                                 & \dcc \nc{MathSAT} &  \dcc \nc{MathSAT}  & \dcc \nc{MathSAT}   & \dcc \nc{MathSAT}       \\
+    \cc QF\_BVFP                 & \cc               & \cc                 & \cc \nc{Z3} *       & \cc CVC4 *              \\
+    \cc QF\_FP                   & \cc               & \cc                 & \cc \nc{Z3} *       & \cc CVC4 \nc{Z3} *      \\
+
+    \drc
+    \cc QF\_LIA                  & Yices2            & Yices2              & Yices2              & Yices2                  \\
+    \cc \multirow{2}{*}{QF\_LRA} & \cc Yices2        & SMTInterpol         & SMTInterpol         & \cc Yices2              \\
+                                 & \cc \nc{MathSAT}  & \nc{MathSAT}        & \nc{MathSAT}        & \cc \nc{MathSAT}        \\
+    \drc
+    \cc QF\_NIA                  & CVC4 \nc{Z3}      & \nc{CVC4} *         &  CVC4 *             & CVC4                    \\
+    \cc QF\_UFBV                 & \cc               & \cc                 & \cc                 & \cc Boolector           \\
+    \cc QF\_UFLIA                & CVC4 \nc{Z3}      & CVC4 \nc{Z3}        & CVC4 \nc{Z3}        & \cc SMTInterpol \nc{Z3} \\
+    \drc
+    \cc QF\_UFLRA                & Yices2 \nc{Z3}    & Yices2 \nc{Z3}      & Yices2              & Yices2 \nc{Z3}          \\
+    \cc QF\_UFNIA                & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3}            \\
+    \cc UFLRA                    & CVC4 \nc{Z3} *    & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *      & CVC4 \nc{Z3} *          \\
     \bottomrule
   \end{tabular}
 \end{table}

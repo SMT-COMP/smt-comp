@@ -4,73 +4,73 @@
 \centering
 \scalebox{.83}{%
 \renewcommand{\arraystretch}{1.01}%
-  \begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
-\toprule
-\rc
-Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
-\hline \hline
-\cc ABVFP        & \cc                   & \cc                      & \cc                    & \cc {CVC4} *               \\
-\cc ALIA         & CVC4 {{[}Z3{]}}       & CVC4 {{[}Z3{]}}          & CVC4 {{[}Z3{]}}        & CVC4 {{[}Z3{]}}            \\
-\cc AUFBVDTLIA   & \cc                   & \cc                      & {CVC4} *               & {CVC4} *                   \\
-\cc AUFDTLIA     & \cc                   & \cc                      & {CVC4} *               & {CVC4}                     \\
-\cc AUFLIA       & {CVC4}                & {CVC4}                   & {CVC4}                 & {CVC4}                     \\
-\drc
-\cc AUFLIRA      & \cc CVC4 {{[}Z3{]}}   & Vampire {{[}Z3{]}}       & Vampire {{[}Z3{]}}     & \cc CVC4 {{[}Z3{]}}        \\
-\drc
-\cc AUFNIRA      & \cc {CVC4} *          & {Vampire}                & {Vampire}              &\cc  {CVC4}                 \\
-\cc BV           & \cc CVC4 {{[}Z3{]}} * & {Q3B}                    & Q3B {{[}Z3{]}}         &  \cc {CVC4}                \\
-\cc BVFP         & \cc                   & \cc                      & \cc                    & \cc {CVC4} *               \\
-\cc FP           & \cc                   & \cc                      & \cc                    & \cc {CVC4} *               \\
-\cc LIA          & {CVC4}                & {CVC4}                   & CVC4 {{[}Z3{]}}        & CVC4 {{[}Z3{]}}            \\
-\cc LRA          & {CVC4}                & {CVC4}                   & CVC4 {{[}Z3{]}}        & CVC4 {{[}Z3{]}}            \\
-\cc NIA          & \cc CVC4 {{[}Z3{]}} * & \cc ProB {{[}Z3{]}}      & CVC4 {{[}Z3{]}}        & CVC4 {{[}Z3{]}}            \\
-\rc
-\cc NRA          & {CVC4} *              & {Vampire}                & {Redlog}               & Vampire {{[}Z3{]}/Vampire} \\
-\cc QF\_ABV      & {Boolector}           & {Boolector}              & {Boolector}            & {Boolector}                \\
-\cc QF\_ABVFP    & \cc                   &  \cc                     & \cc {---}              & \cc {CVC4}                 \\
-\cc QF\_ALIA     & {Yices2}              & {Yices2}                 & {Yices2}               & {Yices2}                   \\
-\drc
-\cc QF\_ANIA     & CVC4 {{[}Z3{]}} *     & {CVC4} *                 & {CVC4} *               & CVC4 {{[}Z3{]}} *          \\
-\cc QF\_AUFBV    & CVC4 {{[}MathSAT{]}}  & CVC4 {{[}MathSAT{]}}   & Yices2 {{[}MathSAT{]}}   & \cc {CVC4}                 \\
-\drc
-\cc QF\_AUFLIA   & {Yices2}              & {Yices2}               & {Yices2}                 & {Yices2}                   \\
-\cc QF\_AUFNIA   & {CVC4} *              & {CVC4} *               & CVC4 {{[}Z3{]}} *        & CVC4 {{[}Z3{]}} *          \\
-\cc QF\_AX       & {Yices2}              & {Yices2}               & {Yices2}                 & {Yices2}                   \\
-\drc
-\cc QF\_BV       & {Boolector}           & {Boolector}            & {Boolector/MinkeyRink}   & {Boolector/MinkeyRink}     \\
-\cc QF\_BVFP     & {Z3} *                & {{[}Z3{]}} *           & \cc COLIBRI {{[}Z3{]}} * & \cc {CVC4}                 \\
-\drc
-\cc QF\_DT       & \cc                   & \cc                    & {CVC4} *                 & {CVC4} *                   \\
-\cc QF\_FP       & \cc {Z3} *            & \cc {{[}MathSAT{]}} *  & COLIBRI {{[}Z3{]}}       & {COLIBRI}                  \\
-\drc
-\cc QF\_IDL      & Yices2 {{[}Z3{]}}     & Yices2 {{[}Z3{]}}      & {Yices2}                 & {Yices2}                   \\
-\cc QF\_LIA      & CVC4 {{[}MathSAT{]}}  & CVC4 {{[}MathSAT{]}}   & CVC4 {{[}MathSAT{]}}     & \cc {SPASS-SATT}           \\
-\drc
-\cc QF\_LIRA     & {Yices2}              & {Yices2}               & Yices2 {{[}Z3{]}}        & Yices2 {{[}Z3{]}}          \\
-\cc QF\_LRA      &  {CVC4}               & {CVC4}                 & {CVC4}                   & {CVC4}                     \\
-\cc QF\_NIA      & \cc AProVE {{[}Z3{]}} & \cc Yices2 {{[}Z3{]}}  & {CVC4}                   & {CVC4}                     \\
-\cc QF\_NIRA     & {CVC4}                & {CVC4}                 & \dcc {SMT-RAT}           & \dcc {SMT-RAT}             \\
-\cc QF\_NRA      & Yices2 {{[}Z3{]}}     & Yices2 {{[}Z3{]}}      & {Yices2}                 & Yices2 {{[}Z3{]}}          \\
-\cc QF\_RDL      & {Yices2}              & {Yices2}               & {Yices2}                 & {Yices2}                   \\
-\cc QF\_SLIA     & \cc                   & \cc                    & \cc                      & \cc {CVC4} *               \\
-\cc QF\_UF       & {Yices2}              & {Yices2}               & {Yices2}                 & {Yices2}                   \\
-\drc
-\cc QF\_UFBV     & {Boolector}           & {Boolector}            & {Boolector}              & {Boolector}                \\
-\cc QF\_UFIDL    & {Yices2}              & {Yices2}               & {Yices2}                 & {Yices2}                   \\
-\cc QF\_UFLIA    & Yices2 {{[}Z3{]}}     & Yices2 {{[}Z3{]}}      & {Yices2}                 & {Yices2}                   \\
-\cc QF\_UFLRA    & {Yices2}              & {Yices2}               & {Yices2}                 & {Yices2}                   \\
-\cc QF\_UFNIA    & \cc {CVC4} *          & {Yices2/CVC4}          & {Yices2}                 & {Yices2}                   \\
-\cc QF\_UFNRA    & \cc CVC3 {{[}Z3{]}} * & {Yices2}               & Yices2 {{[}Z3{]}}        & {Yices2}                   \\
-\cc UF           & {CVC4}                & {CVC4}                 & \dcc {Vampire}           & \dcc {CVC4/Vampire}        \\
-\drc
-\cc UFBV         & CVC4 {{[}Z3{]}} *     & CVC4 {{[}Z3{]}}        & CVC4 {{[}Z3{]}} *        & CVC4 {{[}Z3{]}} *          \\
-\cc UFDT         & \cc                   & \cc                    & {CVC4} *                 & {CVC4}                     \\
-\rc
-\cc UFDTLIA      &                       &                        & {Vampire} *              & {CVC4}                     \\
-\cc UFIDL        & CVC4 {{[}Z3{]}}       & {CVC4}                 & {CVC4}                   & CVC4 {{[}Z3{]}}            \\
-\cc UFLIA        & {CVC4}                & {CVC4}                 & {CVC4}                   & {CVC4}                     \\
-\cc UFLRA        & \cc {CVC3}            & \cc Vampire {{[}Z3{]}} & CVC4 {{[}Z3{]}}          & CVC4 {{[}Z3{]}}            \\
-\cc UFNIA        & \cc {CVC4} *          & {Vampire}              & {Vampire}                & Vampire {{[}Z3{]}/Vampire} \\
-\bottomrule
-\end{tabular}}
+  \begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.5em]}c}
+    \toprule
+    \rc
+    Division         &  2015              &  2016               &  2017                 &  2018                   \\
+    \hline \hline
+    \cc ABVFP        & \cc                & \cc                 & \cc                   & \cc {CVC4} *            \\
+    \cc ALIA         & CVC4 \nc{Z3}       & CVC4 \nc{Z3}        & CVC4 \nc{Z3}          & CVC4 \nc{Z3}            \\
+    \cc AUFBVDTLIA   & \cc                & \cc                 & {CVC4} *              & {CVC4} *                \\
+    \cc AUFDTLIA     & \cc                & \cc                 & {CVC4} *              & {CVC4}                  \\
+    \cc AUFLIA       & {CVC4}             & {CVC4}              & {CVC4}                & {CVC4}                  \\
+    \drc
+    \cc AUFLIRA      & \cc CVC4 \nc{Z3}   & Vampire \nc{Z3}     & Vampire \nc{Z3}       & \cc CVC4 \nc{Z3}        \\
+    \drc
+    \cc AUFNIRA      & \cc {CVC4} *       & {Vampire}           & {Vampire}             &\cc  {CVC4}              \\
+    \cc BV           & \cc CVC4 \nc{Z3} * & {Q3B}               & Q3B \nc{Z3}           &  \cc {CVC4}             \\
+    \cc BVFP         & \cc                & \cc                 & \cc                   & \cc {CVC4} *            \\
+    \cc FP           & \cc                & \cc                 & \cc                   & \cc {CVC4} *            \\
+    \cc LIA          & {CVC4}             & {CVC4}              & CVC4 \nc{Z3}          & CVC4 \nc{Z3}            \\
+    \cc LRA          & {CVC4}             & {CVC4}              & CVC4 \nc{Z3}          & CVC4 \nc{Z3}            \\
+    \cc NIA          & \cc CVC4 \nc{Z3} * & \cc ProB \nc{Z3}    & CVC4 \nc{Z3}          & CVC4 \nc{Z3}            \\
+    \rc
+    \cc NRA          & {CVC4} *           & {Vampire}           & {Redlog}              & Vampire \nc{Z3/Vampire} \\
+    \cc QF\_ABV      & {Boolector}        & {Boolector}         & {Boolector}           & {Boolector}             \\
+    \cc QF\_ABVFP    & \cc                &  \cc                & \cc {---}             & \cc {CVC4}              \\
+    \cc QF\_ALIA     & {Yices2}           & {Yices2}            & {Yices2}              & {Yices2}                \\
+    \drc
+    \cc QF\_ANIA     & CVC4 \nc{Z3} *     & {CVC4} *            & {CVC4} *              & CVC4 \nc{Z3} *          \\
+    \cc QF\_AUFBV    & CVC4 \nc{MathSAT}  & CVC4 \nc{MathSAT}   & Yices2 \nc{MathSAT}   & \cc {CVC4}              \\
+    \drc
+    \cc QF\_AUFLIA   & {Yices2}           & {Yices2}            & {Yices2}              & {Yices2}                \\
+    \cc QF\_AUFNIA   & {CVC4} *           & {CVC4} *            & CVC4 \nc{Z3} *        & CVC4 \nc{Z3} *          \\
+    \cc QF\_AX       & {Yices2}           & {Yices2}            & {Yices2}              & {Yices2}                \\
+    \drc
+    \cc QF\_BV       & {Boolector}        & {Boolector}         & {Boolector/MinkeyRink}& {Boolector/MinkeyRink}  \\
+    \cc QF\_BVFP     & {Z3} *             & \nc{Z3} *           & \cc COLIBRI \nc{Z3} * & \cc {CVC4}              \\
+    \drc
+    \cc QF\_DT       & \cc                & \cc                 & {CVC4} *              & {CVC4} *                \\
+    \cc QF\_FP       & \cc {Z3} *         & \cc \nc{MathSAT} *  & COLIBRI \nc{Z3}       & {COLIBRI}               \\
+    \drc
+    \cc QF\_IDL      & Yices2 \nc{Z3}     & Yices2 \nc{Z3}      & {Yices2}              & {Yices2}                \\
+    \cc QF\_LIA      & CVC4 \nc{MathSAT}  & CVC4 \nc{MathSAT}   & CVC4 \nc{MathSAT}     & \cc {SPASS-SATT}        \\
+    \drc
+    \cc QF\_LIRA     & {Yices2}           & {Yices2}            & Yices2 \nc{Z3}        & Yices2 \nc{Z3}          \\
+    \cc QF\_LRA      &  {CVC4}            & {CVC4}              & {CVC4}                & {CVC4}                  \\
+    \cc QF\_NIA      & \cc AProVE \nc{Z3} & \cc Yices2 \nc{Z3}  & {CVC4}                & {CVC4}                  \\
+    \cc QF\_NIRA     & {CVC4}             & {CVC4}              & \dcc {SMT-RAT}        & \dcc {SMT-RAT}          \\
+    \cc QF\_NRA      & Yices2 \nc{Z3}     & Yices2 \nc{Z3}      & {Yices2}              & Yices2 \nc{Z3}          \\
+    \cc QF\_RDL      & {Yices2}           & {Yices2}            & {Yices2}              & {Yices2}                \\
+    \cc QF\_SLIA     & \cc                & \cc                 & \cc                   & \cc {CVC4} *            \\
+    \cc QF\_UF       & {Yices2}           & {Yices2}            & {Yices2}              & {Yices2}                \\
+    \drc
+    \cc QF\_UFBV     & {Boolector}        & {Boolector}         & {Boolector}           & {Boolector}             \\
+    \cc QF\_UFIDL    & {Yices2}           & {Yices2}            & {Yices2}              & {Yices2}                \\
+    \cc QF\_UFLIA    & Yices2 \nc{Z3}     & Yices2 \nc{Z3}      & {Yices2}              & {Yices2}                \\
+    \cc QF\_UFLRA    & {Yices2}           & {Yices2}            & {Yices2}              & {Yices2}                \\
+    \cc QF\_UFNIA    & \cc {CVC4} *       & {Yices2/CVC4}       & {Yices2}              & {Yices2}                \\
+    \cc QF\_UFNRA    & \cc CVC3 \nc{Z3} * & {Yices2}            & Yices2 \nc{Z3}        & {Yices2}                \\
+    \cc UF           & {CVC4}             & {CVC4}              & \dcc {Vampire}        & \dcc {CVC4/Vampire}     \\
+    \drc
+    \cc UFBV         & CVC4 \nc{Z3} *     & CVC4 \nc{Z3}        & CVC4 \nc{Z3} *        & CVC4 \nc{Z3} *          \\
+    \cc UFDT         & \cc                & \cc                 & {CVC4} *              & {CVC4}                  \\
+    \rc
+    \cc UFDTLIA      &                    &                     & {Vampire} *           & {CVC4}                  \\
+    \cc UFIDL        & CVC4 \nc{Z3}       & {CVC4}              & {CVC4}                & CVC4 \nc{Z3}            \\
+    \cc UFLIA        & {CVC4}             & {CVC4}              & {CVC4}                & {CVC4}                  \\
+    \cc UFLRA        & \cc {CVC3}         & \cc Vampire \nc{Z3} & CVC4 \nc{Z3}          & CVC4 \nc{Z3}            \\
+    \cc UFNIA        & \cc {CVC4} *       & {Vampire}           & {Vampire}             & Vampire \nc{Z3/Vampire} \\
+    \bottomrule
+  \end{tabular}}
 \end{table}
