@@ -21,10 +21,14 @@ the change of the scoring for competition-wise ranking is explained, but to me
 is (partially) in contrast to the (clear) motivations given before for strongly
 penalizing incorrect solvers.
 
-(3) TODO:
+(3)
 -------------------------------------------------------------------------------
-It is not defined what a "competitive" division is,
-please explain the rules for this.
+> It is not defined what a "competitive" division is, please explain the rules
+> for this.
+
+A division is "competitive" if at least two substantially different solvers
+(i.e., solvers from two different teams) were submitted. This is now explained
+also in the paper.
 
 (4) TODO:
 -------------------------------------------------------------------------------
