@@ -273,12 +273,18 @@ propositional logic.  In place of Boolean variables, SMT formulas may
 contain terms that are built from function and predicate symbols drawn
 from a number of background theories.  Background theories, which are
 motivated by application domains, include the theory of arrays,
-integer and real arithmetic, bit-vectors, and floating-point numbers
+integer and real arithmetic, bit-vectors, and floating-point numbers,
 among others~\cite{BarFT-RR-17}.  For instance, the following is an
 SMT formula over the combination of integer arithmetic and
 uninterpreted functions:
 %
-$$x \leq y \wedge y \leq x \wedge P (f(x) - f(y)) \wedge \neg P(0)$$
+$$x \leq y \wedge y \leq x \wedge P (f(x) - f(y)) \wedge \neg P(0).$$
+%
+This formula asserts that~$x$ is less than or equal to~$y$, that~$y$
+is less than or equal to~$x$, that~$P$ holds for the difference
+of~$f(x)$ and~$f(y)$, and that~$P$ does not hold for~$0$.  (Here,~$x$
+and~$y$ are integers,~$f$ is a function from integers to integers,
+and~$P$ is a predicate over integers.)
 %
 Software tools to determine the satisfiability of such formulas are
 called SMT solvers.  With its rich input language, SMT has
@@ -289,7 +295,7 @@ Internally, many SMT solvers employ SAT solving techniques to deal
 with the propositional structure of the formula, and combine these
 with (semi-)decision procedures for the background theories that the
 solver
-supports~\cite{DBLP:conf/cav/BarrettCDHJKRT11,DBLP:conf/cade/BoutonODF09,DBLP:conf/tacas/MouraB08}.
+supports~\cite{DBLP:conf/cav/BarrettCDHJKRT11,DBLP:conf/cade/BoutonODF09,DBLP:conf/tacas/MouraB08,Nieuwenhuis:2006:SSS:1217856.1217859}.
 Historically, SMT solvers have focused on quantifier-free formulas and
 decidable combinations of background theories.  Increasingly, however,
 SMT solvers also support quantified formulas.  Hence there is overlap

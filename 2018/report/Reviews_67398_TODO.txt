@@ -206,22 +206,39 @@ other author data (such as affiliation and e-mail address).
 An "Olympiad" is the period of four years between two Olympic Games. The term
 is used with this meaning in the abstract.
 
-(19) TODO: Minor
+(19)
 -------------------------------------------------------------------------------
-Introduction:
-. "among others" -> ", among others"
-. Intuitive meaning of the formula in page 2 should be given. And a "." should
-  be added at its end
-. "Many SMT solvers employ SAT". Should we explicitly refer to the lazy SMT
-  solving approach?
-Section 3:
-. "to the next" -> "to the other" ? (This recurs later.)
-. "reclassified". Are you referring to a sort of benchmark classification? As
-  stated above, in case this should be expanded
-. "if this is known" -> "if known"
-Section 4:
-. "need not support all logics"?
-. "for favoring imitations" ?
+> Introduction:
+> . "among others" -> ", among others"
+
+Done.
+
+> . Intuitive meaning of the formula in page 2 should be given. And a
+>   "." should be added at its end
+
+Done.
+
+> . "Many SMT solvers employ SAT". Should we explicitly refer to the lazy SMT
+>   solving approach?
+
+We have added a reference ([36]) to explain the approach, but we do not think
+that it would be beneficial to introduce "lazy SMT solving" as a technical term
+at this point in the paper.
+
+> Section 3:
+> . "to the next" -> "to the other" ? (This recurs later.)
+> . "reclassified". Are you referring to a sort of benchmark classification? As
+>   stated above, in case this should be expanded
+> . "if this is known" -> "if known"
+
+TODO
+
+> Section 4:
+> . "need not support all logics"?
+> . "for favoring imitations" ?
+
+TODO
+
 
 (19) TODO
 -------------------------------------------------------------------------------
