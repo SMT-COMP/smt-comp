@@ -132,9 +132,7 @@ Giles:
   -> indicate changes (some rows will not change entirely)
   -> use same scoring per year as for the overall results tables
 
-+ Parallelism:
-  -> numbers for CPU/Wallclock
-  -> score for  24s
++ score for  24s
 
 + scoring scripts for 2016 2017 2018 (new scripts to compute scores)
 
@@ -145,11 +143,14 @@ Giles:
 Tjark:
 
 + "regret" (in the context of portfolio setting)
-   -> Pie chart with # uniquely solved instances (maybe + instances that
-      are solved significantly faster)
+   -> # uniquely solved instances
    -> determine corresponding numbers for all divisions
 
 + include discussion and details about scoring scheme
+
++ Parallelism:
+  -> numbers for CPU/Wallclock
+
 ...............................................................................
 Matthias:
 
@@ -294,6 +295,3 @@ years, i.e. this needs to be explained much more thorough.
 Sec 8: This section is really a combined conclusion over the previous years,
 and an outlook to and recommendation for the next competition - perhaps this
 section could be split to emphasize that.
-
-
-
