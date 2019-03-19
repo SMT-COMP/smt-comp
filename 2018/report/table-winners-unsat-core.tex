@@ -2,52 +2,69 @@
   \caption{Best unsat-core track solvers (by division)}
   \label{tab:winners-unsat-core}
   \centering
-  \scalebox{.93}{\begin{tabular}{rccc}
+  \scalebox{.88}{%
+    \begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c}
     \toprule
-    Division                        & 2016                               & 2017                                      & 2018                             \\ \midrule \cline{2-4}
-    \multicolumn{1}{r|}{ALIA}       & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    AUFBVDTLIA                      &                                    &                                           & \multicolumn{1}{|c|}{CVC4}         \\ \cline{2-4} 
-    \multicolumn{1}{r|}{AUFLIA}     & \multicolumn{2}{c|}{{[}Z3{]}}                                                  & \multicolumn{1}{c|}{CVC4}        \\ \cline{2-4} 
-    \multicolumn{1}{r|}{AUFLIRA}    & \multicolumn{2}{c|}{{[}Z3{]}}                                                  & \multicolumn{1}{c|}{CVC4}        \\ \cline{2-4} 
-    \multicolumn{1}{r|}{AUFNIRA}    & \multicolumn{1}{c|}{{[}Z3{]}}     & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{BV}         & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{LIA}        & \multicolumn{1}{c|}{[veriT]}      & \multicolumn{1}{c|}{CVC4}                 & \multicolumn{1}{c|}{{[}Z3{]}}    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{LRA}        & \multicolumn{1}{c|}{[veriT]}      & \multicolumn{2}{c|}{CVC4}                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{NIA}        & \multicolumn{1}{c|}{{[}Z3{]}}     & \multicolumn{1}{c|}{CVC4/{[}Z3{]}}        & \multicolumn{1}{c|}{CVC4}        \\ \cline{2-4} 
-    \multicolumn{1}{r|}{NRA}        & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_ABV}    & \multicolumn{2}{c|}{{[}Z3{]}}                                                  & \multicolumn{1}{c|}{Yices2}      \\ \cline{2-4} 
-    QF\_ABVFP                        &                                   & \multicolumn{1}{|c|}{---}                 & \multicolumn{1}{|c|}{CVC4}        \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_ALIA}   & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_ANIA}   & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_AUFBV}  & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{c|}{{[}MathSAT{]}}                                           \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_AUFLIA} & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_AUFNIA} & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_AX}     & \multicolumn{2}{c|}{{[}Z3{]}}                                                  & \multicolumn{1}{c|}{Yices2}      \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_BV}     & \multicolumn{2}{c|}{{[}MathSAT{]}}                                             & \multicolumn{1}{c|}{Yices2}      \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_BVFP}   & \multicolumn{2}{c|}{{[}Z3{]}}                                                  & \multicolumn{1}{c|}{CVC4}        \\ \cline{2-4} 
-    QF\_DT                           &                                    &                                           & \multicolumn{1}{|c|}{CVC4}       \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_FP}     & \multicolumn{1}{c|}{{[}MathSAT{]}} & \multicolumn{1}{c|}{{[}Z3{]}}             & \multicolumn{1}{c|}{CVC4}        \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_IDL}    & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_LIA}    & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{1}{c|}{SMTInterpol/{[}Z3{]}} & \multicolumn{1}{c|}{SMTInterpol} \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_LIRA}   & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_LRA}    & \multicolumn{3}{c|}{SMTInterpol}                                                                                  \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_NIA}    & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_NIRA}   & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_NRA}    & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_RDL}    & \multicolumn{1}{c|}{{[}veriT{]}}   & \multicolumn{2}{c|}{{[}Z3{]}}                                                \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_UF}     & \multicolumn{1}{c|}{{[}MathSAT{]}} & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_UFBV}   & \multicolumn{2}{c|}{{[}MathSAT{]}}                                             & \multicolumn{1}{c|}{{[}Z3{]}}    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_UFIDL}  & \multicolumn{2}{c|}{{[}Z3{]}}                                                  & \multicolumn{1}{c|}{Yices2}      \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_UFLIA}  & \multicolumn{1}{c|}{{[}MathSAT{]}} & \multicolumn{2}{c|}{{[}Z3{]}}                                                \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_UFLRA}  & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{|c|}{{[}MathSAT{]}}                                          \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_UFNIA}  & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{QF\_UFNRA}  & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{UF}         & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{UFBV}       & \multicolumn{2}{c|}{{[}Z3{]}}                                                  & \multicolumn{1}{c|}{CVC4}        \\ \cline{2-4} 
-    UFDT                             &                                    &                                           & \multicolumn{1}{|c|}{CVC4}       \\ \cline{2-4} 
-    \multicolumn{1}{r|}{UFIDL}      & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{UFLIA}      & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} 
-    \multicolumn{1}{r|}{UFLRA}      & \multicolumn{3}{c|}{{[}Z3{]}}                                                                                     \\ \cline{2-4} 
-    \multicolumn{1}{r|}{UFNIA}      & \multicolumn{1}{c|}{{[}Z3{]}}      & \multicolumn{2}{c|}{CVC4}                                                    \\ \cline{2-4} \bottomrule
-  \end{tabular}}
+    \rc
+    Division   & 2016             & 2017            & 2018               \\
+    \hline \hline
+    \cc ALIA       & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \cc AUFBVDTLIA & \cc                            & \cc                                 & CVC4 *                   \\
+    \cc AUFLIA     & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 *                   \\
+    \cc AUFLIRA    & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 *                   \\
+    \cc AUFNIRA    & \cc \nc{Z3} *                  & CVC4 *                              & CVC4 *                   \\
+    \cc BV         & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \cc LIA        & \cc \nc{veriT} *               & CVC4 *                              & CVC4 \nc{Z3} *           \\
+    \cc LRA        & \cc \nc{veriT} *               & CVC4 *                              & CVC4 *                   \\
+    \cc NIA        & \cc \nc{Z3} *                  & CVC4 / CVC4 \nc{Z3}*                & CVC4 *                   \\
+    \cc NRA        & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \cc QF\_ABV    & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & Yices2                   \\
+    \cc QF\_ABVFP  & \cc                            & \cc ---                             & \cc CVC4 *               \\
+    \rc
+    \cc QF\_ALIA   & SMTInterpol \nc{Z3} *          & SMTInterpol \nc{Z3}                 & Yices2 \nc{Z3}           \\
+    \cc QF\_ANIA   & \cc \nc{Z3} *                  & CVC4 *                              & CVC4 *                   \\
+    \rc
+    \cc QF\_AUFBV  & \nc{Z3} *                      & CVC4 \nc{MathSAT} *                 & Yices2 \nc{MathSAT}      \\
+    \cc QF\_AUFLIA & \cc SMTInterpol \nc{Z3} *      & CVC4                                & CVC4                     \\
+    \cc QF\_AUFNIA & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \drc
+    \cc QF\_AX     & SMTInterpol \nc{Z3} *          & SMTInterpol \nc{Z3}                 & \cc Yices2               \\
+    \rc
+    \cc QF\_BV     & \nc{MathSAT} *                 & CVC4 \nc{MathSAT} *                 & Yices2                   \\
+    \cc QF\_BVFP   & \nc{Z3} *                      & \nc{Z3} *                           & \cc CVC4 \nc{Z3} *       \\
+    \rc
+    \cc QF\_DT     &                                &                                     & CVC4 *                   \\
+    \rc
+    \cc QF\_FP     & \nc{MathSAT} *                 & \nc{Z3} *                           & CVC4 *                   \\
+    \cc QF\_IDL    & \cc SMTInterpol \nc{Z3} *      & CVC4 \nc{Z3}                        & CVC4 \nc{Z3}             \\
+    \drc
+    \cc QF\_LIA    & SMTInterpol \nc{Z3} *          & SMTInterpol / SMTInterpol \nc{Z3}   & SMTInterpol              \\
+    \cc QF\_LIRA   & \cc SMTInterpol \nc{Z3} *      & CVC4 \nc{Z3}                        & CVC4 \nc{Z3}             \\
+    \drc
+    \cc QF\_LRA    & SMTInterpol *                  & SMTInterpol                         & SMTInterpol              \\
+    \cc QF\_NIA    & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \cc QF\_NIRA   & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \cc QF\_NRA    & \cc \nc{Z3} *                  & CVC4 *                              & CVC4 *                   \\
+    \cc QF\_RDL    & \cc SMTInterpol \nc{veriT} *   & CVC4 \nc{Z3}                        & CVC4 \nc{Z3}             \\
+    \cc QF\_UF     & \cc SMTInterpol \nc{MathSAT} * & CVC4                                & CVC4                     \\
+    \rc
+    \cc QF\_UFBV   & \nc{MathSAT} *                 & CVC4 \nc{MathSAT} *                 & Yices2 \nc{Z3}           \\
+    \drc
+    \cc QF\_UFIDL  & SMTInterpol \nc{Z3} *          & SMTInterpol \nc{Z3}                 & \cc Yices2               \\
+    \drc
+    \cc QF\_UFLIA  & SMTInterpol \nc{MathSAT} *     & SMTInterpol \nc{Z3}                 & SMTInterpol \nc{Z3}      \\
+    \drc
+    \cc QF\_UFLRA  & SMTInterpol \nc{Z3} *          & SMTInterpol \nc{MathSAT}            & \cc Yices2 \nc{MathSAT}  \\
+    \cc QF\_UFNIA  & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \cc QF\_UFNRA  & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \cc UF         & \cc \nc{Z3} *                  & CVC4 *                              & CVC4 *                   \\
+    \cc UFBV       & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 *                   \\
+    \rc
+    \cc UFDT       &                                &                                     & CVC4 *                   \\
+    \cc UFIDL      & \cc \nc{Z3} *                  & CVC4 *                              & CVC4 *                   \\
+    \cc UFLIA      & \cc \nc{Z3} *                  & CVC4 *                              & CVC4 *                   \\
+    \cc UFLRA      & \cc \nc{Z3} *                  & CVC4 \nc{Z3} *                      & CVC4 \nc{Z3} *           \\
+    \cc UFNIA      & \cc \nc{Z3} *                  & CVC4 *                              & CVC4 *                   \\
+  \end{tabular}
+  }
 \end{table}
