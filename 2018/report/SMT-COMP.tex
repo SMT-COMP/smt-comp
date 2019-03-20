@@ -45,11 +45,6 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 \renewcommand{\textfraction}{0.15}
 \renewcommand{\floatpagefraction}{0.7}
 
-\newcommand{\cc}[1]{\cellcolor{#1}}
-\newcommand{\wc}{\cc{white}}
-\newcommand{\rc}[1]{\rowcolor{#1}}
-\newcommand{\nc}[1]{{[}#1{]}}
-
 \colorlet{bool}{blue!10}
 \colorlet{cvc4}{cyan!10}
 \colorlet{smti}{yellow!10}
@@ -64,8 +59,14 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 \colorlet{rat}{Goldenrod!10}
 \colorlet{cvc3}{GreenYellow!10}
 \colorlet{redl}{Yellow!10}
+\colorlet{nonc}{black!55}
 
-\newcommand{\nonc}{\color{black!55}}
+\newcommand{\cc}[1]{\cellcolor{#1}}
+\newcommand{\wc}{\cc{white}}
+\newcommand{\rc}[1]{\rowcolor{#1}}
+\newcommand{\nc}[1]{{[}#1{]}}
+
+\newcommand{\nonc}{\color{nonc}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1173,11 +1174,21 @@ parallel performance is reported (because response times to individual
 {\tt check-sat} commands are not recorded by StarExec).
 
 Tables~\ref{tab:winners-main}--\ref{tab:winners-unsat-core} show the
-highest-ranked solver for each division from 2015--2018.  Entries
+highest-ranked solver for each division from 2015--2018.
+Non-competitive divisions use gray font.
+Entries $A [B]$ indicate that solver $A$ was the highest competing solver,
+but non-competing solver $B$ actually ranked best if non-competing solvers
+are also taking into consideration.
+Entries
 $A/B$ indicate that solver~$A$ ranked first considering sequential
 performance, while~$B$ ranked first considering parallel performance.
 When the same solver ranked first in both, which is most often the
-case, its name appears just once.  A division is \emph{competitive} if
+case, its name appears just once.
+Table cell colors (other than white) indicate the best competing sequential
+solver performance, no cell color indicate that the best sequential solver
+performance was by a non-competing solver and no competing solvers participated
+in that division.
+A division is \emph{competitive} if
 at least two substantially different solvers (i.e., solvers from two
 different teams) were submitted.  (Experimental divisions are never
 competitive.)  Official winners were declared only for competitive
