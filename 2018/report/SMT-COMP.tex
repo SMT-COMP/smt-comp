@@ -1173,9 +1173,18 @@ performance separately.  The latter is determined by imposing a
 parallel performance is reported (because response times to individual
 {\tt check-sat} commands are not recorded by StarExec).
 
+A division is \emph{competitive} if
+at least two substantially different solvers (i.e., solvers from two
+different teams) were submitted.  (Experimental divisions are never
+competitive.)  Official winners were declared only for competitive
+divisions.
+
 Tables~\ref{tab:winners-main}--\ref{tab:winners-unsat-core} show the
-highest-ranked solver for each division from 2015--2018.
-Non-competitive divisions use gray font.
+highest-ranked solvers for all (competitive and non-competitive) division from
+2015--2018.
+We include solvers that were running hors concours (and hence non-competing
+and ineligible to be recognized as official competition winners).
+Non-com-petitive divisions use gray font.
 Entries $A [B]$ indicate that solver $A$ was the highest competing solver,
 but non-competing solver $B$ actually ranked best if non-competing solvers
 are also taking into consideration.
@@ -1185,17 +1194,10 @@ performance, while~$B$ ranked first considering parallel performance.
 When the same solver ranked first in both, which is most often the
 case, its name appears just once.
 Table cell colors (other than white) indicate the best competing sequential
-solver performance, no cell color indicate that the best sequential solver
+solver performance, no cell color indicates that the best sequential solver
 performance was by a non-competing solver and no competing solvers participated
 in that division.
-A division is \emph{competitive} if
-at least two substantially different solvers (i.e., solvers from two
-different teams) were submitted.  (Experimental divisions are never
-competitive.)  Official winners were declared only for competitive
-divisions; we are including all divisions here.  Moreover, we are
-including solvers that were running hors concours (and hence
-ineligible to be recognized as official competition winners).  Full
-division rankings are available from the competition website.
+Full division rankings are available from the competition website.
 
 \include{table-winners-main}
 
