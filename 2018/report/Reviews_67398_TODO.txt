@@ -289,7 +289,7 @@ References: Some work has to be done in order to have the references uniform,
 > Sec 5: "Since 2014 (and ... 2013)": Unclear why 2013 is singled out.
 
 2013 is singled out because there was no competition in that year, but
-only an evaluation of SMT-COMP and SMT-LIB.
+only an evaluation (of SMT-COMP and SMT-LIB).
 
 (21)
 -------------------------------------------------------------------------------
