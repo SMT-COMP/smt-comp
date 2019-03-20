@@ -126,15 +126,15 @@ this part should be extended.
 -------------------------------------------------------------------------------
 Aina:
 
-+ Fix representation of results tables
-  -> one entry per division and year,
-  -> empty cell for "didn't exist" and "-" for "no participants"
++ DONE: Fix representation of results tables
+        -> one entry per division and year,
+        -> empty cell for "didn't exist" and "-" for "no participants"
 
-+ Try different representation for non-competing solvers as winners
-  in results tables
-  -> list actual division winners as winners but use superscript
-     identifying non-competing solvers that would have won (+ legend in
-     caption)
++ DONE: Try different representation for non-competing solvers as winners
+        in results tables
+        -> list actual division winners as winners but use superscript
+           identifying non-competing solvers that would have won (+ legend in
+           caption)
 
 + DONE: Progress plots, VBS over all tracks and time (pair-wise, 2014-2018)
 ...............................................................................
