@@ -27,7 +27,7 @@ penalizing incorrect solvers.
 > for this.
 
 A division is "competitive" if at least two substantially different solvers
-(i.e., solvers from two different teams) were submitted. This is now explained
+(i.e., solvers from two different teams) were submitted. We now explain this
 also in the paper.
 
 (4) TODO:
