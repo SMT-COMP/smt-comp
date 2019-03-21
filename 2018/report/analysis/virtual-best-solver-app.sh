@@ -14,5 +14,5 @@ set -u
 #        14: correct answers
 
 awk -F , '$8=="complete"' "$1"|
-    sort -t , -k 3,3n -k 10,10n|
+    sort -t , -k 3,3n -k 14,14nr|
     sort -t , -k 3,3n -u
