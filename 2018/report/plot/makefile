@@ -17,7 +17,7 @@ csv-main:
 	./gen_common_results.py ../analysis/2017_Main_Track.vbs.csv ../analysis/Main_Track_Common_Benchmarks_2015_2016_2017_2018.csv
 	./gen_common_results.py ../analysis/2018_Main_Track.vbs.csv ../analysis/Main_Track_Common_Benchmarks_2015_2016_2017_2018.csv
 
-csv-app:
+gen-csv-app:
 	./gen_common_results.py ../analysis/2015_Application_Track.vbs.csv ../analysis/Application_Track_Common_Benchmarks_2015_2016.csv
 	./gen_common_results.py ../analysis/2016_Application_Track.vbs.csv ../analysis/Application_Track_Common_Benchmarks_2015_2016.csv
 	./gen_common_results.py ../analysis/2016_Application_Track.vbs.csv ../analysis/Application_Track_Common_Benchmarks_2016_2017.csv
@@ -28,6 +28,32 @@ csv-app:
 	./gen_common_results.py ../analysis/2016_Application_Track.vbs.csv ../analysis/Application_Track_Common_Benchmarks_2015_2016_2017_2018.csv
 	./gen_common_results.py ../analysis/2017_Application_Track.vbs.csv ../analysis/Application_Track_Common_Benchmarks_2015_2016_2017_2018.csv
 	./gen_common_results.py ../analysis/2018_Application_Track.vbs.csv ../analysis/Application_Track_Common_Benchmarks_2015_2016_2017_2018.csv
+
+awk-2015-app:
+	rm -f results-files/Application_Track_vbs_2015_2016.csv
+	awk -F ',' '{sum += $$14;}END{print "2015,"sum}' results-files/2015_Application_Track_vbs_2015_2016.csv >> results-files/Application_Track_vbs_2015_2016.csv
+	awk -F ',' '{sum += $$14;}END{print "2016,"sum}' results-files/2016_Application_Track_vbs_2015_2016.csv >> results-files/Application_Track_vbs_2015_2016.csv
+
+awk-2016-app:
+	rm -f results-files/Application_Track_vbs_2016_2017.csv
+	awk -F ',' '{sum += $$14;}END{print "2016,"sum}' results-files/2016_Application_Track_vbs_2016_2017.csv >> results-files/Application_Track_vbs_2016_2017.csv
+	awk -F ',' '{sum += $$14;}END{print "2017,"sum}' results-files/2017_Application_Track_vbs_2016_2017.csv >> results-files/Application_Track_vbs_2016_2017.csv
+
+awk-2017-app:
+	rm -f results-files/Application_Track_vbs_2017_2018.csv
+	awk -F ',' '{sum += $$14;}END{print "2017,"sum}' results-files/2017_Application_Track_vbs_2017_2018.csv >> results-files/Application_Track_vbs_2017_2018.csv
+	awk -F ',' '{sum += $$14;}END{print "2018,"sum}' results-files/2018_Application_Track_vbs_2017_2018.csv >> results-files/Application_Track_vbs_2017_2018.csv
+
+awk-years-app:
+	rm -f results-files/Application_Track_vbs_2015_2016_2017_2018.csv
+	awk -F ',' '{sum += $$14;}END{print "2015,"sum}' results-files/2015_Application_Track_vbs_2015_2016_2017_2018.csv >> results-files/Application_Track_vbs_2015_2016_2017_2018.csv
+	awk -F ',' '{sum += $$14;}END{print "2016,"sum}' results-files/2016_Application_Track_vbs_2015_2016_2017_2018.csv >> results-files/Application_Track_vbs_2015_2016_2017_2018.csv
+	awk -F ',' '{sum += $$14;}END{print "2017,"sum}' results-files/2017_Application_Track_vbs_2015_2016_2017_2018.csv >> results-files/Application_Track_vbs_2015_2016_2017_2018.csv
+	awk -F ',' '{sum += $$14;}END{print "2018,"sum}' results-files/2018_Application_Track_vbs_2015_2016_2017_2018.csv >> results-files/Application_Track_vbs_2015_2016_2017_2018.csv
+
+awk-app: awk-2015-app awk-2016-app awk-2017-app awk-years-app
+
+csv-app: gen-csv-app awk-app
 
 plot-main: 2014-main 2015-main 2016-main 2017-main years-main
 plot-app: 2015-app 2016-app 2017-app years-app
@@ -40,32 +66,33 @@ plot-app: 2015-app 2016-app 2017-app years-app
 	mkdir -p pdf
 	Rscript cactus_plot.r 130000 154238 "Virtual Best Solver (VBS) Main Track 2015-2016" "results-files/2016_Main_Track_vbs_2015_2016.csv" "results-files/2015_Main_Track_vbs_2015_2016.csv" "VBS-2016" "VBS-2015"
 
-2015-app:
-	mkdir -p pdf
-	Rscript cactus_plot.r 130000 154238 "Virtual Best Solver (VBS) Application Track 2015-2016" "results-files/2016_Application_Track_vbs_2015_2016.csv" "results-files/2015_Application_Track_vbs_2015_2016.csv" "VBS-2016" "VBS-2015"
-
 2016-main:
 	mkdir -p pdf
 	Rscript cactus_plot.r 130000 145236 "Virtual Best Solver (VBS) Main Track 2016-2017" "results-files/2017_Main_Track_vbs_2016_2017.csv" "results-files/2016_Main_Track_vbs_2016_2017.csv" "VBS-2017" "VBS-2016"
 
-2016-app:
-	mkdir -p pdf
-	Rscript cactus_plot.r 130000 145236 "Virtual Best Solver (VBS) Application Track 2016-2017" "results-files/2017_Application_Track_vbs_2016_2017.csv" "results-files/2016_Application_Track_vbs_2016_2017.csv" "VBS-2017" "VBS-2016"
 2017-main:
 	mkdir -p pdf
 	Rscript cactus_plot.r 190000 226429 "Virtual Best Solver (VBS) Main Track 2017-2018" "results-files/2018_Main_Track_vbs_2017_2018.csv" "results-files/2017_Main_Track_vbs_2017_2018.csv" "VBS-2018" "VBS-2017"
-
-2017-app:
-	mkdir -p pdf
-	Rscript cactus_plot.r 190000 226429 "Virtual Best Solver (VBS) Application Track 2017-2018" "results-files/2018_Application_Track_vbs_2017_2018.csv" "results-files/2017_Application_Track_vbs_2017_2018.csv" "VBS-2018" "VBS-2017"
 
 years-main:
 	mkdir -p pdf
 	Rscript cactus_plot.r 136000 145062 "Virtual Best Solver (VBS) Main Track 2015-2018" "results-files/2018_Main_Track_vbs_2015_2016_2017_2018.csv" "results-files/2017_Main_Track_vbs_2015_2016_2017_2018.csv" "results-files/2016_Main_Track_vbs_2015_2016_2017_2018.csv" "results-files/2015_Main_Track_vbs_2015_2016_2017_2018.csv" "VBS-2018" "VBS-2017" "VBS-2016" "VBS-2015"
 
+2015-app:
+	mkdir -p pdf
+	Rscript bar_plot.r "Virtual Best Solver (VBS) Application Track 2015-2016" "results-files/Application_Track_vbs_2015_2016.csv"
+
+2016-app:
+	mkdir -p pdf
+	Rscript bar_plot.r "Virtual Best Solver (VBS) Application Track 2016-2017" "results-files/Application_Track_vbs_2016_2017.csv"
+
+2017-app:
+	mkdir -p pdf
+	Rscript bar_plot.r "Virtual Best Solver (VBS) Application Track 2017-2018" "results-files/Application_Track_vbs_2017_2018.csv"
+
 years-app:
 	mkdir -p pdf
-	Rscript cactus_plot.r 136000 145062 "Virtual Best Solver (VBS) Application Track 2015-2018" "results-files/2018_Application_Track_vbs_2015_2016_2017_2018.csv" "results-files/2017_Application_Track_vbs_2015_2016_2017_2018.csv" "results-files/2016_Application_Track_vbs_2015_2016_2017_2018.csv" "results-files/2015_Application_Track_vbs_2015_2016_2017_2018.csv" "VBS-2018" "VBS-2017" "VBS-2016" "VBS-2015"
+	Rscript bar_plot.r "Virtual Best Solver (VBS) Application Track 2015-2018" "results-files/Application_Track_vbs_2015_2016_2017_2018.csv"
 
 clean:
 	rm -r pdf

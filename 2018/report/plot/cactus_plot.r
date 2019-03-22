@@ -27,7 +27,6 @@ xpch=vector(length=nfiles)
 xcol=vector(length=nfiles)
 datacol=10
 fname_data <- args[4]
-fname <- file_path_sans_ext(basename(fname_data))
 
 xvalues <- list()
 
@@ -40,7 +39,6 @@ if (nfiles >= 2)
   for (i in 2:nfiles)
   {
     fname_data <- args[i+3]
-    fname <- file_path_sans_ext(basename(fname_data))
     data=read.csv(fname_data,sep=",",head=F,comment.char="#")
     x=sort(ifelse(data[,datacol] > 1200, 1200, data[,datacol]))
     xvalues[[i]] <- x
