@@ -10,7 +10,11 @@
 \hyphenation{data-types}
 
 \newcommand{\akey}[1]{\textbf{#1}}
-\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
+\newcommand{\rem}[1]{\textcolor{red}{[#1]}}
+\newcommand{\an}[1]{\rem{#1 -- aina}}
+\newcommand{\ah}[1]{\rem{#1 -- antti}}
+\newcommand{\lh}[1]{\rem{#1 -- liana}}
+\newcommand{\gr}[1]{\rem{#1 -- giles}}
 
 \let\OLDthebibliography\thebibliography
 \renewcommand\thebibliography[1]{
@@ -100,7 +104,7 @@ competition web site, \url{www.smtcomp.org}.
   entered, and magic numbers for benchmark scrambling.
 \item[June~2] Deadline for final versions of solvers, including
   system descriptions.
-\item[\todo{TODO}] Opening value of NYSE Composite Index used to complete
+\item[\an{TODO}] Opening value of NYSE Composite Index used to complete
   random seed for benchmark scrambling.
 \item[July~7/8] SMT Workshop; end of competition, presentation of
   results.
@@ -133,9 +137,10 @@ benchmarks and new or improved solvers to raise the level of
 competition and advance the state-of-the-art in automated SMT problem
 solving.
 
-SMT-COMP 2019 will have four tracks: the single problem track (formerly
+SMT-COMP 2019 will have five tracks: the single problem track (formerly
 known as main track), the incremental track (formerly known as application
-track), the unsat-core track, and the (new) industry challenge track.
+track), the unsat-core track, the (new) industry challenge track, and the
+(new) model validation track.
 
 Within each track there are multiple divisions, where each division
 uses benchmarks from a specific SMT-LIB logic (or group of logics).
@@ -151,7 +156,7 @@ version,\footnote{Earlier versions of this document include
   Matthias Heizmann, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
 	and Tjark Weber.}  describes the rules and competition procedures for
 SMT-COMP~2019.
-\todo{update changes vs 2018}
+\an{update changes vs 2018}
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
 \item The time limit per solver/benchmark pair is anticipated to be at
@@ -205,7 +210,7 @@ for clarity, \emph{each submitted solver must have one configuration
 presence \emph{and the tracks and divisions in which it is
   participating} via the web form at
 \begin{center}
-  \todo{\url{}submission form url}
+  \an{\url{}submission form url}
 \end{center}
 A submission must also include a \emph{system description} (see below) and a
 \emph{32-bit unsigned integer}.
@@ -260,11 +265,11 @@ the competition or the SMT Workshop to participate or win.
 \subsection*{Deadlines}
 
 SMT-COMP entrants must be submitted via StarExec (solvers) \emph{and}
-the above web form (accompanying information) until the end of {\bf
-  May~27, 2018} anywhere on earth.
-After this date no new entrants will be accepted.
+the above web form (accompanying information) until the end of
+{\bf May~19, 2019} anywhere on earth.
+After this date \emph{no new entrants} will be accepted.
 However, updates to existing entrants on StarExec
-will be accepted until the end of {\bf June~10, 2018} anywhere on earth.
+will be accepted until the end of {\bf June~2, 2019} anywhere on earth.
 
 We strongly encourage participants to use this grace period
 \emph{only} for the purpose of fixing any bugs that may be discovered,
@@ -281,6 +286,10 @@ deadline.
 These deadlines and procedures apply equally to all tracks of the
 competition.
 
+\an{Add information that these solver versions will be made available
+on the smt-comp website for archiving purposes? What are the implications of
+this?}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Execution of Solvers}
@@ -295,7 +304,7 @@ made public.
 \header{Dates of competition.}
 %
 The bulk of the computation will take place during the weeks leading
-up to SMT 2018.  Intermediate results will be regularly posted to the
+up to SMT 2019.  Intermediate results will be regularly posted to the
 SMT-COMP website as the competition runs.
 
 The organizers reserve the right to prioritize certain competition
@@ -303,7 +312,7 @@ tracks or divisions to ensure their timely completion, and in
 exceptional circumstances to complete divisions after the SMT
 Workshop.
 
-\header{Input and output.}
+\header{Input and output. \rem{TODO: update}}
 %
 In the main and unsat-core track, a participating solver must read a
 single benchmark script, whose filename is presented as the solver's
@@ -385,14 +394,16 @@ competition machine, for each given benchmark, up to a fixed
 wall-clock time limit~$T$.  Each processor has 4 cores.  Detailed
 machine specifications are available on the competition web site.
 
-The time limit~$T$ is yet to be determined.  It is anticipated to be
-at most 20~minutes of wall-clock time per solver/benchmark pair in the
-main track, and at most 40~minutes in the other tracks.\footnote{The
-  time limit may be adjusted once we know the number of competition
-  entrants and eligible benchmarks.}  Solvers that take more than this
-time limit will be killed.  Solvers are allowed to spawn other
-processes; these will be killed at approximately the same time as the
-first started process.
+The time limit~$T$ will be 40~minutes of wall-clock time per solver/benchmark
+pair in the single problem, incremental and unsat core tracks, \rem{TODO:
+XX}~minutes in the industry challenge track, and \rem{TODO: XX}~minutes in the
+model validation track \an{TODO: Need to elaborate how time is split? Do we
+need two time limits here, one for solving and one for
+validation?}.\footnote{\an{TODO: Is this obsolete?} The time limit may be
+adjusted once we know the number of competition entrants and eligible
+benchmarks.}  Solvers that take more than this time limit will be killed.
+Solvers are allowed to spawn other processes; these will be killed at
+approximately the same time as the first started process.
 
 The StarExec service also limits the memory consumption of the solver
 processes.  We expect the memory limit per solver/benchmark pair to be
@@ -413,7 +424,7 @@ unsatisfiable (\texttt{unsat}).  A solver may also report
 of the formula.
 
 The main track competition uses a StarExec post-processor (named
-``SMT-COMP 2018") to accumulate the results.
+``SMT-COMP 2019") to accumulate the results.
 
 \header{Aborts and unparsable output.}
 %
