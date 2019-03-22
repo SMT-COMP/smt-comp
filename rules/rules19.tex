@@ -29,8 +29,8 @@
 
 \date{\small This version revised \the\year-\the\month-\the\day}
 
-\title{13th International Satisfiability Modulo Theories Competition
-  (SMT-COMP 2018): Rules and Procedures}
+\title{14th International Satisfiability Modulo Theories Competition
+  (SMT-COMP 2019): Rules and Procedures}
 
 % [morgan] do our own layout of authors; the four-author layout spacing
 % was screwed up...
@@ -449,6 +449,8 @@ machines, e.g., over the network.
 
 \subsection{Incremental Track (Previously: Application Track)}
 
+\rem{TODO: Update accordingly: Do we run only up to the first unknown status
+check-sat or further?}
 The incremental track evaluates SMT solvers when interacting with an
 external verification framework, e.g., a model checker. This
 interaction, ideally, happens by means of an online communication
@@ -537,6 +539,9 @@ command.
 
 \section{Benchmarks and Problem Divisions}
 
+\an{TODO: We do not run non-competitive divisions.}
+
+
 \header{Benchmark sources.}
 %
 Benchmarks for each division will be drawn from the SMT-LIB benchmark
@@ -548,13 +553,13 @@ top-level assertions.
 
 \header{New benchmarks.}
 %
-The deadline for submission of new benchmarks is {\bf April~8, 2018}.
+The deadline for submission of new benchmarks is {\bf March~1, 2019}.
 The organizers, in collaboration with the SMT-LIB maintainers, will be
-checking and curating these until {\bf May~15, 2018}.  The SMT-LIB
+checking and curating these until {\bf May~1, 2019}.  The SMT-LIB
 maintainers intend to make a new release of the benchmark library
 publicly available on or close to this date.
 
-\header{Benchmark demographics.}
+\header{Benchmark demographics. \rem{TODO: update}}
 %
 In SMT-LIB, benchmarks are organized according to \emph{families}.  A
 benchmark family contains problems that are similar in some
@@ -562,7 +567,7 @@ significant way.  Typically they come from the same source or
 application, or are all output by the same tool.  Each top-level
 subdirectory within a division represents a distinct family.
 
-\header{Benchmark selection.}
+\header{Benchmark selection. \rem{TODO: update}}
 %
 The competition will use a large subset of SMT-LIB benchmarks.  The
 benchmark pool is culled as follows:
@@ -633,7 +638,7 @@ particular submitted solver.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Scoring}
+\section{Scoring \rem{TODO: update}}
 \label{sec:scoring}
 
 \subsection{Competitive divisions}
@@ -721,6 +726,8 @@ is the number of named top-level assertions in the benchmark, and
 
 \subsection{Sequential Performance (Single Problem Track)}
 \label{sec:sequential}
+
+\rem{TODO: 24s, sat, unsat score description}
 
 SMT-COMP has traditionally emphasized sequential performance (i.e.,
 CPU time) over parallel performance (i.e., wall-clock time).  StarExec
@@ -864,7 +871,7 @@ computed from its sequential division scores
 (Section~\ref{sec:division-scoring}) according to the same formula.
 We will recognize the best three solvers according to these metrics.
 
-\subsection{Other recognitions}
+\subsection{Other Recognitions \rem{TODO: Update}}
 
 The organizers will also recognize the following contributions:
 %
@@ -909,41 +916,43 @@ be recused from these decisions.  The organizers' decisions are final.
 
 \section{Acknowledgments}
 
-SMT-COMP 2018 is organized under the direction of the SMT Steering
+SMT-COMP 2019 is organized under the direction of the SMT Steering
 Committee. The organizing team is
 %
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \item
-  \href{https://swt.informatik.uni-freiburg.de/staff/heizmann}{Matthias
-    Heizmann}~-- University of Freiburg, Germany (co-organizer)
+		Liana Hadarean~-- Amazon, USA (co-organizer)
+\item \href{http://www.inf.usi.ch/postdoc/hyvarinen/}{Antti Hyvarinen}~--
+		Universita della Svizzera italiana, Switzerland (co-organizer)
 \item
   \href{http://cs.stanford.edu/people/niemetz}{Aina
-    Niemetz}~-- Stanford University, USA (co-organizer)
+    Niemetz}~-- Stanford University, USA (co-chair)
 \item \href{http://www.cs.man.ac.uk/~regerg/}{Giles Reger}~--
-  University of Manchester, UK (co-organizer)
-\item \href{http://user.it.uu.se/~tjawe125/}{Tjark Weber}~-- Uppsala
-  University, Sweden (chair)
+  University of Manchester, UK (co-chair)
 \end{itemize}
 %
-Tjark Weber is responsible for policy and procedure decisions, such as
-these rules, with input from the co-organizers. He is not associated
-with any group creating or submitting solvers.
+The competition charis are responsible for policy and procedure decisions,
+such as these rules, with input from the co-organizers.
 
-Many others have contributed benchmarks, effort, and feedback.  Clark
-Barrett and Pascal Fontaine are maintaining the SMT-LIB benchmark
-library.  The competition uses the
+Many others have contributed benchmarks, effort, and feedback.  Clark Barrett,
+Pascal Fontaine, Aina Niemetz and Mathias Preiner are maintaining the SMT-LIB
+benchmark library.
+The competition uses the
 \href{https://www.starexec.org/}{StarExec} service, which is hosted at
 the \href{http://www.cs.uiowa.edu/}{University of Iowa}.  Aaron Stump
 is providing essential StarExec support.
 
 \header{Disclosure.}
 %
+Liana Hadarean was part of the developing team of the SMT solver
+CVC4~\cite{cvc4} and is currently not associated with any group
+creating or submitting solvers.
 Aina Niemetz is part of the developing teams of the SMT solvers
 Boolector~\cite{boolector}
 and CVC4~\cite{cvc4}.
-Matthias Heizmann is associated with the group producing the
-SMTInterpol~\cite{smtinterpol} solver.
+Antti Hyvarinen is part of the developing team of the SMT solver OpenSMT
+\rem{TODO: cite OpenSMT}.
 Giles Reger is associated with the group
 producing the Vampire system~\cite{vampire}.
 
