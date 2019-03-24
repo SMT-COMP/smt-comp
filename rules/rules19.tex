@@ -665,7 +665,7 @@ eligible to be designated as winners.
 \subsection{Benchmark scoring}
 \label{sec:benchmark-scoring}
 
-A solver's \emph{raw score} for each benchmark is a quadruple $\langle
+A solver's \emph{parallel performance} for each benchmark is a quadruple $\langle
 e, n, w, c\rangle$, with $e \in \{0, 1\}$ the number of erroneous
 results (usually~$e = 0$), $0 \leq n \leq N$ the number of correct
 results,\footnote{Here, $N$ is the number of \akey{check-sat} commands
@@ -737,34 +737,42 @@ is the number of named top-level assertions in the benchmark, and
 \subsection{Sequential Performance (Single Problem Track)}
 \label{sec:sequential}
 
-\rem{TODO: 24s, sat, unsat score description}
 
+\iffalse
 SMT-COMP has traditionally emphasized sequential performance (i.e.,
 CPU time) over parallel performance (i.e., wall-clock time).  StarExec
 measures both, and we intend to recognize both best sequential and
 best parallel solvers in all competitive single problem track divisions.
+\fi
 
-The raw score, as defined in Section~\ref{sec:benchmark-scoring},
+The parallel performance, as defined in Section~\ref{sec:benchmark-scoring},
 favors parallel solvers, which may utilize all available processor
 cores.  To evaluate sequential performance, we derive a
-\emph{sequential score} by imposing a (virtual) CPU time limit equal
+\emph{sequential performance} by imposing a (virtual) CPU time limit equal
 to the wall-clock time limit~$T$.  A solver result is taken into
-consideration for the sequential score only if the solver process
+consideration for the sequential performance only if the solver process
 terminates within this CPU time limit.  More specifically, for a given
-raw score $\langle e, n, w, c\rangle$, the corresponding sequential
-score is defined as~$\langle e_S, n_S, c_S\rangle$, where
+parallel performance $\langle e, n, w, c\rangle$, the corresponding sequential
+performance is defined as~$\langle e_S, n_S, c_S\rangle$, where
 \begin{itemize}
 \item $e_S = 0$ and $n_S = 0$ if $c > T$, $e_S = e$ and $n_S = n$
   otherwise,
 \item $c_S = \min\ \{c, T\}$.\footnote{\emph{Rationale:} Under this
-  score, a solver should not benefit from using multiple processor
-  cores.  Conceptually, the sequential score should be (nearly)
+  measure, a solver should not benefit from using multiple processor
+  cores.  Conceptually, the sequential performance should be (nearly)
   unchanged if the solver was run on a single-core processor, up to a
   time limit of~$T$.}
 \end{itemize}
 
 \subsection{Division scoring}
 \label{sec:division-scoring}
+
+We compute in total eight different {\em scores} for each division based
+on solvers' parallel and sequential performance.  The two performances
+are computed separately for {\em all}, {\em satisfiable}, and {\em
+unsatisfiable instances}.  In addition we compute the performances for a
+\emph{one-minute wonder} track, where each solver is run with a
+24-second timeout.
 
 \header{Single Problem Track: Removal of Disagreements.}
 %
@@ -774,7 +782,7 @@ with unknown status are removed from the competition results if two
 disagree on their result.  More specifically, a solver (including a
 solver that was entered into the competition by the organizers for
 comparison purposes) is \emph{sound on benchmarks with known status}
-for a division if its raw score (Section~\ref{sec:benchmark-scoring})
+for a division if its parallel performance (Section~\ref{sec:benchmark-scoring})
 is of the form $\langle 0, n, w, c\rangle$ for each benchmark in the
 division, i.e., if it did not produce any erroneous results.  Two
 solvers \emph{disagree} on a benchmark if one of them reported
@@ -785,7 +793,7 @@ purposes).
 
 \medskip
 
-To compute a solver's score for a division, the solver's individual
+To compute a solver's scores for a division, the solver's individual
 benchmark scores for all benchmarks in the division are first
 multiplied by a scalar weight that depends on the benchmark's family,
 and then summed component-wise.
@@ -802,28 +810,38 @@ where the sum is over all benchmarks in the division.  Let~$N$ be the
 total number of benchmarks in the division.
 
 For Single Problem Track and unsat-core track divisions, we will separately
-compute the weighted sum of all raw scores
-(Section~\ref{sec:benchmark-scoring}) $$\sum_b \alpha'_b \cdot \langle
-e_b \cdot N, n_b \cdot N, w_b, c_b\rangle$$ where the sum is over all
+compute the weighted sum of all benchmarks separately based on the
+parallel performance and sequential performance.
+(Section~\ref{sec:benchmark-scoring})
+%
+These will be computed as
+$$\sum_b \alpha'_b \cdot \langle e_b \cdot N, n_b \cdot N, w_b, c_b\rangle$$
+%
+where the sum $\sum_b$ ranges over all parallel performances when
+computing parallel performance scores, and over all sequential
+performances when computing sequential performance scores.
+\iffalse
 benchmarks in the division to assess parallel performance, and the
-weighted sum of all sequential scores (Section~\ref{sec:sequential})
-to assess sequential performance.  For incremental track divisions,
-division scores will be based on raw scores only.\footnote{Since
+weighted sum of all sequential performances (Section~\ref{sec:sequential})
+to assess sequential performance.
+\fi
+For incremental track divisions,
+division scores will be based on parallel performance only.\footnote{Since
   incremental track benchmarks may be partially solved, defining a
-  useful sequential score for the incremental track would require
-  information not provided by the raw score, e.g., detailed timing
+  useful sequential performance for the incremental track would require
+  information not provided by the parallel performance, e.g., detailed timing
   information for each result.}
 
 Division scores are compared lexicographically:
 \begin{itemize}
-\item A weighted sum of raw scores $\langle e, n, w, c\rangle$ is
+\item A weighted sum of parallel performances $\langle e, n, w, c\rangle$ is
   better than $\langle e', n', w', c'\rangle$ iff $e < e'$ or ($e =
   e'$ and $n > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e =
   e'$ and $n = n'$ and $w = w'$ and $c < c'$).  That is, fewer errors
   takes precedence over more correct solutions, which takes precedence
   over less wall-clock time taken, which takes precedence over less
   CPU time taken.
-\item A weighted sum of sequential scores $\langle e_S, n_S,
+\item A weighted sum of sequential performances $\langle e_S, n_S,
   c_S\rangle$ is better than $\langle e_S', n_S', c_S'\rangle$ iff
   $e_S < e_S'$ or ($e_S = e_S'$ and $n_S > n_S'$) or ($e_S = e_S'$ and
   $n_S = n_S'$ and $c_S < c_S'$).  That is, fewer errors takes
@@ -831,12 +849,14 @@ Division scores are compared lexicographically:
   less CPU time taken.
 \end{itemize}
 %
-We will not make any comparisons between raw scores and sequential
-scores, as these are intended to measure fundamentally different
+We will not make any comparisons between parallel and sequential
+performances, as these are intended to measure fundamentally different
 performance characteristics.
 
 \subsection{Competition-wide scoring (Single Problem Track)}
 \label{sec:competition-wide}
+
+\rem{TODO: Shall we drop the competition-wide scoring?}
 
 We define a competition-wide metric for the Single Problem Track, separately for
 parallel and sequential performance, as follows.  Let $N_i$ be the
