@@ -5,8 +5,7 @@ set -u
 
 # virtual best solver
 
-# only keep the best (fastest, based on wall time) result for each
-# benchmark
+# only keep the best (fastest, based on wall time) result for each benchmark
 
 # Column  3: benchmark id
 #         8: status
