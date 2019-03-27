@@ -1394,9 +1394,9 @@ To give a measure of overall progress in solver performance we
 use the notion of \emph{virtual best solver} (VBS) over all divisions of all
 three tracks.
 
-For the Main track, we determine the VBS as the best wall-clock performance per
-(correctly solved) instance with the time limit of 1200s used in the
-competitions 2017 and 2018. Figure~\ref{fig:progress-all} visualizes VBS
+For the \emph{Main track}, we determine the VBS as the best wall-clock
+performance per (correctly solved) instance with the time limit of 1200s used
+in the competitions 2017 and 2018. Figure~\ref{fig:progress-all} visualizes VBS
 performance on common benchmarks from 2015-2018 as cactus plot.
 Figure~\ref{fig:progress} shows VBS performance on common benchmarks over pairs
 of consecutive years from 2014 to 2018.  Both plots show the wall-clock solving
@@ -1416,8 +1416,8 @@ division QF\_FP where solved by one of the two participating configurations of
 Z3 that no one else could solve, and in 2016 Z3 did not participate in this
 division.
 
-For the Application track, we determine the VBS as the best performance in
-terms of number of correct \texttt{check-sat} answers within the time limit
+For the \emph{Application track}, we determine the VBS as the best performance
+in terms of number of correct \texttt{check-sat} answers within the time limit
 of 2400s (the time limit of the Application track in the competitions
 2015-2018).
 The total number of eligible \texttt{check-sat} queries (i.e., all queries with
@@ -1433,6 +1433,17 @@ of Z3 on 2 benchmarks in the QF\_NIA division.
 %(on which in 2016, CVC4 then
 %performed best, and from 2017 onwards even as well as Z3 in 2015).
 
+For the \emph{Unsat-Core track}, we determine the VBS as the best performance in
+terms of \emph{reduction}, i.e., the difference in the number of assertions
+of the input formula and the unsat core, within the time limit
+of 2400s (the time limit of the Unsat-Core track in the competitions
+2016-2018).
+Figure~\ref{fig:progress-all-app} visualizes VBS performance on the common
+benchmarks (91455 total) from 2016-2018 as a bar plot.
+For 32377 of these benchmarks, extracting an unsat core is trivial since
+they contain only one single \texttt{assert} command.
+They are thus also not considered in the bar plot, since their maximum
+possible reduction is trivially 0.
 
 
 \paragraph{Unique solutions.}
