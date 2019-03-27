@@ -41,6 +41,7 @@ if __name__ == "__main__":
         years = years.split('/')[-1]
         years = years.replace('Main_Track_Common_Benchmarks_', '')
         years = years.replace('Application_Track_Common_Benchmarks_', '')
+        years = years.replace('Unsat_Core_Track_Common_Benchmarks_', '')
         outfile_name = "{}/{}_vbs_{}.csv".format(path, year, years)
         with open(outfile_name, 'w') as outfile:
             with open(args.vbs_data, 'r') as infile:
