@@ -775,6 +775,7 @@ are computed separately for {\em all}, {\em satisfiable}, and {\em
 unsatisfiable instances}.  In addition we compute the performances for a
 \emph{one-minute wonder} track, where each solver is run with a
 24-second timeout.
+\rem{TODO: 24-seconds is only a score, not a track}
 
 \header{Single Problem Track: Removal of Disagreements.}
 %
@@ -858,7 +859,9 @@ performance characteristics.
 \subsection{Competition-wide scoring (Single Problem Track)}
 \label{sec:competition-wide}
 
-\rem{TODO: Shall we drop the competition-wide scoring?}
+\rem{TODO: Replace notion of competition-wide scoring with a notion of ranking
+based on distance between first and second (based on scoring, and maybe a second
+based on VBS marginal contribution)}
 
 We define a competition-wide metric for the Single Problem Track, separately for
 parallel and sequential performance, as follows.  Let $N_i$ be the
