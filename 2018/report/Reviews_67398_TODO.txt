@@ -306,16 +306,20 @@ reasoning": These statements are really unnecessary, especially if they are not
 backed up by data or references. Also, the "measures" in the two occurrences of
 this sentence are not the same!
 
-(23) TODO (Aina)
+(23)
 -------------------------------------------------------------------------------
-Pg 13/Tbl 7: I think listing the names of the solver submitters for each
-participating solver is a bit awkward. This paper, as a record of the
-competition results, really doesn't need this bit of information. Conversely,
-it would be much nicer if the whole development teams could be credited for
-their participation. This is to some degree implicit in the citations, but I'm
-sure the cited papers don't contain all team members either.
+> Pg 13/Tbl 7: I think listing the names of the solver submitters for each
+> participating solver is a bit awkward. This paper, as a record of the
+> competition results, really doesn't need this bit of information. Conversely,
+> it would be much nicer if the whole development teams could be credited for
+> their participation. This is to some degree implicit in the citations, but I'm
+> sure the cited papers don't contain all team members either.
 
-(24) TODO
+We agree and updated the table accordingly to the best of our knowledge. Note
+that this increased the table size significantly, thus the information is now
+split over 3 tables.
+
+(24)
 -------------------------------------------------------------------------------
 Pg 16/Tbl 10: I find this very hard to read; I think it would be better not to
 use multi-column cells. For instance, just repeating the solver name in every
