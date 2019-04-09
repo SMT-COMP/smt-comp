@@ -3,6 +3,7 @@
 \usepackage{jsat}
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage{booktabs}
+\usepackage{longtable}
 %\usepackage[pdf]{pstricks}
 %\usepackage{pst-tree}
 
@@ -982,67 +983,7 @@ the SMT solving approach used.  System descriptions are published on
 the competition website.  They were submitted for about 60\,\% of all
 solver versions since 2015.
 
-\begin{table}
-  \caption{Participants (2015--2018)}
-  \label{table:participants}
-  \centering
-  \begin{tabular}{lp{11.5cm}}
-    \toprule
-    Solver & Submitters (Affiliations)\\
-    \midrule
-    ABC~\cite{DBLP:conf/cav/BraytonM10} & Valeriy Balabanov
-                        (Mentor Graphics)\\
-    Alt-Ergo~\cite{conchon:hal-01960203} & Albin Coquereau
-                        (CNRS and University of Paris-Sud)\\
-    AProVE~\cite{DBLP:journals/jar/GieslABEFFHOPSS17} & Carsten Fuhs
-                        (University College London; Birkbeck, University of London)\\
-    Boolector~\cite{DBLP:conf/cav/NiemetzPWB18} & Mathias Preiner
-                        (Johannes Kepler University, Stanford University)\\
-    COLIBRI~\cite{colibri} & Fran\c{c}ois Bobot
-                        (French Alternative Energies and Atomic Energy Commission)\\
-    Ctrl-Ergo~\cite{10.1007/978-3-642-31365-3_8} & Mohamed Iguernlala
-                        (OCamlPro SAS)\\
-    CVC3~\cite{DBLP:conf/cav/BarrettT07} & Kshitij Bansal
-                        (New York University)\\
-    CVC4~\cite{DBLP:conf/cav/BarrettCDHJKRT11}  & Kshitij Bansal, Clark Barrett, Andres N\"otzli, Duligur Ibeling
-                        (New York University; Stanford University)\\
-    MapleSTP          & Jimmy Liang
-                        (University of Waterloo)\\
-    MinkeyRink        & Trevor Hansen
-                        (University of Melbourne)\\
-    OpenSMT2~\cite{DBLP:conf/sat/HyvarinenMAS16} & Matteo Marescotti, Antti Hyv\"arinen
-                        (University of Lugano)\\
-    ProB~\cite{doi:10.1002/9781119002727.ch14} & Sebastian Krings
-                        (University of D\"usseldorf)\\
-    Q3B               & Martin Jon\'a\v{s}
-                        (Masaryk University)\\
-    raSAT~\cite{rasat} & Tung Vu Xuan
-                        (Japan Advanced Institute of Science and Technology)\\
-    Redlog~\cite{DBLP:journals/cca/Dolzmann097} & Haniel Barbosa
-                        (Inria Nancy)\\
-    SMT-RAT~\cite{DBLP:conf/sat/CorziliusKJSA15} & Florian Corzilius, Gereon Kremer
-                        (RWTH Aachen University)\\
-    SMTInterpol~\cite{DBLP:conf/spin/ChristHN12} & J\"urgen Christ
-                        (University of Freiburg)\\
-    SPASS-SATT         & Martin Bromberger
-                        (Max Planck Institute for Informatics)\\
-    STP~\cite{ganesh07} & Mate Soos, Trevor Hansen, Norbert Manthey
-                        (National University of Singapore; University of Melbourne)\\
-    toysmt             & Masahiro Sakai
-                        (Toshiba Corporation)\\
-    Vampire~\cite{DBLP:conf/cav/KovacsV13} & Giles Reger
-                        (University of Manchester)\\
-    veriT~\cite{DBLP:conf/cade/BoutonODF09} & David D\'eharbe, Haniel Barbosa, Hans-J\"org Schurr
-                        (Federal University of Rio Grande do Norte; Inria Nancy)\\
-    XSat~\cite{DBLP:conf/cav/FuS16} & Martin Velez
-                        (University of California, Davis)\\
-    Yices2~\cite{Dutertre:cav2014} & Bruno Dutertre, Dejan Jovanovi\'c
-                        (SRI International)\\
-    Z3~\cite{DBLP:conf/tacas/MouraB08} & Christoph Wintersteiger, Aleksandar Zelji\'c
-                        (Microsoft Research; Uppsala University)\\
-    \bottomrule
-  \end{tabular}
-\end{table}
+\include{table-participants}
 
 Many of these solvers were submitted in multiple years.  Additionally,
 to promote a wide comparison between tools, developers are allowed to
