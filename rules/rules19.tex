@@ -11,6 +11,7 @@
 
 \newcommand{\akey}[1]{\textbf{#1}}
 \newcommand{\rem}[1]{\textcolor{red}{[#1]}}
+\newcommand{\todo}[1]{\rem{TODO #1}}
 \newcommand{\an}[1]{\rem{#1 -- aina}}
 \newcommand{\ah}[1]{\rem{#1 -- antti}}
 \newcommand{\lh}[1]{\rem{#1 -- liana}}
@@ -106,7 +107,7 @@ competition web site, \url{http://www.smtcomp.org}.
   entered, and magic numbers for benchmark scrambling.
 \item[June~2] Deadline for final versions of solvers, including
   system descriptions.
-\item[\an{TODO}] Opening value of NYSE Composite Index used to complete
+\item[\todo{}] Opening value of NYSE Composite Index used to complete
   random seed for benchmark scrambling.
 \item[July~7/8] SMT Workshop; end of competition, presentation of
   results.
@@ -158,7 +159,7 @@ version,\footnote{Earlier versions of this document include
   Matthias Heizmann, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
 	and Tjark Weber.}  describes the rules and competition procedures for
 SMT-COMP~2019.
-\an{update changes vs 2018}
+\todo{update changes vs 2018}
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
 \item The time limit per solver/benchmark pair is anticipated to be at
@@ -212,7 +213,7 @@ for clarity, \emph{each submitted solver must have one configuration
 presence \emph{and the tracks and divisions in which it is
   participating} via the web form at
 \begin{center}
-  \an{\url{}submission form url}
+  \todo{\url{}submission form url}
 \end{center}
 A submission must also include a \emph{system description} (see below) and a
 \emph{32-bit unsigned integer}.
@@ -288,7 +289,7 @@ deadline.
 These deadlines and procedures apply equally to all tracks of the
 competition.
 
-\an{Add information that these solver versions will be made available
+\todo{Add information that these solver versions will be made available
 on the smt-comp website for archiving purposes? What are the implications of
 this?}
 
@@ -314,7 +315,7 @@ tracks or divisions to ensure their timely completion, and in
 exceptional circumstances to complete divisions after the SMT
 Workshop.
 
-\header{Input and output. \rem{TODO: update}}
+\header{Input and output. \todo{update}}
 %
 In the main and unsat-core track, a participating solver must read a
 single benchmark script, whose filename is presented as the solver's
@@ -397,9 +398,8 @@ wall-clock time limit~$T$.  Each processor has 4 cores.  Detailed
 machine specifications are available on the competition web site.
 
 The time limit~$T$ will be 40~minutes of wall-clock time per solver/benchmark
-pair in the single problem, incremental and unsat core tracks, \rem{TODO:
-XX}~minutes in the industry challenge track, and \rem{TODO: XX}~minutes in the
-model validation track \an{TODO: Need to elaborate how time is split? Do we
+pair in the single problem, incremental and unsat core tracks, \todo{XX}~minutes in the industry challenge track, and \todo{XX}~minutes in the
+model validation track \todo{Need to elaborate how time is split? Do we
 need two time limits here, one for solving and one for
 validation?}.\footnote{The time limit may be
 adjusted once we know the number of competition entrants and eligible
@@ -451,7 +451,7 @@ machines, e.g., over the network.
 
 \subsection{Incremental Track (Previously: Application Track)}
 
-\rem{TODO: Update accordingly: Do we run only up to the first unknown status
+\todo{Update accordingly: Do we run only up to the first unknown status
 check-sat or further?}
 The incremental track evaluates SMT solvers when interacting with an
 external verification framework, e.g., a model checker. This
@@ -575,7 +575,7 @@ developers before the solver submission deadline.
 
 \section{Benchmarks and Problem Divisions}
 
-\an{TODO: We do not run non-competitive divisions.}
+\todo{We do not run non-competitive divisions.}
 
 
 \header{Benchmark sources.}
@@ -595,7 +595,7 @@ checking and curating these until {\bf May~1, 2019}.  The SMT-LIB
 maintainers intend to make a new release of the benchmark library
 publicly available on or close to this date.
 
-\header{Benchmark demographics. \rem{TODO: check}}
+\header{Benchmark demographics. \todo{check}}
 %
 The set of all SMT-LIB benchmarks in a given division can be naturally
 partitioned to sets containing benchmarks that are similar from the user
@@ -613,7 +613,7 @@ the common identity of their benchmarks and therefore partition each
 division based on the bottom-level directory imposed by each submitter.
 These partitions are referred to as \emph{families}.
 
-\header{Benchmark selection. \rem{TODO: update}}
+\header{Benchmark selection. \todo{update}}
 %
 The competition will use a large subset of SMT-LIB benchmarks.  The
 benchmark pool is culled as follows:
@@ -684,7 +684,7 @@ particular submitted solver.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Scoring \rem{TODO: update}}
+\section{Scoring \todo{update}}
 \label{sec:scoring}
 
 \subsection{Competitive divisions}
@@ -809,7 +809,7 @@ are computed separately for {\em all}, {\em satisfiable}, and {\em
 unsatisfiable instances}.  In addition we compute the performances for a
 \emph{one-minute wonder} track, where each solver is run with a
 24-second timeout.
-\rem{TODO: 24-seconds is only a score, not a track}
+\todo{24-seconds is only a score, not a track}
 
 \header{Single Problem Track: Removal of Disagreements.}
 %
@@ -893,7 +893,7 @@ performance characteristics.
 \subsection{Competition-wide scoring (Single Problem Track)}
 \label{sec:competition-wide}
 
-\rem{TODO: Replace notion of competition-wide scoring with a notion of ranking
+\todo{Replace notion of competition-wide scoring with a notion of ranking
 based on distance between first and second (based on scoring, and maybe a second
 based on VBS marginal contribution)}
 
@@ -940,7 +940,7 @@ computed from its sequential division scores
 (Section~\ref{sec:division-scoring}) according to the same formula.
 We will recognize the best three solvers according to these metrics.
 
-\subsection{Other Recognitions \rem{TODO: Update}}
+\subsection{Other Recognitions \todo{Update}}
 
 The organizers will also recognize the following contributions:
 %
