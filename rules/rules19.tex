@@ -537,6 +537,40 @@ solvers that respond \texttt{unknown} to the \akey{check-sat} command
 must respond with an error to the following \akey{get-unsat-core}
 command.
 
+\subsection{Industry challenge track}
+\label{sec:exec:industry-challenge}
+
+The industry challenge track will follow the same rules as the single problem track,
+with two exceptions: benchmark selection and the time limit. The track will run on
+all SMT-LIB benchmarks that have an unknown status and that have been tagged as being
+ \emph{industrial}. Additionally we will include benchmarks nominated by the community.
+\lh{TODO: benchmark selection still needs discussion}
+\lh{TODO: We didn't decide on what we do if only one solver gives an answer and we don't
+know if the problem is sat/unsat}
+
+
+\subsection{Model Validation Track (experimental)}
+\label{sec:exec:model}
+The model validation track will evaluate the solver's ability to produce models
+for satisfiable problems. This track will run on all QF\_BV satisfiable benchmarks
+from the single problem track.
+
+The SMT-LIB language accommodates this functionality by providing the ability to
+request a satisfying model after a \akey{check-sat} command returns \texttt{sat}.
+The satisfiable core that is returned must consist of definitions specifying all
+and only the current user-declared function symbols, in the format prescribed by
+the SMT-LIB standard.
+
+The result of a solver is considered erroneous if the response to the
+\akey{checks-sat} command is \texttt{unsat}, if the returned model is not
+well-formed (e.g. does not provide a definition for all the user-declared function
+symbols), or if the returned model does not satisfy the benchmark.
+
+In order to check that the model satisfies the benchmark, the organizers will use
+a model validating tool. The organizers will make this tool available to solver
+developers before the solver submission deadline.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Benchmarks and Problem Divisions}
