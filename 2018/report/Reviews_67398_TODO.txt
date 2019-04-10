@@ -321,10 +321,15 @@ split over 3 tables.
 
 (24)
 -------------------------------------------------------------------------------
-Pg 16/Tbl 10: I find this very hard to read; I think it would be better not to
-use multi-column cells. For instance, just repeating the solver name in every
-cell would make it much easier to see how many participants there were in each
-of the years.
+> Pg 16/Tbl 10: I find this very hard to read; I think it would be better not to
+> use multi-column cells. For instance, just repeating the solver name in every
+> cell would make it much easier to see how many participants there were in each
+> of the years.
+
+We now use a new layout that we believe is easier to read. We also added a
+description about how to parse this layout. We further now also list the best
+participating competing solver and not only the best participating solver of
+all competing and non-competing solvers per division and year.
 
 (25) TODO: discuss
 -------------------------------------------------------------------------------
