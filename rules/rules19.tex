@@ -655,21 +655,10 @@ benchmark pool is culled as follows:
   families to avoid their over-representation.  SMT-COMP attempts to
   give preference to benchmarks that are ``real-world,'' in the sense
   of coming from or having some intended application outside SMT.
-\item \emph{Remove incremental benchmarks whose first \akey{check-sat}
-  command has unknown status.}  Incremental benchmarks may contain
-  multiple \akey{check-sat} commands, each with its own status.  If an
-  incremental benchmark contains a \akey{check-sat} command whose
-  status is unknown, only the prefix of the benchmark up to the
-  preceding \akey{check-sat} command is eligible for the application
-  track of the competition; if the benchmark's first \akey{check-sat}
-  command has unknown status, the entire benchmark is
-  ineligible.\footnote{It might be desirable to also include
-    \akey{check-sat} commands with unknown status in the application
-    track (for the same reasons they are now included in the \main
-    track), but this would require substantial changes to the trace
-    executor and scoring tools.}
+\item \todo{\emph{Remove benchmarks solved by all solvers within 1s in the previous year}}
 \end{enumerate}
 %
+\todo{update with the new benchmark selection rules}
 All remaining benchmarks are used for the competition.  There will be
 no further selection of benchmarks, e.g., based on benchmark
 difficulty or benchmark category.
