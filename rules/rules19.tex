@@ -22,6 +22,7 @@
 \newcommand{\incremental}{Incremental\xspace}
 \newcommand{\ucore}{Unsat Core\xspace}
 \newcommand{\mval}{Model Validation\xspace}
+\newcommand{\challenge}{Industry Challenge\xspace}
 
 \let\OLDthebibliography\thebibliography
 \renewcommand\thebibliography[1]{
@@ -148,7 +149,7 @@ solving.
 
 SMT-COMP 2019 will have five tracks: the \main Track (formerly known
 as Main Track), the incremental track (formerly known as application
-track), the \ucore Track, the (new) industry challenge track, and the (new)
+track), the \ucore Track, the (new) \challenge Track, and the (new)
 \mval Track.
 
 Within each track there are multiple divisions, where each division
@@ -405,7 +406,7 @@ machine specifications are available on the competition web site.
 
 The time limit~$T$ will be 40~minutes of wall-clock time per solver/benchmark
 pair in the \main, \incremental and \ucore tracks, \todo{XX}~minutes in the
-industry challenge track, and \todo{XX}~minutes in the \mval Track
+\challenge Track, and \todo{XX}~minutes in the \mval Track
 \todo{Need to elaborate how time is split? Do we
 need two time limits here, one for solving and one for
 validation?}.\footnote{The time limit may be
@@ -543,10 +544,10 @@ solvers that respond \texttt{unknown} to the \akey{check-sat} command
 must respond with an error to the following \akey{get-unsat-core}
 command.
 
-\subsection{Industry challenge track}
+\subsection{\challenge Track}
 \label{sec:exec:industry-challenge}
 
-The industry challenge track will follow the same rules as the \main Track,
+The \challenge Track will follow the same rules as the \main Track,
 with two exceptions: benchmark selection and the time limit. The track will run on
 all SMT-LIB benchmarks that have an unknown status and that have been tagged as being
  \emph{industrial}. Additionally we will include benchmarks nominated by the community.
