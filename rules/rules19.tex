@@ -350,7 +350,7 @@ tracks or divisions to ensure their timely completion, and in
 exceptional circumstances to complete divisions after the SMT
 Workshop.
 
-\header{Input and output. \todo{update}}
+\header{Input and output.}
 %
 In the \main and \ucore tracks, a participating solver must read a
 single benchmark script, whose filename is presented as the solver's
@@ -399,14 +399,14 @@ satisfies the following requirements:
   free symbols declared in the script.
 \item
   \begin{enumerate}
-    \item In the \main and \incremental tracks, named terms (i.e., terms
+    \item In all tracks except the \ucore Track,  named terms (i.e., terms
       with the \akey{:named} attribute) are not used.
     \item In the \ucore Track, top-level assertions may be named.
   \end{enumerate}
 \item
   \begin{enumerate}
-  \item In the \main and \ucore tracks, there is exactly one
-    \akey{check-sat} command.
+  \item In all tracks except the \incremental Track, there is exactly one
+    \akey{check-sat} command. \todo{is that true for the challenge track?}
   \item In the incremental track, there are one or more
     \akey{check-sat} commands.  There may also be zero or more
     \akey{push 1} commands, and zero or more \akey{pop 1} commands,
@@ -415,6 +415,9 @@ satisfies the following requirements:
 \item In the \ucore Track, the \akey{check-sat} command (which is
   always issued in an unsatisfiable context) is followed by a single
   \akey{get-unsat-core} command.
+\item In the \mval Track, the \akey{check-sat} command (which is
+  always issued in a satisfiable context) is followed by a single
+  \akey{get-model} command. \todo{Liana: please verify}
 \item The script may optionally contain an \akey{exit} command as its
   last command.  In the incremental track, this command must not be
   omitted.
