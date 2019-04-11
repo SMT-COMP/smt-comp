@@ -1138,6 +1138,8 @@ performance was by a non-competing solver and no competing solvers participated
 in that division.
 Full division rankings are available from the competition website.
 
+It is interesting to note that the non-competitive solvers MathSAT and Z3 often appear as the best performing solver. We do not see this as detracting from the overall significance of results. Both solvers are industrial-strength tools, actively maintained and tuned. The reasons for non-entry into the competition are orthogonal to their suitability for the competition. Indeed, Z3 has been entered into the competition competitively in the past and one can assume was trained on the current problems (as much as any solver is). Finally, the fact that industrial-strength solvers perform well in the competition supports the notion that the benchmarks in the competition are industrially relevant.
+
 \include{table-winners-main}
 
 \include{table-winners-application}
@@ -1316,14 +1318,14 @@ be known precisely.
   \label{fig:progress-all-uc}
 \end{figure}
 
-\subsection{Further Analysis}
+\section{Further Analysis}
 
 Beyond the competition rankings, the competition data provides ample
 opportunity for further analysis.  Here, we report on three additional
 aspects: progress in solver performance, number of uniquely solved
 benchmarks, and use of parallelism in SMT solvers.
 
-\paragraph{Progress in solver performance.}
+\subsection{Progress in Solver Performance.}
 
 The SMT Competition consists of several tracks with a multitude of divisions
 per track.
@@ -1385,7 +1387,7 @@ They are thus also not considered in the bar plot, since their maximum
 possible reduction is trivially 0.
 
 
-\paragraph{Unique solutions.}
+\subsection{Unique Solutions.}
 
 For each SMT solver, the number of uniquely solved benchmarks---that
 is, the number of benchmarks that were solved by this solver only---is
@@ -1456,7 +1458,7 @@ competition-wide ranking.
   \end{tabular}
 \end{table}
 
-\paragraph{Use of parallelism.}
+\subsection{Use of Parallelism.}
 
 It is evident both from the division rankings
 (Section~\ref{sec:division-rankings}) and the competition-wide ranking
@@ -1517,6 +1519,128 @@ parallelism.
     All solvers       & 1.0 & 1.3 & 1.3 & 1.3 \\
     \bottomrule
   \end{tabular}
+\end{table}
+
+\subsection{Focussing on Satisfiability or Unsatisfiability} 
+
+In the Main-track all divisions contain a mixture of problems that are satisfiable and unsatisfiable. However, some solvers may be specialised or optimised for a particular kind of problem. Therefore, it is interesting to ask whether the winners of divisions might have changed if benchmarks in that division had been restricted to one of these results. Table~\ref{tab:results:sat:unsat} shows the changes in division winners if only satisfiable or unsatisfiable results are given.
+
+\begin{table}
+\caption{Alternative winners if only Satisfiable (top) or Unsatisfiable (bottom) benchmarks had been considered. These results are in reference to those given in Table~\ref{tab:winners-main}.\label{tab:results:sat:unsat}}
+\centering
+\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
+\toprule
+Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
+\hline \hline
+AUFLIA  & CVC3  &   &   & Alt-Ergo  \\
+AUFNIRA & \nc{Z3}  & CVC4 \nc{Z3}  & CVC4 \nc{Z3}  & \nc{Z3}  \\
+NIA     & CVC3  &   &   &   \\
+NRA     & CVC3  & CVC4  & CVC4  & CVC4\nc{Z3}Z3  \\
+QF\_AUFBV        & Yices  & Yices2  &   & Yices2  \\
+QF\_LIA  & \nc{Z3}  &   &   &   \\
+QF\_UFIDL        & \nc{Z3}  & \nc{Z3}  & \nc{Z3}  & \nc{Z3} veriT  \\
+QF\_UFNIA        & CVC3  &   & CVC4  &   \\
+UFLIA   & \nc{Z3}  &   &   &   \\
+UFLRA   & CVC3  & CVC4  &   &   \\
+AUFLIRA &   & CVC4  & CVC4  & Alt-Ergo  \\
+BV      &   & \nc{Z3}  & Boolector  & Boolector  \\
+QF\_ABV  &   & Yices2  & Yices2  &   \\
+QF\_BV   &   & MinkeyRink  &   &   \\
+QF\_NIA  &   & SMT-RAT  &   &   \\
+UF      &   & Vampire  &   &   \\
+UFBV    &   & Boolector  &   &   \\
+UFNIA   &   & CVC4  & CVC4  & CVC4  \\
+LRA     &   &   & veriT+Redlog  &   \\
+QF\_LRA  &   &   & Yices2  & Yices2  \\
+QF\_NIRA &   &   & CVC4  &   \\
+QF\_NRA  &   &   & \nc{Z3}  &   \\
+UFDTLIA &   &   & CVC4  &   \\
+ALIA    &   &   &   & Alt-Ergo  \\
+QF\_FP   &   &   &   & CVC4  \\
+QF\_UFBV &   &   &   & Yices2  \\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
+\toprule
+Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
+\hline \hline
+QF\_AUFNIA       & \nc{Z3}  & \nc{Z3}  &   &   \\
+QF\_IDL  & CVC4  &   & \nc{Z3}  & CVC4 \nc{Z3}  \\
+QF\_LIA  & SMTInterpol  & SMTInterpol  & SMTInterpol  & SMTInterpol  \\
+QF\_NIA  & CVC3  &   & Yices2  &   \\
+BV      &   & CVC4  &   &   \\
+NIA     &   & CVC4  & Vampire  & Vampire  \\
+QF\_UFNRA        &   & CVC4 \nc{Z3}  & CVC4  & CVC4 \nc{Z3}  \\
+UFIDL   &   & Vampire \nc{Z3}  & \nc{Z3}  &   \\
+QF\_AUFBV        &   &   & CVC4  &   \\
+QF\_BV   &   &   & Boolector  &   \\
+QF\_UFLIA        &   &   & \nc{Z3}  &   \\
+UF      &   &   & CVC4  & CVC4  \\
+UFLRA   &   &   & veriT  & veriT  \\
+QF\_NRA  &   &   &   & CVC4  \\
+\bottomrule
+\end{tabular}
+
+\end{table}
+
+\subsection{Very Quick Solutions}
+
+Table~\ref{tab:results:24s}
+
+\begin{table}
+\caption{Alternative winners if the time limit had been 24 seconds.\label{tab:results:24s}}
+\centering
+
+\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
+\toprule
+Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
+\hline \hline
+AUFLIRA & CVC3  &   &   & Alt-Ergo  \\
+AUFNIRA & \nc{Z3}  &   &   & \nc{Z3}  \\
+QF\_BV   & CVC4  & STP \nc{Z3}  &   & Boolector  \\
+QF\_LIA  & Yices  & Yices2  & Yices2  &   \\
+QF\_LRA  & Yices  & Yices2  & Yices2  & Yices2  \\
+QF\_UF   & veriT  & veriT  &   &   \\
+UFNIA   & \nc{Z3}  &   &   & \nc{Z3}  \\
+AUFLIA  &   & Vampire \nc{Z3}  & veriT  &   \\
+QF\_ABV  &   & Yices2  &   &   \\
+QF\_ANIA &   & \nc{Z3}  & \nc{Z3}  &   \\
+QF\_UFNRA        &   & CVC4 \nc{Z3}  & CVC4  & \nc{Z3}  \\
+UF      &   & Vampire  &   &   \\
+UFBV    &   & Boolector  &   &   \\
+UFIDL   &   & Vampire \nc{Z3}  & \nc{Z3}  &   \\
+QF\_NIA  &   &   & Yices2  & Yices2  \\
+QF\_NIRA &   &   & Yices2 Z3  & Yices2 \nc{Z3}  \\
+QF\_NRA  &   &   & \nc{Z3}  &   \\
+UFLRA   &   &   & veriT  & veriT  \\
+BV      &   &   &   & Boolector \nc{Z3}  \\
+NRA     &   &   &   & CVC4 \nc{Z3}  \\
+UFLIA   &   &   &   & \nc{Z3}  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Do Families Matter?}
+
+Table~\ref{tab:results:total:solved}
+
+\begin{table}
+\caption{Alternative winners if families were not used in computing scores e.g. the 2015 scoring system were used.\label{tab:results:total:solved}}
+\centering
+\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
+\toprule
+Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
+\hline\hline
+AUFNIRA &   & CVC4  &   &   \\
+UFIDL   &   & \nc{Z3}  &   &   \\
+BV      &   &   & Boolector  &   \\
+QF\_LRA  &   &   & Yices2  & SPASS-SATT  \\
+QF\_NIA  &   &   & Yices2  & Yices2  \\
+QF\_BV   &   &   &   & Boolector  \\
+QF\_FP   &   &   &   & CVC4  \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
