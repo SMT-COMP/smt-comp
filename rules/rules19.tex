@@ -166,7 +166,7 @@ version,\footnote{Earlier versions of this document include
   Matthias Heizmann, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
 	and Tjark Weber.}  describes the rules and competition procedures for
 SMT-COMP~2019.
-The principal changes from the previous competition rules are the following:
+The principal changes from the previous competition rules are the following: \todo{Aina in charge of this section}
 \begin{itemize}
   \item {\it Renaming of Tracks.} This year, the track previously known as
     `Main Track` will be renamed to \emph{\main Track}, and the previous
@@ -277,7 +277,7 @@ solving approach employed should be described (e.g., lazy integration of a
 Nelson-Oppen combination with SAT, translation to SAT, etc.).  System
 descriptions should also include a URL for a web site for the submitted tool.
 System descriptions must be submitted until the final solver deadline System
-descriptions will be made publicly available.
+descriptions will be made publicly available. \todo{Giles: Include licence information - minimum requirement: licence must allow to run the binary for evaluation purposes}
 
 \header{Multiple versions.}
 %
@@ -335,9 +335,7 @@ deadline.
 These deadlines and procedures apply equally to all tracks of the
 competition.
 
-\todo{Add information that these solver versions will be made available
-on the smt-comp website for archiving purposes? What are the implications of
-this?}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -360,6 +358,12 @@ The organizers reserve the right to prioritize certain competition
 tracks or divisions to ensure their timely completion, and in
 exceptional circumstances to complete divisions after the SMT
 Workshop.
+
+
+\header{Competition Website}
+
+\todo{Giles: Add text about the fact that we will use the competition website to include links to tools, announce results etc... including archiving}
+%
 
 \header{Input and output.}
 %
@@ -417,7 +421,7 @@ satisfies the following requirements:
 \item
   \begin{enumerate}
   \item In all tracks except the \incremental Track, there is exactly one
-    \akey{check-sat} command. \todo{is that true for the challenge track?}
+    \akey{check-sat} command.
   \item In the incremental track, there are one or more
     \akey{check-sat} commands.  There may also be zero or more
     \akey{push 1} commands, and zero or more \akey{pop 1} commands,
@@ -428,7 +432,7 @@ satisfies the following requirements:
   \akey{get-unsat-core} command.
 \item In the \mval Track, the \akey{check-sat} command (which is
   always issued in a satisfiable context) is followed by a single
-  \akey{get-model} command. \todo{Liana: please verify}
+  \akey{get-model} command.
 \item The script may optionally contain an \akey{exit} command as its
   last command.  In the incremental track, this command must not be
   omitted.
@@ -439,7 +443,7 @@ The SMT-LIB format specification is available from the ``Standard''
 section of the SMT-LIB website~\cite{SMT-LIB}.  Solvers will be given
 formulas only from the divisions into which they have been entered.
 
-\header{Time and memory limits.}
+\header{Time and memory limits.} \todo{Aina: Move all time and memory limits to the individual sections and forward reference from here}
 %
 Each SMT-COMP solver will be executed on a dedicated processor of a
 competition machine, for each given benchmark, up to a fixed
@@ -447,11 +451,8 @@ wall-clock time limit~$T$.  Each processor has 4 cores.  Detailed
 machine specifications are available on the competition web site.
 
 The time limit~$T$ will be 40~minutes of wall-clock time per solver/benchmark
-pair in the \main, \incremental and \ucore tracks, \todo{XX}~minutes in the
-\challenge Track, and \todo{XX}~minutes in the \mval Track
-\todo{Need to elaborate how time is split? Do we
-need two time limits here, one for solving and one for
-validation?}.\footnote{The time limit may be
+pair in the \main, \incremental and \ucore tracks, \todo{12 hours} in the
+\challenge Track, and \todo{40 + 5 as in Unsat core}~minutes in the \mval Track \footnote{The time limit may be
 adjusted once we know the number of competition entrants and eligible
 benchmarks.}  Solvers that take more than this time limit will be killed.
 Solvers are allowed to spawn other processes; these will be killed at
@@ -462,6 +463,7 @@ processes.  We expect the memory limit per solver/benchmark pair to be
 on the order of 60\,GB.  The values of both the time limit and the
 memory limit are available to a solver process through environment
 variables.  See the StarExec user guide for more information.
+
 
 \subsection{\main Track (Previously: Main Track)}
 \label{sec:exec:single}
@@ -513,7 +515,7 @@ In order to facilitate the evaluation of solvers in this track, we will set up
 a ``simulation'' of the aforementioned interaction.  Each benchmark represents
 a realistic communication trace, containing multiple \akey{check-sat} commands
 (possibly with corresponding \akey{push 1} and \akey{pop 1} commands). It is
-parsed by a (publicly available) \emph{trace executor}\footnote{\todo{link}},
+parsed by a (publicly available) \emph{trace executor},
 which serves the following purposes: \begin{itemize} \item it simulates the
 online interaction by sending single queries to the SMT solver (through stdin);
 \item it prevents ``look-ahead'' behaviors of SMT solvers;
@@ -583,12 +585,9 @@ command.
 
 \todo{time limit}
 The \challenge Track will follow the same rules as the \main Track,
-with two exceptions: benchmark selection and the time limit. The track will run on
-all SMT-LIB benchmarks that have an unknown status and that have been tagged as being
- \emph{industrial}. Additionally we will include benchmarks nominated by the community.
+with two exceptions: benchmark selection and the time limit. The track will run on benchmarks nominated by the community.
 \lh{TODO: benchmark selection still needs discussion}
-\lh{TODO: We didn't decide on what we do if only one solver gives an answer and we don't
-know if the problem is sat/unsat}
+\lh{TODO: scored in the same way as main track (mention later not here)}
 
 
 \subsection{\mval Track (experimental)}
@@ -612,12 +611,13 @@ In order to check that the model satisfies the benchmark, the organizers will us
 a model validating tool. The organizers will make this tool available to solver
 developers before the solver submission deadline.
 
+\todo{Liana - check if we can use the SMT-LIB standard and if so say that we will here, or if we need slight changes state them here.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Benchmarks and Problem Divisions}
 
-\todo{We do not run non-competitive divisions.}
+\todo{Aina: We do not run non-competitive divisions.}
 
 
 \header{Benchmark sources.}
@@ -628,9 +628,7 @@ library.  The \main Track will use a subset of all
 subset of all \emph{incremental} benchmarks.  The \ucore Track
 will use unsatisfiable \main Track benchmarks, modified to use named
 top-level assertions.
-\todo{add information about how benchmarks are selected for the \mval,
-\challenge, \ucore tracks, and the 24s, sat and unsat scores -- either here
-or below}
+
 
 \header{New benchmarks.}
 %
@@ -658,7 +656,7 @@ the common identity of their benchmarks and therefore partition each
 division based on the bottom-level directory imposed by each submitter.
 These partitions are referred to as \emph{families}.
 
-\header{Benchmark selection.}
+\header{Benchmark selection.} \todo{Antti covers this section}
 %
 The competition will use a large subset of SMT-LIB benchmarks.  The
 benchmark pool is culled as follows:
@@ -681,6 +679,12 @@ difficulty or benchmark category.
 
 The set of benchmarks selected for the competition will be published
 when the competition begins.
+
+\todo{add information about how benchmarks are selected for the \mval,
+\challenge, \ucore tracks, and the 24s, sat and unsat scores -- either here
+or below}
+
+\todo{For Unsatcore remove all benchmarks with a single assertion, otherwise use same procedure as last year... check what that was}
 
 \header{Heats.}
 %
