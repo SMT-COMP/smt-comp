@@ -476,8 +476,6 @@ machines, e.g., over the network.
 
 \subsection{Incremental Track (Previously: Application Track)}
 
-\todo{Update accordingly: Do we run only up to the first unknown status
-check-sat or further?}
 The incremental track evaluates SMT solvers when interacting with an
 external verification framework, e.g., a model checker. This
 interaction, ideally, happens by means of an online communication
@@ -486,25 +484,19 @@ queries to the SMT solver, which in turn answers either \texttt{sat}
 or \texttt{unsat}.  In this interaction an SMT solver is required to
 accept queries incrementally via its \emph{standard input channel}.
 
-In order to facilitate the evaluation of solvers in this track, we
-will set up a ``simulation'' of the aforementioned interaction.  Each
-benchmark in the incremental track represents a realistic
-communication trace, containing multiple \akey{check-sat} commands
-(possibly with corresponding \akey{push 1} and \akey{pop 1} commands),
-which is parsed by a \emph{trace executor}. The trace executor serves
-the following purposes:
-\begin{itemize}
-\item it simulates the online interaction by sending single queries to
-  the SMT solver (through stdin);
+In order to facilitate the evaluation of solvers in this track, we will set up
+a ``simulation'' of the aforementioned interaction.  Each benchmark represents
+a realistic communication trace, containing multiple \akey{check-sat} commands
+(possibly with corresponding \akey{push 1} and \akey{pop 1} commands). It is
+parsed by a (publicly available) \emph{trace executor}\footnote{\todo{link}},
+which serves the following purposes: \begin{itemize} \item it simulates the
+online interaction by sending single queries to the SMT solver (through stdin);
 \item it prevents ``look-ahead'' behaviors of SMT solvers;
 \item it records time and answers for each command;
 \item it guarantees a fair execution for all solvers by abstracting
   from any possible crash, misbehavior, etc.\ that might happen in the
   verification framework.
 \end{itemize}
-%
-The trace executor terminates processing the benchmark script upon
-receiving an incorrect response from the solver.
 
 The disk space and memory limits for the incremental track are the
 same as for the \main Track (see Section~\ref{sec:exec:single}).
@@ -835,22 +827,27 @@ unsatisfiable instances}.  In addition we compute the performances for a
 24-second timeout.
 \todo{24-seconds is only a score, not a track}
 
-\header{\main Track: Removal of Disagreements.}
+\header{\main and \challenge Track: Removal of Disagreements.}
 %
-Before division scores are computed for the \main Track, benchmarks
-with unknown status are removed from the competition results if two
-(or more) solvers that are sound on benchmarks with known status
-disagree on their result.  More specifically, a solver (including a
-solver that was entered into the competition by the organizers for
-comparison purposes) is \emph{sound on benchmarks with known status}
-for a division if its parallel performance (Section~\ref{sec:benchmark-scoring})
-is of the form $\langle 0, n, w, c\rangle$ for each benchmark in the
-division, i.e., if it did not produce any erroneous results.  Two
-solvers \emph{disagree} on a benchmark if one of them reported
-\texttt{sat} and the other reported \texttt{unsat}.  Only the
-remaining benchmarks are used in the following computation of division
-scores (but the organizers may report disagreements for informational
-purposes).
+\todo{do we need to update this notion?}
+Before division scores are computed for the \main and \challenge tracks,
+benchmarks with unknown status are removed from the competition results if two
+(or more) solvers that are sound on benchmarks with known status disagree on
+their result.  More specifically, a solver (including a solver that was entered
+into the competition by the organizers for comparison purposes) is \emph{sound
+on benchmarks with known status} for a division if its parallel performance
+(Section~\ref{sec:benchmark-scoring}) is of the form $\langle 0, n, w,
+c\rangle$ for each benchmark in the division, i.e., if it did not produce any
+erroneous results.  Two solvers \emph{disagree} on a benchmark if one of them
+reported \texttt{sat} and the other reported \texttt{unsat}.  Only the
+remaining benchmarks are used in the following computation of division scores
+(but the organizers may report disagreements for informational purposes).
+
+\header{\incremental Track: Removal of Disagreements.}
+\todo{}
+
+\header{\challenge Track: Removal of Disagreements.}
+\todo{}
 
 \medskip
 
