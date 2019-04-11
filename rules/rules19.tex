@@ -166,32 +166,49 @@ version,\footnote{Earlier versions of this document include
   Matthias Heizmann, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
 	and Tjark Weber.}  describes the rules and competition procedures for
 SMT-COMP~2019.
-\todo{update changes vs 2018}
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
-\item The time limit per solver/benchmark pair is anticipated to be at
-  most 20 minutes in the \main Track, and at most 40 minutes in the
-  other tracks.  \emph{Rationale:} Already in 2017, the time limit for
-  the \main Track was reduced to 20 minutes (down from 40 minutes in
-  earlier years) to cope with the inclusion of a large number of
-  benchmarks with unknown status.
+  \item {\it Renaming of Tracks.} \todo{}
 
-\item In the \ucore Track, the unsatisfiability check for the
-  returned core will be based on a simple majority vote.  The case
-  that a solver finds its own core satisfiable will no longer be
-  treated specially.  \emph{Rationale:} This allows to simplify the
-  post-processing of \ucore Track results considerably.
+  \item {\it Mandatory System Descriptions.} \todo{}
 
-\item In 2017, the competition featured experimental divisions for
-  benchmarks that use algebraic datatypes.  These divisions will be
-  regular (non-experimental) in 2018. \emph{Rationale:} Algebraic
-  datatypes are specified in the latest official release (Version~2.6)
-  of the SMT-LIB standard.
-  
-\item The competition will feature an experimental divisions for
+  \item {\it Do Not Run Non-Competitive Divisions.} \todo{}
+
+  \item {\it Benchmark Selection.} \todo{}
+
+  \item {\it Time Limit.} The time limit per solver/benchmark pair is
+    anticipated to be at most 40 minutes in the \main (formerly: Main),
+    \incremental (formerly: Application), \ucore and \mval Tracks.  For the
+    \challenge Track, it is anticipated to be at most \todo{xx} minutes.
+    \emph{Rationale:} In 2017 and 2018, the time limit for the Main Track was
+    reduced to 20 minutes (down from 40 minutes in earlier years) to cope with
+    the inclusion of a large number of benchmarks with unknown status.  This
+    year, the reduced number of benchmarks selected per division allows us to
+    increase the time limit back to 40 minutes for the \main Track.
+
+  \item {\it New \mval Track.} \todo{}
+
+  \item {\it New \challenge Track.} \todo{}
+.
+  \item {\it New Scores.} \todo{24 seconds, sat, unsat}
+
+  \item {\it Incremental Track.} \todo{Run beyond the first unknown status query}
+
+  \item {\it Experimental Strings Division.}
+    \todo{point to the current draft of the standard as the set of rules
+    solvers have to agree on}
+    The competition will feature an experimental divisions for
   benchmarks that use strings.  \emph{Rationale:} Corresponding
   theories and benchmarks are expected to be added to SMT-LIB in the
   near future.
+
+  \item {\it Scoring Scheme.} \todo{}
+
+  \item {\it Competition-Wide Scores/Winners.} \todo{}
+
+  \item {\it Problems with Evaluation Scripts.} \todo{Explain what was the
+    problem and what has been fixed, talk about notion of benchmark family.}
+
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -547,6 +564,7 @@ command.
 \subsection{\challenge Track}
 \label{sec:exec:industry-challenge}
 
+\todo{time limit}
 The \challenge Track will follow the same rules as the \main Track,
 with two exceptions: benchmark selection and the time limit. The track will run on
 all SMT-LIB benchmarks that have an unknown status and that have been tagged as being
