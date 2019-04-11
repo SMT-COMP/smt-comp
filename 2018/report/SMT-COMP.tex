@@ -1523,7 +1523,9 @@ parallelism.
 
 \subsection{Focussing on Satisfiability or Unsatisfiability} 
 
-In the Main-track all divisions contain a mixture of problems that are satisfiable and unsatisfiable. However, some solvers may be specialised or optimised for a particular kind of problem. Therefore, it is interesting to ask whether the winners of divisions might have changed if benchmarks in that division had been restricted to one of these results. Table~\ref{tab:results:sat:unsat} shows the changes in division winners if only satisfiable or unsatisfiable results are given.
+In the Main-track all divisions contain a mixture of problems that are satisfiable and unsatisfiable. However, some solvers may be specialised or optimised for a particular kind of problem. Therefore, it is interesting to ask whether the winners of divisions might have changed if benchmarks in that division had been restricted to one of these results. Table~\ref{tab:results:sat:unsat} shows the changes in division winners if only satisfiable or unsatisfiable results are given. This table only lists a solver if the winner has changed. A non-competing solver is listed by itself if it now outperforms the winning competitive solver.
+
+It is interesting to note that we see some new solvers winning divisions that did not win any division in the main results. For example, Alt-Ergo solves the most satisfiable problems in AUFLIA and ALIA in 2018 and SMTInterpol performs very well on unsatisfiable problems in QF\_LIA.
 
 \begin{table}
 \caption{Alternative winners if only Satisfiable (top) or Unsatisfiable (bottom) benchmarks had been considered. These results are in reference to those given in Table~\ref{tab:winners-main}.\label{tab:results:sat:unsat}}
@@ -1584,9 +1586,10 @@ QF\_NRA  &   &   &   & CVC4  \\
 
 \end{table}
 
+%%%%%%%%%%%%%%%%%%%%
 \subsection{Very Quick Solutions}
 
-Table~\ref{tab:results:24s}
+The time limits used in each year are relatively long (20 or 40 minutes) whereas some applications of SMT solvers (e.g. software verification) make use of very short time limits. We ask the question \emph{how would the results change if we consider a much shorter time limit of 24 seconds?}\footnote{This time limit was inspired by a conversation with Liana Hadarean as it is a time limit being used in one application of SMT solvers in Amazon.}. The results of this analysis are given in Table~\ref{tab:results:24s}. As in the previous, this highlights the different winners under this new scheme only. Here we see STP winning a division for the first time in our analysis (QF\_BV in 2016) and Yices2 performing well.
 
 \begin{table}
 \caption{Alternative winners if the time limit had been 24 seconds.\label{tab:results:24s}}
@@ -1623,7 +1626,9 @@ UFLIA   &   &   &   & \nc{Z3}  \\
 
 \subsection{Do Families Matter?}
 
-Table~\ref{tab:results:total:solved}
+In 2016 the Main-track competition scoring was changed to weight the correctness score for benchmarks by the size of the family the benchmark belongs to. Here we ask what the winners would have been if this change had not been made. The answer to this question is given in Table~\ref{tab:results:total:solved}. Relatively few changes would have occurred. Unsurprisingly the differences are in the larger and more structured divisions.
+
+Whilst producing these results we noticed that the description of what constitutes a family had been incorrectly interpreted by the scoring scripts in 2016-2018. After fixing this misinterpretation we note that only a single division winner changes. As this is in the past we are choosing not to retroactively change the winner (and all tables in this paper reflect the previously published results) but the scripts have been fixed for future iterations of the competition.
 
 \begin{table}
 \caption{Alternative winners if families were not used in computing scores e.g. the 2015 scoring system were used.\label{tab:results:total:solved}}
