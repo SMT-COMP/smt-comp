@@ -192,7 +192,18 @@ The principal changes from the previous competition rules are the following:
 .
   \item {\it New Scores.} \todo{24 seconds, sat, unsat}
 
-  \item {\it Incremental Track.} \todo{Run beyond the first unknown status query}
+  \item {\it Incremental Track.}
+    In previous years, benchmarks were not eligible for the \incremental Track
+    if their first \akey{check-sat} command had unknown status.  Similarly, the
+    trace executor used to send commands from the benchmark to the solver's
+    standard input channel stopped execution at the first \akey{check-sat}
+    command with unknown status. This year, benchmarks whose first
+    \akey{check-sat} command has unknown status are eligible for the
+    \incremental track and trace execution is only stopped before the solver
+    completes a benchmark if the execution runs into the time limit.
+    \emph{Rationale:} The previous limitations were imposed by the trace
+    executor, which now has been extended to support executing solvers on
+    benchmarks beyond \akey{check-sat} commands with unknown status.
 
   \item {\it Experimental Strings Division.}
     \todo{point to the current draft of the standard as the set of rules
