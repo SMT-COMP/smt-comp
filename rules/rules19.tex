@@ -4,6 +4,7 @@
 \usepackage{times}
 \usepackage{fullpage}
 \usepackage{hyperref}
+\usepackage{xspace}
 
 %\usepackage{draftwatermark}
 
@@ -16,6 +17,11 @@
 \newcommand{\ah}[1]{\rem{#1 -- antti}}
 \newcommand{\lh}[1]{\rem{#1 -- liana}}
 \newcommand{\gr}[1]{\rem{#1 -- giles}}
+
+\newcommand{\main}{Single Query\xspace}
+\newcommand{\incremental}{Incremental\xspace}
+\newcommand{\ucore}{Unsat Core\xspace}
+\newcommand{\mval}{Model Validation\xspace}
 
 \let\OLDthebibliography\thebibliography
 \renewcommand\thebibliography[1]{
@@ -140,10 +146,10 @@ benchmarks and new or improved solvers to raise the level of
 competition and advance the state-of-the-art in automated SMT problem
 solving.
 
-SMT-COMP 2019 will have five tracks: the single problem track (formerly known
-as Single Problem Track), the incremental track (formerly known as application
-track), the unsat-core track, the (new) industry challenge track, and the (new)
-model validation track.
+SMT-COMP 2019 will have five tracks: the \main Track (formerly known
+as Main Track), the incremental track (formerly known as application
+track), the \ucore Track, the (new) industry challenge track, and the (new)
+\mval Track.
 
 Within each track there are multiple divisions, where each division
 uses benchmarks from a specific SMT-LIB logic (or group of logics).
@@ -163,17 +169,17 @@ SMT-COMP~2019.
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
 \item The time limit per solver/benchmark pair is anticipated to be at
-  most 20 minutes in the main track, and at most 40 minutes in the
+  most 20 minutes in the \main Track, and at most 40 minutes in the
   other tracks.  \emph{Rationale:} Already in 2017, the time limit for
-  the main track was reduced to 20 minutes (down from 40 minutes in
+  the \main Track was reduced to 20 minutes (down from 40 minutes in
   earlier years) to cope with the inclusion of a large number of
   benchmarks with unknown status.
 
-\item In the unsat-core track, the unsatisfiability check for the
+\item In the \ucore Track, the unsatisfiability check for the
   returned core will be based on a simple majority vote.  The case
   that a solver finds its own core satisfiable will no longer be
   treated specially.  \emph{Rationale:} This allows to simplify the
-  post-processing of unsat-core track results considerably.
+  post-processing of \ucore Track results considerably.
 
 \item In 2017, the competition featured experimental divisions for
   benchmarks that use algebraic datatypes.  These divisions will be
@@ -317,7 +323,7 @@ Workshop.
 
 \header{Input and output. \todo{update}}
 %
-In the main and unsat-core track, a participating solver must read a
+In the \main and \ucore tracks, a participating solver must read a
 single benchmark script, whose filename is presented as the solver's
 first command-line argument.  In the incremental track, a trace
 executor will send commands from a benchmark script to the solver's
@@ -331,7 +337,7 @@ satisfies the following requirements:
 \begin{enumerate}
 \item
   \begin{enumerate}
-  \item In the main and unsat-core track, there may be a single
+  \item In the \main and \ucore tracks, there may be a single
     \akey{(set-option :print-success ...)} command.  Note that
     \texttt{success} outputs are ignored by the post-processor used by
     the competition.\footnote{SMT-LIB~2.6 requires solvers to produce
@@ -346,7 +352,7 @@ satisfies the following requirements:
     must not be disabled.  The trace executor will send an initial
       \akey{(set-option :print-success true)} command to the solver.
   \end{enumerate}
-\item In the unsat-core track, there is a single \akey{(set-option
+\item In the \ucore Track, there is a single \akey{(set-option
   :produce-unsat-cores true)} command.
 \item The (single) \akey{set-logic} command setting the benchmark's
   logic is the first command after any \akey{set-option} commands.
@@ -364,20 +370,20 @@ satisfies the following requirements:
   free symbols declared in the script.
 \item
   \begin{enumerate}
-    \item In the main and incremental track, named terms (i.e., terms
+    \item In the \main and \incremental tracks, named terms (i.e., terms
       with the \akey{:named} attribute) are not used.
-    \item In the unsat core track, top-level assertions may be named.
+    \item In the \ucore Track, top-level assertions may be named.
   \end{enumerate}
 \item
   \begin{enumerate}
-  \item In the main and unsat-core track, there is exactly one
+  \item In the \main and \ucore tracks, there is exactly one
     \akey{check-sat} command.
   \item In the incremental track, there are one or more
     \akey{check-sat} commands.  There may also be zero or more
     \akey{push 1} commands, and zero or more \akey{pop 1} commands,
     consistent with the use of those commands in the SMT-LIB standard.
   \end{enumerate}
-\item In the unsat-core track, the \akey{check-sat} command (which is
+\item In the \ucore Track, the \akey{check-sat} command (which is
   always issued in an unsatisfiable context) is followed by a single
   \akey{get-unsat-core} command.
 \item The script may optionally contain an \akey{exit} command as its
@@ -398,8 +404,9 @@ wall-clock time limit~$T$.  Each processor has 4 cores.  Detailed
 machine specifications are available on the competition web site.
 
 The time limit~$T$ will be 40~minutes of wall-clock time per solver/benchmark
-pair in the single problem, incremental and unsat core tracks, \todo{XX}~minutes in the industry challenge track, and \todo{XX}~minutes in the
-model validation track \todo{Need to elaborate how time is split? Do we
+pair in the \main, \incremental and \ucore tracks, \todo{XX}~minutes in the
+industry challenge track, and \todo{XX}~minutes in the \mval Track
+\todo{Need to elaborate how time is split? Do we
 need two time limits here, one for solving and one for
 validation?}.\footnote{The time limit may be
 adjusted once we know the number of competition entrants and eligible
@@ -413,10 +420,10 @@ on the order of 60\,GB.  The values of both the time limit and the
 memory limit are available to a solver process through environment
 variables.  See the StarExec user guide for more information.
 
-\subsection{Single Problem Track (Previously: Main Track)}
+\subsection{\main Track (Previously: Main Track)}
 \label{sec:exec:single}
 
-The single problem track competition will consist of selected benchmarks in each
+The \main Track competition will consist of selected benchmarks in each
 of the logic divisions.  Each benchmark script will be presented to
 the solver as its first command-line argument.  The solver is then
 expected to attempt to report on its standard output channel whether
@@ -425,7 +432,7 @@ unsatisfiable (\texttt{unsat}).  A solver may also report
 \texttt{unknown} to indicate that it cannot determine satisfiability
 of the formula.
 
-The single problem track competition uses a StarExec post-processor (named
+The \main Track competition uses a StarExec post-processor (named
 ``SMT-COMP 2019") to accumulate the results.
 
 \header{Aborts and unparsable output.}
@@ -482,7 +489,7 @@ The trace executor terminates processing the benchmark script upon
 receiving an incorrect response from the solver.
 
 The disk space and memory limits for the incremental track are the
-same as for the single problem track (see Section~\ref{sec:exec:single}).
+same as for the \main Track (see Section~\ref{sec:exec:single}).
 
 \header{Input and output.}
 %
@@ -499,10 +506,10 @@ an answer of \texttt{sat}, \texttt{unsat}, or \texttt{unknown} for
 \akey{check-sat} commands, and with a \texttt{success} answer for
 other commands.
 
-\subsection{Unsat-core track}
+\subsection{\ucore Track}
 \label{sec:exec:unsat-core}
 
-The unsat-core track will evaluate the capability of solvers to
+The \ucore Track will evaluate the capability of solvers to
 generate unsatisfiable cores (for problems that are known to be
 unsatisfiable).  Solvers will be measured by the smallness of the
 unsatisfiable core they return.
@@ -520,16 +527,15 @@ unsatisfiable core is not well-formed (e.g., contains names of
 formulas that have not been asserted before), or if the returned
 unsatisfiable core is not, in fact, unsatisfiable.
 
-In order to perform this unsatisfiability check, the organizers will
-use a selection of SMT solvers that participate in the single problem track of
-this competition.  For each division, the organizers will use only
-solvers that have been sound (i.e., not produced any erroneous result)
-in the single problem track for this division.  The unsatisfiability of a
-produced unsatisfiable core is refuted if the number of checking
-solvers whose result is \texttt{sat} exceeds the number of checking
-solvers whose result is \texttt{unsat}.  The time limit for checking
-unsatisfiable cores is yet to be determined, but is anticipated to be
-around 5 minutes of wall-clock time per solver.
+In order to perform this unsatisfiability check, the organizers will use a
+selection of SMT solvers that participate in the \main Track of this
+competition.  For each division, the organizers will use only solvers that have
+been sound (i.e., not produced any erroneous result) in the \main Track for
+this division.  The unsatisfiability of a produced unsatisfiable core is
+refuted if the number of checking solvers whose result is \texttt{sat} exceeds
+the number of checking solvers whose result is \texttt{unsat}.  The time limit
+for checking unsatisfiable cores is yet to be determined, but is anticipated to
+be around 5 minutes of wall-clock time per solver.
 
 Solvers must respond to each command in the benchmark script with the
 answers defined in the SMT-LIB format specification.  In particular,
@@ -540,7 +546,7 @@ command.
 \subsection{Industry challenge track}
 \label{sec:exec:industry-challenge}
 
-The industry challenge track will follow the same rules as the single problem track,
+The industry challenge track will follow the same rules as the \main Track,
 with two exceptions: benchmark selection and the time limit. The track will run on
 all SMT-LIB benchmarks that have an unknown status and that have been tagged as being
  \emph{industrial}. Additionally we will include benchmarks nominated by the community.
@@ -549,11 +555,11 @@ all SMT-LIB benchmarks that have an unknown status and that have been tagged as 
 know if the problem is sat/unsat}
 
 
-\subsection{Model Validation Track (experimental)}
+\subsection{\mval Track (experimental)}
 \label{sec:exec:model}
-The model validation track will evaluate the solver's ability to produce models
+The \mval Track will evaluate the solver's ability to produce models
 for satisfiable problems. This track will run on all QF\_BV satisfiable benchmarks
-from the single problem track.
+from the \main Track.
 
 The SMT-LIB language accommodates this functionality by providing the ability to
 request a satisfying model after a \akey{check-sat} command returns \texttt{sat}.
@@ -581,10 +587,10 @@ developers before the solver submission deadline.
 \header{Benchmark sources.}
 %
 Benchmarks for each division will be drawn from the SMT-LIB benchmark
-library.  The single problem track will use a subset of all
+library.  The \main Track will use a subset of all
 \emph{non-incremental} benchmarks; the incremental track will use a
-subset of all \emph{incremental} benchmarks.  The unsat-core track
-will use unsatisfiable single problem track benchmarks, modified to use named
+subset of all \emph{incremental} benchmarks.  The \ucore Track
+will use unsatisfiable \main Track benchmarks, modified to use named
 top-level assertions.
 
 \header{New benchmarks.}
@@ -634,7 +640,7 @@ benchmark pool is culled as follows:
   command has unknown status, the entire benchmark is
   ineligible.\footnote{It might be desirable to also include
     \akey{check-sat} commands with unknown status in the application
-    track (for the same reasons they are now included in the main
+    track (for the same reasons they are now included in the \main
     track), but this would require substantial changes to the trace
     executor and scoring tools.}
 \end{enumerate}
@@ -705,15 +711,14 @@ A solver's \emph{parallel performance} for each benchmark is a quadruple $\langl
 e, n, w, c\rangle$, with $e \in \{0, 1\}$ the number of erroneous
 results (usually~$e = 0$), $0 \leq n \leq N$ the number of correct
 results,\footnote{Here, $N$ is the number of \akey{check-sat} commands
-  in the benchmark.  Recall that single problem track benchmarks have just one
+  in the benchmark.  Recall that \main Track benchmarks have just one
   \akey{check-sat} command; incremental track benchmarks may have
   multiple \akey{check-sat} commands.} $w \in [0,T]$ the (real-valued)
 wall-clock time in seconds, and $c \in [0, 4T]$ the (real-valued) CPU
 time in seconds, measured across all cores and sub-processes, until
 the solver process terminates.
 
-\header{Single Problem Track.} More specifically, for the single problem track,
-we have
+\header{\main Track.} More specifically, for the \main Track, we have
 %
 \begin{itemize}
 \item $e=0$, $n=0$ if the solver aborts without a response, or the
@@ -756,9 +761,9 @@ processing.  For the incremental track, we have
   limit is reached.
 \end{itemize}
 
-\header{Unsat-core track.}
+\header{\ucore Track.}
 %
-For the unsat-core track, we instead have $0 \leq n \leq A$, where~$A$
+For the \ucore Track, we instead have $0 \leq n \leq A$, where~$A$
 is the number of named top-level assertions in the benchmark, and
 \begin{itemize}
 \item $e=0$, $n=0$ if the solver aborts without a response, or the
@@ -770,7 +775,7 @@ is the number of named top-level assertions in the benchmark, and
   reported unsatisfiable core.
 \end{itemize}
 
-\subsection{Sequential Performance (Single Problem Track)}
+\subsection{Sequential Performance (\main Track)}
 \label{sec:sequential}
 
 
@@ -778,7 +783,7 @@ is the number of named top-level assertions in the benchmark, and
 SMT-COMP has traditionally emphasized sequential performance (i.e.,
 CPU time) over parallel performance (i.e., wall-clock time).  StarExec
 measures both, and we intend to recognize both best sequential and
-best parallel solvers in all competitive single problem track divisions.
+best parallel solvers in all competitive \main Track divisions.
 \fi
 
 The parallel performance, as defined in Section~\ref{sec:benchmark-scoring},
@@ -811,9 +816,9 @@ unsatisfiable instances}.  In addition we compute the performances for a
 24-second timeout.
 \todo{24-seconds is only a score, not a track}
 
-\header{Single Problem Track: Removal of Disagreements.}
+\header{\main Track: Removal of Disagreements.}
 %
-Before division scores are computed for the Single Problem Track, benchmarks
+Before division scores are computed for the \main Track, benchmarks
 with unknown status are removed from the competition results if two
 (or more) solvers that are sound on benchmarks with known status
 disagree on their result.  More specifically, a solver (including a
@@ -846,7 +851,7 @@ benchmark~$b$ as $\alpha'_b = \alpha_b / (\sum_{b'} \alpha_{b'})$,
 where the sum is over all benchmarks in the division.  Let~$N$ be the
 total number of benchmarks in the division.
 
-For Single Problem Track and unsat-core track divisions, we will separately
+For \main Track and \ucore Track divisions, we will separately
 compute the weighted sum of all benchmarks separately based on the
 parallel performance and sequential performance.
 (Section~\ref{sec:benchmark-scoring})
@@ -890,14 +895,14 @@ We will not make any comparisons between parallel and sequential
 performances, as these are intended to measure fundamentally different
 performance characteristics.
 
-\subsection{Competition-wide scoring (Single Problem Track)}
+\subsection{Competition-wide scoring (\main Track)}
 \label{sec:competition-wide}
 
 \todo{Replace notion of competition-wide scoring with a notion of ranking
 based on distance between first and second (based on scoring, and maybe a second
 based on VBS marginal contribution)}
 
-We define a competition-wide metric for the Single Problem Track, separately for
+We define a competition-wide metric for the \main Track, separately for
 parallel and sequential performance, as follows.  Let $N_i$ be the
 total number of benchmarks in division~$i$ that were used in the
 competition (and not removed because of disagreements), and let
@@ -959,13 +964,13 @@ awarded to:
 %
 \begin{itemize}
 \item The best three solvers according to the competition-wide scoring
-  (Single Problem Track);
+  (\main Track);
 \item the solver that wins the most competitive divisions in the
   incremental track;
 \item the solver that wins the most competitive divisions in the
-  unsat-core track;
+  \ucore Track;
 \item the solver that wins the QF\_BV division (separately for
-  parallel and sequential performance) in the Single Problem Track.
+  parallel and sequential performance) in the \main Track.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
