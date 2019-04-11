@@ -1,4 +1,4 @@
-﻿(1) TODO:
+﻿(1) TODO: reply that we think that this is out of scope
 -------------------------------------------------------------------------------
 In the CfP it is mentioned that competition reports
 should give a summary of the main technical contributions to the field.
@@ -30,7 +30,7 @@ A division is "competitive" if at least two substantially different solvers
 (i.e., solvers from two different teams) were submitted. We now explain this
 also in the paper.
 
-(4) TODO:
+(4) TODO (Aina):
 -------------------------------------------------------------------------------
 What are the requirements that a submission to SMT-COMP has to fulfill?
 For example, can anybody submit a tool,
@@ -38,7 +38,7 @@ or do they need to be a developer of the tool?
 Are there any conditions on the license of the tool,
 such as allowing to redistribute the tool?
 
-(5) TODO:
+(5) TODO (Giles): goes into Section 5 (Infrastructure)
 -------------------------------------------------------------------------------
 To which extend is SMT-COMP reproducible?
 The SMT Library is available for everyone,
@@ -46,13 +46,13 @@ can everyone download all tools, too
 (in the version that is guaranteed to be the same as in SMT-COMP)?
 Is everything else that is necessary (i.e., tool command lines etc.) archived?
 
-(6) TODO:
+(6) TODO (Tjark): + explanation of how solver versions are counted as solvers
 -------------------------------------------------------------------------------
 Is there anything known about why the number of participants
 in the application track is now much smaller compared to 2015,
 although the number of participants in the main track is similar?
 
-(7) TODO:
+(7) TODO (Giles):
 -------------------------------------------------------------------------------
 Are produced unsat cores checked for whether they are actually unsat cores,
 i.e., unsatisfiable and a subset of the input problem?
@@ -74,7 +74,7 @@ of SMT-LIB benchmarks by file size).
 
 Done.
 
-(10) TODO:
+(10) TODO (Giles):
 -------------------------------------------------------------------------------
 In the fifth paragraph of Sect. 4, the term "otherwise sound solvers" is used
 but not precisely defined.
@@ -110,12 +110,12 @@ SMT-COMP.
 
 We have removed Figure 2 (Distribution of SMT-LIB benchmarks by file size).
 
-(12) TODO:
+(12) TODO: won't fix
 -------------------------------------------------------------------------------
 first part of Section 4 refers to years earlier than 2015. Given the focus of
 the paper, I ll not mention this
 
-(13) TODO:
+(13) TODO: reply that as mentioned above SMT-LIB classifies the benchmarks
 -------------------------------------------------------------------------------
 again on Sec 4, it is not clear whether the central part (first paragraph of pg
 7) reports about some sort of benchmarks classification. If this is the case,
@@ -181,7 +181,7 @@ logics/division, in order to support a more deep understanding of what's is
 going on in SMT solving.
 
 
-(15) TODO
+(15) TODO (Giles)
 -------------------------------------------------------------------------------
 "Benchmarks with disagreement are removed". What is about n-1 solvers give one
 response, and only one give another? Is not there a sort of "majority" outputs
@@ -189,7 +189,7 @@ or the possibility to check responses? (for some logics there should be). If I
 understand correctly, the risk is of, instead of assigning a wrong answer to a
 solver,  removing the benchmark "ignoring" the issue.
 
-(16) TODO
+(16) TODO (Tjark): this should go with the score
 -------------------------------------------------------------------------------
 what is the "competition-wide" ranking? please explain.
 
@@ -244,13 +244,13 @@ at this point in the paper.
 >   stated above, in case this should be expanded
 > . "if this is known" -> "if known"
 
-TODO
+TODO (Aina)
 
 > Section 4:
 > . "need not support all logics"?
 > . "for favoring imitations" ?
 
-TODO
+TODO (Aina)
 
 (19)
 -------------------------------------------------------------------------------
@@ -266,7 +266,7 @@ results. There is some discussion of it in the text, but we think that the
 table is more accessible, and that this justifies the relatively small amount
 of additional space needed.
 
-(19) TODO: Minor
+(19) TODO (Aina): Minor
 -------------------------------------------------------------------------------
 Section 7:
 . "(because response ... are not recorded by StarExec)". Please clarify
@@ -276,7 +276,7 @@ Section 7:
 Acknowledge:
 . "and last but not least" -> "and, last but not least,"
 
-(19) TODO: References
+(19) TODO (Aina): References
 -------------------------------------------------------------------------------
 References: Some work has to be done in order to have the references uniform,
             e.g.
@@ -299,7 +299,7 @@ only an evaluation (of SMT-COMP and SMT-LIB).
 We agree that these tables contain information that should be archived. Hence,
 they cannot be relegated to an (unpublished) appendix.
 
-(22) TODO
+(22) TODO (Aina): remove
 -------------------------------------------------------------------------------
 Pg 11, Pg 21: "By these measures ... one of largest competition in automated
 reasoning": These statements are really unnecessary, especially if they are not
@@ -331,13 +331,15 @@ description about how to parse this layout. We further now also list the best
 participating competing solver and not only the best participating solver of
 all competing and non-competing solvers per division and year.
 
-(25) TODO: discuss
+(25) TODO reply
 -------------------------------------------------------------------------------
-Pg 19, Tbl 13: This table essentially shows that the parallel score has
-absolutely no effect on the competition at all. This should perhaps be
-mentioned in the text, or those scores could be removed altogether.
+> Pg 19, Tbl 13: This table essentially shows that the parallel score has
+> absolutely no effect on the competition at all. This should perhaps be
+> mentioned in the text, or those scores could be removed altogether.
 
-(26) TODO
+Done
+
+(26) TODO (Giles): reply
 -------------------------------------------------------------------------------
 Pg 7, Pg 21: The fact that the trace executor doesn't support "unknown"
 annotations in the incremental track is mentioned twice. This seems a
