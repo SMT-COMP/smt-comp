@@ -147,9 +147,9 @@ benchmarks and new or improved solvers to raise the level of
 competition and advance the state-of-the-art in automated SMT problem
 solving.
 
-SMT-COMP 2019 will have five tracks: the \main Track (formerly known
-as Main Track), the incremental track (formerly known as application
-track), the \ucore Track, the (new) \challenge Track, and the (new)
+SMT-COMP 2019 will have five tracks: the \main Track (previously: Main Track),
+the incremental track (previously: Application Track), the \ucore Track,
+the (new) \challenge Track, and the (new)
 \mval Track.
 
 Within each track there are multiple divisions, where each division
@@ -177,8 +177,8 @@ The principal changes from the previous competition rules are the following:
   \item {\it Benchmark Selection.} \todo{}
 
   \item {\it Time Limit.} The time limit per solver/benchmark pair is
-    anticipated to be at most 40 minutes in the \main (formerly: Main),
-    \incremental (formerly: Application), \ucore and \mval Tracks.  For the
+    anticipated to be at most 40 minutes in the \main (previously: Main),
+    \incremental (previously: Application), \ucore and \mval Tracks.  For the
     \challenge Track, it is anticipated to be at most \todo{xx} minutes.
     \emph{Rationale:} In 2017 and 2018, the time limit for the Main Track was
     reduced to 20 minutes (down from 40 minutes in earlier years) to cope with
@@ -617,6 +617,9 @@ library.  The \main Track will use a subset of all
 subset of all \emph{incremental} benchmarks.  The \ucore Track
 will use unsatisfiable \main Track benchmarks, modified to use named
 top-level assertions.
+\todo{add information about how benchmarks are selected for the \mval,
+\challenge, \ucore tracks, and the 24s, sat and unsat scores -- either here
+or below}
 
 \header{New benchmarks.}
 %
@@ -894,6 +897,7 @@ division scores will be based on parallel performance only.\footnote{Since
   useful sequential performance for the incremental track would require
   information not provided by the parallel performance, e.g., detailed timing
   information for each result.}
+  \todo{is this only true for the incremental track or also one of the new tracks}
 
 Division scores are compared lexicographically:
 \begin{itemize}
