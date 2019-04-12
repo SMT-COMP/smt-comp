@@ -244,13 +244,13 @@ at this point in the paper.
 >   stated above, in case this should be expanded
 > . "if this is known" -> "if known"
 
-TODO (Aina)
+Done.
 
 > Section 4:
 > . "need not support all logics"?
 > . "for favoring imitations" ?
 
-TODO (Aina)
+Done.
 
 (19)
 -------------------------------------------------------------------------------
@@ -270,11 +270,19 @@ of additional space needed.
 -------------------------------------------------------------------------------
 Section 7:
 . "(because response ... are not recorded by StarExec)". Please clarify
-. "performance" -> "execution"
-. "we are including" -> "we include"
-. "awarded these to the" -> "awarded the"
-Acknowledge:
-. "and last but not least" -> "and, last but not least,"
+
+> . "performance" -> "execution"
+We do refer to performance (in terms of score) here rather than to execution.
+
+> . "we are including" -> "we include"
+Done.
+
+> . "awarded these to the" -> "awarded the"
+Done.
+
+> Acknowledge:
+> . "and last but not least" -> "and, last but not least,"
+Done.
 
 (19)
 -------------------------------------------------------------------------------
