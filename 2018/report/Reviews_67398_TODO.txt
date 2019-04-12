@@ -276,13 +276,16 @@ Section 7:
 Acknowledge:
 . "and last but not least" -> "and, last but not least,"
 
-(19) TODO (Aina): References
+(19)
 -------------------------------------------------------------------------------
-References: Some work has to be done in order to have the references uniform,
-            e.g.
-(i) conferences are mentioned in two different ways, e.g. "Proceedings of the
-... " vs. "..., Proceedings," (see, e.g. [4] vs. [5])
-(ii) reference [7] is incomplete
+> References: Some work has to be done in order to have the references uniform,
+>             e.g.
+> (i) conferences are mentioned in two different ways, e.g. "Proceedings of the
+> ... " vs. "..., Proceedings," (see, e.g. [4] vs. [5])
+> (ii) reference [7] is incomplete
+
+Done
+
 
 (20)
 -------------------------------------------------------------------------------
