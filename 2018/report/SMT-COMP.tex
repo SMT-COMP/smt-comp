@@ -968,25 +968,46 @@ this information was collected by email.  Since 2017, a web form is
 being used for this purpose.  This has greatly reduced the number of
 incomplete or ambiguous submissions.
 
+Participants are required to be authors of the tool they submit.
+In 2015--2018, the competition rules did not further define authorship,
+but it is understood that an author contributed code to the tool.
+As a special case of this rule, participants are required to identify
+if their tool is a wrapper tool, i.e., any solver that calls (or is in some
+other way based on) one or more SMT solvers of which the author of the tool
+is not an author.
+
 Tables~\ref{table:participants1}-\ref{table:participants3} list the solvers
 that participated between~2015 and~2018, together with contributing team
 members (in alphabetical order) and their institutional affiliations (which may
 have changed over time).
+
+Further, there was no restriction on the number of solver versions participants
+may submit, but the organizers reserved the right to not accept multiple
+versions of a solver in case the number of solver submissions is too large for
+the computational resources. In the past four years, executing this right was
+not necessary.
 %
-Participants are also encouraged to submit a short system description
-of their solver, including a list of its authors and an explanation of
-the SMT solving approach used.  System descriptions are published on
-the competition website.  They were submitted for about 60\,\% of all
-solver versions since 2015.
-
-\include{table-participants}
-
 Many of these solvers were submitted in multiple years.  Additionally,
 to promote a wide comparison between tools, developers are allowed to
 submit multiple versions of a solver, e.g., for different competition
 tracks or with differently tuned internal components.
 Table~\ref{table:participants-history} shows in more detail how many
 versions of each solver were submitted in each year.
+
+Participants were not required to provide source code with their submission.
+There were no licensing requirements/restrictions for the submitted binaries
+of the participating solvers.
+%
+Participants were encouraged to submit a short system description
+of their solver, including a list of its authors and an explanation of
+the SMT solving approach used.  System descriptions are published on
+the competition website.  They were submitted for about 60\,\% of all
+solver versions since 2015.
+
+
+
+\include{table-participants}
+
 
 \begin{table}
   \caption{Number of versions submitted for each solver (by year).

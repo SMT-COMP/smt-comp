@@ -30,13 +30,15 @@ A division is "competitive" if at least two substantially different solvers
 (i.e., solvers from two different teams) were submitted. We now explain this
 also in the paper.
 
-(4) TODO (Aina):
+(4)
 -------------------------------------------------------------------------------
-What are the requirements that a submission to SMT-COMP has to fulfill?
-For example, can anybody submit a tool,
-or do they need to be a developer of the tool?
-Are there any conditions on the license of the tool,
-such as allowing to redistribute the tool?
+>  What are the requirements that a submission to SMT-COMP has to fulfill?
+>  For example, can anybody submit a tool,
+>  or do they need to be a developer of the tool?
+>  Are there any conditions on the license of the tool,
+>  such as allowing to redistribute the tool?
+
+Done.
 
 (5) TODO (Giles): goes into Section 5 (Infrastructure)
 -------------------------------------------------------------------------------
