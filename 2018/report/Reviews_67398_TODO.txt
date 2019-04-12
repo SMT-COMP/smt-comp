@@ -302,12 +302,14 @@ only an evaluation (of SMT-COMP and SMT-LIB).
 We agree that these tables contain information that should be archived. Hence,
 they cannot be relegated to an (unpublished) appendix.
 
-(22) TODO (Aina): remove
+(22)
 -------------------------------------------------------------------------------
-Pg 11, Pg 21: "By these measures ... one of largest competition in automated
-reasoning": These statements are really unnecessary, especially if they are not
-backed up by data or references. Also, the "measures" in the two occurrences of
-this sentence are not the same!
+> Pg 11, Pg 21: "By these measures ... one of largest competition in automated
+> reasoning": These statements are really unnecessary, especially if they are not
+> backed up by data or references. Also, the "measures" in the two occurrences of
+> this sentence are not the same!
+
+Done
 
 (23)
 -------------------------------------------------------------------------------
