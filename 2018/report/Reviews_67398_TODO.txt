@@ -198,9 +198,14 @@ or the possibility to check responses? (for some logics there should be). If I
 understand correctly, the risk is of, instead of assigning a wrong answer to a
 solver,  removing the benchmark "ignoring" the issue.
 
-(16) TODO (Tjark): this should go with the score
+(16)
 -------------------------------------------------------------------------------
-what is the "competition-wide" ranking? please explain.
+> what is the "competition-wide" ranking? please explain.
+
+We have added a brief explanation to Section 7.2, which now also
+offers a reference to the rules (which contain full details, including
+the precise formula used).
+
 
 (17) TODO (Giles)
 -------------------------------------------------------------------------------
