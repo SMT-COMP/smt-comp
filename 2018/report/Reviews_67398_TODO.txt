@@ -1,4 +1,4 @@
-﻿(1) TODO: reply that we think that this is out of scope
+(1) TODO: reply that we think that this is out of scope
 -------------------------------------------------------------------------------
 > In the CfP it is mentioned that competition reports should give a
 > summary of the main technical contributions to the field.  Are there
@@ -47,7 +47,7 @@ also in the paper.
 
 Submitters must be tool authors. We have clarified this in Section 6.
 
-(5) TODO (Giles): goes into Section 5 (Infrastructure)
+(5) TODO (Giles): goes into Section 5 (Infrastructure) : DONE
 -------------------------------------------------------------------------------
 To which extend is SMT-COMP reproducible?
 The SMT Library is available for everyone,
@@ -83,7 +83,7 @@ of SMT-LIB benchmarks by file size).
 
 Done.
 
-(10) TODO (Giles):
+(10) TODO (Giles): DONE
 -------------------------------------------------------------------------------
 In the fifth paragraph of Sect. 4, the term "otherwise sound solvers" is used
 but not precisely defined.
@@ -190,7 +190,7 @@ logics/division, in order to support a more deep understanding of what's is
 going on in SMT solving.
 
 
-(15) TODO (Giles)
+(15) TODO (Giles) : DONE
 -------------------------------------------------------------------------------
 "Benchmarks with disagreement are removed". What is about n-1 solvers give one
 response, and only one give another? Is not there a sort of "majority" outputs
@@ -207,7 +207,7 @@ offers a reference to the rules (which contain full details, including
 the precise formula used).
 
 
-(17) TODO (Giles)
+(17) TODO (Giles) : DONE
 -------------------------------------------------------------------------------
 From the global results (Table 13) I can see that in 2015, 2016 and 2017 the
 overall winner would have been Z3, running hors concourse. Perhaps, it is a

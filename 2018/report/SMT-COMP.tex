@@ -646,11 +646,13 @@ separately.  Since 2017, all non-incremental benchmarks are eligible
 for the competition's Main track regardless of status, and they
 directly affect the competition results.  Solver responses for such
 benchmarks are assumed to be correct, unless there is a disagreement
-between two or more (otherwise sound) solvers.  Benchmarks with
-disagreements are removed from the competition results.  In 2016,
+between two or more (otherwise sound e.g. on problems with known status) solvers.  Benchmarks with
+disagreements are removed from the competition results.  This conservative approach was chosen over a voting system as this situation is expected to be rare as the SMT-LIB organisers go to a significant effort prior to each competition to update the statuses of problems. A manual investigation is therefore preferred over an automated resolution. Disagreements are reported to the solvers involved and in all cases have led to bugs in solvers being identified and fixed. 
+In 2016,
 there were disagreements on 79 benchmarks; in 2017, only one benchmark
 was removed; and in 2018, there were no disagreements between
-otherwise sound solvers.
+otherwise sound solvers. 
+
 
 For incremental benchmarks, the situation is different: an incremental
 benchmark is ineligible for the Application track if its first {\tt
@@ -659,7 +661,7 @@ benchmark that only contains {\tt check-sat} commands with known
 status is eligible.  The main reason for this difference is that the
 competition tools for the Application track (in particular, the trace
 executor) have not been adapted yet to support {\tt check-sat}
-commands with unknown status.
+commands with unknown status. Even though the trace executor has now been modified, we cannot check what impact this may have had on previous results without rerunning all tracks as the trace executor drives the solver.
 
 Tables~\ref{table:benchmarks-main-track}--\ref{table:benchmarks-unsat-core-track}
 show the number of benchmarks that were used in each competition track
@@ -959,6 +961,8 @@ weeks.
   \caption{Number of job pairs ($\blacksquare$) and total wall-clock time ($\square$).}
   \label{fig:job-pairs}
 \end{figure}
+
+The use of StarExec ensures the \emph{reproducibility} of the competition. The publicly accessible space \url{https://www.starexec.org/starexec/secure/explore/spaces.jsp?id=2641} stores all of the information required to rerun the competition e.g. all benchmarks and copies of all tools. In addition, a GitHub organisation (\url{https://github.com/SMT-COMP/smt-comp}) has been setup to archive previous results and store the tools used by organisers to run the competition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1560,32 +1564,32 @@ It is interesting to note that we see some new solvers winning divisions that di
 \toprule
 Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
 \hline \hline
+ALIA    &   &   &   & Alt-Ergo  \\
 AUFLIA  & CVC3  &   &   & Alt-Ergo  \\
-AUFNIRA & \nc{Z3}  & CVC4 \nc{Z3}  & CVC4 \nc{Z3}  & \nc{Z3}  \\
-NIA     & CVC3  &   &   &   \\
-NRA     & CVC3  & CVC4  & CVC4  & CVC4\nc{Z3}Z3  \\
-QF\_AUFBV        & Yices  & Yices2  &   & Yices2  \\
-QF\_LIA  & \nc{Z3}  &   &   &   \\
-QF\_UFIDL        & \nc{Z3}  & \nc{Z3}  & \nc{Z3}  & \nc{Z3} veriT  \\
-QF\_UFNIA        & CVC3  &   & CVC4  &   \\
-UFLIA   & \nc{Z3}  &   &   &   \\
-UFLRA   & CVC3  & CVC4  &   &   \\
 AUFLIRA &   & CVC4  & CVC4  & Alt-Ergo  \\
+AUFNIRA & \nc{Z3}  & CVC4 \nc{Z3}  & CVC4 \nc{Z3}  & \nc{Z3}  \\
 BV      &   & \nc{Z3}  & Boolector  & Boolector  \\
-QF\_ABV  &   & Yices2  & Yices2  &   \\
-QF\_BV   &   & MinkeyRink  &   &   \\
-QF\_NIA  &   & SMT-RAT  &   &   \\
-UF      &   & Vampire  &   &   \\
-UFBV    &   & Boolector  &   &   \\
-UFNIA   &   & CVC4  & CVC4  & CVC4  \\
 LRA     &   &   & veriT+Redlog  &   \\
+NIA     & CVC3  &   &   &   \\
+NRA     & CVC3  & CVC4  & CVC4  & CVC4 \nc{Z3}  \\
+QF\_ABV  &   & Yices2  & Yices2  &   \\
+QF\_AUFBV        & Yices  & Yices2  &   & Yices2  \\
+QF\_BV   &   & \nc{Z3}/MinkeyRink  &   &   \\
+QF\_FP   &   &   &   & CVC4  \\
+QF\_LIA  & \nc{Z3}  &   &   &   \\
 QF\_LRA  &   &   & Yices2  & Yices2  \\
+QF\_NIA  &   & SMT-RAT  &   &   \\
 QF\_NIRA &   &   & CVC4  &   \\
 QF\_NRA  &   &   & \nc{Z3}  &   \\
-UFDTLIA &   &   & CVC4  &   \\
-ALIA    &   &   &   & Alt-Ergo  \\
-QF\_FP   &   &   &   & CVC4  \\
 QF\_UFBV &   &   &   & Yices2  \\
+QF\_UFIDL        & \nc{Z3}  & \nc{Z3}  & \nc{Z3}  & \nc{Z3} veriT  \\
+QF\_UFNIA        & CVC3  &   & CVC4  &   \\
+UF      &   & Vampire  &   & Vampire/-  \\
+UFBV    &   & Boolector  &   &   \\
+UFDTLIA &   &   & CVC4  &   \\
+UFLIA   & \nc{Z3}  &   &   &   \\
+UFLRA   & CVC3  & CVC4  &   &   \\
+UFNIA   &   & CVC4  & CVC4  & CVC4  \\
 \bottomrule
 \end{tabular}
 
@@ -1593,20 +1597,20 @@ QF\_UFBV &   &   &   & Yices2  \\
 \toprule
 Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
 \hline \hline
+BV      &   & CVC4  &   &   \\
+NIA     &   & CVC4  & Vampire  & Vampire  \\
+QF\_AUFBV        &   &   & CVC4  &   \\
 QF\_AUFNIA       & \nc{Z3}  & \nc{Z3}  &   &   \\
+QF\_BV   &   &   & Boolector  &   \\
 QF\_IDL  & CVC4  &   & \nc{Z3}  & CVC4 \nc{Z3}  \\
 QF\_LIA  & SMTInterpol  & SMTInterpol  & SMTInterpol  & SMTInterpol  \\
 QF\_NIA  & CVC3  &   & Yices2  &   \\
-BV      &   & CVC4  &   &   \\
-NIA     &   & CVC4  & Vampire  & Vampire  \\
-QF\_UFNRA        &   & CVC4 \nc{Z3}  & CVC4  & CVC4 \nc{Z3}  \\
-UFIDL   &   & Vampire \nc{Z3}  & \nc{Z3}  &   \\
-QF\_AUFBV        &   &   & CVC4  &   \\
-QF\_BV   &   &   & Boolector  &   \\
-QF\_UFLIA        &   &   & \nc{Z3}  &   \\
-UF      &   &   & CVC4  & CVC4  \\
-UFLRA   &   &   & veriT  & veriT  \\
 QF\_NRA  &   &   &   & CVC4  \\
+QF\_UFLIA        &   &   & \nc{Z3}  &   \\
+QF\_UFNRA        &   & CVC4 \nc{Z3}  & CVC4  & CVC4 \nc{Z3}  \\
+UF      &   &   & CVC4  & -/CVC4  \\
+UFIDL   &   & Vampire \nc{Z3}  & \nc{Z3}  &   \\
+UFLRA   &   &   & veriT  & veriT  \\
 \bottomrule
 \end{tabular}
 
@@ -1615,7 +1619,7 @@ QF\_NRA  &   &   &   & CVC4  \\
 %%%%%%%%%%%%%%%%%%%%
 \subsection{Very Quick Solutions}
 
-The time limits used in each year are relatively long (20 or 40 minutes) whereas some applications of SMT solvers (e.g. software verification) make use of very short time limits. We ask the question \emph{how would the results change if we consider a much shorter time limit of 24 seconds?}\footnote{This time limit was inspired by a conversation with Liana Hadarean as it is a time limit being used in one application of SMT solvers in Amazon.}. The results of this analysis are given in Table~\ref{tab:results:24s}. As in the previous, this highlights the different winners under this new scheme only. Here we see STP winning a division for the first time in our analysis (QF\_BV in 2016) and Yices2 performing well.
+The time limits used in each year are relatively long (20 or 40 minutes) whereas some applications of SMT solvers (e.g. software verification) make use of very short time limits. We ask the question \emph{how would the Main track results change if we consider a much shorter time limit of 24 seconds?}\footnote{This time limit was inspired by a conversation with Liana Hadarean as it is a time limit being used in one application of SMT solvers in Amazon.}. We only consider the Main track here as this is the setting where short time limits are most likely to be relevant. The results of this analysis are given in Table~\ref{tab:results:24s}. As in the previous, this highlights the different winners under this new scheme only. Here we see STP winning a division for the first time in our analysis (QF\_BV in 2016) and Yices2 performing well.
 
 \begin{table}
 \caption{Alternative winners if the time limit had been 24 seconds.\label{tab:results:24s}}
@@ -1625,36 +1629,39 @@ The time limits used in each year are relatively long (20 or 40 minutes) whereas
 \toprule
 Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
 \hline \hline
-AUFLIRA & CVC3  &   &   & Alt-Ergo  \\
-AUFNIRA & \nc{Z3}  &   &   & \nc{Z3}  \\
-QF\_BV   & CVC4  & STP \nc{Z3}  &   & Boolector  \\
-QF\_LIA  & Yices  & Yices2  & Yices2  &   \\
-QF\_LRA  & Yices  & Yices2  & Yices2  & Yices2  \\
-QF\_UF   & veriT  & veriT  &   &   \\
-UFNIA   & \nc{Z3}  &   &   & \nc{Z3}  \\
 AUFLIA  &   & Vampire \nc{Z3}  & veriT  &   \\
+AUFLIRA & CVC3  &   &   & -/Alt-Ergo  \\
+AUFNIRA & \nc{Z3}  &   &   & \nc{Z3}  \\
+BV      &   &   &   & Boolector/Boolector \nc{Z3}  \\
+NRA     &   &   &   & CVC4/CVC4 \nc{Z3}  \\
 QF\_ABV  &   & Yices2  &   &   \\
 QF\_ANIA &   & \nc{Z3}  & \nc{Z3}  &   \\
+QF\_BV   & CVC4  & STP \nc{Z3}  & Boolector+CaDiCaL/-  & Boolector  \\
+QF\_LIA  & Yices  & Yices2  & Yices2  &   \\
+QF\_LRA  & Yices  & Yices2  & Yices2  & Yices2  \\
+QF\_NIA  &   &   & Yices2  & Yices2  \\
+QF\_NIRA &   &   & Yices2 \nc{Z3}  & Yices2 \nc{Z3}  \\
+QF\_NRA  &   &   & \nc{Z3}  &   \\
+QF\_UF   & veriT  & veriT  &   &   \\
 QF\_UFNRA        &   & CVC4 \nc{Z3}  & CVC4  & \nc{Z3}  \\
-UF      &   & Vampire  &   &   \\
+UF      &   & Vampire  &   &  Vampire/- \\
 UFBV    &   & Boolector  &   &   \\
 UFIDL   &   & Vampire \nc{Z3}  & \nc{Z3}  &   \\
-QF\_NIA  &   &   & Yices2  & Yices2  \\
-QF\_NIRA &   &   & Yices2 Z3  & Yices2 \nc{Z3}  \\
-QF\_NRA  &   &   & \nc{Z3}  &   \\
-UFLRA   &   &   & veriT  & veriT  \\
-BV      &   &   &   & Boolector \nc{Z3}  \\
-NRA     &   &   &   & CVC4 \nc{Z3}  \\
 UFLIA   &   &   &   & \nc{Z3}  \\
+UFLRA   &   &   & veriT  & veriT  \\
+UFNIA   & \nc{Z3}  &   &   & CVC4/\nc{Z3}  \\
 \bottomrule
 \end{tabular}
 \end{table}
 
+%%%%%%%%%%%%%%%%%
 \subsection{Do Families Matter?}
 
 In 2016 the Main-track competition scoring was changed to weight the correctness score for benchmarks by the size of the family the benchmark belongs to. Here we ask what the winners would have been if this change had not been made. The answer to this question is given in Table~\ref{tab:results:total:solved}. Relatively few changes would have occurred. Unsurprisingly the differences are in the larger and more structured divisions.
 
-Whilst producing these results we noticed that the description of what constitutes a family had been incorrectly interpreted by the scoring scripts in 2016-2018. After fixing this misinterpretation we note that only a single division winner changes. As this is in the past we are choosing not to retroactively change the winner (and all tables in this paper reflect the previously published results) but the scripts have been fixed for future iterations of the competition.
+Whilst producing these results we noticed that the description of what constitutes a family had been incorrectly interpreted by the scoring scripts in 2016-2018. After fixing this misinterpretation we note that only a single division winner changes - in 2017 AUFNIRA should have been won by 
+
+. As this is in the past we are choosing not to retroactively change the winner (and all tables in this paper reflect the previously published results) but the scripts have been fixed for future iterations of the competition.
 
 \begin{table}
 \caption{Alternative winners if families were not used in computing scores e.g. the 2015 scoring system were used.\label{tab:results:total:solved}}
@@ -1670,6 +1677,32 @@ QF\_LRA  &   &   & Yices2  & SPASS-SATT  \\
 QF\_NIA  &   &   & Yices2  & Yices2  \\
 QF\_BV   &   &   &   & Boolector  \\
 QF\_FP   &   &   &   & CVC4  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%%%%%%%%%%%%%%%%
+\subsection{What Impact Did Adding Unknowns Have?}
+
+In 2017 the Main track ran with benchmarks with unknown status (removing any that had disagreements). An interesting question is to what extent this affected the winners in the Main track. Table~\ref{tab:results:unknowns} gives the alternative winners if these benchmarks had not been included.
+
+
+\begin{table}
+\caption{Alternative winners if benchmarks with unknown status had not bee included in 2017 onwards.\label{tab:results:unknowns}}
+\centering
+\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
+\toprule
+Division                       &  2017                  &  2018                      \\
+\hline\hline
+AUFNIRA & CVC4 & \\
+QF\_NIRA & \nc{Z3} & CVC4 \nc{Z3} \\
+QF\_NRA & \nc{Z3} & \\
+UFDTLIA & CVC4 & \\
+BV & & Boolector \\
+QF\_FP & & CVC4 \nc{Z3} \\
+UFNIA & & CVC4 \\
+NRA & & -/\nc{Z3} \\
+UF & & -/CVC4\\
 \bottomrule
 \end{tabular}
 \end{table}
