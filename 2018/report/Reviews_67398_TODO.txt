@@ -1,25 +1,32 @@
 ﻿(1) TODO: reply that we think that this is out of scope
 -------------------------------------------------------------------------------
-In the CfP it is mentioned that competition reports
-should give a summary of the main technical contributions to the field.
-Are there any worthy new concepts or approaches
-(except for the mentioned additions of new logics)
-that have appeared in SMT-COMP in 2015-2018 and could be mentioned?
+> In the CfP it is mentioned that competition reports should give a
+> summary of the main technical contributions to the field.  Are there
+> any worthy new concepts or approaches (except for the mentioned
+> additions of new logics) that have appeared in SMT-COMP in 2015-2018
+> and could be mentioned?
 
 
-(2) TODO (Tjark): Add scoring schema, description, discussion
+(2)
 -------------------------------------------------------------------------------
-R1:
-In Sect. 4, it is mentioned that a weighted scoring schema was introduced in
-2016, but it is not explained how this weighting is computed.
-This is explained in [29], but please add it to this paper, too
-([29] is just an online PDF, not a publication).
-It would also be good to compare this weighting
-to the weighting used by other competitions, like for example SV-COMP.
-R2:
-the change of the scoring for competition-wise ranking is explained, but to me
-is (partially) in contrast to the (clear) motivations given before for strongly
-penalizing incorrect solvers.
+> In Sect. 4, it is mentioned that a weighted scoring schema was
+> introduced in 2016, but it is not explained how this weighting is
+> computed.  This is explained in [29], but please add it to this
+> paper, too ([29] is just an online PDF, not a publication).  It
+> would also be good to compare this weighting to the weighting used
+> by other competitions, like for example SV-COMP.
+
+We have added a more detailed explanation of benchmark weights to
+Section 4.
+
+> the change of the scoring for competition-wise ranking is explained,
+> but to me is (partially) in contrast to the (clear) motivations
+> given before for strongly penalizing incorrect solvers.
+
+Since the Main track consists of independent divisions, a solver bug
+in one division does not necessarily affect other divisions.  We have
+added a brief explanation to Section 7.2.
+
 
 (3)
 -------------------------------------------------------------------------------
@@ -38,7 +45,7 @@ also in the paper.
 >  Are there any conditions on the license of the tool,
 >  such as allowing to redistribute the tool?
 
-Done.
+Submitters must be tool authors. We have clarified this in Section 6.
 
 (5) TODO (Giles): goes into Section 5 (Infrastructure)
 -------------------------------------------------------------------------------
@@ -261,7 +268,7 @@ Done.
 > for Unsat-core track in 2015 (but the track was not in place) and main track
 > of 2017. A line in the text should suffice
 
-... and Main track of 2018.
+... and also the Main track of 2018.
 
 The time limit is important contextual information to interpret the competition
 results. There is some discussion of it in the text, but we think that the

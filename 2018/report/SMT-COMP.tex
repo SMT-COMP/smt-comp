@@ -625,7 +625,12 @@ similar characteristics).  Since there are vast differences in size
 between benchmark families in the SMT Library, the competition
 since~2016 uses a scoring method that assigns a weight to each
 Main-track benchmark in order to de-emphasize large benchmark
-families~\cite{rules18}.
+families~\cite{rules18}.  A benchmark's weight is computed as $(1 +
+\ln F)/F$, where~$F\geq 1$ is the size of the benchmark's family.  The
+log scaling seems a reasonable compromise between linearly combining
+numbers of benchmarks, which would overemphasize large families, and
+simply averaging the fraction of benchmarks solved, which would
+overemphasize small families.
 
 Another paradigm shift concerns the treatment of benchmarks with
 unknown status.  Because of the difficulty to judge solver responses
@@ -1232,14 +1237,15 @@ A contentious issue with this ranking has been the scoring of
 incorrect solver responses.  In the division rankings, an incorrect
 response causes a solver to be ranked below all correct solvers for
 that division.  But the competition's Main track consists of many
-independent divisions.  To balance the strong interest in correct
-solvers against the risk of stifling innovation, the competition-wide
-ranking was revised in~2017 to use a fixed numeric penalty for each
-division with incorrect responses.  The value of this penalty is
-currently set so that entering a (possibly buggy) solver that can
-solve all benchmarks into a division has a positive expected score if
-the probability that a soundness bug in the solver will be triggered
-is below~$20\,\%$.~\cite{rules18}
+independent divisions.  A solver bug that affects one division need
+not manifest itself in other divisions.  To balance the strong
+interest in correct solvers against the risk of stifling innovation,
+the competition-wide ranking was revised in~2017 to use a fixed
+numeric penalty for each division with incorrect responses.  The value
+of this penalty is currently set so that entering a (possibly buggy)
+solver that can solve all benchmarks into a division has a positive
+expected score if the probability that a soundness bug in the solver
+will be triggered is below~$20\,\%$.~\cite{rules18}
 
 The 2018 edition of the competition was again part of the FLoC Olympic
 Games, which sponsored seven medals.  The competition organizers
