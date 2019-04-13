@@ -353,13 +353,16 @@ description about how to parse this layout. We further now also list the best
 participating competing solver and not only the best participating solver of
 all competing and non-competing solvers per division and year.
 
-(25) TODO reply
+(25)
 -------------------------------------------------------------------------------
 > Pg 19, Tbl 13: This table essentially shows that the parallel score has
 > absolutely no effect on the competition at all. This should perhaps be
 > mentioned in the text, or those scores could be removed altogether.
 
-Done
+We report these scores because they were part of the official
+competition results. We have added some discussion on the use of
+parallelism in Section 8.3.
+
 
 (26) TODO (Giles): reply
 -------------------------------------------------------------------------------
