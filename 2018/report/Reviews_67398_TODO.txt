@@ -25,7 +25,7 @@ Section 4.
 
 Since the Main track consists of independent divisions, a solver bug
 in one division does not necessarily affect other divisions.  We have
-added a brief explanation to Section 7.2.
+added a brief explanation in Section 7.2.
 
 
 (3)
@@ -55,11 +55,16 @@ can everyone download all tools, too
 (in the version that is guaranteed to be the same as in SMT-COMP)?
 Is everything else that is necessary (i.e., tool command lines etc.) archived?
 
-(6) TODO (Tjark): + explanation of how solver versions are counted as solvers
+(6)
 -------------------------------------------------------------------------------
-Is there anything known about why the number of participants
-in the application track is now much smaller compared to 2015,
-although the number of participants in the main track is similar?
+> Is there anything known about why the number of participants in the
+> application track is now much smaller compared to 2015, although the
+> number of participants in the main track is similar?
+
+This is mainly due to multiple experimental versions of the same
+solver, which are counted separately in Table 11. We have added a
+clarifying remark.
+
 
 (7) TODO (Giles):
 -------------------------------------------------------------------------------
