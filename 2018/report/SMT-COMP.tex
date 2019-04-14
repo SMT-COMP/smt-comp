@@ -564,7 +564,16 @@ solvers~\cite{DBLP:conf/cade/Weber16}.
 \section{Competition Divisions and Benchmarks}
 \label{sec:benchmarks}
 
-The SMT Competition consists of several tracks.  The \emph{\maintrack}, which
+The SMT Competition consists of several tracks.  Each track is further split
+into (logic) \emph{divisions}, where each division corresponds to a logic from
+the SMT Library.  As indicated in
+Tables~\ref{table:smtlib}--\ref{table:divisions}, there are slightly fewer
+divisions (Table~\ref{table:divisions}) than logics in the SMT Library
+(Table~\ref{table:smtlib}) because not every logic contains benchmarks eligible
+for the competition.
+
+\paragraph{Tracks.}
+The \emph{\maintrack}, which
 has been a staple of the competition since its
 inception in 2005, features non-incremental benchmarks.  The
 \emph{\apptrack}, which has been part of the competition since
@@ -581,18 +590,16 @@ discontinued partly because of the competition's move to StarExec and
 lacking tool support.  It was re-introduced as an experimental track
 in 2016, and has been a regular competition track again since~2017.
 
-Each track is further split into (logic) \emph{divisions}, where each
-division corresponds to a logic from the SMT Library.
+\paragraph{Divisions.}
 Table~\ref{table:divisions} shows the number of divisions in each
 track since~2015.  Participants can choose which tracks and divisions
 they want to enter, and competition results are reported separately
-for each track and division.  Thus, competing solvers do not need support
-all logics, and may or may not support features such as incrementality
+for each track and division.  Thus, competing solvers do not need to support
+all logics, and may or may not support features such as incremental solving
 or unsat-core generation.
 
-There are slightly fewer divisions than logics in the SMT Library
-(Table~\ref{table:smtlib}) because not every logic contains benchmarks
-eligible for the competition.  Some benchmarks typically have to be
+\paragraph{Eligible Benchmarks.}
+Some benchmarks typically have to be
 excluded for syntactic reasons: in 2015 and 2016, 11,966 benchmarks
 were excluded because they contained partial or underspecified
 operations (e.g., bit-vector division) whose precise semantics were
@@ -622,28 +629,21 @@ language that is not permitted in competition benchmarks), and
   \end{tabular}
 \end{table}
 
+\paragraph{Benchmark Selection.}
 SMT Competitions until~2014 employed a pseudo-random selection process
 to further cull the number of benchmarks used in the competition.
 However, a 2013 evaluation of SMT-COMP and SMT-LIB found that this
 ``significantly lessens the ability of a competition to determine
-`best' solvers.''~\cite{CSW15} Together with the increased
+`best' solvers''~\cite{CSW15}. Together with the increased
 computational resources available to the competition since its move to
 StarExec, this finding prompted a paradigm shift.  Since 2015, the
 competition is evaluating all solvers on all eligible benchmarks.
 This change had an unintended side effect: the pseudo-random selection
 process had been purposely constrained to choose benchmarks from
 different benchmark families (that is, groups of benchmarks with
-similar characteristics).  Since there are vast differences in size
-between benchmark families in the SMT Library, the competition
-since~2016 uses a scoring method that assigns a weight to each
-\maintrack benchmark in order to de-emphasize large benchmark
-families~\cite{rules18}.  A benchmark's weight is computed as $(1 +
-\ln F)/F$, where~$F\geq 1$ is the size of the benchmark's family.  The
-log scaling seems a reasonable compromise between linearly combining
-numbers of benchmarks, which would overemphasize large families, and
-simply averaging the fraction of benchmarks solved, which would
-overemphasize small families.
+similar characteristics).
 
+\paragraph{Benchmarks with Unknown Status.}
 Another paradigm shift concerns the treatment of benchmarks with
 unknown status.  Because of the difficulty to judge solver responses
 for such benchmarks, SMT Competitions until 2015 only used benchmarks
@@ -663,8 +663,7 @@ disagreements are removed from the competition results.  This conservative appro
 In 2016,
 there were disagreements on 79 benchmarks; in 2017, only one benchmark
 was removed; and in 2018, there were no disagreements between
-otherwise sound solvers. 
-
+otherwise sound solvers.
 
 For incremental benchmarks, the situation is different: an incremental
 benchmark is ineligible for the \apptrack if its first {\tt
@@ -682,6 +681,19 @@ were available, and hence the corresponding SMT-LIB logic was not
 actually a competition division in that track and year.  The size of
 divisions varies widely, from just one benchmark in ABVFP to~72,705
 benchmarks in QF\_SLIA.
+
+\subsection{Scoring}
+
+Since there are vast differences in size
+between benchmark families in the SMT Library, the competition
+since~2016 uses a scoring method that assigns a weight to each
+\maintrack benchmark in order to de-emphasize large benchmark
+families~\cite{rules18}.  A benchmark's weight is computed as $(1 +
+\ln F)/F$, where~$F\geq 1$ is the size of the benchmark's family.  The
+log scaling seems a reasonable compromise between linearly combining
+numbers of benchmarks, which would overemphasize large families, and
+simply averaging the fraction of benchmarks solved, which would
+overemphasize small families.
 
 \begin{table}
   \caption{Number of benchmarks used in the \maintrack (by division)}
