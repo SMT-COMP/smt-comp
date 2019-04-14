@@ -146,37 +146,35 @@ Aina:
            caption)
 
 + DONE: Progress plots, VBS over all tracks and time (pair-wise, 2014-2018)
+
++ DONE: Unsat Core Track analysis
 ...............................................................................
 Giles:
 
-+ Tables for Main track with winners for 24s/sat/unsat score
-  -> drop identical rows
-  -> indicate changes (some rows will not change entirely)
-  -> use same scoring per year as for the overall results tables
++ DONE: Tables for Main track with winners for 24s/sat/unsat score
+        -> drop identical rows
+        -> indicate changes (some rows will not change entirely)
+        -> use same scoring per year as for the overall results tables
 
-+ score for  24s
++ DONE: score for  24s
 
-+ scoring scripts for 2016 2017 2018 (new scripts to compute scores)
++ DONE: scoring scripts for 2016 2017 2018 (new scripts to compute scores)
 
-+ do the winners change if we use # solved instances instead of scoring
++ DONE: do the winners change if we use # solved instances instead of scoring
 
 + Z3 discussion
 ...............................................................................
 Tjark:
 
-+ "regret" (in the context of portfolio setting)
-   -> # uniquely solved instances
-   -> determine corresponding numbers for all divisions
++ DONE: "regret" (in the context of portfolio setting)
+        -> # uniquely solved instances
+        -> determine corresponding numbers for all divisions
 
 + include discussion and details about scoring scheme
 
-+ Parallelism:
-  -> numbers for CPU/Wallclock
++ DONE: Parallelism:
+        -> numbers for CPU/Wallclock
 
-...............................................................................
-Matthias:
-
-+ Unsat Core Track analysis
 ...............................................................................
 
 
