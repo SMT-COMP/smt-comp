@@ -6,6 +6,7 @@
 %\usepackage[pdf]{pstricks}
 %\usepackage{pst-tree}
 \usepackage{xspace}
+\usepackage{enumitem}
 
 %\usepackage[numbers,sort&compress]{natbib}
 
@@ -684,16 +685,59 @@ benchmarks in QF\_SLIA.
 
 \subsection{Scoring}
 
-Since there are vast differences in size
-between benchmark families in the SMT Library, the competition
-since~2016 uses a scoring method that assigns a weight to each
-\maintrack benchmark in order to de-emphasize large benchmark
-families~\cite{rules18}.  A benchmark's weight is computed as $(1 +
-\ln F)/F$, where~$F\geq 1$ is the size of the benchmark's family.  The
-log scaling seems a reasonable compromise between linearly combining
-numbers of benchmarks, which would overemphasize large families, and
-simply averaging the fraction of benchmarks solved, which would
-overemphasize small families.
+The \emph{raw benchmark score} of a solver is a quadruple $\langle
+e, n, w, c\rangle$, with
+\begin{itemize}[noitemsep]
+  \item \makebox[5em][l]{$e \in \{0, 1\}$} number of erroneous results (usually~$e = 0$)
+  \item \makebox[5em][l]{$0 \leq n \leq N$} number of correct results (resp.~\emph{reduction} for the \ucoretrack)
+  \item \makebox[5em][l]{$w \in [0,T]$} wall-clock time in seconds (real-valued)
+  \item \makebox[5em][l]{$c \in [0, 4T]$} CPU time in seconds (real-valued)
+\end{itemize}
+\noindent
+For the \maintrack and \apptrack,
+$N$ is defined as the number of {\tt check-sat} commands, and
+$n$ is defined as the number of correct results.
+For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
+and $n$ is defined as the \emph{reduction}, i.e., the difference between $N$
+and the size of the unsat core.
+
+This raw score corresponds to the \emph{raw parallel score} (all values are
+determined for solver performance within the wall-clock time limit).  To
+evaluate sequential performance, we derive a \emph{raw sequential score} by
+imposing a (virtual) CPU time limit equal to the wall-clock time limit~$T$.  A
+solver result is taken into consideration for the sequential score only if the
+solver process terminates within this CPU time limit.
+
+Until 2015, the competition used these raw scores for all tracks to determine
+the division score of a solver as the sum of the scores of all benchmarks in
+that division.
+Fewer errors in a division takes precedence over more correct solutions
+(resp.~reduction), which takes precedence over less wall-clock time taken,
+which takes precedence over less CPU time taken.
+However, since there are vast differences in size between benchmark families in
+the SMT Library, the competition since~2016 uses a scoring method that assigns
+a weight to each benchmark in the \maintrack and \ucoretrack in order to
+de-emphasize large benchmark families~\cite{rules16,rules17,rules18}.
+For application track divisions, division scores were still based on raw scores
+only, since application track benchmarks may be partially solved. Defining a
+useful sequential score for the application track would require information not
+provided by the raw score, e.g., detailed timing information for each result.
+
+\paragraph{Benchmark Weights (\maintrack and \ucoretrack 2016-2018).} The \emph{weight} of a
+benchmark in the main track is computed as $\alpha = (1 + \ln F)/F$,
+where~$F\geq 1$ is the size of the benchmark's family.  We then define its
+\emph{normalized weight} as $\alpha' = \alpha / (\sum_{i\in F} \alpha_i)$,
+where the sum is over all benchmarks in the division.  The log scaling seems a
+reasonable compromise between linearly combining numbers of benchmarks, which
+would overemphasize large families, and simply averaging the fraction of
+benchmarks solved, which would overemphasize small families.
+
+\paragraph{Weighted Division Scores (\maintrack and \ucoretrack 2016-2018).}
+The \emph{(weighted) score} of a solver in a division of the \maintrack and
+\ucoretrack is then defined as the weighted sum of all raw scores $$\sum_{i\in
+F} \alpha'_i \cdot \langle e \cdot N, n \cdot N, w, c\rangle$$ where the sum is
+over all benchmarks in the division to assess parallel performance, and the
+weighted sum of all sequential scores to assess sequential performance.
 
 \begin{table}
   \caption{Number of benchmarks used in the \maintrack (by division)}
