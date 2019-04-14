@@ -1568,7 +1568,34 @@ It is interesting to note that we see some new solvers winning divisions that di
 %%%%%%%%%%%%%%%%%%%%
 \subsection{Very Quick Solutions}
 
-The time limits used in each year are relatively long (20 or 40 minutes) whereas some applications of SMT solvers (e.g. software verification) make use of very short time limits. We ask the question \emph{how would the \maintrack results change if we consider a much shorter time limit of 24 seconds?}\footnote{This time limit was inspired by a conversation with Liana Hadarean as it is a time limit being used in one application of SMT solvers in Amazon.}. We only consider the \maintrack here as this is the setting where short time limits are most likely to be relevant. The results of this analysis are given in Table~\ref{tab:results:24s}. As in the previous, this highlights the different winners under this new scheme only. Here we see STP winning a division for the first time in our analysis (QF\_BV in 2016) and Yices2 performing well.
+Different application domains of SMT typically impose a wide range of time
+limits (from hours to seconds). In domains with very low time limits, these
+limits are, in the incremental case, usually even defined per incremental
+query.  With 20 and 40 minutes, the time limits used in the competition for all
+tracks in all four years were relatively long and the same for all benchmarks,
+thus agnostic to the application domain of a benchmark.  Hence, it is
+interesting to investigate how the results change if we consider a much shorter
+time limit.  Table~\ref{tab:results:24s} shows the results of virtually
+imposing a time limit of 24 seconds\footnote{This time limit is used for the
+new 24 seconds score introduced in SMT-COMP 2019 and was inspired by a use case
+at Amazon.} in the \maintrack.  As in the previous, this highlights the
+different winners under this new scheme only. Here we see STP winning a
+division for the first time in our analysis (QF\_BV in 2016) and Yices2
+performing well.
+
+We only consider the \maintrack here, since for the other two tracks, the
+results are less interesting.  In the \apptrack, for such low time limits we
+are rather interested in a time limit per query, which we are unable to impose
+on the existing data since it is not possible to extract wallclock run time
+information per incremental query from the data of the competitions (as
+mentioned above, StarExec does not record this information).  In the
+\ucoretrack, the main focus is on producing small unsat-cores and solving times
+are of secondary interest.  Additionally, benchmarks with known unsatisfiable
+status from the \maintrack are used, and thus these results are already
+available from the \maintrack analysis in Table~\ref{tab:results:24s}
+(disregarding the fact that enabling unsat core production may slow down a
+solver, depending on the technique).
+
 
 \input{table-winners-main-24s}
 
