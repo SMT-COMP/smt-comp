@@ -1,0 +1,21 @@
+\begin{table}
+  \caption{Alternative best solvers if benchmarks with unknown status had not bee included in 2017 onwards.}
+  \label{tab:results:unknowns}
+  \centering
+    \begin{tabular}{r@{\hskip 1em}>{\columncolor{white}[.25em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][0.5em]}c}
+    \toprule
+    Division &  2017          &  2018                  \\
+    \hline\hline
+    AUFNIRA  & \cc{cvc4} CVC4 &                        \\
+    QF\_NIRA & \nc{Z3}        & \cc{cvc4} CVC4 \nc{Z3} \\
+    QF\_NRA  & \nc{Z3}        &                        \\
+    UFDTLIA  & \cc{cvc4} CVC4 &                        \\
+    BV       &                & \cc{bool} Boolector    \\
+    QF\_FP   &                & \cc{cvc4} CVC4 \nc{Z3} \\
+    UFNIA    &                & \cc{cvc4} CVC4         \\
+    NRA      &                & -/\nc{Z3}              \\
+    UF       &                & -/CVC4                 \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+

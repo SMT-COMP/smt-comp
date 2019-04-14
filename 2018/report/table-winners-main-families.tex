@@ -1,0 +1,20 @@
+\begin{table}
+  \caption{Alternative best solvers in the Main track if families were not considered in computing scores (i.e., the 2015 scoring system were used).}
+  \label{tab:results:total:solved}
+  \centering
+  \begin{tabular}{r@{\hskip 1em}>{\columncolor{white}[.25em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][0.5em]}c}
+    \toprule
+    Division & 2015 &  2016           &  2017                &  2018                  \\
+    \hline\hline
+    AUFNIRA  &      & \cc{cvc4} CVC4  &                      &                        \\
+    UFIDL    &      & \nc{Z3}         &                      &                        \\
+    BV       &      &                 & \cc{bool} Boolector  &                        \\
+    QF\_LRA  &      &                 & \cc{yices} Yices2    & \cc{spass} SPASS-SATT  \\
+    QF\_NIA  &      &                 & \cc{yices} Yices2    & \cc{yices} Yices2      \\
+    QF\_BV   &      &                 &                      & -/Boolector            \\
+    QF\_FP   &      &                 &                      & \cc{cvc4} CVC4         \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+
+

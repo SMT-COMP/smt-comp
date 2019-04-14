@@ -1578,50 +1578,14 @@ Whilst producing these results we noticed that the description of what constitut
 
 . As this is in the past we are choosing not to retroactively change the winner (and all tables in this paper reflect the previously published results) but the scripts have been fixed for future iterations of the competition.
 
-\begin{table}
-\caption{Alternative winners if families were not used in computing scores e.g. the 2015 scoring system were used.\label{tab:results:total:solved}}
-\centering
-\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
-\toprule
-Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
-\hline\hline
-AUFNIRA &   & CVC4  &   &   \\
-UFIDL   &   & \nc{Z3}  &   &   \\
-BV      &   &   & Boolector  &   \\
-QF\_LRA  &   &   & Yices2  & SPASS-SATT  \\
-QF\_NIA  &   &   & Yices2  & Yices2  \\
-QF\_BV   &   &   &   & Boolector  \\
-QF\_FP   &   &   &   & CVC4  \\
-\bottomrule
-\end{tabular}
-\end{table}
-
+\input{table-winners-main-families}
 %%%%%%%%%%%%%%%%%
 \subsection{What Impact Did Adding Unknowns Have?}
 
 In 2017 the Main track ran with benchmarks with unknown status (removing any that had disagreements). An interesting question is to what extent this affected the winners in the Main track. Table~\ref{tab:results:unknowns} gives the alternative winners if these benchmarks had not been included.
 
 
-\begin{table}
-\caption{Alternative winners if benchmarks with unknown status had not bee included in 2017 onwards.\label{tab:results:unknowns}}
-\centering
-\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
-\toprule
-Division                       &  2017                  &  2018                      \\
-\hline\hline
-AUFNIRA & CVC4 & \\
-QF\_NIRA & \nc{Z3} & CVC4 \nc{Z3} \\
-QF\_NRA & \nc{Z3} & \\
-UFDTLIA & CVC4 & \\
-BV & & Boolector \\
-QF\_FP & & CVC4 \nc{Z3} \\
-UFNIA & & CVC4 \\
-NRA & & -/\nc{Z3} \\
-UF & & -/CVC4\\
-\bottomrule
-\end{tabular}
-\end{table}
-
+\input{table-winners-main-unknown}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusions}
