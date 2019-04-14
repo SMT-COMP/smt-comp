@@ -8,7 +8,7 @@
 
 %\usepackage[numbers,sort&compress]{natbib}
 
-%\usepackage{showframe}   % debug
+\usepackage{showframe}   % debug
 
 \usepackage{pifont}
 \usepackage{multirow}
@@ -57,8 +57,11 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 \colorlet{spass}{Lavender!10}
 \colorlet{apr}{PineGreen!10}
 \colorlet{rat}{Goldenrod!10}
-\colorlet{cvc3}{GreenYellow!10}
+\colorlet{cvc3}{Melon!10}
 \colorlet{redl}{Yellow!10}
+\colorlet{alt}{LimeGreen!10}
+\colorlet{verit}{MidnightBlue!10}
+\colorlet{stp}{Fuchsia!10}
 \colorlet{nonc}{black!55}
 
 \newcommand{\cc}[1]{\cellcolor{#1}}
@@ -1553,106 +1556,18 @@ parallelism.
 
 \subsection{Focussing on Satisfiability or Unsatisfiability} 
 
-In the Main-track all divisions contain a mixture of problems that are satisfiable and unsatisfiable. However, some solvers may be specialised or optimised for a particular kind of problem. Therefore, it is interesting to ask whether the winners of divisions might have changed if benchmarks in that division had been restricted to one of these results. Table~\ref{tab:results:sat:unsat} shows the changes in division winners if only satisfiable or unsatisfiable results are given. This table only lists a solver if the winner has changed. A non-competing solver is listed by itself if it now outperforms the winning competitive solver.
+In the Main-track all divisions contain a mixture of problems that are satisfiable and unsatisfiable. However, some solvers may be specialised or optimised for a particular kind of problem. Therefore, it is interesting to ask whether the winners of divisions might have changed if benchmarks in that division had been restricted to one of these results. Tables~\ref{tab:results:sat}-\ref{tab:results::unsat} show the changes in division winners if only satisfiable or unsatisfiable results are given. This table is in reference to Table~\ref{tab:winners-main} and only lists a solver if the result has changed. A non-competing solver is listed by itself if it was not the overall best performing solver of that division but now outperforms the winning competitive solver .
 
 It is interesting to note that we see some new solvers winning divisions that did not win any division in the main results. For example, Alt-Ergo solves the most satisfiable problems in AUFLIA and ALIA in 2018 and SMTInterpol performs very well on unsatisfiable problems in QF\_LIA.
 
-\begin{table}
-\caption{Alternative winners if only Satisfiable (top) or Unsatisfiable (bottom) benchmarks had been considered. These results are in reference to those given in Table~\ref{tab:winners-main}.\label{tab:results:sat:unsat}}
-\centering
-\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
-\toprule
-Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
-\hline \hline
-ALIA    &   &   &   & Alt-Ergo  \\
-AUFLIA  & CVC3  &   &   & Alt-Ergo  \\
-AUFLIRA &   & CVC4  & CVC4  & Alt-Ergo  \\
-AUFNIRA & \nc{Z3}  & CVC4 \nc{Z3}  & CVC4 \nc{Z3}  & \nc{Z3}  \\
-BV      &   & \nc{Z3}  & Boolector  & Boolector  \\
-LRA     &   &   & veriT+Redlog  &   \\
-NIA     & CVC3  &   &   &   \\
-NRA     & CVC3  & CVC4  & CVC4  & CVC4 \nc{Z3}  \\
-QF\_ABV  &   & Yices2  & Yices2  &   \\
-QF\_AUFBV        & Yices  & Yices2  &   & Yices2  \\
-QF\_BV   &   & \nc{Z3}/MinkeyRink  &   &   \\
-QF\_FP   &   &   &   & CVC4  \\
-QF\_LIA  & \nc{Z3}  &   &   &   \\
-QF\_LRA  &   &   & Yices2  & Yices2  \\
-QF\_NIA  &   & SMT-RAT  &   &   \\
-QF\_NIRA &   &   & CVC4  &   \\
-QF\_NRA  &   &   & \nc{Z3}  &   \\
-QF\_UFBV &   &   &   & Yices2  \\
-QF\_UFIDL        & \nc{Z3}  & \nc{Z3}  & \nc{Z3}  & \nc{Z3} veriT  \\
-QF\_UFNIA        & CVC3  &   & CVC4  &   \\
-UF      &   & Vampire  &   & Vampire/-  \\
-UFBV    &   & Boolector  &   &   \\
-UFDTLIA &   &   & CVC4  &   \\
-UFLIA   & \nc{Z3}  &   &   &   \\
-UFLRA   & CVC3  & CVC4  &   &   \\
-UFNIA   &   & CVC4  & CVC4  & CVC4  \\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
-\toprule
-Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
-\hline \hline
-BV      &   & CVC4  &   &   \\
-NIA     &   & CVC4  & Vampire  & Vampire  \\
-QF\_AUFBV        &   &   & CVC4  &   \\
-QF\_AUFNIA       & \nc{Z3}  & \nc{Z3}  &   &   \\
-QF\_BV   &   &   & Boolector  &   \\
-QF\_IDL  & CVC4  &   & \nc{Z3}  & CVC4 \nc{Z3}  \\
-QF\_LIA  & SMTInterpol  & SMTInterpol  & SMTInterpol  & SMTInterpol  \\
-QF\_NIA  & CVC3  &   & Yices2  &   \\
-QF\_NRA  &   &   &   & CVC4  \\
-QF\_UFLIA        &   &   & \nc{Z3}  &   \\
-QF\_UFNRA        &   & CVC4 \nc{Z3}  & CVC4  & CVC4 \nc{Z3}  \\
-UF      &   &   & CVC4  & -/CVC4  \\
-UFIDL   &   & Vampire \nc{Z3}  & \nc{Z3}  &   \\
-UFLRA   &   &   & veriT  & veriT  \\
-\bottomrule
-\end{tabular}
-
-\end{table}
+\input{table-winners-main-sat-unsat}
 
 %%%%%%%%%%%%%%%%%%%%
 \subsection{Very Quick Solutions}
 
 The time limits used in each year are relatively long (20 or 40 minutes) whereas some applications of SMT solvers (e.g. software verification) make use of very short time limits. We ask the question \emph{how would the Main track results change if we consider a much shorter time limit of 24 seconds?}\footnote{This time limit was inspired by a conversation with Liana Hadarean as it is a time limit being used in one application of SMT solvers in Amazon.}. We only consider the Main track here as this is the setting where short time limits are most likely to be relevant. The results of this analysis are given in Table~\ref{tab:results:24s}. As in the previous, this highlights the different winners under this new scheme only. Here we see STP winning a division for the first time in our analysis (QF\_BV in 2016) and Yices2 performing well.
 
-\begin{table}
-\caption{Alternative winners if the time limit had been 24 seconds.\label{tab:results:24s}}
-\centering
-
-\begin{tabular}{r@{\hskip 1em}>{\columncolor[gray]{.95}[.25em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][.5em]}c@{\hskip 1em}>{\columncolor[gray]{.95}[.5em][0.25em]}c}
-\toprule
-Division         &  2015                 &  2016                    &  2017                  &  2018                      \\
-\hline \hline
-AUFLIA  &   & Vampire \nc{Z3}  & veriT  &   \\
-AUFLIRA & CVC3  &   &   & -/Alt-Ergo  \\
-AUFNIRA & \nc{Z3}  &   &   & \nc{Z3}  \\
-BV      &   &   &   & Boolector/Boolector \nc{Z3}  \\
-NRA     &   &   &   & CVC4/CVC4 \nc{Z3}  \\
-QF\_ABV  &   & Yices2  &   &   \\
-QF\_ANIA &   & \nc{Z3}  & \nc{Z3}  &   \\
-QF\_BV   & CVC4  & STP \nc{Z3}  & Boolector+CaDiCaL/-  & Boolector  \\
-QF\_LIA  & Yices  & Yices2  & Yices2  &   \\
-QF\_LRA  & Yices  & Yices2  & Yices2  & Yices2  \\
-QF\_NIA  &   &   & Yices2  & Yices2  \\
-QF\_NIRA &   &   & Yices2 \nc{Z3}  & Yices2 \nc{Z3}  \\
-QF\_NRA  &   &   & \nc{Z3}  &   \\
-QF\_UF   & veriT  & veriT  &   &   \\
-QF\_UFNRA        &   & CVC4 \nc{Z3}  & CVC4  & \nc{Z3}  \\
-UF      &   & Vampire  &   &  Vampire/- \\
-UFBV    &   & Boolector  &   &   \\
-UFIDL   &   & Vampire \nc{Z3}  & \nc{Z3}  &   \\
-UFLIA   &   &   &   & \nc{Z3}  \\
-UFLRA   &   &   & veriT  & veriT  \\
-UFNIA   & \nc{Z3}  &   &   & CVC4/\nc{Z3}  \\
-\bottomrule
-\end{tabular}
-\end{table}
+\input{table-winners-main-24s}
 
 %%%%%%%%%%%%%%%%%
 \subsection{Do Families Matter?}

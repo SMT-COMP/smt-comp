@@ -1,0 +1,34 @@
+\begin{table}
+  \caption{Alternative best solvers in the Main track if the time limit had been 24 seconds.}
+  \label{tab:results:24s}
+  \centering
+
+  \begin{tabular}{r@{\hskip 1em}>{\columncolor{white}[.25em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][0.5em]}c}
+    \toprule
+    Division   &  2015             &  2016                      &  2017                     &  2018                                  \\
+    \hline \hline
+    AUFLIA     &                   & \cc{vamp} Vampire \nc{Z3}  & \cc{verit} veriT          &                                        \\
+    AUFLIRA    & \cc{cvc3} CVC3    &                            &                           & -/Alt-Ergo                             \\
+    AUFNIRA    & \nonc \nc{Z3}     &                            &                           & \nc{Z3}                                \\
+    BV         &                   &                            &                           & \cc{bool} Boolector/Boolector \nc{Z3}  \\
+    NRA        &                   &                            &                           & \cc{cvc4} CVC4/CVC4 \nc{Z3}            \\
+    QF\_ABV    &                   & \cc{yices} Yices2          &                           &                                        \\
+    QF\_ANIA   &                   & \nonc \nc{Z3}              & \nonc \nc{Z3}             &                                        \\
+    QF\_BV     & \cc{cvc4} CVC4    & \cc{stp} STP \nc{Z3}       &                           & -/Boolector                            \\
+    QF\_LIA    & \cc{yices} Yices2 & \cc{yices} Yices2          & \cc{yices} Yices2         &                                        \\
+    QF\_LRA    & \cc{yices} Yices2 & \cc{yices} Yices2          & \cc{yices} Yices2         & \cc{yices} Yices2                      \\
+    QF\_NIA    &                   &                            & \cc{yices} Yices2         & \cc{yices} Yices2                      \\
+    QF\_NIRA   &                   &                            & \cc{yices} Yices2 \nc{Z3} & \cc{yices} Yices2 \nc{Z3}              \\
+    QF\_NRA    &                   &                            & \nc{Z3}                   &                                        \\
+    QF\_UF     & \cc{verit} veriT  & \cc{verit} veriT           &                           &                                        \\
+    QF\_UFNRA  &                   & \cc{cvc4} CVC4 \nc{Z3}     & \cc{cvc4} CVC4            & \nc{Z3}                                \\
+    UF         &                   & \cc{vamp} Vampire          &                           &  \cc{vamp} Vampire/-                   \\
+    UFBV       &                   & \cc{bool} Boolector        &                           &                                        \\
+    UFIDL      &                   & \cc{vamp} Vampire \nc{Z3}  & \nc{Z3}                   &                                        \\
+    UFLIA      &                   &                            &                           & \nc{Z3}                                \\
+    UFLRA      &                   &                            & \cc{verit} veriT          & \cc{verit} veriT                       \\
+    UFNIA      & \nonc \nc{Z3}     &                            &                           & \cc{cvc4} CVC4/\nc{Z3}                 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
