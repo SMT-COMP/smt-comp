@@ -29,6 +29,9 @@ keywordstyle=\bfseries\sffamily,
 keywordstyle={[2]\bfseries\sffamily\underbar}
 }
 
+\newcommand{\rem}[1]{\textcolor{red}{[#1]}}
+\newcommand{\todo}[1]{\rem{TODO #1}}
+
 %\input epsf
 \special{papersize=8.5in,11in}
 
@@ -1564,11 +1567,36 @@ parallelism.
   \end{tabular}
 \end{table}
 
-\subsection{Focussing on Satisfiability or Unsatisfiability} 
+\subsection{Focussing on Satisfiability or Unsatisfiability}
 
-In the \maintrack all divisions contain a mixture of problems that are satisfiable and unsatisfiable. However, some solvers may be specialised or optimised for a particular kind of problem. Therefore, it is interesting to ask whether the winners of divisions might have changed if benchmarks in that division had been restricted to one of these results. Tables~\ref{tab:results:sat}-\ref{tab:results::unsat} show the changes in division winners if only satisfiable or unsatisfiable results are given. This table is in reference to Table~\ref{tab:winners-main} and only lists a solver if the result has changed. A non-competing solver is listed by itself if it was not the overall best performing solver of that division but now outperforms the winning competitive solver .
-
+In many cases, an SMT application produces either mainly satisfiable or mainly
+unsatisfiable queries to the SMT solver.  A typical example is model checking,
+where a query is only satisfiable if a property of the model does not hold.  As
+a consequence, some solvers may implement specialized techniques and
+optimizations for the more frequent (the expected) case.
+%
+Therefore, it is interesting to ask whether the winners of divisions of a track
+might have changed if benchmarks in that division had been restricted to one of
+these results.  Tables~\ref{tab:results:sat}-\ref{tab:results:unsat} show the
+changes in division winners if only satisfiable or unsatisfiable results are
+given. This table is in reference to Table~\ref{tab:winners-main} and only
+lists a solver if the result has changed. A non-competing solver is listed by
+itself if it was not the overall best performing solver of that division but
+now outperforms the winning competitive solver, and the winning competing
+solver did not change.
 It is interesting to note that we see some new solvers winning divisions that did not win any division in the main results. For example, Alt-Ergo solves the most satisfiable problems in AUFLIA and ALIA in 2018, and SMTInterpol performs very well on unsatisfiable problems in QF\_LIA.
+
+
+We only consider the \maintrack here, which contains a mixture of problems that
+are satisfiable and unsatisfiable.
+\todo{give numbers in percent for years or refer to table where the numbers should be: {table:benchmarks-main-track}}
+For the \apptrack, this analysis is less meaningful since a benchmarks usually
+contains a multitude of both satisfiable and unsatisfiable incremental queries
+(which may depend on each other).
+For the \ucoretrack, only known unsatisfiable benchmarks from the \maintrack
+are used, which renders this analysis useless for this track.
+
+
 
 \input{table-winners-main-sat-unsat}
 
