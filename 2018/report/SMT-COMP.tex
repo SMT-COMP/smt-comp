@@ -739,6 +739,37 @@ F} \alpha'_i \cdot \langle e \cdot N, n \cdot N, w, c\rangle$$ where the sum is
 over all benchmarks in the division to assess parallel performance, and the
 weighted sum of all sequential scores to assess sequential performance.
 
+\paragraph{Competition-Wide Score (\maintrack).}
+A competition-wide metric for the main track, separately for
+parallel and sequential performance, was defined as follows.
+
+Let $N_i$ be the total number of benchmarks in division~$i$ that were used in the
+competition (and not removed because of disagreements), and let $\langle e_i, n_i, w_i, c_i\rangle$ be a solver's
+raw score for this division.
+%
+In 2015 and 2016,
+the \emph{competition-wide raw score} for a solver was defined as
+%
+$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -e_i) \log N_i$,
+%
+where the sum is over all competitive
+divisions into which the solver was
+entered.
+%
+In 2017, the (per-division) penalty for erroneous results was changed from the
+number of errors to a fixed constant, since the weight already takes the number
+of benchmarks in the division into account, and multiplying it by the number of
+errors overemphasizes large divisions.
+In 2017 and 2018,
+the \emph{competition-wide raw score} for a solver was thus defined as
+%
+$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$,
+%
+where the sum is over all competitive divisions into which the solver
+was entered.
+
+
+
 \begin{table}
   \caption{Number of benchmarks used in the \maintrack (by division)}
   \label{table:benchmarks-main-track}
