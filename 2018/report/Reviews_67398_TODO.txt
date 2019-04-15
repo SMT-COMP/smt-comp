@@ -6,6 +6,9 @@
 > additions of new logics) that have appeared in SMT-COMP in 2015-2018
 > and could be mentioned?
 
+We believe that attempting to systematically summarise the scientific contributions that led to the results seen in the competition would require an extensive input from all tool developers involved and is out of scope of this report.
+
+We have added more extensive analysis of the results and commented on perceived trends.
 
 (2)
 -------------------------------------------------------------------------------
@@ -68,10 +71,12 @@ solver, which are counted separately in Table 11. We have added a
 clarifying remark.
 
 
-(7) TODO (Giles):
+(7) 
 -------------------------------------------------------------------------------
 Are produced unsat cores checked for whether they are actually unsat cores,
 i.e., unsatisfiable and a subset of the input problem?
+
+Yes, unsat cores are validated by other solvers. This is clarified.
 
 (8)
 -------------------------------------------------------------------------------

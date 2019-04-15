@@ -696,6 +696,8 @@ e, n, w, c\rangle$, with
   \item \makebox[5em][l]{$c \in [0, 4T]$} CPU time in seconds (real-valued)
 \end{itemize}
 \noindent
+For the \maintrack and \apptrack, $e$ is the number of returned statuses that disagree with the given expected status (as described above, disagreements on benchmarks with unknown status lead to the benchmark being disregarded). For the \ucoretrack, $e$ includes, in addition, the number of returned unsat cores that are ill-formed or are not, in fact, unsatisfiable (as validated by a selection of other solvers selected by organizers).
+
 For the \maintrack and \apptrack,
 $N$ is defined as the number of {\tt check-sat} commands, and
 $n$ is defined as the number of correct results.
