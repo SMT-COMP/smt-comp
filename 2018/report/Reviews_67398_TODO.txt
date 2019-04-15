@@ -47,13 +47,15 @@ also in the paper.
 
 Submitters must be tool authors. We have clarified this in Section 6.
 
-(5) TODO (Giles): goes into Section 5 (Infrastructure) : DONE
+(5)
 -------------------------------------------------------------------------------
-To which extend is SMT-COMP reproducible?
-The SMT Library is available for everyone,
-can everyone download all tools, too
-(in the version that is guaranteed to be the same as in SMT-COMP)?
-Is everything else that is necessary (i.e., tool command lines etc.) archived?
+> To which extend is SMT-COMP reproducible?
+> The SMT Library is available for everyone,
+> can everyone download all tools, too
+> (in the version that is guaranteed to be the same as in SMT-COMP)?
+> Is everything else that is necessary (i.e., tool command lines etc.) archived?
+
+Done.
 
 (6)
 -------------------------------------------------------------------------------
@@ -88,13 +90,15 @@ of SMT-LIB benchmarks by file size).
 
 Done.
 
-(10) TODO (Giles): DONE
+(10)
 -------------------------------------------------------------------------------
-In the fifth paragraph of Sect. 4, the term "otherwise sound solvers" is used
-but not precisely defined.
-Does this refer to solvers that do not produce wrong answers
-for benchmarks with a known status?
-Please clarify in the paper.
+> In the fifth paragraph of Sect. 4, the term "otherwise sound solvers" is used
+> but not precisely defined.
+> Does this refer to solvers that do not produce wrong answers
+> for benchmarks with a known status?
+> Please clarify in the paper.
+
+Done.
 
 
 (11) TODO: Relate some of the core decision items and how SMT-COMP is organized
@@ -136,7 +140,7 @@ again on Sec 4, it is not clear whether the central part (first paragraph of pg
 this part should be extended.
 
 
-(13) TODO: Analysis section
+(13)
 -------------------------------------------------------------------------------
 Aina:
 
@@ -183,23 +187,27 @@ Tjark:
 ...............................................................................
 
 
-(14) TODO: Analysis discussion
+(14)
 -------------------------------------------------------------------------------
-I think that a detailed analysis should be instead one of a main aim of a
-competition report (and independently from the fact that this is an immediate
-mandate or not of the organizers), going beyond overall results and raw
-numbers, by explaining e.g. what techniques have worked well on what
-logics/division, in order to support a more deep understanding of what's is
-going on in SMT solving.
+> I think that a detailed analysis should be instead one of a main aim of a
+> competition report (and independently from the fact that this is an immediate
+> mandate or not of the organizers), going beyond overall results and raw
+> numbers, by explaining e.g. what techniques have worked well on what
+> logics/division, in order to support a more deep understanding of what's is
+> going on in SMT solving.
+
+Done (see TODO 13).
 
 
-(15) TODO (Giles) : DONE
+(15)
 -------------------------------------------------------------------------------
-"Benchmarks with disagreement are removed". What is about n-1 solvers give one
-response, and only one give another? Is not there a sort of "majority" outputs
-or the possibility to check responses? (for some logics there should be). If I
-understand correctly, the risk is of, instead of assigning a wrong answer to a
-solver,  removing the benchmark "ignoring" the issue.
+> "Benchmarks with disagreement are removed". What is about n-1 solvers give one
+> response, and only one give another? Is not there a sort of "majority" outputs
+> or the possibility to check responses? (for some logics there should be). If I
+> understand correctly, the risk is of, instead of assigning a wrong answer to a
+> solver,  removing the benchmark "ignoring" the issue.
+
+Done.
 
 (16)
 -------------------------------------------------------------------------------
@@ -210,14 +218,16 @@ offers a reference to the rules (which contain full details, including
 the precise formula used).
 
 
-(17) TODO (Giles) : DONE
+(17)
 -------------------------------------------------------------------------------
-From the global results (Table 13) I can see that in 2015, 2016 and 2017 the
-overall winner would have been Z3, running hors concourse. Perhaps, it is a
-solver not tuned for the (benchmarks of the) competition.
-In my opinion this questions about the significance of the results and the
-awards of the competition, given that the overall best solver is a
-non-participant non-tuned solver.
+> From the global results (Table 13) I can see that in 2015, 2016 and 2017 the
+> overall winner would have been Z3, running hors concourse. Perhaps, it is a
+> solver not tuned for the (benchmarks of the) competition.
+> In my opinion this questions about the significance of the results and the
+> awards of the competition, given that the overall best solver is a
+> non-participant non-tuned solver.
+
+Done.
 
 
 (17)
@@ -283,7 +293,7 @@ results. There is some discussion of it in the text, but we think that the
 table is more accessible, and that this justifies the relatively small amount
 of additional space needed.
 
-(19) TODO (Aina): Minor
+(19)
 -------------------------------------------------------------------------------
 Section 7:
 . "(because response ... are not recorded by StarExec)". Please clarify
