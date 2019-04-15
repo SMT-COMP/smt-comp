@@ -7,12 +7,12 @@
 > and could be mentioned?
 
 We believe that attempting to systematically summarise the scientific
-contributions that led to the results seen in the competition would require an
-extensive input from all tool developers involved and is out of scope of this
-report.
+contributions that led to the results seen in the competition would
+require an extensive input from all tool developers involved and is
+out of scope of this report.
 
-We have added more extensive analysis of the results and commented on perceived
-trends.
+We have added more extensive analysis of the results and commented on
+perceived trends.
 
 (2)
 -------------------------------------------------------------------------------
@@ -34,11 +34,10 @@ Since the Main track consists of independent divisions, a solver bug
 in one division does not necessarily affect other divisions.  We have
 added a brief explanation in Section 7.2.
 
-
 (3)
 -------------------------------------------------------------------------------
-> It is not defined what a "competitive" division is, please explain the rules
-> for this.
+> It is not defined what a "competitive" division is, please explain
+> the rules for this.
 
 A division is "competitive" if at least two substantially different solvers
 (i.e., solvers from two different teams) were submitted. We now explain this
@@ -46,21 +45,20 @@ also in the paper.
 
 (4)
 -------------------------------------------------------------------------------
->  What are the requirements that a submission to SMT-COMP has to fulfill?
->  For example, can anybody submit a tool,
->  or do they need to be a developer of the tool?
->  Are there any conditions on the license of the tool,
->  such as allowing to redistribute the tool?
+>  What are the requirements that a submission to SMT-COMP has to
+>  fulfill?  For example, can anybody submit a tool, or do they need
+>  to be a developer of the tool?  Are there any conditions on the
+>  license of the tool, such as allowing to redistribute the tool?
 
 Submitters must be tool authors. We have clarified this in Section 6.
 
 (5)
 -------------------------------------------------------------------------------
-> To which extend is SMT-COMP reproducible?
-> The SMT Library is available for everyone,
-> can everyone download all tools, too
-> (in the version that is guaranteed to be the same as in SMT-COMP)?
-> Is everything else that is necessary (i.e., tool command lines etc.) archived?
+> To which extend is SMT-COMP reproducible?  The SMT Library is
+> available for everyone, can everyone download all tools, too (in the
+> version that is guaranteed to be the same as in SMT-COMP)?  Is
+> everything else that is necessary (i.e., tool command lines etc.)
+> archived?
 
 Done.
 
@@ -74,93 +72,75 @@ This is mainly due to multiple experimental versions of the same
 solver, which are counted separately in Table 11. We have added a
 clarifying remark.
 
-
 (7) 
 -------------------------------------------------------------------------------
-Are produced unsat cores checked for whether they are actually unsat cores,
-i.e., unsatisfiable and a subset of the input problem?
+> Are produced unsat cores checked for whether they are actually unsat
+> cores, i.e., unsatisfiable and a subset of the input problem?
 
 Yes, unsat cores are validated by other solvers. This is clarified.
 
 (8)
 -------------------------------------------------------------------------------
-> The labels of the x-axis of Fig. 2 would be easier to read for humans if they
-> would be written like "100 B - 1 kB" or something similar.  Maybe there is
-> also a way to keep the current labels and add some intuitive markers for the
-> ranges of kB, MB, GB?
+> The labels of the x-axis of Fig. 2 would be easier to read for
+> humans if they would be written like "100 B - 1 kB" or something
+> similar.  Maybe there is also a way to keep the current labels and
+> add some intuitive markers for the ranges of kB, MB, GB?
 
 Following another reviewer's suggestion, we have removed Figure 2 (Distribution
 of SMT-LIB benchmarks by file size).
 
 (9)
 -------------------------------------------------------------------------------
-> In the third paragraph of Sect. 4, there should be no line break between "8"
-> and "benchmarks".
+> In the third paragraph of Sect. 4, there should be no line break
+> between "8" and "benchmarks".
 
 Done.
 
 (10)
 -------------------------------------------------------------------------------
-> In the fifth paragraph of Sect. 4, the term "otherwise sound solvers" is used
-> but not precisely defined.
-> Does this refer to solvers that do not produce wrong answers
-> for benchmarks with a known status?
-> Please clarify in the paper.
+> In the fifth paragraph of Sect. 4, the term "otherwise sound
+> solvers" is used but not precisely defined.  Does this refer to
+> solvers that do not produce wrong answers for benchmarks with a
+> known status?  Please clarify in the paper.
 
 Done.
 
-
-(11) TODO: Relate some of the core decision items and how SMT-COMP is organized
-           to other competitions.
+(11)
+-------------------------------------------------------------------------------
+> Relate some of the core decision items and how SMT-COMP is organized
+> to other competitions.
 
 Added a short reflection to the introduction.
 
--------------------------------------------------------------------------------
-R1:
-Section 2 is basically only about organization, and to goals is devoted the
-first paragraph only. Please consider to rename. More in general to the
-section, the vast majority focuses on explaining the timeline and reasons for
-having deadline for milestones in the organization, that are basic rules and
-motivations when organizing such an event. So, I would avoid this information,
-and either deleting the section or significantly shrinking it.
-R3:
-Sec 1&2&3: I believe these two sections are completely unnecessary. They are
-not specific to the 2015-2018 time frame and the same information in greater
-detail is found elsewhere. This paper is really for readers that already know
-SMT; those that don't, would be served much better by references to the
-respective standards/tutorials/websites. The numbers in Sec 3 are somewhat
-interesting (as a record), but they are really more about SMT-LIB than
-SMT-COMP.
-
-> Fig 2: The file size of benchmark problems is really only very vaguely
-> interesting, as it is not in any relation with the complexity of the
-> problems. Perhaps a scatter-plot that relates file size and average solver
-> run-time (perhaps one for each competition year) would provide a better view
-> of the complexity of SMT problems.
+> Fig 2: The file size of benchmark problems is really only very
+> vaguely interesting, as it is not in any relation with the
+> complexity of the problems. Perhaps a scatter-plot that relates file
+> size and average solver run-time (perhaps one for each competition
+> year) would provide a better view of the complexity of SMT problems.
 
 We have removed Figure 2 (Distribution of SMT-LIB benchmarks by file size).
 
 (12) 
 -------------------------------------------------------------------------------
-first part of Section 4 refers to years earlier than 2015. Given the focus of
-the paper, I ll not mention this
+> first part of Section 4 refers to years earlier than 2015. Given the
+> focus of the paper, I ll not mention this
 
-We believe that these brief mentions are relevant to give the broader context of the competition. The focus of the paper remains the years stated.
+We believe that these brief mentions are relevant to give the broader
+context of the competition. The focus of the paper remains the years
+stated.
 
 (13)
 -------------------------------------------------------------------------------
-> again on Sec 4, it is not clear whether the central part (first paragraph of
-> pg 7) reports about some sort of benchmarks classification. If this is the
-> case, this part should be extended.
+> again on Sec 4, it is not clear whether the central part (first
+> paragraph of pg 7) reports about some sort of benchmarks
+> classification. If this is the case, this part should be extended.
 
 As mentioned in Section 3, the SMT Library classifies benchmarks according to
 the specific combination of background theories used into logics. No further
 classification of benchmarks is performed for the competition.
 
-(13)
+(14)
 -------------------------------------------------------------------------------
-Aina:
-
 + DONE: Fix representation of results tables
         -> one entry per division and year,
         -> empty cell for "didn't exist" and "-" for "no participants"
@@ -174,23 +154,19 @@ Aina:
 + DONE: Progress plots, VBS over all tracks and time (pair-wise, 2014-2018)
 
 + DONE: Unsat Core Track analysis
-...............................................................................
-Giles:
 
 + DONE: Tables for Main track with winners for 24s/sat/unsat score
         -> drop identical rows
         -> indicate changes (some rows will not change entirely)
         -> use same scoring per year as for the overall results tables
 
-+ DONE: score for  24s
++ DONE: score for 24s
 
 + DONE: scoring scripts for 2016 2017 2018 (new scripts to compute scores)
 
 + DONE: do the winners change if we use # solved instances instead of scoring
 
 + Z3 discussion
-...............................................................................
-Tjark:
 
 + DONE: "regret" (in the context of portfolio setting)
         -> # uniquely solved instances
@@ -201,32 +177,29 @@ Tjark:
 + DONE: Parallelism:
         -> numbers for CPU/Wallclock
 
-...............................................................................
-
-
-(14)
--------------------------------------------------------------------------------
-> I think that a detailed analysis should be instead one of a main aim of a
-> competition report (and independently from the fact that this is an immediate
-> mandate or not of the organizers), going beyond overall results and raw
-> numbers, by explaining e.g. what techniques have worked well on what
-> logics/division, in order to support a more deep understanding of what's is
-> going on in SMT solving.
-
-Done (see TODO 13).
-
-
 (15)
 -------------------------------------------------------------------------------
-> "Benchmarks with disagreement are removed". What is about n-1 solvers give one
-> response, and only one give another? Is not there a sort of "majority" outputs
-> or the possibility to check responses? (for some logics there should be). If I
-> understand correctly, the risk is of, instead of assigning a wrong answer to a
-> solver,  removing the benchmark "ignoring" the issue.
+> I think that a detailed analysis should be instead one of a main aim
+> of a competition report (and independently from the fact that this
+> is an immediate mandate or not of the organizers), going beyond
+> overall results and raw numbers, by explaining e.g. what techniques
+> have worked well on what logics/division, in order to support a more
+> deep understanding of what's is going on in SMT solving.
 
-Done.
+Done (see TODO 14).
 
 (16)
+-------------------------------------------------------------------------------
+> "Benchmarks with disagreement are removed". What is about n-1
+> solvers give one response, and only one give another? Is not there a
+> sort of "majority" outputs or the possibility to check responses?
+> (for some logics there should be). If I understand correctly, the
+> risk is of, instead of assigning a wrong answer to a solver,
+> removing the benchmark "ignoring" the issue.
+
+We have added an explanation why we do not use majority vote.
+
+(17)
 -------------------------------------------------------------------------------
 > what is the "competition-wide" ranking? please explain.
 
@@ -234,36 +207,35 @@ We have added a brief explanation to Section 7.2, which now also
 offers a reference to the rules (which contain full details, including
 the precise formula used).
 
-
-(17)
--------------------------------------------------------------------------------
-> From the global results (Table 13) I can see that in 2015, 2016 and 2017 the
-> overall winner would have been Z3, running hors concourse. Perhaps, it is a
-> solver not tuned for the (benchmarks of the) competition.
-> In my opinion this questions about the significance of the results and the
-> awards of the competition, given that the overall best solver is a
-> non-participant non-tuned solver.
-
-Done.
-
-
-(17)
--------------------------------------------------------------------------------
-> * Authors list: In case, the information about the involvement of authors
-> should be put in the main text
-
-We have de-emphasized author roles by typesetting them in normal (non-bold)
-font. We think that this information is most naturally presented together with
-other author data (such as affiliation and e-mail address).
-
 (18)
+-------------------------------------------------------------------------------
+> From the global results (Table 13) I can see that in 2015, 2016 and
+> 2017 the overall winner would have been Z3, running hors
+> concourse. Perhaps, it is a solver not tuned for the (benchmarks of
+> the) competition.  In my opinion this questions about the
+> significance of the results and the awards of the competition, given
+> that the overall best solver is a non-participant non-tuned solver.
+
+We have added a discussion of this point.
+
+(19)
+-------------------------------------------------------------------------------
+> * Authors list: In case, the information about the involvement of
+> authors should be put in the main text
+
+We have de-emphasized author roles by typesetting them in normal
+(non-bold) font. We think that this information is most naturally
+presented together with other author data (such as affiliation and
+e-mail address).
+
+(20)
 -------------------------------------------------------------------------------
 > * Abstract: "FLoC Olympiad" -> "FLoC Olympic Games" as stated by FLoC?
 
 An "Olympiad" is the period of four years between two Olympic Games. The term
 is used with this meaning in the abstract.
 
-(19)
+(21)
 -------------------------------------------------------------------------------
 > Introduction:
 > . "among others" -> ", among others"
@@ -296,7 +268,7 @@ Done.
 
 Done.
 
-(19)
+(22)
 -------------------------------------------------------------------------------
 > Section 5:
 > is Table 6 needed? Basically all time limits have been of 40 min, other than
@@ -310,7 +282,7 @@ results. There is some discussion of it in the text, but we think that the
 table is more accessible, and that this justifies the relatively small amount
 of additional space needed.
 
-(19)
+(23)
 -------------------------------------------------------------------------------
 Section 7:
 . "(because response ... are not recorded by StarExec)". Please clarify
@@ -328,7 +300,7 @@ Done.
 > . "and last but not least" -> "and, last but not least,"
 Done.
 
-(19)
+(24)
 -------------------------------------------------------------------------------
 > References: Some work has to be done in order to have the references uniform,
 >             e.g.
@@ -336,17 +308,16 @@ Done.
 > ... " vs. "..., Proceedings," (see, e.g. [4] vs. [5])
 > (ii) reference [7] is incomplete
 
-Done
+Done.
 
-
-(20)
+(25)
 -------------------------------------------------------------------------------
 > Sec 5: "Since 2014 (and ... 2013)": Unclear why 2013 is singled out.
 
 2013 is singled out because there was no competition in that year, but
 only an evaluation (of SMT-COMP and SMT-LIB).
 
-(21)
+(26)
 -------------------------------------------------------------------------------
 > Tbls 3/4: These tables could go into an appendix; they are really just for
 > the archive, they don't add much to the reader's experience.
@@ -354,16 +325,16 @@ only an evaluation (of SMT-COMP and SMT-LIB).
 We agree that these tables contain information that should be archived. Hence,
 they cannot be relegated to an (unpublished) appendix.
 
-(22)
+(27)
 -------------------------------------------------------------------------------
 > Pg 11, Pg 21: "By these measures ... one of largest competition in automated
 > reasoning": These statements are really unnecessary, especially if they are not
 > backed up by data or references. Also, the "measures" in the two occurrences of
 > this sentence are not the same!
 
-Done
+Done.
 
-(23)
+(28)
 -------------------------------------------------------------------------------
 > Pg 13/Tbl 7: I think listing the names of the solver submitters for each
 > participating solver is a bit awkward. This paper, as a record of the
@@ -376,7 +347,7 @@ We agree and updated the table accordingly to the best of our knowledge. Note
 that this increased the table size significantly, thus the information is now
 split over 3 tables.
 
-(24)
+(29)
 -------------------------------------------------------------------------------
 > Pg 16/Tbl 10: I find this very hard to read; I think it would be better not to
 > use multi-column cells. For instance, just repeating the solver name in every
@@ -388,7 +359,7 @@ description about how to parse this layout. We further now also list the best
 participating competing solver and not only the best participating solver of
 all competing and non-competing solvers per division and year.
 
-(25)
+(30)
 -------------------------------------------------------------------------------
 > Pg 19, Tbl 13: This table essentially shows that the parallel score has
 > absolutely no effect on the competition at all. This should perhaps be
@@ -398,8 +369,7 @@ We report these scores because they were part of the official
 competition results. We have added some discussion on the use of
 parallelism in Section 8.3.
 
-
-(26) 
+(31) 
 -------------------------------------------------------------------------------
 > Pg 7, Pg 21: The fact that the trace executor doesn't support "unknown"
 > annotations in the incremental track is mentioned twice. This seems a
@@ -408,14 +378,17 @@ parallelism in Section 8.3.
 > must be much harder than I imagine for this issue to persist over the last 4
 > years, i.e. this needs to be explained much more thorough.
 
+As the trace executor interacts with the solvers to feed them with
+incremental problems, if it is extended to no longer terminate on the
+first "unknown" annotation, it would be necessary to rerun all
+job-pairs as all current job-pairs terminate on the first “unknown”
+annotation. We felt that rerunning job-pairs to provide further data
+is outside the scope of this report.
 
-As the trace executor interacts with the solvers to feed them with incremental problems, if it is extended to no longer terminate on the first “unknown” annotation it would be necessary to rerun all job-pairs as all current job-pairs terminate on the first “unknown” annotation. We felt that rerunning job-pairs to provide further data is outside the scope of this report. 
-
-
-(26)
+(32)
 -------------------------------------------------------------------------------
-> Sec 8: This section is really a combined conclusion over the previous years,
-> and an outlook to and recommendation for the next competition - perhaps this
-> section could be split to emphasize that.
+> Sec 8: This section is really a combined conclusion over the
+> previous years, and an outlook to and recommendation for the next
+> competition - perhaps this section could be split to emphasize that.
 
 Done.
