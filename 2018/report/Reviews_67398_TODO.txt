@@ -1,4 +1,4 @@
-(1) TODO: reply that we think that this is out of scope
+(1)
 -------------------------------------------------------------------------------
 > In the CfP it is mentioned that competition reports should give a
 > summary of the main technical contributions to the field.  Are there
@@ -6,9 +6,13 @@
 > additions of new logics) that have appeared in SMT-COMP in 2015-2018
 > and could be mentioned?
 
-We believe that attempting to systematically summarise the scientific contributions that led to the results seen in the competition would require an extensive input from all tool developers involved and is out of scope of this report.
+We believe that attempting to systematically summarise the scientific
+contributions that led to the results seen in the competition would require an
+extensive input from all tool developers involved and is out of scope of this
+report.
 
-We have added more extensive analysis of the results and commented on perceived trends.
+We have added more extensive analysis of the results and commented on perceived
+trends.
 
 (2)
 -------------------------------------------------------------------------------
@@ -138,12 +142,15 @@ We have removed Figure 2 (Distribution of SMT-LIB benchmarks by file size).
 first part of Section 4 refers to years earlier than 2015. Given the focus of
 the paper, I ll not mention this
 
-(13) TODO: reply that as mentioned above SMT-LIB classifies the benchmarks
+(13)
 -------------------------------------------------------------------------------
-again on Sec 4, it is not clear whether the central part (first paragraph of pg
-7) reports about some sort of benchmarks classification. If this is the case,
-this part should be extended.
+> again on Sec 4, it is not clear whether the central part (first paragraph of
+> pg 7) reports about some sort of benchmarks classification. If this is the
+> case, this part should be extended.
 
+As mentioned in Section 3, the SMT Library classifies benchmarks according to
+the specific combination of background theories used into logics. No further
+classification of benchmarks is performed for the competition.
 
 (13)
 -------------------------------------------------------------------------------
