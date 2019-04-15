@@ -1794,16 +1794,26 @@ participants and benchmarks each year, to determine time limits that
 will allow the computational workload to complete before the SMT
 Workshop.
 
-Further development of the competition should be undertaken with care,
-keeping in mind that major changes require not just the competition
-organizers, but also participants to adapt.  Immediate action items
-for next year's organizers are
+\paragraph{The Next Competition}
+
+Preparations for the 2019 iteration of the competition are underway and a number of changes have already been decided. These include
+
 \begin{itemize}
-\item the inclusion of {\tt check-sat} commands with unknown status in
-  the \apptrack, and
-\item the definition of competition-wide rankings for the \apptrack 
-  and \ucoretrack.
-\end{itemize}
+	\item the inclusion of {\tt check-sat} commands with unknown status in
+  the \apptrack, 
+  	\item the removal of non-competitive divisions and the filtering of benchmarks to exclude those seen as \emph{trivial} (taken as those solved by all competitors in the previous competition in less than 1 second)  
+  	\item the introduction of a new experimental \emph{model validation track} with a single QF\_BV division where the models produced by solvers are checked,
+	\item the introduction of a new \emph{industrial challenge track} consisting of unsolved benchmarks submitted specifically for the track, and
+	\item the removal of the notion of competition-wide scoring.
+\end{itemize}  	
+
+
+
+\paragraph{The Future}
+
+Looking to the future of the competition, it is clear that further development should be undertaken with care,
+keeping in mind that major changes require not just the competition
+organizers, but also participants to adapt.  
 
 For the inclusion of new tracks or divisions, a two-phase approach has
 proven successful.  A new division is first declared
