@@ -112,6 +112,9 @@ Done.
 
 (11) TODO: Relate some of the core decision items and how SMT-COMP is organized
            to other competitions.
+
+Added a short reflection to the introduction.
+
 -------------------------------------------------------------------------------
 R1:
 Section 2 is basically only about organization, and to goals is devoted the
@@ -137,10 +140,12 @@ SMT-COMP.
 
 We have removed Figure 2 (Distribution of SMT-LIB benchmarks by file size).
 
-(12) TODO: won't fix
+(12) 
 -------------------------------------------------------------------------------
 first part of Section 4 refers to years earlier than 2015. Given the focus of
 the paper, I ll not mention this
+
+We believe that these brief mentions are relevant to give the broader context of the competition. The focus of the paper remains the years stated.
 
 (13)
 -------------------------------------------------------------------------------
@@ -394,14 +399,18 @@ competition results. We have added some discussion on the use of
 parallelism in Section 8.3.
 
 
-(26) TODO (Giles): reply
+(26) 
 -------------------------------------------------------------------------------
-Pg 7, Pg 21: The fact that the trace executor doesn't support "unknown"
-annotations in the incremental track is mentioned twice. This seems a
-completely trivial issue to resolve (by simply implementing it), and the data
-can easily be re-analyzed without re-running the solvers. Clearly, something
-must be much harder than I imagine for this issue to persist over the last 4
-years, i.e. this needs to be explained much more thorough.
+> Pg 7, Pg 21: The fact that the trace executor doesn't support "unknown"
+> annotations in the incremental track is mentioned twice. This seems a
+> completely trivial issue to resolve (by simply implementing it), and the data
+> can easily be re-analyzed without re-running the solvers. Clearly, something
+> must be much harder than I imagine for this issue to persist over the last 4
+> years, i.e. this needs to be explained much more thorough.
+
+
+As the trace executor interacts with the solvers to feed them with incremental problems, if it is extended to no longer terminate on the first “unknown” annotation it would be necessary to rerun all job-pairs as all current job-pairs terminate on the first “unknown” annotation. We felt that rerunning job-pairs to provide further data is outside the scope of this report. 
+
 
 (26) TODO (Giles, Aina): Give outlook for 2019
 -------------------------------------------------------------------------------
