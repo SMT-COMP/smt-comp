@@ -412,8 +412,10 @@ parallelism in Section 8.3.
 As the trace executor interacts with the solvers to feed them with incremental problems, if it is extended to no longer terminate on the first “unknown” annotation it would be necessary to rerun all job-pairs as all current job-pairs terminate on the first “unknown” annotation. We felt that rerunning job-pairs to provide further data is outside the scope of this report. 
 
 
-(26) TODO (Giles, Aina): Give outlook for 2019
+(26)
 -------------------------------------------------------------------------------
-Sec 8: This section is really a combined conclusion over the previous years,
-and an outlook to and recommendation for the next competition - perhaps this
-section could be split to emphasize that.
+> Sec 8: This section is really a combined conclusion over the previous years,
+> and an outlook to and recommendation for the next competition - perhaps this
+> section could be split to emphasize that.
+
+Done.
