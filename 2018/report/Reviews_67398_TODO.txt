@@ -16,8 +16,8 @@
 > would also be good to compare this weighting to the weighting used
 > by other competitions, like for example SV-COMP.
 
-We have added a more detailed explanation of benchmark weights to
-Section 4.
+We have added a more detailed explanation of benchmark weights and the scoring
+scheme used in the competition to Section 4.
 
 > the change of the scoring for competition-wise ranking is explained,
 > but to me is (partially) in contrast to the (clear) motivations
