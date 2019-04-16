@@ -244,7 +244,26 @@ The principal changes from the previous competition rules are the following: \to
     \challtrack, 12 hours seem to be a reasonable compromise for the
     expected number of participants and benchmarks submitted to this track.}
 
-  \item {\bf Benchmark Selection.} \todo{}
+  \item {\bf Benchmark Selection.} Since 2015, the competition evaluated all
+    solvers on all eligible benchmarks in SMT-LIB.  This year, we will use an
+    alternative benchmark selection scheme that selects a subset of the
+    eligible benchmarks. The upper bound for the size of each division,
+    however, is not fixed, but depends on the size of the corresponding logic.
+    Prior to this selection, we will remove all benchmarks in a division that
+    were solved by all solvers (including non-competing solvers) in this
+    division in under a second during last year's competition.
+    \rationale{Evaluating solvers on all eligible benchmarks in SMT-LIB makes
+    results more predictable and seems to be more of an evaluation than a
+    competition.  In the Main track of last year's competition, 78\% of the 258,741
+    benchmarks were solved by all supported solvers within the time
+    limit (71\% within 1 second). In 7 (out of 46) logics, over 99\% of
+    benchmarks were solved by all solvers.  Removing `easy' (or at least
+    `unsurprising') benchmarks attempts to shift the focus towards challenging
+    benchmarks, in particular since we now use an alternative benchmark
+    selection scheme.  It can be argued that the size of a logic in SMT-LIB can
+    be seen as an indicator of its relevance.  We thus do not use a fixed upper
+    bound for the size of a division in order to reflect the suggested
+    importance of a division.}
 
   \item {\bf Scoring Scheme.} \todo{}
 
