@@ -202,7 +202,7 @@ The principal changes from the previous competition rules are the following: \to
     executor, which now has been extended to support executing solvers on
     benchmarks beyond \akey{check-sat} commands with unknown status.}
 
-  \item {\bf New \mvaltrack.}
+  \item {\bf New \mvaltrack for QF\_BV.}
     This year, we introduce a new experimental \mvaltrack for logic QF\_BV.
     The benchmarks for this track will include all eligible \emph{non-incremental}
     QF\_BV benchmarks with known satisfiable status in SMT-LIB.
@@ -217,7 +217,20 @@ The principal changes from the previous competition rules are the following: \to
     division was the one with the largest number of participants in previous
     years,  we hope for a high number of participants in this track.  }
 
-  \item {\bf New \challtrack.} \todo{}
+  \item {\bf New \challtrack.}
+    This year, we further introduce a new \challtrack.  This track will contain
+    new challenging SMT-LIB benchmarks (with an emphasis on industrial
+    applications) that are either unsolved or unsolved within some reasonable
+    time limit, as indicated by the benchmark submitters.  We will also include
+    benchmarks nominated by the community as challenging and of interest. In
+    this track, solvers will run with a significantly longer time limit.
+    \rationale{ Different application domains require different time limits.
+    For example software verification traditionally requires much lower time
+    limits, compared to hardware verification.  To reward solvers optimized for
+    different use cases, we propose this new track and a new score for
+    benchmarks solved within a very low time limit (see item ``New Scores in
+    the \maintrack'').  }
+    \todo{how do we provide information about which benchmarks and which logics?}
 
   \item {\bf Time Limit.} The time limit per solver/benchmark pair is
     anticipated to be at most 40 minutes in the \maintrack (previously: Main
@@ -387,6 +400,8 @@ Workshop.
 
 \todo{Giles: Add text about the fact that we will use the competition website to include links to tools, announce results etc... including archiving}
 %
+
+\header{Tools} \todo{link to scrambler, trace executor, benchmark selection script, postprocessors}
 
 \header{Input and output.}
 %
