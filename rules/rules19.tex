@@ -659,10 +659,9 @@ These partitions are referred to as \emph{families}.
 
 \header{Benchmark selection.} \todo{Antti covers this section}
 %
-The competition will use a large subset of SMT-LIB benchmarks.  The
-benchmark pool is culled as follows:
-\todo{add information about how benchmarks are selected for the \mvaltrack,
-\challtrack, \ucoretrack, and the 24s, sat and unsat scores}
+The competition will use a large subset of SMT-LIB benchmarks.  In all
+tracks the following process will be used for culling the benchmark
+pool.
 \begin{enumerate}
 \item \emph{Remove inappropriate benchmarks.} The competition
   organizers may remove benchmarks that are deemed inappropriate or
@@ -670,22 +669,28 @@ benchmark pool is culled as follows:
   families to avoid their over-representation.  SMT-COMP attempts to
   give preference to benchmarks that are ``real-world,'' in the sense
   of coming from or having some intended application outside SMT.
-\item \todo{\emph{Remove benchmarks solved by all solvers within 1s in the previous year}}
+\item \emph{Remove easy benchmarks.} The competition organizers will
+  remove all benchmarks that were solved by all solvers (including the
+  non-competitive solvers) in the 2018 SMT competition.
+\item \emph{Cap the number of instances in a division.} The competition
+  organizers will limit the number of benchmarks in a division as
+  follows:
+  \begin{enumerate}
+  \item If a division contains less than 300 instances, all
+        the instances will selected.
+  \item If a division contains between 300 and 600 instances, a
+        random selection of 300 instances from the set will be used.
+  \item If a division contains more than 600 instances, 50\% of
+        the benchmarks will be randomly selected.
+  \end{enumerate}
+\item \emph{\ucoretrack{}.} In addition, for the \ucoretrack{}, all
+  benchmarks with a single assertion will be removed.
 \end{enumerate}
 %
-\todo{update with the new benchmark selection rules}
-All remaining benchmarks are used for the competition.  There will be
-no further selection of benchmarks, e.g., based on benchmark
-difficulty or benchmark category.
+The culling script will be publicly available and use the same random
+seed as the rest of the competition, and the set of benchmarks selected
+for the competition will be published when the competition begins.
 
-The set of benchmarks selected for the competition will be published
-when the competition begins.
-
-\todo{add information about how benchmarks are selected for the \mvaltrack,
-\challtrack, \ucoretrack, and the 24s, sat and unsat scores -- either here
-or below}
-
-\todo{For Unsatcore remove all benchmarks with a single assertion, otherwise use same procedure as last year... check what that was}
 
 \header{Heats.}
 %
