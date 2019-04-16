@@ -254,8 +254,8 @@ The principal changes from the previous competition rules are the following: \to
     division in under a second during last year's competition.
     \rationale{Evaluating solvers on all eligible benchmarks in SMT-LIB makes
     results more predictable and seems to be more of an evaluation than a
-    competition.  In the Main track of last year's competition, 78\% of the 258,741
-    benchmarks were solved by all supported solvers within the time
+    competition.  In the Main track of last year's competition, 78\% of the
+    258,741 benchmarks were solved by all supported solvers within the time
     limit (71\% within 1 second). In 7 (out of 46) logics, over 99\% of
     benchmarks were solved by all solvers.  Removing `easy' (or at least
     `unsurprising') benchmarks attempts to shift the focus towards challenging
@@ -265,7 +265,26 @@ The principal changes from the previous competition rules are the following: \to
     bound for the size of a division in order to reflect the suggested
     importance of a division.}
 
-  \item {\bf Scoring Scheme.} \todo{}
+  \item {\bf Scoring Scheme.}
+    This year, we will abandon the weighted scoring scheme that was introduced
+    for the Main Track and \ucoretrack in 2016. We will fall back to the
+    scoring scheme based on the number of solved instances that was last used
+    in 2015.
+    \rationale{ Since 2016, the competition has used a scoring scheme based on
+    benchmark weights in order to de-emphasize large benchmark families.  The
+    scoring scheme is fairly complicated and not necessarily intuitive.  It
+    further makes comparing results in papers with results from the competition
+    more difficult.  A recent analysis of competition data from 2015-2018 for a
+    report on the competition of these years (currently under submission to
+    JSAT) suggests that benchmark families do not have a significant impact on
+    the (weighted) scores.  When determining winners for each division using
+    the scoring scheme of 2015, the winners for only 7 divisions (out of 139)
+    over all three years would have changed.  While producing these results we
+    further noticed that the description of what constitutes a benchmark family
+    (as stated in the rules documents) had been incorrectly interpreted by the
+    scoring scripts in 2016-2018. After fixing this misinterpretation, only one
+    single division winner changes - in 2017 AUFNIRA should have been won by
+    CVC4 and not Vampire.}
 
   \item {\bf New Scores in the \maintrack.}
     This year, additionally to the separate scores given for sequential and
