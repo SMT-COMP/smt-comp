@@ -233,9 +233,9 @@ The principal changes from the previous competition rules are the following: \to
     \todo{how do we provide information about which benchmarks and which logics?}
 
   \item {\bf Time Limit.} The time limit per solver/benchmark pair is
-    anticipated to be at most 40 minutes in the \maintrack (previously: Main
-    Track), \inctrack, \ucoretrack and \mvaltrack.  For the \challtrack, it is
-    anticipated to be at most 720 (12 hours) minutes.
+    anticipated to be at most 40 minutes in the \maintrack, \inctrack,
+    \ucoretrack and \mvaltrack.  For the \challtrack, it is anticipated to be
+    at most 720 (12 hours) minutes.
     \rationale{In 2017 and 2018, the time limit for the Main Track was
     reduced to 20 minutes (down from 40 minutes in earlier years) to cope with
     the inclusion of a large number of benchmarks with unknown status.  This
@@ -248,7 +248,22 @@ The principal changes from the previous competition rules are the following: \to
 
   \item {\bf Scoring Scheme.} \todo{}
 
-  \item {\bf New Scores in the \maintrack.} \todo{24 seconds, sat, unsat}
+  \item {\bf New Scores in the \maintrack.}
+    This year, additionally to the separate scores given for sequential and
+    parallel performance, we will reward three new scores in the \maintrack.
+    The \emph{24-second score} will reward solving performance within a time
+    limit of 24 seconds (wall clock time), the \emph{sat score} will reward
+    performance on satisfiable instances, and the \emph{unsat score} will
+    reward performance on unsatisfiable instances.
+    \rationale{ Different application domains of SMT typically impose a wide
+    range of time limits (from hours to seconds).  Previous time limits used in
+    the competition were the same for all benchmarks and thus agnostic to the
+    application domain of a benchmark.  The new \challtrack and the new
+    24-second score try to address use cases on both extreme ends of the
+    spectrum.  Further, in many cases an SMT application produces either mainly
+    satisfiable or mainly unsatisfiable queries to the SMT solver.  The new sat
+    and unsat scores are intended to reward solvers that implement specialized
+    techniques and optimizations for either case.}
 
   \item {\bf Do Not Run Non-Competitive Divisions.} \todo{}
 
