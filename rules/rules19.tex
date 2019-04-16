@@ -10,7 +10,8 @@
 
 \hyphenation{data-types}
 
-\newcommand{\akey}[1]{\textbf{#1}}
+\newcommand{\akey}[1]{\texttt{#1}}
+
 \newcommand{\rem}[1]{\textcolor{red}{[#1]}}
 \newcommand{\todo}[1]{\rem{TODO #1}}
 \newcommand{\an}[1]{\rem{#1 -- aina}}
@@ -23,6 +24,8 @@
 \newcommand{\ucoretrack}{Unsat Core Track\xspace}
 \newcommand{\mvaltrack}{Model Validation Track\xspace}
 \newcommand{\challtrack}{Industry Challenge Track\xspace}
+
+\newcommand{\rationale}[1]{\hskip .5em{\textit{Rationale:} #1}\xspace}
 
 \let\OLDthebibliography\thebibliography
 \renewcommand\thebibliography[1]{
@@ -124,6 +127,7 @@ competition web site, \url{http://www.smtcomp.org}.
 
 \section{Introduction}
 
+\todo{does this paragraph need rewriting?}
 The annual Satisfiability Modulo Theories Competition~(SMT-COMP) is
 held to spur advances in SMT solver implementations on benchmark
 formulas of practical interest.  Public competitions are a well-known
@@ -168,23 +172,24 @@ version,\footnote{Earlier versions of this document include
 SMT-COMP~2019.
 The principal changes from the previous competition rules are the following: \todo{Aina in charge of this section}
 \begin{itemize}
-  \item {\it Mandatory System Descriptions.}
+  \item {\bf Mandatory System Descriptions.}
     SMT-COMP entrants are now required to provide a short (1–2 pages)
-    description of the system.  \emph{Rationale:} The main incentive for this
+    description of the system.
+    \rationale{The main incentive for this
     change is twofold.  First, we want to improve transparency when submitted
     solvers are wrapper tools according to the rules of the competition.
     Second, we want to encourage documentation of technical improvements that
-    lead to the current results.
+    lead to the current results.}
 
-  \item {\it Renaming of Tracks.} This year, the track previously known as
+  \item {\bf Renaming of Tracks.} This year, the track previously known as
     `Main Track` will be renamed to \emph{\maintrack}, and the previous
     `Application Track' will be renamed to \emph{\inctrack}.
-    \emph{Rationale:} We believe the current names are misleading, as the
+    \rationale{We believe the current names are misleading, as the
     previous `Main Track' also contains problems coming from applications.
     Additionally, having it called `Main' de-emphasizes the importance of the
-    other tracks and use cases of SMT.
+    other tracks and use cases of SMT.}
 
-  \item {\it Incremental Track.}
+  \item {\bf Incremental Track.}
     In previous years, benchmarks were not eligible for the \inctrack
     if their first \akey{check-sat} command had unknown status.  Similarly, the
     trace executor used to send commands from the benchmark to the solver's
@@ -193,45 +198,45 @@ The principal changes from the previous competition rules are the following: \to
     \akey{check-sat} command has unknown status are eligible for the
     \inctrack and trace execution is only stopped before the solver
     completes a benchmark if the execution runs into the time limit.
-    \emph{Rationale:} The previous limitations were imposed by the trace
+    \rationale{The previous limitations were imposed by the trace
     executor, which now has been extended to support executing solvers on
-    benchmarks beyond \akey{check-sat} commands with unknown status.
+    benchmarks beyond \akey{check-sat} commands with unknown status.}
 
-  \item {\it New \mvaltrack.} \todo{}
+  \item {\bf New \mvaltrack.} \todo{}
 
-  \item {\it New \challtrack.} \todo{}
-.
-  \item {\it Time Limit.} The time limit per solver/benchmark pair is
-    anticipated to be at most 40 minutes in the \maintrack (previously: Main Track),
-    \inctrack, \ucoretrack and \mvaltrack.  For the
-    \challtrack, it is anticipated to be at most 720 (12 hours) minutes.
-    \emph{Rationale:} In 2017 and 2018, the time limit for the Main Track was
+  \item {\bf New \challtrack.} \todo{}
+
+  \item {\bf Time Limit.} The time limit per solver/benchmark pair is
+    anticipated to be at most 40 minutes in the \maintrack (previously: Main
+    Track), \inctrack, \ucoretrack and \mvaltrack.  For the \challtrack, it is
+    anticipated to be at most 720 (12 hours) minutes.
+    \rationale{In 2017 and 2018, the time limit for the Main Track was
     reduced to 20 minutes (down from 40 minutes in earlier years) to cope with
     the inclusion of a large number of benchmarks with unknown status.  This
     year, the reduced number of benchmarks selected per division allows us to
     increase the time limit back to 40 minutes for the \maintrack.  For the
     \challtrack, 12 hours seem to be a reasonable compromise for the
-    expected number of participants and benchmarks submitted to this track.
+    expected number of participants and benchmarks submitted to this track.}
 
-  \item {\it Benchmark Selection.} \todo{}
+  \item {\bf Benchmark Selection.} \todo{}
 
-  \item {\it Scoring Scheme.} \todo{}
+  \item {\bf Scoring Scheme.} \todo{}
 
-  \item {\it New Scores in the \maintrack.} \todo{24 seconds, sat, unsat}
+  \item {\bf New Scores in the \maintrack.} \todo{24 seconds, sat, unsat}
 
-  \item {\it Do Not Run Non-Competitive Divisions.} \todo{}
+  \item {\bf Do Not Run Non-Competitive Divisions.} \todo{}
 
-  \item {\it Experimental Strings Division.}
+  \item {\bf Experimental Strings Division.}
     \todo{point to the current draft of the standard as the set of rules
     solvers have to agree on}
-    The competition will feature an experimental divisions for
-  benchmarks that use strings.  \emph{Rationale:} Corresponding
-  theories and benchmarks are expected to be added to SMT-LIB in the
-  near future.
+    The competition will feature an experimental divisions for benchmarks that
+    use strings.
+    \rationale{Corresponding theories and benchmarks are expected to be added
+    to SMT-LIB in the near future.}
 
-  \item {\it Competition-Wide Scores/Winners.} \todo{}
+  \item {\bf Competition-Wide Scores/Winners.} \todo{}
 
-  \item {\it Problems with Evaluation Scripts.} \todo{Explain what was the
+  \item {\bf Problems with Evaluation Scripts.} \todo{Explain what was the
     problem and what has been fixed, talk about notion of benchmark family.}
 
 \end{itemize}
