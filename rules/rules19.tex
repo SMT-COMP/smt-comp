@@ -202,7 +202,20 @@ The principal changes from the previous competition rules are the following: \to
     executor, which now has been extended to support executing solvers on
     benchmarks beyond \akey{check-sat} commands with unknown status.}
 
-  \item {\bf New \mvaltrack.} \todo{}
+  \item {\bf New \mvaltrack.}
+    This year, we introduce a new experimental \mvaltrack for logic QF\_BV.
+    The benchmarks for this track will include all eligible \emph{non-incremental}
+    QF\_BV benchmarks with known satisfiable status in SMT-LIB.
+    Participating solvers are required to support the \akey{get-model} command.
+    \rationale{In many SMT applications, model generation is an essential
+    feature.  Previously, none of the SMT-COMP tracks required model
+    generation. One of the challenges is that the model format is not
+    consistent across different solvers. While imposing a standard over all
+    logics is challenging, there are several logics (e.g., QF\_BV) where it is
+    straightforward.  In the future we hope to expand this track to other
+    logics as a way of pushing for model standardization.  Since the QF\_BV
+    division was the one with the largest number of participants in previous
+    years,  we hope for a high number of participants in this track.  }
 
   \item {\bf New \challtrack.} \todo{}
 
