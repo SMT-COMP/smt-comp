@@ -10,7 +10,8 @@
 
 \hyphenation{data-types}
 
-\newcommand{\akey}[1]{\textbf{#1}}
+\newcommand{\akey}[1]{\texttt{#1}}
+
 \newcommand{\rem}[1]{\textcolor{red}{[#1]}}
 \newcommand{\todo}[1]{\rem{TODO #1}}
 \newcommand{\an}[1]{\rem{#1 -- aina}}
@@ -23,6 +24,8 @@
 \newcommand{\ucoretrack}{Unsat Core Track\xspace}
 \newcommand{\mvaltrack}{Model Validation Track\xspace}
 \newcommand{\challtrack}{Industry Challenge Track\xspace}
+
+\newcommand{\rationale}[1]{\hskip .5em{\textit{Rationale:} #1}\xspace}
 
 \let\OLDthebibliography\thebibliography
 \renewcommand\thebibliography[1]{
@@ -124,6 +127,7 @@ competition web site, \url{http://www.smtcomp.org}.
 
 \section{Introduction}
 
+\todo{does this paragraph need rewriting?}
 The annual Satisfiability Modulo Theories Competition~(SMT-COMP) is
 held to spur advances in SMT solver implementations on benchmark
 formulas of practical interest.  Public competitions are a well-known
@@ -168,23 +172,24 @@ version,\footnote{Earlier versions of this document include
 SMT-COMP~2019.
 The principal changes from the previous competition rules are the following: \todo{Aina in charge of this section}
 \begin{itemize}
-  \item {\it Mandatory System Descriptions.}
+  \item {\bf Mandatory System Descriptions.}
     SMT-COMP entrants are now required to provide a short (1–2 pages)
-    description of the system.  \emph{Rationale:} The main incentive for this
+    description of the system.
+    \rationale{The main incentive for this
     change is twofold.  First, we want to improve transparency when submitted
     solvers are wrapper tools according to the rules of the competition.
     Second, we want to encourage documentation of technical improvements that
-    lead to the current results.
+    lead to the current results.}
 
-  \item {\it Renaming of Tracks.} This year, the track previously known as
+  \item {\bf Renaming of Tracks.} This year, the track previously known as
     `Main Track` will be renamed to \emph{\maintrack}, and the previous
     `Application Track' will be renamed to \emph{\inctrack}.
-    \emph{Rationale:} We believe the current names are misleading, as the
+    \rationale{We believe the current names are misleading, as the
     previous `Main Track' also contains problems coming from applications.
     Additionally, having it called `Main' de-emphasizes the importance of the
-    other tracks and use cases of SMT.
+    other tracks and use cases of SMT.}
 
-  \item {\it Incremental Track.}
+  \item {\bf Incremental Track.}
     In previous years, benchmarks were not eligible for the \inctrack
     if their first \akey{check-sat} command had unknown status.  Similarly, the
     trace executor used to send commands from the benchmark to the solver's
@@ -193,45 +198,124 @@ The principal changes from the previous competition rules are the following: \to
     \akey{check-sat} command has unknown status are eligible for the
     \inctrack and trace execution is only stopped before the solver
     completes a benchmark if the execution runs into the time limit.
-    \emph{Rationale:} The previous limitations were imposed by the trace
+    \rationale{The previous limitations were imposed by the trace
     executor, which now has been extended to support executing solvers on
-    benchmarks beyond \akey{check-sat} commands with unknown status.
+    benchmarks beyond \akey{check-sat} commands with unknown status.}
 
-  \item {\it New \mvaltrack.} \todo{}
+  \item {\bf New \mvaltrack for QF\_BV.}
+    This year, we introduce a new experimental \mvaltrack for logic QF\_BV.
+    The benchmarks for this track will include all eligible \emph{non-incremental}
+    QF\_BV benchmarks with known satisfiable status in SMT-LIB.
+    Participating solvers are required to support the \akey{get-model} command.
+    \rationale{In many SMT applications, model generation is an essential
+    feature.  Previously, none of the SMT-COMP tracks required model
+    generation. One of the challenges is that the model format is not
+    consistent across different solvers. While imposing a standard over all
+    logics is challenging, there are several logics (e.g., QF\_BV) where it is
+    straightforward.  In the future we hope to expand this track to other
+    logics as a way of pushing for model standardization.  Since the QF\_BV
+    division was the one with the largest number of participants in previous
+    years,  we hope for a high number of participants in this track.  }
 
-  \item {\it New \challtrack.} \todo{}
-.
-  \item {\it Time Limit.} The time limit per solver/benchmark pair is
-    anticipated to be at most 40 minutes in the \maintrack (previously: Main Track),
-    \inctrack, \ucoretrack and \mvaltrack.  For the
-    \challtrack, it is anticipated to be at most 720 (12 hours) minutes.
-    \emph{Rationale:} In 2017 and 2018, the time limit for the Main Track was
+  \item {\bf New \challtrack.}
+    This year, we further introduce a new \challtrack.  This track will contain
+    new challenging SMT-LIB benchmarks (with an emphasis on industrial
+    applications) that are either unsolved or unsolved within some reasonable
+    time limit, as indicated by the benchmark submitters.  We will also include
+    benchmarks nominated by the community as challenging and of interest. In
+    this track, solvers will run with a significantly longer time limit.
+    \rationale{ Different application domains require different time limits.
+    For example software verification traditionally requires much lower time
+    limits, compared to hardware verification.  To reward solvers optimized for
+    different use cases, we propose this new track and a new score for
+    benchmarks solved within a very low time limit (see item ``New Scores in
+    the \maintrack'').  }
+    \todo{how do we provide information about which benchmarks and which logics?}
+
+  \item {\bf Time Limit.} The time limit per solver/benchmark pair is
+    anticipated to be at most 40 minutes in the \maintrack, \inctrack,
+    \ucoretrack and \mvaltrack.  For the \challtrack, it is anticipated to be
+    at most 720 (12 hours) minutes.
+    \rationale{In 2017 and 2018, the time limit for the Main Track was
     reduced to 20 minutes (down from 40 minutes in earlier years) to cope with
     the inclusion of a large number of benchmarks with unknown status.  This
     year, the reduced number of benchmarks selected per division allows us to
     increase the time limit back to 40 minutes for the \maintrack.  For the
     \challtrack, 12 hours seem to be a reasonable compromise for the
-    expected number of participants and benchmarks submitted to this track.
+    expected number of participants and benchmarks submitted to this track.}
 
-  \item {\it Benchmark Selection.} \todo{}
+  \item {\bf Benchmark Selection.} Since 2015, the competition evaluated all
+    solvers on all eligible benchmarks in SMT-LIB.  This year, we will use an
+    alternative benchmark selection scheme that selects a subset of the
+    eligible benchmarks. The upper bound for the size of each division,
+    however, is not fixed, but depends on the size of the corresponding logic.
+    Prior to this selection, we will remove all benchmarks in a division that
+    were solved by all solvers (including non-competing solvers) in this
+    division in under a second during last year's competition.
+    \rationale{Evaluating solvers on all eligible benchmarks in SMT-LIB makes
+    results more predictable and seems to be more of an evaluation than a
+    competition.  In the Main track of last year's competition, 78\% of the
+    258,741 benchmarks were solved by all supported solvers within the time
+    limit (71\% within 1 second). In 7 (out of 46) logics, over 99\% of
+    benchmarks were solved by all solvers.  Removing `easy' (or at least
+    `unsurprising') benchmarks attempts to shift the focus towards challenging
+    benchmarks, in particular since we now use an alternative benchmark
+    selection scheme.  It can be argued that the size of a logic in SMT-LIB can
+    be seen as an indicator of its relevance.  We thus do not use a fixed upper
+    bound for the size of a division in order to reflect the suggested
+    importance of a division.}
 
-  \item {\it Scoring Scheme.} \todo{}
+  \item {\bf Scoring Scheme.}
+    This year, we will abandon the weighted scoring scheme that was introduced
+    for the Main Track and \ucoretrack in 2016. We will fall back to the
+    scoring scheme based on the number of solved instances that was last used
+    in 2015.
+    \rationale{ Since 2016, the competition has used a scoring scheme based on
+    benchmark weights in order to de-emphasize large benchmark families.  The
+    scoring scheme is fairly complicated and not necessarily intuitive.  It
+    further makes comparing results in papers with results from the competition
+    more difficult.  A recent analysis of competition data from 2015-2018 for a
+    report on the competition of these years (currently under submission to
+    JSAT) suggests that benchmark families do not have a significant impact on
+    the (weighted) scores.  When determining winners for each division using
+    the scoring scheme of 2015, the winners for only 7 divisions (out of 139)
+    over all three years would have changed.  While producing these results we
+    further noticed that the description of what constitutes a benchmark family
+    (as stated in the rules documents) had been incorrectly interpreted by the
+    scoring scripts in 2016-2018. After fixing this misinterpretation, only one
+    single division winner changes - in 2017 AUFNIRA should have been won by
+    CVC4 and not Vampire.}
 
-  \item {\it New Scores in the \maintrack.} \todo{24 seconds, sat, unsat}
+  \item {\bf New Scores in the \maintrack.}
+    This year, additionally to the separate scores given for sequential and
+    parallel performance, we will reward three new scores in the \maintrack.
+    The \emph{24-second score} will reward solving performance within a time
+    limit of 24 seconds (wall clock time), the \emph{sat score} will reward
+    performance on satisfiable instances, and the \emph{unsat score} will
+    reward performance on unsatisfiable instances.
+    \rationale{ Different application domains of SMT typically impose a wide
+    range of time limits (from hours to seconds).  Previous time limits used in
+    the competition were the same for all benchmarks and thus agnostic to the
+    application domain of a benchmark.  The new \challtrack and the new
+    24-second score try to address use cases on both extreme ends of the
+    spectrum.  Further, in many cases an SMT application produces either mainly
+    satisfiable or mainly unsatisfiable queries to the SMT solver.  The new sat
+    and unsat scores are intended to reward solvers that implement specialized
+    techniques and optimizations for either case.}
 
-  \item {\it Do Not Run Non-Competitive Divisions.} \todo{}
+  \item {\bf Do Not Run Non-Competitive Divisions.} \todo{}
 
-  \item {\it Experimental Strings Division.}
+  \item {\bf Experimental Strings Division.}
     \todo{point to the current draft of the standard as the set of rules
     solvers have to agree on}
-    The competition will feature an experimental divisions for
-  benchmarks that use strings.  \emph{Rationale:} Corresponding
-  theories and benchmarks are expected to be added to SMT-LIB in the
-  near future.
+    The competition will feature an experimental divisions for benchmarks that
+    use strings.
+    \rationale{Corresponding theories and benchmarks are expected to be added
+    to SMT-LIB in the near future.}
 
-  \item {\it Competition-Wide Scores/Winners.} \todo{}
+  \item {\bf Competition-Wide Scores/Winners.} \todo{}
 
-  \item {\it Problems with Evaluation Scripts.} \todo{Explain what was the
+  \item {\bf Problems with Evaluation Scripts.} \todo{Explain what was the
     problem and what has been fixed, talk about notion of benchmark family.}
 
 \end{itemize}
@@ -369,6 +453,8 @@ Workshop.
 
 \todo{Giles: Add text about the fact that we will use the competition website to include links to tools, announce results etc... including archiving}
 %
+
+\header{Tools} \todo{link to scrambler, trace executor, benchmark selection script, postprocessors}
 
 \header{Input and output.}
 %
@@ -1068,11 +1154,11 @@ is providing essential StarExec support.
 Liana Hadarean was part of the developing team of the SMT solver
 CVC4~\cite{cvc4} and is currently not associated with any group
 creating or submitting solvers.
+Antti Hyvarinen is part of the developing team of the SMT solver
+OpenSMT~\cite{opensmt2}.
 Aina Niemetz is part of the developing teams of the SMT solvers
 Boolector~\cite{boolector}
 and CVC4~\cite{cvc4}.
-Antti Hyvarinen is part of the developing team of the SMT solver
-OpenSMT~\cite{opensmt2}.
 Giles Reger is associated with the group
 producing the Vampire system~\cite{vampire}.
 
