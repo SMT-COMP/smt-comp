@@ -725,7 +725,7 @@ checking and curating these until {\bf May~1, 2019}.  The SMT-LIB
 maintainers intend to make a new release of the benchmark library
 publicly available on or close to this date.
 
-\header{Benchmark demographics. \todo{check}}
+\header{Benchmark demographics.}
 %
 The set of all SMT-LIB benchmarks in a given division can be naturally
 partitioned to sets containing benchmarks that are similar from the user
@@ -743,11 +743,11 @@ the common identity of their benchmarks and therefore partition each
 division based on the bottom-level directory imposed by each submitter.
 These partitions are referred to as \emph{families}.
 
-\header{Benchmark selection.} \todo{Antti covers this section}
+\header{Benchmark selection.}
 %
-The competition will use a large subset of SMT-LIB benchmarks, with a
-preference to the new benchmarks.  In all tracks the following process
-will be used for culling the benchmark pool.
+The competition will use a large subset of SMT-LIB benchmarks, with some
+guarantees on including new benchmarks.  In all tracks the following
+process will be used for culling the benchmark pool.
 \begin{enumerate}
 \item \emph{Remove inappropriate benchmarks.} The competition
   organizers may remove benchmarks that are deemed inappropriate or
@@ -764,19 +764,24 @@ will be used for culling the benchmark pool.
   \begin{enumerate}
   \item If a division contains less than 300 instances, all
         the instances will selected.
-  \item If a division contains between 300 and 600 instances, a
-        random selection of 300 instances from the set will be used.
+  \item If a division contains between 300 and 600 instances,
+        a selection of 300 instances from the set will be selected.
   \item If a division contains more than 600 instances, 50\% of
-        the benchmarks will be randomly selected.
+        the benchmarks will be selected.
   \end{enumerate}
 \item \emph{\ucoretrack{}.} In addition, for the \ucoretrack{}, all
   benchmarks with a single assertion will be removed.
 \end{enumerate}
 %
-The culling script will be publicly available and use the same random
-seed as the rest of the competition, and the set of benchmarks selected
-for the competition will be published when the competition begins.
-
+The selection process in cases (b) and (c) above will guarantee the
+inclusion of new benchmarks by first picking randomly one benchmark from
+each new benchmark family.  The rest of the benchmarks will be chosen
+randomly from the remaining benchmarks using a uniform distribution.
+%
+The culling script will be publicly available and will use the same
+random seed as the rest of the competition.  The set of benchmarks
+selected for the competition will be published when the competition
+begins.
 
 \header{Heats.}
 %
