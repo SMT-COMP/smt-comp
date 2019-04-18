@@ -5,6 +5,7 @@
 \usepackage{fullpage}
 \usepackage{hyperref}
 \usepackage{xspace}
+\usepackage{enumitem}
 
 %\usepackage{draftwatermark}
 
@@ -280,7 +281,7 @@ The principal changes from the previous competition rules are the following: \to
     more difficult.  A recent analysis of competition data from 2015-2018 for a
     report on the competition of these years (currently under submission to
     JSAT) suggests that benchmark families do not have a significant impact on
-    the (weighted) scores.  When determining winners for each division using
+    the (weighted) scores  When determining winners for each division using
     the scoring scheme of 2015, the winners for only 7 divisions (out of 139)
     over all three years would have changed.  While producing these results we
     further noticed that the description of what constitutes a benchmark family
@@ -331,20 +332,27 @@ The principal changes from the previous competition rules are the following: \to
 \section{Entrants}
 \label{sec:entrants}
 
-\header{Solver submission.}
-%
-An entrant to SMT-COMP is an SMT solver submitted by its authors using
-the StarExec (\url{http://www.starexec.org}) service.  The execution
+\header{SMT Solver.} A solver that can enter SMT-COMP is a tool that allows to
+determine (un)satisfiability of benchmarks from the SMT-LIB benchmark library
+(\url{http://www.smt-lib.org/benchmarks.shtml}).
+
+\header{SMT Solver Submission.}
+An entrant to SMT-COMP is a solver submitted by its authors using
+the StarExec (\url{http://www.starexec.org}) service.
+
+\header{Solver execution.}
+The StarExec execution
 service enables members of the SMT research community to run solvers
 on jobs consisting of benchmarks from the SMT-LIB benchmark library.
 Jobs are run on a shared computer cluster.  The execution service is
-provided free of charge, but it does require registration to create a
-login account.  Registered users may then upload their own solvers to
+provided free of charge, but requires registration to create a
+login account.  Registered users may then upload solvers to
 run, or may run public solvers already uploaded to the service.
 Information about how to configure and upload a solver is contained in
 the StarExec user guide,
 \url{https://wiki.uiowa.edu/display/stardev/User+Guide}.
 
+\header{Participation in the Competition.}
 For participation in SMT-COMP, a solver must be uploaded to StarExec
 and made publicly available.  StarExec supports solver configurations;
 for clarity, \emph{each submitted solver must have one configuration
@@ -352,26 +360,31 @@ for clarity, \emph{each submitted solver must have one configuration
 presence \emph{and the tracks and divisions in which it is
   participating} via the web form at
 \begin{center}
-  \todo{\url{}submission form url}
+  \rem{submission form url}
 \end{center}
-A submission must also include a \emph{system description} (see below) and a
-\emph{32-bit unsigned integer}.
- These integer numbers, collected from all submissions, are used to seed the
-benchmark scrambler.
+A submission \textbf{must} also include a \emph{system description} (see below)
+and a \emph{32-bit unsigned integer}.
+ These integer numbers, collected from all submissions, are used to seed
+ competition tools.
 
 \header{System description.}
-%
-\todo{add minimum requirement for authorship?}
-As part of the submission, SMT-COMP entrants are \emph{required} to provide a
-short (1–-2 pages) description of the system.  This should include a list of
-all authors of the system, their present institutional affiliations, and any
-appropriate acknowledgements.  The programming language(s) and basic SMT
-solving approach employed should be described (e.g., lazy integration of a
-Nelson-Oppen combination with SAT, translation to SAT, etc.).  System
-descriptions should also include a URL for a web site for the submitted tool.
-System descriptions must be submitted until the final solver deadline System
-descriptions will be made publicly available. \todo{Giles: Include licence information - minimum requirement: licence must allow to run the binary for evaluation purposes}
-\an{This todo should actually go into section 5, intro of the section maybe, we should add there that solvers will be archived on the website and so on. Interestingly, we replied to the reviewer in the report that the solvers are publicly available in the StarExec space when asked about reproducability, but in the past it was never defined under which terms.}
+As part of the submission, SMT-COMP entrants are \textbf{required} to provide a
+short (1-2 pages) description of the system, which \textbf{must} explicitly
+acknowledge any solver it wraps in case of a \emph{wrapper tool} (see below).
+It \emph{should} further include
+\begin{itemize}[itemsep=0ex]
+  \item a list of all authors of the system and their present institutional
+    affiliations,
+  \item the basic SMT solving approach employed,
+  \item details of any non-standard algorithmic techniques as well as
+    references to relevant literature (by the authors or others),
+  \item appropriate acknowledgement of tools other than SMT solvers called by
+    the system (e.g., SAT solvers) that are not written by the authors of the
+    submitted solver, and
+  \item a link to a website for the submitted tool.
+\end{itemize}
+System descriptions \textbf{must} be submitted \textbf{until the final solver
+deadline}, and will be made publicly available on the competition website.
 
 \header{Multiple versions.}
 %
@@ -440,6 +453,9 @@ competition.
 Solvers will be publicly evaluated in all tracks and divisions into
 which they have been entered.  All results of the competition will be
 made public.
+\todo{Giles: Include licence information - minimum requirement: licence must allow to run the binary for evaluation purposes}
+\an{intro of the section maybe, we should add there that solvers will be archived on the website and so on. Interestingly, we replied to the reviewer in the report that the solvers are publicly available in the StarExec space when asked about reproducability, but in the past it was never defined under which terms.}
+
 
 \subsection{Logistics}
 \label{sec:logistics}
