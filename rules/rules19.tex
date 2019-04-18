@@ -371,10 +371,11 @@ Nelson-Oppen combination with SAT, translation to SAT, etc.).  System
 descriptions should also include a URL for a web site for the submitted tool.
 System descriptions must be submitted until the final solver deadline System
 descriptions will be made publicly available. \todo{Giles: Include licence information - minimum requirement: licence must allow to run the binary for evaluation purposes}
+\an{This todo should actually go into section 5, intro of the section maybe, we should add there that solvers will be archived on the website and so on. Interestingly, we replied to the reviewer in the report that the solvers are publicly available in the StarExec space when asked about reproducability, but in the past it was never defined under which terms.}
 
 \header{Multiple versions.}
 %
-The organizers' intent is to promote as wide a comparison among
+The intent of the organizers is to promote as wide a comparison among
 solvers and solver options as possible.  However, if the number of
 solver submissions is too large for the computational resources
 available to the competition, the organizers reserve the right not to
@@ -464,11 +465,11 @@ Workshop.
 
 \header{Input and output.}
 %
-In the \maintrack and \ucoretrack, a participating solver must read a
-single benchmark script, whose filename is presented as the solver's
-first command-line argument.  In the incremental track, a trace
-executor will send commands from a benchmark script to the solver's
-standard input channel.
+In the \maintrack, \mvaltrack, \ucoretrack and \challtrack, a participating
+solver must read a single benchmark script, whose filename is presented as the
+solver's first command-line argument.  In the \inctrack, a trace
+executor will send commands from a benchmark script to the solver's standard
+input channel.
 
 The benchmark script is in the concrete syntax of the SMT-LIB format,
 version~2.6, though with a restricted set of commands.  A benchmark
