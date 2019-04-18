@@ -456,12 +456,19 @@ exceptional circumstances to complete divisions after the SMT
 Workshop.
 
 
-\header{Competition Website}
-
-\todo{Giles: Add text about the fact that we will use the competition website to include links to tools, announce results etc... including archiving}
+\header{Competition Website.} 
+The competition website (\url{www.smtcomp.org}) will be used as the main form of communication for the competition. The website will be used to post updates, link to these rules and other relevant information (e.g. the benchmarks), and to announce the results. We also use the website to archive previous competitions. Starting from 2019 we will include the submitted solvers in this archive to allow reproduction of the competition results in the future.
 %
 
-\header{Tools} \todo{link to scrambler, trace executor, benchmark selection script, postprocessors}
+\header{Tools.} 
+The competition uses a number of its own tools/scripts to run the competition. We briefly describe these tools. Unless stated otherwise the tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}. {\color{red} Some tools have not been released yet.}
+\begin{itemize}
+	\item \textbf{Benchmark Selection.} This script implements the benchmark selection policy described on page~\pageref{benchmark-selection}. It takes a seed for the random benchmark selection. The same seed is used for all tools requiring randomisation.
+	\item \textbf{Scramber.} This tool is used to scramble benchmarks during the competition to ensure that tools do not rely on syntactic features to identify benchmarks. The scramber can be found at \url{https://github.com/SMT-COMP/scrambler}.
+	\item \textbf{Trace Executor.} This tool is used in the interactive track to emulate an on-line interaction between an SMT solver and a client application and is available at \url{https://github.com/SMT-COMP/trace-executor}
+	\item \textbf{Postprocessors.} These are used by StarExec to translate the output of tools to the format required for scoring. The postprocessors (per track) are available at \url{https://github.com/SMT-COMP/postprocessors}.
+	\item \textbf{Scoring.} This script implements the scoring computation described on in Section~\ref{sec:scoring}. It also includes the scoring computations used in previous competitions (since 2015).
+\end{itemize}
 
 \header{Input and output.}
 %
@@ -750,7 +757,7 @@ the common identity of their benchmarks and therefore partition each
 division based on the bottom-level directory imposed by each submitter.
 These partitions are referred to as \emph{families}.
 
-\header{Benchmark selection.}
+\header{Benchmark selection.} \label{benchmark-selection}
 %
 The competition will use a large subset of SMT-LIB benchmarks, with some
 guarantees on including new benchmarks.  In all tracks the following
