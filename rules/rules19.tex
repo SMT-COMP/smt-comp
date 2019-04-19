@@ -993,7 +993,7 @@ e, n, w, c\rangle$, with
     number of correct results (resp.~\emph{reduction} for the \ucoretrack)
   \item \makebox[5em][l]{$w \in [0,T]$}
     wall-clock time in seconds (real-valued)
-  \item \makebox[5em][l]{$c \in [0, 4T]$}
+  \item \makebox[5em][l]{$c \in [0, mT]$}
     CPU time in seconds (real-valued)
 \end{itemize}
 
@@ -1020,20 +1020,21 @@ The (real-valued) wall-clock time in seconds, until time limit $T$ or the
 solver process terminates.
 
 \header{CPU Time Score ($\mathbf{c}$).}
-The (real-valued) CPU time in seconds, measured across all cores and
-sub-processes, until time limit $4T$ or the solver process terminates.
+The (real-valued) CPU time in seconds, measured across all $m$ cores
+until time limit $mT$ is reached or the solver process
+terminates.
 
 \subsubsection{Sequential Benchmark Score}
 \label{sec:sequential}
 
 The parallel score as defined above favors parallel solvers, which may utilize
 all available processor cores.  To evaluate sequential performance, we derive a
-\emph{sequential score} by imposing a (virtual) CPU time limit equal to the
-wall-clock time limit~$T$.  A solver result is taken into consideration for the
-sequential score only if the solver process terminates within this CPU time
-limit.  More specifically, for a given parallel performance $\langle e, n, w,
-c\rangle$, the corresponding sequential performance is defined as~$\langle e_S,
-n_S, c_S\rangle$, where
+\textbf{sequential score} by imposing a \emph{virtual} CPU time limit equal to
+the wall-clock time limit~$T$.  A solver result is taken into consideration for
+the sequential score only if the solver process terminates \emph{within} this
+CPU time limit.  More specifically, for a given parallel performance $\langle
+e, n, w, c\rangle$, the corresponding sequential performance is defined
+as~$\langle e_S, n_S, c_S\rangle$, where
 \begin{itemize}
 \item $e_S = 0$ and $n_S = 0$ if $c > T$, and $e_S = e$ and $n_S = n$
   otherwise,
@@ -1044,7 +1045,7 @@ n_S, c_S\rangle$, where
   time limit of~$T$.}
 \end{itemize}
 
-\subsubsection{\maintrack and \challtrack.}
+\subsubsection{\maintrack and \challtrack}
   For the \maintrack and \challtrack, the error score $e$ and the correctly
   solved score $n$ are defined as
   \begin{itemize}
@@ -1112,6 +1113,7 @@ processing.  For the \inctrack, we have
 
 \subsection{Division scoring \todo{update}}
 \label{sec:division-scoring}
+
 
 We compute in total eight different {\em scores} for each division based
 on solvers' parallel and sequential performance.  The two performances
