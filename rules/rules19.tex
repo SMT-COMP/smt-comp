@@ -718,6 +718,8 @@ an answer of \texttt{sat}, \texttt{unsat}, or \texttt{unknown} for
 \akey{check-sat} commands, and with a \texttt{success} answer for
 other commands.
 
+\header{Benchmark Selection.} See page~\pageref{benchmark-selection}.
+
 \header{Time Limit.}
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
 pair.
@@ -762,10 +764,10 @@ unsatisfiable cores.  Performance of solvers will be measured by correctness
 and size of the unsatisfiable core they provide.
 
 \header{Benchmark Selection.}
-This track will run on all \emph{unsatisfiable} benchmarks from the \maintrack,
-modified to use named top-level assertions of the form \akey{(assert (! t
-:named f ))}.
-\todo{what if removing all benchmarks with one assertion doesn't leave enough benchmarks in a division?}
+This track will run on a selection of non-incremental benchmarks with status
+\texttt{unsat} (as described on page~\pageref{benchmark-selection}), modified
+to use named top-level assertions of the form \akey{(assert (! t :named f ))}.
+
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-unsat-core)}, which asks
@@ -814,7 +816,8 @@ and well-formedness of the model they provide.
 
 \header{Benchmark Selection.}
 This experimental track only has one division, QF\_BV. It will run on all
-\emph{satisfiable} benchmarks from this division in the \maintrack.
+selection of non-incremental benchmarks with status \texttt{sat} from logic
+QF\_BV (as described on page~\pageref{benchmark-selection}).
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-model)} to request a
@@ -866,10 +869,11 @@ Benchmarks for each division will be drawn from the SMT-LIB benchmark library.
 The \maintrack will use a subset of all \emph{non-incremental} benchmarks and
 the \inctrack will use a subset of all \emph{incremental} benchmarks. The
 \challtrack will use all incremental and non-incremental benchmarks dedicated
-to this track by their submitters. The \ucoretrack will use all unsatisfiable
-\maintrack benchmarks, modified to use named top-level assertions.  The
-\mvaltrack will use all satisfiable \maintrack benchmarks from the QF\_BV
-division.
+to this track by their submitters. The \ucoretrack will use a selection of
+non-incremental benchmarks with status \texttt{unsat} and more than one
+top-level assertion, modified to use named top-level assertions.  The
+\mvaltrack will use a selection of non-incremental benchmarks with status
+\texttt{sat} from logic QF\_BV.
 
 \header{New benchmarks.}
 The deadline for submission of new benchmarks is {\bf March~1, 2019}.
