@@ -23,9 +23,9 @@
 
 \newcommand{\maintrack}{Single Query Track\xspace}
 \newcommand{\inctrack}{Incremental Track\xspace}
-\newcommand{\ucoretrack}{Unsat Core Track\xspace}
-\newcommand{\mvaltrack}{Model Validation Track\xspace}
-\newcommand{\challtrack}{Industry Challenge Track\xspace}
+\newcommand{\ucoretrack}{Unsat-Core Track\xspace}
+\newcommand{\mvaltrack}{Model-Validation Track\xspace}
+\newcommand{\challtrack}{Industry-Challenge Track\xspace}
 
 \newcommand{\rationale}[1]{\hskip .5em{\textit{Rationale:} #1}\xspace}
 
@@ -497,7 +497,7 @@ competitions. Starting from 2019 we will include the submitted solvers in this
 archive to allow reproduction of the competition results in the future.
 %
 
-\header{Tools.}
+\header{Tools.} \label{tools}
 The competition uses a number of tools/scripts to run the competition. In the
 following, we briefly describe these tools. Unless stated otherwise, these
 tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
@@ -692,24 +692,26 @@ a ``simulation'' of the aforementioned interaction.  Each benchmark represents
 a realistic communication trace, containing multiple \akey{check-sat} commands
 (possibly with corresponding \akey{push 1} and \akey{pop 1} commands). It is
 parsed by a (publicly available) \emph{trace executor},
-which serves the following purposes: \begin{itemize} \item it simulates the
-online interaction by sending single queries to the SMT solver (through stdin);
-\item it prevents ``look-ahead'' behaviors of SMT solvers;
-\item it records time and answers for each command;
-\item it guarantees a fair execution for all solvers by abstracting
+which serves the following purposes:
+
+\begin{itemize}
+  \item simulating online interaction by sending single queries to the SMT
+    solver (through stdin),
+  \item preventing ``look-ahead'' behaviors of SMT solvers,
+  \item recording time and answers for each command,
+  \item guaranteeing a fair execution for all solvers by abstracting
   from any possible crash, misbehavior, etc.\ that might happen in the
   verification framework.
 \end{itemize}
 
 \header{Input and output.}
-%
 Participating solvers will be connected to a trace executor, which
 will incrementally send commands to the standard input channel of the
 solver and read responses from the standard output channel of the
 solver.  The commands will be taken from an SMT-LIB benchmark script
 that satisfies the requirements for incremental track scripts given in
 Section~\ref{sec:logistics}.
-
+%
 Solvers must respond to each command sent by the trace executor with
 the answers defined in the SMT-LIB format specification, that is, with
 an answer of \texttt{sat}, \texttt{unsat}, or \texttt{unknown} for
@@ -720,8 +722,12 @@ other commands.
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
 pair.
 
+\header{Trace Executor.} This track will use the trace executor at \rem{link tba}
+to execute solvers on an incremental benchmark file.
+
 \header{Post-Processor.}
-This track uses the post-processor at \rem{link tba} to accumulate the results.
+This track will use the post-processor at \rem{link tba} to accumulate the
+results.
 
 \subsection{\challtrack}
 \label{sec:exec:industry-challenge}
@@ -744,49 +750,55 @@ This track will use a wall-clock time limit of 12 hours per solver/benchmark
 pair.
 
 \header{Post-Processor.}
-This track uses the post-processors from the \maintrack (for non-incremental
+This track uses the post-processors from the \maintrack (for non-incremen-tal
 benchmarks) and the \inctrack (for incremental benchmarks) to accumulate the
 results.
 
 \subsection{\ucoretrack}
 \label{sec:exec:unsat-core}
 
-The \ucoretrack will evaluate the capability of solvers to
-generate unsatisfiable cores (for problems that are known to be
-unsatisfiable).  Solvers will be measured by the smallness of the
-unsatisfiable core they return.
+The \ucoretrack will evaluate the capability of solvers to generate
+unsatisfiable cores.  Performance of solvers will be measured by the smallness
+of the unsatisfiable core they provide.
 
-The SMT-LIB language accommodates this functionality by providing two
-features: the ability to name top-level (asserted) formulas, and the
-ability to request an unsatisfiable core after a \akey{check-sat}
-command returns \texttt{unsat}.  The unsatisfiable core that is
-returned must consist of a list of names of formulas, in the format
-prescribed by the SMT-LIB standard.
-
-The result of a solver is considered erroneous if the response to the
-\akey{check-sat} command is \texttt{sat}, or if the returned
-unsatisfiable core is not well-formed (e.g., contains names of
-formulas that have not been asserted before), or if the returned
-unsatisfiable core is not, in fact, unsatisfiable.
-
-In order to perform this unsatisfiability check, the organizers will use a
-selection of SMT solvers that participate in the \maintrack of this
-competition.  For each division, the organizers will use only solvers that have
-been sound (i.e., not produced any erroneous result) in the \maintrack for
-this division.  The unsatisfiability of a produced unsatisfiable core is
-refuted if the number of checking solvers whose result is \texttt{sat} exceeds
-the number of checking solvers whose result is \texttt{unsat}.
-
+\header{Input/Output.}
+The SMT-LIB language provides a command \akey{(get-unsat-core)}, which asks
+a solver to identify an unsatisfiable core after a \akey{check-sat}
+command returns \texttt{unsat}.
+This unsat core must consist of a list of all named top-level
+assertions in the format prescribed by the SMT-LIB standard.
+%
 Solvers must respond to each command in the benchmark script with the
 answers defined in the SMT-LIB format specification.  In particular,
 solvers that respond \texttt{unknown} to the \akey{check-sat} command
 must respond with an error to the following \akey{get-unsat-core}
 command.
 
+\header{Result.}
+The result of a solver is considered erroneous if the response to the
+\akey{check-sat} command is \texttt{sat}, or if the returned
+unsatisfiable core is not well-formed (e.g., contains names of
+formulas that have not been asserted before), or if the returned
+unsatisfiable core is not, in fact, unsatisfiable.
+
+\header{Validation.}
+The organizers will use a selection of SMT solvers (the \emph{validation
+solvers}) that participate in the \maintrack of this competition in order to
+validate if a given unsat core is indeed unsatisfiable.  For each division, the
+organizers will use only solvers that have been sound (i.e., they did not
+produce any erroneous result) in the \maintrack for this division.  The
+unsatisfiability of an unsat core is refuted if the number of validation
+solvers whose result is \texttt{sat} exceeds the number of checking solvers
+whose result is \texttt{unsat}.
+
 \header{Time Limit.}
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
-pair. The time limit for checking unsatisfiable cores is yet to be determined, but is anticipated to
-be around 5 minutes of wall-clock time per solver.
+pair. The time limit for checking unsatisfiable cores is yet to be determined,
+but is anticipated to be around 5 minutes of wall-clock time per solver.
+
+\header{Post-Processor.}
+This track will use the post-processor at \rem{link tba} to accumulate the
+results.
 
 \subsection{\mvaltrack (experimental)}
 \label{sec:exec:model}
