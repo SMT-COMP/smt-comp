@@ -342,9 +342,8 @@ determine the (un)satisfiability of benchmarks from the SMT-LIB benchmark librar
 
 \header{Wrapper Tool.}
 %
-A \emph{wrapper tool} is defined as any solver that calls one or more SMT
-solvers (the \emph{wrapped solvers}) that do not have the same author as the
-wrapper tool itself. Its system description \textbf{must} explicitly acknowledge any
+A \emph{wrapper tool} is defined as any solver that calls one or more other SMT
+solvers (the \emph{wrapped solvers}). Its system description \textbf{must} explicitly acknowledge any
 solvers that it wraps.  It \emph{should} further make clear technical
 innovations by which the wrapper tool expects to improve on the wrapped
 solvers.
@@ -352,11 +351,11 @@ solvers.
 \header{Derived Tool.}
 %
 A \emph{derived tool} is defined as any solver that is \emph{based on and
-extends} an SMT solver (the \emph{base solver}) not written by the authors of
-the derived tool.  Its system description \textbf{must} explicitly acknowledge
+extends} another SMT solver (the \emph{base solver}).  Its system description
+\textbf{must} explicitly acknowledge
 the solver it is based on and extends.  It \emph{should} further make clear
-technical innovations by which the wrapper tool expects to improve on the
-wrapped solvers.  A derived tool should follow the \emph{naming convention}
+technical innovations by which the derived tool expects to improve on the
+original solver.  A derived tool should follow the \emph{naming convention}
 {[name of base solver]-[my solver name]}.
 
 \header{SMT Solver Submission.}
