@@ -153,7 +153,7 @@ competition and advance the state-of-the-art in automated SMT problem
 solving.
 
 SMT-COMP 2019 will have five tracks: the \maintrack (previously: Main Track),
-the incremental track (previously: Application Track), the \ucoretrack,
+the \inctrack (previously: Application Track), the \ucoretrack,
 the (new) \challtrack, and the (new)
 \mvaltrack.
 
@@ -179,7 +179,7 @@ The principal changes from the previous competition rules are the following: \to
     \rationale{The main incentive for this
     change is twofold.  First, we want to improve transparency when submitted
     solvers are wrapper tools according to the rules of the competition.
-    Second, we want to encourage documentation of technical improvements that
+    Second, we want to encourage documenting technical improvements that
     lead to the current results.}
 
   \item {\bf Naming Convention for Derived Tools.} \todo{}
@@ -206,7 +206,7 @@ The principal changes from the previous competition rules are the following: \to
     benchmarks beyond \akey{check-sat} commands with unknown status.}
 
   \item {\bf New \mvaltrack for QF\_BV.}
-    This year, we introduce a new experimental \mvaltrack for logic QF\_BV.
+    This year, we introduce a new experimental \mvaltrack for the QF\_BV logic.
     The benchmarks for this track will include all eligible \emph{non-incremental}
     QF\_BV benchmarks with known satisfiable status in SMT-LIB.
     Participating solvers are required to support the \akey{get-model} command.
@@ -221,7 +221,7 @@ The principal changes from the previous competition rules are the following: \to
     years,  we hope for a high number of participants in this track.  }
 
   \item {\bf New \challtrack.}
-    This year, we further introduce a new \challtrack.  This track will contain
+    This year, we introduce a new \challtrack.  This track will contain
     new challenging SMT-LIB benchmarks (with an emphasis on industrial
     applications) that are either unsolved or unsolved within some reasonable
     time limit, as indicated by the benchmark submitters.  We will also include
@@ -232,8 +232,8 @@ The principal changes from the previous competition rules are the following: \to
     limits, compared to hardware verification.  To reward solvers optimized for
     different use cases, we propose this new track and a new score for
     benchmarks solved within a very low time limit (see item ``New Scores in
-    the \maintrack'').  }
-    \todo{how do we provide information about which benchmarks and which logics?}
+    the \maintrack'').  } See ~\ref{sec:exec:industry-challenge} for the list of
+    benchmark families included in \challtrack for this year.
 
   \item {\bf Time Limit.} The time limit per solver/benchmark pair is
     anticipated to be at most 40 minutes in the \maintrack, \inctrack,
@@ -336,15 +336,15 @@ The principal changes from the previous competition rules are the following: \to
 
 \header{SMT Solver.}
 %
-A solver that can enter SMT-COMP is a tool that allows to
-determine (un)satisfiability of benchmarks from the SMT-LIB benchmark library
+A SMT solver that can enter SMT-COMP is a tool that can
+determine the (un)satisfiability of benchmarks from the SMT-LIB benchmark library
 (\url{http://www.smt-lib.org/benchmarks.shtml}).
 
 \header{Wrapper Tool.}
 %
 A \emph{wrapper tool} is defined as any solver that calls one or more SMT
-solvers (the \emph{wrapped solvers}) of which the author of the wrapper tool is
-not an author.  Its system description \textbf{must} explicitly acknowledge any
+solvers (the \emph{wrapped solvers}) that do not have the same author as the
+wrapper tool itself. Its system description \textbf{must} explicitly acknowledge any
 solvers that it wraps.  It \emph{should} further make clear technical
 innovations by which the wrapper tool expects to improve on the wrapped
 solvers.
@@ -493,16 +493,15 @@ Workshop.
 
 
 \header{Competition Website.}
-%
 The competition website (\url{www.smtcomp.org}) will be used as the main form
 of communication for the competition. The website will be used to post updates,
 link to these rules and other relevant information (e.g. the benchmarks), and
 to announce the results. We also use the website to archive previous
 competitions. Starting from 2019 we will include the submitted solvers in this
 archive to allow reproduction of the competition results in the future.
+%
 
 \header{Tools.}
-%
 The competition uses a number of tools/scripts to run the competition. In the
 following, we briefly describe these tools. Unless stated otherwise, these
 tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
@@ -523,7 +522,7 @@ tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
     output of tools to the format required for scoring. All postprocessors (per
     track) are available at \url{https://github.com/SMT-COMP/postprocessors}.
   \item \textbf{Scoring.} We use a script to implement the scoring computation
-    described in Section~\ref{sec:scoring}. It also includes the scoring
+    described on in Section~\ref{sec:scoring}. It also includes the scoring
     computations used in previous competitions (since 2015).
 \end{itemize}
 
@@ -746,7 +745,7 @@ command.
 \label{sec:exec:industry-challenge}
 
 \todo{time limit}
-The \challtrack will include both incremental and single query benchmarks and it will follow the same rules as the \inctrack and  \maintrack, respectively with two exceptions: benchmark selection and the time limit. The track will run on challenging industrial benchmarks provided by the community.
+The \challtrack will include both incremental and single query benchmarks and it will follow the same rules as the \inctrack and  \maintrack, respectively with two exceptions: benchmark selection and the time limit. The track will run on challenging industrial benchmarks provided by the community. This year, the \challtrack will include all the benchmarks from the \lh{TODO families} families, in the \lh{TODO logics}.
 
 \subsection{\mvaltrack (experimental)}
 \label{sec:exec:model}
@@ -768,8 +767,6 @@ symbols), or if the returned model does not satisfy the benchmark.
 In order to check that the model satisfies the benchmark, the organizers will use
 a model validating tool. The organizers will make this tool available to solver
 developers before the solver submission deadline.
-
-\todo{Liana - check if we can use the SMT-LIB standard and if so say that we will here, or if we need slight changes state them here.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
