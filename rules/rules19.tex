@@ -619,26 +619,27 @@ The SMT-LIB format specification is available from the ``Standard''
 section of the SMT-LIB website~\cite{SMT-LIB}.  Solvers will be given
 formulas only from the divisions into which they have been entered.
 
-\header{Time and memory limits.} \todo{Aina: Move all time and memory limits to the individual sections and forward reference from here}
+\header{Time and memory limits.}
 %
 Each SMT-COMP solver will be executed on a dedicated processor of a
 competition machine, for each given benchmark, up to a fixed
-wall-clock time limit~$T$.  Each processor has 4 cores.  Detailed
+wall-clock time limit~$T$. The individual track description specifies
+the time limit for each track. Each processor has 4 cores.  Detailed
 machine specifications are available on the competition web site.
-
-The time limit~$T$ will be 40~minutes of wall-clock time per solver/benchmark
-pair in the \maintrack, \inctrack and \ucoretrack, \todo{12 hours} in the
-\challtrack, and \todo{40 + 5 as in Unsat core}~minutes in the \mvaltrack \footnote{The time limit may be
-adjusted once we know the number of competition entrants and eligible
-benchmarks.}  Solvers that take more than this time limit will be killed.
-Solvers are allowed to spawn other processes; these will be killed at
-approximately the same time as the first started process.
 
 The StarExec service also limits the memory consumption of the solver
 processes.  We expect the memory limit per solver/benchmark pair to be
 on the order of 60\,GB.  The values of both the time limit and the
 memory limit are available to a solver process through environment
 variables.  See the StarExec user guide for more information.
+
+% The time limit~$T$ will be 40~minutes of wall-clock time per solver/benchmark
+% pair in the \maintrack, \inctrack and \ucoretrack, \todo{12 hours} in the
+% \challtrack, and \todo{40 + 5 as in Unsat core}~minutes in the \mvaltrack \footnote{The time limit may be
+% adjusted once we know the number of competition entrants and eligible
+% benchmarks.}  Solvers that take more than this time limit will be killed.
+% Solvers are allowed to spawn other processes; these will be killed at
+% approximately the same time as the first started process.
 
 
 \subsection{\maintrack (Previously: Main Track)}
