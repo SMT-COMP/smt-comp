@@ -617,7 +617,7 @@ The SMT-LIB format specification is available from the ``Standard''
 section of the SMT-LIB website~\cite{SMT-LIB}.  Solvers will be given
 formulas only from the divisions into which they have been entered.
 
-\header{Time and memory limits.}
+\header{Time and Memory Limits.}
 %
 Each SMT-COMP solver will be executed on a dedicated processor of a
 competition machine, for each given benchmark, up to a fixed
@@ -632,7 +632,7 @@ on the order of 60\,GB.  The values of both the time limit and the
 memory limit are available to a solver process through environment
 variables.  See the StarExec user guide for more information.
 
-\header{Aborts and unparsable output.}
+\header{Aborts and Unparsable Output.}
 %
 In all tracks except the \inctrack, any \texttt{success} outputs will be
 ignored.  Solvers that exit before the time limit without reporting a result
@@ -641,7 +641,7 @@ that includes \texttt{sat}, \texttt{unsat}, \texttt{unknown} or other track
 specific output as specified in the individual track sections e.g. unsat cores
 or models, will be considered to have aborted.
 
-\header{Persistent state.}
+\header{Persistent State.}
 %
 Solvers may create and write to files and directories during the
 course of an execution, but they must not read such files back during
@@ -758,8 +758,12 @@ results.
 \label{sec:exec:unsat-core}
 
 The \ucoretrack will evaluate the capability of solvers to generate
-unsatisfiable cores.  Performance of solvers will be measured by the smallness
-of the unsatisfiable core they provide.
+unsatisfiable cores.  Performance of solvers will be measured by correctness
+and size of the unsatisfiable core they provide.
+
+\header{Benchmark Selection.}
+This track will run on all benchmarks from the \maintrack with status
+\texttt{unsat}.
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-unsat-core)}, which asks
@@ -802,29 +806,41 @@ results.
 
 \subsection{\mvaltrack (experimental)}
 \label{sec:exec:model}
-The \mvaltrack will evaluate the solver's ability to produce models
-for satisfiable problems. This track will run on all QF\_BV satisfiable benchmarks
-from the \maintrack.
+The \mvaltrack will evaluate the capability of solvers to produce models for
+satisfiable problems.  Performance of solvers will be measured by correctness
+and well-formedness of the model they provide.
 
-The SMT-LIB language accommodates this functionality by providing the ability to
-request a satisfying model after a \akey{check-sat} command returns \texttt{sat}.
-The satisfiable core that is returned must consist of definitions specifying all
-and only the current user-declared function symbols, in the format prescribed by
-the SMT-LIB standard.
+\header{Benchmark Selection.}
+This track will run on all QF\_BV benchmarks from the \maintrack with status
+\texttt{sat}.
 
+\header{Input/Output.}
+The SMT-LIB language provides a command \akey{(get-model)} to request a
+satisfying model after a \akey{check-sat} command returns \texttt{sat}.  This
+model must consist of definitions specifying all and only the current
+user-declared function symbols, in the format prescribed by the SMT-LIB
+standard.
+
+\header{Result.}
 The result of a solver is considered erroneous if the response to the
 \akey{checks-sat} command is \texttt{unsat}, if the returned model is not
-well-formed (e.g. does not provide a definition for all the user-declared function
-symbols), or if the returned model does not satisfy the benchmark.
+well-formed (e.g. does not provide a definition for all the user-declared
+function symbols), or if the returned model does not satisfy the benchmark.
 
-In order to check that the model satisfies the benchmark, the organizers will use
-a model validating tool. The organizers will make this tool available to solver
-developers before the solver submission deadline.
+\header{Validation.}
+In order to check that the model satisfies the benchmark, the organizers will
+use a model validating tool. The organizers will make this tool available to
+solver developers before the solver submission deadline.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
 pair. The time limit for checking the satisfying assignment is yet to be
-determined, but is anticipated to be around 5 minutes of wall-clock time per solver.
+determined, but is anticipated to be around 5 minutes of wall-clock time per
+solver.
+
+\header{Post-Processor.}
+This track will use the post-processor at \rem{link tba} to accumulate the
+results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
