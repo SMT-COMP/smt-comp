@@ -762,7 +762,10 @@ unsatisfiable cores.  Performance of solvers will be measured by correctness
 and size of the unsatisfiable core they provide.
 
 \header{Benchmark Selection.}
-This track will run on all \emph{unsatisfiable} benchmarks from the \maintrack.
+This track will run on all \emph{unsatisfiable} benchmarks from the \maintrack,
+modified to use named top-level assertions of the form \akey{(assert (! t
+:named f ))}.
+\todo{what if removing all benchmarks with one assertion doesn't leave enough benchmarks in a division?}
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-unsat-core)}, which asks
@@ -845,6 +848,10 @@ results.
 
 \section{Benchmarks and Problem Divisions}
 
+\header{Division}
+Within each track there are multiple divisions, and each division selects
+benchmarks from a specific SMT-LIB logic in the SMT-LIB benchmark library.
+
 \header{Competitive Divisions.}
 A division in a track is competitive if at least two substantially
 different solvers (i.e., solvers from two different teams) were
@@ -855,17 +862,16 @@ eligible to be designated as winners.
 We will \textbf{not} run \emph{non-competitive} divisions.
 
 \header{Benchmark sources.}
-%
-Benchmarks for each division will be drawn from the SMT-LIB benchmark
-library.  The \maintrack will use a subset of all
-\emph{non-incremental} benchmarks; the incremental track will use a
-subset of all \emph{incremental} benchmarks.  The \ucoretrack
-will use unsatisfiable \maintrack benchmarks, modified to use named
-top-level assertions.
-
+Benchmarks for each division will be drawn from the SMT-LIB benchmark library.
+The \maintrack will use a subset of all \emph{non-incremental} benchmarks and
+the \inctrack will use a subset of all \emph{incremental} benchmarks. The
+\challtrack will use all incremental and non-incremental benchmarks dedicated
+to this track by their submitters. The \ucoretrack will use all unsatisfiable
+\maintrack benchmarks, modified to use named top-level assertions.  The
+\mvaltrack will use all satisfiable \maintrack benchmarks from the QF\_BV
+division.
 
 \header{New benchmarks.}
-%
 The deadline for submission of new benchmarks is {\bf March~1, 2019}.
 The organizers, in collaboration with the SMT-LIB maintainers, will be
 checking and curating these until {\bf May~1, 2019}.  The SMT-LIB
@@ -873,7 +879,6 @@ maintainers intend to make a new release of the benchmark library
 publicly available on or close to this date.
 
 \header{Benchmark demographics.}
-%
 The set of all SMT-LIB benchmarks in a given division can be naturally
 partitioned to sets containing benchmarks that are similar from the user
 community perspective.  Such benchmarks could all come from the same
@@ -891,44 +896,43 @@ division based on the bottom-level directory imposed by each submitter.
 These partitions are referred to as \emph{families}.
 
 \header{Benchmark selection.} \label{benchmark-selection}
-%
 The competition will use a large subset of SMT-LIB benchmarks, with some
 guarantees on including new benchmarks.  In \textbf{all} tracks \textbf{except}
 the \challtrack, the following selection process will be used.
 \begin{enumerate}
-\item \emph{Remove inappropriate benchmarks.} The competition
+\item \emph{Remove inappropriate benchmarks.} The
   organizers may remove benchmarks that are deemed inappropriate or
   uninteresting for competition, or cut the size of certain benchmark
   families to avoid their over-representation.  SMT-COMP attempts to
   give preference to benchmarks that are ``real-world,'' in the sense
   of coming from or having some intended application outside SMT.
-\item \emph{Remove easy benchmarks.} The competition organizers will
-    remove all benchmarks that were solved by all solvers (including the
-        non-competitive solvers) in less than one second in the 2018 SMT
-        competition.
-\item \emph{Cap the number of instances in a division.} The competition
-  organizers will limit the number of benchmarks in a division as
-  follows:
-  \begin{enumerate}
-  \item If a division contains less than 300 instances, all
-        the instances will selected.
-  \item If a division contains between 300 and 600 instances,
-        a selection of 300 instances from the set will be selected.
-  \item If a division contains more than 600 instances, 50\% of
-        the benchmarks will be selected.
-  \end{enumerate}
-\item \emph{\ucoretrack{}.} In addition, for the \ucoretrack{}, all
+\item \emph{Remove easy benchmarks.} The organizers will remove all
+  benchmarks that were solved by all solvers (including non-competitive
+  solvers) in less than one second in 2018.
+\item \emph{\ucoretrack.} In addition, for the \ucoretrack, all
   benchmarks with a single assertion will be removed.
+\item \emph{Cap the number of instances in a division.} The organizers will
+  limit the number of benchmarks in a division based on the size of the
+  corresponding logic in SMT-LIB as follows:
+  \begin{enumerate}
+  \vspace{-1ex}
+    \item \label{bench-sel-300} If a logic contains less than 300 instances,
+      all instances will selected.
+  \item \label{bench-sel-600} If a logic contains between 300 and 600
+    instances, a subset of 300 instances from the set will be selected.
+  \item \label{bench-sel-more} If a logic contains more than 600 instances,
+    50\% of the benchmarks will be selected.
+  \end{enumerate}
 \end{enumerate}
 %
-The selection process in cases (b) and (c) above will guarantee the
-inclusion of new benchmarks by first picking randomly one benchmark from
-each new benchmark family.  The rest of the benchmarks will be chosen
-randomly from the remaining benchmarks using a uniform distribution.
+The selection process in cases \ref{bench-sel-600} and \ref{bench-sel-more}
+above will guarantee the inclusion of new benchmarks by first picking randomly
+one benchmark from each new benchmark family.  The rest of the benchmarks will
+be chosen randomly from the remaining benchmarks using a uniform distribution.
 %
-The culling script will be publicly available and will use the same
-random seed as the rest of the competition.  The set of benchmarks
-selected for the competition will be published when the competition
+The benchmark selection script will be publicly available at \rem{link tba} and
+will use the same random seed as the rest of the competition.  The set of
+benchmarks selected for the competition will be published when the competition
 begins.
 
 \header{Heats.}
