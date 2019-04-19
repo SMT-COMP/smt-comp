@@ -323,7 +323,7 @@ The principal changes from the previous competition rules are the following: \to
     \rationale{Corresponding theories and benchmarks are expected to be added
     to SMT-LIB in the near future.}
 
-  \item {\bf Competition-Wide Scores/Winners.} \todo{}
+  \item {\bf Competition-Wide Recognitions.} \todo{}
 
   \item {\bf Problems with Evaluation Scripts.} \todo{Explain what was the
     problem and what has been fixed, talk about notion of benchmark family.}
@@ -678,6 +678,7 @@ complete.  Solvers must not attempt to communicate with other
 machines, e.g., over the network.
 
 \subsection{Incremental Track (Previously: Application Track)}
+\label{sec:exec:app}
 
 The incremental track evaluates SMT solvers when interacting with an
 external verification framework, e.g., a model checker. This
@@ -1070,9 +1071,7 @@ For a given competition benchmark~$b$, let~$F_b \geq 1$ be the total
 number of benchmarks in $b$'s benchmark family that were used in the
 competition track to which the division belongs (and not removed
 because of disagreements).  We define the weight for benchmark~$b$ as
-$\alpha_b = (1 + \log_e F_b) / F_b$.\footnote{See
-  Section~\ref{sec:competition-wide} for a motivating discussion of
-  log scaling.}  We define the \emph{normalized weight} for
+$\alpha_b = (1 + \log_e F_b) / F_b$.  We define the \emph{normalized weight} for
 benchmark~$b$ as $\alpha'_b = \alpha_b / (\sum_{b'} \alpha_{b'})$,
 where the sum is over all benchmarks in the division.  Let~$N$ be the
 total number of benchmarks in the division.
@@ -1122,56 +1121,6 @@ We will not make any comparisons between parallel and sequential
 performances, as these are intended to measure fundamentally different
 performance characteristics.
 
-\subsection{Competition-wide scoring (\maintrack)}
-\label{sec:competition-wide}
-
-\todo{Replace notion of competition-wide scoring with a notion of ranking
-based on distance between first and second (based on scoring, and maybe a second
-based on VBS marginal contribution)}
-
-We define a competition-wide metric for the \maintrack, separately for
-parallel and sequential performance, as follows.  Let $N_i$ be the
-total number of benchmarks in division~$i$ that were used in the
-competition (and not removed because of disagreements), and let
-$\langle e_i, n_i, w_i, c_i\rangle$ be a solver's raw score for this
-division (Section~\ref{sec:division-scoring}).  The solver's
-competition-wide raw score is
-%
-$$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$$
-%
-where the sum is over all competitive divisions into which the solver
-was entered.\footnote{\emph{Rationale:} This metric purposely
-  emphasizes breadth of solver participation---a solver participating
-  in many logics need not be the best in any one of them.  The use of
-  the square in the metric limits this somewhat---a solver still needs
-  to do reasonably well compared to winners to be able to catch up by
-  breadth of participation.  The non-linear metric also gives added
-  weight to completing close to all benchmarks in a division.
-
-  The constant penalty for errors reflects the fact that any error (in
-  a particular division) renders a solver untrustworthy for that
-  division.  The value~$4$ balances the community's strong interest in
-  correct (thoroughly tested) solvers against the risk of stifling
-  innovation: entering a (possibly buggy) solver that can solve all
-  benchmarks into a division has a positive expected value if the
-  probability of a soundness bug is below $\frac{1}{1+4} = 20$\,\%.
-
-  The log scaling is a (somewhat arbitrary) means to adjust the scores
-  for the wide variety of numbers of benchmarks in different
-  divisions.  It seems a reasonable compromise between linearly
-  combining numbers of benchmarks, which would overweigh large
-  divisions, and simply summing the fraction of benchmarks solved,
-  which would overweigh small divisions.
-
-  The metric is also quite simple, and the metric for a solver is
-  independent of the performance of other solvers.  Time is omitted
-  from the metric because it is only of third importance in the
-  regular competition metric, and is difficult to compare across
-  divisions.}  The solver's competition-wide sequential score is
-computed from its sequential division scores
-(Section~\ref{sec:division-scoring}) according to the same formula.
-We will recognize the best three solvers according to these metrics.
-
 \subsection{Other Recognitions \todo{Update}}
 
 The organizers will also recognize the following contributions:
@@ -1179,7 +1128,7 @@ The organizers will also recognize the following contributions:
 \begin{itemize}
 \item \emph{Best new entrant}. The best performing entrant from a new
   solver implementation team, as measured by the competition-wide
-  metric.
+    metric. \todo{}
 \item \emph{Benchmarks}. Contributors of new benchmarks.
 \end{itemize}
 %
@@ -1190,8 +1139,6 @@ As part of the FLoC Olympic Games, Kurt G{\"o}del medals will be
 awarded to:
 %
 \begin{itemize}
-\item The best three solvers according to the competition-wide scoring
-  (\maintrack);
 \item the solver that wins the most competitive divisions in the
   incremental track;
 \item the solver that wins the most competitive divisions in the
