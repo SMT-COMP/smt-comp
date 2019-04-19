@@ -480,30 +480,50 @@ made public.
 \subsection{Logistics}
 \label{sec:logistics}
 
-\header{Dates of competition.}
+\header{Dates of Competition.}
 %
 The bulk of the computation will take place during the weeks leading
 up to SMT 2019.  Intermediate results will be regularly posted to the
 SMT-COMP website as the competition runs.
-
+%
 The organizers reserve the right to prioritize certain competition
 tracks or divisions to ensure their timely completion, and in
 exceptional circumstances to complete divisions after the SMT
 Workshop.
 
 
-\header{Competition Website.} 
-The competition website (\url{www.smtcomp.org}) will be used as the main form of communication for the competition. The website will be used to post updates, link to these rules and other relevant information (e.g. the benchmarks), and to announce the results. We also use the website to archive previous competitions. Starting from 2019 we will include the submitted solvers in this archive to allow reproduction of the competition results in the future.
+\header{Competition Website.}
+The competition website (\url{www.smtcomp.org}) will be used as the main form
+of communication for the competition. The website will be used to post updates,
+link to these rules and other relevant information (e.g. the benchmarks), and
+to announce the results. We also use the website to archive previous
+competitions. Starting from 2019 we will include the submitted solvers in this
+archive to allow reproduction of the competition results in the future.
 %
 
-\header{Tools.} 
-The competition uses a number of its own tools/scripts to run the competition. We briefly describe these tools. Unless stated otherwise the tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}. {\color{red} Some tools have not been released yet.}
+\header{Tools.}
+The competition uses a number of tools/scripts to run the competition. In the
+following, we briefly describe these tools. Unless stated otherwise, these
+tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
+{\color{red} Some tools have not been released yet.}
 \begin{itemize}
-	\item \textbf{Benchmark Selection.} This script implements the benchmark selection policy described on page~\pageref{benchmark-selection}. It takes a seed for the random benchmark selection. The same seed is used for all tools requiring randomisation.
-	\item \textbf{Scramber.} This tool is used to scramble benchmarks during the competition to ensure that tools do not rely on syntactic features to identify benchmarks. The scramber can be found at \url{https://github.com/SMT-COMP/scrambler}.
-	\item \textbf{Trace Executor.} This tool is used in the interactive track to emulate an on-line interaction between an SMT solver and a client application and is available at \url{https://github.com/SMT-COMP/trace-executor}
-	\item \textbf{Postprocessors.} These are used by StarExec to translate the output of tools to the format required for scoring. The postprocessors (per track) are available at \url{https://github.com/SMT-COMP/postprocessors}.
-	\item \textbf{Scoring.} This script implements the scoring computation described on in Section~\ref{sec:scoring}. It also includes the scoring computations used in previous competitions (since 2015).
+  \item \textbf{Benchmark Selection.} We use a script to implement the
+    benchmark selection policy described on page~\pageref{benchmark-selection}.
+    It takes a seed for the random benchmark selection. The same seed is used
+    for all tools requiring randomisation.
+  \item \textbf{Scrambler.} This tool is used to scramble benchmarks during the
+    competition to ensure that tools do not rely on syntactic features to
+    identify benchmarks. The scrambler can be found at
+    \url{https://github.com/SMT-COMP/scrambler}.
+  \item \textbf{Trace Executor.} This tool is used in the \inctrack to emulate
+    an on-line interaction between an SMT solver and a client application and
+    is available at \url{https://github.com/SMT-COMP/trace-executor}
+  \item \textbf{Postprocessors.} These are used by StarExec to translate the
+    output of tools to the format required for scoring. All postprocessors (per
+    track) are available at \url{https://github.com/SMT-COMP/postprocessors}.
+  \item \textbf{Scoring.} We use a script to implement the scoring computation
+    described on in Section~\ref{sec:scoring}. It also includes the scoring
+    computations used in previous competitions (since 2015).
 \end{itemize}
 
 \header{Input and output.}
