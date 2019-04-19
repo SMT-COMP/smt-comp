@@ -11,8 +11,8 @@
 
 \hyphenation{data-types}
 
-\newcommand{\akey}[1]{\textbf{#1}}
-\newcommand{\bkey}[1]{\textbf{\texttt{#1}}}
+\newcommand{\akey}[1]{\textbf{#1}\xspace}
+\newcommand{\bkey}[1]{\textbf{{#1}}\xspace}
 
 \newcommand{\rem}[1]{\textcolor{red}{[#1]}}
 \newcommand{\todo}[1]{\rem{TODO #1}}
@@ -256,10 +256,10 @@ The principal changes from the previous competition rules are the following: \to
     depends on the size of the corresponding logic.  Prior to this
     selection, we will remove all benchmarks in a division that were
     solved by all solvers (including non-competing solvers) in this
-    division in under 1 second during last year's competition.
+    division in under one second in last year's competition.
     \rationale{Evaluating solvers on all eligible benchmarks in SMT-LIB
     makes results more predictable and seems to be more of an evaluation
-    than a competition.  In the Main track of last year's competition,
+    than a competition.  In the Main track last year,
     78\% of the 258,741 benchmarks were solved by all supported solvers
     within the time limit (71\% within 1 second). In 7 (out of 46)
     logics, over 99\% of benchmarks were solved by all solvers.
@@ -514,8 +514,8 @@ tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
   \item \textbf{Trace Executor.} This tool is used in the \inctrack to emulate
     an on-line interaction between an SMT solver and a client application and
     is available at \url{https://github.com/SMT-COMP/trace-executor}
-  \item \textbf{Postprocessors.} These are used by StarExec to translate the
-    output of tools to the format required for scoring. All postprocessors (per
+  \item \textbf{Post-Processors.} These are used by StarExec to translate the
+    output of tools to the format required for scoring. All post-processors (per
     track) are available at \url{https://github.com/SMT-COMP/postprocessors}.
   \item \textbf{Scoring.} We use a script to implement the scoring computation
     described on in Section~\ref{sec:scoring}. It also includes the scoring
@@ -535,33 +535,35 @@ version~2.6, though with a \emph{restricted} set of commands.  A benchmark
 file is a text file containing a sequence of SMT-LIB commands that
 satisfies the following \emph{requirements}:
 %
-\begin{enumerate}
+\begin{itemize}
+  \item \bkey{(set-logic ...)}\\
+    A (single) \akey{set-logic} command is the \emph{first} command after
+    any \akey{set-option} commands.
+  \item \bkey{(set-info ...)}\\
+    A benchmark file may contain any number of \akey{set-info} commands.
   \item
     \bkey{(set-option :print-success ...)}
-    \begin{enumerate}
+    \begin{enumerate}[label=(\alph*)]
       \vspace{-1ex}
-      \item In the \textbf{\maintrack} and \textbf{\ucoretrack}, there may be a
-        single \akey{set-option} command.  Note that \texttt{success} outputs
-        are ignored by the post-processor used by the
-        competition.\footnote{SMT-LIB~2.6 requires solvers to produce a
-        \texttt{success} answer after each \akey{set-logic},
+    \item In the \emph{\maintrack}, \emph{\challtrack}, \emph{\mvaltrack} and
+        \emph{\ucoretrack}, there may be a single \akey{set-option} command.
+        Note that \texttt{success} outputs are ignored by the post-processors
+        used by the competition.\footnote{SMT-LIB~2.6 requires solvers to
+        produce a \texttt{success} answer after each \akey{set-logic},
         \akey{declare-sort}, \akey{declare-fun} and \akey{assert} command
         (among others), unless the option \akey{:print-success} is set to
         false.  Ignoring the \texttt{success} outputs allows for submitting
         fully SMT-LIB~2.6 compliant solvers without the need for a wrapper
         script, while still allowing entrants of previous competitions to run
         without changes.}
-      \item In the \textbf{\inctrack}, the \akey{:print-success} option
-      must not be disabled.  The trace executor will send an initial
+      \item In the \emph{\inctrack}, the \akey{:print-success} option
+        must not be disabled.  The trace executor will send an initial
         \akey{(set-option :print-success true)} command to the solver.
-      \item In the \textbf{\ucoretrack}, there is a single \akey{(set-option
-        :produce-unsat-cores true)} command.
+      \item In the \emph{\mvaltrack}, a benchmark file contains a single
+        \akey{(set-option :produce-models true)} command.
+      \item In the \emph{\ucoretrack}, a benchmark file contains a single
+        \akey{(set-option :produce-unsat-cores true)} command.
     \end{enumerate}
-  \item \bkey{(set-logic ...)}\\
-    A (single) \akey{set-logic} command is the \emph{first} command after
-    any \akey{set-option} commands.
-  \item \bkey{(set-info ...)}\\
-    A benchmark file may contain any number of \akey{set-info} commands.
   \item \bkey{(declare-sort ...)}\\
     A benchmark file may contain any number of \akey{declare-sort} and
     \akey{define-sort} commands.  All sorts declared or defined with these
@@ -578,38 +580,38 @@ satisfies the following \emph{requirements}:
     declared in the file.
   \item
     \bkey{:named}
-    \begin{enumerate}
+    \begin{enumerate}[label=(\alph*)]
       \vspace{-1ex}
-      \item In \textbf{all} tracks \textbf{except} the \ucoretrack,  named
+      \item In \emph{all} tracks \emph{except} the \ucoretrack,  named
         terms (i.e., terms with the \akey{:named} attribute) are \emph{not}
         used.
-      \item In the \textbf{\ucoretrack}, top-level assertions may be named.
+      \item In the \emph{\ucoretrack}, top-level assertions may be named.
     \end{enumerate}
     \item
       \bkey{(check-sat)}
-      \begin{enumerate}
+      \begin{enumerate}[label=(\alph*)]
         \vspace{-1ex}
-        \item In \textbf{all} tracks \textbf{except} the \inctrack, there is
+        \item In \emph{all} tracks \emph{except} the \inctrack, there is
           \emph{exactly one} \akey{check-sat} command.
-        \item In the \textbf{\inctrack}, there are one or more
+        \item In the \emph{\inctrack}, there are one or more
         \akey{check-sat} commands.  There may also be zero or more
-        \akey{push 1} commands, and zero or more \akey{pop 1} commands,
+        \akey{(push 1)} commands, and zero or more \akey{(pop 1)} commands,
         consistent with the use of those commands in the SMT-LIB standard.
     \end{enumerate}
     \item \bkey{(get-unsat-core)}\\
-    In the \textbf{\ucoretrack}, the \akey{check-sat} command (which is
+      In the \emph{\ucoretrack}, the \akey{check-sat} command (which is
       always issued in an unsatisfiable context) is followed by a single
       \akey{get-unsat-core} command.
     \item \bkey{(get-model)}\\
-      In the \textbf{\mvaltrack}, the \akey{check-sat} command (which is
+      In the \emph{\mvaltrack}, the \akey{check-sat} command (which is
       always issued in a satisfiable context) is followed by a single
     \akey{get-model} command.
   \item \bkey{(exit)}\\
     It may \emph{optionally} contain an \akey{exit} command as its
-    last command.  In the \textbf{\inctrack}, this command must not be
+    last command.  In the \emph{\inctrack}, this command must not be
     omitted.
   \item \textbf{No other commands} besides the ones just mentioned may be used.
-\end{enumerate}
+\end{itemize}
 %
 The SMT-LIB format specification is available from the ``Standard''
 section of the SMT-LIB website~\cite{SMT-LIB}.  Solvers will be given
@@ -667,7 +669,7 @@ indicate that it cannot determine satisfiability of the formula.
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
 pair.
 
-\header{Postprocessor.}
+\header{Post-Processor.}
 This track uses a StarExec post-processor (named \rem{tba}) to accumulate the
 results.
 
