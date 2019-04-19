@@ -658,13 +658,15 @@ machines, e.g., over the network.
 \subsection{\maintrack (Previously: Main Track)}
 \label{sec:exec:single}
 
-\header{Input/Output.}
-This track will consist of selected non-incremental benchmarks in each of
-the logic divisions.  Each benchmark will be presented to the solver as its
-first command-line argument.  The solver is then expected to report on its
-standard output channel whether the formula is satisfiable (\texttt{sat}) or
-unsatisfiable (\texttt{unsat}).  A solver may also report \texttt{unknown} to
-indicate that it cannot determine satisfiability of the formula.
+The \maintrack track will consist of selected non-incremental benchmarks in
+each of the competitive logic divisions.  Each benchmark will be presented to
+the solver as its first command-line argument.  The solver is then expected to
+report on its standard output channel whether the formula is satisfiable
+(\texttt{sat}) or unsatisfiable (\texttt{unsat}).  A solver may also report
+\texttt{unknown} to indicate that it cannot determine satisfiability of the
+formula.
+
+\header{Benchmark Selection.} See page~\pageref{benchmark-selection}.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
@@ -718,21 +720,33 @@ other commands.
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
 pair.
 
+\header{Post-Processor.}
+This track uses the post-processor at \rem{link tba} to accumulate the results.
+
 \subsection{\challtrack}
 \label{sec:exec:industry-challenge}
 
-The \challtrack will include both non-incremental and incremental benchmarks and
-it will follow the same rules as the \inctrack and  \maintrack, respectively
-with two exceptions: benchmark selection and the time limit. The track will
-run on challenging industrial benchmarks provided by the community. This year,
-the \challtrack will include both incremental and single query benchmarks in the
-following logics QF\_BV, QF\_ABV and QF\_AUFBV. The complete list of benchmarks
-along with instructions on how to access them will be provided on the SMT-COMP
-website as soon as the benchmarks are released.
+The \challtrack will include both non-incremental and incremental benchmarks.
+It will follow the same rules as the \maintrack and \inctrack, respectively,
+with two exceptions: benchmark selection and the time limit.
+
+\header{Benchmark Selection.}
+This track will run on challenging industrial benchmarks provided by the
+community. This year, the \challtrack will include the complete set of provided
+benchmarks dedicated to this track, which consist of both incremental and
+single query benchmarks in the logics QF\_BV, QF\_ABV and QF\_AUFBV. The
+complete list of benchmarks along with instructions on how to access them will
+be provided on the SMT-COMP website as soon as the benchmark library is
+released.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 12 hours per solver/benchmark
 pair.
+
+\header{Post-Processor.}
+This track uses the post-processors from the \maintrack (for non-incremental
+benchmarks) and the \inctrack (for incremental benchmarks) to accumulate the
+results.
 
 \subsection{\ucoretrack}
 \label{sec:exec:unsat-core}
@@ -852,8 +866,8 @@ These partitions are referred to as \emph{families}.
 \header{Benchmark selection.} \label{benchmark-selection}
 %
 The competition will use a large subset of SMT-LIB benchmarks, with some
-guarantees on including new benchmarks.  In all tracks the following
-process will be used for culling the benchmark pool.
+guarantees on including new benchmarks.  In \textbf{all} tracks \textbf{except}
+the \challtrack, the following selection process will be used.
 \begin{enumerate}
 \item \emph{Remove inappropriate benchmarks.} The competition
   organizers may remove benchmarks that are deemed inappropriate or
