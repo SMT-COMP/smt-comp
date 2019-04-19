@@ -633,13 +633,27 @@ on the order of 60\,GB.  The values of both the time limit and the
 memory limit are available to a solver process through environment
 variables.  See the StarExec user guide for more information.
 
-% The time limit~$T$ will be 40~minutes of wall-clock time per solver/benchmark
-% pair in the \maintrack, \inctrack and \ucoretrack, \todo{12 hours} in the
-% \challtrack, and \todo{40 + 5 as in Unsat core}~minutes in the \mvaltrack \footnote{The time limit may be
-% adjusted once we know the number of competition entrants and eligible
-% benchmarks.}  Solvers that take more than this time limit will be killed.
-% Solvers are allowed to spawn other processes; these will be killed at
-% approximately the same time as the first started process.
+\header{Aborts and unparsable output.}
+%
+Any \texttt{success} outputs will be ignored.  Solvers that exit
+before the time limit without reporting a result (e.g., due to
+exhausting memory or crashing) \emph{and} do not produce output that
+includes \texttt{sat}, \texttt{unsat}, \texttt{unknown} or other track
+specific output as specified in the individual track sections e.g. unsat
+cores or models, will be considered to have aborted.
+
+\header{Persistent state.}
+%
+Solvers may create and write to files and directories during the
+course of an execution, but they must not read such files back during
+later executions.  Each solver is executed with a temporary directory
+as its current working directory.  Any generated files should be
+produced there (and not, say, in the system's \texttt{/tmp}
+directory).  The StarExec system sets a limit on the amount of disk
+storage permitted---typically 20\,GB.  See the StarExec user guide for
+more information.  The temporary directory is deleted after the job is
+complete.  Solvers must not attempt to communicate with other
+machines, e.g., over the network.
 
 
 \subsection{\maintrack (Previously: Main Track)}
@@ -660,27 +674,6 @@ pair.
 \header{Postprocessor.}
 This track uses a StarExec post-processor (named \rem{tba}) to accumulate the
 results.
-
-\header{Aborts and unparsable output.}
-%
-Any \texttt{success} outputs will be ignored.  Solvers that exit
-before the time limit without reporting a result (e.g., due to
-exhausting memory or crashing) \emph{and} do not produce output that
-includes \texttt{sat}, \texttt{unsat} or \texttt{unknown} will be
-considered to have aborted.
-
-\header{Persistent state.}
-%
-Solvers may create and write to files and directories during the
-course of an execution, but they must not read such files back during
-later executions.  Each solver is executed with a temporary directory
-as its current working directory.  Any generated files should be
-produced there (and not, say, in the system's \texttt{/tmp}
-directory).  The StarExec system sets a limit on the amount of disk
-storage permitted---typically 20\,GB.  See the StarExec user guide for
-more information.  The temporary directory is deleted after the job is
-complete.  Solvers must not attempt to communicate with other
-machines, e.g., over the network.
 
 \subsection{Incremental Track (Previously: Application Track)}
 \label{sec:exec:app}
@@ -707,9 +700,6 @@ online interaction by sending single queries to the SMT solver (through stdin);
   verification framework.
 \end{itemize}
 
-The disk space and memory limits for the incremental track are the
-same as for the \maintrack (see Section~\ref{sec:exec:single}).
-
 \header{Input and output.}
 %
 Participating solvers will be connected to a trace executor, which
@@ -724,6 +714,10 @@ the answers defined in the SMT-LIB format specification, that is, with
 an answer of \texttt{sat}, \texttt{unsat}, or \texttt{unknown} for
 \akey{check-sat} commands, and with a \texttt{success} answer for
 other commands.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 40 minutes per solver/benchmark
+pair.
 
 \subsection{\ucoretrack}
 \label{sec:exec:unsat-core}
@@ -752,9 +746,7 @@ competition.  For each division, the organizers will use only solvers that have
 been sound (i.e., not produced any erroneous result) in the \maintrack for
 this division.  The unsatisfiability of a produced unsatisfiable core is
 refuted if the number of checking solvers whose result is \texttt{sat} exceeds
-the number of checking solvers whose result is \texttt{unsat}.  The time limit
-for checking unsatisfiable cores is yet to be determined, but is anticipated to
-be around 5 minutes of wall-clock time per solver.
+the number of checking solvers whose result is \texttt{unsat}.
 
 Solvers must respond to each command in the benchmark script with the
 answers defined in the SMT-LIB format specification.  In particular,
@@ -762,10 +754,14 @@ solvers that respond \texttt{unknown} to the \akey{check-sat} command
 must respond with an error to the following \akey{get-unsat-core}
 command.
 
+\header{Time Limit.}
+This track will use a wall-clock time limit of 40 minutes per solver/benchmark
+pair. The time limit for checking unsatisfiable cores is yet to be determined, but is anticipated to
+be around 5 minutes of wall-clock time per solver.
+
 \subsection{\challtrack}
 \label{sec:exec:industry-challenge}
 
-\todo{time limit}
 The \challtrack will include both incremental and single query benchmarks and
 it will follow the same rules as the \inctrack and  \maintrack, respectively
 with two exceptions: benchmark selection and the time limit. The track will
@@ -774,6 +770,10 @@ the \challtrack will include both incremental and single query benchmarks in the
 following logics QF\_BV, QF\_ABV and QF\_AUFBV. The complete list of benchmarks
 along with instructions on how to access them will be provided on the SMT-COMP
 website as soon as the benchmarks are released.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 12 hours per solver/benchmark
+pair.
 
 \subsection{\mvaltrack (experimental)}
 \label{sec:exec:model}
@@ -795,6 +795,11 @@ symbols), or if the returned model does not satisfy the benchmark.
 In order to check that the model satisfies the benchmark, the organizers will use
 a model validating tool. The organizers will make this tool available to solver
 developers before the solver submission deadline.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 40 minutes per solver/benchmark
+pair. The time limit for checking the satisfying assignment is yet to be
+determined, but is anticipated to be around 5 minutes of wall-clock time per solver.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
