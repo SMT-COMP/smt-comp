@@ -644,17 +644,21 @@ variables.  See the StarExec user guide for more information.
 \subsection{\maintrack (Previously: Main Track)}
 \label{sec:exec:single}
 
-The \maintrack competition will consist of selected benchmarks in each
-of the logic divisions.  Each benchmark script will be presented to
-the solver as its first command-line argument.  The solver is then
-expected to attempt to report on its standard output channel whether
-the formula is satisfiable (\texttt{sat}, in lowercase) or
-unsatisfiable (\texttt{unsat}).  A solver may also report
-\texttt{unknown} to indicate that it cannot determine satisfiability
-of the formula.
+\header{Input/Output.}
+This track will consist of selected non-incremental benchmarks in each of
+the logic divisions.  Each benchmark will be presented to the solver as its
+first command-line argument.  The solver is then expected to report on its
+standard output channel whether the formula is satisfiable (\texttt{sat}) or
+unsatisfiable (\texttt{unsat}).  A solver may also report \texttt{unknown} to
+indicate that it cannot determine satisfiability of the formula.
 
-The \maintrack competition uses a StarExec post-processor (named
-``SMT-COMP 2019") to accumulate the results.
+\header{Time Limit.}
+This track will use a wall-clock time limit of 40 minutes per solver/benchmark
+pair.
+
+\header{Postprocessor.}
+This track uses a StarExec post-processor (named \rem{tba}) to accumulate the
+results.
 
 \header{Aborts and unparsable output.}
 %
