@@ -762,8 +762,7 @@ unsatisfiable cores.  Performance of solvers will be measured by correctness
 and size of the unsatisfiable core they provide.
 
 \header{Benchmark Selection.}
-This track will run on all benchmarks from the \maintrack with status
-\texttt{unsat}.
+This track will run on all \emph{unsatisfiable} benchmarks from the \maintrack.
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-unsat-core)}, which asks
@@ -811,8 +810,8 @@ satisfiable problems.  Performance of solvers will be measured by correctness
 and well-formedness of the model they provide.
 
 \header{Benchmark Selection.}
-This track will run on all QF\_BV benchmarks from the \maintrack with status
-\texttt{sat}.
+This experimental track only has one division, QF\_BV. It will run on all
+\emph{satisfiable} benchmarks from this division in the \maintrack.
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-model)} to request a
