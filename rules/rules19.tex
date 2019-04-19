@@ -129,7 +129,6 @@ competition web site, \url{http://www.smtcomp.org}.
 
 \section{Introduction}
 
-\todo{does this paragraph need rewriting?}
 The annual Satisfiability Modulo Theories Competition~(SMT-COMP) is
 held to spur advances in SMT solver implementations on benchmark
 formulas of practical interest.  Public competitions are a well-known
@@ -233,8 +232,8 @@ The principal changes from the previous competition rules are the following: \to
     limits, compared to hardware verification.  To reward solvers optimized for
     different use cases, we propose this new track and a new score for
     benchmarks solved within a very low time limit (see item ``New Scores in
-    the \maintrack'').  } See ~\ref{sec:exec:industry-challenge} for the logics
-    included in \challtrack for this year.
+    the \maintrack''). See Section~\ref{sec:exec:industry-challenge} for the
+    logics included in the \challtrack for this year. }
 
   \item {\bf Time Limit.} The time limit per solver/benchmark pair is
     anticipated to be at most 40 minutes in the \maintrack, \inctrack,
@@ -324,9 +323,6 @@ The principal changes from the previous competition rules are the following: \to
     to SMT-LIB in the near future.}
 
   \item {\bf Competition-Wide Recognitions.} \todo{}
-
-  \item {\bf Problems with Evaluation Scripts.} \todo{Explain what was the
-    problem and what has been fixed, talk about notion of benchmark family.}
 
 \end{itemize}
 
@@ -612,7 +608,7 @@ satisfies the following \emph{requirements}:
     It may \emph{optionally} contain an \akey{exit} command as its
     last command.  In the \textbf{\inctrack}, this command must not be
     omitted.
-  \item No other commands besides the ones just mentioned may be used.
+  \item \textbf{No other commands} besides the ones just mentioned may be used.
 \end{enumerate}
 %
 The SMT-LIB format specification is available from the ``Standard''
@@ -928,7 +924,7 @@ particular submitted solver.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Scoring \todo{update}}
+\section{Scoring}
 \label{sec:scoring}
 
 \subsection{Benchmark scoring}
@@ -1061,7 +1057,7 @@ processing.  For the \inctrack, we have
     reported unsatisfiable core.
   \end{itemize}
 
-\subsection{Division scoring}
+\subsection{Division scoring \todo{update}}
 \label{sec:division-scoring}
 
 We compute in total eight different {\em scores} for each division based
