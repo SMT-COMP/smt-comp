@@ -934,32 +934,89 @@ particular submitted solver.
 \subsection{Benchmark scoring}
 \label{sec:benchmark-scoring}
 
-A solver's \emph{parallel performance} for each benchmark is a quadruple $\langle
-e, n, w, c\rangle$, with $e \in \{0, 1\}$ the number of erroneous
-results (usually~$e = 0$), $0 \leq n \leq N$ the number of correct
-results,\footnote{Here, $N$ is the number of \akey{check-sat} commands
-  in the benchmark.  Recall that \maintrack benchmarks have just one
-  \akey{check-sat} command; incremental track benchmarks may have
-  multiple \akey{check-sat} commands.} $w \in [0,T]$ the (real-valued)
-wall-clock time in seconds, and $c \in [0, 4T]$ the (real-valued) CPU
-time in seconds, measured across all cores and sub-processes, until
-the solver process terminates.
-
-\header{\maintrack.} More specifically, for the \maintrack, we have
-%
-\begin{itemize}
-\item $e=0$, $n=0$ if the solver aborts without a response, or the
-  result of the \akey{check-sat} command is \texttt{unknown},
-\item $e=0$, $n=1$ if the result of the \akey{check-sat} command is
-  \texttt{sat} or \texttt{unsat}, and the result either agrees with
-  the benchmark status or the benchmark status is unknown,\footnote{If
-    the benchmark status is unknown, we thus treat the solver's answer
-    as correct.  Disagreements between different solvers on benchmarks
-    with unknown status are governed in
-    Section~\ref{sec:division-scoring}.}
-\item $e=1$, $n=0$ if the result of the \akey{check-sat} command is
-  incorrect.
+The \textbf{parallel benchmark score} of a solver is a quadruple $\langle
+e, n, w, c\rangle$, with
+\begin{itemize}[noitemsep]
+  \vspace{-1ex}
+  \item \makebox[5em][l]{$e \in \{0, 1\}$}
+    number of erroneous results (usually~$e = 0$)
+  \item \makebox[5em][l]{$0 \leq n \leq N$}
+    number of correct results (resp.~\emph{reduction} for the \ucoretrack)
+  \item \makebox[5em][l]{$w \in [0,T]$}
+    wall-clock time in seconds (real-valued)
+  \item \makebox[5em][l]{$c \in [0, 4T]$}
+    CPU time in seconds (real-valued)
 \end{itemize}
+
+\header{Error Score ($\mathbf{e}$).}
+For the \maintrack, \inctrack and \challtrack, $e$ is the number of returned
+statuses that disagree with the given expected status (as described above,
+disagreements on benchmarks with unknown status lead to the benchmark being
+disregarded). For the \ucoretrack, $e$ includes, in addition, the number of
+returned unsat cores that are ill-formed or are not, in fact, unsatisfiable (as
+validated by a selection of other solvers selected by organizers).  For the
+\mvaltrack, $e$ includes, in addition, the number of returned models that are
+ill-formed or not full satisfiable models.
+
+\header{Correctly Solved Score ($\mathbf{n}$).}
+For the \maintrack, \inctrack, \challtrack and \mvaltrack,
+$N$ is defined as the number of \akey{check-sat} commands, and
+$n$ is defined as the number of correct results.
+For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
+and $n$ is defined as the \emph{reduction}, i.e., the difference between $N$
+and the size of the unsat core.
+
+\header{Wall-Clock Time Score ($\mathbf{w}$).}
+The (real-valued) wall-clock time in seconds, until time limit $T$ or the
+solver process terminates.
+
+\header{CPU Time Score ($\mathbf{c}$).}
+The (real-valued) CPU time in seconds, measured across all cores and
+sub-processes, until time limit $4T$ or the solver process terminates.
+
+\subsubsection{Sequential Benchmark Score}
+\label{sec:sequential}
+
+The parallel score as defined above favors parallel solvers, which may utilize
+all available processor cores.  To evaluate sequential performance, we derive a
+\emph{sequential score} by imposing a (virtual) CPU time limit equal to the
+wall-clock time limit~$T$.  A solver result is taken into consideration for the
+sequential score only if the solver process terminates within this CPU time
+limit.  More specifically, for a given parallel performance $\langle e, n, w,
+c\rangle$, the corresponding sequential performance is defined as~$\langle e_S,
+n_S, c_S\rangle$, where
+\begin{itemize}
+\item $e_S = 0$ and $n_S = 0$ if $c > T$, and $e_S = e$ and $n_S = n$
+  otherwise,
+\item $c_S = \min\ \{c, T\}$.\footnote{Under this
+  measure, a solver should not benefit from using multiple processor
+  cores.  Conceptually, the sequential performance should be (nearly)
+  unchanged if the solver was run on a single-core processor, up to a
+  time limit of~$T$.}
+\end{itemize}
+
+\subsubsection{\maintrack and \challtrack.}
+  For the \maintrack and \challtrack, the error score $e$ and the correctly
+  solved score $n$ are defined as
+  \begin{itemize}
+  \item $e=0$ and $n=0$ if the solver
+    \begin{itemize}[noitemsep,nolistsep]
+      \item aborts without a response, or
+      \item  the result of the \akey{check-sat} command is \texttt{unknown},
+    \end{itemize}
+  \item $e=0$ and $n=1$ if the result of the \akey{check-sat} command is
+      \texttt{sat} or \texttt{unsat} and either
+    \begin{itemize}[noitemsep,nolistsep]
+      \item agrees with the benchmark status,
+      \item or the benchmark status
+        is unknown,\footnote{If the benchmark status is unknown, we thus treat
+        the solver's answer as correct.  Disagreements between different
+        solvers on benchmarks with unknown status are governed in
+        Section~\ref{sec:division-scoring}.}
+    \end{itemize}
+  \item $e=1$ and $n=0$ if the result of the \akey{check-sat} command is
+    incorrect.
+  \end{itemize}
 %
 Note that a (correct or incorrect) response is taken into
 consideration even when the solver process terminates abnormally, or
@@ -967,7 +1024,7 @@ does not terminate within the time limit.  Solvers should take care
 not to accidentally produce output that contains \texttt{sat} or
 \texttt{unsat}.
 
-\header{Incremental Track.}
+\subsubsection{Incremental Track.}
 %
 An application benchmark may contain multiple \akey{check-sat}
 commands.  Solvers may partially solve the benchmark before timing
@@ -979,58 +1036,30 @@ respond to commands.\footnote{Times measured by StarExec may include
   nearly constant across solvers.}  Most time will likely be spent in
 response to \akey{check-sat} commands, but \akey{assert}, \akey{push}
 or \akey{pop} commands might also entail a reasonable amount of
-processing.  For the incremental track, we have
+processing.  For the \inctrack, we have
 \begin{itemize}
-\item $e=1$, $n=0$ if the solver returns an incorrect result for any
+\item $e=1$ and $n=0$ if the solver returns an incorrect result for any
   \akey{check-sat} command within the time limit,
-\item otherwise, $e=0$, and $n$ is the number of correct results for
+\item otherwise, $e=0$ and $n$ is the number of correct results for
   \akey{check-sat} commands returned by the solver before the time
   limit is reached.
 \end{itemize}
 
-\header{\ucoretrack.}
-%
-For the \ucoretrack, we instead have $0 \leq n \leq A$, where~$A$
-is the number of named top-level assertions in the benchmark, and
-\begin{itemize}
-\item $e=0$, $n=0$ if the solver aborts without a response, or the
-  result of the \akey{check-sat} command is \texttt{unknown},
-\item $e=1$, $n=0$ if the result is erroneous according to
-  Section~\ref{sec:exec:unsat-core},
-\item otherwise, $e=0$, and $n$ is the reduction in the number of
-  formulas, i.e., $n = A$ minus the number of formula names in the
-  reported unsatisfiable core.
-\end{itemize}
-
-\subsection{Sequential Performance (\maintrack)}
-\label{sec:sequential}
-
-
-\iffalse
-SMT-COMP has traditionally emphasized sequential performance (i.e.,
-CPU time) over parallel performance (i.e., wall-clock time).  StarExec
-measures both, and we intend to recognize both best sequential and
-best parallel solvers in all competitive \maintrack divisions.
-\fi
-
-The parallel performance, as defined in Section~\ref{sec:benchmark-scoring},
-favors parallel solvers, which may utilize all available processor
-cores.  To evaluate sequential performance, we derive a
-\emph{sequential performance} by imposing a (virtual) CPU time limit equal
-to the wall-clock time limit~$T$.  A solver result is taken into
-consideration for the sequential performance only if the solver process
-terminates within this CPU time limit.  More specifically, for a given
-parallel performance $\langle e, n, w, c\rangle$, the corresponding sequential
-performance is defined as~$\langle e_S, n_S, c_S\rangle$, where
-\begin{itemize}
-\item $e_S = 0$ and $n_S = 0$ if $c > T$, $e_S = e$ and $n_S = n$
-  otherwise,
-\item $c_S = \min\ \{c, T\}$.\footnote{\emph{Rationale:} Under this
-  measure, a solver should not benefit from using multiple processor
-  cores.  Conceptually, the sequential performance should be (nearly)
-  unchanged if the solver was run on a single-core processor, up to a
-  time limit of~$T$.}
-\end{itemize}
+\subsubsection{\ucoretrack.}
+  For the \ucoretrack, the error score $e$ and the correctly solved score $n$
+  are defined as
+  \begin{itemize}
+  \item $e=0$ and $n=0$ if the solver
+    \begin{itemize}[noitemsep,nolistsep]
+      \item aborts without a response, or
+      \item the result of the \akey{check-sat} command is \texttt{unknown},
+    \end{itemize}
+  \item $e=1$and  $n=0$ if the result is erroneous according to
+    Section~\ref{sec:exec:unsat-core},
+  \item otherwise, $e=0$ and $n$ is the \emph{reduction} in the number of
+    formulas, i.e., $n = N$ minus the number of formula names in the
+    reported unsatisfiable core.
+  \end{itemize}
 
 \subsection{Division scoring}
 \label{sec:division-scoring}
