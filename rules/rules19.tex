@@ -634,12 +634,12 @@ variables.  See the StarExec user guide for more information.
 
 \header{Aborts and unparsable output.}
 %
-Any \texttt{success} outputs will be ignored.  Solvers that exit
-before the time limit without reporting a result (e.g., due to
-exhausting memory or crashing) \emph{and} do not produce output that
-includes \texttt{sat}, \texttt{unsat}, \texttt{unknown} or other track
-specific output as specified in the individual track sections e.g. unsat
-cores or models, will be considered to have aborted.
+In all tracks except the \inctrack, any \texttt{success} outputs will be
+ignored.  Solvers that exit before the time limit without reporting a result
+(e.g., due to exhausting memory or crashing) \emph{and} do not produce output
+that includes \texttt{sat}, \texttt{unsat}, \texttt{unknown} or other track
+specific output as specified in the individual track sections e.g. unsat cores
+or models, will be considered to have aborted.
 
 \header{Persistent state.}
 %
