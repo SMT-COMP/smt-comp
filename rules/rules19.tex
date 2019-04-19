@@ -527,76 +527,76 @@ tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
 
 \header{Input and output.}
 %
-In the \maintrack, \mvaltrack, \ucoretrack and \challtrack, a participating
-solver must read a single benchmark script, whose filename is presented as the
-solver's first command-line argument.  In the \inctrack, a trace
-executor will send commands from a benchmark script to the solver's standard
-input channel.
+In the \emph{\inctrack}, the \emph{trace executor} will send commands from an
+(incremental) benchmark file to the standard input channel of the solver.  In
+\emph{all other tracks}, a participating solver must read a \emph{single}
+benchmark file, whose filename is presented as the first command-line argument
+of the solver.
 
-The benchmark script is in the concrete syntax of the SMT-LIB format,
-version~2.6, though with a restricted set of commands.  A benchmark
-script is a text file containing a sequence of SMT-LIB commands that
+Benchmark files are in the concrete syntax of the SMT-LIB format
+version~2.6, though with a \emph{restricted} set of commands.  A benchmark
+file is a text file containing a sequence of SMT-LIB commands that
 satisfies the following requirements:
 %
 \begin{enumerate}
-\item
-  \begin{enumerate}
-  \item In the \maintrack and \ucoretrack, there may be a single
-    \akey{(set-option :print-success ...)} command.  Note that
-    \texttt{success} outputs are ignored by the post-processor used by
-    the competition.\footnote{SMT-LIB~2.6 requires solvers to produce
-      a \texttt{success} answer after each \akey{set-logic},
-      \akey{declare-sort}, \akey{declare-fun} and \akey{assert}
-      command (among others), unless the option \akey{:print-success}
-      is set to false.  Ignoring the \texttt{success} outputs allows
-      for submitting fully SMT-LIB~2.6 compliant solvers without the
-      need for a wrapper script, while still allowing entrants of
-      previous competitions to run without changes.}
-  \item In the incremental track, the \akey{:print-success} option
-    must not be disabled.  The trace executor will send an initial
-      \akey{(set-option :print-success true)} command to the solver.
-  \end{enumerate}
-\item In the \ucoretrack, there is a single \akey{(set-option
-  :produce-unsat-cores true)} command.
-\item The (single) \akey{set-logic} command setting the benchmark's
-  logic is the first command after any \akey{set-option} commands.
-\item The script may contain any number of \akey{set-info} commands.
-\item The script may contain any number of \akey{declare-sort} and
-  \akey{define-sort} commands.  All sorts declared or defined with
-  these commands must have zero arity.
-\item The script may contain any number of \akey{declare-fun} and
-  \akey{define-fun} commands.
-\item If the benchmark's logic features algebraic datatypes, the
-  script may contain any number of \akey{declare-datatype(s)}
-  commands.
-\item The script may contain any number of \akey{assert} commands.
-  All formulas in the script belong to the benchmark's logic, with any
-  free symbols declared in the script.
-\item
-  \begin{enumerate}
-    \item In all tracks except the \ucoretrack,  named terms (i.e., terms
-      with the \akey{:named} attribute) are not used.
-    \item In the \ucoretrack, top-level assertions may be named.
-  \end{enumerate}
-\item
-  \begin{enumerate}
-  \item In all tracks except the \inctrack, there is exactly one
-    \akey{check-sat} command.
-  \item In the incremental track, there are one or more
-    \akey{check-sat} commands.  There may also be zero or more
-    \akey{push 1} commands, and zero or more \akey{pop 1} commands,
-    consistent with the use of those commands in the SMT-LIB standard.
-  \end{enumerate}
-\item In the \ucoretrack, the \akey{check-sat} command (which is
-  always issued in an unsatisfiable context) is followed by a single
-  \akey{get-unsat-core} command.
-\item In the \mvaltrack, the \akey{check-sat} command (which is
-  always issued in a satisfiable context) is followed by a single
-  \akey{get-model} command.
-\item The script may optionally contain an \akey{exit} command as its
-  last command.  In the incremental track, this command must not be
-  omitted.
-\item No other commands besides the ones just mentioned may be used.
+  \item
+    \begin{enumerate}
+      \item In the \textbf{\maintrack} and \textbf{\ucoretrack}, there may be a single
+      \akey{(set-option :print-success ...)} command.  Note that
+      \texttt{success} outputs are ignored by the post-processor used by
+      the competition.\footnote{SMT-LIB~2.6 requires solvers to produce
+        a \texttt{success} answer after each \akey{set-logic},
+        \akey{declare-sort}, \akey{declare-fun} and \akey{assert}
+        command (among others), unless the option \akey{:print-success}
+        is set to false.  Ignoring the \texttt{success} outputs allows
+        for submitting fully SMT-LIB~2.6 compliant solvers without the
+        need for a wrapper script, while still allowing entrants of
+        previous competitions to run without changes.}
+      \item In the \textbf{\inctrack}, the \akey{:print-success} option
+      must not be disabled.  The trace executor will send an initial
+        \akey{(set-option :print-success true)} command to the solver.
+      \item In the \textbf{\ucoretrack}, there is a single \akey{(set-option
+        :produce-unsat-cores true)} command.
+    \end{enumerate}
+  \item A (single) \akey{set-logic} command is the \emph{first} command after
+    any \akey{set-option} commands.
+  \item It may contain any number of \akey{set-info} commands.
+  \item It may contain any number of \akey{declare-sort} and
+    \akey{define-sort} commands.  All sorts declared or defined with
+    these commands must have zero arity.
+  \item It may contain any number of \akey{declare-fun} and \akey{define-fun}
+    commands.
+  \item If the logic features algebraic datatypes, the benchmark file may
+    contain any number of \akey{declare-datatype(s)} commands.
+  \item It may contain any number of \akey{assert} commands.  All formulas in
+    the file belong in the declared logic, with any free symbols declared in
+    the file.
+  \item
+    \begin{enumerate}
+      \item In \textbf{all} tracks \textbf{except} the \ucoretrack,  named
+        terms (i.e., terms with the \akey{:named} attribute) are \emph{not}
+        used.
+      \item In the \textbf{\ucoretrack}, top-level assertions may be named.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item In \textbf{all} tracks \textbf{except} the \inctrack, there is
+        \emph{exactly one} \akey{check-sat} command.
+      \item In the \textbf{\inctrack}, there are one or more
+      \akey{check-sat} commands.  There may also be zero or more
+      \akey{push 1} commands, and zero or more \akey{pop 1} commands,
+      consistent with the use of those commands in the SMT-LIB standard.
+    \end{enumerate}
+  \item In the \textbf{\ucoretrack}, the \akey{check-sat} command (which is
+    always issued in an unsatisfiable context) is followed by a single
+    \akey{get-unsat-core} command.
+  \item In the \textbf{\mvaltrack}, the \akey{check-sat} command (which is
+    always issued in a satisfiable context) is followed by a single
+    \akey{get-model} command.
+  \item It may \emph{optionally} contain an \akey{exit} command as its
+    last command.  In the \textbf{\inctrack}, this command must not be
+    omitted.
+  \item No other commands besides the ones just mentioned may be used.
 \end{enumerate}
 %
 The SMT-LIB format specification is available from the ``Standard''
