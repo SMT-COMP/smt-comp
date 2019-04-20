@@ -1074,7 +1074,7 @@ does not terminate within the time limit.  Solvers should take care
 not to accidentally produce output that contains \texttt{sat} or
 \texttt{unsat}.
 
-\subsubsection{Incremental Track.}
+\subsubsection{Incremental Track}
 %
 An application benchmark may contain multiple \akey{check-sat}
 commands.  Solvers may partially solve the benchmark before timing
@@ -1095,7 +1095,7 @@ processing.  For the \inctrack, we have
   limit is reached.
 \end{itemize}
 
-\subsubsection{\ucoretrack.}
+\subsubsection{\ucoretrack}
   For the \ucoretrack, the error score $e$ and the correctly solved score $n$
   are defined as
   \begin{itemize}
@@ -1111,100 +1111,92 @@ processing.  For the \inctrack, we have
     reported unsatisfiable core.
   \end{itemize}
 
-\subsection{Division scoring \todo{update}}
+\subsection{Division scoring}
 \label{sec:division-scoring}
 
+For each track and division, we compute a division score based on the parallel
+performance of a solver (the \emph{parallel division score}).  For the
+\maintrack, \challtrack, \ucoretrack and \mvaltrack we also compute a division
+score based on the sequential performance of a solver (the \emph{sequential
+division score}).  Additionally, for the \maintrack, we further determine three
+additional scores based on parallel performance: The \emph{24-second score}
+will reward solving performance within a time limit of 24 seconds (wall clock
+time), the \emph{sat score} will reward (parallel) performance on satisfiable
+instances, and the \emph{unsat score} will reward (parallel) performance on
+unsatisfiable instances.
 
-We compute in total eight different {\em scores} for each division based
-on solvers' parallel and sequential performance.  The two performances
-are computed separately for {\em all}, {\em satisfiable}, and {\em
-unsatisfiable instances}.  In addition we compute the performances for a
-\emph{one-minute wonder} track, where each solver is run with a
-24-second timeout.
-\todo{24-seconds is only a score, not a track}
+\header{Sound Solver.}
+A solver is \emph{sound} on benchmarks with \emph{known status} for a division
+if its parallel performance (Section~\ref{sec:benchmark-scoring}) is of the
+form $\langle 0, n, w, c\rangle$ for each benchmark in the division, i.e., if
+it did not produce any erroneous results.
 
-\header{\maintrack and \challtrack: Removal of Disagreements.}
-%
-\todo{do we need to update this notion?}
+\header{Disagreeing Solvers.}
+Two solvers \emph{disagree} on a benchmark if one of them reported \texttt{sat}
+and the other reported \texttt{unsat}.
+
+\header{Removal of Disagreements.}
 Before division scores are computed for the \maintrack and \challtrack,
-benchmarks with unknown status are removed from the competition results if two
-(or more) solvers that are sound on benchmarks with known status disagree on
-their result.  More specifically, a solver (including a solver that was entered
-into the competition by the organizers for comparison purposes) is \emph{sound
-on benchmarks with known status} for a division if its parallel performance
-(Section~\ref{sec:benchmark-scoring}) is of the form $\langle 0, n, w,
-c\rangle$ for each benchmark in the division, i.e., if it did not produce any
-erroneous results.  Two solvers \emph{disagree} on a benchmark if one of them
-reported \texttt{sat} and the other reported \texttt{unsat}.  Only the
-remaining benchmarks are used in the following computation of division scores
-(but the organizers may report disagreements for informational purposes).
-
-\header{\inctrack: Removal of Disagreements.}
-\todo{}
-
-\header{\challtrack: Removal of Disagreements.}
-\todo{}
-
-\medskip
-
-To compute a solver's scores for a division, the solver's individual
-benchmark scores for all benchmarks in the division are first
-multiplied by a scalar weight that depends on the benchmark's family,
-and then summed component-wise.
-
-For a given competition benchmark~$b$, let~$F_b \geq 1$ be the total
-number of benchmarks in $b$'s benchmark family that were used in the
-competition track to which the division belongs (and not removed
-because of disagreements).  We define the weight for benchmark~$b$ as
-$\alpha_b = (1 + \log_e F_b) / F_b$.  We define the \emph{normalized weight} for
-benchmark~$b$ as $\alpha'_b = \alpha_b / (\sum_{b'} \alpha_{b'})$,
-where the sum is over all benchmarks in the division.  Let~$N$ be the
-total number of benchmarks in the division.
-
-For \maintrack and \ucoretrack divisions, we will separately
-compute the weighted sum of all benchmarks separately based on the
-parallel performance and sequential performance.
-(Section~\ref{sec:benchmark-scoring})
+benchmarks with \emph{unknown status} are removed from the competition results
+if two (or more) solvers that are sound on benchmarks with known status
+disagree on their result.
 %
-These will be computed as
-$$\sum_b \alpha'_b \cdot \langle e_b \cdot N, n_b \cdot N, w_b, c_b\rangle$$
-%
-where the sum $\sum_b$ ranges over all parallel performances when
-computing parallel performance scores, and over all sequential
-performances when computing sequential performance scores.
-\iffalse
-benchmarks in the division to assess parallel performance, and the
-weighted sum of all sequential performances (Section~\ref{sec:sequential})
-to assess sequential performance.
-\fi
-For incremental track divisions,
-division scores will be based on parallel performance only.\footnote{Since
-  incremental track benchmarks may be partially solved, defining a
-  useful sequential performance for the incremental track would require
-  information not provided by the parallel performance, e.g., detailed timing
-  information for each result.}
-  \todo{is this only true for the incremental track or also one of the new tracks}
+Only the remaining benchmarks are used in the following computation of division
+scores (but the organizers \emph{will report disagreements} for informational
+purposes).
 
-Division scores are compared lexicographically:
-\begin{itemize}
-\item A weighted sum of parallel performances $\langle e, n, w, c\rangle$ is
-  better than $\langle e', n', w', c'\rangle$ iff $e < e'$ or ($e =
-  e'$ and $n > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e =
-  e'$ and $n = n'$ and $w = w'$ and $c < c'$).  That is, fewer errors
-  takes precedence over more correct solutions, which takes precedence
-  over less wall-clock time taken, which takes precedence over less
-  CPU time taken.
-\item A weighted sum of sequential performances $\langle e_S, n_S,
-  c_S\rangle$ is better than $\langle e_S', n_S', c_S'\rangle$ iff
-  $e_S < e_S'$ or ($e_S = e_S'$ and $n_S > n_S'$) or ($e_S = e_S'$ and
-  $n_S = n_S'$ and $c_S < c_S'$).  That is, fewer errors takes
-  precedence over more correct solutions, which takes precedence over
-  less CPU time taken.
-\end{itemize}
-%
-We will not make any comparisons between parallel and sequential
-performances, as these are intended to measure fundamentally different
-performance characteristics.
+\subsubsection{Parallel Division Score}
+
+The parallel score for a division is computed for \emph{all} tracks.  It is
+defined for a participating solver in a division with $M$ benchmarks as the sum
+of all the individual parallel benchmark scores:
+$$\sum_{b\in M} \langle e_b \cdot N, n_b \cdot N, w_b, c_b\rangle$$.
+
+\noindent
+A parallel division score $\langle e, n, w, c\rangle$ is better than a parallel
+division score $\langle e', n', w', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
+> n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w
+= w'$ and $c < c'$).  That is, fewer errors takes precedence over more correct
+solutions, which takes precedence over less wall-clock time taken, which takes
+precedence over less CPU time taken.
+
+\subsubsection{Sequential Division Score}
+
+The sequential score for a division is computed for \emph{all} tracks
+\emph{except} the \inctrack and incremental benchmarks in the
+\challtrack\footnote{Since incremental track benchmarks may be partially
+solved, defining a useful sequential performance for the incremental track
+would require information not provided by the parallel performance, e.g.,
+detailed timing information for each result.}.  It is defined for a
+participating solver in a division with $M$ benchmarks as the sum of all the
+individual sequential benchmark scores:
+$$\sum_{b\in M} \langle e_{S_b} \cdot N, n_{S_b} \cdot N, w_{S_b}, c_{S_b}\rangle$$.
+
+\noindent
+A sequential division score $\langle e_S, n_S, c_S\rangle$ is better than a
+sequential division score $\langle e_S', n_S', c_S'\rangle$ iff $e_S < e_S'$ or
+($e_S = e_S'$ and $n_S > n_S'$) or ($e_S = e_S'$ and $n_S = n_S'$ and $c_S <
+c_S'$).  That is, fewer errors takes precedence over more correct solutions,
+which takes precedence over less CPU time taken.
+
+We will not make any comparisons between parallel and sequential performances,
+as these are intended to measure fundamentally different performance
+characteristics.
+
+\subsubsection{24-Seconds Score (\maintrack)}
+
+The 24-seconds score for a division is computed for the \maintrack as the
+parallel division score with a wall-clock time limit $T$ of 24 seconds.
+
+\subsubsection{Sat Score (\maintrack)}
+
+The sat score for a division is computed for the \maintrack as the
+parallel division score when only satisfiable instances are considered.
+
+\subsubsection{Unsat Score (\maintrack)}
+The unsat score for a division is computed for the \maintrack as the
+parallel division score when only unsatisfiable instances are considered.
+
 
 \subsection{Other Recognitions \todo{Update}}
 
