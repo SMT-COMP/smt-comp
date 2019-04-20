@@ -119,8 +119,8 @@ competition web site, \url{http://www.smtcomp.org}.
   entered, and magic numbers for benchmark scrambling.
 \item[June~2] Deadline for final versions of solvers, including
   system descriptions.
-\item[\todo{}] Opening value of NYSE Composite Index used to complete
-  random seed for benchmark scrambling.
+\item[June~3] Opening value of NYSE Composite Index used to compute
+  random seed for competition tools.
 \item[July~7/8] SMT Workshop; end of competition, presentation of
   results.
 \end{description}
@@ -146,7 +146,7 @@ SMT-COMP~2019 is part of the SMT Workshop~2019
 which is affiliated with SAT~2019 (\url{http://sat2019.tecnico.ulisboa.pt/}).
 The SMT Workshop will include a block of time to present the results of the
 competition.
-
+%
 Accordingly, researchers are highly encouraged to submit both new
 benchmarks and new or improved solvers to raise the level of
 competition and advance the state-of-the-art in automated SMT problem
@@ -156,7 +156,7 @@ SMT-COMP 2019 will have five tracks: the \maintrack (previously: Main Track),
 the \inctrack (previously: Application Track), the \ucoretrack,
 the (new) \challtrack, and the (new)
 \mvaltrack.
-
+%
 Within each track there are multiple divisions, where each division
 uses benchmarks from a specific SMT-LIB logic (or group of logics).
 We will recognize winners as measured by number of benchmarks solved
@@ -171,7 +171,7 @@ version,\footnote{Earlier versions of this document include
   Matthias Heizmann, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
 	and Tjark Weber.}  describes the rules and competition procedures for
 SMT-COMP~2019.
-The principal changes from the previous competition rules are the following: \todo{Aina in charge of this section}
+The principal changes from the previous competition rules are the following:
 \begin{itemize}
   \item {\bf Mandatory System Descriptions.}
     SMT-COMP entrants are now required to provide a short (1–2 pages)
@@ -182,7 +182,11 @@ The principal changes from the previous competition rules are the following: \to
     Second, we want to encourage documenting technical improvements that
     lead to the current results.}
 
-  \item {\bf Naming Convention for Derived Tools.} \todo{}
+  \item {\bf Naming Convention for Derived Tools.}
+    This year, we require that a derived tool (a tool based on and extending
+    another SMT solver) should follow the \emph{naming convention} {[name of
+    base solver]-[my solver name]}.
+    \rationale{Give credit where credit is due.}
 
   \item {\bf Renaming of Tracks.} This year, the track previously known as
     `Main Track` will be renamed to \emph{\maintrack}, and the previous
@@ -315,10 +319,10 @@ The principal changes from the previous competition rules are the following: \to
     spirit of an evaluation than a competition.}
 
   \item {\bf Experimental Strings Division.}
-    \todo{point to the current draft of the standard as the set of rules
-    solvers have to agree on}
     The competition will feature an experimental divisions for benchmarks that
-    use strings.
+    use strings. Participating solvers must implement the semantics of the
+    current SMT-LIB draft for the theory of unicode strings
+    (\url{http://smtlib.cs.uiowa.edu/theories-UnicodeStrings.shtml}).
     \rationale{Corresponding theories and benchmarks are expected to be added
     to SMT-LIB in the near future.}
 
@@ -624,6 +628,7 @@ The SMT-LIB format specification is available from the ``Standard''
 section of the SMT-LIB website~\cite{SMT-LIB}.  Solvers will be given
 formulas only from the divisions into which they have been entered.
 
+\pagebreak
 \header{Time and Memory Limits.}
 %
 Each SMT-COMP solver will be executed on a dedicated processor of a
@@ -1211,6 +1216,8 @@ parallel division score when only unsatisfiable instances are considered.
 
 \subsection{Other Recognitions}
 
+{\color{red} Details to be announced.}
+\iffalse
 The organizers will also recognize the following contributions:
 %
 \begin{itemize}
@@ -1222,18 +1229,7 @@ The organizers will also recognize the following contributions:
 %
 The organizers reserve the right to recognize other outstanding
 contributions that become apparent in the competition results.
-
-As part of the FLoC Olympic Games, Kurt G{\"o}del medals will be
-awarded to:
-%
-\begin{itemize}
-\item the solver that wins the most competitive divisions in the
-  incremental track;
-\item the solver that wins the most competitive divisions in the
-  \ucoretrack;
-\item the solver that wins the QF\_BV division (separately for
-  parallel and sequential performance) in the \maintrack.
-\end{itemize}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1250,6 +1246,7 @@ be recused from these decisions.  The organizers' decisions are final.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pagebreak
 \section{Acknowledgments}
 
 SMT-COMP 2019 is organized under the direction of the SMT Steering
