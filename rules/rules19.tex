@@ -182,9 +182,9 @@ The principal changes from the previous competition rules are the following:
     description of the system.
     \rationale{The main incentive for this
     change is twofold.  First, we want to improve transparency when submitted
-    solvers are wrapper tools according to the rules of the competition.
-    Second, we want to encourage documenting technical improvements that
-    lead to the current results.}
+    solvers are wrapper or derived tools according to the rules of the
+    competition.  Second, we want to encourage documenting technical
+    improvements that lead to the current results.}
 
   \item {\bf Naming Convention for Derived Tools.}
     This year, we require that a derived tool (a tool based on and extending
@@ -355,10 +355,10 @@ determine the (un)satisfiability of benchmarks from the SMT-LIB benchmark librar
 \header{Wrapper Tool.}
 %
 A \emph{wrapper tool} is defined as any solver that calls one or more other SMT
-solvers (the \emph{wrapped solvers}). Its system description \textbf{must} explicitly acknowledge any
-solvers that it wraps.  It \emph{should} further make clear technical
-innovations by which the wrapper tool expects to improve on the wrapped
-solvers.
+solvers (the \emph{wrapped solvers}). Its system description \textbf{must}
+explicitly acknowledge and state the \textbf{exact} version of any solvers that
+it wraps.  It \emph{should} further make clear technical innovations by which
+the wrapper tool expects to improve on the wrapped solvers.
 
 \header{Derived Tool.}
 %
@@ -410,6 +410,8 @@ As part of the submission, SMT-COMP entrants are \textbf{required} to provide a
 short (1-2 pages) description of the system, which \textbf{must} explicitly
 acknowledge any solver it wraps or is based on in case of a \emph{wrapper} or
 \emph{derived} tool (see above).
+In case of a \emph{wrapper} tool, it \textbf{must} also explicitly state
+the exact version of each wrapped solver.
 It \emph{should} further include
 \begin{itemize}[itemsep=0ex]
   \item a list of all authors of the system and their present institutional
@@ -417,10 +419,9 @@ It \emph{should} further include
   \item the basic SMT solving approach employed,
   \item details of any non-standard algorithmic techniques as well as
     references to relevant literature (by the authors or others),
-  \item in case of a \emph{wrapped} or \emph{derived tool}: details of
+  \item in case of a \emph{wrapper} or \emph{derived tool}: details of
     technical innovations by which a wrapper or derived tool expects to improve
-    on the wrapped,
-    solvers or base solver
+    on the wrapped solvers or base solver
   \item appropriate acknowledgement of tools other than SMT solvers called by
     the system (e.g., SAT solvers) that are not written by the authors of the
     submitted solver, and
