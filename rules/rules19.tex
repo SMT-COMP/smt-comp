@@ -872,7 +872,7 @@ results.
 
 \section{Benchmarks and Problem Divisions}
 
-\header{Division}
+\header{Divisions.}
 Within each track there are multiple divisions, and each division selects
 benchmarks from a specific SMT-LIB logic in the SMT-LIB benchmark library.
 
@@ -1166,7 +1166,7 @@ Only the remaining benchmarks are used in the following computation of division
 scores (but the organizers \emph{will report disagreements} for informational
 purposes).
 
-\subsubsection{Parallel Division Score}
+\subsubsection{Parallel Score}
 
 The parallel score for a division is computed for \emph{all} tracks.  It is
 defined for a participating solver in a division with $M$ benchmarks as the sum
@@ -1181,7 +1181,7 @@ division score $\langle e', n', w', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
 solutions, which takes precedence over less wall-clock time taken, which takes
 precedence over less CPU time taken.
 
-\subsubsection{Sequential Division Score}
+\subsubsection{Sequential Score}
 
 The sequential score for a division is computed for \emph{all} tracks
 \emph{except} the \inctrack and incremental benchmarks in the
@@ -1221,7 +1221,37 @@ parallel division score when only unsatisfiable instances are considered.
 
 \subsection{Competition-Wide Recognitions}
 
-{\color{red} Details to be announced.}
+In 2014 the SMT competition introduced a competition-wide scoring to allow it to award medals in the FLoC Olympic Games and has been awarded each year since. This scoring purposefully emphasized the breadth of solver participation by summing up a score for each (competitive) division a solver competed in. Whilst this rationale is reasonable, we observed that this score had become dictated by the number of divisions being entered by a solver.
+
+This year we will replace the competition-wide score with two new \emph{rankings} that select one solver per division and then rank those solvers. The rationale here is to take the focus away from the number of divisions entered and focus on measures that make sense to use to compare different divisions.
+
+\subsubsection{Biggest Lead Ranking}
+
+This ranking aims to select the solver that \emph{won by the most} in some competitive division. The winners of each division are ranked by the distance between them and the next competitive solver in that division.
+
+Let $\mathit{solved}(D,i)$ be the number of problems solved by the $i$th solver in division $D$. The rank of division $D$ is given as
+\[
+\frac{\mathit{solved}(D,1)+1}{\mathit{solved}(D,2)+1}
+\]
+The biggest lead winner is the winner of the division with the highest (largest) rank. This can be computed per scoring system e.g. separately for the sat and unsat score.
+
+\subsubsection{Largest Contribution Ranking}
+
+This ranking aims to select the solver that \emph{uniquely contributed} the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solvers contribution to the \emph{virtual best solver} for a division.
+
+The virtual best solver score for a division $D$ containing solvers $S$ is given as 
+\[
+\mathit{vbss}(D,S) = \sum_{b \in D} {\sf min}\{ \mathit{solvedIn}(s,b) \mid s \in S ~\mathit{and}~\mathit{solved}(s,b) \}
+\]
+where $\mathit{solved}(s,b)$ is true if solver $s$ solves benchmark $b$ and $\mathit{solvedIn}(s,b)$ is the amount of time solver $s$ takes to solve benchmark $b$. E.g. $\mathit{vbss}(D,S)$ is the smallest amount of time taken to solve all benchmarks solved in division $D$ using solvers in $S$.
+
+Let $S$ be the set of competitive solvers competing in division $D$. The rank of solver $s \in S$ in division $D$ is then
+\[
+1- \frac{\mathit{vbss}(D,S-s) }{ \mathit{vbss}(D,S)}
+\]
+e.g. the difference in virtual best solver score when removing $s$ from the computation. This will be a number between 0 and 1 with 0 indicating that $s$ made no impact on the \emph{vbss} and 1 indicating that $s$ is the only solver that solved anything in the division.
+
+The largest contribution winner is the solver across all divisions with the highest (largest) rank. Again, this can be computed per scoring system.
 
 \subsection{Other Recognitions}
 
