@@ -334,6 +334,7 @@ def process_csv(csv,family,division,disagreements,year,time_limit,verdicts,use_f
 
 # This function runs with specific values for certain years but keeps some options open to allow
 # us to try diferent things
+# Assumes csv files for different years are stored in a hardcoded place. TODO: make more generic
 def run(family,division,verdicts,tlimit,bytotal,sequential,skip_unknowns):
 
   df15 = process_csv("csvs/2015.csv",family,division,False,2015,min(2400,tlimit),verdicts,False,skip_unknowns,sequential)
