@@ -1171,7 +1171,7 @@ purposes).
 The parallel score for a division is computed for \emph{all} tracks.  It is
 defined for a participating solver in a division with $M$ benchmarks as the sum
 of all the individual parallel benchmark scores:
-$$\sum_{b\in M} \langle e_b \cdot N, n_b \cdot N, w_b, c_b\rangle$$.
+$$\sum_{b\in M} \langle e_b , n_b , w_b, c_b\rangle$$.
 
 \noindent
 A parallel division score $\langle e, n, w, c\rangle$ is better than a parallel
@@ -1191,7 +1191,7 @@ would require information not provided by the parallel performance, e.g.,
 detailed timing information for each result.}.  It is defined for a
 participating solver in a division with $M$ benchmarks as the sum of all the
 individual sequential benchmark scores:
-$$\sum_{b\in M} \langle e_{S_b} \cdot N, n_{S_b} \cdot N, w_{S_b}, c_{S_b}\rangle$$.
+$$\sum_{b\in M} \langle e_{S_b}, n_{S_b}, w_{S_b}, c_{S_b}\rangle$$.
 
 \noindent
 A sequential division score $\langle e_S, n_S, c_S\rangle$ is better than a
@@ -1229,46 +1229,44 @@ This year we will replace the competition-wide score with two new \emph{rankings
 
 This ranking aims to select the solver that \emph{won by the most} in some competitive division. The winners of each division are ranked by the distance between them and the next competitive solver in that division.
 
-Let $\mathit{solved}(D,i)$ be the number of problems solved by the $i$th solver in division $D$. The rank of division $D$ is given as
+Let $n_i^D$ be the correctness score of the $i$th solver (for a given scoring system e.g. number of correct results or reduction) in division $D$. The rank of division $D$ is given as
 \[
-\frac{\mathit{solved}(D,1)+1}{\mathit{solved}(D,2)+1}
+\frac{n_1^D+1}{n_2^D+1}
 \]
-The biggest lead winner is the winner of the division with the highest (largest) rank. This can be computed per scoring system e.g. separately for the sat and unsat score.
+The \emph{biggest lead winner} is the winner of the division with the highest (largest) rank. This can be computed per scoring system.
 
 \subsubsection{Largest Contribution Ranking}
 
-This ranking aims to select the solver that \emph{uniquely contributed} the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solvers contribution to the \emph{virtual best solver} for a division.
+This ranking aims to select the solver that \emph{uniquely contributed} the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solver's contribution to the \emph{virtual best solver} for a division.
 
-The virtual best solver score for a division $D$ containing solvers $S$ is given as 
+Let $\langle e_b^s, n_b^s, w_b^s, c_b^s \rangle$ be the parallel benchmark score for benchmark $b$ and solver $s$ (for a given scoring system e.g. $n$ is either number of correct results or reduction). 
+The virtual best solver score for a division $D$ using solvers $S$ is given as 
 \[
-\mathit{vbss}(D,S) = \sum_{b \in D} {\sf min}\{ \mathit{solvedIn}(s,b) \mid s \in S ~\mathit{and}~\mathit{solved}(s,b) \}
+\mathit{vbss}(D,S) = \sum_{b \in D} {\sf min}\{ n_b^s \times c_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0  \}
 \]
-where $\mathit{solved}(s,b)$ is true if solver $s$ solves benchmark $b$ and $\mathit{solvedIn}(s,b)$ is the amount of time solver $s$ takes to solve benchmark $b$. E.g. $\mathit{vbss}(D,S)$ is the smallest amount of time taken to solve all benchmarks solved in division $D$ using solvers in $S$.
+where the minimum of an empty set is 0 (e.g. no contribution if a benchmark is unsolved). In other words, for the single query track, $\mathit{vbss}(D,S)$ is the smallest amount of time taken to solve all benchmarks solved in division $D$ using solvers in $S$.
 
 Let $S$ be the set of competitive solvers competing in division $D$. The rank of solver $s \in S$ in division $D$ is then
 \[
 1- \frac{\mathit{vbss}(D,S-s) }{ \mathit{vbss}(D,S)}
 \]
-e.g. the difference in virtual best solver score when removing $s$ from the computation. This will be a number between 0 and 1 with 0 indicating that $s$ made no impact on the \emph{vbss} and 1 indicating that $s$ is the only solver that solved anything in the division.
-
-The largest contribution winner is the solver across all divisions with the highest (largest) rank. Again, this can be computed per scoring system.
+e.g. the difference in virtual best solver score when removing $s$ from the computation. This will be a number between 0 and 1 with 0 indicating that $s$ made no impact on the \emph{vbss} and 1 indicating that $s$ is the only solver that solved anything in the division. 
+%
+The \emph{largest contribution winner} is the solver across all divisions with the highest (largest) rank. Again, this can be computed per scoring system.
 
 \subsection{Other Recognitions}
 
-{\color{red} Details to be announced.}
-\iffalse
 The organizers will also recognize the following contributions:
 %
 \begin{itemize}
-\item \emph{Best new entrant}. The best performing entrant from a new
-  solver implementation team, as measured by the competition-wide
-    metric. \todo{}
-\item \emph{Benchmarks}. Contributors of new benchmarks.
+\item \emph{New entrants}. All new entrants (to be interpreted by the organisers, but broadly a significantly new tool that has not competed in the competition before) that beat an existing solver in some division will be awarded special commendations.
+\item \emph{Benchmarks}. Contributors of new benchmarks used in the competition will receive a special mention.
 \end{itemize}
 %
+These recognitions will be announced at the SMT workshop and published on the competition website. 
 The organizers reserve the right to recognize other outstanding
 contributions that become apparent in the competition results.
-\fi
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
