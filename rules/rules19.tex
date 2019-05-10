@@ -7,7 +7,8 @@
 \usepackage{xspace}
 \usepackage{enumitem}
 
-\usepackage{draftwatermark}
+%\usepackage{draftwatermark}
+%\usepackage{showframe}   % debug
 
 \hyphenation{data-types}
 
@@ -331,10 +332,9 @@ The principal changes from the previous competition rules are the following:
     to SMT-LIB in the near future.}
 
   \item {\bf Competition-Wide Recognitions.}
-    This year, we will replace the previous notion of competition-wide scoring
+    This year, we will replace the previous notion of competi\-tion-wide scoring
     as introduced for the Main Track in 2014 (and improved over the years)
     with recognitions for all tracks that do not directly compare divisions.
-    {\color{red} Details to be announced.}
     \rationale{Competition-wide scoring was introduced as a metric to
     compare solver performance across all divisions. By definition, this metric
     is biased towards solvers that enter a large number of divisions.}
@@ -348,8 +348,8 @@ The principal changes from the previous competition rules are the following:
 
 \header{SMT Solver.}
 %
-A SMT solver that can enter SMT-COMP is a tool that can
-determine the (un)satisfiability of benchmarks from the SMT-LIB benchmark library
+A Satisfiability Modulo Theories (SMT) solver that can enter SMT-COMP is a tool that can determine the
+(un)satisfia\-bility of benchmarks from the SMT-LIB benchmark library
 (\url{http://www.smt-lib.org/benchmarks.shtml}).
 
 \header{Wrapper Tool.}
@@ -397,7 +397,7 @@ for clarity, \emph{each submitted solver must have one configuration
 presence \emph{and the tracks and divisions in which it is
   participating} via the web form at
 \begin{center}
-  \rem{submission form url}
+  \url{https://docs.google.com/forms/d/1gJ_9ztIzwsgeyR0R4H_yIg5lBxxxDBwSy8ZodXt5xKk}
 \end{center}
 A submission \textbf{must} also include a \emph{system description} (see below)
 and a \emph{32-bit unsigned integer}.
@@ -521,7 +521,6 @@ archive to allow reproduction of the competition results in the future.
 The competition uses a number of tools/scripts to run the competition. In the
 following, we briefly describe these tools. Unless stated otherwise, these
 tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
-{\color{red} Some tools have not been released yet.}
 \begin{itemize}
   \item \textbf{Benchmark Selection.} We use a script to implement the
     benchmark selection policy described on page~\pageref{benchmark-selection}.
@@ -694,8 +693,10 @@ This track will use a wall-clock time limit of 40 minutes per solver/benchmark
 pair.
 
 \header{Post-Processor.}
-This track uses a StarExec post-processor (named \rem{tba}) to accumulate the
-results.
+This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/single-query-track/process}}
+as a post-processor
+to validate and accumulate the results.
 
 \subsection{Incremental Track (Previously: Application Track)}
 \label{sec:exec:app}
@@ -745,12 +746,14 @@ other commands.
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
 pair.
 
-\header{Trace Executor.} This track will use the trace executor at \rem{link tba}
-to execute solvers on an incremental benchmark file.
+\header{Trace Executor.} This track will use the trace executor
+to execute a solver on an incremental benchmark file.
 
 \header{Post-Processor.}
-This track will use the post-processor at \rem{link tba} to accumulate the
-results.
+This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/incremental-track/process}}
+as a post-processor
+to validate and accumulate the results.
 
 \subsection{\challtrack}
 \label{sec:exec:industry-challenge}
@@ -773,9 +776,9 @@ This track will use a wall-clock time limit of 12 hours per solver/benchmark
 pair.
 
 \header{Post-Processor.}
-This track uses the post-processors from the \maintrack (for non-incremen-tal
-benchmarks) and the \inctrack (for incremental benchmarks) to accumulate the
-results.
+This track will use the post-processors from the \maintrack (for
+non-incremen\-tal benchmarks) and the \inctrack (for incremental benchmarks)
+to accumulate the results.
 
 \subsection{\ucoretrack}
 \label{sec:exec:unsat-core}
@@ -826,8 +829,10 @@ pair. The time limit for checking unsatisfiable cores is yet to be determined,
 but is anticipated to be around 5 minutes of wall-clock time per solver.
 
 \header{Post-Processor.}
-This track will use the post-processor at \rem{link tba} to accumulate the
-results.
+This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/unsat-core-track/process}}
+as a post-processor
+to validate and accumulate the results.
 
 \subsection{\mvaltrack (experimental)}
 \label{sec:exec:model}
@@ -855,8 +860,8 @@ function symbols), or if the returned model does not satisfy the benchmark.
 
 \header{Validation.}
 In order to check that the model satisfies the benchmark, the organizers will
-use a model validating tool. The organizers will make this tool available to
-solver developers before the solver submission deadline.
+use the model validating tool available at
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/model-validation-track}}.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
@@ -865,8 +870,10 @@ determined, but is anticipated to be around 5 minutes of wall-clock time per
 solver.
 
 \header{Post-Processor.}
-This track will use the post-processor at \rem{link tba} to accumulate the
-results.
+This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/model-validation-track/process}}
+as a post-processor
+to validate and accumulate the results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -974,8 +981,8 @@ will be ignored.
 \header{Benchmark scrambling.}
 %
 Benchmarks will be slightly scrambled before the competition, using a simple
-benchmark scrambler available at \rem{link tba}.  The benchmark scrambler will
-be made publicly available before the competition.
+benchmark scrambler available at \url{https://github.com/SMT-COMP/scrambler}.
+The benchmark scrambler will be made publicly available before the competition.
 %
 Naturally, solvers must not rely on previously determined identifying
 syntactic characteristics of competition benchmarks in testing
