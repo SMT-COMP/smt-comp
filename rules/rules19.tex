@@ -862,6 +862,10 @@ function symbols), or if the returned model does not satisfy the benchmark.
 In order to check that the model satisfies the benchmark, the organizers will
 use the model validating tool available at
 {\url{https://github.com/SMT-COMP/postprocessors/tree/master/model-validation-track}}.
+The tool will output VALID for full satisfying models, and INVALID for partial models,
+malformed models, models that do not satisfy the benchmark or if the solver returns
+\texttt{unsat}. If the solver provides no output or returns \texttt{unknown} the model
+validating tool will output UNKNOWN.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
@@ -1138,6 +1142,20 @@ processing.  For the \inctrack, we have
   \item otherwise, $e=0$ and $n$ is the \emph{reduction} in the number of
     formulas, i.e., $n = N$ minus the number of formula names in the
     reported unsatisfiable core.
+  \end{itemize}
+
+\subsubsection{\mvaltrack}
+  For the \mvaltrack, the error score $e$ and the correctly solved score $n$
+  are defined as
+  \begin{itemize}
+  \item $e=0$ and $n=0$ if the solver
+    \begin{itemize}[noitemsep,nolistsep]
+      \item aborts without a response, or
+      \item the result of the \akey{check-sat} command is \texttt{unknown},
+    \end{itemize}
+  \item $e=1$ and $n=0$ if the result is invalid according to the output of
+    the model validating tool described in Section~\ref{sec:exec:model},
+  \item otherwise, $e=0$ and $n=1$.
   \end{itemize}
 
 \subsection{Division scoring}
