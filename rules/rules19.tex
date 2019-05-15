@@ -841,7 +841,7 @@ satisfiable problems.  Performance of solvers will be measured by correctness
 and well-formedness of the model they provide.
 
 \header{Benchmark Selection.}
-This experimental track only has one division, QF\_BV. It will run on all
+This experimental track only has one division, QF\_BV. It will run on a
 selection of non-incremental benchmarks with status \texttt{sat} from logic
 QF\_BV (as described on page~\pageref{benchmark-selection}).
 
@@ -942,22 +942,27 @@ the \challtrack, the following selection process will be used.
   families to avoid their over-representation.  SMT-COMP attempts to
   give preference to benchmarks that are ``real-world,'' in the sense
   of coming from or having some intended application outside SMT.
-\item \emph{Remove easy benchmarks.} The organizers will remove all
-  benchmarks that were solved by all solvers (including non-competitive
-  solvers) in less than one second in 2018.
-\item \emph{\ucoretrack.} In addition, for the \ucoretrack, all
-  benchmarks with a single assertion will be removed.
-\item \emph{Cap the number of instances in a division.} The organizers will
-  limit the number of benchmarks in a division based on the size of the
-  corresponding logic in SMT-LIB as follows:
+\item \emph{Remove easy / uninteresting benchmarks.}
+  For the following tracks, all benchmarks that can be
+  considered as easy or uninteresting based on the following criteria
+  will be removed.
+  \begin{itemize}
+    \item \emph{\maintrack.} All benchmarks that were solved by all
+      solvers (including non-competitive solvers) in less than one second in
+      the corresponding track in 2018.
+    \item \emph{\ucoretrack.} All benchmarks with only a single assertion.
+  \end{itemize}
+\item \emph{Cap the number of instances in a division.}
+  The number of benchmarks in a division based on the size of the
+  corresponding logic in SMT-LIB will be limited as follows.
+  Let $n$ be the number of benchmarks in an SMT-LIB logic, then
   \begin{enumerate}
   \vspace{-1ex}
-    \item \label{bench-sel-300} If a logic contains less than 300 instances,
-      all instances will selected.
-  \item \label{bench-sel-600} If a logic contains between 300 and 600
-    instances, a subset of 300 instances from the set will be selected.
-  \item \label{bench-sel-more} If a logic contains more than 600 instances,
-    50\% of the benchmarks will be selected.
+    \item \label{bench-sel-300} if $n <= 300$, all instances will be selected;
+  \item \label{bench-sel-600} if $300 < n \leq 600$, a subset of 300 instances
+    from the logic will be selected;
+  \item \label{bench-sel-more} and if $n > 600$,
+    50\% of the benchmarks of the logic will be selected.
   \end{enumerate}
 \end{enumerate}
 %
