@@ -807,11 +807,14 @@ must respond with an error to the following \akey{get-unsat-core}
 command.
 
 \header{Result.}
-The result of a solver is considered erroneous if the response to the
+The result of a solver is considered \emph{erroneous} if the response to the
 \akey{check-sat} command is \texttt{sat}, or if the returned
 unsatisfiable core is not well-formed (e.g., contains names of
 formulas that have not been asserted before), or if the returned
 unsatisfiable core is not, in fact, unsatisfiable.
+Note that an \texttt{unsat} response to \akey{check-sat} but no response to
+\akey{get-model} is considered as a special case of the last case
+(the empty formula is satisfiable).
 
 \header{Validation.}
 The organizers will use a selection of SMT solvers (the \emph{validation
@@ -862,10 +865,27 @@ function symbols), or if the returned model does not satisfy the benchmark.
 In order to check that the model satisfies the benchmark, the organizers will
 use the model validating tool available at
 {\url{https://github.com/SMT-COMP/postprocessors/tree/master/model-validation-track}}.
-The tool will output VALID for full satisfying models, and INVALID for partial models,
-malformed models, models that do not satisfy the benchmark or if the solver returns
-\texttt{unsat}. If the solver provides no output or returns \texttt{unknown} the model
-validating tool will output UNKNOWN.
+It expects as model input a file with the answer to the \akey{check-sat}
+command followed by the solver response to the \akey{get-model} command.
+The model validator tool will output 
+\begin{enumerate}
+  \item VALID\hskip .5em for a \texttt{sat} solver response
+        followed by a full satisfying model;
+  \item INVALID\hskip .5em for
+    \begin{itemize}[noitemsep,topsep=0pt]
+      \item an \texttt{unsat} solver response to \akey{check-sat},
+      \item a \texttt{sat} response to \akey{check-sat} without a response to
+        \akey{get-model},
+      \item partial models,
+      \item malformed models,
+      \item models that do not satisfy the input problem; and
+    \end{itemize}
+  \item UNKNOWN\hskip .5em for
+    \begin{itemize}[noitemsep,topsep=0pt]
+      \item no solver output (no response to both commands),
+      \item an \texttt{unknown} response to \akey{check-sat}.
+    \end{itemize}
+\end{enumerate}
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 40 minutes per solver/benchmark
@@ -1112,7 +1132,7 @@ does not terminate within the time limit.  Solvers should take care
 not to accidentally produce output that contains \texttt{sat} or
 \texttt{unsat}.
 
-\subsubsection{Incremental Track}
+\subsubsection{\inctrack}
 %
 An application benchmark may contain multiple \akey{check-sat}
 commands.  Solvers may partially solve the benchmark before timing
@@ -1139,7 +1159,7 @@ processing.  For the \inctrack, we have
   \begin{itemize}
   \item $e=0$ and $n=0$ if the solver
     \begin{itemize}[noitemsep,nolistsep]
-      \item aborts without a response, or
+      \item aborts without a response to \akey{check-sat}, or
       \item the result of the \akey{check-sat} command is \texttt{unknown},
     \end{itemize}
   \item $e=1$and  $n=0$ if the result is erroneous according to
@@ -1153,12 +1173,9 @@ processing.  For the \inctrack, we have
   For the \mvaltrack, the error score $e$ and the correctly solved score $n$
   are defined as
   \begin{itemize}
-  \item $e=0$ and $n=0$ if the solver
-    \begin{itemize}[noitemsep,nolistsep]
-      \item aborts without a response, or
-      \item the result of the \akey{check-sat} command is \texttt{unknown},
-    \end{itemize}
-  \item $e=1$ and $n=0$ if the result is invalid according to the output of
+  \item $e=0$ and $n=0$ if the result is UNKNOWN according to the output of
+    the model validating tool described in Section~\ref{sec:exec:model},
+  \item $e=1$ and $n=0$ if the result is INVALID according to the output of
     the model validating tool described in Section~\ref{sec:exec:model},
   \item otherwise, $e=0$ and $n=1$.
   \end{itemize}
