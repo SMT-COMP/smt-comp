@@ -876,15 +876,15 @@ The model validator tool will output
   \item INVALID\hskip .5em for
     \begin{itemize}[noitemsep,topsep=0pt]
       \item an \texttt{unsat} solver response to \akey{check-sat},
-      \item a \texttt{sat} response to \akey{check-sat} without a response to
-        \akey{get-model},
       \item partial models,
-      \item malformed models,
+      \item malformed models (except if this due to reaching the time limit
+        while printing),
       \item models that do not satisfy the input problem; and
     \end{itemize}
   \item UNKNOWN\hskip .5em for
     \begin{itemize}[noitemsep,topsep=0pt]
-      \item no solver output (no response to both commands),
+      \item no solver output (no response to either both commands or
+        \akey{get-model}),
       \item an \texttt{unknown} response to \akey{check-sat}.
     \end{itemize}
 \end{enumerate}
