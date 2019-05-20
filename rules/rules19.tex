@@ -807,14 +807,16 @@ must respond with an error to the following \akey{get-unsat-core}
 command.
 
 \header{Result.}
-The result of a solver is considered \emph{erroneous} if the response to the
-\akey{check-sat} command is \texttt{sat}, or if the returned
-unsatisfiable core is not well-formed (e.g., contains names of
-formulas that have not been asserted before), or if the returned
+The result of a solver is considered \emph{erroneous} if (i) the
+response to the \akey{check-sat} command is \texttt{sat}, (ii) the
+returned unsatisfiable core is not well-formed (e.g., contains names of
+formulas that have not been asserted before), or (iii) the returned
 unsatisfiable core is not, in fact, unsatisfiable.
-Note that an \texttt{unsat} response to \akey{check-sat} but no response to
-\akey{get-model} is considered as a special case of the last case
-(the empty formula is satisfiable).
+%
+If the solver replies \texttt{unsat} to \akey{check-sat} but gives no
+response to \akey{get-model}, this is considered as no reduction, i.e.,
+as if the solver would have returned the entire benchmark as an unsat
+core.
 
 \header{Validation.}
 The organizers will use a selection of SMT solvers (the \emph{validation
