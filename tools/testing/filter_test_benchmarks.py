@@ -2,6 +2,11 @@
 
 from argparse import ArgumentParser
 import xml.etree.ElementTree as ET
+import os
+
+def die(msg):
+    print("error: {}".format(msg))
+    sys.exit(1)
 
 def trav_space(space):
     spaces = space.findall('Space')
@@ -18,12 +23,15 @@ if __name__ == "__main__":
                   "with benchmarks (for testing purposes).")
     parser.add_argument ("infile", help="the input space xml from StarExec")
     parser.add_argument ("outfile", help="the filtered output space xml")
-    g_args = parser.parse_args()
+    args = parser.parse_args()
 
-    tree = ET.parse(g_args.infile)
+    if not os.path.exists(args.infile):
+        die("file not found: {}".format(args.infile))
+
+    tree = ET.parse(args.infile)
     root = tree.getroot()
     incremental_space = root.find('.//Space[@name="incremental"]')
     non_incremental_space = root.find('.//Space[@name="non-incremental"]')
     for space in [incremental_space, non_incremental_space]:
         if space: trav_space(space)
-    tree.write(g_args.outfile)
+    tree.write(args.outfile)
