@@ -56,6 +56,16 @@ def filter_benchmarks_in_space(space):
     benchmarks = space.findall('Benchmark')
     for b in benchmarks[1:]: space.remove(b)
 
+# Traverse space and add solvers to divisions and their subspaces.
+def add_solvers_in_space(space, solvers):
+    spaces = space.findall('Space')
+    for s in spaces: add_solvers_in_space(s, solvers)
+    for solver in solvers:
+        ET.SubElement(
+                space,
+                'Solver',
+                attrib = {'id': solver[0], 'name': solver[1]})
+
 # Parse xml and add solvers to divisions.
 # If 'filter_benchmarks' is true, remove all but one benchmark for each
 # (sub)space with benchmarks (for test runs on StarExec).
@@ -73,11 +83,8 @@ def add_solvers(track, filter_benchmarks):
             subspaces = space.findall('Space')
             for subspace in subspaces:
                 solvers = g_divisions[subspace.attrib['name']]
-                for solver in solvers:
-                    ET.SubElement(
-                            subspace,
-                            'Solver',
-                            attrib = {'id': solver[0], 'name': solver[1]})
+                add_solvers_in_space(subspace, solvers)
+            # remove top-level non-incremental/incremental space tag
             root.extend(subspaces)
             root.remove(space)
 
