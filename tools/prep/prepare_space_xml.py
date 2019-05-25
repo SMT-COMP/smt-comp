@@ -83,7 +83,10 @@ def add_solvers(track, filter_benchmarks):
             subspaces = space.findall('Space')
             for subspace in subspaces:
                 solvers = g_divisions[subspace.attrib['name']]
-                add_solvers_in_space(subspace, solvers)
+                # Only add solvers if the division is competitive
+                # TODO make this check aware of non-competitive solvers and solver variants
+                if len(solvers) > 1:
+                  add_solvers_in_space(subspace, solvers)
             # remove top-level non-incremental/incremental space tag
             root.extend(subspaces)
             root.remove(space)
