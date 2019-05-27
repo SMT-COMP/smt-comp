@@ -42,11 +42,31 @@ def read_csv(fname, track):
             assert (divisions)
 
             for division in divisions:
+                if division == "":
+                    continue
                 if division not in g_divisions:
                     g_divisions[division] = []
                 g_divisions[division].append(
                         [drow['Solver ID'], drow['Solver Name']])
 
+
+def is_model_validation_benchmark(benchmark):
+    isSat = False
+    isQF_BV = False
+    for child in benchmark:
+        if child.attrib['name'] == 'status' and child.attrib['value'] == "sat":
+            isSat = True
+        if child.attrib['name'] == 'set-logic' and child.attrib['value'] == "QF_BV":
+            isQF_BV = True
+    return isSat and isQF_BV
+
+def filter_model_validation_benchmarks(space):
+    spaces = space.findall('Space')
+    for s in spaces: filter_model_validation_benchmarks(s)
+    benchmarks = space.findall('Benchmark')
+    for b in benchmarks:
+        if (not is_model_validation_benchmark(b)):
+            space.remove(b)
 
 # Traverse space and remove all but one benchmark for each (sub)space with
 # benchmarks (for test runs on StarExec).
@@ -76,17 +96,21 @@ def add_solvers(track, filter_benchmarks):
     non_incremental_space = root.find('.//Space[@name="non-incremental"]')
     for space in [incremental_space, non_incremental_space]:
         if space:
+            if track == 'track_model_validation':
+                filter_model_validation_benchmarks(space)
             # filter benchmarks
             if filter_benchmarks:
                 filter_benchmarks_in_space(space)
             # add solvers
             subspaces = space.findall('Space')
             for subspace in subspaces:
-                solvers = g_divisions[subspace.attrib['name']]
-                # Only add solvers if the division is competitive
-                # TODO make this check aware of non-competitive solvers and solver variants
-                if len(solvers) > 1:
-                  add_solvers_in_space(subspace, solvers)
+                division = subspace.attrib['name']
+                if division in g_divisions:
+                    solvers = g_divisions[division]
+                    # Only add solvers if the division is competitive
+                    # TODO make this check aware of non-competitive solvers and solver variants
+                    if len(solvers) > 1:
+                      add_solvers_in_space(subspace, solvers)
             # remove top-level non-incremental/incremental space tag
             root.extend(subspaces)
             root.remove(space)
