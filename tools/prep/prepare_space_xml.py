@@ -68,13 +68,25 @@ def filter_model_validation_benchmarks(space):
         if (not is_model_validation_benchmark(b)):
             space.remove(b)
 
+def space_is_empty(space):
+    spaces = space.findall('Space')
+    benchmarks = space.findall('Benchmark')
+    return not spaces and not benchmarks
+
+def remove_empty_spaces(space):
+    spaces = space.findall('Space')
+    for s in spaces:
+        remove_empty_spaces(s)
+        if space_is_empty(s):
+            space.remove(s)
+
 # Traverse space and remove all but one benchmark for each (sub)space with
 # benchmarks (for test runs on StarExec).
-def filter_benchmarks_in_space(space):
+def filter_benchmarks_in_space(space, n):
     spaces = space.findall('Space')
-    for s in spaces: filter_benchmarks_in_space(s)
+    for s in spaces: filter_benchmarks_in_space(s, n)
     benchmarks = space.findall('Benchmark')
-    for b in benchmarks[1:]: space.remove(b)
+    for b in benchmarks[n:]: space.remove(b)
 
 # Traverse space and add solvers to divisions and their subspaces.
 def add_solvers_in_space(space, solvers):
@@ -96,11 +108,16 @@ def add_solvers(track, filter_benchmarks):
     non_incremental_space = root.find('.//Space[@name="non-incremental"]')
     for space in [incremental_space, non_incremental_space]:
         if space:
+            n = 1 # number of benchmarks to keep in each family
             if track == 'track_model_validation':
                 filter_model_validation_benchmarks(space)
+                n = 3
             # filter benchmarks
             if filter_benchmarks:
-                filter_benchmarks_in_space(space)
+                filter_benchmarks_in_space(space, n)
+
+            remove_empty_spaces(space)
+
             # add solvers
             subspaces = space.findall('Space')
             for subspace in subspaces:
