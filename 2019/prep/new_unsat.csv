@@ -1,0 +1,1281 @@
+./QF_ABV/2019-Wolf-fmbench/2018E/picorv32-check-unrolled-mem.smt2
+./QF_ABV/2019-Wolf-fmbench/2018E/VexRiscv-regch0-30-unrolled-mem.smt2
+./QF_ABV/2019-Wolf-fmbench/2018E/zipcpu-busdelay-unrolled-mem.smt2
+./QF_ABV/2019-Wolf-fmbench/2018E/zipcpu-pfcache-unrolled-mem.smt2
+./QF_ABV/2019-Wolf-fmbench/2018E/zipcpu-zipmmu-unrolled-mem.smt2
+./QF_AUFBV/2019-Wolf-fmbench/2018E/picorv32-check-compact-mem.smt2
+./QF_AUFBV/2019-Wolf-fmbench/2018E/VexRiscv-regch0-30-compact-mem.smt2
+./QF_AUFBV/2019-Wolf-fmbench/2018E/zipcpu-busdelay-compact-mem.smt2
+./QF_AUFBV/2019-Wolf-fmbench/2018E/zipcpu-pfcache-compact-mem.smt2
+./QF_AUFBV/2019-Wolf-fmbench/2018E/zipcpu-zipmmu-compact-mem.smt2
+./QF_BV/2019-Mann/digital-estimation-convergence-bmc-fwd.smt2
+./QF_BV/2019-Mann/digital-estimation-convergence-fwd_prove_ind.smt2
+./QF_BV/2019-Wolf-fmbench/2018E/VexRiscv-regch0-15-unrolled-nomem.smt2
+./QF_BV/2019-Wolf-fmbench/2018E/zipcpu-busdelay-unrolled-nomem.smt2
+./QF_BV/2019-Wolf-fmbench/2018E/zipcpu-pfcache-unrolled-nomem.smt2
+./QF_UFBV/2019-Wolf-fmbench/2018E/VexRiscv-regch0-15-compact-nomem.smt2
+./QF_UFBV/2019-Wolf-fmbench/2018E/zipcpu-busdelay-compact-nomem.smt2
+./QF_UFBV/2019-Wolf-fmbench/2018E/zipcpu-pfcache-compact-nomem.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsge_bvadd_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsge_bvadd_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsge_bvneg_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsge_bvnot_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsgt_bvlshr0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvadd_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvlshr0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvmul_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvneg_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvnot_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvslt_bvashr0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvslt_bvshl0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvadd_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvadd_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvashr0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvlshr1_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvneg_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvneg_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvnot_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvnot_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvor_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvshl0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvudiv1_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvudiv1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvurem0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvadd_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvadd_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvashr0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvlshr0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvlshr1_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvneg_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvneg_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvnot_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvnot_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvshl0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvudiv0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvudiv1_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvurem0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvurem1_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvurem1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvadd_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvadd_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvand_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvashr0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvlshr0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvlshr1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvmul_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvmul_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvneg_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvnot_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvnot_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvshl0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvshl0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvshl1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvurem0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvurem1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvadd_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvadd_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvashr0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvlshr0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvlshr1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvmul_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvmul_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvneg_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvnot_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvnot_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvshl0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvshl0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvshl1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvudiv0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvudiv0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvurem0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvurem1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvadd_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvadd_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvand_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvlshr0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvneg_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvneg_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvnot_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvnot_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvor_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvshl0_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_eq_bvudiv0_ltr_inv_a.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvadd_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvashr0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvmul_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvneg_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvnot_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvshl1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvudiv0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvudiv1_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvurem0_rtl.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvurem1_ltr_inv_g.smt2
+./QF_UFNIA/201903-Zohar-ic/int_check_ne_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvlshr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvashr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvashr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvneg_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvudiv1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvurem1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvneg_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvurem1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvashr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvlshr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvshl0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvshl1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvashr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvlshr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvshl0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvshl1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvudiv0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvudiv0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvurem0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvashr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvudiv0_ltr_inv_a.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_eq_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvneg_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvneg_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvudiv0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsge_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsge_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsge_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsgt_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsgt_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvashr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvashr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvadd_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvlshr1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvneg_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvudiv1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvadd_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvlshr1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvneg_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvurem1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvlshr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvmul_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvmul_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvshl0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvshl0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvshl1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvule_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvlshr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvmul_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvmul_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvshl0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvshl0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvshl1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvudiv0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvudiv0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvurem0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_bvult_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvudiv0_ltr_inv_a.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvmul_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvneg_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvshl1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvudiv0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvashr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvashr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvadd_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvlshr1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvneg_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvneg_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvudiv1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvurem1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvadd_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvlshr1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvneg_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvneg_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvurem1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvadd_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvashr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvashr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvmul_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvmul_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvadd_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvmul_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvmul_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvurem0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvand_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvashr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvlshr0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvneg_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvor_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvshl0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvshl0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvudiv0_ltr_inv_a.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_eq_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvadd_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvand_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvashr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvlshr0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvlshr1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvmul_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvneg_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvneg_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvnot_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvnot_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvor_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvshl1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvudiv0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvudiv1_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem0_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem0_rtl.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem1_ltr_inv_g.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem1_rtl.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvsle_bvlshr0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvsle_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvsle_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvslt_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvuge_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvuge_bvneg_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvuge_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvuge_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvneg_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvudiv1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvule_bvmul_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvule_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvule_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvmul_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvurem0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvurem1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_eq_bvand_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_eq_bvnot_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_eq_bvor_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_eq_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_ne_bvlshr1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_ne_bvmul_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_ne_bvshl1_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_ne_bvudiv0_ltr_no_inv.smt2
+./UFNIA/2019-Zohar-ic/qf/int_check_ne_bvurem1_ltr_no_inv.smt2
+x,QF_ABV/2019-Wolf-fmbench/2018E/picorv32-check-unrolled-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_ABV/2019-Wolf-fmbench/2018E/VexRiscv-regch0-30-unrolled-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_ABV/2019-Wolf-fmbench/2018E/zipcpu-busdelay-unrolled-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_ABV/2019-Wolf-fmbench/2018E/zipcpu-pfcache-unrolled-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_ABV/2019-Wolf-fmbench/2018E/zipcpu-zipmmu-unrolled-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_AUFBV/2019-Wolf-fmbench/2018E/picorv32-check-compact-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_AUFBV/2019-Wolf-fmbench/2018E/VexRiscv-regch0-30-compact-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_AUFBV/2019-Wolf-fmbench/2018E/zipcpu-busdelay-compact-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_AUFBV/2019-Wolf-fmbench/2018E/zipcpu-pfcache-compact-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_AUFBV/2019-Wolf-fmbench/2018E/zipcpu-zipmmu-compact-mem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_BV/2019-Mann/digital-estimation-convergence-bmc-fwd.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_BV/2019-Mann/digital-estimation-convergence-fwd_prove_ind.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_BV/2019-Wolf-fmbench/2018E/VexRiscv-regch0-15-unrolled-nomem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_BV/2019-Wolf-fmbench/2018E/zipcpu-busdelay-unrolled-nomem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_BV/2019-Wolf-fmbench/2018E/zipcpu-pfcache-unrolled-nomem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFBV/2019-Wolf-fmbench/2018E/VexRiscv-regch0-15-compact-nomem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFBV/2019-Wolf-fmbench/2018E/zipcpu-busdelay-compact-nomem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFBV/2019-Wolf-fmbench/2018E/zipcpu-pfcache-compact-nomem.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-alive/qf_AndOrXor:2453_values_121.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-alive/qf_AndOrXor:2663_values_65.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-alive/qf_AndOrXor:887-2_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-alive/qf_Select:699_values_71.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsge_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsge_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsge_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsge_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsgt_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvsle_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvslt_bvashr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvslt_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvlshr1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvuge_bvurem0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvlshr1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvudiv0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvurem0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvugt_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvmul_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvshl0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvule_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvmul_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvshl0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvudiv0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvudiv0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_bvult_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_eq_bvudiv0_ltr_inv_a.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvudiv0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,QF_UFNIA/201903-Zohar-ic/int_check_ne_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/combined/combined_AndOrXor:2453_values_121.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/combined/combined_AndOrXor:2663_values_65.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/combined/combined_AndOrXor:794_values_121.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/combined/combined_AndOrXor:827_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/combined/combined_AndOrXor:887-2_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/combined/combined_Select:699_values_71.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/combined/combined_Select:700_values_123.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/combined/combined_Select:705_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/full/full_AndOrXor:2453_values_121.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/full/full_AndOrXor:2663_values_65.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/full/full_AndOrXor:794_values_121.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/full/full_AndOrXor:887-2_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/full/full_Select:699_values_71.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/full/full_Select:700_values_123.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/full/full_Select:705_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/partial/partial_AndOrXor:2453_values_121.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/partial/partial_AndOrXor:2663_values_65.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/partial/partial_AndOrXor:794_values_121.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/partial/partial_AndOrXor:827_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/partial/partial_AndOrXor:887-2_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/partial/partial_Select:699_values_71.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/partial/partial_Select:700_values_123.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-alive/partial/partial_Select:705_values_0.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsge_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsgt_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvashr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvsle_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvashr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvslt_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvneg_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvuge_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvneg_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvugt_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvashr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvshl0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvule_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvashr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvshl0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvudiv0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvudiv0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvurem0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_bvult_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvashr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvudiv0_ltr_inv_a.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_eq_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvneg_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvudiv0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/combined/int_check_ne_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsge_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsge_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsge_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsgt_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsgt_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvashr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvsle_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvashr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvslt_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvlshr1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvneg_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvuge_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvlshr1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvugt_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvmul_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvmul_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvshl0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvshl0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvule_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvmul_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvmul_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvshl0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvshl0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvudiv0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvudiv0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvurem0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_bvult_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvudiv0_ltr_inv_a.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_eq_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvmul_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvudiv0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/full/int_check_ne_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsge_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsgt_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvashr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvsle_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvashr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvslt_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvlshr1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvneg_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvuge_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvlshr1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvneg_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvugt_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvashr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvashr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvmul_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvmul_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvule_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvadd_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvmul_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvmul_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvurem0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_bvult_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvand_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvashr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvlshr0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvor_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvshl0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvshl0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvudiv0_ltr_inv_a.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_eq_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvadd_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvand_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvashr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvlshr0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvlshr1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvmul_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvneg_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvneg_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvnot_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvnot_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvor_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvshl1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvudiv0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvudiv1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem0_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem0_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem1_ltr_inv_g.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/partial/int_check_ne_bvurem1_rtl.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvsle_bvlshr0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvsle_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvsle_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvslt_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvuge_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvuge_bvneg_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvuge_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvuge_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvneg_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvudiv1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvugt_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvule_bvmul_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvule_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvule_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvmul_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvurem0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_bvult_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_eq_bvand_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_eq_bvnot_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_eq_bvor_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_eq_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_ne_bvlshr1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_ne_bvmul_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_ne_bvshl1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_ne_bvudiv0_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
+x,UFNIA/2019-Zohar-ic/qf/int_check_ne_bvurem1_ltr_no_inv.smt2,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,starexec-unknown
