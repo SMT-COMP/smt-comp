@@ -118,8 +118,9 @@ def add_solvers(track, filter_benchmarks):
 
 if __name__ == '__main__':
     parser = ArgumentParser(
-            usage="prepare_space_xml <space: xml> <solvers: csv> "\
-                  "<outfile: xml>\n\n"
+            usage="prepare_space_xml "\
+                  "-t <track> "\
+                  "<space: xml> <solvers: csv> <outfile: xml>\n\n"
                   "Add solvers from csv to space with divisions "\
                   "(and benchmarks)\nto upload as space xml to StarExec.")
     parser.add_argument ("space_xml",
