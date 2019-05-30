@@ -80,6 +80,28 @@ def remove_empty_spaces(space):
         if space_is_empty(s):
             space.remove(s)
 
+def is_unsat_core_benchmark(benchmark):
+    isUnsat = False
+    hasNumAsrtsTag = False
+    hasMoreThanOneAsrt = False
+
+    for child in benchmark:
+        if child.attrib['name'] == 'status' and child.attrib['value'] == "unsat":
+            isUnsat = True
+        if child.attrib['name'] == 'num_asrts':
+            hasNumAsrtsTag = True
+            if int(child.attrib['value']) > 1:
+                hasMoreThanOneAsrt = True
+    return isUnsat and (not hasNumAsrtsTag or hasMoreThanOneAsrt)
+
+def filter_unsat_core_benchmarks(space):
+    spaces = space.findall('Space')
+    for s in spaces: filter_unsat_core_benchmarks(s)
+    benchmarks = space.findall('Benchmark')
+    for b in benchmarks:
+        if (not is_unsat_core_benchmark(b)):
+            space.remove(b)
+
 # Traverse space and remove all but one benchmark for each (sub)space with
 # benchmarks (for test runs on StarExec).
 def filter_benchmarks_in_space(space, n):
@@ -112,6 +134,8 @@ def add_solvers(track, filter_benchmarks):
             if track == 'track_model_validation':
                 filter_model_validation_benchmarks(space)
                 n = 3
+            elif track == 'track_unsat_core':
+                filter_unsat_core_benchmarks(space)
             # filter benchmarks
             if filter_benchmarks:
                 filter_benchmarks_in_space(space, n)
