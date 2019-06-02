@@ -28,7 +28,7 @@ Solver ID,Solver Name,Single Query Track,Incremental Track,Challenge Track,Model
 23393,"Minkeyrink Solver MT",QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,
 23394,"STP ST",QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,
 23672,"Par4",AUFLIRA;AUFNIRA;BV;LRA;NRA;QF_ABV;QF_BV;QF_BVFP;QF_FP;QF_IDL;QF_LIA;QF_LIRA;QF_LRA;QF_NIA;QF_NRA;QF_UF;QF_UFNRA;UF;UFBV;UFIDL;UFLIA;UFNIA,,,,,
-23396,"stp-incremental",QF_BV,QF_BV,QF_BV (incremental),QF_BV,QF_BV,
+23678,"stp-incremental",QF_BV,QF_BV,QF_BV (incremental),QF_BV,QF_BV,
 23355,"COLIBRI",QF_FP,,,,,
 23663,"stp-mt",QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,
 23398,"Ctrl-Ergo",QF_LIA;QF_LRA,,,,,
