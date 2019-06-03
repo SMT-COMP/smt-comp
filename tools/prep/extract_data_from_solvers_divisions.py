@@ -221,7 +221,7 @@ if __name__ == '__main__':
     if not os.path.exists(args.descr_csv):
         die("file not found: {}".format(args.descr_csv))
     if not os.path.exists(args.out_md_path):
-        die("path not found: {}".format(args.out_md_path))
+        os.makedirs(args.out_md_path)
 
     read_divisions_csv(args.in_csv)
     read_aux_csv(args.seed_csv)
