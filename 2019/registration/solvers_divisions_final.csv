@@ -35,7 +35,7 @@ Preliminary Solver ID,Solver ID,Solver Name,Single Query Track,Incremental Track
 23402,23402,stp-minisat,QF_BV,,QF_BV (non-incremental),,,23321,,,nmanthey@conp-solutions.com,"Mate Soos, Trevor Hansen, Norbert Manthey",3,Y
 23403,23403,stp-portfolio,QF_BV,,QF_BV (non-incremental),,,23321,,,nmanthey@conp-solutions.com,"Mate Soos, Trevor Hansen, Norbert Manthey",3,Y
 23406,23693,veriT,ALIA;AUFLIA;AUFLIRA;LIA;QF_ALIA;QF_AUFLIA;QF_IDL;QF_LIA;QF_LRA;QF_RDL;QF_UF;QF_UFIDL;QF_UFLIA;QF_UFLRA;UF;UFIDL;UFLIA;UFLRA,,,,,,,,hans-jorg.schurr@inria.fr,"Haniel Barbosa, Daniel El Ouraoui, Pascal Fontaine, Hans-Jörg Schurr",3,Y
-23399,23399,veriT+raSAT+Reduce,QF_NRA;QF_UFNRA,,,,,"veriT, 23406",,,hans-jorg.schurr@inria.fr,"Haniel Barbosa, Pascal Fontaine, Maximilian Jaroschek, Marek Kosta, Mizuhito Ogawa, Thomas Sturm, Vu Xuan Tung",3,Y
+23399,23399,veriT+raSAT+Redlog,QF_NRA;QF_UFNRA,,,,,"veriT, 23406",,,hans-jorg.schurr@inria.fr,"Haniel Barbosa, Pascal Fontaine, Maximilian Jaroschek, Marek Kosta, Mizuhito Ogawa, Thomas Sturm, Vu Xuan Tung",3,Y
 23405,23686,Q3B,BV,BV,,,,,,,martin.jonas@mail.muni.cz,"Martin Jonáš, Jan Strejček",0,Y
 23409,23703,Vampire,ALIA;AUFDTLIA;AUFLIA;AUFLIRA;AUFNIA;AUFNIRA;LIA;LRA;NIA;NRA;UF;UFDT;UFDTLIA;UFDTNIA;UFIDL;UFLIA;UFLRA;UFNIA,,,,,,Z3 4.5,,giles.reger@manchester.ac.uk,"Giles Reger, Martin Suda, Andrei Voronkov, Laura Kovacs, Evgenii Kotelnikov, Simon Robillard, Martin Riener",2,Y
 23423,23423,UltimateEliminator+Yices-2.6.1,ALIA;AUFLIA;AUFLIRA;AUFNIA;AUFNIRA;LIA;LRA;NIA;NRA;UF;UFIDL;UFLIA;UFLRA;UFNIA,ALIA;ANIA;AUFNIRA;LIA;LRA;UFLRA,,,ALIA;AUFLIA;AUFLIRA;AUFNIA;AUFNIRA;LIA;LRA;NIA;NRA;UF;UFIDL;UFLIA;UFLRA;UFNIA,,Yices-2.6.1,,heizmann@informatik.uni-freiburg.de,"Max Barth, Daniel Dietsch, Leonard Fichtner, Matthias Heizmann",1,Y
