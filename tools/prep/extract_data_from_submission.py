@@ -52,6 +52,11 @@ COL_SINGLE_QUERY_TRACK = 'Select all divisions in the Single-Query (previously: 
 COL_INCREMENTAL_TRACK = 'Select all divisions in the Incremental Track to submit the solver to (use checkbox ALL for all divisions):'
 COL_MODEL_VALIDATION_TRACK = 'Select all divisions in the Model-Validation Track (experimental) to submit the solver to:'
 COL_CHALLENGE_TRACK = 'Select all divisions in the Industry-Challenge Track to submit the solver to (use checkbox ALL for all divisions):'
+COL_VARIANT = 'If this solver is a VARIANT of another submission, e.g. an experimental version, provide the name and the StarExec ID of the main solver, otherwise leave blank.'
+COL_WRAPPER = 'If this solver is a WRAPPER TOOL (i.e., it includes and calls one or more other SMT solvers, see Section 4 of the competition rules at https://smt-comp.github.io/2019/rules19.pdf), list ALL wrapped solvers and their exact version here, otherwise leave blank.'
+COL_DERIVED = 'If this solver is a DERIVED TOOL (i.e., any solver that is based on or extends another SMT solver, see Section 4 of the competition rules at https://smt-comp.github.io/2019/rules19.pdf), provide the name of the original tool here. A derived tool should follow the naming convention [name-of-base-solver]-[my-solver-name].'
+COL_CERTIFICATES = 'Certificates will be awarded to winning teams. To allow us to print the correct number, please indicate how many certificates you would need.'
+COL_TEAM = 'Please list all contributors that you wish to be acknowledged here'
 
 # Print error message and exit.
 def die(msg):
@@ -80,6 +85,15 @@ def read_csv(fname):
             submission['track_challenge'] = drow[COL_CHALLENGE_TRACK].split(';')
             submission['track_single_query'] = []
             submission['track_unsat_core'] = []
+            m = re.search('solver\.jsp\?id=(\d+)', drow[COL_VARIANT])
+            if not m:
+                submission['variant'] = drow[COL_VARIANT]
+            else:
+                submission['variant'] = m.group(1)
+            submission['wrapper'] = drow[COL_WRAPPER]
+            submission['derived'] = drow[COL_DERIVED]
+            submission['team'] = drow[COL_TEAM]
+            submission['certificates'] = drow[COL_CERTIFICATES]
 
             # Collect logics for single-query and unsat core track.
             #
@@ -119,13 +133,21 @@ def read_csv(fname):
 # Columns are separated by ',' and divisions are separated by ';'.
 def write_csv(fname):
     with open(fname, 'w') as outfile:
-        outfile.write("{},{},{},{},{},{},{}\n".format(
-            "Solver ID", "Solver Name",
+        outfile.write("{},{},{},{},{},{},{},{},{},{},{},{},{},\n".format(
+            "Solver ID",
+            "Solver Name",
             "Single Query Track",
             "Incremental Track",
             "Challenge Track",
             "Model Validation Track",
-            "Unsat Core Track"))
+            "Unsat Core Track",
+            "Variant Of",
+            "Wrapper Tool",
+            "Derived Tool",
+            "Contact",
+            "Team Members",
+            "Certificates"
+            ))
         for submission in g_submissions:
             outfile.write("{},\"{}\",".format(
                 submission['solver_id'], submission['solver_name']))
@@ -139,6 +161,15 @@ def write_csv(fname):
                 else:
                     outfile.write(";".join(submission[track]))
                 outfile.write(",")
+            outfile.write(
+                    "\"{}\",\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"".format(
+                        submission['variant'],
+                        submission['wrapper'],
+                        submission['derived'],
+                        submission['username'],
+                        submission['team'],
+                        submission['certificates']
+                        ))
             outfile.write("\n")
 
 
