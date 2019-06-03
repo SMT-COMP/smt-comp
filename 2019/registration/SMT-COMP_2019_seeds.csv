@@ -1,3 +1,4 @@
+Solver Name,Seed
 Ctrl-Ergo,12019
 ProB,9247
 CVC4,439
@@ -13,8 +14,8 @@ Poolector,42
 Alt-Ergo,42
 SMTInterpol,983571724
 OpenSMT2,568
-Yices,255
-SPASS-SAT,73
+Yices 2.6.2,255
+SPASS-SATT,73
 STP,1094795585
 STP ST,1094795585
 stp-incremental,1094795585
@@ -29,6 +30,6 @@ Q3B,93629305
 Par4,0
 veriT,7800
 veriT+raSAT+Redlog,13
-Colibri,614823377508390721
+COLIBRI,614823377508390721
 MathSAT-default,512
 MathSAT-na-ext,512

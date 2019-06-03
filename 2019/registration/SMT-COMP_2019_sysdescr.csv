@@ -1,0 +1,35 @@
+Solver Name,System description URL,System description name,Solver homepage
+Ctrl-Ergo,Ctrl-Ergo.pdf,Ctrl-Ergo,https://alt-ergo.ocamlpro.com/
+ProB,proB.pdf,proB,http://www.prob2.de
+CVC4,cvc4.pdf,CVC4,http://cvc4.cs.stanford.edu
+CVC4-inc,cvc4.pdf,CVC4,http://cvc4.cs.stanford.edu
+CVC4-mv,cvc4.pdf,CVC4,http://cvc4.cs.stanford.edu
+CVC4-uc,cvc4.pdf,CVC4,http://cvc4.cs.stanford.edu
+UltimateEliminator+Yices-2.6.1,
+UltimateEliminator+MathSAT-5.5.4,
+UltimateEliminator+SMTInterpol,
+Boolector,boolector.pdf,Boolector,https://boolector.github.io
+Boolector (incremental),Boolector,https://boolector.github.io
+Poolector,Boolector,https://boolector.github.io
+Alt-Ergo,Alt-Ergo.pdf,Alt-Ergo,https://alt-ergo.ocamlpro.com/
+SMTInterpol,smtinterpol.pdf,SMTInterpol,http://ultimate.informatik.uni-freiburg.de/smtinterpol/
+OpenSMT2,OpenSMT2.pdf,OpenSMT2,http://verify.inf.usi.ch/opensmt
+Yices 2.6.2,yices.pdf,Yices,http://yices.csl.sri.com
+SPASS-SATT,SPASS-SATT.pdf,SPASS-SATT,https://www.spass-prover.org/
+STP,STP.pdf,STP,https://github.com/stp/stp
+STP ST,STP.pdf,STP,https://github.com/stp/stp
+stp-incremental,STP.pdf,STP,https://github.com/stp/stp
+stp-mt,STP.pdf,STP,https://github.com/stp/stp
+stp-riss,STP.pdf,STP,https://github.com/stp/stp
+stp-mergesat,STP.pdf,STP,https://github.com/stp/stp
+stp-minisat,STP.pdf,STP,https://github.com/stp/stp
+stp-portfolio,STP.pdf,STP,https://github.com/stp/stp
+Vampire,vampire.pdf,Vampire,https://vprover.github.io
+AProVE,AProVE19.pdf,AProVE,http://aprove.informatik.rwth-aachen.de/
+Q3B,q3b.pdf,Q3B,https://github.com/martinjonas/Q3B/releases/tag/smtcomp2019
+Par4,Par4.pdf,Par4,
+veriT,veriT.pdf,veriT,http://www.verit-solver.org
+veriT+raSAT+Redlog,veriT+raSAT+Redlog.pdf,veriT+raSAT+Redlog,http://www.verit-solver.org
+COLIBRI,colibri.pdf,COLIBRI,
+MathSAT-default,mathsat5.pdf,MathSAT5,
+MathSAT-na-ext,mathsat5.pdf,MathSAT5,
