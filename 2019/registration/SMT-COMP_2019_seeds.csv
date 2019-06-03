@@ -9,9 +9,7 @@ UltimateEliminator+MathSAT-5.5.4,0
 UltimateEliminator+SMTInterpol,0
 Boolector,42
 Boolector (incremental),42
-Boolector (Plingeling),42
-Boolector (Treengeling),42
-Boolector (Portfolio),42
+Poolector,42
 Alt-Ergo,42
 SMTInterpol,983571724
 OpenSMT2,568
