@@ -15,6 +15,15 @@ Alt-Ergo,Alt-Ergo.pdf,Alt-Ergo,https://alt-ergo.ocamlpro.com/
 SMTInterpol,smtinterpol.pdf,SMTInterpol,http://ultimate.informatik.uni-freiburg.de/smtinterpol/
 OpenSMT2,OpenSMT2.pdf,OpenSMT2,http://verify.inf.usi.ch/opensmt
 Yices 2.6.2,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 CaDiCal,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 CaDiCal/SMT-LIB2 Models,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 Cryptominisat,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 Cryptominisat/SMT-LIB2 Models,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 Incremental,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 Model Validation,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 New Bvsolver,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 New Bvsolver with SMT2 Models,yices.pdf,Yices,http://yices.csl.sri.com
+Yices 2.6.2 mcsat-bv,yices.pdf,Yices,http://yices.csl.sri.com
 SPASS-SATT,SPASS-SATT.pdf,SPASS-SATT,https://www.spass-prover.org/
 STP,STP.pdf,STP,https://github.com/stp/stp
 STP ST,STP.pdf,STP,https://github.com/stp/stp

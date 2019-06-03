@@ -15,6 +15,15 @@ Alt-Ergo,42
 SMTInterpol,983571724
 OpenSMT2,568
 Yices 2.6.2,255
+Yices 2.6.2 CaDiCal,255
+Yices 2.6.2 CaDiCal/SMT-LIB2 Models,255
+Yices 2.6.2 Cryptominisat,255
+Yices 2.6.2 Cryptominisat/SMT-LIB2 Models,255
+Yices 2.6.2 Incremental,255
+Yices 2.6.2 Model Validation,255
+Yices 2.6.2 New Bvsolver,255
+Yices 2.6.2 New Bvsolver with SMT2 Models,255
+Yices 2.6.2 mcsat-bv,255
 SPASS-SATT,73
 STP,1094795585
 STP ST,1094795585
