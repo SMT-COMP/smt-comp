@@ -5,12 +5,12 @@ CVC4,cvc4.pdf,CVC4,http://cvc4.cs.stanford.edu
 CVC4-inc,cvc4.pdf,CVC4,http://cvc4.cs.stanford.edu
 CVC4-mv,cvc4.pdf,CVC4,http://cvc4.cs.stanford.edu
 CVC4-uc,cvc4.pdf,CVC4,http://cvc4.cs.stanford.edu
-UltimateEliminator+Yices-2.6.1,
-UltimateEliminator+MathSAT-5.5.4,
-UltimateEliminator+SMTInterpol,
+UltimateEliminator+Yices-2.6.1,2019UltimateEliminator.pdf,UltimateEliminator,https://ultimate.informatik.uni-freiburg.de/
+UltimateEliminator+MathSAT-5.5.4,2019UltimateEliminator.pdf,UltimateEliminator,https://ultimate.informatik.uni-freiburg.de/
+UltimateEliminator+SMTInterpol,2019UltimateEliminator.pdf,UltimateEliminator,https://ultimate.informatik.uni-freiburg.de/
 Boolector,boolector.pdf,Boolector,https://boolector.github.io
-Boolector (incremental),Boolector,https://boolector.github.io
-Poolector,Boolector,https://boolector.github.io
+Boolector (incremental),boolector.pdf,Boolector,https://boolector.github.io
+Poolector,,,
 Alt-Ergo,Alt-Ergo.pdf,Alt-Ergo,https://alt-ergo.ocamlpro.com/
 SMTInterpol,smtinterpol.pdf,SMTInterpol,http://ultimate.informatik.uni-freiburg.de/smtinterpol/
 OpenSMT2,OpenSMT2.pdf,OpenSMT2,http://verify.inf.usi.ch/opensmt
@@ -35,3 +35,9 @@ MathSAT-default,mathsat5.pdf,MathSAT5,
 MathSAT-na-ext,mathsat5.pdf,MathSAT5,
 Minkeyrink Solver,minkeyrink.pdf,Minkeyrink Solver,
 Minkeyrink Solver MT,minkeyrink.pdf,Minkeyrink Solver,
+Boolector-ReasonLS,boolector-ReasonLS.pdf,Boolector-ReasonLS,
+CVC4-SymBreak,cvc4-symbreak.pdf,CVC4-SymBreak,
+SMT-RAT,smtrat.pdf,SMT-RAT,https://github.com/smtrat/smtrat/wiki
+SMTRAT-MCSAT,smtrat.pdf,SMT-RAT,https://github.com/smtrat/smtrat/wiki
+
+
