@@ -22,9 +22,9 @@ Preliminary Solver ID,Solver ID,Solver Name,Single Query Track,Incremental Track
 23381,23381,Boolector (incremental),,QF_ABV;QF_AUFBV;QF_BV;QF_UFBV,QF_BV (incremental);QF_ABV (incremental);QF_AUFBV (incremental),,,23380,,,preiner@cs.stanford.edu,"Aina Niemetz, Mathias Preiner, Armin Biere",3,Y
 23384,23384,Poolector,QF_ABV;QF_AUFBV;QF_UFBV;QF_BV;BV,,QF_BV (non-incremental);QF_ABV (non-incremental);QF_AUFBV (non-incremental),,,23380,,,preiner@cs.stanford.edu,"Aina Niemetz, Mathias Preiner, Armin Biere",3,Y
 1229,1229,AProVE,QF_NIA,,,,,,,,carsten@dcs.bbk.ac.uk,Carsten Fuhs,2,Y
-23392,23392,Minkeyrink Solver ,QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,,,,trev_abroad@yahoo.com,"Trevor Hansen, Mate Soos",2,Y
-23393,23393,Minkeyrink Solver MT,QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,,,,trev_abroad@yahoo.com,"Trevor Hansen, Mate Soos",2,Y
-23394,23394,STP ST,QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,,,,trev_abroad@yahoo.com,Various,0,Y
+23392,23720,Minkeyrink Solver ,QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,,,,trev_abroad@yahoo.com,"Trevor Hansen, Mate Soos",2,Y
+23393,23719,Minkeyrink Solver MT,QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,,,,trev_abroad@yahoo.com,"Trevor Hansen, Mate Soos",2,Y
+23394,23721,STP ST,QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,,,,trev_abroad@yahoo.com,Various,0,Y
 23391,23672,Par4,AUFLIRA;AUFNIRA;BV;LRA;NRA;QF_ABV;QF_BV;QF_BVFP;QF_FP;QF_IDL;QF_LIA;QF_LIRA;QF_LRA;QF_NIA;QF_NRA;QF_UF;QF_UFNRA;UF;UFBV;UFIDL;UFLIA;UFNIA,,,,,,Par4 is a wrapper tool. It calls several other SMT solvers that participated in SMT-COMP 2018. The full list of wrapped solvers is still subject to change and will be provided in the system description.,,tjark.weber@it.uu.se,Tjark Weber,1,Y
 23396,23678,stp-incremental,QF_BV,QF_BV,QF_BV (incremental),QF_BV,QF_BV,23321,,,soos.mate@gmail.com,"Trevor Hansen, Norbert Manthey, Mate Soos",3,Y
 23355,23355,COLIBRI,QF_FP,,,,,,,,francois.bobot@cea.fr,"Bruno Marre, François Bobot, Zakaria Chihani ",2,Y
