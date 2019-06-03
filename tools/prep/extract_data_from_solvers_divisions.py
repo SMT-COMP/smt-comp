@@ -142,7 +142,9 @@ def write_mds(path):
         # Read & convert the properties from g_submissions to the md format
         for (prop_name, repr_name, col_name) in g_properties:
             md_descr[repr_name] = \
-                    (prop_name in s) and (s[prop_name] or "n/a") or 'unknown'
+                    (prop_name in s) and (s[prop_name] or '') or ''
+            if repr_name == "competing":
+                md_descr[repr_name] = '\"{}\"'.format(md_descr[repr_name])
 
         s_logics = {}
 
@@ -154,14 +156,14 @@ def write_mds(path):
                     s_logics[logic] = []
                 s_logics[logic].append(track)
 
-        attr_fields_str = "\n".join(map(lambda x: "{}: \"{}\"".format(
+        attr_fields_str = "\n".join(map(lambda x: "{}: {}".format(
             x, md_descr[x]), md_descr.keys()))
 
         logic_fields = []
         for l in s_logics:
-            sub_logic_fields = "- name: \"{}\"\n  tracks:\n\"{}\"".format(
+            sub_logic_fields = "- name: {}\n  tracks:\n{}".format(
                     l, "\n".join(
-                        map(lambda x: "  - \"{}\"".format(x), s_logics[l])))
+                        map(lambda x: "  - {}".format(x), s_logics[l])))
             logic_fields.append(sub_logic_fields)
         logic_fields_str = "\n".join(logic_fields)
 
