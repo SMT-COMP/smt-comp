@@ -89,12 +89,8 @@ g_properties = [
             ['variant_of', 'variantOf', COL_VARIANT_OF],
             ['wrapper_tool', 'wrapperTool', COL_WRAPPER_TOOL],
             ['derived_tool', 'derivedTool', COL_DERIVED_TOOL],
-            ['competing', 'competing', COL_COMPETING]
-        ]
-
-g_aux_properties = [
+            ['competing', 'competing', COL_COMPETING],
             ['seed', 'seed', COL_SEED],
-            ['solver_name', 'name', COL_SOLVER_NAME],
             ['solver_homepage', 'solverHomePage', COL_SOLVER_HOMEPAGE],
             ['system_description_url', 'sysDescrUrl', COL_SYS_DESCR_URL],
             ['system_description_name', 'sysDescrName', COL_SYS_DESCR_NAME]
@@ -106,7 +102,7 @@ def die(msg):
     sys.exit(1)
 
 # Read csv with submissions data from solvers_divisions_final.
-def read_divisions_csv(fname):
+def read_csv(fname):
     global g_submissions, g_logics_all, g_logics_to_track
     with open(fname) as file:
         reader = csv.reader(file, delimiter=',')
@@ -136,26 +132,6 @@ def read_divisions_csv(fname):
 
             g_submissions[submission['solver_name']] = submission
 
-def read_aux_csv(fname):
-    global g_submissions
-
-    with open(fname) as file:
-        reader = csv.reader(file, delimiter=',')
-        header = next(reader)
-
-        for row in reader:
-
-            drow = dict(zip(iter(header), iter(row)))
-            solver_name = drow[COL_SOLVER_NAME]
-            if solver_name not in g_submissions:
-                die("Unknown solver name: %s" % solver_name)
-
-            s = g_submissions[solver_name]
-
-            for (subm_key, md_key, div_key) in g_aux_properties:
-                if div_key in drow:
-                    s[subm_key] = drow[div_key]
-
 # Converts the structures in g_submission to mds
 def write_mds(path):
     for sname in g_submissions:
@@ -163,10 +139,10 @@ def write_mds(path):
 
         md_descr = {}
 
-        # Read & convert the properties from g_submissions to the md
-        # format
-        for (prop_name, repr_name, col_name) in g_properties + g_aux_properties:
-            md_descr[repr_name] =  (prop_name in s) and (s[prop_name] or "n/a") or 'unknown'
+        # Read & convert the properties from g_submissions to the md format
+        for (prop_name, repr_name, col_name) in g_properties:
+            md_descr[repr_name] = \
+                    (prop_name in s) and (s[prop_name] or "n/a") or 'unknown'
 
         s_logics = {}
 
@@ -178,52 +154,43 @@ def write_mds(path):
                     s_logics[logic] = []
                 s_logics[logic].append(track)
 
-        attr_fields_str = "\n".join(map(lambda x: "%s: %s" % (x, md_descr[x]),
-            md_descr.keys()))
+        attr_fields_str = "\n".join(map(lambda x: "{}: \"{}\"".format(
+            x, md_descr[x]), md_descr.keys()))
 
         logic_fields = []
         for l in s_logics:
-            sub_logic_fields = "- name: %s\n  tracks:\n%s" \
-                    % (l, "\n".join(map(lambda x: "  - %s" % x, \
-                        s_logics[l])))
+            sub_logic_fields = "- name: \"{}\"\n  tracks:\n\"{}\"".format(
+                    l, "\n".join(
+                        map(lambda x: "  - \"{}\"".format(x), s_logics[l])))
             logic_fields.append(sub_logic_fields)
         logic_fields_str = "\n".join(logic_fields)
 
-        ofile_name = ("%s.md" % s['solver_name']).replace(" ", "_").replace("/", "_")
+        ofile_name = \
+                "{}.md".format(s['solver_name']).replace(" ", "_").replace("/", "_")
         outfile = open(os.path.join(path, ofile_name), "w")
-        md_str = "---\nlayout: participant\n%s\nlogics:\n%s\n---" % \
-            (attr_fields_str, logic_fields_str)
+        md_str = "---\nlayout: participant\n{}\nlogics:\n{}\n---".format(
+                attr_fields_str, logic_fields_str)
         outfile.write(md_str)
+
+
 
 if __name__ == '__main__':
     parser = ArgumentParser(
-            usage="extract_data_from_submission "\
-                    "<solvers-divisions: csv> "\
-                    "<solvers-seeds: csv> "\
-                    "<solvers-sysdescr: csv> "\
-                    "<mdfile_path: path>\n\n"
-                  "Extract and convert csv data from solvers_divisions csv"
-                  "into an md")
+            usage="extract_data_from_submission "
+                  "<solvers-divisions: csv> "
+                  "<mdfile_path: path>\n\n"
+                  "Extract csv data from solvers_divisions_final.csv"
+                  "into per solver md files for the website")
     parser.add_argument (
-            "in_csv", help="the input solvers_divisions csv")
+            "in_csv", help="input csv")
     parser.add_argument(
-            "seed_csv", help="The input solver seeds csv")
-    parser.add_argument(
-            "descr_csv", help="The input description csv")
-    parser.add_argument(
-            "out_md_path", help="The path where the mds should be output")
+            "out_md_path", help="output path for generated md files")
     args = parser.parse_args()
 
     if not os.path.exists(args.in_csv):
         die("file not found: {}".format(args.in_csv))
-    if not os.path.exists(args.seed_csv):
-        die("file not found: {}".format(args.seed_csv))
-    if not os.path.exists(args.descr_csv):
-        die("file not found: {}".format(args.descr_csv))
     if not os.path.exists(args.out_md_path):
         os.makedirs(args.out_md_path)
 
-    read_divisions_csv(args.in_csv)
-    read_aux_csv(args.seed_csv)
-    read_aux_csv(args.descr_csv)
+    read_csv(args.in_csv)
     write_mds(args.out_md_path)
