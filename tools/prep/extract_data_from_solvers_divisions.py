@@ -81,11 +81,11 @@ COL_SYS_DESCR_URL = 'System description URL'
 COL_SYS_DESCR_NAME = 'System description name'
 
 g_properties = [
-            ['username', 'contactEmail', COL_CONTACT],
+            ['username', 'contact', COL_CONTACT],
             ['solver_name', 'name', COL_SOLVER_NAME],
             ['solver_id', 'preliminaryID', COL_PRELIMINARY_SOLVER_ID],
             ['final_id', 'finalID', COL_SOLVER_ID],
-            ['contributors', 'contactName', COL_CONTRIBUTORS],
+            ['contributors', 'team', COL_CONTRIBUTORS],
             ['variant_of', 'variantOf', COL_VARIANT_OF],
             ['wrapper_tool', 'wrapperTool', COL_WRAPPER_TOOL],
             ['derived_tool', 'derivedTool', COL_DERIVED_TOOL],
