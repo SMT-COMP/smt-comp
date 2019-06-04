@@ -7,6 +7,8 @@ import sys
 import os
 import re
 
+g_sum_seed = 0
+
 g_submissions = None
 
 g_logics_all = {
@@ -134,8 +136,10 @@ def read_csv(fname):
 
 # Converts the structures in g_submission to mds
 def write_mds(path):
+    global g_sum_seed
     for sname in g_submissions:
         s = g_submissions[sname]
+        if s['seed']: g_sum_seed += int(s['seed'])
 
         md_descr = {}
 
@@ -196,3 +200,4 @@ if __name__ == '__main__':
 
     read_csv(args.in_csv)
     write_mds(args.out_md_path)
+    print("Seeds (sum mod 2^30): {}".format(g_sum_seed % (2**30)))
