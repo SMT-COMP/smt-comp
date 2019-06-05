@@ -25,8 +25,7 @@ Preliminary Solver ID,Solver ID,Solver Name,Single Query Track,Incremental Track
 23328,23434,SMTRAT-MCSAT,QF_NRA,,,,,,,,gereon.kremer@cs.rwth-aachen.de,Gereon Kremer,1,yes,,smtrat.pdf,SMT-RAT,https://github.com/smtrat/smtrat/wiki
 23356,23356,SPASS-SATT,QF_LIA;QF_LRA,,,,,,,,mbromber@mpi-inf.mpg.de,"Martin Bromberger, Mathias Fleury, Simon Schwarz, and Christoph Weidenbach",4,yes,73,SPASS-SATT.pdf,SPASS-SATT,https://www.spass-prover.org/
 23321,23321,STP,QF_BV,,QF_BV (non-incremental),,,,,,nmanthey@conp-solutions.com,"Trevor Hansen, Norbert Manthey, Mate Soos",3,yes,1094795585,STP.pdf,STP,https://github.com/stp/stp
-23394,23721,STP ST,QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,,,,trev_abroad@yahoo.com,"Trevor Hansen, Norbert Manthey, Mate Soos",0,yes,1094795585,STP.pdf,STP,https://github.com/stp/stp
-23396,23678,STP-incremental,QF_BV,QF_BV,QF_BV (incremental),QF_BV,QF_BV,23321,,,soos.mate@gmail.com,"Trevor Hansen, Norbert Manthey, Mate Soos",3,yes,1094795585,STP.pdf,STP,https://github.com/stp/stp
+23396,23678,STP-incremental,QF_BV,QF_BV,QF_BV (incremental),QF_BV,,23321,,,soos.mate@gmail.com,"Trevor Hansen, Norbert Manthey, Mate Soos",3,yes,1094795585,STP.pdf,STP,https://github.com/stp/stp
 23401,23401,STP-mergesat,QF_BV,,QF_BV (non-incremental),,,23321,,,nmanthey@conp-solutions.com,"Trevor Hansen, Norbert Manthey, Mate Soos",3,yes,1094795585,STP.pdf,STP,https://github.com/stp/stp
 23402,23402,STP-minisat,QF_BV,,QF_BV (non-incremental),,,23321,,,nmanthey@conp-solutions.com,"Trevor Hansen, Norbert Manthey, Mate Soos",3,yes,1094795585,STP.pdf,STP,https://github.com/stp/stp
 23397,23663,STP-mt,QF_BV,QF_BV,QF_BV (non-incremental);QF_BV (incremental),QF_BV,,23321,,,soos.mate@gmail.com,"Trevor Hansen, Norbert Manthey, Mate Soos",3,yes,1094795585,STP.pdf,STP,https://github.com/stp/stp
