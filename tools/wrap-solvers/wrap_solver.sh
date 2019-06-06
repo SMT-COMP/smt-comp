@@ -66,7 +66,13 @@ popd
 
 NEW_SOLVER_DIR="${WRAPPED_SOLVER_DIR}/${NAME}-${WRAPPED_NAME}"
 cp -r "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
+
 mv "${NEW_SOLVER_DIR}/bin/starexec_run_default" "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
+if [ $? -ne 0 ]
+then
+    echo "ERROR: not default config"
+    exit 1
+fi
 cp -r ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
 
 pushd "${NEW_SOLVER_DIR}"
@@ -74,4 +80,3 @@ zip -r "../${NAME}-${WRAPPED_NAME}.zip" *
 popd
 
 uploadSolver "${WRAPPED_SOLVER_DIR}/${NAME}-${WRAPPED_NAME}.zip" "${NAME}-${WRAPPED_NAME}"
-
