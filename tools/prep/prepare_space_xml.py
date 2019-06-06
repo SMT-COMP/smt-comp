@@ -33,8 +33,10 @@ def read_csv(fname, track):
                 divisions = drow['Single Query Track'].split(';')
             elif track == 'track_incremental':
                 divisions = drow['Incremental Track'].split(';')
-            elif track == 'track_challenge':
-                divisions = drow['Challenge Track'].split(';')
+            elif track == 'track_single_query_challenge':
+                divisions = drow['Challenge Track (single query)'].split(';')
+            elif track == 'track_incremental_challenge':
+                divisions = drow['Challenge Track (incremental)'].split(';')
             elif track == 'track_model_validation':
                 divisions = drow['Model Validation Track'].split(';')
             elif track == 'track_unsat_core':
@@ -176,8 +178,8 @@ if __name__ == '__main__':
     parser.add_argument('-t',
             type=str, dest="track",
             help="SMT-COMP track name (one out of:"\
-                 "'single_query', 'incremental', 'challenge',"\
-                 "'model_validation', 'unsat_core'",
+                 "'single_query', 'incremental', 'single_query_challenge',"\
+                 "'incremental_challenge', 'model_validation', 'unsat_core'",
             required = True)
     parser.add_argument ("-f",
             action="store_true", dest="filter", default=False,
@@ -190,8 +192,8 @@ if __name__ == '__main__':
     if not os.path.exists(args.csv):
         die("file not found: {}".format(args.csv))
 
-    if args.track not in ['single_query', 'incremental', 'challenge',
-                          'model_validation', 'unsat_core']:
+    if args.track not in ['single_query', 'incremental', 'single_query_challenge',
+                          'incremental_challenge', 'model_validation', 'unsat_core']:
         die("invalid track name")
     args.track = "track_{}".format(args.track)
 
