@@ -13,7 +13,7 @@ It requires the
 [trace executor](https://github.com/smt-comp/trace-executor)
 into directory `wrapper_inc`
 
-3. `./wrap_solvers.py <solvers: csv> <space: id> <space_inc: id>`  
+3. `./wrap_solvers.py <solvers: csv> [ --sq <space: id> [ --inc <space_inc: id> [ --mv <space_mv: id> [ --uc <space_uc: id>]]]]`  
 
 ```
 <solvers: csv>   is a csv file with the solver ids as in
@@ -22,7 +22,13 @@ into directory `wrapper_inc`
 <space: id>      the StarExec space id of the solver space for non-incremental
                  solvers
 
-<space_inc: id>  the StarExec space ide of the solver space for incremental
+<space_inc: id>  the StarExec space id of the solver space for incremental
                  solvers
+
+<space_mv: id>   the StarExec space id of the solver space for model validation 
+                 track solvers
+
+<space_uc: id>   the StarExec space id of the solver space for unsat core 
+                 track solvers
 ```
 
