@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-from extract_data_from_solvers_divisions_split_challenge import g_logics_all as g_logics_all
-from extract_data_from_solvers_divisions_split_challenge import track_raw_names_to_pretty_names as tr_raw_to_pretty
+from extract_data_from_solvers_divisions import g_logics_all as g_logics_all
+from extract_data_from_solvers_divisions import track_raw_names_to_pretty_names as tr_raw_to_pretty
 
 import sys
 import os
