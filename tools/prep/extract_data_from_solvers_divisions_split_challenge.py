@@ -77,8 +77,8 @@ COL_COMPETING = 'Competing'
 # Tracks
 COL_SINGLE_QUERY_TRACK = 'Single Query Track'
 COL_INCREMENTAL_TRACK = 'Incremental Track'
-COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Single Query Track (challenge)'
-COL_CHALLENGE_TRACK_INCREMENTAL = 'Incremental Track (challenge)'
+COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
+COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
 
