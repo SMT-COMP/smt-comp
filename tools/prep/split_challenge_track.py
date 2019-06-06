@@ -6,9 +6,10 @@ import sys
 import os
 import re
 
+from extract_data_from_solvers_divisions_split_challenge import COL_CHALLENGE_TRACK_SINGLE_QUERY
+from extract_data_from_solvers_divisions_split_challenge import COL_CHALLENGE_TRACK_INCREMENTAL
+
 COL_CHALLENGE_TRACK = 'Challenge Track'
-COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Single Query Track (challenge)'
-COL_CHALLENGE_TRACK_INCREMENTAL = 'Incremental Track (challenge)'
 
 REGEX_SINGLE_QUERY = '(.*) \(non-incremental\)'
 REGEX_INCREMENTAL = '(.*) \(incremental\)'

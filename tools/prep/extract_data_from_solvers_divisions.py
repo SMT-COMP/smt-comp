@@ -10,8 +10,15 @@ g_sum_seed = 0
 
 g_submissions = None
 
+TRACK_SINGLE_QUERY_RAW = 'track_single_query'
+TRACK_INCREMENTAL_RAW = 'track_incremental'
+TRACK_SINGLE_QUERY_CHALLENGE_RAW = 'track_single_query_challenge'
+TRACK_INCREMENTAL_CHALLENGE_RAW = 'track_incremental_challenge'
+TRACK_UNSAT_CORE_RAW = 'track_unsat_core'
+TRACK_MODEL_VALIDATION_RAW = 'track_model_validation'
+
 g_logics_all = {
-        'track_single_query'     : [
+        TRACK_SINGLE_QUERY_RAW     : [
             'ABVFP','ALIA','AUFBVDTLIA','AUFDTLIA','AUFLIA','AUFLIRA','AUFNIA',
             'AUFNIRA','BV','BVFP','FP','LIA','LRA','NIA','NRA','QF_ABV',
             'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
@@ -21,22 +28,24 @@ g_logics_all = {
             'QF_UFLRA','QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
             'UFDTNIA','UFIDL','UFLIA','UFLRA','UFNIA',
             ],
-        'track_incremental'      : [
+        TRACK_INCREMENTAL_RAW      : [
             'ABVFP','ALIA','ANIA','AUFNIRA','BV','BVFP','LIA','LRA','QF_ABV',
             'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFBVLIA',
             'QF_AUFBVNIA','QF_AUFLIA','QF_BV','QF_BVFP','QF_FP','QF_LIA',
             'QF_LRA','QF_NIA','QF_UF','QF_UFBV','QF_UFBVLIA','QF_UFLIA',
             'QF_UFLRA','QF_UFNIA','UFLRA',
             ],
-        'track_challenge'        : [
-            'QF_BV (non-incremental)',
-            'QF_BV (incremental)',
-            'QF_ABV (non-incremental)',
-            'QF_ABV (incremental)',
-            'QF_AUFBV (non-incremental)',
-            'QF_AUFBV (incremental)',
+        TRACK_SINGLE_QUERY_CHALLENGE_RAW        : [
+            'QF_BV',
+            'QF_ABV',
+            'QF_AUFBV',
             ],
-        'track_unsat_core'       : [
+        TRACK_INCREMENTAL_CHALLENGE_RAW        : [
+            'QF_BV',
+            'QF_ABV',
+            'QF_AUFBV',
+            ],
+        TRACK_UNSAT_CORE_RAW       : [
             'ABVFP','ALIA','AUFBVDTLIA','AUFDTLIA','AUFLIA','AUFLIRA','AUFNIA',
             'AUFNIRA','BV','BVFP','FP','LIA','LRA','NIA','NRA','QF_ABV',
             'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
@@ -46,7 +55,7 @@ g_logics_all = {
             'QF_UFLRA','QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
             'UFDTNIA','UFIDL','UFLIA','UFLRA','UFNIA',
             ],
-        'track_model_validation' : ['QF_BV']
+        TRACK_MODEL_VALIDATION_RAW : ['QF_BV']
         }
 
 g_logics_to_tracks = {}
@@ -68,9 +77,19 @@ COL_COMPETING = 'Competing'
 # Tracks
 COL_SINGLE_QUERY_TRACK = 'Single Query Track'
 COL_INCREMENTAL_TRACK = 'Incremental Track'
-COL_CHALLENGE_TRACK = 'Challenge Track'
+COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
+COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
+
+track_raw_names_to_pretty_names = {
+        TRACK_SINGLE_QUERY_RAW: COL_SINGLE_QUERY_TRACK,
+        TRACK_INCREMENTAL_RAW: COL_INCREMENTAL_TRACK,
+        TRACK_SINGLE_QUERY_CHALLENGE_RAW: COL_CHALLENGE_TRACK_SINGLE_QUERY,
+        TRACK_INCREMENTAL_CHALLENGE_RAW: COL_CHALLENGE_TRACK_INCREMENTAL,
+        TRACK_UNSAT_CORE_RAW: COL_UNSAT_CORE_TRACK,
+        TRACK_MODEL_VALIDATION_RAW: COL_MODEL_VALIDATION_TRACK,
+        }
 
 COL_VARIANT_OF = 'Variant Of'
 COL_WRAPPER_TOOL = 'Wrapper Tool'
@@ -117,16 +136,19 @@ def read_csv(fname):
             for (subm_key, md_key, div_key) in g_properties:
                 submission[subm_key] = drow[div_key]
 
-            submission['track_incremental'] = drow[COL_INCREMENTAL_TRACK].split(';')
-            submission['track_model_validation'] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
-            submission['track_challenge'] = drow[COL_CHALLENGE_TRACK].split(';')
-            submission['track_single_query'] = drow[COL_SINGLE_QUERY_TRACK].split(';')
-            submission['track_unsat_core'] = drow[COL_UNSAT_CORE_TRACK].split(';')
+            submission[TRACK_SINGLE_QUERY_RAW] = drow[COL_SINGLE_QUERY_TRACK].split(';')
+            submission[TRACK_INCREMENTAL_RAW] = drow[COL_INCREMENTAL_TRACK].split(';')
+            submission[TRACK_SINGLE_QUERY_CHALLENGE_RAW] = drow[COL_CHALLENGE_TRACK_SINGLE_QUERY].split(';')
+            submission[TRACK_INCREMENTAL_CHALLENGE_RAW] = drow[COL_CHALLENGE_TRACK_INCREMENTAL].split(';')
+            submission[TRACK_UNSAT_CORE_RAW] = drow[COL_UNSAT_CORE_TRACK].split(';')
+            submission[TRACK_MODEL_VALIDATION_RAW] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
 
-            if not submission['track_incremental'] and \
-               not submission['track_model_validation'] and \
-               not submission['track_single_query'] and \
-               not submission['track_unsat_core']:
+            if not submission[TRACK_SINGLE_QUERY_RAW] and \
+               not submission[TRACK_INCREMENTAL_RAW] and \
+               not submission[TRACK_SINGLE_QUERY_CHALLENGE_RAW] and \
+               not submission[TRACK_INCREMENTAL_CHALLENGE_RAW] and\
+               not submission[TRACK_UNSAT_CORE_RAW] and \
+               not submission[TRACK_MODEL_VALIDATION_RAW]:
                 die('Configuration "{}" '\
                     'does not participate in any track'.format(
                         submission['solver_name']))

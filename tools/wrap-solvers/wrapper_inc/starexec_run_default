@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./smtlib2_trace_executor ./original_starexec_run_default "$1"
