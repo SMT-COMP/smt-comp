@@ -9,6 +9,7 @@ import re
 
 g_xml_tree = None
 g_divisions = {}
+selected = set()
 
 # Print error message and exit.
 def die(msg):
@@ -21,7 +22,7 @@ def die(msg):
 #   ....       | ....        | entered divisions  | ...
 # Order of tracks: single query, incremental, challenge, model val, unsat core
 # Columns are separated by ',' and divisions are separated by ';'.
-def read_csv(fname, track):
+def read_csv(fname, track,solver_colid):
     global g_divisions
     with open(args.csv) as file:
         reader = csv.reader(file, delimiter=',')
@@ -47,7 +48,14 @@ def read_csv(fname, track):
                 if division not in g_divisions:
                     g_divisions[division] = []
                 g_divisions[division].append(
-                        [drow['Solver ID'], drow['Solver Name']])
+                        [drow[solver_colid], drow['Solver Name']])
+
+def read_selected(fname):
+    global selected
+    with open(fname) as file:
+       for line in file:
+         selected.add(line.strip())
+
 
 
 def is_model_validation_benchmark(benchmark):
@@ -60,9 +68,9 @@ def is_model_validation_benchmark(benchmark):
             isQF_BV = True
     return isSat and isQF_BV
 
-def filter_model_validation_benchmarks(space):
+def filter_model_validation_benchmarks(space, select_benchmarks):
     spaces = space.findall('Space')
-    for s in spaces: filter_model_validation_benchmarks(s)
+    for s in spaces: filter_model_validation_benchmarks(s, select_benchmarks)
     benchmarks = space.findall('Benchmark')
     for b in benchmarks:
         if (not is_model_validation_benchmark(b)):
@@ -94,9 +102,9 @@ def is_unsat_core_benchmark(benchmark):
                 hasMoreThanOneAsrt = True
     return isUnsat and (not hasNumAsrtsTag or hasMoreThanOneAsrt)
 
-def filter_unsat_core_benchmarks(space):
+def filter_unsat_core_benchmarks(space, select_benchmarks):
     spaces = space.findall('Space')
-    for s in spaces: filter_unsat_core_benchmarks(s)
+    for s in spaces: filter_unsat_core_benchmarks(s, select_benchmarks)
     benchmarks = space.findall('Benchmark')
     for b in benchmarks:
         if (not is_unsat_core_benchmark(b)):
@@ -104,11 +112,20 @@ def filter_unsat_core_benchmarks(space):
 
 # Traverse space and remove all but one benchmark for each (sub)space with
 # benchmarks (for test runs on StarExec).
-def filter_benchmarks_in_space(space, n):
+def filter_benchmarks_in_space(space, n, select_benchmarks,path):
+    path = path+"/"+space.attrib['name']
     spaces = space.findall('Space')
-    for s in spaces: filter_benchmarks_in_space(s, n)
+    for s in spaces: filter_benchmarks_in_space(s, n, select_benchmarks,path)
     benchmarks = space.findall('Benchmark')
-    for b in benchmarks[n:]: space.remove(b)
+    if select_benchmarks:
+      for b in benchmarks:
+        bname = path +"/"+b.attrib['name']
+        if bname not in selected:
+          space.remove(b)
+        else:
+          selected.remove(bname)
+    if n>0:
+      for b in benchmarks[n:]: space.remove(b)
 
 # Traverse space and add solvers to divisions and their subspaces.
 def add_solvers_in_space(space, solvers):
@@ -123,7 +140,7 @@ def add_solvers_in_space(space, solvers):
 # Parse xml and add solvers to divisions.
 # If 'filter_benchmarks' is true, remove all but one benchmark for each
 # (sub)space with benchmarks (for test runs on StarExec).
-def add_solvers(track, filter_benchmarks):
+def add_solvers(track, filter_benchmarks, select_benchmarks):
     global g_xml_tree
     root = g_xml_tree.getroot()
     incremental_space = root.find('.//Space[@name="incremental"]')
@@ -132,13 +149,15 @@ def add_solvers(track, filter_benchmarks):
         if space:
             n = 1 # number of benchmarks to keep in each family
             if track == 'track_model_validation':
-                filter_model_validation_benchmarks(space)
+                filter_model_validation_benchmarks(space, select_benchmarks)
                 n = 3
             elif track == 'track_unsat_core':
-                filter_unsat_core_benchmarks(space)
+                filter_unsat_core_benchmarks(space, select_benchmarks)
             # filter benchmarks
             if filter_benchmarks:
-                filter_benchmarks_in_space(space, n)
+                filter_benchmarks_in_space(space, n, select_benchmarks,"")
+            elif select_benchmarks:
+                filter_benchmarks_in_space(space, 0, select_benchmarks,"")
 
             remove_empty_spaces(space)
 
@@ -183,6 +202,12 @@ if __name__ == '__main__':
             action="store_true", dest="filter", default=False,
             help="filter space to only keep one (the first) benchmark " \
                   "in each space with benchmarks (for test runs)")
+    parser.add_argument("-s","-select",
+            action="store",dest="select",default="none",
+            help="A list of benchmarks to select", required=False)
+    parser.add_argument("-c","-col",
+            action="store",dest="solver_colid",default="Solver ID",
+            help="Column name to use for solver id", required=False)
     args = parser.parse_args()
 
     if not os.path.exists(args.space_xml):
@@ -195,7 +220,16 @@ if __name__ == '__main__':
         die("invalid track name")
     args.track = "track_{}".format(args.track)
 
+    if args.select != "none":
+      read_selected(args.select)
+      print("selected "+str(len(selected)))
+
     g_xml_tree = ET.parse(args.space_xml)
-    read_csv(args.csv, args.track)
-    add_solvers(args.track, args.filter)
+    read_csv(args.csv, args.track,args.solver_colid)
+    add_solvers(args.track, args.filter,args.select!="none")
     g_xml_tree.write(args.out_xml)
+
+    if args.select != "none":
+      print("there are "+str(len(selected))+" benchmarks unselected")
+      for s in selected:
+        print(s)

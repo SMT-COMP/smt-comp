@@ -5,7 +5,7 @@ import sys, random, os.path
 # Options parsing
 import optparse
 
-def read_data(data_file_names):
+def read_data(data_file_names,verdict):
 
   logics = {}   # maps logics to a dict mapping solvers to a {(problem,family):(status,expected_status,time)} dict
   
@@ -15,28 +15,27 @@ def read_data(data_file_names):
      #Remove header
      first=True
      for line in f:
-	if first:
+        if first:
           first=False
           continue 
 
         _,prob,_,solver,_,config,_,_,time,_,memory,status,expected = line.split(",")[:13]
 
-        # uncomment to ignore problems with unknown expected status
-	#if 'unknown' in expected:
-	#	continue
+        if verdict != "any" and expected != verdict:
+           continue
 
         solver_name = solver+"_"+config
-	logic = prob.split("/")[0]
+        logic = prob.split("/")[0]
         # Required due to how data was run in 2018 and 2017
-	if logic == "Other Divisions" or logic == "Datatype Divisions":
-		logic = prob.split("/")[1]
-		prob = "/".join(prob.split("/")[1:])
+        if logic == "Other Divisions" or logic == "Datatype Divisions":
+          logic = prob.split("/")[1]
+          prob = "/".join(prob.split("/")[1:])
 
-	if logic in logics:
-		solvers = logics[logic]
-	else:
-		solvers = {}
-		logics[logic] = solvers
+        if logic in logics:
+       	  solvers = logics[logic]
+        else:
+       	  solvers = {}
+       	  logics[logic] = solvers
 
         if solver_name in solvers:
            results = solvers[solver_name]
@@ -59,6 +58,7 @@ if __name__ == "__main__":
   parser.add_option('-n','--new_csv',action="store",dest="new_csv",help="Specify the new csv containing new problems")
   parser.add_option('-f','--filter',action="store",dest="filter",help="Select whether you want to filter by previous years results",default=False)
   parser.add_option('-x','--out',action="store",dest="out",help="Optionally give an output file to print selected benchmark names",default="")
+  parser.add_option('-v','--verdict',action="store",dest="verdict",help="Restrict problems to those with this verdict",default="any")
 
   options, args = parser.parse_args()
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
   # the problem is described in the <logic/family/path> bit
   # one could put the correct status as the expected value but this script does not
   # currently use it 
-  data =read_data([options.old_csv,options.new_csv])
+  data =read_data([options.old_csv,options.new_csv],options.verdict)
 
   # Set time limit for interestingness. The default here is 1 second
   time_limit = 1 
