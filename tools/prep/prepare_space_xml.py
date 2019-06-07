@@ -11,11 +11,32 @@ g_xml_tree = None
 g_divisions = {}
 selected = set()
 
+TRACK_SINGLE_QUERY = 'track_single_query'
+TRACK_INCREMENTAL = 'track_incremental'
+TRACK_SINGLE_QUERY_CHALLENGE = 'track_single_query_challenge'
+TRACK_INCREMENTAL_CHALLENGE = 'track_incremental_challenge'
+TRACK_UNSAT_CORE = 'track_unsat_core'
+TRACK_MODEL_VALIDATION = 'track_model_validation'
+
+# Solver ID columns
+COL_SOLVER_ID_PRELIM = 'Preliminary Solver ID'
+COL_SOLVER_ID = 'Solver ID'
+COL_SOLVER_ID_WRAPPED_SQ = 'Wrapped Solver ID Single Query'
+COL_SOLVER_ID_WRAPPED_INC = 'Wrapped Solver ID Incremental'
+COL_SOLVER_ID_WRAPPED_MV = 'Wrapped Solver ID Model Validation'
+COL_SOLVER_ID_WRAPPED_UC = 'Wrapped Solver ID Unsat Core'
+# Track Columns
+COL_SINGLE_QUERY_TRACK = 'Single Query Track'
+COL_INCREMENTAL_TRACK = 'Incremental Track'
+COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
+COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
+COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
+COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
+
 # Print error message and exit.
 def die(msg):
     print("error: {}".format(msg))
     sys.exit(1)
-
 
 # Read csv with solver data of the form:
 #   solver_id  | solver_name | single_query_track | ... other tracks
@@ -23,25 +44,43 @@ def die(msg):
 # Order of tracks: single query, incremental, challenge, model val, unsat core
 # Columns are separated by ',' and divisions are separated by ';'.
 def read_csv(fname, track,solver_colid):
+# If 'use_wrapped' is true, use wrapped solver IDs instead.
+def read_csv(fname, track, use_wrapped):
     global g_divisions
+    col_solver_id = COL_SOLVER_ID
+    if use_wrapped:
+        if track == TRACK_SINGLE_QUERY:
+            col_solver_id = COL_SOLVER_ID_WRAPPED_SQ
+        elif track == TRACK_INCREMENTAL:
+            col_solver_id = COL_SOLVER_ID_WRAPPED_INC
+        elif track == TRACK_SINGLE_QUERY_CHALLENGE:
+            col_solver_id = COL_SOLVER_ID_WRAPPED_SQ
+        elif track == TRACK_INCREMENTAL_CHALLENGE:
+            col_solver_id = COL_SOLVER_ID_WRAPPED_INC
+        elif track == TRACK_MODEL_VALIDATION:
+            col_solver_id = COL_SOLVER_ID_WRAPPED_MV
+        elif track == TRACK_UNSAT_CORE:
+            col_solver_id = COL_SOLVER_ID_WRAPPED_UC
     with open(args.csv) as file:
         reader = csv.reader(file, delimiter=',')
         header = next(reader)
         for row in reader:
             drow = dict(zip(iter(header), iter(row)))
+            solver_id = drow[col_solver_id]
+            if not solver_id: continue
             divisions = None
-            if track == 'track_single_query':
-                divisions = drow['Single Query Track'].split(';')
-            elif track == 'track_incremental':
-                divisions = drow['Incremental Track'].split(';')
-            elif track == 'track_single_query_challenge':
-                divisions = drow['Challenge Track (single query)'].split(';')
-            elif track == 'track_incremental_challenge':
-                divisions = drow['Challenge Track (incremental)'].split(';')
-            elif track == 'track_model_validation':
-                divisions = drow['Model Validation Track'].split(';')
-            elif track == 'track_unsat_core':
-                divisions = drow['Unsat Core Track'].split(';')
+            if track == TRACK_SINGLE_QUERY:
+                divisions = drow[COL_SINGLE_QUERY_TRACK].split(';')
+            elif track == TRACK_INCREMENTAL:
+                divisions = drow[COL_INCREMENTAL_TRACK].split(';')
+            elif track == TRACK_SINGLE_QUERY_CHALLENGE:
+                divisions = drow[COL_CHALLENGE_TRACK_SINGLE_QUERY].split(';')
+            elif track == TRACK_INCREMENTAL_CHALLENGE:
+                divisions = drow[COL_CHALLENGE_TRACK_INCREMENTAL].split(';')
+            elif track == TRACK_MODEL_VALIDATION:
+                divisions = drow[COL_MODEL_VALIDATION_TRACK].split(';')
+            elif track == TRACK_UNSAT_CORE:
+                divisions = drow[COL_UNSAT_CORE_TRACK].split(';')
             assert (divisions)
 
             for division in divisions:
@@ -57,7 +96,6 @@ def read_selected(fname):
     with open(fname) as file:
        for line in file:
          selected.add(line.strip())
-
 
 
 def is_model_validation_benchmark(benchmark):
@@ -83,11 +121,22 @@ def space_is_empty(space):
     benchmarks = space.findall('Benchmark')
     return not spaces and not benchmarks
 
+def space_has_no_solvers(space):
+    solvers = space.findall('Solver')
+    return not solvers
+
 def remove_empty_spaces(space):
     spaces = space.findall('Space')
     for s in spaces:
         remove_empty_spaces(s)
         if space_is_empty(s):
+            space.remove(s)
+
+def remove_spaces_without_solvers(space):
+    spaces = space.findall('Space')
+    for s in spaces:
+        remove_spaces_without_solvers(s)
+        if space_has_no_solvers(s):
             space.remove(s)
 
 def is_unsat_core_benchmark(benchmark):
@@ -150,19 +199,18 @@ def add_solvers(track, filter_benchmarks, select_benchmarks):
     for space in [incremental_space, non_incremental_space]:
         if space:
             n = 1 # number of benchmarks to keep in each family
-            if track == 'track_model_validation':
+            if track == TRACK_MODEL_VALIDATION:
                 filter_model_validation_benchmarks(space, select_benchmarks)
                 n = 3
-            elif track == 'track_unsat_core':
+            elif track == TRACK_UNSAT_CORE:
                 filter_unsat_core_benchmarks(space, select_benchmarks)
             # filter benchmarks
             if filter_benchmarks:
                 filter_benchmarks_in_space(space, n, select_benchmarks,"")
             elif select_benchmarks:
                 filter_benchmarks_in_space(space, 0, select_benchmarks,"")
-
+            # remove spaces without benchmarks
             remove_empty_spaces(space)
-
             # add solvers
             subspaces = space.findall('Space')
             for subspace in subspaces:
@@ -173,7 +221,10 @@ def add_solvers(track, filter_benchmarks, select_benchmarks):
                     # TODO make this check aware of non-competitive solvers and solver variants
                     if len(solvers) > 1:
                       add_solvers_in_space(subspace, solvers)
+            # remove spaces without solvers
+            remove_spaces_without_solvers(space)
             # remove top-level non-incremental/incremental space tag
+            subspaces = space.findall('Space')
             root.extend(subspaces)
             root.remove(space)
 
@@ -207,9 +258,9 @@ if __name__ == '__main__':
     parser.add_argument("-s","-select",
             action="store",dest="select",default="none",
             help="A list of benchmarks to select", required=False)
-    parser.add_argument("-c","-col",
-            action="store",dest="solver_colid",default="Solver ID",
-            help="Column name to use for solver id", required=False)
+    parser.add_argument ("-w",
+            action="store_true", dest="wrapped", default=False,
+            help="use wrapped solver IDs")
     args = parser.parse_args()
 
     if not os.path.exists(args.space_xml):
@@ -227,11 +278,9 @@ if __name__ == '__main__':
       print("selected "+str(len(selected)))
 
     g_xml_tree = ET.parse(args.space_xml)
-    read_csv(args.csv, args.track,args.solver_colid)
+    read_csv(args.csv, args.track, args.wrapped)
     add_solvers(args.track, args.filter,args.select!="none")
     g_xml_tree.write(args.out_xml)
 
     if args.select != "none":
       print("there are "+str(len(selected))+" benchmarks unselected")
-      for s in selected:
-        print(s)
