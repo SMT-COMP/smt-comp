@@ -18,9 +18,9 @@ def readXml(tmpl_str):
 def pp(el):
     print("{}\n".format(ET.tostring(el).decode('UTF-8')))
 
-def addElems(base, file_list):
+def addElems(base, file_list, name):
     for el in base:
-        if el.tag == 'Space' and ('name' in el.attrib and el.attrib['name'] == 'non-incremental'):
+        if el.tag == 'Space' and ('name' in el.attrib and el.attrib['name'] == name):
             for f in file_list:
                 f_el = readXml(open(f).read())
                 for child in f_el:
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     tmpl_str = open(args.template_xml).read()
     base_el = readXml(tmpl_str)
 
-    addElems(base_el, args.space_xmls)
+    addElems(base_el, args.space_xmls, args.name)
 
     sys.stdout.write("{}".format(ET.tostring(base_el, method="html").decode('UTF-8')))
 
