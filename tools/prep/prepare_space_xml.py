@@ -43,7 +43,6 @@ def die(msg):
 #   ....       | ....        | entered divisions  | ...
 # Order of tracks: single query, incremental, challenge, model val, unsat core
 # Columns are separated by ',' and divisions are separated by ';'.
-def read_csv(fname, track,solver_colid):
 # If 'use_wrapped' is true, use wrapped solver IDs instead.
 def read_csv(fname, track, use_wrapped):
     global g_divisions
@@ -89,13 +88,15 @@ def read_csv(fname, track, use_wrapped):
                 if division not in g_divisions:
                     g_divisions[division] = []
                 g_divisions[division].append(
-                        [drow[solver_colid], drow['Solver Name']])
+                        [drow[col_solver_id], drow['Solver Name']])
 
 def read_selected(fname):
     global selected
     with open(fname) as file:
        for line in file:
-         selected.add(line.strip())
+         line = line.strip()
+         if line:
+           selected.add(line)
 
 
 def is_model_validation_benchmark(benchmark):
@@ -284,3 +285,5 @@ if __name__ == '__main__':
 
     if args.select != "none":
       print("there are "+str(len(selected))+" benchmarks unselected")
+      for s in selected:
+        print(s)

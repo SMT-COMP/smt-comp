@@ -124,7 +124,7 @@ if __name__ == "__main__":
      total = 0
 
      for (solver,results) in sorted(solvers.items()):
-      if solver == "NEW":
+      if solver == "NEW_x":
         for ((prob,fam),(stat,expected,time)) in results.items(): 
           count = count+1
           eligible.add(prob)
@@ -144,10 +144,13 @@ if __name__ == "__main__":
              solved_by[prob] = set()
            solved_by[prob].add(solver)
 
+     competing_solvers = set(solvers.keys())
+     if 'NEW_x' in competing_solvers:
+       competing_solvers.remove('NEW_x') 
      for (prob,ss) in solved_by.items(): 
       if options.filter:
          # add problem if not all solvers solve it
-         if len(ss) < len(solvers):
+         if len(ss) < len(competing_solvers):
           count = count+1
           eligible.add(prob)
       else:
@@ -159,9 +162,10 @@ if __name__ == "__main__":
          per = "{0:.2f}".format(100.0 * float(total-count) / float(total))
          print logic.ljust(15),":",str(count).ljust(6),("\t (out of "+str(total)+")").ljust(20),(" "+per+"% removed   ")
 
-     if count != len(eligible):
-       print "Something went wrong"
-       sys.exit(0)
+     #if count != len(eligible):
+     #  print "Something went wrong"
+     #  print "count is "+str(count)+" but eligible is "+str(len(eligible))
+     #  sys.exit(0)
 
      #Perform selection
      # Note that this only really makes sense for particular parameters
@@ -169,6 +173,7 @@ if __name__ == "__main__":
 
      # This first check would allow us to place a minimum size but for now
      # just ignores 'empty' divisions
+     count = len(eligible)
      if count > 0:
       if count <= lower: 
         select = count 
@@ -176,6 +181,9 @@ if __name__ == "__main__":
         select = lower 
       else:
         select = int(percent*count)
+
+      #for prob in eligible:
+      #  print "Eligible: "+prob
 
       print "For ",logic.ljust(15), " selected ",str(select)
       selected = set()
@@ -185,6 +193,7 @@ if __name__ == "__main__":
         prob = random.choice(tuple(problems)) 
         eligible.remove(prob)
         selected.add(prob)
+        #print "Select "+prob+" from new family "+fam
 
       while len(selected) < select: 
         prob = random.choice(tuple(eligible))
