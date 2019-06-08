@@ -96,16 +96,26 @@ Usage:
 
 """
 
-def fillLogic(logic_data, track, file):
-    print("Filling logic_data for track %s using file %s" % (track, file))
-    rows = open(file).readlines()
-    for row in rows:
-        els = row.split('/')
+def fillLogic(logic_data, track, bm_files, noncomp_files):
+    print("Filling logic_data for track %s using benchmark files `%s'"\
+            " and non-competitive division files `%s'" % \
+            (track, " ".join(bm_files), " ".join(noncomp_files)))
 
-        if len(els) == 1:
-            continue # empty line
+    for bm_file in bm_files:
+        rows = open(bm_file).readlines()
+        for row in rows:
+            els = row.split('/')
 
-        logic_data[(els[2])][track][0] += 1
+            if len(els) == 1:
+                continue # empty line
+
+            logic_data[(els[2])][track][0] += 1
+
+    for noncomp_file in noncomp_files:
+        noncomp_rows = open(noncomp_file).readlines()
+        for div in noncomp_rows:
+            div = div.strip()
+            logic_data[div][track][2] = 'non-competitive'
 
     return logic_data
 
@@ -114,8 +124,9 @@ def tostring(logic_name, logic_el):
     for track in logic_el:
         tr_el = logic_el[track]
         track_str_list.append(\
-                "- name: track_%s\n  n_insts: %d\n  n_excluded: %d" \
-                % (track, tr_el[0], tr_el[1]))
+                "- name: track_%s\n  n_insts: %d\n  n_excluded: %d\n" \
+                "  status: %s"
+                % (track, tr_el[0], tr_el[1], tr_el[2]))
     yaml_str = """---
 layout: logic
 division: %s
@@ -144,6 +155,15 @@ if __name__ == '__main__':
         parser.add_argument("--%s" % argname, metavar="file", type=str,
                 nargs='*', dest=argname, help=help_str)
 
+        argname_nc = "%s_noncompetitive" % argname
+        hel_str = "A list of files containing the "\
+                "non competitive logics in track %s" % \
+                track_raw_names_to_pretty_names['track_%s' % argname]
+        parser.add_argument("--%s-noncompetitive" % argname, \
+                metavar = "file", type=str, nargs='*', dest=argname_nc, \
+                help=help_str)
+
+
     parser.add_argument("--yaml-path", metavar="path", type=str,
             dest='yaml_path', required=True, help="path where the yaml"\
             "files should be placed")
@@ -157,9 +177,14 @@ if __name__ == '__main__':
         if tr_files == None:
             tr_files = []
 
-        tracks_to_files[x] = tr_files
+        tr_nocomp_files = eval("args.%s_noncompetitive" % x)
 
-        for f in tr_files:
+        if tr_nocomp_files == None:
+            tr_nocomp_files = []
+
+        tracks_to_files[x] = (tr_files, tr_nocomp_files)
+
+        for f in tr_files + tr_nocomp_files:
             if not os.path.exists(f):
                 die("File not found: {}".format(f))
 
@@ -170,11 +195,11 @@ if __name__ == '__main__':
     for logic in all_logics:
         logic_data[logic] = {}
         for track in tracks:
-            logic_data[logic][track] = [0,0]
+            logic_data[logic][track] = [0,0,'competitive']
 
     for tr in tracks:
-        for file in tracks_to_files[tr]:
-            logic_data = fillLogic(logic_data, tr, file)
+        (bm_files, noncomp_files) = tracks_to_files[tr]
+        logic_data = fillLogic(logic_data, tr, bm_files, noncomp_files)
 
     for logic in all_logics:
         printYaml(logic, logic_data[logic], args.yaml_path)
