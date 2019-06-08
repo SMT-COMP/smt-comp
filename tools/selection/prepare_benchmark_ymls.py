@@ -9,6 +9,7 @@ def die(msg):
     print("error: {}".format(msg))
     sys.exit(1)
 
+SMTLIB_DESCR_TEMPLATE = "http://smtlib.cs.uiowa.edu/logics.shtml#%s"
 
 TRACK_SINGLE_QUERY_RAW = 'track_single_query'
 TRACK_INCREMENTAL_RAW = 'track_incremental'
@@ -130,10 +131,11 @@ def tostring(logic_name, logic_el):
     yaml_str = """---
 layout: logic
 division: %s
+description: %s
 tracks:
 %s
 ---
-""" % (logic_name, "\n".join(track_str_list))
+""" % (logic_name, SMTLIB_DESCR_TEMPLATE % logic_name, "\n".join(track_str_list))
     return yaml_str
 
 def printYaml(logic_name, logic_el, path):
