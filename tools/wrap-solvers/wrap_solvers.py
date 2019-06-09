@@ -14,13 +14,25 @@ COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
 
 if __name__ == '__main__':
     parser = ArgumentParser(
-            usage="wrap_solvers <solvers: csv> <space: id> <inc_space: id>\n\n"
+            usage="wrap_solvers [options] <solvers: csv>\n\n"
 
                   "Download, wrap and upload solvers for non-incremental and "
                   "incremental tracks.")
     parser.add_argument ("csv",
             help="the input csv with solvers and divisions as generated from"\
                  "tools/prep/extract_data_from_submission.py")
+    parser.add_argument ("-d", dest="download_only", action="store_true",
+                         default=False,
+                         help="download solvers only")
+    parser.add_argument ("-w", dest="wrap_only", action="store_true",
+                         default=False,
+                         help="wrap solvers only")
+    parser.add_argument ("-W", dest="wrap", action="store_true",
+                         default=False,
+                         help="wrap solvers")
+    parser.add_argument ("-u", dest="upload_only", action="store_true",
+                         default=False,
+                         help="upload solvers only")
     parser.add_argument ("--sq", dest="space_id",
             help="the StarExec space id for non-incremental wrapped solvers")
     parser.add_argument ("--inc", dest="space_id_inc",
@@ -48,20 +60,39 @@ if __name__ == '__main__':
 
             print(solver_name)
 
+            add_args = []
+            if args.download_only:
+                add_args.append("-d")
+            if args.wrap_only:
+                add_args.append("-w")
+            if args.upload_only:
+                add_args.append("-u")
+            if args.wrap:
+                add_args.append("-W")
+
+            script_args = [os.path.dirname(os.path.abspath(__file__)) + '/wrap_solver.sh']
             if args.space_id and single_query_track:
                 print('wrapping for single query track')
-                p = subprocess.Popen(['./wrap_solver.sh', 'wrapped-sq', 'wrapper_sq', solver_id, args.space_id, "solvers"])
+                script_args.extend(add_args)
+                script_args.extend(['wrapped-sq', 'wrapper_sq', solver_id, args.space_id, "solvers"])
+                p = subprocess.Popen(script_args)
                 p.communicate()
             if args.space_id_mv and model_validation_track:
                 print('wrapping for model validation track')
-                p = subprocess.Popen(['./wrap_solver.sh', 'wrapped-mv', 'wrapper_sq', solver_id, args.space_id_mv, "solvers-mv"])
+                script_args.extend(add_args)
+                script_args.extend(['wrapped-mv', 'wrapper_sq', solver_id, args.space_id_mv, "solvers-mv"])
+                p = subprocess.Popen(script_args)
                 p.communicate()
             if args.space_id_uc and unsat_core_track:
                 print('wrapping for unsat core track')
-                p = subprocess.Popen(['./wrap_solver.sh', 'wrapped-uc', 'wrapper_sq', solver_id, args.space_id_uc, "solvers-uc"])
+                script_args.extend(add_args)
+                script_args.extend(['wrapped-uc', 'wrapper_sq', solver_id, args.space_id_uc, "solvers-uc"])
+                p = subprocess.Popen(script_args)
                 p.communicate()
             if args.space_id_inc and incremental_track:
                 print('wrapping for incremental track')
-                p = subprocess.Popen(['./wrap_solver.sh', 'wrapped-inc', 'wrapper_inc', solver_id, args.space_id_inc, "solvers-inc"])
+                script_args.extend(add_args)
+                script_args.extend(['./wrap_solver.sh', 'wrapped-inc', 'wrapper_inc', solver_id, args.space_id_inc, "solvers-inc"])
+                p = subprocess.Popen(script_args)
                 p.communicate()
 
