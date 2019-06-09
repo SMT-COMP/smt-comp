@@ -256,7 +256,7 @@ if __name__ == '__main__':
             action="store_true", dest="filter", default=False,
             help="filter space to only keep one (the first) benchmark " \
                   "in each space with benchmarks (for test runs)")
-    parser.add_argument("-s","-select",
+    parser.add_argument("-s","--select",
             action="store",dest="select",default="none",
             help="A list of benchmarks to select", required=False)
     parser.add_argument ("-w",
