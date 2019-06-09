@@ -33,6 +33,10 @@ if __name__ == '__main__':
     parser.add_argument ("-u", dest="upload_only", action="store_true",
                          default=False,
                          help="upload solvers only")
+    parser.add_argument ("-z", dest="zip_only", action="store_true",
+                         default=False,
+                         help="only zip solvers from existing wrapped "
+                              "directories when wrapping")
     parser.add_argument ("--sq", dest="space_id",
             help="the StarExec space id for non-incremental wrapped solvers")
     parser.add_argument ("--inc", dest="space_id_inc",
@@ -69,6 +73,8 @@ if __name__ == '__main__':
                 add_args.append("-u")
             if args.wrap:
                 add_args.append("-W")
+            if args.zip_only:
+                add_args.append("-z")
 
             script_args = [os.path.dirname(os.path.abspath(__file__)) + '/wrap_solver.sh']
             if args.space_id and single_query_track:

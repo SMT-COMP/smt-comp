@@ -10,6 +10,7 @@ WRAP=yes
 DOWNLOAD=yes
 UPLOAD=yes
 FORCE_WRAP=no
+ZIP_ONLY=no
 
 while [ $# -gt 0 ]
 do
@@ -23,6 +24,7 @@ do
       echo "    -d            download solver only"
       echo "    -w            wrap solver only"
       echo "    -u            upload solver only"
+      echo "    -z            only zip solver from existing wrapped dir when wrapping"
       echo
       exit
       ;;
@@ -40,6 +42,9 @@ do
     -u)
       DOWNLOAD=no
       WRAP=no
+      ;;
+    -z)
+      ZIP_ONLY=yes
       ;;
     -*)
         echo "ERROR: invalid option '$1'"
@@ -121,20 +126,26 @@ if [ $WRAP == "yes" ]
 then
   echo ">> wrap solver"
 
-  #pushd "${SOLVER_DIR}"
-  #unzip -o "${NAME}.zip"
-  #popd
+  if [ $ZIP_ONLY == "no" ]
+  then
+    pushd "${SOLVER_DIR}"
+    unzip -o "${NAME}.zip"
+    popd
+  fi
 
   NEW_SOLVER_DIR="${WRAPPED_SOLVER_DIR}/${NAME}-${WRAPPED_NAME}"
-  #cp -r "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
 
-  #mv "${NEW_SOLVER_DIR}/bin/starexec_run_default" "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
-  #if [ $? -ne 0 ]
-  #then
-  #    echo "ERROR: not default config"
-  #    exit 1
-  #fi
-  #cp -r ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
+  if [ $ZIP_ONLY == "no" ]
+  then
+    cp -r "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
+    mv "${NEW_SOLVER_DIR}/bin/starexec_run_default" "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
+    if [ $? -ne 0 ]
+    then
+        echo "ERROR: not default config"
+        exit 1
+    fi
+    cp -r ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
+  fi
 
   pushd "${NEW_SOLVER_DIR}"
   zip -r "../${NAME}-${WRAPPED_NAME}.zip" *
