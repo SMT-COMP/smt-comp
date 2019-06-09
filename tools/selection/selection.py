@@ -71,7 +71,13 @@ def parse_args():
     ap.add_argument('-x', '--out', dest='out',
                     help='Output file name to print selected benchmarks')
     ap.add_argument('-v', '--verdict', dest="verdict", default="any",
-                    help="Restrict problems to those with this verdict")
+                    help='Restrict problems to those with this verdict')
+    ap.add_argument('--print-stats', dest="print_stats",
+                    action='store_true',
+                    help='print statistics')
+    ap.add_argument('--print-eligible', dest='print_eligible',
+                    action='store_true',
+                    help='print eligible benchmarks')
     return ap.parse_args()
 
 
@@ -140,7 +146,7 @@ def main():
         for (solver,results) in sorted(solvers.items()):
             if solver == "NEW_x":
                 for ((prob,fam),(stat,expected,time)) in results.items():
-                    count = count+1
+                    count += 1
                     eligible.add(prob)
                     if fam not in new_families:
                         new_families[fam] = set()
@@ -166,22 +172,25 @@ def main():
             competing_solvers.remove('NEW_x')
         for (prob,ss) in solved_by.items():
             if g_args.filter:
-            # add problem if not all solvers solve it
+                # add problem if not all solvers solve it
                 if len(ss) < len(competing_solvers):
                     count = count+1
                     eligible.add(prob)
             else:
-                count = count+1
+                count += 1
                 eligible.add(prob)
 
-            # Set to True to print statistics on the reduction acheived by ignoring uninteresting
-        if False:
-            per = "{0:.2f}".format(100.0 * float(total-count) / float(total))
+        # print statistics on the reduction achieved by ignoring
+        # uninteresting benchmarks
+        if g_args.print_stats:
+            reduction = 100.0 * float(total - count) / float(total) \
+                    if total > 0 else 0.0
             print("{}:{}{} {}% removed".format(
                 logic.ljust(15),
                 str(count).ljust(6),
-                ("\t (out of "+str(total)+")").ljust(20),
-                per))
+                ("\t (out of " + str(total) + ")").ljust(20),
+                "{0:.2f}".format(reduction)
+                ))
 
         #if count != len(eligible):
         #  print("Something went wrong")
@@ -203,14 +212,15 @@ def main():
             else:
                 select = int(percent*count)
 
-            #for prob in eligible:
-            #  print("Eligible: " + str(prob))
-
             print("For {} selected {}".format(logic.ljust(15), str(select)))
             selected = set()
 
+            if g_args.print_eligible:
+                for prob in eligible:
+                  print("  Eligible: " + str(prob))
+
             for (fam,problems) in new_families.items():
-                select = select-1
+                select -= 1
                 prob = random.choice(tuple(problems))
                 eligible.remove(prob)
                 selected.add(prob)
