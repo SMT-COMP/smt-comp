@@ -7,6 +7,7 @@ import sys
 import os
 import re
 
+g_args = None
 g_xml_tree = None
 g_divisions = {}
 selected = set()
@@ -60,7 +61,7 @@ def read_csv(fname, track, use_wrapped):
             col_solver_id = COL_SOLVER_ID_WRAPPED_MV
         elif track == TRACK_UNSAT_CORE:
             col_solver_id = COL_SOLVER_ID_WRAPPED_UC
-    with open(args.csv) as file:
+    with open(fname) as file:
         reader = csv.reader(file, delimiter=',')
         header = next(reader)
         for row in reader:
@@ -189,6 +190,17 @@ def add_solvers_in_space(space, solvers):
                 'Solver',
                 attrib = {'id': solver[0], 'name': solver[1]})
 
+def is_competitive(solvers):
+    global g_args
+    count = len(solvers)
+    for nc in g_args.non_competing:
+        for s in solvers:
+            if nc == s[0]:
+                count -= 1
+                break
+    return count > 1
+
+
 # Parse xml and add solvers to divisions.
 # If 'filter_benchmarks' is true, remove all but one benchmark for each
 # (sub)space with benchmarks (for test runs on StarExec).
@@ -219,8 +231,7 @@ def add_solvers(track, filter_benchmarks, select_benchmarks):
                 if division in g_divisions:
                     solvers = g_divisions[division]
                     # Only add solvers if the division is competitive
-                    # TODO make this check aware of non-competitive solvers and solver variants
-                    if len(solvers) > 1:
+                    if is_competitive(solvers):
                       add_solvers_in_space(subspace, solvers)
             # remove spaces without solvers
             remove_spaces_without_solvers(space)
@@ -230,7 +241,8 @@ def add_solvers(track, filter_benchmarks, select_benchmarks):
             root.remove(space)
 
 
-if __name__ == '__main__':
+def main():
+    global g_args, g_xml_tree
     parser = ArgumentParser(
             usage="prepare_space_xml "\
                   "-t <track> "\
@@ -259,31 +271,41 @@ if __name__ == '__main__':
     parser.add_argument("-s","--select",
             action="store",dest="select",default="none",
             help="A list of benchmarks to select", required=False)
-    parser.add_argument ("-w",
+    parser.add_argument("-w",
             action="store_true", dest="wrapped", default=False,
             help="use wrapped solver IDs")
-    args = parser.parse_args()
+    parser.add_argument("-e", metavar="solver_id[,solver_id...]",
+                        dest="non_competing",
+                        help="list of non-competing solvers (StarExec IDs)")
+    g_args = parser.parse_args()
+    print(g_args)
 
-    if not os.path.exists(args.space_xml):
-        die("file not found: {}".format(args.space_xml))
-    if not os.path.exists(args.csv):
-        die("file not found: {}".format(args.csv))
+    if not os.path.exists(g_args.space_xml):
+        die("file not found: {}".format(g_args.space_xml))
+    if not os.path.exists(g_args.csv):
+        die("file not found: {}".format(g_args.csv))
 
-    if args.track not in ['single_query', 'incremental', 'single_query_challenge',
+    if g_args.track not in ['single_query', 'incremental', 'single_query_challenge',
                           'incremental_challenge', 'model_validation', 'unsat_core']:
         die("invalid track name")
-    args.track = "track_{}".format(args.track)
+    g_args.track = "track_{}".format(g_args.track)
 
-    if args.select != "none":
-      read_selected(args.select)
+    if g_args.select != "none":
+      read_selected(g_args.select)
       print("selected "+str(len(selected)))
 
-    g_xml_tree = ET.parse(args.space_xml)
-    read_csv(args.csv, args.track, args.wrapped)
-    add_solvers(args.track, args.filter,args.select!="none")
-    g_xml_tree.write(args.out_xml)
+    g_args.non_competing = g_args.non_competing.split(',') \
+            if g_args.non_competing else []
 
-    if args.select != "none":
+    g_xml_tree = ET.parse(g_args.space_xml)
+    read_csv(g_args.csv, g_args.track, g_args.wrapped)
+    add_solvers(g_args.track, g_args.filter,g_args.select!="none")
+    g_xml_tree.write(g_args.out_xml)
+
+    if g_args.select != "none":
       print("there are "+str(len(selected))+" benchmarks unselected")
       for s in selected:
         print(s)
+
+if __name__ == '__main__':
+    main()
