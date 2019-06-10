@@ -1,14 +1,55 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import argparse
 import csv
-import os
 import random
-import sys
 
-g_args = None
+#==============================================================================
+# Selection parameters
+#==============================================================================
 
-def read_data(data, file_name, verdict):
+# Set time limit for interesting benchmarks. The default here is 1 second.
+TIME_LIMIT = 1
+
+# The rules give the following rules for the number of selected benchmarks
+# (a) If a logic contains < 300 instances, all instances will be selected
+# (b) If a logic contains between 300 and 600, a subset of 300 will be selected
+# (c) If a logic contains > 600 then 50% will be selected
+# The following three variables represent the parameters in these rules so that
+# they can be modified if needed
+NUM_LOWER = 300
+NUM_UPPER = 600
+PERCENT = 0.5
+
+#==============================================================================
+
+def read_benchmarks(file_name):
+    # Maps benchmarks to corresponding logic and family.
+    # benchmarksk[logic][family] = set(benchmarks...)
+    benchmarks = {}
+    num_families = 0
+    num_benchmarks = 0
+    with open(file_name, 'r') as infile:
+        for benchmark in infile.readlines():
+            benchmark_split = benchmark.strip().split('/')
+            logic = benchmark_split[0]
+            family = '/'.join(benchmark_split[:-1])
+            benchmark = '/'.join(benchmark_split)
+            if not logic in benchmarks:
+                benchmarks[logic] = {}
+            if not family in benchmarks[logic]:
+                benchmarks[logic][family] = set()
+                num_families += 1
+            benchmarks[logic][family].add(benchmark)
+            num_benchmarks += 1
+    return benchmarks, num_families, num_benchmarks
+
+
+def read_data(file_name):
+
+    # Map logics to a dict mapping solvers to
+    # {(benchmark, family):(status, expected_status, time)}
+    data = {}
 
     with open(file_name, 'r') as file:
         reader = csv.reader(file)
@@ -17,61 +58,90 @@ def read_data(data, file_name, verdict):
         for row in reader:
             drow = dict(zip(iter(header), iter(row)))
 
-            benchmark = drow['benchmark']
-            solver = drow['solver']
-            config = drow['configuration']
-            cpu_time = float(drow['cpu time'])
+            benchmark = drow['benchmark'].strip()
+            solver = drow['solver'].strip()
+            config = drow['configuration'].strip()
+            cpu_time = float(drow['cpu time'].strip())
             status = drow['result'].strip()
             expected = drow['expected'].strip()
-
-            if verdict != "any" and expected != verdict:
-               continue
 
             solver_name = '{}_{}'.format(solver, config)
 
             benchmark_split = benchmark.split('/')
-            logic = benchmark_split[0]
 
             # Required due to how data was run in 2018 and 2017
-            if logic in ('Other Divisions', 'Datatype Divisions'):
-                logic = benchmark_split[1]
-                benchmark = '/'.join(benchmark_split[1:])
+            if benchmark_split[0] in ('Other Divisions', 'Datatype Divisions'):
+                benchmark_split.pop(0)
 
-            if logic in data:
-                solvers = data[logic]
-            else:
-                solvers = {}
-                data[logic] = solvers
-
-            if solver_name in solvers:
-                results = solvers[solver_name]
-            else:
-                results = {}
-                solvers[solver_name] = results
-
+            logic = benchmark_split[0]
+            benchmark = '/'.join(benchmark_split)
             family = '/'.join(benchmark_split[:-1])
-            results[(benchmark, family)] = (status, expected, cpu_time)
 
+            # Store results for each benchmarks as solver tuples.
+            # data[logic][family][benchmark] = [...]
+            if logic not in data:
+                data[logic] = {}
+            if family not in data[logic]:
+                data[logic][family] = {}
+            if benchmark not in data[logic][family]:
+                results = []
+                data[logic][family][benchmark] = results
+            else:
+                results = data[logic][family][benchmark]
+
+            results.append((solver_name, status, cpu_time, expected))
+
+    return data
+
+
+def sanity_check(data, selected_benchmarks, removed_benchmarks):
+    if not data:
+        return
+
+    for benchmark in selected_benchmarks:
+        benchmark_split = benchmark.split('/')
+        logic = benchmark_split[0]
+        family = '/'.join(benchmark_split[:-1])
+
+        results_logic = data.get(logic, {})
+        results_family = results_logic.get(family, {})
+        results_benchmark = results_family.get(benchmark, [])
+
+        if not is_eligible(results_benchmark):
+            print(benchmark)
+            print('\n'.join([str(x) for x in results_benchmark]))
+        assert is_eligible(results_benchmark)
+
+    for benchmark in removed_benchmarks:
+        benchmark_split = benchmark.split('/')
+        logic = benchmark_split[0]
+        family = '/'.join(benchmark_split[:-1])
+
+        results_logic = data.get(logic, {})
+        results_family = results_logic.get(family, {})
+        results_benchmark = results_family.get(benchmark, [])
+
+        if is_eligible(results_benchmark):
+            print(benchmark)
+            print('\n'.join([str(x) for x in results_benchmark]))
+        assert not is_eligible(results_benchmark)
 
 
 def parse_args():
     ap = argparse.ArgumentParser()
     ap.add_argument('-s', '--seed', dest='seed', type=int, help='RNG seed',
                     required=True)
-    ap.add_argument('-o', '--old-csv', dest='old_csv',
-                    help='CSV containing previous year\'s results',
+    ap.add_argument('-b', '--benchmarks', dest='benchmarks_file',
+                    help='List of benchmarks to be selected',
                     required=True)
-    ap.add_argument('-n', '--new-csv', dest='new_csv',
-                    help='CSV containing new problems',
+    ap.add_argument('-n', '--new-benchmarks', dest='new_benchmarks_file',
+                    help='List of new benchmarks to be selected',
                     required=True)
-    ap.add_argument('-f', '--filter', dest='filter',
-                    action='store_true',
-                    default=False,
-                    help='Filter out benchmarks based on \'old_csv\' results')
-    ap.add_argument('-x', '--out', dest='out',
+    ap.add_argument('-f', '--filter', dest='filter_csv',
+                    help="Filter out benchmarks based on csv containing " \
+                         "previous year's results")
+    ap.add_argument('-o', '--out', dest='out',
                     help='Output file name to print selected benchmarks')
-    ap.add_argument('-v', '--verdict', dest="verdict", default="any",
-                    help='Restrict problems to those with this verdict')
     ap.add_argument('--print-stats', dest="print_stats",
                     action='store_true',
                     help='print statistics')
@@ -81,161 +151,166 @@ def parse_args():
     return ap.parse_args()
 
 
+def is_eligible(results):
+    # Determine number of solvers that were able to correctly solve
+    # the benchmark within 'TIME_LIMIT' seconds.
+    num_solved = 0
+    for solver_name, status, cpu_time, expected in results:
+        if status in ('unsat', 'sat') \
+           and expected in ('starexec-unknown', status) \
+           and cpu_time <= TIME_LIMIT:
+            num_solved += 1
+
+    # All solvers correctly solved 'benchmark' within 'TIME_LIMIT'
+    # seconds, hence remove benchmark from 'all_benchmarks'.
+    #
+    # Note: We require that at least two solvers were in the division.
+    if num_solved >= 2 and num_solved == len(results):
+        return False
+    return True
+
+
 def main():
-    global g_args
 
-    g_args = parse_args()
-
-    # Map logics to a dict mapping solvers
-    # to {(benchmark, family):(status, expected_status, time)}
-    data = {}
+    args = parse_args()
 
     # Set up RNG
-    random.seed(g_args.seed)
+    random.seed(args.seed)
 
-    # Load data on previous years results and new divisions
-    # The new csv file should contain the same columns as we get
-    # from StarExec with a solver called NEW but as if we had timed out e.g.
-    # x,<logic/family/path>,x,NEW,x,x,x,timeout (wallclock),5000,5000,0,starexec-unknown,unsat
-    # the problem is described in the <logic/family/path> bit
-    # one could put the correct status as the expected value but this script does not
-    # currently use it
-    read_data(data, g_args.old_csv, g_args.verdict)
-    read_data(data, g_args.new_csv, g_args.verdict)
+    # Load list of all considered benchmarks for this year's competition.
+    all_benchmarks, num_logics, num_all_benchmarks = \
+            read_benchmarks(args.benchmarks_file)
+    print('All Benchmarks: {} logics, {} families, {} benchmarks'.format(
+          len(all_benchmarks), num_logics, num_all_benchmarks))
 
-    # Set time limit for interesting benchmarks. The default here is 1 second.
-    time_limit = 1
+    # Load list of benchmarks that are new for this year's competition
+    new_benchmarks, num_new_logics, num_new_benchmarks = \
+            read_benchmarks(args.new_benchmarks_file)
+    print('New Benchmarks: {} logics, {} families, {} benchmarks'.format(
+          len(new_benchmarks), num_new_logics, num_new_benchmarks))
 
-    # This is used to predict the amount of time the resulting problem
-    # selection will take using this number nodes.
-    #nodes = 150
-    #starexec_time_limit = 1200
-
-    # The rules give the following rules for the number of selected benchmarks
-    # (a) If a logic contains < 300 instances, all instances will be selected
-    # (b) If a logic contains between 300 and 600, a subset of 300 will be selected
-    # (c) If a logic contains > 600 then 50% will be selected
-    # The following three variables represent the parameters in these rules so that
-    # they can be modified if needed
-    lower = 300
-    upper = 600
-    percent = 0.5
-
-    #================================================================
+    # Determine total number of benchmarks for each logic.
+    num_all_benchmarks = {}
+    if args.print_stats:
+        for logic, families in all_benchmarks.items():
+            num_all_benchmarks[logic] = 0
+            for family, benchmarks in families.items():
+                num_all_benchmarks[logic] += len(benchmarks)
 
 
-    # count up the time taken to run all logics
-    # this assumes the same number of participants for divisions
-    # as in previous years
-    #all_time = 0
+    # Stores all selected benchmarks
+    selected_benchmarks = []
+    removed_benchmarks = []
 
-    for (logic,solvers) in sorted(data.items()):
+    # Load data of previous year's result used to filter out uninteresting
+    # benchmarks.
+    data = {}
+    if args.filter_csv:
+        data = read_data(args.filter_csv)
 
-        # place eligible problems here
-        eligible = set()
-        new_families = {}
+    # Filter out uninteresting benchmarks from 'all_benchmarks'.
+    for logic, families in sorted(data.items()):
 
-        # map from problem to set of solvers solving it
-        solved_by = {}
-        #run_in = {}
+        # For printing statistics
+        num_removed = 0
 
-        # used for statistics
-        count = 0
-        total = 0
+        # Logics might have changed compared to last year.
+        if logic not in all_benchmarks:
+            continue
 
-        for (solver,results) in sorted(solvers.items()):
-            if solver == "NEW_x":
-                for ((prob,fam),(stat,expected,time)) in results.items():
-                    count += 1
-                    eligible.add(prob)
-                    if fam not in new_families:
-                        new_families[fam] = set()
-                    new_families[fam].add(prob)
-            else:
-                total = total + len(results)
-                for ((prob,fam),(stat,expected,time)) in results.items():
-                    #if prob not in run_in:
-                    #  run_in[prob] = 0
-                    #run_in[prob] = run_in[prob] + min(time,starexec_time_limit)
-                    # It's solved if it has a unsat/sat result, is solved within the time limit
-                    # and the solution is sound. We don't check for disagreements on unknowns here
-                    if (stat=="unsat" or stat=="sat") \
-                            and (time<=time_limit) \
-                            and (expected=="starexec-unknown" \
-                            or stat==expected):
-                        if prob not in solved_by:
-                            solved_by[prob] = set()
-                        solved_by[prob].add(solver)
+        for family, benchmarks in families.items():
+            # Families might have changed compared to last year.
+            if family not in all_benchmarks[logic]:
+                continue
 
-        competing_solvers = set(solvers.keys())
-        if 'NEW_x' in competing_solvers:
-            competing_solvers.remove('NEW_x')
-        for (prob,ss) in solved_by.items():
-            if g_args.filter:
-                # add problem if not all solvers solve it
-                if len(ss) < len(competing_solvers):
-                    count = count+1
-                    eligible.add(prob)
-            else:
-                count += 1
-                eligible.add(prob)
+            for benchmark, results in benchmarks.items():
 
-        # print statistics on the reduction achieved by ignoring
-        # uninteresting benchmarks
-        if g_args.print_stats:
-            reduction = 100.0 * float(total - count) / float(total) \
-                    if total > 0 else 0.0
-            print("{}:{}{} {}% removed".format(
-                logic.ljust(15),
-                str(count).ljust(6),
-                ("\t (out of " + str(total) + ")").ljust(20),
-                "{0:.2f}".format(reduction)
-                ))
+                # Benchmarks might have changed compared to last year.
+                if benchmark not in all_benchmarks[logic][family]:
+                    continue
 
-        #if count != len(eligible):
-        #  print("Something went wrong")
-        #  print("count is "+str(count)+" but eligible is "+str(len(eligible)))
-        #  sys.exit(0)
+                assert results
+                if not is_eligible(results):
+                    all_benchmarks[logic][family].remove(benchmark)
+                    removed_benchmarks.append(benchmark)
+                    num_removed += 1
 
-        #Perform selection
-        # Note that this only really makes sense for particular parameters
-        # percent*upper should equal lower
+        # Print statistics on the reduction achieved by ignoring uninteresting
+        # benchmarks.
+        if args.print_stats:
+            num_total = num_all_benchmarks.get(logic, 0)
+            reduction = \
+                float(num_removed) / float(num_total) if num_total > 0 else 0.0
+            print('{:15s}{:6d}{:20s} {:.2%} removed'.format(
+                    '{}:'.format(logic),
+                    num_total - num_removed,
+                    '\t (out of {})'.format(num_total),
+                    reduction
+                 ))
 
-        # This first check would allow us to place a minimum size but for now
-        # just ignores 'empty' divisions
-        count = len(eligible)
-        if count > 0:
-            if count <= lower:
-                select = count
-            elif count > lower and count <= upper:
-                select = lower
-            else:
-                select = int(percent*count)
 
-            print("For {} selected {}".format(logic.ljust(15), str(select)))
-            selected = set()
+    # 'all_benchmarks' now contains all eligible benchmarks (inclucing new
+    # benchmarks.
+    for logic, families in sorted(all_benchmarks.items()):
 
-            if g_args.print_eligible:
-                for prob in eligible:
-                  print("  Eligible: " + str(prob))
+        # Collect all eligible benchmarks.
+        eligible_benchmarks = set()
+        for family, benchmarks in families.items():
+            eligible_benchmarks.update(benchmarks)
+        num_eligible = len(eligible_benchmarks)
 
-            for (fam,problems) in new_families.items():
-                select -= 1
-                prob = random.choice(tuple(problems))
-                eligible.remove(prob)
-                selected.add(prob)
-                #print("Select "+prob+" from new family "+fam)
+        # This check would allow us in the future to place a minimum number of
+        # benchmarks for a division, but for now just ignores 'empty'
+        # divisions.
+        if num_eligible == 0:
+            print('No eligible benchmarks for {}. Skipping.'.format(logic))
+            continue
 
-            while len(selected) < select:
-                prob = random.choice(tuple(eligible))
-                eligible.remove(prob)
-                selected.add(prob)
+        # Determine number of benchmarks to select.
+        if num_eligible <= NUM_LOWER:
+            num_select = num_eligible
+        elif NUM_LOWER < num_eligible <= NUM_UPPER:
+            num_select = NUM_LOWER
+        else:
+            num_select = int(PERCENT * num_eligible)
 
-            # print selected problems
-            if g_args.out != "":
-                with open(g_args.out,"w") as f:
-                    for prob in selected:
-                        f.write(prob+"\n")
+        print("For {:15s} selected {}".format(logic, num_select))
+
+        if args.print_eligible:
+            for benchmark in eligible_benchmarks:
+                print('  Eligible: {}'.format(benchmark))
+
+        # Stores the selected benchmarks for this logic.
+        selected = set()
+
+        # Sort eligible benchmarks. Make sure that the order of eligible
+        # benchmarks is always the same for each execution of the script.
+        # Sets in Python don't necessarily have the same order in each
+        # execution of the script.
+        eligible_benchmarks = sorted(eligible_benchmarks)
+
+        # Pick at least one benchmark from each new family.
+        new_families = new_benchmarks.get(logic, {})
+        for family, benchmarks in new_families.items():
+            benchmark = random.choice(sorted(benchmarks))
+            assert benchmark in eligible_benchmarks
+            eligible_benchmarks.remove(benchmark)
+            selected.add(benchmark)
+
+        # Pick the remaining number of benchmarks from all eligible benchmarks.
+        while len(selected) < num_select:
+            benchmark = random.choice(eligible_benchmarks)
+            eligible_benchmarks.remove(benchmark)
+            selected.add(benchmark)
+
+        selected_benchmarks.extend(sorted(selected))
+
+    sanity_check(data, selected_benchmarks, removed_benchmarks)
+
+    # Print selected benchmarks
+    if args.out:
+        with open(args.out, 'w') as outfile:
+            outfile.write('\n'.join(selected_benchmarks))
 
 
 if __name__ == '__main__':
