@@ -149,6 +149,8 @@ def parse_args():
     ap.add_argument('--print-eligible', dest='print_eligible',
                     action='store_true',
                     help='print eligible benchmarks')
+    ap.add_argument('--prefix', dest='prefix', default='',
+                    help='the prefix to prepend to selected benchmark lines')
     return ap.parse_args()
 
 
@@ -311,7 +313,9 @@ def main():
     # Print selected benchmarks
     if args.out:
         with open(args.out, 'w') as outfile:
-            outfile.write('\n'.join(selected_benchmarks))
+            benchmarks = ['{}{}'.format(args.prefix, b) \
+                          for b in selected_benchmarks]
+            outfile.write('\n'.join(benchmarks))
 
 
 if __name__ == '__main__':

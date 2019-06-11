@@ -16,5 +16,5 @@ OLD_INC_CSV="$SCRIPTDIR/../../../2018/csv/Application_Track.csv"
 
 SEED=912681576
 
-#python $SELECT --filter "$OLD_SQ_CSV" --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ"
-python $SELECT --filter "$OLD_INC_CSV" --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC"
+python $SELECT --filter "$OLD_SQ_CSV" --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/"
+python $SELECT --filter "$OLD_INC_CSV" --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/"
