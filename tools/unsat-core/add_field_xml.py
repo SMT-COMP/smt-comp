@@ -23,7 +23,10 @@ def read_lines(lines):
     els = []
     r = [None, {}]
     for l in lines:
-        (path, prop) = l.split()
+        try:
+            (path, prop) = l.split()
+        except ValueError as e:
+            print(e, l)
         path_split = path.split("/")
         assert(path_split[-1][-len(".smt2"):] == ".smt2")
 
