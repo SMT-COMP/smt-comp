@@ -3,6 +3,7 @@
 OUT_SPACE_SQ=$1
 OUT_SPACE_CHALL_NON_INC=$2
 OUT_SPACE_CHALL_INC=$3
+OUT_SPACE_INC=$4
 
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
@@ -18,9 +19,13 @@ SELECT_CHALL_NON_INC="$SCRIPTDIR/../selection/challenge-non-incremental/benchmar
 IN_SPACE_CHALL_INC="../incremental-space.xml"
 SELECT_CHALL_INC="$SCRIPTDIR/../selection/challenge-incremental/benchmark_selection_challenge_incremental_2019"
 
+IN_SPACE_INC="../incremental-space.xml"
+SELECT_INC="$SCRIPTDIR/../selection/incremental/benchmark_selection_incremental_2019"
+
 Z3_SQ=24192
 Z3_CHALL_NON_INC=24192
 Z3_CHALL_INC=24017
+Z3_INC=24017
 
 # Single Query Track
 python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w -e $Z3_SQ
@@ -31,3 +36,5 @@ python $PREPARE "$IN_SPACE_CHALL_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_I
 # Challenge Track incremental
 python $PREPARE "$IN_SPACE_CHALL_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC" -t incremental_challenge --select "$SELECT_CHALL_INC" -w -e $Z3_CHALL_INC
 
+# Incremental Track
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w -e $Z3_INC
