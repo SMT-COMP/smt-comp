@@ -278,7 +278,6 @@ def main():
                         dest="non_competing",
                         help="list of non-competing solvers (StarExec IDs)")
     g_args = parser.parse_args()
-    print(g_args)
 
     if not os.path.exists(g_args.space_xml):
         die("file not found: {}".format(g_args.space_xml))
