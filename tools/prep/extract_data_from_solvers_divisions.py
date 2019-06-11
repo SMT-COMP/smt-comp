@@ -58,6 +58,8 @@ g_logics_all = {
         TRACK_MODEL_VALIDATION_RAW : ['QF_BV']
         }
 
+
+
 g_logics_to_tracks = {}
 for track in g_logics_all:
     for logic in g_logics_all[track]:
@@ -81,6 +83,59 @@ COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
 COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
+
+canonical = {
+        'AProVE': 'AProVE',
+        'Alt-Ergo': 'Alt-Ergo',
+        'Boolector-ReasonLS': 'Boolector-ReasonLS',
+        'Boolector': 'Boolector',
+        'Boolector (incremental)': 'Boolector',
+        'COLIBRI': 'COLIBRI',
+        'CVC4-SymBreak': 'CVC4-SymBreak',
+        'CVC4-inc': 'CVC4',
+        'CVC4-mv': 'CVC4',
+        'CVC4-uc': 'CVC4',
+        'CVC4': 'CVC4',
+        'Ctrl-Ergo': 'Ctrl-Ergo',
+        'MathSAT-default': 'MathSAT-default',
+        'MathSAT-na-ext': 'MathSAT-na-ext',
+        'Minkeyrink Solver': 'Minkeyrink Solver',
+        'Minkeyrink Solver MT': 'Minkeyrink Solver',
+        'OpenSMT2': 'OpenSMT2',
+        'Par4': 'Par4',
+        'Poolector': 'Boolector',
+        'ProB': 'ProB',
+        'Q3B': 'Q3B',
+        'SMT-RAT': 'SMT-RAT',
+        'SMTInterpol': 'SMTInterpol',
+        'SMTRAT-MCSAT': 'SMT-RAT',
+        'SPASS-SATT': 'SPASS-SATT',
+        'STP': 'STP',
+        'STP-incremental': 'STP',
+        'STP-mergesat': 'STP',
+        'STP-minisat': 'STP',
+        'STP-mt': 'STP',
+        'STP-portfolio': 'STP',
+        'STP-riss': 'STP',
+        'UltimateEliminator+MathSAT-5.5.4': 'UltimateEliminator+MathSAT-5.5.4',
+        'UltimateEliminator+SMTInterpol': 'UltimateEliminator+MathSAT-5.5.4',
+        'UltimateEliminator+Yices-2.6.1': 'UltimateEliminator+MathSAT-5.5.4',
+        'Vampire': 'Vampire',
+        'Yices 2.6.2': 'Yices 2.6.2',
+        'Yices 2.6.2 CaDiCal': 'Yices 2.6.2',
+        'Yices 2.6.2 CaDiCal/SMT-LIB2 Models': 'Yices 2.6.2',
+        'Yices 2.6.2 Cryptominisat': 'Yices 2.6.2',
+        'Yices 2.6.2 Cryptominisat/SMT-LIB2 Models': 'Yices 2.6.2',
+        'Yices 2.6.2 Incremental': 'Yices 2.6.2',
+        'Yices 2.6.2 Cryptominisat/SMT-LIB2 Models': 'Yices 2.6.2',
+        'Yices 2.6.2 Incremental': 'Yices 2.6.2',
+        'Yices 2.6.2 Model Validation': 'Yices 2.6.2',
+        'Yices 2.6.2 New Bvsolver': 'Yices 2.6.2',
+        'Yices 2.6.2 New Bvsolver with SMT2 Models': 'Yices 2.6.2',
+        'Yices 2.6.2 mcsat-bv': 'Yices 2.6.2',
+        'Z3': 'Z3',
+        'veriT': 'veriT',
+        'veriT+raSAT+Redlog': 'veriT'}
 
 track_raw_names_to_pretty_names = {
         TRACK_SINGLE_QUERY_RAW: COL_SINGLE_QUERY_TRACK,
@@ -199,7 +254,37 @@ def write_mds(path):
                 attr_fields_str, logic_fields_str)
         outfile.write(md_str)
 
+def print_div_competitiveness():
+    global g_submissions
+    global g_logics_all
 
+    competitiveness = {}
+
+    for track in g_logics_all:
+        if track not in competitiveness.keys():
+            competitiveness[track] = {}
+
+        for division in g_logics_all[track]:
+            competitiveness[track][division] = set()
+
+    for s in g_submissions:
+        s_canon = canonical[s]
+        for track in track_raw_names_to_pretty_names.keys():
+            for division in g_submissions[s][track]:
+                if division == "":
+                    continue
+                if s_canon not in competitiveness[track][division]:
+                    competitiveness[track][division].add(s_canon)
+
+    for track in competitiveness:
+        for division in competitiveness[track]:
+            part_set = competitiveness[track][division]
+
+            part_set_filtered = filter(lambda x: g_submissions[x]['competing'] == 'yes', part_set)
+            if len(set(part_set_filtered)) <= 1:
+                print("Non-competitive: %s, %s" % (track, division))
+                print("Participated only by `%s'" %\
+                        " ".join(set(part_set)))
 
 if __name__ == '__main__':
     parser = ArgumentParser(
@@ -220,5 +305,6 @@ if __name__ == '__main__':
         os.makedirs(args.out_md_path)
 
     read_csv(args.in_csv)
+    print_div_competitiveness()
     write_mds(args.out_md_path)
     print("Seeds (sum mod 2^30): {}".format(g_sum_seed % (2**30)))
