@@ -63,7 +63,8 @@ def read_data(file_name):
             config = drow['configuration'].strip()
             cpu_time = float(drow['cpu time'].strip())
             status = drow['result'].strip()
-            expected = drow['expected'].strip()
+            expected = drow['expected'].strip() \
+                    if 'expected' in drow else 'starexec-unknown'
 
             solver_name = '{}_{}'.format(solver, config)
 
