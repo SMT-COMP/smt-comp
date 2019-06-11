@@ -118,6 +118,19 @@ def filter_model_validation_benchmarks(space, select_benchmarks):
         if (not is_model_validation_benchmark(b)):
             space.remove(b)
 
+def remove_noncompetitive_divisions(space, noncomp_divs):
+    spaces = space.findall('Space')
+
+    to_remove = []
+    for s in spaces:
+        if s.attrib['name'] in noncomp_divs:
+            to_remove.append(s)
+
+    for s in to_remove:
+        print("Removing %s" % s.attrib['name'])
+        space.remove(s)
+
+
 def space_is_empty(space):
     spaces = space.findall('Space')
     benchmarks = space.findall('Benchmark')
@@ -235,6 +248,9 @@ def add_solvers(track, filter_benchmarks, select_benchmarks):
                       add_solvers_in_space(subspace, solvers)
             # remove spaces without solvers
             remove_spaces_without_solvers(space)
+            # remove non-competitive divisions
+            remove_noncompetitive_divisions(space, noncomp_divs)
+
             # remove top-level non-incremental/incremental space tag
             subspaces = space.findall('Space')
             root.extend(subspaces)
@@ -246,6 +262,7 @@ def main():
     parser = ArgumentParser(
             usage="prepare_space_xml "\
                   "-t <track> "\
+                  "-n <file> "\
                   "<space: xml> <solvers: csv> <outfile: xml>\n\n"
                   "Add solvers from csv to space with divisions "\
                   "(and benchmarks)\nto upload as space xml to StarExec.")
@@ -263,6 +280,10 @@ def main():
             help="SMT-COMP track name (one out of:"\
                  "'single_query', 'incremental', 'single_query_challenge',"\
                  "'incremental_challenge', 'model_validation', 'unsat_core'",
+            required = True)
+    parser.add_argument('-n',
+            type=str, dest="noncomp_file",
+            help="List of non-competitie divisions for the track",
             required = True)
     parser.add_argument ("-f",
             action="store_true", dest="filter", default=False,
@@ -308,3 +329,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
