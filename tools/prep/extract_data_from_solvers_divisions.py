@@ -2,6 +2,8 @@
 
 from argparse import ArgumentParser
 import csv
+import json
+
 import sys
 import os
 import re
@@ -57,6 +59,8 @@ g_logics_all = {
             ],
         TRACK_MODEL_VALIDATION_RAW : ['QF_BV']
         }
+
+
 
 g_logics_to_tracks = {}
 for track in g_logics_all:
@@ -199,26 +203,107 @@ def write_mds(path):
                 attr_fields_str, logic_fields_str)
         outfile.write(md_str)
 
+def print_div_competitiveness(o_path, canonical):
+    global g_submissions
+    global g_logics_all
 
+    competitiveness = {}
+
+    for track in g_logics_all:
+        if track not in competitiveness.keys():
+            competitiveness[track] = {}
+
+        for division in g_logics_all[track]:
+            competitiveness[track][division] = set()
+
+    for s in g_submissions:
+        s_canon = canonical[s]
+        for track in track_raw_names_to_pretty_names.keys():
+            for division in g_submissions[s][track]:
+                if division == "":
+                    continue
+                if s_canon not in competitiveness[track][division]:
+                    competitiveness[track][division].add(s_canon)
+
+    for track in competitiveness:
+        # single_query_2019_noncomp.txt
+        ofile = os.path.join(o_path, track.replace("track_", ""))
+        ofile = "%s_2019_noncomp.txt" % ofile
+        ofd = open(ofile, 'w')
+
+        for division in competitiveness[track]:
+            part_set = competitiveness[track][division]
+
+            part_set_filtered = filter(lambda x: g_submissions[x]['competing'] == 'yes', part_set)
+            if len(set(part_set_filtered)) <= 1:
+                ofd.write("%s\n" % division)
+                ofd.write("# Participated only by `%s'\n" %\
+                        " ".join(set(part_set)))
+        ofd.close()
+
+def read_canon(f):
+    canon_to_versions = json.load(open(f))
+    canonical = dict()
+    for k in canon_to_versions.keys():
+        versions = canon_to_versions[k]
+        for v in versions:
+            if v in canonical:
+                die("Solver `%s' indicated as having both `%s' and `%s' "\
+                        "as the canonical version."\
+                        % (v, canonical[v], k))
+            canonical[v] = k
+
+        if k in canonical.keys():
+            die("Canonical solver %s is marked as a version of %s" %\
+                    canonical[k])
+        canonical[k] = k
+
+    return canonical
 
 if __name__ == '__main__':
     parser = ArgumentParser(
-            usage="extract_data_from_submission "
-                  "<solvers-divisions: csv> "
-                  "<mdfile_path: path>\n\n"
-                  "Extract csv data from solvers_divisions_final.csv"
-                  "into per solver md files for the website")
+            usage="%s "\
+                  "<solvers-divisions: csv> "\
+                  "<yaml-path: path> "\
+                  "<canon-json: file> "\
+                  "<competitiveness-suggestion-path: path> "\
+                  "\n\n"\
+                  "Extract csv data from solvers_divisions_final.csv "\
+                  "into per-solver yaml files for the website.  In "\
+                  "addition prints a suggestion for non-competitive "\
+                  "divisions based on the mapping from the solver "\
+                  "versions to their canonical version.  Outputs "\
+                  "also the competition seed base seed (to which "\
+                  "randomness must still be added. " % sys.argv[0])
     parser.add_argument (
-            "in_csv", help="input csv")
+            "solver_divisions",
+            help="the main csv from solver registrations")
     parser.add_argument(
-            "out_md_path", help="output path for generated md files")
+            "yaml_path",
+            help="output path for generated yaml files for the participants")
+    parser.add_argument(
+            "canon_json",
+            help="The connection between a solver and its variants as "\
+            "determined by the judges")
+    parser.add_argument(
+            "noncompeting_sug_path",
+            help="The files produced by the script suggesting which "\
+            "divisions are not competitive and the reasons, one for each "\
+            "track.")
+
     args = parser.parse_args()
 
-    if not os.path.exists(args.in_csv):
-        die("file not found: {}".format(args.in_csv))
-    if not os.path.exists(args.out_md_path):
-        os.makedirs(args.out_md_path)
+    if not os.path.exists(args.solver_divisions):
+        die("file not found: {}".format(args.solver_divisions))
+    if not os.path.exists(args.yaml_path):
+        die("path not found: {}".format(args.yaml_path))
+    if not os.path.exists(args.canon_json):
+        die("file not found: {}".format(args.canon_json))
+    if not os.path.exists(args.noncompeting_sug_path):
+        die("path not found: {}".format(args.noncompeting_sug_path))
 
-    read_csv(args.in_csv)
-    write_mds(args.out_md_path)
+    read_csv(args.solver_divisions)
+    canonical = read_canon(args.canon_json)
+    print_div_competitiveness(args.noncompeting_sug_path, canonical)
+    write_mds(args.yaml_path)
     print("Seeds (sum mod 2^30): {}".format(g_sum_seed % (2**30)))

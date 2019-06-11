@@ -1,0 +1,26 @@
+{
+    "AProVE": [],
+    "Alt-Ergo": [],
+    "Boolector-ReasonLS": [],
+    "Boolector": ["Boolector (incremental)", "Poolector"],
+    "COLIBRI": [],
+    "CVC4-SymBreak": [],
+    "CVC4": ["CVC4-inc", "CVC4-mv", "CVC4-uc"],
+    "Ctrl-Ergo": [],
+    "MathSAT-default": ["MathSAT-na-ext"],
+    "Minkeyrink Solver": ["Minkeyrink Solver MT"],
+    "OpenSMT2": [],
+    "Par4": [],
+    "ProB": [],
+    "Q3B": [],
+    "SMT-RAT": ["SMTRAT-MCSAT"],
+    "SMTInterpol": [],
+    "SPASS-SATT": [],
+    "STP": ["STP-incremental", "STP-mergesat", "STP-minisat", "STP-mt", "STP-portfolio", "STP-riss", "STP-mergesat-fixed", "STP-portfolio-fixed"],
+    "UltimateEliminator+MathSAT-5.5.4": ["UltimateEliminator+SMTInterpol", "UltimateEliminator+Yices-2.6.1"],
+    "Vampire": [],
+    "Yices 2.6.2": ["Yices 2.6.2 CaDiCal", "Yices 2.6.2 CaDiCal/SMT-LIB2 Models", "Yices 2.6.2 Cryptominisat", "Yices 2.6.2 Cryptominisat/SMT-LIB2 Models", "Yices 2.6.2 Incremental", "Yices 2.6.2 Model Validation", "Yices 2.6.2 New Bvsolver", "Yices 2.6.2 New Bvsolver with SMT2 Models", "Yices 2.6.2 mcsat-bv"],
+    "Z3": [],
+    "veriT": ["veriT+raSAT+Redlog"]
+}
+
