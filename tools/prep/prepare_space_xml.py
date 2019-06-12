@@ -190,6 +190,8 @@ def add_solvers_in_space(space, solvers):
                 'Solver',
                 attrib = {'id': solver[0], 'name': solver[1]})
 
+# Return if a division is competitive based on the list of given solvers.
+# Currently, this only considers non-competing solvers as given via '-e'.
 def is_competitive(solvers):
     global g_args
     count = len(solvers)
@@ -230,7 +232,9 @@ def add_solvers(track, filter_benchmarks, select_benchmarks):
                 division = subspace.attrib['name']
                 if division in g_divisions:
                     solvers = g_divisions[division]
-                    # Only add solvers if the division is competitive
+                    # Only add solvers if the division is competitive.
+                    # Consequently, solvers do not get added to non-competitive
+                    # divisions, which are then removed below.
                     if is_competitive(solvers):
                       add_solvers_in_space(subspace, solvers)
             # remove spaces without solvers
