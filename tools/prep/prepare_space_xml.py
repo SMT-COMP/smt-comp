@@ -45,8 +45,10 @@ def die(msg):
 # Order of tracks: single query, incremental, challenge, model val, unsat core
 # Columns are separated by ',' and divisions are separated by ';'.
 # If 'use_wrapped' is true, use wrapped solver IDs instead.
-def read_csv(fname, track, use_wrapped):
-    global g_divisions
+def read_csv():
+    global g_divisions, g_args
+    track = g_args.track
+    use_wrapped = g_args.wrapped
     col_solver_id = COL_SOLVER_ID
     if use_wrapped:
         if track == TRACK_SINGLE_QUERY:
@@ -61,7 +63,7 @@ def read_csv(fname, track, use_wrapped):
             col_solver_id = COL_SOLVER_ID_WRAPPED_MV
         elif track == TRACK_UNSAT_CORE:
             col_solver_id = COL_SOLVER_ID_WRAPPED_UC
-    with open(fname) as file:
+    with open(g_args.csv) as file:
         reader = csv.reader(file, delimiter=',')
         header = next(reader)
         for row in reader:
@@ -206,8 +208,11 @@ def is_competitive(solvers):
 # Parse xml and add solvers to divisions.
 # If 'filter_benchmarks' is true, remove all but one benchmark for each
 # (sub)space with benchmarks (for test runs on StarExec).
-def add_solvers(track, filter_benchmarks, select_benchmarks):
-    global g_xml_tree
+def add_solvers():
+    global g_xml_tree, g_args
+    track = g_args.track
+    filter_benchmarks = g_args.filter
+    select_benchmarks = g_args.select != 'none'
     root = g_xml_tree.getroot()
     incremental_space = root.find('.//Space[@name="incremental"]')
     non_incremental_space = root.find('.//Space[@name="non-incremental"]')
@@ -301,8 +306,8 @@ def main():
             if g_args.non_competing else []
 
     g_xml_tree = ET.parse(g_args.space_xml)
-    read_csv(g_args.csv, g_args.track, g_args.wrapped)
-    add_solvers(g_args.track, g_args.filter,g_args.select!="none")
+    read_csv()
+    add_solvers()
     g_xml_tree.write(g_args.out_xml)
 
     if g_args.select != "none":
