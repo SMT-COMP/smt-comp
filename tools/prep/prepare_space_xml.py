@@ -49,6 +49,7 @@ def read_csv():
     global g_divisions, g_args
     track = g_args.track
     use_wrapped = g_args.wrapped
+    only_solvers = g_args.only_solvers
     col_solver_id = COL_SOLVER_ID
     if use_wrapped:
         if track == TRACK_SINGLE_QUERY:
@@ -70,6 +71,7 @@ def read_csv():
             drow = dict(zip(iter(header), iter(row)))
             solver_id = drow[col_solver_id]
             if not solver_id: continue
+            if only_solvers and solver_id not in only_solvers: continue
             divisions = None
             if track == TRACK_SINGLE_QUERY:
                 divisions = drow[COL_SINGLE_QUERY_TRACK].split(';')
@@ -286,6 +288,10 @@ def main():
     parser.add_argument("-e", metavar="solver_id[,solver_id...]",
                         dest="non_competing",
                         help="list of non-competing solvers (StarExec IDs)")
+    parser.add_argument("--only-solvers", metavar="solver_id[,solver_id...]",
+                        dest="only_solvers",
+                        help="generate space including only the listed "\
+                             "solvers (final submission StarExec IDs)")
     g_args = parser.parse_args()
 
     if not os.path.exists(g_args.space_xml):
@@ -304,6 +310,9 @@ def main():
 
     g_args.non_competing = g_args.non_competing.split(',') \
             if g_args.non_competing else []
+
+    g_args.only_solvers = g_args.only_solvers.split(',') \
+            if g_args.only_solvers else []
 
     g_xml_tree = ET.parse(g_args.space_xml)
     read_csv()

@@ -4,6 +4,8 @@ OUT_SPACE_SQ=$1
 OUT_SPACE_CHALL_NON_INC=$2
 OUT_SPACE_CHALL_INC=$3
 OUT_SPACE_INC=$4
+OUT_SPACE_SQ_ONLY=$5
+OUT_SPACE_CHALL_NON_INC_ONLY=$6
 
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
@@ -27,6 +29,8 @@ NON_COMPETITIVE_CHALL_NON_INC="24192"   # Z3
 NON_COMPETITIVE_CHALL_INC="24017"       # Z3
 NON_COMPETITIVE_INC="24017,23970"       # Z3,Boolector-ReasonLS
 
+ONLY_SOLVERS_SQ="24281,24282"           # STP-mergesat-fixed,STP-portfolio-fixed
+
 # Single Query Track
 python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w -e $NON_COMPETITIVE_SQ
 
@@ -38,3 +42,9 @@ python $PREPARE "$IN_SPACE_CHALL_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC" -t i
 
 # Incremental Track
 python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w -e $NON_COMPETITIVE_INC
+
+# Single Query Track - fixed STP versions
+python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ_ONLY" -t single_query --select "$SELECT_SQ" -w -e $NON_COMPETITIVE_SQ --only-solvers $ONLY_SOLVERS_SQ
+
+# Challenge Track non-incremental - fixed STP versions
+python $PREPARE "$IN_SPACE_CHALL_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC_ONLY" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w -e $NON_COMPETITIVE_CHALL_NON_INC --only-solvers $ONLY_SOLVERS_SQ
