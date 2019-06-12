@@ -81,7 +81,7 @@ getSolverInfo()
   ID=$1
 
   COMMAND="viewsolver id=${ID}"
-  java -jar StarexecCommand.jar <<EOF
+  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
 login u=${USERNAME} p=${PASSWORD}
 ${COMMAND}
 EOF
@@ -93,7 +93,7 @@ downloadSolver()
   OUT=$2
 
   COMMAND="getsolver id=${ID} out=${OUT}"
-  java -jar StarexecCommand.jar <<EOF
+  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
 login u=${USERNAME} p=${PASSWORD}
 ${COMMAND}
 EOF
