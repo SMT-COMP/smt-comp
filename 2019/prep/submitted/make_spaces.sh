@@ -22,19 +22,19 @@ SELECT_CHALL_INC="$SCRIPTDIR/../selection/challenge-incremental/benchmark_select
 IN_SPACE_INC="../incremental-space.xml"
 SELECT_INC="$SCRIPTDIR/../selection/incremental/benchmark_selection_incremental_2019"
 
-Z3_SQ=24192
-Z3_CHALL_NON_INC=24192
-Z3_CHALL_INC=24017
-Z3_INC=24017
+NON_COMPETITIVE_SQ="24192,24193,24160"  # Z3,Boolector-ReasonLS,CVC4-SymBreak
+NON_COMPETITIVE_CHALL_NON_INC="24192"   # Z3
+NON_COMPETITIVE_CHALL_INC="24017"       # Z3
+NON_COMPETITIVE_INC="24017,23970"       # Z3,Boolector-ReasonLS
 
 # Single Query Track
-python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w -e $Z3_SQ
+python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w -e $NON_COMPETITIVE_SQ
 
 # Challenge Track non-incremental
-python $PREPARE "$IN_SPACE_CHALL_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w -e $Z3_CHALL_NON_INC
+python $PREPARE "$IN_SPACE_CHALL_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w -e $NON_COMPETITIVE_CHALL_NON_INC
 
 # Challenge Track incremental
-python $PREPARE "$IN_SPACE_CHALL_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC" -t incremental_challenge --select "$SELECT_CHALL_INC" -w -e $Z3_CHALL_INC
+python $PREPARE "$IN_SPACE_CHALL_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC" -t incremental_challenge --select "$SELECT_CHALL_INC" -w -e $NON_COMPETITIVE_CHALL_INC
 
 # Incremental Track
-python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w -e $Z3_INC
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w -e $NON_COMPETITIVE_INC
