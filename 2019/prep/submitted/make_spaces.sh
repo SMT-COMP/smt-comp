@@ -20,12 +20,12 @@ SELECT_SQ="$SCRIPTDIR/../selection/single_query/benchmark_selection_single_query
 IN_SPACE_INC="../incremental-space.xml"
 SELECT_INC="$SCRIPTDIR/../selection/incremental/benchmark_selection_incremental_2019"
 
-NON_COMPETITIVE_SQ="24192,24193,24160"  # Z3,Boolector-ReasonLS,CVC4-SymBreak
-NON_COMPETITIVE_CHALL_NON_INC="24192"   # Z3
-NON_COMPETITIVE_CHALL_INC="24017"       # Z3
-NON_COMPETITIVE_INC="24017,23970"       # Z3,Boolector-ReasonLS
+NON_COMPETITIVE_SOLVERS_SQ="24192,24193,24160"  # Z3,Boolector-ReasonLS,CVC4-SymBreak
+NON_COMPETITIVE_SOLVERS_CHALL_NON_INC="24192"   # Z3
+NON_COMPETITIVE_SOLVERS_CHALL_INC="24017"       # Z3
+NON_COMPETITIVE_SOLVERS_INC="24017,23970"       # Z3,Boolector-ReasonLS
 
-ONLY_SOLVERS_SQ="24281,24282"           # STP-mergesat-fixed,STP-portfolio-fixed
+FIXED_SOLVERS_SQ="24281,24282"          # STP-mergesat-fixed,STP-portfolio-fixed
 
 OUT_SPACE_SQ=
 OUT_SPACE_CHALL_NON_INC=
@@ -100,19 +100,19 @@ done
 
 # Single Query Track
 [[ -n $OUT_SPACE_SQ ]] && \
-python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w -e $NON_COMPETITIVE_SQ
+python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ
 
 # Challenge Track non-incremental
 [[ -n $OUT_SPACE_CHALL_NON_INC ]] && \
-python $PREPARE "$IN_SPACE_CHALL_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w -e $NON_COMPETITIVE_CHALL_NON_INC
+python $PREPARE "$IN_SPACE_CHALL_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_NON_INC
 
 # Challenge Track incremental
 [[ -n $OUT_SPACE_CHALL_INC ]] && \
-python $PREPARE "$IN_SPACE_CHALL_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC" -t incremental_challenge --select "$SELECT_CHALL_INC" -w -e $NON_COMPETITIVE_CHALL_INC
+python $PREPARE "$IN_SPACE_CHALL_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC" -t incremental_challenge --select "$SELECT_CHALL_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_INC
 
 # Incremental Track
 [[ -n $OUT_SPACE_INC ]] && \
-python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w -e $NON_COMPETITIVE_INC
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w --nc $NON_COMPETITIVE_SOLVERS_INC
 
 # Model Validation Track
 [[ -n $OUT_SPACE_MV ]] && \
@@ -120,8 +120,8 @@ python $PREPARE "$IN_SPACE_MV" "$SOLVERS_CSV" "$OUT_SPACE_MV" -t model_validatio
 
 # Single Query Track - fixed STP versions
 [[ -n $OUT_SPACE_SQ_FIXED ]] && \
-python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ_FIXED" -t single_query --select "$SELECT_SQ" -w -e $NON_COMPETITIVE_SQ --only-solvers $ONLY_SOLVERS_SQ
+python $PREPARE "$IN_SPACE_SQ" "$SOLVERS_CSV" "$OUT_SPACE_SQ_FIXED" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --solvers $FIXED_SOLVERS_SQ
 
 # Challenge Track non-incremental - fixed STP versions
 [[ -n $OUT_SPACE_CHALL_NON_INC_FIXED ]] && \
-python $PREPARE "$IN_SPACE_CHALL_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC_FIXED" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w -e $NON_COMPETITIVE_CHALL_NON_INC --only-solvers $ONLY_SOLVERS_SQ
+python $PREPARE "$IN_SPACE_CHALL_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC_FIXED" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_NON_INC --solvers $FIXED_SOLVERS_SQ
