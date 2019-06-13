@@ -10,6 +10,8 @@ import random
 
 # Set time limit for interesting benchmarks. The default here is 1 second.
 TIME_LIMIT = 1
+# Set the (exclusive) minimum for number of asserts in unsat core track
+NUM_ASSERTS = 1
 
 # The rules give the following rules for the number of selected benchmarks
 # (a) If a logic contains < 300 instances, all instances will be selected
@@ -20,6 +22,17 @@ TIME_LIMIT = 1
 NUM_LOWER = 300
 NUM_UPPER = 600
 PERCENT = 0.5
+
+#==============================================================================
+
+COL_BENCHMARK = 'benchmark'
+COL_SOLVER = 'solver'
+COL_CONFIG = 'configuration'
+COL_CPU = 'cpu time'
+COL_STATUS = 'status'
+COL_RESULT = 'result'
+COL_EXPECTED = 'expected'
+COL_ASSERTS = 'number of asserts'
 
 #==============================================================================
 
@@ -45,10 +58,10 @@ def read_benchmarks(file_name):
     return benchmarks, num_families, num_benchmarks
 
 
-def read_data(file_name):
-
+def read_data(file_name, unsat_core):
     # Map logics to a dict mapping solvers to
-    # {(benchmark, family):(status, expected_status, time)}
+    # unsat core track: {(benchmark, family):(status, num_asserts)}
+    # rest:             {(benchmark, family):(status, expected_status, time)}
     data = {}
 
     with open(file_name, 'r') as file:
@@ -58,28 +71,21 @@ def read_data(file_name):
         for row in reader:
             drow = dict(zip(iter(header), iter(row)))
 
-            benchmark = drow['benchmark'].strip()
-            solver = drow['solver'].strip()
-            config = drow['configuration'].strip()
-            cpu_time = float(drow['cpu time'].strip())
-            status = drow['result'].strip()
-            expected = drow['expected'].strip() \
-                    if 'expected' in drow else 'starexec-unknown'
-
-            solver_name = '{}_{}'.format(solver, config)
-
+            # Read data
+            benchmark = drow[COL_BENCHMARK].strip()
             benchmark_split = benchmark.split('/')
-
             # Required due to how data was run in 2018 and 2017
-            if benchmark_split[0] in ('Other Divisions', 'Datatype Divisions'):
-                benchmark_split.pop(0)
-
-            logic = benchmark_split[0]
+            if not unsat_core and \
+               benchmark_split[0] in ('Other Divisions', 'Datatype Divisions'):
+                   benchmark_split.pop(0)
             benchmark = '/'.join(benchmark_split)
             family = '/'.join(benchmark_split[:-1])
+            logic = benchmark_split[0]
 
-            # Store results for each benchmarks as solver tuples.
+            # Results for each benchmark is stored as list of tuples.
             # data[logic][family][benchmark] = [...]
+            # In case of the unsat core tracks, these lists only contain one
+            # element, else it contains the tuples for all solvers.
             if logic not in data:
                 data[logic] = {}
             if family not in data[logic]:
@@ -90,12 +96,24 @@ def read_data(file_name):
             else:
                 results = data[logic][family][benchmark]
 
-            results.append((solver_name, status, cpu_time, expected))
+            if unsat_core:
+                status = drow[COL_STATUS].strip()
+                num_asserts = int(drow[COL_ASSERTS])
+                results.append((status,num_asserts))
+            else:
+                solver = drow[COL_SOLVER].strip()
+                config = drow[COL_CONFIG].strip()
+                cpu_time = float(drow[COL_CPU].strip())
+                status = drow[COL_RESULT].strip()
+                expected = drow[COL_EXPECTED].strip() \
+                        if COL_EXPECTED in drow else 'starexec-unknown'
+                solver_name = '{}_{}'.format(solver, config)
+                results.append((solver_name, status, cpu_time, expected))
 
     return data
 
 
-def sanity_check(data, selected_benchmarks, removed_benchmarks):
+def sanity_check(data, selected_benchmarks, removed_benchmarks, unsat_core):
     if not data:
         return
 
@@ -108,10 +126,10 @@ def sanity_check(data, selected_benchmarks, removed_benchmarks):
         results_family = results_logic.get(family, {})
         results_benchmark = results_family.get(benchmark, [])
 
-        if not is_eligible(results_benchmark):
+        if not is_eligible(results_benchmark, unsat_core):
             print(benchmark)
             print('\n'.join([str(x) for x in results_benchmark]))
-        assert is_eligible(results_benchmark)
+        assert is_eligible(results_benchmark, unsat_core)
 
     for benchmark in removed_benchmarks:
         benchmark_split = benchmark.split('/')
@@ -122,10 +140,10 @@ def sanity_check(data, selected_benchmarks, removed_benchmarks):
         results_family = results_logic.get(family, {})
         results_benchmark = results_family.get(benchmark, [])
 
-        if is_eligible(results_benchmark):
+        if is_eligible(results_benchmark, unsat_core):
             print(benchmark)
             print('\n'.join([str(x) for x in results_benchmark]))
-        assert not is_eligible(results_benchmark)
+        assert not is_eligible(results_benchmark, unsat_core)
 
 
 def parse_args():
@@ -139,31 +157,39 @@ def parse_args():
                     help='List of new benchmarks to be selected',
                     required=True)
     ap.add_argument('-f', '--filter', dest='filter_csv',
-                    help="Filter out benchmarks based on csv containing " \
-                         "previous year's results")
+                    help="Filter out benchmarks based on csv (default: " \
+                         "previous year's results, --unsat: benchmarks with " \
+                         "status and num asserts)")
     ap.add_argument('-o', '--out', dest='out',
                     help='Output file name to print selected benchmarks')
+    ap.add_argument('--unsat', dest='unsat', action='store_true',
+                    help="Filter for unsat core track")
     ap.add_argument('--print-stats', dest="print_stats",
                     action='store_true',
-                    help='print statistics')
+                    help='Print statistics')
     ap.add_argument('--print-eligible', dest='print_eligible',
                     action='store_true',
-                    help='print eligible benchmarks')
+                    help='Print eligible benchmarks')
     ap.add_argument('--prefix', dest='prefix', default='',
-                    help='the prefix to prepend to selected benchmark lines')
+                    help='The prefix to prepend to selected benchmark lines')
     return ap.parse_args()
 
 
-def is_eligible(results):
-    # Determine number of solvers that were able to correctly solve
+def is_eligible(results, unsat_core):
+    # For the unsat core track, all benchmarks with more assertions than
+    # th minimum limit are eligible.
+    if unsat_core:
+        assert len(results) == 1
+        for status, num_asserts in results:
+            return num_asserts > NUM_ASSERTS 
+    # Else determine number of solvers that were able to correctly solve
     # the benchmark within 'TIME_LIMIT' seconds.
     num_solved = 0
-    for solver_name, status, cpu_time, expected in results:
+    for solver_name, status, cpu_time, expected, num_asserts in results:
         if status in ('unsat', 'sat') \
            and expected in ('starexec-unknown', status) \
            and cpu_time <= TIME_LIMIT:
             num_solved += 1
-
     # All solvers correctly solved 'benchmark' within 'TIME_LIMIT'
     # seconds, hence remove benchmark from 'all_benchmarks'.
     #
@@ -205,11 +231,12 @@ def main():
     selected_benchmarks = []
     removed_benchmarks = []
 
-    # Load data of previous year's result used to filter out uninteresting
-    # benchmarks.
+    # Load data csv to base filtering of 'uninteresting becnhmarks' on.
+    # Default: results csv from previous year
+    # Unsat Core: csv with benchmarks,status,number of assertions
     data = {}
     if args.filter_csv:
-        data = read_data(args.filter_csv)
+        data = read_data(args.filter_csv, args.unsat)
 
     # Filter out uninteresting benchmarks from 'all_benchmarks'.
     for logic, families in sorted(data.items()):
@@ -227,13 +254,12 @@ def main():
                 continue
 
             for benchmark, results in benchmarks.items():
-
                 # Benchmarks might have changed compared to last year.
                 if benchmark not in all_benchmarks[logic][family]:
                     continue
 
                 assert results
-                if not is_eligible(results):
+                if not is_eligible(results, args.unsat):
                     all_benchmarks[logic][family].remove(benchmark)
                     removed_benchmarks.append(benchmark)
                     num_removed += 1
@@ -296,9 +322,10 @@ def main():
         new_families = new_benchmarks.get(logic, {})
         for family, benchmarks in new_families.items():
             benchmark = random.choice(sorted(benchmarks))
-            assert benchmark in eligible_benchmarks
-            eligible_benchmarks.remove(benchmark)
-            selected.add(benchmark)
+            assert args.unsat or benchmark in eligible_benchmarks
+            if benchmark in eligible_benchmarks:
+                eligible_benchmarks.remove(benchmark)
+                selected.add(benchmark)
 
         # Pick the remaining number of benchmarks from all eligible benchmarks.
         while len(selected) < num_select:
@@ -308,7 +335,7 @@ def main():
 
         selected_benchmarks.extend(sorted(selected))
 
-    sanity_check(data, selected_benchmarks, removed_benchmarks)
+    sanity_check(data, selected_benchmarks, removed_benchmarks, args.unsat)
 
     # Print selected benchmarks
     if args.out:
