@@ -10,7 +10,7 @@ import re
 g_args = None
 g_xml_tree = None
 g_divisions = {}
-selected = set()
+g_selected = set()
 
 TRACK_SINGLE_QUERY = 'track_single_query'
 TRACK_INCREMENTAL = 'track_incremental'
@@ -98,12 +98,12 @@ def read_csv():
                         [drow[col_solver_id], drow['Solver Name']])
 
 def read_selected(fname):
-    global selected
+    global g_selected
     with open(fname) as file:
        for line in file:
          line = line.strip()
          if line:
-           selected.add(line)
+           g_selected.add(line)
 
 
 def is_model_validation_benchmark(benchmark):
@@ -171,20 +171,21 @@ def filter_unsat_core_benchmarks(space, select_benchmarks):
 
 # Traverse space and remove all but one benchmark for each (sub)space with
 # benchmarks (for test runs on StarExec).
-def filter_benchmarks_in_space(space, n, select_benchmarks,path):
-    path = path+"/"+space.attrib['name']
+def filter_benchmarks_in_space(space, n, select_benchmarks, path):
+    path = "{}/{}".format(path, space.attrib['name'])
     spaces = space.findall('Space')
-    for s in spaces: filter_benchmarks_in_space(s, n, select_benchmarks,path)
+    for s in spaces: filter_benchmarks_in_space(s, n, select_benchmarks, path)
     benchmarks = space.findall('Benchmark')
     if select_benchmarks:
-      for b in benchmarks:
-        bname = path +"/"+b.attrib['name']
-        if bname not in selected:
-          space.remove(b)
-        else:
-          selected.remove(bname)
-    if n>0:
-      for b in benchmarks[n:]: space.remove(b)
+        for b in benchmarks:
+            bname = "{}/{}".format(path, b.attrib['name'])
+            if bname not in g_selected:
+                space.remove(b)
+            else:
+                g_selected.remove(bname)
+    if n > 0:
+       for b in benchmarks[n:]:
+           space.remove(b)
 
 # Traverse space and add solvers to divisions and their subspaces.
 def add_solvers_in_space(space, solvers):
@@ -223,13 +224,13 @@ def add_solvers():
     for space in [incremental_space, non_incremental_space]:
         if space:
             n = 1 # number of benchmarks to keep in each family
-            if track == TRACK_MODEL_VALIDATION:
-                filter_model_validation_benchmarks(space, select_benchmarks)
-                n = 3
-            elif track == TRACK_UNSAT_CORE:
-                filter_unsat_core_benchmarks(space, select_benchmarks)
             # filter benchmarks
             if filter_benchmarks:
+                if track == TRACK_MODEL_VALIDATION:
+                    filter_model_validation_benchmarks(space, select_benchmarks)
+                    n = 3
+                elif track == TRACK_UNSAT_CORE:
+                    filter_unsat_core_benchmarks(space, select_benchmarks)
                 filter_benchmarks_in_space(space, n, select_benchmarks,"")
             elif select_benchmarks:
                 filter_benchmarks_in_space(space, 0, select_benchmarks,"")
@@ -312,7 +313,7 @@ def main():
 
     if g_args.select != "none":
       read_selected(g_args.select)
-      print("selected "+str(len(selected)))
+      print("selected {}".format(len(g_selected)))
 
     g_args.non_competing = g_args.non_competing.split(',') \
             if g_args.non_competing else []
@@ -329,9 +330,8 @@ def main():
     g_xml_tree.write(g_args.out_xml)
 
     if g_args.select != "none":
-      print("there are "+str(len(selected))+" benchmarks unselected")
-      for s in selected:
-        print(s)
+      print("there are {} benchmarks unselected".format(len(g_selected)))
+      for s in g_selected: print(s)
 
 if __name__ == '__main__':
     main()
