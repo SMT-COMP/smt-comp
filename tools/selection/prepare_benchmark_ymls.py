@@ -115,6 +115,8 @@ def fillLogic(logic_data, track, bm_files, noncomp_files):
     for noncomp_file in noncomp_files:
         noncomp_rows = open(noncomp_file).readlines()
         for div in noncomp_rows:
+            if div[0] == '#':
+                continue
             div = div.strip()
             logic_data[div][track][2] = 'non-competitive'
 
