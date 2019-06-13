@@ -116,20 +116,28 @@ def fillLogic(logic_data, track, bm_files, noncomp_files):
         noncomp_rows = open(noncomp_file).readlines()
         for div in noncomp_rows:
             if div[0] == '#':
-                continue
-            div = div.strip()
-            logic_data[div][track][2] = 'non-competitive'
+                comment = div.split()
+                if comment[1] in logic_data:
+                    # Comments where first word is a logic name comment
+                    # on this track's logic
+                    logic_data[comment[1]][track][3].append(div[1:].strip())
+            else:
+                div = div.strip()
+                logic_data[div][track][2] = 'non-competitive'
 
     return logic_data
 
 def tostring(logic_name, logic_el):
     track_str_list = []
+    comments = []
     for track in logic_el:
         tr_el = logic_el[track]
         track_str_list.append(\
                 "- name: track_%s\n  n_insts: %d\n  n_excluded: %d\n" \
                 "  status: %s"
                 % (track, tr_el[0], tr_el[1], tr_el[2]))
+        for i in range(0, len(tr_el[3])):
+            comments.append(tr_el[3][i])
     yaml_str = """---
 layout: logic
 division: %s
@@ -137,7 +145,9 @@ description: %s
 tracks:
 %s
 ---
-""" % (logic_name, SMTLIB_DESCR_TEMPLATE % logic_name, "\n".join(track_str_list))
+%s
+""" % (logic_name, SMTLIB_DESCR_TEMPLATE % logic_name, \
+        "\n".join(track_str_list), "\n".join(comments))
     return yaml_str
 
 def printYaml(logic_name, logic_el, path):
@@ -199,7 +209,7 @@ if __name__ == '__main__':
     for logic in all_logics:
         logic_data[logic] = {}
         for track in tracks:
-            logic_data[logic][track] = [0,0,'competitive']
+            logic_data[logic][track] = [0,0,'competitive', []]
 
     for tr in tracks:
         (bm_files, noncomp_files) = tracks_to_files[tr]

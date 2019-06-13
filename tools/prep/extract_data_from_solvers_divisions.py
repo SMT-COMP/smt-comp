@@ -237,8 +237,10 @@ def print_div_competitiveness(o_path, canonical):
             part_set_filtered = filter(lambda x: g_submissions[x]['competing'] == 'yes', part_set)
             if len(set(part_set_filtered)) <= 1:
                 ofd.write("%s\n" % division)
-                ofd.write("# Participated only by `%s'\n" %\
-                        " ".join(set(part_set)))
+                ofd.write("# %s %s track participated only by %s.\n" %\
+                        (division,
+                            track_raw_names_to_pretty_names[track], \
+                                    ", ".join(set(part_set))))
         ofd.close()
 
 def read_canon(f):
