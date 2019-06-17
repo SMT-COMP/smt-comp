@@ -49,8 +49,6 @@ def read_csv():
     global g_divisions, g_args
     track = g_args.track
     use_wrapped = g_args.wrapped
-    solvers = g_args.solvers
-    excluded_solvers = g_args.excluded_solvers
     col_solver_id = COL_SOLVER_ID
     if use_wrapped:
         if track == TRACK_SINGLE_QUERY:
@@ -72,8 +70,6 @@ def read_csv():
             drow = dict(zip(iter(header), iter(row)))
             solver_id = drow[col_solver_id]
             if not solver_id: continue
-            if solvers and solver_id not in solvers: continue
-            if excluded_solvers and solver_id in excluded_solvers: continue
             divisions = None
             if track == TRACK_SINGLE_QUERY:
                 divisions = drow[COL_SINGLE_QUERY_TRACK].split(';')
@@ -189,9 +185,15 @@ def filter_benchmarks_in_space(space, n, select_benchmarks, path):
 
 # Traverse space and add solvers to divisions and their subspaces.
 def add_solvers_in_space(space, solvers):
+    global g_args
     spaces = space.findall('Space')
     for s in spaces: add_solvers_in_space(s, solvers)
+    included_solvers = g_args.solvers
+    excluded_solvers = g_args.excluded_solvers
     for solver in solvers:
+        solver_id = solver[0]
+        if included_solvers and solver_id not in included_solvers: continue
+        if excluded_solvers and solver_id in excluded_solvers: continue
         ET.SubElement(
                 space,
                 'Solver',
