@@ -14,7 +14,7 @@ def getLogicYaml(logics_indexed_by_tracks):
             logics[l].append(track)
 
     logic_fields = []
-    for l in logics:
+    for l in sorted(logics):
         sub_logic_fields = "- name: {}\n  tracks:\n{}".format(
                 l, "\n".join(
                     map(lambda x: "  - {}".format(x), logics[l])))
