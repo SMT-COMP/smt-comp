@@ -12,6 +12,11 @@ COL_INCREMENTAL_TRACK = 'Incremental Track'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
 
+# Print error message and exit.
+def die(msg):
+    print("error: {}".format(msg))
+    sys.exit(1)
+
 if __name__ == '__main__':
     parser = ArgumentParser(
             usage="wrap_solvers [options] <solvers: csv>\n\n"
