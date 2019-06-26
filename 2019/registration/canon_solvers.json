@@ -21,6 +21,17 @@
     "Vampire": [],
     "Yices 2.6.2": ["Yices 2.6.2 CaDiCal", "Yices 2.6.2 CaDiCal/SMT-LIB2 Models", "Yices 2.6.2 Cryptominisat", "Yices 2.6.2 Cryptominisat/SMT-LIB2 Models", "Yices 2.6.2 Incremental", "Yices 2.6.2 Model Validation", "Yices 2.6.2 New Bvsolver", "Yices 2.6.2 New Bvsolver with SMT2 Models", "Yices 2.6.2 mcsat-bv"],
     "Z3": [],
-    "veriT": ["veriT+raSAT+Redlog"]
+    "veriT": ["veriT+raSAT+Redlog"],
+    "2018-Boolector": ["2018-Boolector (incremental)"],
+    "2018-COLIBRI": [],
+    "2018-CVC4": ["2018-CVC4 (incremental)","2018-CVC4 (unsat core)"],
+    "2018-Minkeyrink MT": [],
+    "2018-SMTRAT-Rat": [],
+    "2018-SPASS-SATT": [],
+    "2018-vampire": [],
+    "2018-Yices": ["2018-Yices (incremental)", "2018-Yices (unsat core)"],
+    "2018-Z3": ["2018-Z3 (incremental)", "2018-Z3 (unsat core)"],
+    "2018-MathSAT (incremental)": ["2018-MathSAT (unsat core)"],
+    "2018-SMTInterpol (unsat core)": []
 }
 
