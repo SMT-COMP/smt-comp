@@ -5,20 +5,24 @@
 #
 # This script requires the pandas data analysis framework
 #
-# @author Giles Reger
-# @date May 2019
+# @author Giles Reger, Aina Niemetz
+# @date 2019
 
 # Data processing library pandas
 import numpy as np
 import pandas as pd
 
 # Options parsing
-import optparse
+from argparse import ArgumentParser
 
+import os
 import sys
 import csv
 import math
+import time
 
+g_args = None
+g_non_competitive = {}
 
 ############################
 # Helper functions
@@ -27,11 +31,13 @@ all_solved_verdicts = pd.Series(['sat','unsat'])
 sat_solved_verdicts = pd.Series(['sat'])
 unsat_solved_verdicts = pd.Series(['unsat'])
 
+# Print error message and exit.
+def die(msg):
+    print("error: {}".format(msg))
+    sys.exit(1)
 
 def log(string):
-  # turn this on to debug stuff 
-  if(False):
-    print(string)
+    print("[score] {}".format(string))
 
 # project out the main columns for printing
 def view(data):
@@ -42,61 +48,76 @@ def view(data):
 # also does some tidying of benchmark column for specific years of the competition
 # edit this function if you want to edit how families are added
 def addDivisonFamilyInfo(data,fam):
+    global g_args
 
-  # Remove OtherDivision from benchmark name (2018)
-  data['benchmark'] = data['benchmark'].str.replace('Other Divisions/','')
-  # Remove Datatype divisions from benchmark name (2017)
-  data['benchmark'] = data['benchmark'].str.replace('Datatype Divisions/','')
+    # Remove OtherDivision from benchmark name (2018)
+    data['benchmark'] = data['benchmark'].str.replace('Other Divisions/','')
+    # Remove Datatype divisions from benchmark name (2017)
+    data['benchmark'] = data['benchmark'].str.replace('Datatype Divisions/','')
 
-  # Extract divisions and as another column
-  data['division'] = data['benchmark'].str.split('/').str[0]
-  # Extract family as another column
-  # This depends on the fam option. The 'top' option takes the top directory and the 'bot' option takes the
-  # bottom directory. The rules have always specified 'top' but the scoring scripts for many years actually
-  # implemented 'top'. The scripts allow you to choose.
-  if fam=="top":
-    log("Using top-level directories for fam")
-    # Take top-level sub-directories as family
-    data['family'] = np.where(data['benchmark'].str.count('/')>1,data['benchmark'].str.split('/').str[1], '-')
-  elif fam=="bot":
-    log("Using bottom-level directories for fam")
-    # Take immediate super-directory as family
-    data['family'] = data.benchmark.apply(lambda x : x[(1+x.index('/')):(x.rfind('/'))])
-  else:
-    print("fam option not supported: "+str(fam))
-    sys.exit(0)
-  return data
+    # Extract divisions and as another column
+    data['division'] = data['benchmark'].str.split('/').str[0]
+    # Extract family as another column
+    # This depends on the fam option. The 'top' option takes the top directory and the 'bot' option takes the
+    # bottom directory. The rules have always specified 'top' but the scoring scripts for many years actually
+    # implemented 'bot'. The scripts allow you to choose.
+    if fam == "top":
+        if g_args.log: log("Using top-level directories for fam")
+        # Take top-level sub-directories as family
+        data['family'] = np.where(data['benchmark'].str.count('/')>1,data['benchmark'].str.split('/').str[1], '-')
+    elif fam == "bot":
+        if g_args.log: log("Using bottom-level directories for fam")
+        # Take immediate super-directory as family
+        data['family'] = data.benchmark.apply(lambda x : x[(1+x.index('/')):(x.rfind('/'))])
+    else:
+        die ("family option not supported: {}".format(fam))
+    return data
 
 
-# drop from data any rows that contain benchmarks
-# where two sound solvers disagree on the result and the
-# result is unknown
+# Drop any rows that contain benchmarks with status unknown where two otherwise
+# sound solvers disagree on the result
 def removeDisagreements(data):
+    global g_args
+    # First find unsound solvers e.g. those that disagree with the expected status
+    # these solvers are ignored in the following
+    unsound_solvers = set(data[(data.expected != "starexec-unknown")
+                               & (data.result != "starexec-unknown")
+                               & (data.result != data.expected)]['solver'])
+ 
+    if g_args.log: log("Removing disagreements...")
+    unknown = data[(data.expected == "starexec-unknown")
+                   & (~data.solver.isin(unsound_solvers))
+                   & ((data.result == 'sat')
+                      | (data.result == 'unsat'))]
+    exclude = set()
+    for b,rows in unknown.groupby('benchmark'):
+        res = set(rows.result.tolist())
+        if 'sat' in res and 'unsat' in res:
+            if g_args.log: log("Removing "+b)
+            if g_args.log: log(view(rows))
+            exclude.add(b)
+    data = data[~(data.benchmark.isin(exclude))]
+    return data
 
-  # First find unsound solvers e.g. those that disagree with the expected status
-  # these solvers are ignored in the following
-  unsound_solvers = data[(data.expected!="starexec-unknown") & (data.result!="starexec-unknown") & (data.result != data.expected)]['solver'].unique()
-
-  log("Removing disagreements...")
-  unknown = data[(data.expected == "starexec-unknown")] 
-  for b,rows in unknown.groupby('benchmark'):
-    frows = rows[(~rows.solver.isin(unsound_solvers))]
-    if len(frows[(frows.result=='sat')]) > 0 and len(frows[(frows.result=='unsat')]) > 0:
-       log("Removing "+b)
-       log(view(rows))
-       data = data[(data.benchmark!=b)]
-  return data
-
-# Returns true if the solver is competitive in the year
+# Returns true if the solver is competitive in the given year.
 # This function depends on an external file 'noncompetitive.csv' which is
 # provided and maintained for the official competition data
-def competitive(year,solver):
-  with open('noncompetitive.csv',mode='r') as f:
-    reader = csv.reader(f)
-    for rows in reader:
-      if str(year)==rows[0] and str(solver)==rows[1]:
-        return False
-  return True
+def competitive(year, solver):
+    global g_non_competitive
+    solvers = g_non_competitive.get(year)
+    return not solvers or solver not in solvers
+
+def read_competitive():
+    global g_non_competitive
+    with open('noncompetitive.csv', mode='r') as f:
+        reader = csv.reader(f)
+        for rows in reader:
+            year = rows[0]
+            solver = rows[1]
+
+            if year not in g_non_competitive:
+                g_non_competitive[year] = set()
+            g_non_competitive[year].add(solver)
 
 
 # Use the names in the file name_lookups.csv to rename the names of solvers
@@ -207,74 +228,94 @@ def competitive_row(row):
   [year,division,solver,nsolved,error,correct,wall_total,cpu_total,rank] = row
   return competitive(year,solver) 
 
-# This is the main scoring function that takes lots of paramters that allows it to capture
-# different scoring schemes
-# set wclock_limit to filter out results with higher wclock limits (useful for comparing results from different years with different time limits)
-# set solved_verdicts to focus on a single verdict
-# set use_families to decide whether to use the notion of family used in 2016-8
-# set skip_unknowns to ignore problems with unknown results as done prior to 2017
-# set sequential to apply the wallclock limit to the cpu time 
-def score(data, wclock_limit, solved_verdicts,year,division,use_families,skip_unknowns,sequential):
-  log("Score for "+str(year)+" in "+str(division))
+# Main scoring function that allows it to capture different scoring schemes.
+# division       : the division to compute the scores for
+# data           : the results data of this division
+# wclock_limit   : the wallclock time limit
+# year           : the string identifying the year of the results
+# verdicts       : a pd.Series created with
+#                  - ['sat', 'unsat'] to consider all solved instances
+#                  - ['sat'] to consider only sat instances
+#                  - ['unsat'] to consider only unsat instances
+# use_families   : use weighted scoring scheme (as used from 2016-2018)
+# skip_unknowns  : skip benchmarks with status unknown (as done prior to 2017)
+def score(division,
+          data,
+          wclock_limit,
+          verdicts,
+          year,
+          use_families,
+          skip_unknowns):
+    global g_args
+    if g_args.log: log("Score for {} in {}".format(year, division))
 
-  benchmark_num = len(data.benchmark.unique())
-  log("Computing scores for "+division)
-  log("... with "+str(benchmark_num)+" benchmarks") 
+    benchmark_num = len(data.benchmark.unique())
+    if g_args.log: log("Computing scores for {}".format(division))
+    if g_args.log: log("... with {} benchmarks".format(benchmark_num))
 
-  family_scores = get_family_scores(data) if use_families else {}
+    family_scores = get_family_scores(data) if use_families else {}
 
-  rows = []
+    rows = []
 
-  for solver, sdata in data.groupby('solver'):
-    log("Computing scores for "+solver)
-    nsolved = len(sdata[(sdata.result.isin(solved_verdicts))])
-    error = 0.0
-    correct = 0.0
-    wall_total = 0.0
-    cpu_total = 0.0
-    for family, sfdata in sdata.groupby('family'):
-      modifier = family_scores[family] if use_families else 1
-      
-      sf_wrong = len(sfdata[(sfdata.result!="starexec-unknown") & (sfdata.result != sfdata.expected) & (sfdata.expected != "starexec-unknown")])
-      rf_solved = sfdata[(sfdata.result.isin(solved_verdicts)) & ((sfdata.expected=="starexec-unknown") | (sfdata.result==sfdata.expected) ) & (sfdata.wallclock_time <= wclock_limit)]
-      if skip_unknowns: 
-        rf_solved = sfdata[(sfdata.result.isin(solved_verdicts)) & (sfdata.result==sfdata.expected) & (sfdata.wallclock_time <= wclock_limit)]
+    all_wrong = data[(data.result != "starexec-unknown")
+                     & (data.result != data.expected)
+                     & (data.expected != "starexec-unknown")]
 
-      if sequential:
-        rf_solved = sfdata[(sfdata.result.isin(solved_verdicts)) & ((sfdata.expected=="starexec-unknown") | (sfdata.result==sfdata.expected) ) & (sfdata.cpu_time <= wclock_limit)]
-        if skip_unknowns: 
-          rf_solved = sfdata[(sfdata.result.isin(solved_verdicts)) & (sfdata.result==sfdata.expected) & (sfdata.cpu_time <= wclock_limit)]
+    data = data[(data.result.isin(set(verdicts)))]
 
-      sf_solved = len(rf_solved)
+    if g_args.sequential:
+        data = data[(data.cpu_time <= wclock_limit)]
+    else:
+        data = data[(data.wallclock_time <= wclock_limit)]
 
-      this_mod = benchmark_num*modifier if use_families else 1
+    if skip_unknowns:
+        data = data[(data.result == data.expected)]
+    else:
+        data = data[(data.expected == "starexec-unknown")
+                    | (data.result == data.expected)]
 
-      error += sf_wrong*this_mod
-      correct += sf_solved*this_mod
-      #wall_total += rf_solved.wallclock_time.sum()*modifier
-      for d in rf_solved.wallclock_time:
-        wall_total += modifier*d
-      cpu_total += rf_solved.cpu_time.sum()*modifier
+    for solver, sdata in data.groupby('solver'):
+        if g_args.log: log("Computing scores for "+solver)
+        nsolved = len(sdata)
+        error = 0.0
+        correct = 0.0
+        wall_total = 0.0
+        cpu_total = 0.0
+        wrong_solver = all_wrong[all_wrong.solver == solver]
+        for family, sfdata in sdata.groupby('family'):
+            modifier = family_scores[family] if use_families else 1
 
-      #log("... "+str(error)+","+str(correct)+","+str(wall_total)+","+str(cpu_total)+" with "+str(modifier))
+            sf_wrong = len(wrong_solver[wrong_solver.family == family])
+            sf_solved = len(sfdata)
 
-    psolved = 100.0 * (float(nsolved)/benchmark_num) 
-    row = [year,division,solver,psolved,error,correct,wall_total,cpu_total]
-    rows.append(row)
-    log("Row: "+str(row))
+            this_mod = benchmark_num * modifier if use_families else 1
 
-  # After computing a row per solver we then sort and rank them
-  # Note that competitive solvers cannot get awarded a rank and merely
-  # get the current rank without increasing it
-  rows.sort(key=row_key)
-  rank = 0
-  for row in rows:
-    row.append(rank)
-    competitive = competitive_row(row)
-    row.append(competitive)
-    if competitive:
-      rank+=1
-  return rows
+            error += sf_wrong * this_mod
+            correct += sf_solved * this_mod
+            wall_total += sfdata.wallclock_time.sum() * modifier
+            cpu_total += sfdata.cpu_time.sum() * modifier
+            #if g_args.log: log("... {}, {}, {}, {} with {}".format(\
+            #       error, correct, wall_total, cpu_total, modifier))
+
+        psolved = 100.0 * (float(nsolved) / benchmark_num)
+        assert psolved > 0
+        row = [year, division, solver, psolved, error, correct,
+               wall_total, cpu_total]
+        rows.append(row)
+        if g_args.log: log("Row: {}".format(row))
+
+    # After computing a row per solver we then sort and rank them
+    # Note that competitive solvers cannot get awarded a rank and merely
+    # get the current rank without increasing it
+    rows.sort(key=row_key)
+    rank = 0
+    for row in rows:
+        row.append(rank)
+        competitive = competitive_row(row)
+        row.append(competitive)
+        if competitive:
+            rank+=1
+    return rows
 
 ############################
 # Processing
@@ -289,62 +330,190 @@ def virtual_best_solver_filter(data,year):
   return result
 
 
-# This function processes a CSV file containing many divisions and computes all of the scores
-# It has some similar options to the scoring function but some others as well.
-# The new options are as follows (for others, see scoring function)
-# Set disagreements if you want to remove disagreements - the only reason not to do this is that it is expensive, so just when testing
-# Set division if you only want to compute the results for fixed divisions (; separated list e.g. "UF;BV"), set this to "-" if you want to run for all divisions 
-def process_csv(csv,family,division,disagreements,year,time_limit,verdicts,use_families,skip_unknowns,sequential):
+# Process a CSV file with results of one track.
+# csv          : the input csv
+# disagreements: set to True to remove disagreements
+# year         : the string identifying the year of the results
+# verdicts     : a pd.Series created with
+#                - ['sat', 'unsat'] to consider all solved instances
+#                - ['sat'] to consider only sat instances
+#                - ['unsat'] to consider only unsat instances
+# use_families : use weighted scoring scheme
+# skip_unknowns: skip benchmarks with status unknown
+def process_csv(csv,
+                disagreements,
+                year,
+                time_limit,
+                verdicts,
+                use_families,
+                skip_unknowns):
+    global g_args
+    if g_args.log:
+        log("Process {} with family: '{}', divisions: '{}', "\
+            "disagreements: '{}', year: '{}', time_limit: '{}', "\
+            "use_families: '{}', skip_unknowns: '{}', sequential: '{}', "\
+            "verdicts: '{}'".format(
+            csv,
+            g_args.family,
+            g_args.divisions,
+            disagreements,
+            year,
+            time_limit,
+            g_args.use_families,
+            skip_unknowns,
+            g_args.sequential,
+            verdicts))
 
-  log("Process "+str(csv)+" with "+str((family,division,disagreements,year,time_limit,use_families,skip_unknowns,sequential,verdicts)))
+    # Load CSV file
+    data = pd.read_csv(csv)
 
-  # Load CSV file
-  data = pd.read_csv(csv)
+    # Remove spaces from columns for ease (other functions rely on this)
+    cols = data.columns
+    cols = cols.map(lambda x: x.replace(' ', '_'))
+    data.columns = cols
 
-  # Remove spaces from columns for ease (other functions rely on this)
-  cols = data.columns
-  cols = cols.map(lambda x: x.replace(' ', '_'))
-  data.columns = cols
+    data = addDivisonFamilyInfo(data, g_args.family)
 
-  data = addDivisonFamilyInfo(data,family)
+    # -: consider all divisions
+    # else list with divisions to consider
+    if g_args.divisions != "-":
+        divisions = g_args.divisions
+        data = data[(data.division.isin(divisions))]
 
-  if division != "-":
-    divisions = division.split(';')
-    data = data[(data.division.isin(divisions))]
+    #TODO: add options to select global ranking outputs
+    #data = virtual_best_solver_filter(data)
 
-  #TODO: add options to select global ranking outputs
-  #data = virtual_best_solver_filter(data)
+    start = time.time() if g_args.show_timestamps else None
+    if disagreements:
+        data = removeDisagreements(data)
+    if g_args.show_timestamps:
+        log('time disagreements: {}'.format(time.time() - start))
 
-  if disagreements:
-    data = removeDisagreements(data)
+    start = time.time() if g_args.show_timestamps else None
+    # Now for each division compute the score
+    rows = []
+    for division, division_data in data.groupby('division'):
+        if g_args.log: log("Compute for {}".format(division))
+        res = score(division,
+                    division_data,
+                    time_limit,
+                    verdicts,
+                    year,
+                    use_families,
+                    skip_unknowns)
+        rows+=res
+    if g_args.show_timestamps:
+        log('time score: {}'.format(time.time() - start))
 
-  # Now for each division compute the score
-  rows = []
-  for division,div_data in data.groupby('division'):
-    log("Compute for "+division)
-    res=score(div_data,time_limit,verdicts,str(year),division,use_families,skip_unknowns,sequential)
-    rows+=res
-    
-
-  results = pd.DataFrame(rows,columns= ['year','division','solver','psolved','error','correct','wall','cpu','Rank','competitive'])
-
-  #print(results)
-  return results
+    results = pd.DataFrame(rows,columns= [
+        'year', 'division', 'solver', 'psolved', 'error', 'correct', 'wall',
+        'cpu', 'Rank','competitive'])
+    return results
 
 
-# This function runs with specific values for certain years but keeps some options open to allow
-# us to try diferent things
-# Assumes csv files for different years are stored in a hardcoded place. TODO: make more generic
-def run(family,division,verdicts,tlimit,bytotal,sequential,skip_unknowns):
+# This function runs with specific values for certain years but keeps some
+# options open to allow us to try diferent things
+def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
+    global g_args
+    dataframes = []
+    dataframes.append(
+            process_csv(
+                g_args.csv['2015'][0],
+                False,
+                '2015',
+                min(g_args.csv['2015'][1], time_limit),
+                verdicts,
+                False,
+                skip_unknowns))
+    dataframes.append(
+            process_csv(
+                g_args.csv['2016'][0],
+                False,
+                '2016',
+                min(g_args.csv['2016'][1], time_limit),
+                verdicts,
+                not bytotal,
+                skip_unknowns))
+    dataframes.append(
+            process_csv(
+                g_args.csv['2017'][0],
+                True,
+                '2017',
+                min(g_args.csv['2017'][1], time_limit),
+                verdicts,
+                not bytotal,
+                skip_unknowns))
+    dataframes.append(
+            process_csv(
+                g_args.csv['2018'][0],
+                True,
+                '2018',
+                min(g_args.csv['2018'][1], time_limit),
+                verdicts,
+                not bytotal,
+                skip_unknowns))
+    return pd.concat(dataframes, ignore_index=True)
 
-  df15 = process_csv("csvs/2015.csv",family,division,False,2015,min(2400,tlimit),verdicts,False,skip_unknowns,sequential)
-  df16 = process_csv("csvs/2016.csv",family,division,False,2016,min(2400,tlimit),verdicts,(not bytotal),skip_unknowns,sequential)
-  df17 = process_csv("csvs/2017.csv",family,division,True,2017,min(1200,tlimit),verdicts,(not bytotal),skip_unknowns,sequential)
-  df18 = process_csv("csvs/2018.csv",family,division,True,2018,min(1200,tlimit),verdicts,(not bytotal),skip_unknowns,sequential)
 
-  results = pd.concat([df15,df16,df17,df18],ignore_index=True)
+def gen_results_for_report():
+    global g_args
 
-  return results
+    print("PARALLEL")
+    start = time.time() if g_args.show_timestamps else None
+    normal = gen_results_for_report_aux(
+            all_solved_verdicts, 2400, False, False)
+    check_all_winners(normal)
+    rows_to_latex(normal)
+    #vbs_winners(normal)
+    #biggest_lead_ranking(normal,"a_normal")
+    if g_args.show_timestamps:
+        log('time parallel: {}'.format(time.time() - start))
+
+    print("UNSAT")
+    start = time.time() if g_args.show_timestamps else None
+    unsat = gen_results_for_report_aux(
+            unsat_solved_verdicts, 2400, False, False)
+    #biggest_lead_ranking(unsat,"b_unsat")
+    unsat_new = project(winners(normal), winners(unsat))
+    rows_to_latex(unsat_new)
+    #vbs_winners(unsat)
+    if g_args.show_timestamps:
+        log('time unsat: {}'.format(time.time() - start))
+
+    print("SAT")
+    start = time.time() if g_args.show_timestamps else None
+    sat = gen_results_for_report_aux(
+            sat_solved_verdicts, 2400, False, False)
+    #biggest_lead_ranking(sat,"c_sat")
+    sat_new = project(winners(normal),winners(sat))
+    rows_to_latex(sat_new)
+    #vbs_winners(sat)
+    if g_args.show_timestamps:
+        log('time sat: {}'.format(time.time() - start))
+
+    print("24s")
+    start = time.time() if g_args.show_timestamps else None
+    twenty_four = gen_results_for_report_aux(
+            all_solved_verdicts, 24, False, False)
+    #biggest_lead_ranking(twenty_four,"d_24")
+    twenty_four_new = project(winners(normal),winners(twenty_four))
+    rows_to_latex(twenty_four_new)
+    #vbs_winners(twenty_four)
+    if g_args.show_timestamps:
+        log('time 24s: {}'.format(time.time() - start))
+
+    #print("Total Solved")
+    #by_total_scored  = gen_results_for_report_aux(
+    #        all_solved_verdicts, 2400, True, False)
+    #biggest_lead_ranking(by_total_scored,"e_total")
+    #by_total_scored_new = project(winners(normal),winners(by_total_scored))
+    #rows_to_latex(by_total_scored_new)
+
+    #print("Without unknowns")
+    #without_unknowns  = gen_results_for_report_aux(
+    #         all_solved_verdicts, 2400, False, True)
+    #without_unknowns_new = project(winners(normal),winners(without_unknowns))
+    #rows_to_latex(without_unknowns_new)
 
 # Checks winners for a fixed number of years
 # TODO: make more generic
@@ -393,7 +562,7 @@ def biggest_lead_ranking(data,thing):
 	  #except:
   	    #print("zz Error in "+division+" with "+thing)
 
- 
+
 # TODO: Slightly different from that in rules document, update 
 def vbs_winners(data):
   print(data)
@@ -402,54 +571,119 @@ def vbs_winners(data):
   print(winners)
 
 
+def parse_args():
+    global g_args
+    parser = ArgumentParser()
+    parser.add_argument ("-c", "--csv",
+                         metavar="path[,path...]",
+                         help="list of input csvs with results from StarExec")
+    parser.add_argument ("-y", "--year",
+                         metavar="year[,year...]",
+                         help="list of years matching given input csvs")
+    parser.add_argument ("-t", "--time",
+                         metavar="time[,time...]",
+                         help="list of time limits matching given input csvs")
+    parser.add_argument("-f", "--family-choice",
+                        action="store",
+                        dest="family",
+                        default="bot",
+                        help="Choose notion of benchmark family"\
+                              "('top' for top-most directory, "\
+                              "'bot' for bottom-most directory")
+    parser.add_argument("-d", "--division-only",
+                        metavar="division[,division...]",
+                        action="store",
+                        dest="divisions",
+                        default="-",
+                        help="Restrict attention to a single division")
+    parser.add_argument("-s", "--sequential",
+                        action="store_true",
+                        dest="sequential",
+                        default=False,
+                        help="Compute sequential scores")
+    parser.add_argument("-w", "--weighted",
+                        action="store_true",
+                        dest="use_families",
+                        default=False,
+                        help="Use weighted scoring scheme")
+    parser.add_argument("-u", "--skip-unknowns",
+                        action="store_true",
+                        dest="skip_unknowns",
+                        default=False,
+                        help="Skip benchmarks with unknown status")
+    parser.add_argument("--report",
+                        action="store_true",
+                        default=False,
+                        help="Produce results for JSat 2015-2018 submission")
+    parser.add_argument("--show-timestamps",
+                        action="store_true",
+                        default=False,
+                        help="Log time for computation steps")
+    parser.add_argument("-l", "--log",
+                        action="store_true",
+                        default=False,
+                        help="Enable logging")
+    g_args = parser.parse_args()
+
+    if not g_args.csv:
+        die ("Missing input csv(s).")
+    if not g_args.year:
+        die ("Missing input year(s).")
+    if not g_args.time:
+        die ("Missing input time(s).")
+
+    g_args.csv = g_args.csv.split(',') if g_args.csv else []
+    g_args.year = g_args.year.split(',') if g_args.year else []
+    g_args.time = g_args.time.split(',') if g_args.time else []
+    g_args.time = [int(t) for t in g_args.time]
+
+    if len(g_args.year) != len(g_args.csv):
+        die ("Number of given years and csv files does not match.")
+    if len(g_args.time) != len(g_args.csv):
+        die ("Number of given time limits and csv files does not match.")
+
+    if g_args.report:
+        assert '2015' in g_args.year
+        assert '2016' in g_args.year
+        assert '2017' in g_args.year
+        assert '2018' in g_args.year
+
+    tmp = zip (g_args.csv, g_args.time)
+    g_args.csv = dict(zip(g_args.year, tmp))
+
+    if g_args.divisions != "-":
+        g_args.divisions = g_args.divisions.split(',')
+
+
+def main():
+    global g_args
+    parse_args()
+    read_competitive()
+
+
+    if g_args.report:
+        for year in g_args.csv:
+            csv = g_args.csv[year][0]
+            if not os.path.exists(csv):
+                die("Given csv does not exist: {}".format(csv))
+        gen_results_for_report()
+    else:
+        data = []
+        for year in csvs:
+            csv, time_limit = csvs[year]
+            if not os.path.exists(csv):
+                die("Given csv does not exist: {}".format(csv))
+            data.append(
+                process_csv(
+                         csv,
+                        True,
+                        year,
+                        time_limit,
+                        all_solved_verdicts))
+        result = pd.concat(data, ignore_index = True)
+        print(result)
+
+
 if __name__ == "__main__":
+    main()
 
-# Set up options for script
-  parser = optparse.OptionParser()
-  #parser.add_option('-c','--csv',action="store",dest="csv",help="csv file destination")
-  parser.add_option('-f','--family_choice',action="store",dest="family",help="Choose top for the default family as sub-directory and bot for family as smallest dir",default="bot")
-  parser.add_option('-d','--division_only',action="store",dest="division",help="Restrict attention to a single division",default="-")
-  parser.add_option('-s','--sequential',action="store",dest="sequential",help="Compute sequential scores",default=False)
-
-  options, args = parser.parse_args()
-  #if not options.csv:
-  #  parser.error("You must provide a csv file using -c")
-  
-  print("PARALLEL")
-  normal = run(options.family,options.division,all_solved_verdicts,2400,False,options.sequential,False)
-  check_all_winners(normal)
-  rows_to_latex(normal)
-  #vbs_winners(normal)
-  #biggest_lead_ranking(normal,"a_normal")
-
-  print("UNSAT")
-  unsat = run(options.family,options.division,unsat_solved_verdicts,2400,False,options.sequential,False)
-  #biggest_lead_ranking(unsat,"b_unsat")
-  unsat_new = project(winners(normal),winners(unsat))
-  rows_to_latex(unsat_new)
-  #vbs_winners(unsat)
-
-  print("SAT")
-  sat = run(options.family,options.division,sat_solved_verdicts,2400,False,options.sequential,False)
-  #biggest_lead_ranking(sat,"c_sat")
-  sat_new = project(winners(normal),winners(sat))
-  rows_to_latex(sat_new)
-  #vbs_winners(sat)
-
-  print("24s")
-  twenty_four = run(options.family,options.division,all_solved_verdicts,24,False,options.sequential,False)
-  #biggest_lead_ranking(twenty_four,"d_24")
-  twenty_four_new = project(winners(normal),winners(twenty_four))
-  rows_to_latex(twenty_four_new)
-  #vbs_winners(twenty_four)
-
-  #print("Total Solved")
-  #by_total_scored  = run(options.family,options.division,all_solved_verdicts,2400,True,options.sequential,False)
-  #biggest_lead_ranking(by_total_scored,"e_total")
-  #by_total_scored_new = project(winners(normal),winners(by_total_scored))
-  #rows_to_latex(by_total_scored_new)
-
-  #print("Without unknowns")
-  #without_unknowns  = run(options.family,options.division,all_solved_verdicts,2400,False,options.sequential,True)
-  #without_unknowns_new = project(winners(normal),winners(without_unknowns))
-  #rows_to_latex(without_unknowns_new)
