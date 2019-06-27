@@ -56,7 +56,7 @@
 ,19777,19777,,,,"2018-Minkeyrink MT","QF_BV",,"QF_BV",,,,,,,,,,"no",,,,
 ,19783,19783,,,,"2018-SMTRAT-Rat","QF_NIRA",,,,,,,,,,,,"no",,,,
 ,19784,19784,,,,"2018-SPASS-SATT","QF_LIA",,,,,,,,,,,,"no",,,,
-,19788,19788,,,,"2018-vampire","NRA;UF;UFNIA",,,,,,,,,,,,"no",,,,
+,19788,19788,,,,"2018-Vampire","NRA;UF;UFNIA",,,,,,,,,,,,"no",,,,
 ,19791,19791,,,,"2018-Yices","QF_ALIA;QF_AUFLIA;QF_AX;QF_IDL;QF_RDL;QF_UF;QF_UFIDL;QF_UFLIA;QF_UFLRA;QF_UFNIA;QF_UFNRA",,,,,,,,,,,,"no",,,,
 ,19792,19792,,,,"2018-Z3","ALIA;AUFLIRA;LIA;LRA;NIA;NRA;QF_ANIA;QF_AUFNIA;QF_LIRA;QF_NRA;UFBV;UFIDL;UFLRA;UFNIA",,,,,,,,,,,,"no",,,,
 ,19991,,19991,,,"2018-Boolector (incremental)",,"QF_ABV;QF_UFBV",,"QF_ABV",,,,,,,,,"no",,,,
