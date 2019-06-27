@@ -680,18 +680,21 @@ def main():
         gen_results_for_report()
     else:
         data = []
-        for year in csvs:
-            csv, time_limit = csvs[year]
+        for year in g_args.csv:
+            csv, time_limit = g_args.csv[year]
             if not os.path.exists(csv):
                 die("Given csv does not exist: {}".format(csv))
             data.append(
-                process_csv(
-                         csv,
-                        True,
-                        year,
-                        time_limit,
-                        g_all_solved))
+                process_csv(csv,
+                            False,
+                            year,
+                            time_limit,
+                            g_all_solved,
+                            g_args.use_families,
+                            g_args.skip_unknowns))
         result = pandas.concat(data, ignore_index = True)
+        pandas.set_option('display.max_columns', None)
+        pandas.set_option('display.max_rows', None)
         print(result)
 
 
