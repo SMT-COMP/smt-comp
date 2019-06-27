@@ -47,7 +47,7 @@ def view(data):
 # adds columns for division and family to data
 # also does some tidying of benchmark column for specific years of the competition
 # edit this function if you want to edit how families are added
-def addDivisonFamilyInfo(data,fam):
+def add_division_family_info(data,fam):
     global g_args
 
     # Remove OtherDivision from benchmark name (2018)
@@ -378,7 +378,7 @@ def process_csv(csv,
     cols = cols.map(lambda x: x.replace(' ', '_'))
     data.columns = cols
 
-    data = addDivisonFamilyInfo(data, g_args.family)
+    data = add_division_family_info(data, g_args.family)
 
     # -: consider all divisions
     # else list with divisions to consider
