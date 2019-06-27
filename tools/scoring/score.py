@@ -50,13 +50,14 @@ def view(data):
 def add_division_family_info(data,fam):
     global g_args
 
-    # Remove OtherDivision from benchmark name (2018)
+    # Remove 'Other Divisions' from benchmark name (2018)
     data['benchmark'] = data['benchmark'].str.replace('Other Divisions/','')
-    # Remove Datatype divisions from benchmark name (2017)
+    # Remove 'Datatype Divisions' from benchmark name (2017)
     data['benchmark'] = data['benchmark'].str.replace('Datatype Divisions/','')
 
-    # Extract divisions and as another column
+    # Extract divisions as additional column
     data['division'] = data['benchmark'].str.split('/').str[0]
+
     # Extract family as an additional column.
     # This depends on the famly_definition option:
     #   - 'top' interprets the top most directory, and
@@ -84,8 +85,8 @@ def add_division_family_info(data,fam):
 # sound solvers disagree on the result
 def removeDisagreements(data):
     global g_args
-    # First find unsound solvers e.g. those that disagree with the expected status
-    # these solvers are ignored in the following
+    # First find unsound solvers e.g. those that disagree with the expected
+    # status these solvers are ignored in the following
     unsound_solvers = set(data[(data.expected != "starexec-unknown")
                                & (data.result != "starexec-unknown")
                                & (data.result != data.expected)]['solver'])
