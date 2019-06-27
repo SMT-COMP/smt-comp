@@ -207,19 +207,28 @@ def check_winners(new_results,year):
       if (all(map(lambda o: o not in new,old_list))):
         print ("Diff in "+div+" old "+str(old)+" new "+ str(new))
 
-# Turns a set of results into a nice LaTeX table, making some assumptions about the contents
-# TODO: make more generic
-def rows_to_latex(results):
- print("\\begin{tabular}{r@{\\hskip 1em}>{\\columncolor[gray]{.95}[.25em][.5em]}c@{\\hskip 1em}>{\\columncolor[gray]{.95}[.5em][.5em]}c@{\\hskip 1em}>{\\columncolor[gray]{.95}[.5em][.5em]}c@{\\hskip 1em}>{\\columncolor[gray]{.95}[.5em][0.25em]}c}") 
- print("\\toprule")
- print("\\rc")
- print("Division         &  2015                 &  2016                    &  2017                  &  2018                      \\\\")
- 
- divisions = results.division.unique()
- for div in divisions:
-   print(div+"	& "+ select_str(results,div,"2015") +"  & "+ select_str(results,div,"2016") +"  & "+ select_str(results,div,"2017") +"  & "+ select_str(results,div,"2018") + "  \\\\") 
- print("\\bottomrule")
- print("\\end{tabular}")
+# Turns a set of results into a LaTeX table that lists winners/best solvers
+# per division as listed in the report for 2015-2018.
+def to_latex_for_report(results):
+     print("\begin{tabular}{"\
+           "r@{\hskip 1em}>{\columncolor{white}[.25em][.5em]}"\
+           "c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}"\
+           "c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}"\
+           "c@{\hskip 1em}>{\columncolor{white}[.5em][0.5em]}c}")
+     print("\\toprule")
+     print("Division & 2015 & 2016 & 2017 & 2018 \\\\")
+     print("\\hline\\hline")
+
+     divisions = results.division.unique()
+     for division in divisions:
+       print("\\wc {} & {} & {} & {} & {} \\\\".format(
+           division,
+           select_str(results, division, "2015"),
+           select_str(results, division, "2016"),
+           select_str(results, division, "2017"),
+           select_str(results, division, "2018")))
+     print("\\bottomrule")
+     print("\\end{tabular}")
 
 ############################
 # Scoring functions
@@ -471,7 +480,7 @@ def gen_results_for_report():
     normal = gen_results_for_report_aux(
             g_all_solved, 2400, False, False)
     check_all_winners(normal)
-    rows_to_latex(normal)
+    to_latex_for_report(normal)
     #vbs_winners(normal)
     #biggest_lead_ranking(normal,"a_normal")
     if g_args.show_timestamps:
@@ -483,7 +492,7 @@ def gen_results_for_report():
             g_unsat_solved, 2400, False, False)
     #biggest_lead_ranking(unsat,"b_unsat")
     unsat_new = project(winners(normal), winners(unsat))
-    rows_to_latex(unsat_new)
+    to_latex_for_report(unsat_new)
     #vbs_winners(unsat)
     if g_args.show_timestamps:
         log('time unsat: {}'.format(time.time() - start))
@@ -494,7 +503,7 @@ def gen_results_for_report():
             g_sat_solved, 2400, False, False)
     #biggest_lead_ranking(sat,"c_sat")
     sat_new = project(winners(normal),winners(sat))
-    rows_to_latex(sat_new)
+    to_latex_for_report(sat_new)
     #vbs_winners(sat)
     if g_args.show_timestamps:
         log('time sat: {}'.format(time.time() - start))
@@ -505,7 +514,7 @@ def gen_results_for_report():
             g_all_solved, 24, False, False)
     #biggest_lead_ranking(twenty_four,"d_24")
     twenty_four_new = project(winners(normal),winners(twenty_four))
-    rows_to_latex(twenty_four_new)
+    to_latex_for_report(twenty_four_new)
     #vbs_winners(twenty_four)
     if g_args.show_timestamps:
         log('time 24s: {}'.format(time.time() - start))
@@ -515,13 +524,13 @@ def gen_results_for_report():
     #        g_all_solved, 2400, True, False)
     #biggest_lead_ranking(by_total_scored,"e_total")
     #by_total_scored_new = project(winners(normal),winners(by_total_scored))
-    #rows_to_latex(by_total_scored_new)
+    #to_latex_for_report(by_total_scored_new)
 
     #print("Without unknowns")
     #without_unknowns  = gen_results_for_report_aux(
     #         g_all_solved, 2400, False, True)
     #without_unknowns_new = project(winners(normal),winners(without_unknowns))
-    #rows_to_latex(without_unknowns_new)
+    #to_latex_for_report(without_unknowns_new)
 
 # Checks winners for a fixed number of years
 # TODO: make more generic
