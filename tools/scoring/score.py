@@ -27,9 +27,9 @@ g_non_competitive = {}
 ############################
 # Helper functions
 
-all_solved_verdicts = pandas.Series(['sat','unsat'])
-sat_solved_verdicts = pandas.Series(['sat'])
-unsat_solved_verdicts = pandas.Series(['unsat'])
+g_all_solved = pandas.Series(['sat','unsat'])
+g_sat_solved = pandas.Series(['sat'])
+g_unsat_solved = pandas.Series(['unsat'])
 
 # Print error message and exit.
 def die(msg):
@@ -463,11 +463,12 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
 
 def gen_results_for_report():
     global g_args
+    global g_all_solved, g_sat_solved, g_unsat_solved
 
     print("PARALLEL")
     start = time.time() if g_args.show_timestamps else None
     normal = gen_results_for_report_aux(
-            all_solved_verdicts, 2400, False, False)
+            g_all_solved, 2400, False, False)
     check_all_winners(normal)
     rows_to_latex(normal)
     #vbs_winners(normal)
@@ -478,7 +479,7 @@ def gen_results_for_report():
     print("UNSAT")
     start = time.time() if g_args.show_timestamps else None
     unsat = gen_results_for_report_aux(
-            unsat_solved_verdicts, 2400, False, False)
+            g_unsat_solved, 2400, False, False)
     #biggest_lead_ranking(unsat,"b_unsat")
     unsat_new = project(winners(normal), winners(unsat))
     rows_to_latex(unsat_new)
@@ -489,7 +490,7 @@ def gen_results_for_report():
     print("SAT")
     start = time.time() if g_args.show_timestamps else None
     sat = gen_results_for_report_aux(
-            sat_solved_verdicts, 2400, False, False)
+            g_sat_solved, 2400, False, False)
     #biggest_lead_ranking(sat,"c_sat")
     sat_new = project(winners(normal),winners(sat))
     rows_to_latex(sat_new)
@@ -500,7 +501,7 @@ def gen_results_for_report():
     print("24s")
     start = time.time() if g_args.show_timestamps else None
     twenty_four = gen_results_for_report_aux(
-            all_solved_verdicts, 24, False, False)
+            g_all_solved, 24, False, False)
     #biggest_lead_ranking(twenty_four,"d_24")
     twenty_four_new = project(winners(normal),winners(twenty_four))
     rows_to_latex(twenty_four_new)
@@ -510,14 +511,14 @@ def gen_results_for_report():
 
     #print("Total Solved")
     #by_total_scored  = gen_results_for_report_aux(
-    #        all_solved_verdicts, 2400, True, False)
+    #        g_all_solved, 2400, True, False)
     #biggest_lead_ranking(by_total_scored,"e_total")
     #by_total_scored_new = project(winners(normal),winners(by_total_scored))
     #rows_to_latex(by_total_scored_new)
 
     #print("Without unknowns")
     #without_unknowns  = gen_results_for_report_aux(
-    #         all_solved_verdicts, 2400, False, True)
+    #         g_all_solved, 2400, False, True)
     #without_unknowns_new = project(winners(normal),winners(without_unknowns))
     #rows_to_latex(without_unknowns_new)
 
@@ -689,7 +690,7 @@ def main():
                         True,
                         year,
                         time_limit,
-                        all_solved_verdicts))
+                        g_all_solved))
         result = pandas.concat(data, ignore_index = True)
         print(result)
 
