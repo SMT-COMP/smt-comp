@@ -9,8 +9,8 @@
 # @date 2019
 
 # Data processing library pandas
-import numpy as np
-import pandas as pd
+import numpy
+import pandas
 
 # Options parsing
 from argparse import ArgumentParser
@@ -27,9 +27,9 @@ g_non_competitive = {}
 ############################
 # Helper functions
 
-all_solved_verdicts = pd.Series(['sat','unsat'])
-sat_solved_verdicts = pd.Series(['sat'])
-unsat_solved_verdicts = pd.Series(['unsat'])
+all_solved_verdicts = pandas.Series(['sat','unsat'])
+sat_solved_verdicts = pandas.Series(['sat'])
+unsat_solved_verdicts = pandas.Series(['unsat'])
 
 # Print error message and exit.
 def die(msg):
@@ -57,18 +57,24 @@ def addDivisonFamilyInfo(data,fam):
 
     # Extract divisions and as another column
     data['division'] = data['benchmark'].str.split('/').str[0]
-    # Extract family as another column
-    # This depends on the fam option. The 'top' option takes the top directory and the 'bot' option takes the
-    # bottom directory. The rules have always specified 'top' but the scoring scripts for many years actually
-    # implemented 'bot'. The scripts allow you to choose.
+    # Extract family as an additional column.
+    # This depends on the famly_definition option:
+    #   - 'top' interprets the top most directory, and
+    #   - 'bot' interprets the bottom most directory as benchmark family.
+    # The rules have always specified 'top' but the scoring scripts for many
+    # years actually implemented 'bot'. The scripts allow you to choose.
     if fam == "top":
         if g_args.log: log("Using top-level directories for fam")
         # Take top-level sub-directories as family
-        data['family'] = np.where(data['benchmark'].str.count('/')>1,data['benchmark'].str.split('/').str[1], '-')
+        data['family'] = numpy.where(
+                data['benchmark'].str.count('/') > 1,
+                data['benchmark'].str.split('/').str[1],
+                '-')
     elif fam == "bot":
         if g_args.log: log("Using bottom-level directories for fam")
         # Take immediate super-directory as family
-        data['family'] = data.benchmark.apply(lambda x : x[(1+x.index('/')):(x.rfind('/'))])
+        data['family'] = data.benchmark.apply(
+                lambda x : x[(1+x.index('/')):(x.rfind('/'))])
     else:
         die ("family option not supported: {}".format(fam))
     return data
@@ -189,7 +195,7 @@ def select_str(results, division, year):
 # other scripts
 def check_winners(new_results,year):
   #First load the previous files from a winners file, which should be a CSV 
-  old_winners = pd.read_csv("winners.csv")
+  old_winners = pandas.read_csv("winners.csv")
   divisions = new_results.division.unique()
   for div in divisions:
     old = old_winners[old_winners.Division==div][year].max()
@@ -233,7 +239,7 @@ def competitive_row(row):
 # data           : the results data of this division
 # wclock_limit   : the wallclock time limit
 # year           : the string identifying the year of the results
-# verdicts       : a pd.Series created with
+# verdicts       : a pandas.Series created with
 #                  - ['sat', 'unsat'] to consider all solved instances
 #                  - ['sat'] to consider only sat instances
 #                  - ['unsat'] to consider only unsat instances
@@ -334,7 +340,7 @@ def virtual_best_solver_filter(data,year):
 # csv          : the input csv
 # disagreements: set to True to remove disagreements
 # year         : the string identifying the year of the results
-# verdicts     : a pd.Series created with
+# verdicts     : a pandas.Series created with
 #                - ['sat', 'unsat'] to consider all solved instances
 #                - ['sat'] to consider only sat instances
 #                - ['unsat'] to consider only unsat instances
@@ -365,7 +371,7 @@ def process_csv(csv,
             verdicts))
 
     # Load CSV file
-    data = pd.read_csv(csv)
+    data = pandas.read_csv(csv)
 
     # Remove spaces from columns for ease (other functions rely on this)
     cols = data.columns
@@ -405,7 +411,7 @@ def process_csv(csv,
     if g_args.show_timestamps:
         log('time score: {}'.format(time.time() - start))
 
-    results = pd.DataFrame(rows,columns= [
+    results = pandas.DataFrame(rows,columns= [
         'year', 'division', 'solver', 'psolved', 'error', 'correct', 'wall',
         'cpu', 'Rank','competitive'])
     return results
@@ -452,7 +458,7 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
                 verdicts,
                 not bytotal,
                 skip_unknowns))
-    return pd.concat(dataframes, ignore_index=True)
+    return pandas.concat(dataframes, ignore_index=True)
 
 
 def gen_results_for_report():
@@ -539,13 +545,17 @@ def winners(data):
 # This was useful when preparing the SMT-COMP journal paper and for discussing how scoring rules
 # could be changed
 def project(normal,other):
-  normal = rename_solvers(normal)
-  other = rename_solvers(other)
-  different = pd.concat([normal,other],keys=['normal','other']).drop_duplicates(keep=False,subset=['year','division','solver','Rank'])
-  if different.empty:
-    return different
-  other_different = different.loc['other']
-  return other_different
+    normal = rename_solvers(normal)
+    other = rename_solvers(other)
+    different = pandas.concat(
+            [normal,other],
+            keys=['normal','other']).drop_duplicates(
+                    keep=False,
+                    subset=['year','division','solver','Rank'])
+    if different.empty:
+        return different
+    other_different = different.loc['other']
+    return other_different
 
 
 # Computes the new global ranking based on the distance between
@@ -680,7 +690,7 @@ def main():
                         year,
                         time_limit,
                         all_solved_verdicts))
-        result = pd.concat(data, ignore_index = True)
+        result = pandas.concat(data, ignore_index = True)
         print(result)
 
 
