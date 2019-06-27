@@ -69,3 +69,4 @@
 ,19796,,,,19796,"2018-Yices (unsat core)",,,,,,"QF_ABV;QF_AX;QF_BV;QF_UFIDL",,,,,,,"no",,,,
 ,19797,,,,19797,"2018-Z3 (unsat core)",,,,,,"ALIA;BV;LIA;NRA;QF_ALIA;QF_AUFNIA;QF_IDL;QF_LIRA;QF_NIA;QF_NIRA;QF_RDL;QF_UFBV;QF_UFLIA;QF_UFNIA;QF_UFNRA;UFLRA",,,,,,,"no",,,,
 ,19827,,,,19827,"2018-MathSAT (unsat core)",,,,,,"QF_AUFBV;QF_UFLRA",,,,,,,"no",,,,
+,24474,,24478,,,"CVC4-inc-fixed",,"QF_BV;QF_LIA",,"QF_BV",,,,,,"noetzli@cs.stanford.edu","Clark Barrett, Haniel Barbosa, Martin Brain, Tim King, Makai Mann, Aina Niemetz, Andres Nötzli, Alex Ozdemir, Mathias Preiner, Andrew Reynolds, Cesare Tinelli, Yoni Zohar",,"no",,"cvc4.pdf","CVC4","http://cvc4.cs.stanford.edu"
