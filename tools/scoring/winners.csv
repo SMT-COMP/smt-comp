@@ -14,7 +14,7 @@ LRA,CVC4,CVC4,CVC4 Z3,CVC4 Z3
 NIA,CVC4 Z3,ProB Z3,CVC4 Z3,CVC4 Z3
 NRA,CVC4,Vampire,Redlog,Vampire Z3 / Vampire
 QF_ABV,Boolector,Boolector,Boolector,Boolector 
-QF_ABVFP,,,---,CVC4
+QF_ABVFP,,,CVC4
 QF_ALIA,Yices2,Yices2,Yices2,Yices2
 QF_ANIA,CVC4 Z3,CVC4,CVC4,CVC4 Z3
 QF_AUFBV,CVC4 MathSAT,CVC4 MathSAT,Yices2 MathSAT,CVC4

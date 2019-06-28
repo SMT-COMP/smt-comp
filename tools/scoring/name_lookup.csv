@@ -13,6 +13,7 @@ MinkeyRink 2017.3a,MinkeyRink
 Minkeyrink MT,MinkeyRink
 Yices2-Main,Yices2
 Yices,Yices2
+Yices2-NL,Yices2
 veriT-2017-06-17,veriT
 smtinterpol-2.1-258-g92ab3df,SMTInterpol
 SMTInterpol-2.5-19-g0d39cdee,SMTInterpol
@@ -38,6 +39,7 @@ Yices 2.6.0,Yices2
 vampire-4.3-smt,Vampire
 vampire_smt_4.1,Vampire
 COLIBRI 10_06_18 v2038,COLIBRI
+COLIBRI 18_06_2017 105a81,COLIBRI
 SMTRAT-Rat-final,SMT-RAT
 Boolector SMT15 QF_AUFBV final,Boolector
 Boolector SMT17 final,Boolector

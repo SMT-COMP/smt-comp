@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+#
 # This script has been written to compute the scores of SMT-COMP
 # It is purposefully trying to be flexible to changes in the scoring
 # mechanisms. It can be used to apply scoring schemes from different
@@ -23,6 +25,7 @@ import time
 
 g_args = None
 g_non_competitive = {}
+g_solver_names = {}
 
 ############################
 # Helper functions
@@ -81,35 +84,51 @@ def add_division_family_info(data,fam):
     return data
 
 
-# Drop any rows that contain benchmarks with status unknown where two otherwise
-# sound solvers disagree on the result
-def removeDisagreements(data):
+def remove_disagreements(data):
     global g_args
-    # First find unsound solvers e.g. those that disagree with the expected
-    # status these solvers are ignored in the following
+
+    # First find and filter out unsound solvers ,i.e., solvers that disagree
+    # with the expected status.
     unsound_solvers = set(data[(data.expected != "starexec-unknown")
                                & (data.result != "starexec-unknown")
                                & (data.result != data.expected)]['solver'])
- 
-    if g_args.log: log("Removing disagreements...")
-    unknown = data[(data.expected == "starexec-unknown")
-                   & (~data.solver.isin(unsound_solvers))
-                   & ((data.result == 'sat')
-                      | (data.result == 'unsat'))]
-    exclude = set()
-    for b,rows in unknown.groupby('benchmark'):
-        res = set(rows.result.tolist())
-        if 'sat' in res and 'unsat' in res:
-            if g_args.log: log("Removing "+b)
-            if g_args.log: log(view(rows))
-            exclude.add(b)
+
+    # Consider only unknown benchmarks that were solved by sound solvers.
+    solved_unknown = data[(data.expected == "starexec-unknown")
+                          & (~data.solver.isin(unsound_solvers))
+                          & ((data.result == 'sat') | (data.result == 'unsat'))]
+
+    # Remove duplicate (benchmark, result) pairs to produces unique
+    # result values for each benchmark.
+    solved_unknown = solved_unknown.drop_duplicates(
+                            subset=['benchmark', 'result'])
+
+    # Group by benchmarks and count the number of results.
+    grouped_results = solved_unknown.groupby('benchmark', as_index=False).agg(
+                            {'result': 'count'})
+
+    # If the number of results is more than one, we have disagreeing solvers, 
+    # i.e., the result column contains 'sat' and 'unsat' for the corresponding
+    # benchmark.
+    disagreements = grouped_results[grouped_results['result'] > 1]
+
+    exclude = set(disagreements.benchmark)
+
+    if g_args.log:
+        log('Found {} disagreements:'.format(len(exclude)))
+        i = 1
+        for b in exclude:
+            log('[{}] {}'.format(i, b))
+            i += 1
+
+    # Exclude benchmarks on which solvers disagree.
     data = data[~(data.benchmark.isin(exclude))]
     return data
 
 # Returns true if the solver is competitive in the given year.
 # This function depends on an external file 'noncompetitive.csv' which is
 # provided and maintained for the official competition data
-def competitive(year, solver):
+def is_competitive(year, solver):
     global g_non_competitive
     solvers = g_non_competitive.get(year)
     return not solvers or solver not in solvers
@@ -127,85 +146,90 @@ def read_competitive():
             g_non_competitive[year].add(solver)
 
 
-# Use the names in the file name_lookups.csv to rename the names of solvers
-# This is used to print nice output. If you want to change how a solver
-# appears in output you should update name_lookups.csv
-def rename_solvers(data):
-  with open('name_lookup.csv',mode='r') as f:
-    reader = csv.reader(f)
-    lookup = {rows[0]:rows[1] for rows in reader}
-    data.solver = data.solver.apply(lambda x : lookup[x] if x in lookup else x)
-    return data
-
 # Use the names in the file name_lookups.csv to rename the given solver
 # This is used to print nice output. If you want to change how a solver
 # appears in output you should update name_lookups.csv
 def solver_str(solver):
-  with open('name_lookup.csv',mode='r') as f:
-    reader = csv.reader(f)
-    lookup = {rows[0]:rows[1] for rows in reader}
-    if solver in lookup:
-      return lookup[solver] 
-    return solver 
+    global g_solver_names
+    return g_solver_names.get(solver, solver)
 
+def read_solver_names():
+    global g_solver_names
+    with open('name_lookup.csv', mode='r') as f:
+      reader = csv.reader(f)
+      g_solver_names = dict((r[0], r[1]) for r in reader)
+
+# Use the names in the file name_lookups.csv to rename the names of solvers
+# This is used to print nice output. If you want to change how a solver
+# appears in output you should update name_lookups.csv
+def rename_solvers(data):
+    data.solver = data.solver.map(solver_str)
+    return data
 
 # compute family scores
 # this is based on the presentation in the SMT-COMP 2017 rules document
 # but this is basically the same in all rules documents
 def get_family_scores(data):
-  if data.empty:
-    return {}
+    if data.empty:
+        return {}
 
-  # the 'raw' score is alpha_b for b in the family
-  raw_fam_scores = {}
-  for family,fdata in data.groupby('family'):
-    Fb = len(fdata.benchmark.unique())
-    alpha_b = (1.0 + math.log(Fb))/Fb
-    raw_fam_scores[family] = alpha_b
+    raw_fam_scores = {} # The 'raw' score is alpha_b for b in the family.
+    score_sum = 0       # The sum in the definition of alpha_b_prime.
 
-  # compute total of all family scores
-  # this is the sum in the definition of alpha_b_prime
-  score_sum = 0
-  one_solver = data.iloc[0].solver
-  for family, raw_score in raw_fam_scores.items():
-    #size of family * its raw score
-    cnt = len(data[(data.family==family) & (data.solver==one_solver)])
-    score_sum += cnt*raw_score
-  
-  # now we get the actual family scores by dividing through
-  family_scores = {family: raw_fam_scores[family]/score_sum  for family in raw_fam_scores}
-  
-  #for family in family_scores:
-  #  print(family+": "+str(family_scores[family]))
+    for family, fdata in data.groupby('family'):
+        Fb = len(fdata.benchmark.unique())
+        alpha_b = (1.0 + math.log(Fb)) / Fb
+        raw_fam_scores[family] = alpha_b
+        score_sum += Fb * alpha_b
 
-  return family_scores
+    # Compute normalized weight alpha_prime_b for each benchmark family.
+    family_scores = dict((family, alpha_b / score_sum)
+                            for family, alpha_b in raw_fam_scores.items())
+
+    return family_scores
 
 # Selects the winners (e.g. rank 0) from the results for a division and year
 # Returns these as a list (there may be more than one)
 def select(results, division, year):
-  return results[(results.division==division) & (results.year==year) & (results.Rank==0)]['solver'].tolist()
+    return results[(results.year == year)
+                   & (results.division == division)].groupby(
+                        ['year', 'division']).first()['solver'].tolist()
 
 # The same as select but turns the winners into a pretty string
 def select_str(results, division, year):
   winners = select(results,division,year)
-  winners_strs = sorted(map(lambda s: solver_str(s) if competitive(year,s) else "["+solver_str(s)+"]", winners))
+  winners_strs = sorted(map(lambda s: solver_str(s) if is_competitive(year,s) else "["+solver_str(s)+"]", winners))
   return " ".join(winners_strs)
+
+
+def check_merge_solver_names(x):
+    return x[0] if x[0] == x[1] else '{} {}'.format(x[1], x[0])
 
 # Checks the winners recorded in new_results against an existing winners.csv file
 # This was used to validate this script against previous results computed by
 # other scripts
-def check_winners(new_results,year):
-  #First load the previous files from a winners file, which should be a CSV 
-  old_winners = pandas.read_csv("winners.csv")
-  divisions = new_results.division.unique()
-  for div in divisions:
-    old = old_winners[old_winners.Division==div][year].max()
-    if str(old)!="nan" and str(old)!="-":
-      old_list = old.split()
-      new = [ solver_str(s) for s in select(new_results,div,year)]
-      #if no old stuff appears in new stuff then Diff
-      if (all(map(lambda o: o not in new,old_list))):
-        print ("Diff in "+div+" old "+str(old)+" new "+ str(new))
+def check_winners(new_results, year):
+    # First load the previous files from a winners file, which should be a CSV 
+    winners_old = pandas.read_csv("winners.csv")
+
+    old = winners_old[['Division', year]].set_index(['Division'])
+    old.columns = ['solver_old']
+
+    # Get all division winners from year 'year'.
+    new = new_results.xs(year).groupby(level=0).first()[['solver']]
+    new['solver'] = new.solver.map(solver_str)
+    new['solver_comp'] = new_results[new_results.competitive == True].xs(year).groupby(level=0).first()[['solver']]
+    new['solver_comp'] = new.solver_comp.map(solver_str)
+    new['solver'] = new[['solver', 'solver_comp']].apply(
+                                    check_merge_solver_names, axis=1)
+
+    merged = new.merge(old, left_index=True, right_index=True, how='outer')
+    diff = merged[(merged.solver.notna() | merged.solver_old.notna())
+                  & (merged.solver != merged.solver_old)]
+
+    if len(diff) > 0:
+        print('Found difference in old and new results {}:'.format(year))
+        print(diff[['solver_old', 'solver']])
 
 # Turns a set of results into a LaTeX table that lists winners/best solvers
 # per division as listed in the report for 2015-2018.
@@ -233,16 +257,45 @@ def to_latex_for_report(results):
 ############################
 # Scoring functions
 
-# used to sort rows in results tables, follows standard ordering used throughout scoring 
-# where we prefer fewer errors, then more corrects, then lower wall-time, then lower cpu time
-def row_key(row):
-  [year,division,solver,nsolved,error,correct,wall_total,cpu_total] = row
-  return (error,-correct,wall_total,cpu_total)
+def group_and_rank_solver(data):
 
-# Checks if a row is competitive
-def competitive_row(row):
-  [year,division,solver,nsolved,error,correct,wall_total,cpu_total,rank] = row
-  return competitive(year,solver) 
+    num_benchmarks = len(data.benchmark.unique())
+
+    # Group results
+    data_grouped = data.groupby(['year', 'division', 'solver']).agg({
+        'correct': sum,
+        'error': sum,
+        'score_correct': sum,
+        'score_error': sum,
+        'score_cpu_time': sum,
+        'score_wallclock_time': sum
+        })
+
+    # Compute percentage of solved benchmarks
+    data_grouped['psolved'] = 100.0 * (data_grouped.correct / num_benchmarks)
+
+    # MultiIndex:
+    # index[0] ... year
+    # index[1] ... division
+    # index[2] ... solver
+    data_grouped['competitive'] = \
+        data_grouped.index.map(lambda x: is_competitive(x[0], x[2]))
+
+    # Rank solvers
+    data_sorted = data_grouped.sort_values(
+                    by=['score_error', 'score_correct', 'score_wallclock_time',
+                        'score_cpu_time'],
+                    ascending=[True, False, True, True])
+    data_sorted = data_sorted.sort_index(level=[0,1], sort_remaining=False)
+
+    # Convert solver index to column
+    data_sorted.reset_index(level=2, inplace=True)
+
+    ## Rank solvers
+    #data_sorted['rank'] = [i + 1 for i in range(len(data_sorted))]
+
+    return data_sorted
+
 
 # Main scoring function that allows it to capture different scoring schemes.
 # division       : the division to compute the scores for
@@ -265,85 +318,76 @@ def score(division,
     global g_args
     if g_args.log: log("Score for {} in {}".format(year, division))
 
-    benchmark_num = len(data.benchmark.unique())
+    num_benchmarks = len(data.benchmark.unique())
     if g_args.log: log("Computing scores for {}".format(division))
-    if g_args.log: log("... with {} benchmarks".format(benchmark_num))
+    if g_args.log: log("... with {} benchmarks".format(num_benchmarks))
 
     family_scores = get_family_scores(data) if use_families else {}
 
-    rows = []
 
-    all_wrong = data[(data.result != "starexec-unknown")
-                     & (data.result != data.expected)
-                     & (data.expected != "starexec-unknown")]
+    # Create new dataframe with relevant columns and populate new columns
+    data_new = data[['division', 'benchmark', 'family', 'solver', 'cpu_time',
+                     'wallclock_time', 'result', 'expected']].copy()
 
-    data = data[(data.result.isin(set(verdicts)))]
+    data_new['year'] = year
+    data_new['score_error'] = 0
+    data_new['score_correct'] = 0
+    data_new['score_cpu_time'] = 0
+    data_new['score_wallclock_time'] = 0
+    data_new['correct'] = 0     # Number of correctly solved benchmarks
+    data_new['error'] = 0       # Number of wrong results
+    data_new['competitive'] = False
 
-    if g_args.sequential:
-        data = data[(data.cpu_time <= wclock_limit)]
+    # Get all job pairs on which solvers were wrong
+    data_new.loc[(data_new.result != 'starexec-unknown')
+                 & (data_new.result != data_new.expected)
+                 & (data_new.expected != 'starexec-unknown'), 'error'] = 1
+
+    # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
+    # 'family_scores' dictionary (use_families == False).
+    data_new['alpha_prime_b'] = \
+        data_new.family.map(lambda x: family_scores.get(x, 1))
+
+    if use_families:
+        data_new['score_modifier'] = data_new.alpha_prime_b * num_benchmarks
     else:
-        data = data[(data.wallclock_time <= wclock_limit)]
+        data_new['score_modifier'] = 1
+
+    data_solved = data_new[(data_new.result.isin(set(verdicts)))]
+    if g_args.sequential:
+        data_solved = data_solved[(data_solved.cpu_time <= wclock_limit)]
+    else:
+        data_solved = data_solved[(data_solved.wallclock_time <= wclock_limit)]
 
     if skip_unknowns:
-        data = data[(data.result == data.expected)]
+        data_solved = data_solved[(data_solved.result == data_solved.expected)]
     else:
-        data = data[(data.expected == "starexec-unknown")
-                    | (data.result == data.expected)]
+        data_solved = data_solved[(data_solved.expected == "starexec-unknown")
+                                  | (data_solved.result == data_solved.expected)]
 
-    for solver, sdata in data.groupby('solver'):
-        if g_args.log: log("Computing scores for "+solver)
-        nsolved = len(sdata)
-        error = 0.0
-        correct = 0.0
-        wall_total = 0.0
-        cpu_total = 0.0
-        wrong_solver = all_wrong[all_wrong.solver == solver]
-        for family, sfdata in sdata.groupby('family'):
-            modifier = family_scores[family] if use_families else 1
+    data_new.loc[data_solved.index, 'correct'] = 1
 
-            sf_wrong = len(wrong_solver[wrong_solver.family == family])
-            sf_solved = len(sfdata)
+    # Compute scores
+    data_new.score_correct = data_new.correct * data_new.score_modifier
+    data_new.score_error = data_new.error * data_new.score_modifier
+    data_new.score_cpu_time = data_new.cpu_time * data_new.alpha_prime_b
+    data_new.score_wallclock_time = \
+        data_new.wallclock_time * data_new.alpha_prime_b
 
-            this_mod = benchmark_num * modifier if use_families else 1
+    # Compute time scores only for correctly solved
+    #data_new.loc[data_solved.index, 'score_cpu_time'] = \
+    #    score_cpu_timedata_new.cpu_time * data_new.alpha_prime_b
+    #data_new.loc[data_solved.index, 'score_wallclock_time'] = \
+    #    data_new.wallclock_time * data_new.alpha_prime_b
 
-            error += sf_wrong * this_mod
-            correct += sf_solved * this_mod
-            wall_total += sfdata.wallclock_time.sum() * modifier
-            cpu_total += sfdata.cpu_time.sum() * modifier
-            #if g_args.log: log("... {}, {}, {}, {} with {}".format(\
-            #       error, correct, wall_total, cpu_total, modifier))
+    data_new.competitive = data_new.solver.map(lambda x: is_competitive(year, x))
 
-        psolved = 100.0 * (float(nsolved) / benchmark_num)
-        assert psolved > 0
-        row = [year, division, solver, psolved, error, correct,
-               wall_total, cpu_total]
-        rows.append(row)
-        if g_args.log: log("Row: {}".format(row))
+    # Delete temporary columns
+    return data_new.drop(columns=['alpha_prime_b', 'score_modifier'])
 
-    # After computing a row per solver we then sort and rank them
-    # Note that competitive solvers cannot get awarded a rank and merely
-    # get the current rank without increasing it
-    rows.sort(key=row_key)
-    rank = 0
-    for row in rows:
-        row.append(rank)
-        competitive = competitive_row(row)
-        row.append(competitive)
-        if competitive:
-            rank+=1
-    return rows
 
 ############################
 # Processing
-
-# Compute the virtual best solver from some data
-# E.g. for each benchmark only keep the solver that solved it fastest
-def virtual_best_solver_filter(data,year):
-  data['competitive'] = data.apply(lambda x: competitive(year,x['solver']),axis=1)
-  non_com = data[data['competitive']==True]
-  sorted = non_com.sort_values(by='wallclock_time')
-  result = sorted.groupby('benchmark_id', as_index=False).first()
-  return result
 
 
 # Process a CSV file with results of one track.
@@ -381,33 +425,36 @@ def process_csv(csv,
             verdicts))
 
     # Load CSV file
+    start = time.time() if g_args.show_timestamps else None
     data = pandas.read_csv(csv)
+    if g_args.show_timestamps:
+        log('time read_csv: {}'.format(time.time() - start))
 
     # Remove spaces from columns for ease (other functions rely on this)
     cols = data.columns
     cols = cols.map(lambda x: x.replace(' ', '_'))
     data.columns = cols
 
+    start = time.time() if g_args.show_timestamps else None
     data = add_division_family_info(data, g_args.family)
+    if g_args.show_timestamps:
+        log('time add_division_family: {}'.format(time.time() - start))
 
     # -: consider all divisions
     # else list with divisions to consider
     if g_args.divisions != "-":
         divisions = g_args.divisions
-        data = data[(data.division.isin(divisions))]
+        data = data[(data.division.isin(set(divisions)))]
 
-    #TODO: add options to select global ranking outputs
-    #data = virtual_best_solver_filter(data)
-
-    start = time.time() if g_args.show_timestamps else None
     if disagreements:
-        data = removeDisagreements(data)
-    if g_args.show_timestamps:
-        log('time disagreements: {}'.format(time.time() - start))
+        start = time.time() if g_args.show_timestamps else None
+        data = remove_disagreements(data)
+        if g_args.show_timestamps:
+            log('time disagreements: {}'.format(time.time() - start))
 
     start = time.time() if g_args.show_timestamps else None
-    # Now for each division compute the score
-    rows = []
+    # Compute the benchmark scores for each division
+    dfs = []
     for division, division_data in data.groupby('division'):
         if g_args.log: log("Compute for {}".format(division))
         res = score(division,
@@ -417,14 +464,11 @@ def process_csv(csv,
                     year,
                     use_families,
                     skip_unknowns)
-        rows+=res
+        dfs.append(res)
     if g_args.show_timestamps:
         log('time score: {}'.format(time.time() - start))
 
-    results = pandas.DataFrame(rows,columns= [
-        'year', 'division', 'solver', 'psolved', 'error', 'correct', 'wall',
-        'cpu', 'Rank','competitive'])
-    return results
+    return pandas.concat(dfs, ignore_index=True)
 
 
 # This function runs with specific values for certain years but keeps some
@@ -468,7 +512,9 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
                 verdicts,
                 not bytotal,
                 skip_unknowns))
-    return pandas.concat(dataframes, ignore_index=True)
+
+    df = pandas.concat(dataframes, ignore_index=True)
+    return group_and_rank_solver(df)
 
 
 def gen_results_for_report():
@@ -477,8 +523,7 @@ def gen_results_for_report():
 
     print("PARALLEL")
     start = time.time() if g_args.show_timestamps else None
-    normal = gen_results_for_report_aux(
-            g_all_solved, 2400, False, False)
+    normal = gen_results_for_report_aux(g_all_solved, 2400, False, False)
     check_all_winners(normal)
     to_latex_for_report(normal)
     #vbs_winners(normal)
@@ -488,8 +533,7 @@ def gen_results_for_report():
 
     print("UNSAT")
     start = time.time() if g_args.show_timestamps else None
-    unsat = gen_results_for_report_aux(
-            g_unsat_solved, 2400, False, False)
+    unsat = gen_results_for_report_aux(g_unsat_solved, 2400, False, False)
     #biggest_lead_ranking(unsat,"b_unsat")
     unsat_new = project(winners(normal), winners(unsat))
     to_latex_for_report(unsat_new)
@@ -499,8 +543,7 @@ def gen_results_for_report():
 
     print("SAT")
     start = time.time() if g_args.show_timestamps else None
-    sat = gen_results_for_report_aux(
-            g_sat_solved, 2400, False, False)
+    sat = gen_results_for_report_aux(g_sat_solved, 2400, False, False)
     #biggest_lead_ranking(sat,"c_sat")
     sat_new = project(winners(normal),winners(sat))
     to_latex_for_report(sat_new)
@@ -510,8 +553,7 @@ def gen_results_for_report():
 
     print("24s")
     start = time.time() if g_args.show_timestamps else None
-    twenty_four = gen_results_for_report_aux(
-            g_all_solved, 24, False, False)
+    twenty_four = gen_results_for_report_aux(g_all_solved, 24, False, False)
     #biggest_lead_ranking(twenty_four,"d_24")
     twenty_four_new = project(winners(normal),winners(twenty_four))
     to_latex_for_report(twenty_four_new)
@@ -535,16 +577,12 @@ def gen_results_for_report():
 # Checks winners for a fixed number of years
 # TODO: make more generic
 def check_all_winners(results):
+    global g_args
 
-  print("Check differences")
-  print("2015")
-  check_winners(results,"2015") 
-  print("2016")
-  check_winners(results,"2016") 
-  print("2017")
-  check_winners(results,"2017") 
-  print("2018")
-  check_winners(results,"2018") 
+    print("Check differences")
+    for year in g_args.year:
+        print(year)
+        check_winners(results, year)
 
 def winners(data):
   top = data.copy()
@@ -568,28 +606,124 @@ def project(normal,other):
     other_different = different.loc['other']
     return other_different
 
-
-# Computes the new global ranking based on the distance between
-# the winner of a division and the second solver in a division
-def biggest_lead_ranking(data,thing):
-	for division,div_data in data.groupby('division'):
-	 div_data = div_data[div_data['competitive']==True]
-	 if len(div_data)>2:
-	  #try:
-	    first = div_data[(div_data.Rank==0) & (div_data['competitive']==True)].max()
-	    second = div_data[(div_data.Rank==1) & (div_data['competitive']==True)].max()
-	    pdif = ((1+first.correct) / (1+second.correct)) 
-	    print(thing+" "+str(pdif)+" in " +division+" for "+solver_str(first.solver)+" and "+solver_str(second.solver))
-	  #except:
-  	    #print("zz Error in "+division+" with "+thing)
+# Do not consider solver variants for determining if a division is
+# competitive.
+# Uses solver_str(solver) to get the base version of solver.
+def is_division_competitive(solvers):
+    return len(set([solver_str(x) for x in solvers])) > 1
 
 
-# TODO: Slightly different from that in rules document, update 
-def vbs_winners(data):
-  print(data)
-  winners = data.sort_values('psolved').groupby('solver').first()
-  winners = winners.sort_values('psolved').groupby('year').tail(3)
-  print(winners)
+# Biggest Lead Ranking.
+#
+# Computes the new global ranking based on the distance between the winner of a
+# division and the second solver in a division as defined in secion 7.3.1 of
+# the SMT-COMP'19 rules.
+#
+# Note: The function prints a list of sorted tuples starting with the first
+#       place (winner).
+#
+def biggest_lead_ranking(data):
+    start = time.time() if g_args.show_timestamps else None
+
+    data = group_and_rank_solver(data)
+    data = data[data.competitive == True]
+    scores = []
+    # TODO: use for (year, division) groupby(level ...)
+    for year, ydata in data.groupby('year'):
+        for division, div_data in ydata.groupby('division'):
+
+            # Skip non-competitive divisions
+            if not is_division_competitive(div_data.solver.unique()):
+                continue
+
+            assert len(div_data) >= 2
+            first = div_data.iloc[0]
+            second = div_data.iloc[1]
+            score = ((1 + first.correct) / (1 + second.correct))
+            scores.append(
+                (score, first.solver, second.solver, division))
+
+    scores_sorted = sorted(scores, reverse=True)
+    print('Biggest Lead Ranking (Score, 1st Solver, 2nd Solver, Division)')
+    for s in scores_sorted:
+        print(s)
+
+    if g_args.show_timestamps:
+        log('time biggest_lead_ranking: {}'.format(time.time() - start))
+
+
+# Largest Contribution Ranking.
+#
+# Compute the correctly solved score for the virtual best solver for a given
+# division if the results of 'solver' are excluded. This function corresponds
+# to function vbss(D,S) as defined in section 7.3.2 of the SMT-COMP'19 rules.
+#
+def vbss(division_data, solver):
+
+    # For VBS we only consider correctly solved benchmarks
+    data = division_data[(division_data.solver != solver)
+                         & (division_data.correct > 0)
+                         & (division_data.error == 0)]
+
+    sort_columns = ['benchmark', 'score_correct', 'wallclock_time']
+    sort_asc = [True, False, True]
+
+    # Get job pair with the highest correctly solved score, which was solved
+    # the fastest.
+    data_vbs = data.sort_values(
+                by=sort_columns, ascending=sort_asc).groupby(
+                        'benchmark', as_index=False).first()
+    assert len(data_vbs) == len(data.benchmark.unique())
+    return data_vbs.score_correct.sum()
+
+
+# Largest Contribution Ranking.
+#
+# Compute the largest contribution to the virtual best solver as defined in
+# section 7.3.2 of the SMT-COMP'19 rules.
+#
+# Note: The function prints the list of division winners sorted by the computed
+#       largest contribution score.
+#
+def largest_contribution_ranking(data):
+    start = time.time() if g_args.show_timestamps else None
+
+    data = data[(data.competitive == True)]
+
+    scores_top = []
+    for division, div_data in data.groupby('division'):
+        solvers = div_data.solver.unique()
+
+        # Skip non-competitive divisions
+        if not is_division_competitive(solvers):
+            continue
+
+        vbs_score_correct = vbss(div_data, '')
+
+        # Compute contribution to virtual best solver for each solver in the
+        # division as defined in the SMT-COMP'19 rules.
+        #
+        # score = 1 - vbss(D, S-s) / vbss(D, S)
+        #
+        # D ... division
+        # S ... set of all solvers in D
+        # s ... current solver
+        #
+        scores_diff = []
+        for solver in solvers:
+            vbs_solver_score_correct = vbss(div_data, solver)
+            score = 1 - (vbs_solver_score_correct / vbs_score_correct)
+            scores_diff.append((score, len(solvers), solver, division))
+
+        scores_diff_sorted = sorted(scores_diff, reverse=True)
+        scores_top.append(scores_diff_sorted[0])
+
+    print('Largest Contribution Ranking (Score, Division Size, Solver, Division)')
+    for s in sorted(scores_top, reverse=True):
+        print(s)
+
+    if g_args.show_timestamps:
+        log('time largest_contribution_ranking: {}'.format(time.time() - start))
 
 
 def parse_args():
@@ -680,6 +814,7 @@ def main():
     global g_args
     parse_args()
     read_competitive()
+    read_solver_names()
 
 
     if g_args.report:
@@ -694,18 +829,17 @@ def main():
             csv, time_limit = g_args.csv[year]
             if not os.path.exists(csv):
                 die("Given csv does not exist: {}".format(csv))
-            data.append(
-                process_csv(csv,
-                            False,
-                            year,
-                            time_limit,
-                            g_all_solved,
-                            g_args.use_families,
-                            g_args.skip_unknowns))
+            df = process_csv(csv,
+                             True,
+                             year,
+                             time_limit,
+                             g_all_solved,
+                             g_args.use_families,
+                             g_args.skip_unknowns)
+            data.append(df)
+            biggest_lead_ranking(df)
+            largest_contribution_ranking(df)
         result = pandas.concat(data, ignore_index = True)
-        pandas.set_option('display.max_columns', None)
-        pandas.set_option('display.max_rows', None)
-        print(result)
 
 
 if __name__ == "__main__":
