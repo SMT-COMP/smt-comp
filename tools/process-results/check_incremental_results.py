@@ -11,6 +11,7 @@ from collections import Counter
 import csv
 import os
 import sys
+import re
 
 # Print error message and exit.
 def die(msg):
@@ -29,12 +30,24 @@ def main():
     if not os.path.isdir(args.outputs):
         die("directory does not exist: {}".format(args.outputs))
 
+    # Regex for competition space where the job was run, expects this space's
+    # name to start with 'Competition'
+    space_pattern = re.compile('.*\/(Competition.*?)\/.*')
+
     output_files = dict()
     for (path, dirs, files) in os.walk(args.outputs):
         if files:
+            space = space_pattern.match(path).group(1)
             path_split = path.split('/')
+            # Remove path up to division to unify paths over different jobs.
+            # This is to support running jobs for one track split into
+            # subjobs in multiple spaces.
+            del path_split[0:path_split.index(space)+1]
+            # [-2]: solver directory
+            # [-1]: benchmark file name
+            # p   : path to directory with benchmarks
             p = "/".join(path_split[:-2])
-            solver = path_split[-2]
+            solver = "{} - {}".format(space, path_split[-2])
             benchmark = path_split[-1]
             if p not in output_files:
                 output_files[p] = dict()
