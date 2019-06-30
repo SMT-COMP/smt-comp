@@ -302,7 +302,7 @@ if __name__ == '__main__':
     if not os.path.exists(args.canon_json):
         die("file not found: {}".format(args.canon_json))
     if not os.path.exists(args.noncompeting_sug_path):
-        die("path not found: {}".format(args.noncompeting_sug_path))
+        os.mkdir(args.noncompeting_sug_path)
 
     read_csv(args.solver_divisions)
     canonical = read_canon(args.canon_json)
