@@ -139,7 +139,7 @@ def remove_disagreements(data):
 # Returns true if the solver is competitive in the given year.
 # This function depends on an external file 'noncompetitive.csv' which is
 # provided and maintained for the official competition data
-def is_competitive(year, solver):
+def is_competitive_solver(year, solver):
     global g_non_competitive
     solvers = g_non_competitive.get(year)
     return not solvers or solver not in solvers
@@ -201,38 +201,49 @@ def get_family_scores(data):
 
 # Selects the winners (e.g. rank 0) from the results for a division and year
 # Returns these as a list (there may be more than one)
-def select(results, division, year):
-    return results[(results.year == year)
-                   & (results.division == division)].groupby(
-                        ['year', 'division']).first()['solver'].tolist()
+# TODO: needs to be refactored with new dataframe layout
+#def select(results, division, year):
+#    return results[(results.year == year)
+#                   & (results.division == division)].groupby(
+#                        ['year', 'division']).first()['solver'].tolist()
 
 # The same as select but turns the winners into a pretty string
-def select_str(results, division, year):
-  winners = select(results,division,year)
-  winners_strs = sorted(map(lambda s: solver_str(s) if is_competitive(year,s) else "["+solver_str(s)+"]", winners))
-  return " ".join(winners_strs)
+# TODO: needs to be refactored with new dataframe layout
+#def select_str(results, division, year):
+#  winners = select_winners(results[(results.year == year)
+#                                   & (results.division == division)])
+#  winners_strs = sorted(map(lambda s: solver_str(s) if is_competitive_solver(year,s) else "["+solver_str(s)+"]", winners))
+#  return " ".join(winners_strs)
 
-
-def check_merge_solver_names(x):
-    return x[0] if x[0] == x[1] else '{} {}'.format(x[1], x[0])
 
 # Checks the winners recorded in new_results against an existing winners.csv file
 # This was used to validate this script against previous results computed by
 # other scripts
 def check_winners(new_results, year):
-    # First load the previous files from a winners file, which should be a CSV 
+    global g_args
+    assert year in ('2015', '2016', '2017', '2018')
+
+    # First load the previous files from a winners file, which should be a CSV
     winners_old = pandas.read_csv("winners.csv")
+
+    # Select sequential winners only
+    if g_args.sequential:
+        for year in g_args.year:
+            winners_old[year] = winners_old[year].str.split('/').str[0]
+    # Select parallel winners only
+    else:
+        for year in g_args.year:
+            winners_old[year] = winners_old[year].str.split('/').str[-1]
 
     old = winners_old[['Division', year]].set_index(['Division'])
     old.columns = ['solver_old']
 
     # Get all division winners from year 'year'.
-    new = new_results.xs(year).groupby(level=0).first()[['solver']]
-    new['solver'] = new.solver.map(solver_str)
-    new['solver_comp'] = new_results[new_results.competitive == True].xs(year).groupby(level=0).first()[['solver']]
-    new['solver_comp'] = new.solver_comp.map(solver_str)
-    new['solver'] = new[['solver', 'solver_comp']].apply(
-                                    check_merge_solver_names, axis=1)
+    new = new_results.xs(year)
+    new = new[new['rank'] == 1][['solver']]
+    new['solver'] = new['solver'].map(solver_str)
+    new = new.groupby(level=0).agg({'solver': lambda x: ' '.join(
+                sorted(x, key=lambda x: (is_competitive_solver(x, year), x)))})
 
     merged = new.merge(old, left_index=True, right_index=True, how='outer')
     diff = merged[(merged.solver.notna() | merged.solver_old.notna())
@@ -244,33 +255,33 @@ def check_winners(new_results, year):
 
 # Turns a set of results into a LaTeX table that lists winners/best solvers
 # per division as listed in the report for 2015-2018.
-def to_latex_for_report(results):
-     print("\begin{tabular}{"\
-           "r@{\hskip 1em}>{\columncolor{white}[.25em][.5em]}"\
-           "c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}"\
-           "c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}"\
-           "c@{\hskip 1em}>{\columncolor{white}[.5em][0.5em]}c}")
-     print("\\toprule")
-     print("Division & 2015 & 2016 & 2017 & 2018 \\\\")
-     print("\\hline\\hline")
-
-     divisions = results.division.unique()
-     for division in divisions:
-       print("\\wc {} & {} & {} & {} & {} \\\\".format(
-           division,
-           select_str(results, division, "2015"),
-           select_str(results, division, "2016"),
-           select_str(results, division, "2017"),
-           select_str(results, division, "2018")))
-     print("\\bottomrule")
-     print("\\end{tabular}")
+# TODO: needs to be refactored with new dataframe layout
+#def to_latex_for_report(results):
+#     print("\begin{tabular}{"\
+#           "r@{\hskip 1em}>{\columncolor{white}[.25em][.5em]}"\
+#           "c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}"\
+#           "c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}"\
+#           "c@{\hskip 1em}>{\columncolor{white}[.5em][0.5em]}c}")
+#     print("\\toprule")
+#     print("Division & 2015 & 2016 & 2017 & 2018 \\\\")
+#     print("\\hline\\hline")
+#
+#     divisions = results.division.unique()
+#     for division in divisions:
+#       print("\\wc {} & {} & {} & {} & {} \\\\".format(
+#           division,
+#           select_str(results, division, "2015"),
+#           select_str(results, division, "2016"),
+#           select_str(results, division, "2017"),
+#           select_str(results, division, "2018")))
+#     print("\\bottomrule")
+#     print("\\end{tabular}")
 
 ############################
 # Scoring functions
 
 def group_and_rank_solver(data):
-
-    num_benchmarks = len(data.benchmark.unique())
+    global g_args
 
     # Group results
     data_grouped = data.groupby(['year', 'division', 'solver']).agg({
@@ -279,31 +290,46 @@ def group_and_rank_solver(data):
         'score_correct': sum,
         'score_error': sum,
         'score_cpu_time': sum,
-        'score_wallclock_time': sum
+        'score_wallclock_time': sum,
+        'competitive': 'first',
+        'division_size': 'first',
         })
 
+    # Convert solver index to column
+    data_grouped.reset_index(level=2, inplace=True)
+
     # Compute percentage of solved benchmarks
-    data_grouped['psolved'] = 100.0 * (data_grouped.correct / num_benchmarks)
+    data_grouped['psolved'] = \
+        100.0 * (data_grouped.correct / data_grouped.division_size)
 
-    # MultiIndex:
-    # index[0] ... year
-    # index[1] ... division
-    # index[2] ... solver
-    data_grouped['competitive'] = \
-        data_grouped.index.map(lambda x: is_competitive(x[0], x[2]))
+    # Sort solvers by sort_columns and sort_asc within a division
+    sort_columns = ['score_error', 'score_correct']
+    sort_asc = [True, False, True, True]
 
-    # Rank solvers
-    data_sorted = data_grouped.sort_values(
-                    by=['score_error', 'score_correct', 'score_wallclock_time',
-                        'score_cpu_time'],
-                    ascending=[True, False, True, True])
+    if g_args.sequential:
+        sort_columns.extend(['score_cpu_time', 'score_wallclock_time'])
+    else:
+        sort_columns.extend(['score_wallclock_time', 'score_cpu_time'])
+
+    data_sorted = data_grouped.sort_values(by=sort_columns, ascending=sort_asc)
     data_sorted = data_sorted.sort_index(level=[0,1], sort_remaining=False)
 
-    # Convert solver index to column
-    data_sorted.reset_index(level=2, inplace=True)
-
-    ## Rank solvers
-    #data_sorted['rank'] = [i + 1 for i in range(len(data_sorted))]
+    # Rank solvers in each division starting from rank 1. Note that competitive
+    # solvers cannot get awarded a rank and merely get the current rank without
+    # increasing it.
+    # Note: If there are consecutive non-competitive solvers, their ranking
+    #       won't be correct (since the rank won't be incremented).
+    ranks = []
+    seen = set()
+    rank = 1
+    for year_division, row in data_sorted.iterrows():
+        if year_division not in seen:
+            rank = 1
+            seen.add(year_division)
+        ranks.append(rank)
+        if row.competitive:
+            rank += 1
+    data_sorted['rank'] = ranks
 
     return data_sorted
 
@@ -348,6 +374,7 @@ def score(division,
     data_new['correct'] = 0     # Number of correctly solved benchmarks
     data_new['error'] = 0       # Number of wrong results
     data_new['competitive'] = False
+    data_new['division_size'] = num_benchmarks
 
     # Get all job pairs on which solvers were wrong
     data_new.loc[(data_new.result != 'starexec-unknown')
@@ -360,7 +387,8 @@ def score(division,
         data_new.family.map(lambda x: family_scores.get(x, 1))
 
     if use_families:
-        data_new['score_modifier'] = data_new.alpha_prime_b * num_benchmarks
+        data_new['score_modifier'] = \
+            data_new.alpha_prime_b * data_new.division_size
     else:
         data_new['score_modifier'] = 1
 
@@ -386,12 +414,14 @@ def score(division,
         data_new.wallclock_time * data_new.alpha_prime_b
 
     # Compute time scores only for correctly solved
+    # Note: Might be need in the future.
     #data_new.loc[data_solved.index, 'score_cpu_time'] = \
     #    score_cpu_timedata_new.cpu_time * data_new.alpha_prime_b
     #data_new.loc[data_solved.index, 'score_wallclock_time'] = \
     #    data_new.wallclock_time * data_new.alpha_prime_b
 
-    data_new.competitive = data_new.solver.map(lambda x: is_competitive(year, x))
+    data_new.competitive = data_new.solver.map(
+                                lambda x: is_competitive_solver(year, x))
 
     # Delete temporary columns
     return data_new.drop(columns=['alpha_prime_b', 'score_modifier'])
@@ -403,7 +433,6 @@ def score(division,
 
 # Process a CSV file with results of one track.
 # csv          : the input csv
-# disagreements: set to True to remove disagreements
 # year         : the string identifying the year of the results
 # verdicts     : a pandas.Series created with
 #                - ['sat', 'unsat'] to consider all solved instances
@@ -412,7 +441,6 @@ def score(division,
 # use_families : use weighted scoring scheme
 # skip_unknowns: skip benchmarks with status unknown
 def process_csv(csv,
-                disagreements,
                 year,
                 time_limit,
                 verdicts,
@@ -421,13 +449,12 @@ def process_csv(csv,
     global g_args
     if g_args.log:
         log("Process {} with family: '{}', divisions: '{}', "\
-            "disagreements: '{}', year: '{}', time_limit: '{}', "\
+            "year: '{}', time_limit: '{}', "\
             "use_families: '{}', skip_unknowns: '{}', sequential: '{}', "\
             "verdicts: '{}'".format(
             csv,
             g_args.family,
             g_args.divisions,
-            disagreements,
             year,
             time_limit,
             g_args.use_families,
@@ -457,11 +484,10 @@ def process_csv(csv,
         divisions = g_args.divisions
         data = data[(data.division.isin(set(divisions)))]
 
-    if disagreements:
-        start = time.time() if g_args.show_timestamps else None
-        data = remove_disagreements(data)
-        if g_args.show_timestamps:
-            log('time disagreements: {}'.format(time.time() - start))
+    start = time.time() if g_args.show_timestamps else None
+    data = remove_disagreements(data)
+    if g_args.show_timestamps:
+        log('time disagreements: {}'.format(time.time() - start))
 
     start = time.time() if g_args.show_timestamps else None
     # Compute the benchmark scores for each division
@@ -490,7 +516,6 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
     dataframes.append(
             process_csv(
                 g_args.csv['2015'][0],
-                False,
                 '2015',
                 min(g_args.csv['2015'][1], time_limit),
                 verdicts,
@@ -499,7 +524,6 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
     dataframes.append(
             process_csv(
                 g_args.csv['2016'][0],
-                False,
                 '2016',
                 min(g_args.csv['2016'][1], time_limit),
                 verdicts,
@@ -508,7 +532,6 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
     dataframes.append(
             process_csv(
                 g_args.csv['2017'][0],
-                True,
                 '2017',
                 min(g_args.csv['2017'][1], time_limit),
                 verdicts,
@@ -517,7 +540,6 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
     dataframes.append(
             process_csv(
                 g_args.csv['2018'][0],
-                True,
                 '2018',
                 min(g_args.csv['2018'][1], time_limit),
                 verdicts,
@@ -536,7 +558,8 @@ def gen_results_for_report():
     start = time.time() if g_args.show_timestamps else None
     normal = gen_results_for_report_aux(g_all_solved, 2400, False, False)
     check_all_winners(normal)
-    to_latex_for_report(normal)
+    grouped_normal = group_and_rank_solver(normal)
+    #to_latex_for_report(normal)
     #vbs_winners(normal)
     #biggest_lead_ranking(normal,"a_normal")
     if g_args.show_timestamps:
@@ -546,29 +569,35 @@ def gen_results_for_report():
     start = time.time() if g_args.show_timestamps else None
     unsat = gen_results_for_report_aux(g_unsat_solved, 2400, False, False)
     #biggest_lead_ranking(unsat,"b_unsat")
-    unsat_new = project(winners(normal), winners(unsat))
-    to_latex_for_report(unsat_new)
-    #vbs_winners(unsat)
+    grouped_unsat = group_and_rank_solver(unsat)
+    unsat_new = project(select_winners(grouped_normal),
+                        select_winners(grouped_unsat))
+    #to_latex_for_report(unsat_new)
+    #vbs_select_winners(unsat)
     if g_args.show_timestamps:
         log('time unsat: {}'.format(time.time() - start))
 
     print("SAT")
     start = time.time() if g_args.show_timestamps else None
     sat = gen_results_for_report_aux(g_sat_solved, 2400, False, False)
+    grouped_sat = group_and_rank_solver(sat)
     #biggest_lead_ranking(sat,"c_sat")
-    sat_new = project(winners(normal),winners(sat))
-    to_latex_for_report(sat_new)
-    #vbs_winners(sat)
+    sat_new = project(select_winners(grouped_normal),
+                      select_winners(grouped_sat))
+    #to_latex_for_report(sat_new)
+    #vbs_select_winners(sat)
     if g_args.show_timestamps:
         log('time sat: {}'.format(time.time() - start))
 
     print("24s")
     start = time.time() if g_args.show_timestamps else None
     twenty_four = gen_results_for_report_aux(g_all_solved, 24, False, False)
+    grouped_twenty_four = group_and_rank_solver(twenty_four)
     #biggest_lead_ranking(twenty_four,"d_24")
-    twenty_four_new = project(winners(normal),winners(twenty_four))
-    to_latex_for_report(twenty_four_new)
-    #vbs_winners(twenty_four)
+    twenty_four_new = project(select_winners(grouped_normal),
+                              select_winners(grouped_twenty_four))
+    #to_latex_for_report(twenty_four_new)
+    #vbs_select_winners(twenty_four)
     if g_args.show_timestamps:
         log('time 24s: {}'.format(time.time() - start))
 
@@ -576,17 +605,16 @@ def gen_results_for_report():
     #by_total_scored  = gen_results_for_report_aux(
     #        g_all_solved, 2400, True, False)
     #biggest_lead_ranking(by_total_scored,"e_total")
-    #by_total_scored_new = project(winners(normal),winners(by_total_scored))
+    #by_total_scored_new = project(select_winners(normal),select_winners(by_total_scored))
     #to_latex_for_report(by_total_scored_new)
 
     #print("Without unknowns")
     #without_unknowns  = gen_results_for_report_aux(
     #         g_all_solved, 2400, False, True)
-    #without_unknowns_new = project(winners(normal),winners(without_unknowns))
+    #without_unknowns_new = project(select_winners(normal),select_winners(without_unknowns))
     #to_latex_for_report(without_unknowns_new)
 
 # Checks winners for a fixed number of years
-# TODO: make more generic
 def check_all_winners(results):
     global g_args
 
@@ -595,10 +623,11 @@ def check_all_winners(results):
         print(year)
         check_winners(results, year)
 
-def winners(data):
+# Select winners from given years and divisions.
+def select_winners(data):
   top = data.copy()
   #res =  top[(data.Rank==0) & (data.competitive==True)]
-  res =  top[(data.Rank==0)]
+  res =  top[(data['rank'] == 1)]
   return res
 
 # Finds the difference between two sets of results, allows us to compare two scoring mechanisms
@@ -611,7 +640,7 @@ def project(normal,other):
             [normal,other],
             keys=['normal','other']).drop_duplicates(
                     keep=False,
-                    subset=['year','division','solver','Rank'])
+                    subset=['solver','rank'])
     if different.empty:
         return different
     other_different = different.loc['other']
@@ -620,9 +649,8 @@ def project(normal,other):
 # Do not consider solver variants for determining if a division is
 # competitive.
 # Uses solver_str(solver) to get the base version of solver.
-def is_division_competitive(solvers):
+def is_competitive_division(solvers):
     return len(set([solver_str(x) for x in solvers])) > 1
-
 
 # Biggest Lead Ranking.
 #
@@ -637,27 +665,31 @@ def biggest_lead_ranking(data):
     start = time.time() if g_args.show_timestamps else None
 
     data = group_and_rank_solver(data)
-    data = data[data.competitive == True]
-    scores = []
-    # TODO: use for (year, division) groupby(level ...)
+    data = data[data['competitive'] == True]
     for year, ydata in data.groupby('year'):
+        scores = []
         for division, div_data in ydata.groupby('division'):
-
             # Skip non-competitive divisions
-            if not is_division_competitive(div_data.solver.unique()):
+            if not is_competitive_division(div_data.solver.unique()):
                 continue
 
             assert len(div_data) >= 2
-            first = div_data.iloc[0]
-            second = div_data.iloc[1]
-            score = ((1 + first.correct) / (1 + second.correct))
-            scores.append(
-                (score, first.solver, second.solver, division))
+            first = div_data[div_data['rank'] == 1]
+            second = div_data[div_data['rank'] == 2]
+            assert len(first) == 1
+            assert len(second) == 1
+            first = first.iloc[0]
+            second = second.iloc[0]
 
-    scores_sorted = sorted(scores, reverse=True)
-    print('Biggest Lead Ranking (Score, 1st Solver, 2nd Solver, Division)')
-    for s in scores_sorted:
-        print(s)
+            # Compute distance between first and second in the division.
+            score = ((1 + first.score_correct) / (1 + second.score_correct))
+            scores.append((score, first.solver, second.solver, division))
+
+        scores_sorted = sorted(scores, reverse=True)
+        print('{} Biggest Lead Ranking'.format(year) +
+              '(Score, 1st Solver, 2nd Solver, Division)')
+        for s in scores_sorted:
+            print(s)
 
     if g_args.show_timestamps:
         log('time biggest_lead_ranking: {}'.format(time.time() - start))
@@ -673,10 +705,9 @@ def vbss(division_data, solver):
 
     # For VBS we only consider correctly solved benchmarks
     data = division_data[(division_data.solver != solver)
-                         & (division_data.correct > 0)
                          & (division_data.error == 0)]
 
-    sort_columns = ['benchmark', 'score_correct', 'wallclock_time']
+    sort_columns = ['benchmark', 'score_correct', 'cpu_time']
     sort_asc = [True, False, True]
 
     # Get job pair with the highest correctly solved score, which was solved
@@ -841,7 +872,6 @@ def main():
             if not os.path.exists(csv):
                 die("Given csv does not exist: {}".format(csv))
             df = process_csv(csv,
-                             True,
                              year,
                              time_limit,
                              g_all_solved,
@@ -850,6 +880,9 @@ def main():
             data.append(df)
             biggest_lead_ranking(df)
             largest_contribution_ranking(df)
+            # Sanity check for previous years
+            if year in ('2015', '2016', '2017', '2018'):
+                check_winners(group_and_rank_solver(df), year)
         result = pandas.concat(data, ignore_index = True)
 
 
