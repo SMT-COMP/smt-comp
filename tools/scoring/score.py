@@ -831,7 +831,6 @@ def to_md_files(results_seq,
                 track,
                 time):
 
-    today = datetime.date.today()
     if not os.path.exists(path):
         os.mkdir(path)
 
@@ -845,8 +844,8 @@ def to_md_files(results_seq,
               )
 
     for data_seq, data_par, data_sat, data_unsat, data_24s in zip(*results):
-        assert data_seq[0] == data_par[0] == data_sat[0] 
-        assert data_sat[0] == data_unsat[0] == data_24s[0] 
+        assert data_seq[0] == data_par[0] == data_sat[0]
+        assert data_sat[0] == data_unsat[0] == data_24s[0]
         year, division = data_seq[0]
         data_seq = data_seq[1]
         data_par = data_par[1]
@@ -869,7 +868,7 @@ def to_md_files(results_seq,
                 "winner_sat: {}\n"\
                 "winner_unsat: {}\n"\
                 "winner_24s: {}\n"\
-                .format(today.strftime("%Y-%m-%d %H:%M:%s"),
+                .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                         division,
                         track,
                         n_benchmarks,
@@ -891,13 +890,14 @@ def to_md_files(results_seq,
         track_path = os.path.join(year_path, track)
         if not os.path.exists(track_path): os.mkdir(track_path)
         outfile = open(os.path.join(track_path, "{}.md".format(division)), "w")
-        outfile.write("".join([
+        outfile.write("\n".join([
             str_division,
             str_seq,
             str_par,
             str_sat,
             str_unsat,
-            str_24s]))
+            str_24s,
+            '---\n']))
 
 
 
