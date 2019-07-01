@@ -21,8 +21,13 @@ SELECT_UC="$SCRIPTDIR/../selection/unsat_core/benchmark_selection_unsat_core_201
 SELECT_MV="$SCRIPTDIR/../selection/model_validation/benchmark_selection_model_validation_2019"
 
 ### Fixed solver versions (non-competitive)
-FIXED_SOLVERS_SQ="24281,24282"  # STP-mergesat-fixed,STP-portfolio-fixed
-FIXED_SOLVERS_INC="24478"       # CVC4
+FIXED_SOLVERS_NON_COMPETITIVE_SQ="24281,24282"  # STP-mergesat-fixed,STP-portfolio-fixed
+FIXED_SOLVERS_NON_COMPETITIVE_INC="24478"       # CVC4
+
+### Fixed solver versions (competitive)
+FIXED_SOLVERS_COMPETITIVE_SQ="24492"   # Colibri had an issue with the with the
+                                       # original StarExec configuration file
+                                       # that broke solver wrapping
 
 ### Best solvers 2018
 # Main track
@@ -34,13 +39,13 @@ SOLVERS_2018_UC="19793,19795,19796,19797,19827"
 
 ### Non-competitive solvers
 # Z3,Boolector-ReasonLS,CVC4-SymBreak
-NON_COMPETITIVE_SOLVERS_SQ="24192,24193,24160,$SOLVERS_2018_SQ,$FIXED_SOLVERS_SQ"
+NON_COMPETITIVE_SOLVERS_SQ="24192,24193,24160,$SOLVERS_2018_SQ,$FIXED_SOLVERS_NON_COMPETITIVE_SQ"
 # Z3
 NON_COMPETITIVE_SOLVERS_CHALL_NON_INC="24192,$SOLVERS_2018_SQ"
 # Z3
 NON_COMPETITIVE_SOLVERS_CHALL_INC="24017,24478,$SOLVERS_2018_INC"
 # Z3,Boolector-ReasonLS
-NON_COMPETITIVE_SOLVERS_INC="24017,23970,$SOLVERS_2018_INC,$FIXED_SOLVERS_INC"
+NON_COMPETITIVE_SOLVERS_INC="24017,23970,$SOLVERS_2018_INC,$FIXED_SOLVERS_NON_COMPETITIVE_INC"
 # Z3
 NON_COMPETITIVE_SOLVERS_UC="24202,$SOLVERS_2018_UC"
 
@@ -48,6 +53,7 @@ NON_COMPETITIVE_SOLVERS_UC="24202,$SOLVERS_2018_UC"
 # Single Query
 OUT_SPACE_SQ=
 OUT_SPACE_SQ_FIXED=
+OUT_SPACE_SQ_FIXED_NC=
 OUT_SPACE_SQ_2018=
 # Challenge Track - non-incremental
 OUT_SPACE_CHALL_NON_INC=
@@ -91,7 +97,9 @@ do
       echo "                         solvers 2018"
       echo "    --csq         <file> Challenge track non-incremental output xml"
       echo "    --csq-fixed   <file> Challenge track non-incremental for fixed "
-      echo "                         (non-competing) solvers"
+      echo "                         competing solvers"
+      echo "    --csq-fixednc <file> Challenge track non-incremental for fixed "
+      echo "                         non-competing solvers"
       echo "    --csq-2018    <file> Challenge track non-incremental output xml"
       echo "                         for best solvers 2018"
       echo "    --cinc        <file> Challenge track incremental output xml"
@@ -113,6 +121,10 @@ do
     --sq-fixed)
       shift
       OUT_SPACE_SQ_FIXED=$1
+      ;;
+    --sq-fixednc)
+      shift
+      OUT_SPACE_SQ_FIXED_NC=$1
       ;;
     --sq-2018)
       shift
@@ -187,24 +199,27 @@ done
 
 # Single Query Track
 [[ -n $OUT_SPACE_SQ ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --exclude-solvers "$FIXED_SOLVERS_SQ,$SOLVERS_2018_SQ"
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --exclude-solvers "$FIXED_SOLVERS_NON_COMPETITIVE_SQ,$SOLVERS_2018_SQ"
 # Single Query Track - fixed STP versions
-[[ -n $OUT_SPACE_SQ_FIXED ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ_FIXED" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --solvers $FIXED_SOLVERS_SQ
+[[ -n $OUT_SPACE_SQ_FIXED_NC ]] && \
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ_FIXED_NC" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --solvers $FIXED_SOLVERS_NON_COMPETITIVE_SQ
 # Single Query Track - Best/Winners 2018
 [[ -n $OUT_SPACE_SQ_2018 ]] && \
 python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ_2018" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --solvers $SOLVERS_2018_SQ
+# Single Query Track - fixed Colibri version
+[[ -n $OUT_SPACE_SQ_FIXED ]] && \
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ_FIXED" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --solvers $FIXED_SOLVERS_COMPETITIVE_SQ
 
 
 # Incremental Track
 [[ -n $OUT_SPACE_INC ]] && \
-python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w --nc $NON_COMPETITIVE_SOLVERS_INC --exclude-solvers "$SOLVERS_2018_INC,$FIXED_SOLVERS_INC"
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w --nc $NON_COMPETITIVE_SOLVERS_INC --exclude-solvers "$SOLVERS_2018_INC,$FIXED_SOLVERS_NON_COMPETITIVE_INC"
 # Incremental Track for benchmarks with unknown status check-sat calls
 [[ -n $OUT_SPACE_INC_UNKNOWN ]] && \
 python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC_UNKNOWN" -t incremental --select "$SELECT_INC_UNKNOWN" -w --nc $NON_COMPETITIVE_SOLVERS_INC
 # Incremental Track - fixed CVC4
 [[ -n $OUT_SPACE_INC_FIXED ]] && \
-python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC_FIXED" -t incremental --select "$SELECT_INC" -w --nc $NON_COMPETITIVE_SOLVERS_INC --solvers $FIXED_SOLVERS_INC
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC_FIXED" -t incremental --select "$SELECT_INC" -w --nc $NON_COMPETITIVE_SOLVERS_INC --solvers $FIXED_SOLVERS_NON_COMPETITIVE_INC
 # Incremental Track - Best/Winners 2018
 [[ -n $OUT_SPACE_INC_2018 ]] && \
 python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC_2018" -t incremental --select "$SELECT_INC" -w --nc $NON_COMPETITIVE_SOLVERS_INC --solvers $SOLVERS_2018_INC
@@ -212,10 +227,10 @@ python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC_2018" -t incremen
 
 # Challenge Track non-incremental
 [[ -n $OUT_SPACE_CHALL_NON_INC ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_NON_INC --exclude-solvers "$FIXED_SOLVERS_SQ,$SOLVERS_2018_SQ"
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_NON_INC --exclude-solvers "$FIXED_SOLVERS_NON_COMPETITIVE_SQ,$SOLVERS_2018_SQ"
 # Challenge Track non-incremental - fixed STP versions
 [[ -n $OUT_SPACE_CHALL_NON_INC_FIXED ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC_FIXED" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_NON_INC --solvers $FIXED_SOLVERS_SQ
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC_FIXED" -t single_query_challenge --select "$SELECT_CHALL_NON_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_NON_INC --solvers $FIXED_SOLVERS_NON_COMPETITIVE_SQ
 # Challenge Track non-incremental - Best/Winners 2018
 [[ -n $OUT_SPACE_CHALL_NON_INC_2018 ]] && \
 python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC_2018" -t single_query_challenge -w --select "$SELECT_CHALL_NON_INC" --nc $NON_COMPETITIVE_SOLVERS_CHALL_NON_INC --solvers $SOLVERS_2018_SQ
@@ -223,13 +238,13 @@ python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_NON_INC_201
 
 # Challenge Track incremental
 [[ -n $OUT_SPACE_CHALL_INC ]] && \
-python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC" -t incremental_challenge --select "$SELECT_CHALL_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_INC --exclude-solvers "$SOLVERS_2018_INC,$FIXED_SOLVERS_INC"
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC" -t incremental_challenge --select "$SELECT_CHALL_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_INC --exclude-solvers "$SOLVERS_2018_INC,$FIXED_SOLVERS_NON_COMPETITIVE_INC"
 # Challenge Track incremental - unknown CVC4
 [[ -n $OUT_SPACE_CHALL_INC_UNKNOWN ]] && \
 python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC_UNKNOWN" -t incremental_challenge --select "$SELECT_CHALL_INC_UNKNOWN" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_INC --solvers "$SOLVERS_INC"
 # Challenge Track incremental - fixed CVC4
 [[ -n $OUT_SPACE_CHALL_INC_FIXED ]] && \
-python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC_FIXED" -t incremental_challenge --select "$SELECT_CHALL_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_INC --solvers "$FIXED_SOLVERS_INC"
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC_FIXED" -t incremental_challenge --select "$SELECT_CHALL_INC" -w --nc $NON_COMPETITIVE_SOLVERS_CHALL_INC --solvers "$FIXED_SOLVERS_NON_COMPETITIVE_INC"
 # Challenge Track incremental - Best/Winners 2018
 [[ -n $OUT_SPACE_CHALL_INC_2018 ]] && \
 python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_CHALL_INC_2018" -t incremental_challenge -w --select "$SELECT_CHALL_INC" --nc $NON_COMPETITIVE_SOLVERS_CHALL_INC --solvers $SOLVERS_2018_INC
