@@ -716,7 +716,7 @@ def vbss(division_data, solver):
                 by=sort_columns, ascending=sort_asc).groupby(
                         'benchmark', as_index=False).first()
     assert len(data_vbs) == len(data.benchmark.unique())
-    return data_vbs.score_correct.sum()
+    return (data_vbs.score_correct.sum(), data_vbs.cpu_time.sum())
 
 
 # Largest Contribution Ranking.
@@ -727,8 +727,12 @@ def vbss(division_data, solver):
 # Note: The function prints the list of division winners sorted by the computed
 #       largest contribution score.
 #
-def largest_contribution_ranking(data):
+def largest_contribution_ranking(data, time_limit):
     start = time.time() if g_args.show_timestamps else None
+
+    # Penalize solvers with 'time_limit' if they they were not able to solve
+    # a benchmark. This is required for the cpu_time impact score computation.
+    data.loc[data.correct == 0, ['cpu_time']] = time_limit
 
     data = data[(data.competitive == True)]
 
@@ -737,28 +741,28 @@ def largest_contribution_ranking(data):
         solvers = div_data.solver.unique()
 
         # Skip non-competitive divisions
-        if not is_division_competitive(solvers):
+        if not is_competitive_division(solvers):
             continue
 
-        vbs_score_correct = vbss(div_data, '')
+        # Compute the scores for the virtual best solver
+        vbs_score_correct, vbs_cpu_time = vbss(div_data, '')
 
-        # Compute contribution to virtual best solver for each solver in the
-        # division as defined in the SMT-COMP'19 rules.
-        #
-        # score = 1 - vbss(D, S-s) / vbss(D, S)
-        #
-        # D ... division
-        # S ... set of all solvers in D
-        # s ... current solver
-        #
-        scores_diff = []
+        # Compute the correct_score and cpu_time impact of removing a solver
+        # from the virtual best solver.
+        scores_div = []
         for solver in solvers:
-            vbs_solver_score_correct = vbss(div_data, solver)
-            score = 1 - (vbs_solver_score_correct / vbs_score_correct)
-            scores_diff.append((score, len(solvers), solver, division))
+            cur_score_correct, cur_cpu_time = vbss(div_data, solver)
 
-        scores_diff_sorted = sorted(scores_diff, reverse=True)
-        scores_top.append(scores_diff_sorted[0])
+            impact_score = 1 - cur_score_correct / vbs_score_correct
+            impact_time = 1 - vbs_cpu_time / cur_cpu_time
+
+            scores_div.append((impact_score, impact_time,
+                               len(solvers),
+                               solver_str(solver), division))
+
+        scores_div_sorted = sorted(scores_div, reverse=True)
+        # Pick the solver with the highest impact
+        scores_top.append(scores_div_sorted[0])
 
     print('Largest Contribution Ranking (Score, Division Size, Solver, Division)')
     for s in sorted(scores_top, reverse=True):
@@ -879,7 +883,7 @@ def main():
                              g_args.skip_unknowns)
             data.append(df)
             biggest_lead_ranking(df)
-            largest_contribution_ranking(df)
+            largest_contribution_ranking(df, time_limit)
             # Sanity check for previous years
             if year in ('2015', '2016', '2017', '2018'):
                 check_winners(group_and_rank_solver(df), year)
