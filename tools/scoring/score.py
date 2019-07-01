@@ -22,6 +22,7 @@ import sys
 import csv
 import math
 import time
+import datetime
 
 g_args = None
 g_non_competitive = {}
@@ -225,7 +226,7 @@ def get_family_scores(data):
 # Checks the winners recorded in new_results against an existing winners.csv file
 # This was used to validate this script against previous results computed by
 # other scripts
-def check_winners(new_results, year):
+def check_winners(new_results, year, sequential):
     global g_args
     assert year in ('2015', '2016', '2017', '2018')
 
@@ -233,7 +234,7 @@ def check_winners(new_results, year):
     winners_old = pandas.read_csv("winners.csv")
 
     # Select sequential winners only
-    if g_args.sequential:
+    if sequential:
         for year in g_args.year:
             winners_old[year] = winners_old[year].str.split('/').str[0]
     # Select parallel winners only
@@ -286,13 +287,15 @@ def check_winners(new_results, year):
 ############################
 # Scoring functions
 
-def group_and_rank_solver(data):
+def group_and_rank_solver(data, sequential):
     global g_args
 
     # Group results
     data_grouped = data.groupby(['year', 'division', 'solver']).agg({
         'correct': sum,
         'error': sum,
+        'correct_sat' : sum,
+        'correct_unsat' : sum,
         'score_correct': sum,
         'score_error': sum,
         'score_cpu_time': sum,
@@ -312,7 +315,7 @@ def group_and_rank_solver(data):
     sort_columns = ['score_error', 'score_correct']
     sort_asc = [True, False, True, True]
 
-    if g_args.sequential:
+    if sequential:
         sort_columns.extend(['score_cpu_time', 'score_wallclock_time'])
     else:
         sort_columns.extend(['score_wallclock_time', 'score_cpu_time'])
@@ -357,7 +360,8 @@ def score(division,
           verdicts,
           year,
           use_families,
-          skip_unknowns):
+          skip_unknowns,
+          sequential):
     global g_args
     if g_args.log: log("Score for {} in {}".format(year, division))
 
@@ -379,6 +383,8 @@ def score(division,
     data_new['score_wallclock_time'] = 0
     data_new['correct'] = 0     # Number of correctly solved benchmarks
     data_new['error'] = 0       # Number of wrong results
+    data_new['correct_sat'] = 0
+    data_new['correct_unsat'] = 0
     data_new['competitive'] = False
     data_new['division_size'] = num_benchmarks
 
@@ -399,7 +405,7 @@ def score(division,
         data_new['score_modifier'] = 1
 
     data_solved = data_new[(data_new.result.isin(set(verdicts)))]
-    if g_args.sequential:
+    if sequential:
         data_solved = data_solved[(data_solved.cpu_time <= wclock_limit)]
     else:
         data_solved = data_solved[(data_solved.wallclock_time <= wclock_limit)]
@@ -426,6 +432,12 @@ def score(division,
     #data_new.loc[data_solved.index, 'score_wallclock_time'] = \
     #    data_new.wallclock_time * data_new.alpha_prime_b
 
+    # Count number of sat/unsat
+    data_solved_sat = data_solved[data_solved.result == RESULT_SAT]
+    data_solved_unsat = data_solved[data_solved.result == RESULT_UNSAT]
+    data_new.loc[data_solved_sat.index, 'correct_sat'] = 1
+    data_new.loc[data_solved_unsat.index, 'correct_unsat'] = 1
+
     data_new.competitive = data_new.solver.map(
                                 lambda x: is_competitive_solver(year, x))
 
@@ -451,7 +463,8 @@ def process_csv(csv,
                 time_limit,
                 verdicts,
                 use_families,
-                skip_unknowns):
+                skip_unknowns,
+                sequential):
     global g_args
     if g_args.log:
         log("Process {} with family: '{}', divisions: '{}', "\
@@ -465,7 +478,7 @@ def process_csv(csv,
             time_limit,
             g_args.use_families,
             skip_unknowns,
-            g_args.sequential,
+            sequential,
             verdicts))
 
     # Load CSV file
@@ -506,7 +519,8 @@ def process_csv(csv,
                     verdicts,
                     year,
                     use_families,
-                    skip_unknowns)
+                    skip_unknowns,
+                    sequential)
         dfs.append(res)
     if g_args.show_timestamps:
         log('time score: {}'.format(time.time() - start))
@@ -516,7 +530,8 @@ def process_csv(csv,
 
 # This function runs with specific values for certain years but keeps some
 # options open to allow us to try diferent things
-def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
+def gen_results_for_report_aux(
+        verdicts, time_limit, bytotal, skip_unknowns, sequential):
     global g_args
     dataframes = []
     dataframes.append(
@@ -526,7 +541,8 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
                 min(g_args.csv['2015'][1], time_limit),
                 verdicts,
                 False,
-                skip_unknowns))
+                skip_unknowns,
+                sequential))
     dataframes.append(
             process_csv(
                 g_args.csv['2016'][0],
@@ -534,7 +550,8 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
                 min(g_args.csv['2016'][1], time_limit),
                 verdicts,
                 not bytotal,
-                skip_unknowns))
+                skip_unknowns,
+                sequential))
     dataframes.append(
             process_csv(
                 g_args.csv['2017'][0],
@@ -542,7 +559,8 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
                 min(g_args.csv['2017'][1], time_limit),
                 verdicts,
                 not bytotal,
-                skip_unknowns))
+                skip_unknowns,
+                sequential))
     dataframes.append(
             process_csv(
                 g_args.csv['2018'][0],
@@ -550,10 +568,11 @@ def gen_results_for_report_aux(verdicts, time_limit, bytotal, skip_unknowns):
                 min(g_args.csv['2018'][1], time_limit),
                 verdicts,
                 not bytotal,
-                skip_unknowns))
+                skip_unknowns,
+                sequential))
 
     df = pandas.concat(dataframes, ignore_index=True)
-    return group_and_rank_solver(df)
+    return group_and_rank_solver(df, sequential)
 
 
 def gen_results_for_report():
@@ -562,9 +581,10 @@ def gen_results_for_report():
 
     print("PARALLEL")
     start = time.time() if g_args.show_timestamps else None
-    normal = gen_results_for_report_aux(g_all_solved, 2400, False, False)
-    check_all_winners(normal)
-    grouped_normal = group_and_rank_solver(normal)
+    normal = gen_results_for_report_aux(
+            g_all_solved, 2400, False, False, g_args.sequential)
+    check_all_winners(normal, False)
+    grouped_normal = group_and_rank_solver(normal, g_args.sequential)
     #to_latex_for_report(normal)
     #vbs_winners(normal)
     #biggest_lead_ranking(normal,"a_normal")
@@ -573,9 +593,10 @@ def gen_results_for_report():
 
     print("UNSAT")
     start = time.time() if g_args.show_timestamps else None
-    unsat = gen_results_for_report_aux(g_unsat_solved, 2400, False, False)
+    unsat = gen_results_for_report_aux(
+            g_unsat_solved, 2400, False, False, g_args.sequential)
     #biggest_lead_ranking(unsat,"b_unsat")
-    grouped_unsat = group_and_rank_solver(unsat)
+    grouped_unsat = group_and_rank_solver(unsat, g_args.sequential)
     unsat_new = project(select_winners(grouped_normal),
                         select_winners(grouped_unsat))
     #to_latex_for_report(unsat_new)
@@ -585,8 +606,9 @@ def gen_results_for_report():
 
     print("SAT")
     start = time.time() if g_args.show_timestamps else None
-    sat = gen_results_for_report_aux(g_sat_solved, 2400, False, False)
-    grouped_sat = group_and_rank_solver(sat)
+    sat = gen_results_for_report_aux(
+            g_sat_solved, 2400, False, False, g_args.sequential)
+    grouped_sat = group_and_rank_solver(sat, g_args.sequential)
     #biggest_lead_ranking(sat,"c_sat")
     sat_new = project(select_winners(grouped_normal),
                       select_winners(grouped_sat))
@@ -597,8 +619,9 @@ def gen_results_for_report():
 
     print("24s")
     start = time.time() if g_args.show_timestamps else None
-    twenty_four = gen_results_for_report_aux(g_all_solved, 24, False, False)
-    grouped_twenty_four = group_and_rank_solver(twenty_four)
+    twenty_four = gen_results_for_report_aux(
+            g_all_solved, 24, False, False, g_args.sequential)
+    grouped_twenty_four = group_and_rank_solver(twenty_four, g_args.sequential)
     #biggest_lead_ranking(twenty_four,"d_24")
     twenty_four_new = project(select_winners(grouped_normal),
                               select_winners(grouped_twenty_four))
@@ -609,25 +632,25 @@ def gen_results_for_report():
 
     #print("Total Solved")
     #by_total_scored  = gen_results_for_report_aux(
-    #        g_all_solved, 2400, True, False)
+    #        g_all_solved, 2400, True, False, g_args.sequential)
     #biggest_lead_ranking(by_total_scored,"e_total")
     #by_total_scored_new = project(select_winners(normal),select_winners(by_total_scored))
     #to_latex_for_report(by_total_scored_new)
 
     #print("Without unknowns")
     #without_unknowns  = gen_results_for_report_aux(
-    #         g_all_solved, 2400, False, True)
+    #         g_all_solved, 2400, False, True, g_args.sequential)
     #without_unknowns_new = project(select_winners(normal),select_winners(without_unknowns))
     #to_latex_for_report(without_unknowns_new)
 
 # Checks winners for a fixed number of years
-def check_all_winners(results):
+def check_all_winners(results, sequential):
     global g_args
 
     print("Check differences")
     for year in g_args.year:
         print(year)
-        check_winners(results, year)
+        check_winners(results, year, sequential)
 
 # Select winners from given years and divisions.
 def select_winners(data):
@@ -667,10 +690,10 @@ def is_competitive_division(solvers):
 # Note: The function prints a list of sorted tuples starting with the first
 #       place (winner).
 #
-def biggest_lead_ranking(data):
+def biggest_lead_ranking(data, sequential):
     start = time.time() if g_args.show_timestamps else None
 
-    data = group_and_rank_solver(data)
+    data = group_and_rank_solver(data, sequential)
     data = data[data['competitive'] == True]
     for year, ydata in data.groupby('year'):
         scores = []
@@ -778,18 +801,180 @@ def largest_contribution_ranking(data, time_limit):
         log('time largest_contribution_ranking: {}'.format(time.time() - start))
 
 
+############################
+# Printing functions
+
+def md_get_winner(df):
+    return df[(df.competitive == True) & (df['rank'] == 1)].iloc[0].solver
+
+def md_table_details(df, scoring, n_benchmarks):
+    lines = ["{}:".format(scoring)]
+    for index, row in df.iterrows():
+        lines.append("- name: {}".format(row.solver))
+        lines.append("  errorScore: {}".format(row.score_error))
+        lines.append("  correctScore: {}".format(row.score_correct))
+        lines.append("  CPUScore: {}".format(row.score_cpu_time))
+        lines.append("  WallScore: {}".format(row.score_wallclock_time))
+        lines.append("  solved: {}".format(row.correct))
+        lines.append("  solved_sat: {}".format(row.correct_sat))
+        lines.append("  solved_unsat: {}".format(row.correct_unsat))
+        lines.append("  unsolved: {}".format(n_benchmarks - row.correct))
+    return '\n'.join(lines)
+
+
+def to_md_files(results_seq,
+                results_par,
+                results_sat,
+                results_unsat,
+                results_24s,
+                path,
+                track,
+                time):
+
+    today = datetime.date.today()
+    if not os.path.exists(path):
+        os.mkdir(path)
+
+    # level=[0,1]: group results by year and division
+    results = (
+               results_seq.groupby(level=[0,1]),
+               results_par.groupby(level=[0,1]),
+               results_sat.groupby(level=[0,1]),
+               results_unsat.groupby(level=[0,1]),
+               results_24s.groupby(level=[0,1]),
+              )
+
+    for data_seq, data_par, data_sat, data_unsat, data_24s in zip(*results):
+        assert data_seq[0] == data_par[0] == data_sat[0] 
+        assert data_sat[0] == data_unsat[0] == data_24s[0] 
+        year, division = data_seq[0]
+        data_seq = data_seq[1]
+        data_par = data_par[1]
+        data_sat = data_sat[1]
+        data_unsat = data_unsat[1]
+        data_24s = data_24s[1]
+
+        n_benchmarks = data_seq.iloc[0].division_size
+        str_division = \
+                "---\n"\
+                "layout: result\n"\
+                "resultdate: {}\n"\
+                "division: {}\n"\
+                "track: {}\n"\
+                "n_benchmarks: {}\n"\
+                "time_limit: {}\n"\
+                "\n"\
+                "winner_seq: {}\n"\
+                "winner_par: {}\n"\
+                "winner_sat: {}\n"\
+                "winner_unsat: {}\n"\
+                "winner_24s: {}\n"\
+                .format(today.strftime("%Y-%m-%d %H:%M:%s"),
+                        division,
+                        track,
+                        n_benchmarks,
+                        time,
+                        md_get_winner(data_seq),
+                        md_get_winner(data_par),
+                        md_get_winner(data_sat),
+                        md_get_winner(data_unsat),
+                        md_get_winner(data_24s))
+
+        str_seq   = md_table_details(data_seq, 'sequential', n_benchmarks)
+        str_par   = md_table_details(data_par, 'parallel', n_benchmarks)
+        str_sat   = md_table_details(data_sat, 'sat', n_benchmarks)
+        str_unsat = md_table_details(data_unsat, 'unsat', n_benchmarks)
+        str_24s   = md_table_details(data_24s, '24s', n_benchmarks)
+
+        year_path = os.path.join(path, year)
+        if not os.path.exists(year_path): os.mkdir(year_path)
+        track_path = os.path.join(year_path, track)
+        if not os.path.exists(track_path): os.mkdir(track_path)
+        outfile = open(os.path.join(track_path, "{}.md".format(division)), "w")
+        outfile.write("".join([
+            str_division,
+            str_seq,
+            str_par,
+            str_sat,
+            str_unsat,
+            str_24s]))
+
+
+
+def gen_results_md_files(csv, time_limit, year, path):
+    global g_args
+    global g_all_solved, g_sat_solved, g_unsat_solved
+    results_seq = process_csv(csv,
+                              year,
+                              time_limit,
+                              g_all_solved,
+                              g_args.use_families,
+                              g_args.skip_unknowns,
+                              True)
+    results_par = process_csv(csv,
+                              year,
+                              time_limit,
+                              g_all_solved,
+                              g_args.use_families,
+                              g_args.skip_unknowns,
+                              False)
+    results_sat = process_csv(csv,
+                              year,
+                              time_limit,
+                              g_sat_solved,
+                              g_args.use_families,
+                              g_args.skip_unknowns,
+                              False)
+    results_unsat = process_csv(csv,
+                                year,
+                                time_limit,
+                                g_unsat_solved,
+                                g_args.use_families,
+                                g_args.skip_unknowns,
+                                False)
+    results_24s = process_csv(csv,
+                              year,
+                              24,
+                              g_all_solved,
+                              g_args.use_families,
+                              g_args.skip_unknowns,
+                              False)
+    results_seq_grouped = group_and_rank_solver(results_seq, True)
+    results_par_grouped = group_and_rank_solver(results_par, False)
+    results_sat_grouped = group_and_rank_solver(results_sat, False)
+    results_unsat_grouped = group_and_rank_solver(results_unsat, False)
+    results_24s_grouped = group_and_rank_solver(results_24s, False)
+    to_md_files(results_seq_grouped,
+                results_par_grouped,
+                results_sat_grouped,
+                results_unsat_grouped,
+                results_24s_grouped,
+                path,
+                g_args.track,
+                time_limit)
+
+
+############################
+# Main
+
 def parse_args():
     global g_args
     parser = ArgumentParser()
-    parser.add_argument ("-c", "--csv",
-                         metavar="path[,path...]",
-                         help="list of input csvs with results from StarExec")
-    parser.add_argument ("-y", "--year",
-                         metavar="year[,year...]",
-                         help="list of years matching given input csvs")
-    parser.add_argument ("-t", "--time",
-                         metavar="time[,time...]",
-                         help="list of time limits matching given input csvs")
+    parser.add_argument("-c", "--csv",
+                        metavar="path[,path...]",
+                        help="list of input csvs with results from StarExec")
+    parser.add_argument("-y", "--year",
+                        metavar="year[,year...]",
+                        help="list of years matching given input csvs")
+    parser.add_argument("-t", "--time",
+                        metavar="time[,time...]",
+                        help="list of time limits matching given input csvs")
+    parser.add_argument("-T", "--track",
+                        default=None,
+                        choices=['single_query', 'incremental',
+                                 'unsat_core', 'single_query_challenge',
+                                 'incremental_challenge', 'model_validation'],
+                        help="A string identifying the competition track")
     parser.add_argument("-f", "--family-choice",
                         action="store",
                         dest="family",
@@ -830,6 +1015,12 @@ def parse_args():
                         action="store_true",
                         default=False,
                         help="Enable logging")
+    parser.add_argument("--gen-md",
+                        metavar="dir",
+                        action="store",
+                        default=None,
+                        help="Generate .md files for results webpage into "\
+                             "directory 'dir'")
     g_args = parser.parse_args()
 
     if not g_args.csv:
@@ -838,6 +1029,8 @@ def parse_args():
         die ("Missing input year(s).")
     if not g_args.time:
         die ("Missing input time(s).")
+    if g_args.gen_md and not g_args.track:
+        die ("Missing track information")
 
     g_args.csv = g_args.csv.split(',') if g_args.csv else []
     g_args.year = g_args.year.split(',') if g_args.year else []
@@ -875,6 +1068,10 @@ def main():
             if not os.path.exists(csv):
                 die("Given csv does not exist: {}".format(csv))
         gen_results_for_report()
+    elif g_args.gen_md:
+        for year in g_args.csv:
+            csv, time_limit = g_args.csv[year]
+            gen_results_md_files(csv, time_limit, year, g_args.gen_md)
     else:
         data = []
         for year in g_args.csv:
@@ -886,14 +1083,16 @@ def main():
                              time_limit,
                              g_all_solved,
                              g_args.use_families,
-                             g_args.skip_unknowns)
+                             g_args.skip_unknowns,
+                             g_args.sequential)
             data.append(df)
             # TODO: Generate result tables
-            biggest_lead_ranking(df)
+            biggest_lead_ranking(df, g_args.sequential)
             largest_contribution_ranking(df, time_limit)
             # Sanity check for previous years
             if year in ('2015', '2016', '2017', '2018'):
-                check_winners(group_and_rank_solver(df), year)
+                check_winners(
+                        group_and_rank_solver(df), year, g_args.sequential)
         result = pandas.concat(data, ignore_index = True)
 
 
