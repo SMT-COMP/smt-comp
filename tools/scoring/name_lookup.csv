@@ -43,3 +43,4 @@ COLIBRI 18_06_2017 105a81,COLIBRI
 SMTRAT-Rat-final,SMT-RAT
 Boolector SMT15 QF_AUFBV final,Boolector
 Boolector SMT17 final,Boolector
+Boolector+CaDiCaL SMT17 final,Boolector
