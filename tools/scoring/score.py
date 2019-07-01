@@ -7,7 +7,7 @@
 #
 # This script requires the pandas data analysis framework
 #
-# @author Giles Reger, Aina Niemetz
+# @author Giles Reger, Aina Niemetz, Mathias Preiner
 # @date 2019
 
 # Data processing library pandas
