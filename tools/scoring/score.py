@@ -27,12 +27,17 @@ g_args = None
 g_non_competitive = {}
 g_solver_names = {}
 
+# StarExec result strings
+RESULT_UNKNOWN = 'starexec-unknown'
+RESULT_SAT = 'sat'
+RESULT_UNSAT = 'unsat'
+
 ############################
 # Helper functions
 
-g_all_solved = pandas.Series(['sat','unsat'])
-g_sat_solved = pandas.Series(['sat'])
-g_unsat_solved = pandas.Series(['unsat'])
+g_all_solved = pandas.Series([RESULT_SAT, RESULT_UNSAT])
+g_sat_solved = pandas.Series([RESULT_SAT])
+g_unsat_solved = pandas.Series([RESULT_UNSAT])
 
 # Print error message and exit.
 def die(msg):
@@ -98,16 +103,17 @@ def add_division_family_info(data, family_definition):
 def remove_disagreements(data):
     global g_args
 
-    # First find and filter out unsound solvers ,i.e., solvers that disagree
+    # First find and filter out unsound solvers, i.e., solvers that disagree
     # with the expected status.
-    unsound_solvers = set(data[(data.expected != "starexec-unknown")
-                               & (data.result != "starexec-unknown")
+    unsound_solvers = set(data[(data.expected != RESULT_UNKNOWN)
+                               & (data.result != RESULT_UNKNOWN)
                                & (data.result != data.expected)]['solver'])
 
     # Consider only unknown benchmarks that were solved by sound solvers.
-    solved_unknown = data[(data.expected == "starexec-unknown")
+    solved_unknown = data[(data.expected == RESULT_UNKNOWN)
                           & (~data.solver.isin(unsound_solvers))
-                          & ((data.result == 'sat') | (data.result == 'unsat'))]
+                          & ((data.result == RESULT_SAT)
+                              | (data.result == RESULT_UNSAT))]
 
     # Remove duplicate (benchmark, result) pairs to produces unique
     # result values for each benchmark.
@@ -377,9 +383,9 @@ def score(division,
     data_new['division_size'] = num_benchmarks
 
     # Get all job pairs on which solvers were wrong
-    data_new.loc[(data_new.result != 'starexec-unknown')
+    data_new.loc[(data_new.result != RESULT_UNKNOWN)
                  & (data_new.result != data_new.expected)
-                 & (data_new.expected != 'starexec-unknown'), 'error'] = 1
+                 & (data_new.expected != RESULT_UNKNOWN), 'error'] = 1
 
     # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
     # 'family_scores' dictionary (use_families == False).
@@ -401,7 +407,7 @@ def score(division,
     if skip_unknowns:
         data_solved = data_solved[(data_solved.result == data_solved.expected)]
     else:
-        data_solved = data_solved[(data_solved.expected == "starexec-unknown")
+        data_solved = data_solved[(data_solved.expected == RESULT_UNKNOWN)
                                   | (data_solved.result == data_solved.expected)]
 
     data_new.loc[data_solved.index, 'correct'] = 1
