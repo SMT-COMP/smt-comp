@@ -888,6 +888,7 @@ def main():
                              g_args.use_families,
                              g_args.skip_unknowns)
             data.append(df)
+            # TODO: Generate result tables
             biggest_lead_ranking(df)
             largest_contribution_ranking(df, time_limit)
             # Sanity check for previous years
