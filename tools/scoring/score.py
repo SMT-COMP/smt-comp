@@ -47,43 +47,54 @@ def view(data):
   return data[['benchmark','solver','result']]
 
 
+def split_benchmark_division_family(x, family_func):
+    division, benchmark = x[0], x[1]
+    # Check if division is a logic string.
+    # Note: This assumes that space names are not in upper case.
+    if not division.isupper():
+        division, benchmark = benchmark.split('/', 1)
+    family = family_func(benchmark)
+    return benchmark, division, family
+
+# Determine the top-most directory as benchmark family.
+# Note: 'benchmark' is not prefixed with the division name.
+def get_family_top(benchmark):
+    return benchmark.split('/', 1)[0]
+
+# Determine the bottom-most directory as benchmark family.
+# Note: 'benchmark' is not prefixed with the division name.
+def get_family_bot(benchmark):
+    return benchmark.rsplit('/', 1)[0]
+
 # adds columns for division and family to data
 # also does some tidying of benchmark column for specific years of the competition
 # edit this function if you want to edit how families are added
-def add_division_family_info(data,fam):
-    global g_args
+def add_division_family_info(data, family_definition):
 
-    # Remove 'Other Divisions' from benchmark name (2018)
-    data['benchmark'] = data['benchmark'].str.replace('Other Divisions/','')
-    # Remove 'Datatype Divisions' from benchmark name (2017)
-    data['benchmark'] = data['benchmark'].str.replace('Datatype Divisions/','')
-
-    # Extract divisions as additional column
-    data['division'] = data['benchmark'].str.split('/').str[0]
-
-    # Extract family as an additional column.
-    # This depends on the famly_definition option:
-    #   - 'top' interprets the top most directory, and
-    #   - 'bot' interprets the bottom most directory as benchmark family.
+    # Select family extraction functions.
+    # This depends on the family_definition option:
+    #   - 'top' interprets the top-most directory, and
+    #   - 'bot' interprets the bottom-most directory as benchmark family.
     # The rules have always specified 'top' but the scoring scripts for many
     # years actually implemented 'bot'. The scripts allow you to choose.
-    if fam == "top":
-        if g_args.log: log("Using top-level directories for fam")
-        # Take top-level sub-directories as family
-        data['family'] = numpy.where(
-                data['benchmark'].str.count('/') > 1,
-                data['benchmark'].str.split('/').str[1],
-                '-')
-    elif fam == "bot":
-        if g_args.log: log("Using bottom-level directories for fam")
-        # Take immediate super-directory as family
-        data['family'] = data.benchmark.apply(
-                lambda x : x[(1+x.index('/')):(x.rfind('/'))])
+    fam_func = None
+    if family_definition == 'top':
+        fam_func = get_family_top
+    elif family_definition == 'bot':
+        fam_func = get_family_bot
     else:
-        die ("family option not supported: {}".format(fam))
+        die('Family option not supported: {}'.format(family_definition))
+
+    split = data['benchmark'].str.split('/', n=1)
+    split = split.map(lambda x: split_benchmark_division_family(x, fam_func))
+    data['benchmark'] = split.str[0]
+    data['division'] = split.str[1]
+    data['family'] = split.str[2]
+
     return data
 
-
+# Drop any rows that contain benchmarks with status unknown where two otherwise
+# sound solvers disagree on the result.
 def remove_disagreements(data):
     global g_args
 
