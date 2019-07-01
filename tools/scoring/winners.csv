@@ -12,9 +12,9 @@ FP,,,,CVC4
 LIA,CVC4,CVC4,CVC4 Z3,CVC4 Z3
 LRA,CVC4,CVC4,CVC4 Z3,CVC4 Z3
 NIA,CVC4 Z3,ProB Z3,CVC4 Z3,CVC4 Z3
-NRA,CVC4,Vampire,Redlog,Vampire Z3 / Vampire
-QF_ABV,Boolector,Boolector,Boolector,Boolector 
-QF_ABVFP,,,---,CVC4
+NRA,CVC4,Vampire,Redlog,Vampire Z3/Vampire
+QF_ABV,Boolector,Boolector,Boolector,Boolector
+QF_ABVFP,,,,CVC4
 QF_ALIA,Yices2,Yices2,Yices2,Yices2
 QF_ANIA,CVC4 Z3,CVC4,CVC4,CVC4 Z3
 QF_AUFBV,CVC4 MathSAT,CVC4 MathSAT,Yices2 MathSAT,CVC4
@@ -22,9 +22,9 @@ QF_AUFLIA,Yices2,Yices2,Yices2,Yices2
 QF_AUFNIA,CVC4,CVC4,CVC4 Z3,CVC4 Z3
 QF_AX,Yices2,Yices2,Yices2,Yices2
 QF_BV,Boolector,Boolector,Boolector/MinkeyRink,Boolector/MinkeyRink
-QF_BVFP,Z3,wc Z3,COLIBRI Z3,CVC4
+QF_BVFP,Z3,Z3,COLIBRI Z3,CVC4
 QF_DT,,,CVC4,CVC4
-QF_FP,Z3,wc MathSAT,COLIBRI Z3,COLIBRI 
+QF_FP,Z3,MathSAT,COLIBRI Z3,COLIBRI
 QF_IDL,Yices2 Z3,Yices2 Z3,Yices2,Yices2
 QF_LIA,CVC4 MathSAT,CVC4 MathSAT,CVC4 MathSAT,SPASS-SATT
 QF_LIRA,Yices2,Yices2,Yices2 Z3,Yices2 Z3
@@ -35,7 +35,7 @@ QF_NRA,Yices2 Z3,Yices2 Z3,Yices2,Yices2 Z3
 QF_RDL,Yices2,Yices2,Yices2,Yices2
 QF_SLIA,,,,CVC4
 QF_UF,Yices2,Yices2,Yices2,Yices2
-QF_UFBV,Boolector,Boolector,Boolector,Boolector 
+QF_UFBV,Boolector,Boolector,Boolector,Boolector
 QF_UFIDL,Yices2,Yices2,Yices2,Yices2
 QF_UFLIA,Yices2 Z3,Yices2 Z3,Yices2,Yices2
 QF_UFLRA,Yices2,Yices2,Yices2,Yices2
@@ -48,4 +48,4 @@ UFDTLIA,,,Vampire,CVC4
 UFIDL,CVC4 Z3,CVC4,CVC4,CVC4 Z3
 UFLIA,CVC4,CVC4,CVC4,CVC4
 UFLRA,CVC3,Vampire Z3,CVC4 Z3,CVC4 Z3
-UFNIA,CVC4,Vampire,Vampire,Vampire Z3 / Vampire
+UFNIA,CVC4,Vampire,Vampire,Vampire Z3/Vampire
