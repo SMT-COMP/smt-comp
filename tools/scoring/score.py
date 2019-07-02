@@ -1087,8 +1087,15 @@ def to_md_files(results_seq,
                              TRACK_SQ,
                              time)
         elif track == OPT_TRACK_INC:
-            ext = EXT_INC
-            track_str = TRACK_INC
+            write_md_file_inc(division,
+                              n_benchmarks,
+                              data_par,
+                              year,
+                              path,
+                              EXT_INC,
+                              track,
+                              TRACK_INC,
+                              time)
         elif track == OPT_TRACK_UC:
             ext = EXT_UC
             track_str = TRACK_UC
