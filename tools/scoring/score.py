@@ -959,22 +959,9 @@ def gen_results_md_files(csv, time_limit, year, path):
 
 def parse_args():
     global g_args
+
     parser = ArgumentParser()
-    parser.add_argument("-c", "--csv",
-                        metavar="path[,path...]",
-                        help="list of input csvs with results from StarExec")
-    parser.add_argument("-y", "--year",
-                        metavar="year[,year...]",
-                        help="list of years matching given input csvs")
-    parser.add_argument("-t", "--time",
-                        metavar="time[,time...]",
-                        help="list of time limits matching given input csvs")
-    parser.add_argument("-T", "--track",
-                        default=None,
-                        choices=['single_query', 'incremental',
-                                 'unsat_core', 'single_query_challenge',
-                                 'incremental_challenge', 'model_validation'],
-                        help="A string identifying the competition track")
+
     parser.add_argument("-f", "--family-choice",
                         action="store",
                         dest="family",
@@ -1003,10 +990,6 @@ def parse_args():
                         dest="skip_unknowns",
                         default=False,
                         help="Skip benchmarks with unknown status")
-    parser.add_argument("--report",
-                        action="store_true",
-                        default=False,
-                        help="Produce results for JSat 2015-2018 submission")
     parser.add_argument("--show-timestamps",
                         action="store_true",
                         default=False,
@@ -1015,20 +998,46 @@ def parse_args():
                         action="store_true",
                         default=False,
                         help="Enable logging")
-    parser.add_argument("--gen-md",
-                        metavar="dir",
+
+    required = parser.add_argument_group("required arguments")
+    required.add_argument("-c", "--csv",
+                        metavar="path[,path...]",
+                        required=True,
+                        help="list of input csvs with results from StarExec")
+    required.add_argument("-y", "--year",
+                        metavar="year[,year...]",
+                        required=True,
+                        help="list of years matching given input csvs")
+    required.add_argument("-t", "--time",
+                        metavar="time[,time...]",
+                        required=True,
+                        help="list of time limits matching given input csvs")
+
+    report = parser.add_argument_group(
+            "generate results for 2015-2018 competition report")
+    report.add_argument("--report",
+                        action="store_true",
+                        default=False,
+                        help="produce results for JSat 2015-2018 submission")
+
+    gen_md = parser.add_argument_group(
+            "generate competition results and write results .md files")
+    gen_md.add_argument("--gen-md",
+                        metavar="directory",
                         action="store",
                         default=None,
-                        help="Generate .md files for results webpage into "\
-                             "directory 'dir'")
+                        help="generate competition results and .md files for "\
+                             "results webpage for given track into "\
+                             "given directory")
+    gen_md.add_argument("-T", "--track",
+                        default=None,
+                        choices=['single_query', 'incremental',
+                                 'unsat_core', 'single_query_challenge',
+                                 'incremental_challenge', 'model_validation'],
+                        help="A string identifying the competition track")
+
     g_args = parser.parse_args()
 
-    if not g_args.csv:
-        die ("Missing input csv(s).")
-    if not g_args.year:
-        die ("Missing input year(s).")
-    if not g_args.time:
-        die ("Missing input time(s).")
     if g_args.gen_md and not g_args.track:
         die ("Missing track information")
 
