@@ -39,12 +39,20 @@ RESULT_SAT = 'sat'
 RESULT_UNSAT = 'unsat'
 
 # Tracks
-TRACK_SQ = "sq"
-TRACK_INC = "inc"
-TRACK_CHALL_SQ = "chall_sq"
-TRACK_CHALL_INC = "chall_inc"
-TRACK_UC = "uc"
-TRACK_MV = "mv"
+TRACK_SQ = "Single Query Track"
+TRACK_INC = "Incremental Track"
+TRACK_CHALL_SQ = "Challenge Track (non-incremental)"
+TRACK_CHALL_INC = "Challenge Track (incremental)"
+TRACK_UC = "Unsat Core Track"
+TRACK_MV = "Model Validation Track"
+
+# Track options
+OPT_TRACK_SQ = "sq"
+OPT_TRACK_INC = "inc"
+OPT_TRACK_CHALL_SQ = "chall_sq"
+OPT_TRACK_CHALL_INC = "chall_inc"
+OPT_TRACK_UC = "uc"
+OPT_TRACK_MV = "mv"
 
 # Columns of solvers csv
 COL_SOLVER_ID = "Solver ID"
@@ -866,7 +874,7 @@ def md_get_winner(df):
                 & (df['rank'] == 1)].iloc[0].solver_id
     return get_solver_name(solver_id)
 
-def md_table_details(df, scoring, n_benchmarks):
+def md_table_details(df, track, scoring, n_benchmarks):
     lines = ["{}:".format(scoring)]
     for index, row in df.iterrows():
         lines.append("- name: {}".format(
@@ -881,15 +889,103 @@ def md_table_details(df, scoring, n_benchmarks):
             round(row.score_cpu_time, 3)))
         lines.append("  WallScore: {}".format(
             round(row.score_wallclock_time, 3)))
-        lines.append("  solved: {}".format(
-            row.correct))
-        lines.append("  solved_sat: {}".format(
-            row.correct_sat))
-        lines.append("  solved_unsat: {}".format(
-            row.correct_unsat))
-        lines.append("  unsolved: {}".format(
-            n_benchmarks - row.correct))
+        if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
+            lines.append("  solved: {}".format(
+                row.correct))
+            lines.append("  solved_sat: {}".format(
+                row.correct_sat))
+            lines.append("  solved_unsat: {}".format(
+                row.correct_unsat))
+            lines.append("  unsolved: {}".format(
+                n_benchmarks - row.correct))
     return '\n'.join(lines)
+
+def write_md_file_sq(division,
+                     n_benchmarks,
+                     data_seq, data_par, data_sat, data_unsat, data_24s,
+                     year,
+                     path,
+                     ext_str,
+                     track,
+                     track_str,
+                     time):
+    # general info about the current division
+    str_div = \
+            "---\n"\
+            "layout: result\n"\
+            "resultdate: {}\n"\
+            "division: {}\n"\
+            "track: {}\n"\
+            "n_benchmarks: {}\n"\
+            "time_limit: {}\n"\
+            "\n"\
+            "winner_seq: {}\n"\
+            "winner_par: {}\n"\
+            "winner_sat: {}\n"\
+            "winner_unsat: {}\n"\
+            "winner_24s: {}\n"\
+            .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    division,
+                    track_str,
+                    n_benchmarks,
+                    time,
+                    md_get_winner(data_seq),
+                    md_get_winner(data_par),
+                    md_get_winner(data_sat),
+                    md_get_winner(data_unsat),
+                    md_get_winner(data_24s))
+    # division scores
+    str_seq   = md_table_details(data_seq, track, 'sequential', n_benchmarks)
+    str_par   = md_table_details(data_par, track, 'parallel', n_benchmarks)
+    str_sat   = md_table_details(data_sat, track, 'sat', n_benchmarks)
+    str_unsat = md_table_details(data_unsat, track, 'unsat', n_benchmarks)
+    str_24s   = md_table_details(data_24s, track, 'twentyfour', n_benchmarks)
+    # write md file
+    year_path = os.path.join(path, year)
+    if not os.path.exists(year_path): os.mkdir(year_path)
+    track_path = os.path.join(year_path, track)
+    if not os.path.exists(track_path): os.mkdir(track_path)
+    outfile = open(
+            os.path.join(track_path, "{}{}".format(division, ext_str)), "w")
+    outfile.write("\n".join([
+        str_div, str_seq, str_par, str_sat, str_unsat, str_24s, '---\n']))
+
+def write_md_file_inc(division,
+                      n_benchmarks,
+                      data_par,
+                      year,
+                      path,
+                      ext_str,
+                      track,
+                      track_str,
+                      time):
+    # general info about the current division
+    str_div = \
+            "---\n"\
+            "layout: result_inc\n"\
+            "resultdate: {}\n"\
+            "division: {}\n"\
+            "track: {}\n"\
+            "n_benchmarks: {}\n"\
+            "time_limit: {}\n"\
+            "\n"\
+            "winner_par: {}\n"\
+            .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    division,
+                    track_str,
+                    n_benchmarks,
+                    time,
+                    md_get_winner(data_par))
+    # division scores
+    str_par = md_table_details(data_par, track, 'parallel', n_benchmarks)
+    # write md file
+    year_path = os.path.join(path, year)
+    if not os.path.exists(year_path): os.mkdir(year_path)
+    track_path = os.path.join(year_path, track)
+    if not os.path.exists(track_path): os.mkdir(track_path)
+    outfile = open(
+            os.path.join(track_path, "{}{}".format(division, ext_str)), "w")
+    outfile.write("\n".join([str_div, str_par, '---\n']))
 
 
 def to_md_files(results_seq,
@@ -928,59 +1024,48 @@ def to_md_files(results_seq,
         data_24s = data_24s[1]
         # total number of benchmarks in the current division
         n_benchmarks = data_seq.iloc[0].division_size
-        # general info about the current division
-        str_div = \
-                "---\n"\
-                "layout: result\n"\
-                "resultdate: {}\n"\
-                "division: {}\n"\
-                "track: {}\n"\
-                "n_benchmarks: {}\n"\
-                "time_limit: {}\n"\
-                "\n"\
-                "winner_seq: {}\n"\
-                "winner_par: {}\n"\
-                "winner_sat: {}\n"\
-                "winner_unsat: {}\n"\
-                "winner_24s: {}\n"\
-                .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        division,
-                        track,
-                        n_benchmarks,
-                        time,
-                        md_get_winner(data_seq),
-                        md_get_winner(data_par),
-                        md_get_winner(data_sat),
-                        md_get_winner(data_unsat),
-                        md_get_winner(data_24s))
-        # division scores
-        str_seq   = md_table_details(data_seq, 'sequential', n_benchmarks)
-        str_par   = md_table_details(data_par, 'parallel', n_benchmarks)
-        str_sat   = md_table_details(data_sat, 'sat', n_benchmarks)
-        str_unsat = md_table_details(data_unsat, 'unsat', n_benchmarks)
-        str_24s   = md_table_details(data_24s, 'twentyfour', n_benchmarks)
-        # write md file
-        year_path = os.path.join(path, year)
-        if not os.path.exists(year_path): os.mkdir(year_path)
-        track_path = os.path.join(year_path, track)
-        if not os.path.exists(track_path): os.mkdir(track_path)
-        ext = ".md"
-        if track == TRACK_SQ:
-            ext = EXT_SQ
-        elif track == TRACK_INC:
+        # track string
+        track_str = ""
+        ext_str = ".md"
+        if track == OPT_TRACK_SQ:
+            write_md_file_sq(division,
+                             n_benchmarks,
+                             data_seq, data_par, data_sat, data_unsat, data_24s,
+                             year,
+                             path,
+                             EXT_SQ,
+                             track,
+                             TRACK_SQ,
+                             time)
+        elif track == OPT_TRACK_INC:
             ext = EXT_INC
-        elif track == TRACK_UC:
+            track_str = TRACK_INC
+        elif track == OPT_TRACK_UC:
             ext = EXT_UC
-        elif track == TRACK_MV:
+            track_str = TRACK_UC
+        elif track == OPT_TRACK_MV:
             ext = EXT_MV
-        elif track == TRACK_CHALL_SQ:
-            ext = EXT_CHALL_SQ
-        elif track == TRACK_CHALL_INC:
-            ext = EXT_CHALL_INC
-        outfile = open(
-                os.path.join(track_path, "{}{}".format(division, ext)), "w")
-        outfile.write("\n".join([
-            str_div, str_seq, str_par, str_sat, str_unsat, str_24s, '---\n']))
+            track_str = TRACK_MV
+        elif track == OPT_TRACK_CHALL_SQ:
+            write_md_file_sq(division,
+                             n_benchmarks,
+                             data_seq, data_par, data_sat, data_unsat, data_24s,
+                             year,
+                             path,
+                             EXT_CHALL_SQ,
+                             track,
+                             TRACK_CHALL_SQ,
+                             time)
+        elif track == OPT_TRACK_CHALL_INC:
+            write_md_file_inc(division,
+                              n_benchmarks,
+                              data_par,
+                              year,
+                              path,
+                              EXT_CHALL_INC,
+                              track,
+                              TRACK_CHALL_INC,
+                              time)
 
 
 
@@ -1120,8 +1205,9 @@ def parse_args():
                              "given directory")
     gen_md.add_argument("-T", "--track",
                         default=None,
-                        choices=[TRACK_SQ, TRACK_INC, TRACK_UC, TRACK_MV,
-                                 TRACK_CHALL_SQ, TRACK_CHALL_INC],
+                        choices=[OPT_TRACK_SQ, OPT_TRACK_INC, OPT_TRACK_UC,
+                                 OPT_TRACK_MV, OPT_TRACK_CHALL_SQ,
+                                 OPT_TRACK_CHALL_INC],
                         help="A string identifying the competition track")
 
     g_args = parser.parse_args()
