@@ -305,10 +305,6 @@ def group_and_rank_solver(data, sequential):
     # Convert solver index to column
     data_grouped.reset_index(level=2, inplace=True)
 
-    # Compute percentage of solved benchmarks
-    data_grouped['psolved'] = \
-        100.0 * (data_grouped.correct / data_grouped.division_size)
-
     # Sort solvers by sort_columns and sort_asc within a division
     sort_columns = ['score_error', 'score_correct']
     sort_asc = [True, False, True, True]
@@ -369,27 +365,53 @@ def score(division,
 
     family_scores = get_family_scores(data) if use_families else {}
 
-
     # Create new dataframe with relevant columns and populate new columns
     data_new = data[['division', 'benchmark', 'family', 'solver', 'solver_id',
                      'cpu_time', 'wallclock_time', 'result', 'expected']].copy()
-
     data_new['year'] = year
-    data_new['score_error'] = 0
-    data_new['score_correct'] = 0
-    data_new['score_cpu_time'] = 0
-    data_new['score_wallclock_time'] = 0
-    data_new['correct'] = 0     # Number of correctly solved benchmarks
-    data_new['error'] = 0       # Number of wrong results
-    data_new['correct_sat'] = 0
-    data_new['correct_unsat'] = 0
-    data_new['competitive'] = False
+    data_new['correct'] = 0       # Number of correctly solved benchmarks
+    data_new['error'] = 0         # Number of wrong results
+    data_new['correct_sat'] = 0   # Number of correctly solved sat benchmarks
+    data_new['correct_unsat'] = 0 # Number of correctly solved unsat benchmarks
     data_new['division_size'] = num_benchmarks
+    data_new['competitive'] = data_new.solver_id.map(is_competitive_solver)
 
-    # Get all job pairs on which solvers were wrong
-    data_new.loc[(data_new.result != RESULT_UNKNOWN)
-                 & (data_new.result != data_new.expected)
-                 & (data_new.expected != RESULT_UNKNOWN), 'error'] = 1
+    # Column 'wrong-answers' only exists in incremental tracks.
+    incremental = 'wrong-answers' in data.columns
+    assert not incremental or 'correct-answers' in data.columns
+
+    # Note: For incremental tracks we have to consider all benchmarks (also
+    #       the ones that run into resource limits).
+    if incremental:
+        data_new['correct'] = data['correct-answers']
+        data_new['error'] = data['wrong-answers']
+    else:
+        # Set correct/error column for solved benchmarks.
+        solved = data_new[(data_new.result.isin(set(verdicts)))]
+        if g_args.sequential:
+            solved = solved[(solved.cpu_time <= wclock_limit)]
+        else:
+            solved = solved[(solved.wallclock_time <= wclock_limit)]
+
+        if skip_unknowns:
+            solved = solved[(solved.result == solved.expected)]
+        else:
+            solved = solved[(solved.expected == RESULT_UNKNOWN)
+                            | (solved.result == solved.expected)]
+
+        data_new.loc[solved.index, 'correct'] = 1
+
+        # Get all job pairs on which solvers were wrong
+        data_new.loc[(data_new.result != RESULT_UNKNOWN)
+                     & (data_new.result != data_new.expected)
+                     & (data_new.expected != RESULT_UNKNOWN), 'error'] = 1
+
+        # Count number of sat/unsat
+        solved_sat = solved[solved.result == RESULT_SAT]
+        solved_unsat = solved[solved.result == RESULT_UNSAT]
+        data_new.loc[solved_sat.index, 'correct_sat'] = 1
+        data_new.loc[solved_unsat.index, 'correct_unsat'] = 1
+
 
     # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
     # 'family_scores' dictionary (use_families == False).
@@ -402,41 +424,12 @@ def score(division,
     else:
         data_new['score_modifier'] = 1
 
-    data_solved = data_new[(data_new.result.isin(set(verdicts)))]
-    if sequential:
-        data_solved = data_solved[(data_solved.cpu_time <= wclock_limit)]
-    else:
-        data_solved = data_solved[(data_solved.wallclock_time <= wclock_limit)]
-
-    if skip_unknowns:
-        data_solved = data_solved[(data_solved.result == data_solved.expected)]
-    else:
-        data_solved = data_solved[(data_solved.expected == RESULT_UNKNOWN)
-                                  | (data_solved.result == data_solved.expected)]
-
-    data_new.loc[data_solved.index, 'correct'] = 1
-
     # Compute scores
-    data_new.score_correct = data_new.correct * data_new.score_modifier
-    data_new.score_error = data_new.error * data_new.score_modifier
-    data_new.score_cpu_time = data_new.cpu_time * data_new.alpha_prime_b
-    data_new.score_wallclock_time = \
+    data_new['score_correct'] = data_new.correct * data_new.score_modifier
+    data_new['score_error'] = data_new.error * data_new.score_modifier
+    data_new['score_cpu_time'] = data_new.cpu_time * data_new.alpha_prime_b
+    data_new['score_wallclock_time'] = \
         data_new.wallclock_time * data_new.alpha_prime_b
-
-    # Compute time scores only for correctly solved
-    # Note: Might be need in the future.
-    #data_new.loc[data_solved.index, 'score_cpu_time'] = \
-    #    score_cpu_timedata_new.cpu_time * data_new.alpha_prime_b
-    #data_new.loc[data_solved.index, 'score_wallclock_time'] = \
-    #    data_new.wallclock_time * data_new.alpha_prime_b
-
-    # Count number of sat/unsat
-    data_solved_sat = data_solved[data_solved.result == RESULT_SAT]
-    data_solved_unsat = data_solved[data_solved.result == RESULT_UNSAT]
-    data_new.loc[data_solved_sat.index, 'correct_sat'] = 1
-    data_new.loc[data_solved_unsat.index, 'correct_unsat'] = 1
-
-    data_new.competitive = data_new.solver_id.map(is_competitive_solver)
 
     # Delete temporary columns
     return data_new.drop(columns=['alpha_prime_b', 'score_modifier'])
@@ -488,6 +481,10 @@ def process_csv(csv,
     cols = data.columns
     cols = cols.map(lambda x: x.replace(' ', '_'))
     data.columns = cols
+
+    # For incremental tracks, the CSV does not contain the 'expected' column.
+    if 'expected' not in data.columns:
+        data['expected'] = None
 
     start = time.time() if g_args.show_timestamps else None
     data = add_division_family_info(data, g_args.family)
@@ -1131,13 +1128,15 @@ def main():
                              g_args.skip_unknowns,
                              g_args.sequential)
             data.append(df)
-            # TODO: Generate result tables
+            print(group_and_rank_solver(df, g_args.sequential))
             biggest_lead_ranking(df, g_args.sequential)
             largest_contribution_ranking(df, time_limit)
-            # Sanity check for previous years
-            if year in ('2015', '2016', '2017', '2018'):
-                check_winners(
-                        group_and_rank_solver(df), year, g_args.sequential)
+#            # Sanity check for previous years
+#            if year in ('2015', '2016', '2017', '2018'):
+#                check_winners(
+#                        group_and_rank_solver(df, g_args.sequential),
+#                        year, g_args.sequential)
+
         result = pandas.concat(data, ignore_index = True)
 
 
