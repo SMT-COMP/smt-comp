@@ -14,6 +14,10 @@
 import numpy
 import pandas
 
+# We need higher precisions for some of the reduction scores of the unsat-core
+# track.
+pandas.set_option('precision', 16)
+
 # Options parsing
 from argparse import ArgumentParser
 
@@ -379,6 +383,8 @@ def score(division,
     # Column 'wrong-answers' only exists in incremental tracks.
     incremental = 'wrong-answers' in data.columns
     assert not incremental or 'correct-answers' in data.columns
+    unsat_core = 'reduction' in data.columns
+    assert not unsat_core or 'result-is-erroneous' in data.columns
 
     # Note: For incremental tracks we have to consider all benchmarks (also
     #       the ones that run into resource limits).
@@ -399,18 +405,22 @@ def score(division,
             solved = solved[(solved.expected == RESULT_UNKNOWN)
                             | (solved.result == solved.expected)]
 
-        data_new.loc[solved.index, 'correct'] = 1
+        if unsat_core:
+            data_new.loc[solved.index, 'correct'] = data['reduction']
+            data_new.loc[solved.index, 'error'] = data['result-is-erroneous']
+        else:
+            data_new.loc[solved.index, 'correct'] = 1
 
-        # Get all job pairs on which solvers were wrong
-        data_new.loc[(data_new.result != RESULT_UNKNOWN)
-                     & (data_new.result != data_new.expected)
-                     & (data_new.expected != RESULT_UNKNOWN), 'error'] = 1
+            # Get all job pairs on which solvers were wrong
+            data_new.loc[(data_new.result != RESULT_UNKNOWN)
+                         & (data_new.result != data_new.expected)
+                         & (data_new.expected != RESULT_UNKNOWN), 'error'] = 1
 
-        # Count number of sat/unsat
-        solved_sat = solved[solved.result == RESULT_SAT]
-        solved_unsat = solved[solved.result == RESULT_UNSAT]
-        data_new.loc[solved_sat.index, 'correct_sat'] = 1
-        data_new.loc[solved_unsat.index, 'correct_unsat'] = 1
+            # Count number of sat/unsat
+            solved_sat = solved[solved.result == RESULT_SAT]
+            solved_unsat = solved[solved.result == RESULT_UNSAT]
+            data_new.loc[solved_sat.index, 'correct_sat'] = 1
+            data_new.loc[solved_unsat.index, 'correct_unsat'] = 1
 
 
     # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
