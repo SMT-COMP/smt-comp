@@ -77,10 +77,6 @@ EXT_MV = "-model-validation.md"
 ###############################################################################
 # Helper functions
 
-g_all_solved = pandas.Series([RESULT_SAT, RESULT_UNSAT])
-g_sat_solved = pandas.Series([RESULT_SAT])
-g_unsat_solved = pandas.Series([RESULT_UNSAT])
-
 # Print error message and exit.
 def die(msg):
     print("error: {}".format(msg))
@@ -369,21 +365,21 @@ def group_and_rank_solver(data, sequential):
 # data           : the results data of this division
 # wclock_limit   : the wallclock time limit
 # year           : the string identifying the year of the results
-# verdicts       : a pandas.Series created with
-#                  - ['sat', 'unsat'] to consider all solved instances
-#                  - ['sat'] to consider only sat instances
-#                  - ['unsat'] to consider only unsat instances
+# filter_result  : - None: consider all instances
+#                  - RESULT_SAT: consider only satisfiable instances
+#                  - RESULT_UNSAT: consider only unsatisfiable instances
 # use_families   : use weighted scoring scheme (as used from 2016-2018)
 # skip_unknowns  : skip benchmarks with status unknown (as done prior to 2017)
 def score(division,
           data,
           wclock_limit,
-          verdicts,
+          filter_result,
           year,
           use_families,
           skip_unknowns,
           sequential):
     global g_args
+    assert not filter_result or filter_result in [RESULT_SAT, RESULT_UNSAT]
     if g_args.log: log("Score for {} in {}".format(year, division))
 
     num_benchmarks = len(data.benchmark.unique())
@@ -404,9 +400,19 @@ def score(division,
     data_new['division_size'] = num_benchmarks
     data_new['competitive'] = data_new.solver_id.map(is_competitive_solver)
 
+    # Set the column that is used to determine if a benchmark was solved
+    # within the time limit.
+    time_column = 'cpu_time' if sequential else 'wallclock_time'
+
     # Set penalty of 'wclock_limit' seconds for jobs with memouts.
     data_new.loc[data_new.status == 'memout',
                  ['cpu_time', 'wallclock_time']] = [wclock_limit, wclock_limit]
+
+    # Reset cpu_time/wallclock_time/status/result if wclock_limit is exceeded.
+    # This can happen e.g., for the 24s scoring.
+    data_new.loc[data_new[time_column] > wclock_limit,
+                 ['cpu_time', 'wallclock_time', 'status', 'result']] = \
+                    [wclock_limit, wclock_limit, 'timeout', RESULT_UNKNOWN]
 
     # Column 'wrong-answers' only exists in incremental tracks.
     incremental = 'wrong-answers' in data.columns
@@ -419,13 +425,26 @@ def score(division,
     if incremental:
         data_new['correct'] = data['correct-answers']
         data_new['error'] = data['wrong-answers']
+    # Set correct/error column for solved benchmarks.
     else:
-        # Set correct/error column for solved benchmarks.
-        solved = data_new[(data_new.result.isin(set(verdicts)))]
-        if sequential:
-            solved = solved[(solved.cpu_time <= wclock_limit)]
-        else:
-            solved = solved[(solved.wallclock_time <= wclock_limit)]
+        # Filter job pairs based on given verdict. For the sat/unsat scoring
+        # only satisfiable/unsatisfiable instances are considered, i.e., if
+        # either the expected status is sat/unsat or a solver solves the
+        # instance.
+        if filter_result:
+            expected = set([filter_result, RESULT_UNKNOWN])
+            data_with_result = \
+                data_new[(data_new.expected == filter_result)
+                         | ((data_new.result == filter_result)
+                            & (data_new.expected.isin(expected)))]
+            benchmarks = set(data_with_result.benchmark.unique())
+            data_new = data_new[data_new.benchmark.isin(benchmarks)]
+
+        # Select benchmarks with results sat/unsat.
+        solved = data_new[(data_new.result == RESULT_SAT)
+                          | (data_new.result == RESULT_UNSAT)]
+        # Select benchmarks that are within the time limit.
+        solved = solved[(solved[time_column] <= wclock_limit)]
 
         if skip_unknowns:
             solved = solved[(solved.result == solved.expected)]
@@ -480,25 +499,25 @@ def score(division,
 # Process a CSV file with results of one track.
 # csv          : the input csv
 # year         : the string identifying the year of the results
-# verdicts     : a pandas.Series created with
-#                - ['sat', 'unsat'] to consider all solved instances
-#                - ['sat'] to consider only sat instances
-#                - ['unsat'] to consider only unsat instances
+# filter_result: - None: consider all instances
+#                - RESULT_SAT: consider only satisfiable instances
+#                - RESULT_UNSAT: consider only unsatisfiable instances
 # use_families : use weighted scoring scheme
 # skip_unknowns: skip benchmarks with status unknown
 def process_csv(csv,
                 year,
                 time_limit,
-                verdicts,
+                filter_result,
                 use_families,
                 skip_unknowns,
                 sequential):
     global g_args
+    assert not filter_result or filter_result in [RESULT_SAT, RESULT_UNSAT]
     if g_args.log:
         log("Process {} with family: '{}', divisions: '{}', "\
             "year: '{}', time_limit: '{}', "\
             "use_families: '{}', skip_unknowns: '{}', sequential: '{}', "\
-            "verdicts: '{}'".format(
+            "filter_result: '{}'".format(
             csv,
             g_args.family,
             g_args.divisions,
@@ -507,7 +526,7 @@ def process_csv(csv,
             g_args.use_families,
             skip_unknowns,
             sequential,
-            verdicts))
+            filter_result))
 
     # Load CSV file
     start = time.time() if g_args.show_timestamps else None
@@ -548,7 +567,7 @@ def process_csv(csv,
         res = score(division,
                     division_data,
                     time_limit,
-                    verdicts,
+                    filter_result,
                     year,
                     use_families,
                     skip_unknowns,
@@ -609,7 +628,7 @@ def report_project(normal,other):
 # This function runs with specific values for certain years but keeps some
 # options open to allow us to try diferent things
 def gen_results_for_report_aux(
-        verdicts, time_limit, bytotal, skip_unknowns, sequential):
+        filter_result, time_limit, bytotal, skip_unknowns, sequential):
     global g_args
     dataframes = []
     dataframes.append(
@@ -617,7 +636,7 @@ def gen_results_for_report_aux(
                 g_args.csv['2015'][0],
                 '2015',
                 min(g_args.csv['2015'][1], time_limit),
-                verdicts,
+                filter_result,
                 False,
                 skip_unknowns,
                 sequential))
@@ -626,7 +645,7 @@ def gen_results_for_report_aux(
                 g_args.csv['2016'][0],
                 '2016',
                 min(g_args.csv['2016'][1], time_limit),
-                verdicts,
+                filter_result,
                 not bytotal,
                 skip_unknowns,
                 sequential))
@@ -635,7 +654,7 @@ def gen_results_for_report_aux(
                 g_args.csv['2017'][0],
                 '2017',
                 min(g_args.csv['2017'][1], time_limit),
-                verdicts,
+                filter_result,
                 not bytotal,
                 skip_unknowns,
                 sequential))
@@ -644,7 +663,7 @@ def gen_results_for_report_aux(
                 g_args.csv['2018'][0],
                 '2018',
                 min(g_args.csv['2018'][1], time_limit),
-                verdicts,
+                filter_result,
                 not bytotal,
                 skip_unknowns,
                 sequential))
@@ -655,7 +674,6 @@ def gen_results_for_report_aux(
 
 def gen_results_for_report():
     global g_args
-    global g_all_solved, g_sat_solved, g_unsat_solved
 
     report_read_competitive()
     report_read_solver_names()
@@ -663,7 +681,7 @@ def gen_results_for_report():
     print("PARALLEL")
     start = time.time() if g_args.show_timestamps else None
     normal = gen_results_for_report_aux(
-            g_all_solved, 2400, False, False, g_args.sequential)
+                None, 2400, False, False, g_args.sequential)
     check_all_winners(normal, False)
     grouped_normal = group_and_rank_solver(normal, g_args.sequential)
     #to_latex_for_report(normal)
@@ -675,7 +693,7 @@ def gen_results_for_report():
     print("UNSAT")
     start = time.time() if g_args.show_timestamps else None
     unsat = gen_results_for_report_aux(
-            g_unsat_solved, 2400, False, False, g_args.sequential)
+            RESULT_UNSAT, 2400, False, False, g_args.sequential)
     #biggest_lead_ranking(unsat,"b_unsat")
     grouped_unsat = group_and_rank_solver(unsat, g_args.sequential)
     unsat_new = report_project(select_winners(grouped_normal),
@@ -688,7 +706,7 @@ def gen_results_for_report():
     print("SAT")
     start = time.time() if g_args.show_timestamps else None
     sat = gen_results_for_report_aux(
-            g_sat_solved, 2400, False, False, g_args.sequential)
+            RESULT_SAT, 2400, False, False, g_args.sequential)
     grouped_sat = group_and_rank_solver(sat, g_args.sequential)
     #biggest_lead_ranking(sat,"c_sat")
     sat_new = report_project(select_winners(grouped_normal),
@@ -701,7 +719,7 @@ def gen_results_for_report():
     print("24s")
     start = time.time() if g_args.show_timestamps else None
     twenty_four = gen_results_for_report_aux(
-            g_all_solved, 24, False, False, g_args.sequential)
+                    None, 24, False, False, g_args.sequential)
     grouped_twenty_four = group_and_rank_solver(twenty_four, g_args.sequential)
     #biggest_lead_ranking(twenty_four,"d_24")
     twenty_four_new = report_project(select_winners(grouped_normal),
@@ -713,14 +731,14 @@ def gen_results_for_report():
 
     #print("Total Solved")
     #by_total_scored  = gen_results_for_report_aux(
-    #        g_all_solved, 2400, True, False, g_args.sequential)
+    #        None, 2400, True, False, g_args.sequential)
     #biggest_lead_ranking(by_total_scored,"e_total")
     #by_total_scored_new = report_project(select_winners(normal),select_winners(by_total_scored))
     #to_latex_for_report(by_total_scored_new)
 
     #print("Without unknowns")
     #without_unknowns  = gen_results_for_report_aux(
-    #         g_all_solved, 2400, False, True, g_args.sequential)
+    #         None, 2400, False, True, g_args.sequential)
     #without_unknowns_new = report_project(select_winners(normal),select_winners(without_unknowns))
     #to_latex_for_report(without_unknowns_new)
 
@@ -1071,39 +1089,38 @@ def to_md_files(results_seq,
 
 def gen_results_md_files(csv, time_limit, year, path):
     global g_args
-    global g_all_solved, g_sat_solved, g_unsat_solved
     results_seq = process_csv(csv,
                               year,
                               time_limit,
-                              g_all_solved,
+                              None,
                               g_args.use_families,
                               g_args.skip_unknowns,
                               True)
     results_par = process_csv(csv,
                               year,
                               time_limit,
-                              g_all_solved,
+                              None,
                               g_args.use_families,
                               g_args.skip_unknowns,
                               False)
     results_sat = process_csv(csv,
                               year,
                               time_limit,
-                              g_sat_solved,
+                              RESULT_SAT,
                               g_args.use_families,
                               g_args.skip_unknowns,
                               False)
     results_unsat = process_csv(csv,
                                 year,
                                 time_limit,
-                                g_unsat_solved,
+                                RESULT_UNSAT,
                                 g_args.use_families,
                                 g_args.skip_unknowns,
                                 False)
     results_24s = process_csv(csv,
                               year,
                               24,
-                              g_all_solved,
+                              None,
                               g_args.use_families,
                               g_args.skip_unknowns,
                               False)
@@ -1263,7 +1280,7 @@ def main():
             df = process_csv(csv,
                              year,
                              time_limit,
-                             g_all_solved,
+                             None,
                              g_args.use_families,
                              g_args.skip_unknowns,
                              g_args.sequential)
