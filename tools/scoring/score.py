@@ -38,16 +38,31 @@ RESULT_UNKNOWN = 'starexec-unknown'
 RESULT_SAT = 'sat'
 RESULT_UNSAT = 'unsat'
 
+# Tracks
+TRACK_SQ = "sq"
+TRACK_INC = "inc"
+TRACK_CHALL_SQ = "chall_sq"
+TRACK_CHALL_INC = "chall_inc"
+TRACK_UC = "uc"
+TRACK_MV = "mv"
+
 # Columns of solvers csv
 COL_SOLVER_ID = "Solver ID"
 COL_SOLVER_NAME = "Solver Name"
 COL_VARIANT_OF_ID = "Variant Of"
 COL_COMPETING = "Competing"
-
 COL_SOLVER_ID_SQ_2019 = "Wrapped Solver ID Single Query"
 COL_SOLVER_ID_INC_2019 = "Wrapped Solver ID Incremental"
 COL_SOLVER_ID_UC_2019 = "Wrapped Solver ID Unsat Core"
 COL_SOLVER_ID_MV_2019 = "Wrapped Solver ID Model Validation"
+
+# Extensions of results .md files
+EXT_SQ = "-single-query.md"
+EXT_INC = "-incremental.md"
+EXT_CHALL_SQ = "-challenge-non-incremental.md"
+EXT_CHALL_INC = "-challenge-incremental.md"
+EXT_UC = "-unsat-core.md"
+EXT_MV = "-model-validation.md"
 
 
 
@@ -842,21 +857,33 @@ def largest_contribution_ranking(data, time_limit):
 # Generate competition results and .md files for website
 
 def md_get_winner(df):
-    solver_id = df[(df.competitive == True) & (df['rank'] == 1)].iloc[0].solver_id
+    solver_id = df[(df.competitive == True) \
+                & (df['rank'] == 1)].iloc[0].solver_id
     return get_solver_name(solver_id)
 
 def md_table_details(df, scoring, n_benchmarks):
     lines = ["{}:".format(scoring)]
     for index, row in df.iterrows():
-        lines.append("- name: {}".format(get_solver_name(row.solver_id)))
-        lines.append("  errorScore: {}".format(row.score_error))
-        lines.append("  correctScore: {}".format(row.score_correct))
-        lines.append("  CPUScore: {}".format(row.score_cpu_time))
-        lines.append("  WallScore: {}".format(row.score_wallclock_time))
-        lines.append("  solved: {}".format(row.correct))
-        lines.append("  solved_sat: {}".format(row.correct_sat))
-        lines.append("  solved_unsat: {}".format(row.correct_unsat))
-        lines.append("  unsolved: {}".format(n_benchmarks - row.correct))
+        lines.append("- name: {}".format(
+            get_solver_name(row.solver_id)))
+        lines.append("  competing: {}".format(
+            '\"yes\"' if is_competitive_solver(row.solver_id) else '\"no\"'))
+        lines.append("  errorScore: {}".format(
+            row.score_error))
+        lines.append("  correctScore: {}".format(
+            row.score_correct))
+        lines.append("  CPUScore: {}".format(
+            round(row.score_cpu_time, 3)))
+        lines.append("  WallScore: {}".format(
+            round(row.score_wallclock_time, 3)))
+        lines.append("  solved: {}".format(
+            row.correct))
+        lines.append("  solved_sat: {}".format(
+            row.correct_sat))
+        lines.append("  solved_unsat: {}".format(
+            row.correct_unsat))
+        lines.append("  unsolved: {}".format(
+            n_benchmarks - row.correct))
     return '\n'.join(lines)
 
 
@@ -880,19 +907,24 @@ def to_md_files(results_seq,
                results_unsat.groupby(level=[0,1]),
                results_24s.groupby(level=[0,1]),
               )
-
+    # iterate over divisions in track
+    # (results are zipped together for iteration)
     for data_seq, data_par, data_sat, data_unsat, data_24s in zip(*results):
+        # assert that results are complete and correctly zipped togeher, i.e.,
+        # year and division of individual results must match
         assert data_seq[0] == data_par[0] == data_sat[0]
         assert data_sat[0] == data_unsat[0] == data_24s[0]
         year, division = data_seq[0]
+        # the actual results data of the current division
         data_seq = data_seq[1]
         data_par = data_par[1]
         data_sat = data_sat[1]
         data_unsat = data_unsat[1]
         data_24s = data_24s[1]
-
+        # total number of benchmarks in the current division
         n_benchmarks = data_seq.iloc[0].division_size
-        str_division = \
+        # general info about the current division
+        str_div = \
                 "---\n"\
                 "layout: result\n"\
                 "resultdate: {}\n"\
@@ -916,26 +948,34 @@ def to_md_files(results_seq,
                         md_get_winner(data_sat),
                         md_get_winner(data_unsat),
                         md_get_winner(data_24s))
-
+        # division scores
         str_seq   = md_table_details(data_seq, 'sequential', n_benchmarks)
         str_par   = md_table_details(data_par, 'parallel', n_benchmarks)
         str_sat   = md_table_details(data_sat, 'sat', n_benchmarks)
         str_unsat = md_table_details(data_unsat, 'unsat', n_benchmarks)
-        str_24s   = md_table_details(data_24s, '24s', n_benchmarks)
-
+        str_24s   = md_table_details(data_24s, 'twentyfour', n_benchmarks)
+        # write md file
         year_path = os.path.join(path, year)
         if not os.path.exists(year_path): os.mkdir(year_path)
         track_path = os.path.join(year_path, track)
         if not os.path.exists(track_path): os.mkdir(track_path)
-        outfile = open(os.path.join(track_path, "{}.md".format(division)), "w")
+        ext = ".md"
+        if track == TRACK_SQ:
+            ext = EXT_SQ
+        elif track == TRACK_INC:
+            ext = EXT_INC
+        elif track == TRACK_UC:
+            ext = EXT_UC
+        elif track == TRACK_MV:
+            ext = EXT_MV
+        elif track == TRACK_CHALL_SQ:
+            ext = EXT_CHALL_SQ
+        elif track == TRACK_CHALL_INC:
+            ext = EXT_CHALL_INC
+        outfile = open(
+                os.path.join(track_path, "{}{}".format(division, ext)), "w")
         outfile.write("\n".join([
-            str_division,
-            str_seq,
-            str_par,
-            str_sat,
-            str_unsat,
-            str_24s,
-            '---\n']))
+            str_div, str_seq, str_par, str_sat, str_unsat, str_24s, '---\n']))
 
 
 
@@ -1075,9 +1115,8 @@ def parse_args():
                              "given directory")
     gen_md.add_argument("-T", "--track",
                         default=None,
-                        choices=['single_query', 'incremental',
-                                 'unsat_core', 'single_query_challenge',
-                                 'incremental_challenge', 'model_validation'],
+                        choices=[TRACK_SQ, TRACK_INC, TRACK_UC, TRACK_MV,
+                                 TRACK_CHALL_SQ, TRACK_CHALL_INC],
                         help="A string identifying the competition track")
 
     g_args = parser.parse_args()
