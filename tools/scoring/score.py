@@ -386,7 +386,8 @@ def score(division,
 
     # Create new dataframe with relevant columns and populate new columns
     data_new = data[['division', 'benchmark', 'family', 'solver', 'solver_id',
-                     'cpu_time', 'wallclock_time', 'result', 'expected']].copy()
+                     'cpu_time', 'wallclock_time', 'status', 'result',
+                     'expected']].copy()
     data_new['year'] = year
     data_new['correct'] = 0       # Number of correctly solved benchmarks
     data_new['error'] = 0         # Number of wrong results
@@ -394,6 +395,10 @@ def score(division,
     data_new['correct_unsat'] = 0 # Number of correctly solved unsat benchmarks
     data_new['division_size'] = num_benchmarks
     data_new['competitive'] = data_new.solver_id.map(is_competitive_solver)
+
+    # Set penalty of 'wclock_limit' seconds for jobs with memouts.
+    data_new.loc[data_new.status == 'memout',
+                 ['cpu_time', 'wallclock_time']] = [wclock_limit, wclock_limit]
 
     # Column 'wrong-answers' only exists in incremental tracks.
     incremental = 'wrong-answers' in data.columns
@@ -409,7 +414,7 @@ def score(division,
     else:
         # Set correct/error column for solved benchmarks.
         solved = data_new[(data_new.result.isin(set(verdicts)))]
-        if g_args.sequential:
+        if sequential:
             solved = solved[(solved.cpu_time <= wclock_limit)]
         else:
             solved = solved[(solved.wallclock_time <= wclock_limit)]
