@@ -323,6 +323,8 @@ def group_and_rank_solver(data, sequential):
         'score_error': sum,
         'score_cpu_time': sum,
         'score_wallclock_time': sum,
+        'timeout' : sum,
+        'memout' : sum,
         'competitive': 'first',
         'division_size': 'first',
         })
@@ -401,6 +403,8 @@ def score(division,
     data_new['correct_unsat'] = 0 # Number of correctly solved unsat benchmarks
     data_new['division_size'] = num_benchmarks
     data_new['competitive'] = data_new.solver_id.map(is_competitive_solver)
+    data_new['timeout'] = 0
+    data_new['memout'] = 0
 
     # Set the column that is used to determine if a benchmark was solved
     # within the time limit.
@@ -415,6 +419,10 @@ def score(division,
     data_new.loc[data_new[time_column] > wclock_limit,
                  ['cpu_time', 'wallclock_time', 'status', 'result']] = \
                     [wclock_limit, wclock_limit, 'timeout', RESULT_UNKNOWN]
+
+    # Determine memouts/timeouts based on status.
+    data_new.loc[data_new.status.str.startswith('timeout'), 'timeout'] = 1
+    data_new.loc[data_new.status == 'memout', 'memout'] = 1
 
     # Column 'wrong-answers' only exists in incremental tracks.
     incremental = 'wrong-answers' in data.columns
@@ -950,6 +958,10 @@ def md_table_details(df, track, scoring, n_benchmarks):
                 row.correct_unsat))
             lines.append("  unsolved: {}".format(
                 n_benchmarks - row.correct))
+            lines.append("  timeout: {}".format(
+                row.timeout))
+            lines.append("  memout: {}".format(
+                row.memout))
     return '\n'.join(lines)
 
 def write_md_file_sq(division,
