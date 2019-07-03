@@ -288,6 +288,8 @@ def get_family_scores(data):
 
 def map_solver_id(row, column):
     global g_competitive, g_solver_names
+    if column not in row:
+        return
     solver_id = int(row[column]) if not pandas.isnull(row[column]) else None
     if solver_id:
         g_competitive[solver_id] = row[COL_COMPETING] == 'yes'
@@ -782,7 +784,7 @@ def biggest_lead_ranking(data, sequential):
         scores = []
         for division, div_data in ydata.groupby('division'):
             # Skip non-competitive divisions
-            if not is_competitive_division(div_data.solver.unique()):
+            if not is_competitive_division(div_data.solver_id.unique()):
                 continue
 
             assert len(div_data) >= 2
@@ -795,7 +797,10 @@ def biggest_lead_ranking(data, sequential):
 
             # Compute distance between first and second in the division.
             score = ((1 + first.score_correct) / (1 + second.score_correct))
-            scores.append((score, first.solver, second.solver, division))
+            scores.append((score,
+                           get_solver_name(first.solver_id),
+                           get_solver_name(second.solver_id),
+                           division))
 
         scores_sorted = sorted(scores, reverse=True)
         print('{} Biggest Lead Ranking'.format(year) +
@@ -805,6 +810,8 @@ def biggest_lead_ranking(data, sequential):
 
     if g_args.show_timestamps:
         log('time biggest_lead_ranking: {}'.format(time.time() - start))
+
+    return scores_sorted
 
 
 # Largest Contribution Ranking.
@@ -848,6 +855,7 @@ def largest_contribution_ranking(data, time_limit):
 
     data = data[(data.competitive == True)]
 
+    num_job_pairs_total = 0
     scores_top = []
     for division, div_data in data.groupby('division'):
         solvers = div_data.solver_id.unique()
@@ -855,6 +863,9 @@ def largest_contribution_ranking(data, time_limit):
         # Skip non-competitive divisions
         if not is_competitive_division(solvers):
             continue
+
+        division_size = div_data.division_size.iloc[0]
+        num_job_pairs_total += division_size * len(solvers)
 
         # Compute the scores for the virtual best solver
         vbs_score_correct, vbs_cpu_time = vbss(div_data, '')
@@ -868,20 +879,35 @@ def largest_contribution_ranking(data, time_limit):
             impact_score = 1 - cur_score_correct / vbs_score_correct
             impact_time = 1 - vbs_cpu_time / cur_cpu_time
 
-            scores_div.append((impact_score, impact_time,
+            scores_div.append((impact_score,
+                               impact_time,
                                len(solvers),
-                               get_solver_name(solver), division))
+                               division_size,
+                               get_solver_name(solver),
+                               division))
 
         scores_div_sorted = sorted(scores_div, reverse=True)
         # Pick the solver with the highest impact
         scores_top.append(scores_div_sorted[0])
 
-    print('Largest Contribution Ranking (Score, Division Size, Solver, Division)')
-    for s in sorted(scores_top, reverse=True):
+    # Normalize scores based on division job pairs/total job pairs as defined
+    # in section 7.3.2 of the SMT-COMP'19 rules.
+    weighted_scores = []
+    for tup in scores_top:
+        impact_score, impact_time, n_solvers, n_benchmarks = tup[:4]
+        weight = n_solvers * n_benchmarks / num_job_pairs_total
+        w_score, w_time = impact_score * weight, impact_time * weight
+        weighted_scores.append(
+            (w_score, w_time, n_solvers, n_benchmarks, tup[4], tup[5]))
+
+    print('Largest Contribution Ranking')
+    for s in sorted(weighted_scores, reverse=True):
         print(s)
 
     if g_args.show_timestamps:
         log('time largest_contribution_ranking: {}'.format(time.time() - start))
+
+    return weighted_scores
 
 
 ###############################################################################
