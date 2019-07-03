@@ -795,9 +795,14 @@ def biggest_lead_ranking(data, sequential):
             first = first.iloc[0]
             second = second.iloc[0]
 
-            # Compute distance between first and second in the division.
+            # Compute score and time distance between first and second in the
+            # division.
+            # Note: The time score is only used if solvers have the same score
+            # lead.
             score = ((1 + first.score_correct) / (1 + second.score_correct))
+            time = ((1 + second.score_cpu_time) / (1 + first.score_cpu_time))
             scores.append((score,
+                           time,
                            get_solver_name(first.solver_id),
                            get_solver_name(second.solver_id),
                            division))
