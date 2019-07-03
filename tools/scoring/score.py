@@ -440,7 +440,10 @@ def score(division,
                          | ((data_new.result == filter_result)
                             & (data_new.expected.isin(expected)))]
             benchmarks = set(data_with_result.benchmark.unique())
-            data_new = data_new[data_new.benchmark.isin(benchmarks)]
+            #data_new = data_new[data_new.benchmark.isin(benchmarks)]
+            data_new.loc[~data_new.benchmark.isin(benchmarks),
+                         ['cpu_time', 'wallclock_time', 'result']] = \
+                            [0.0, 0.0, RESULT_UNKNOWN]
 
         # Select benchmarks with results sat/unsat.
         solved = data_new[(data_new.result == RESULT_SAT)
