@@ -958,10 +958,10 @@ def md_table_details(df, track, scoring, n_benchmarks):
                 row.correct_unsat))
             lines.append("  unsolved: {}".format(
                 n_benchmarks - row.correct))
-            lines.append("  timeout: {}".format(
-                row.timeout))
-            lines.append("  memout: {}".format(
-                row.memout))
+        lines.append("  timeout: {}".format(
+            row.timeout))
+        lines.append("  memout: {}".format(
+            row.memout))
     return '\n'.join(lines)
 
 def write_md_file_sq(division,
