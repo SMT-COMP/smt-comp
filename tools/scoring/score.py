@@ -430,11 +430,22 @@ def score(division,
     unsat_core = 'reduction' in data.columns
     assert not unsat_core or 'result-is-erroneous' in data.columns
 
+    # Column 'model_validator_status' only exists in the model validation track.
+    model_validation = 'model_validator_status' in data.columns
+
     # Note: For incremental tracks we have to consider all benchmarks (also
     #       the ones that run into resource limits).
     if incremental:
         data_new['correct'] = data['correct-answers']
         data_new['error'] = data['wrong-answers']
+    # Note: The model validator reports INVALID if a solver crashes on an
+    #       instance. Hence, only when a solver reports statisfiable, we
+    #       check the status of the model validator.
+    elif model_validation:
+        data_new.loc[(data.result == RESULT_SAT)
+                     & (data.model_validator_status == 'VALID'), 'correct'] = 1
+        data_new.loc[(data.result == RESULT_SAT)
+                     & (data.model_validator_status == 'INVALID'), 'error'] = 1
     # Set correct/error column for solved benchmarks.
     else:
         # Filter job pairs based on given verdict. For the sat/unsat scoring
