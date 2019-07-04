@@ -1241,13 +1241,14 @@ would require information not provided by the parallel performance, e.g.,
 detailed timing information for each result.}.  It is defined for a
 participating solver in a division with $M$ benchmarks as the sum of all the
 individual sequential benchmark scores:
-$$\sum_{b\in M} \langle e_{S_b}, n_{S_b}, w_{S_b}, c_{S_b}\rangle$$.
+$$\sum_{b\in M} \langle e_b^s, n_b^s, w_b^s, c_b^s\rangle$$.
 
 \noindent
-A sequential division score $\langle e_S, n_S, c_S\rangle$ is better than a
-sequential division score $\langle e_S', n_S', c_S'\rangle$ iff $e_S < e_S'$ or
-($e_S = e_S'$ and $n_S > n_S'$) or ($e_S = e_S'$ and $n_S = n_S'$ and $c_S <
-c_S'$).  That is, fewer errors takes precedence over more correct solutions,
+A sequential division score $\langle e^s, n^s, c^s\rangle$ is better than a
+sequential division score $\langle e^{s'}, n^{s'}, c^{s'}\rangle$ iff
+$e^s < e^{s'}$ or ($e^s = e^{s'}$ and $n^s > n^{s'}$) or ($e^s = e^{s'}$ and
+$n_S = n^{s'}$ and $c^s < c^{s'}$).
+That is, fewer errors takes precedence over more correct solutions,
 which takes precedence over less CPU time taken.
 
 We will not make any comparisons between parallel and sequential performances,
@@ -1279,30 +1280,97 @@ This year we will replace the competition-wide score with two new \emph{rankings
 
 This ranking aims to select the solver that \emph{won by the most} in some competitive division. The winners of each division are ranked by the distance between them and the next competitive solver in that division.
 
-Let $n_i^D$ be the correctness score of the $i$th solver (for a given scoring system e.g. number of correct results or reduction) in division $D$. The rank of division $D$ is given as
+Let $n_i^D$ be the correctness score of the $i$th solver (for a given scoring
+system e.g. number of correct results or reduction) in division $D$.
+The \emph{correctness rank} of division $D$ is given as
 \[
 \frac{n_1^D+1}{n_2^D+1}
 \]
-The \emph{biggest lead winner} is the winner of the division with the highest (largest) rank. This can be computed per scoring system.
+Let $c_i^D$ be the CPU time score of the $i$th solver in division $D$.
+The \emph{CPU time rank} of division $D$ is given as
+\vspace{-1ex}
+\[
+\frac{c_2^D+1}{c_1^D+1}
+\]
+Let $w_i^D$ be the wall-clock time score of the $i$th solver in division $D$.
+The \emph{wall-clock time rank} of division $D$ is given as
+\vspace{-1ex}
+\[
+\frac{w_2^D+1}{w_1^D+1}
+\]
+The \emph{biggest lead winner} is the winner of the division with the highest
+(largest) correctness rank. In case of a tie, the winner is determined as the
+solver with the higher corresponding CPU (resp. wall-clock) time rank for
+sequantial (resp. parallel) scoring.
+This can be computed per scoring system.
 
 \subsubsection{Largest Contribution Ranking}
 
 This ranking aims to select the solver that \emph{uniquely contributed} the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solver's contribution to the \emph{virtual best solver} for a division.
 
-Let $\langle e_b^s, n_b^s, w_b^s, c_b^s \rangle$ be the parallel benchmark score for benchmark $b$ and solver $s$ (for a given scoring system e.g. $n$ is either number of correct results or reduction). 
-The virtual best solver score for a division $D$ using solvers $S$ is given as 
-\[
-\mathit{vbss}(D,S) = \sum_{b \in D} {\sf min}\{ n_b^s \times c_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0  \}
-\]
-where the minimum of an empty set is 0 (e.g. no contribution if a benchmark is unsolved). In other words, for the single query track, $\mathit{vbss}(D,S)$ is the smallest amount of time taken to solve all benchmarks solved in division $D$ using solvers in $S$.
+Let $\langle e^s, n^s, w^s, c^s \rangle$ be the parallel division score
+for solver $s$ (for a given scoring system, i.e., $n$ is either number of correct
+results or reduction).
+If the division error score $e^s > 0$, then solver $s$ is considered unsound
+and excluded from the ranking.
+If the number of sound competitive solvers~$S$ in a division $D$ is $|S| < 2$, 
+the division is excluded from the ranking.
 
-Let $S$ be the set of competitive solvers competing in division $D$. The rank of solver $s \in S$ in division $D$ is then
+Let $\langle e_b^s, n_b^s, w_b^s, c_b^s \rangle$ be the parallel benchmark
+score for benchmark $b$ and solver $s$ (for a given scoring system). 
+The virtual best solver \emph{correctness score} for a division $D$ with 
+competitive sound solvers $S$ is given as 
 \[
-1- \frac{\mathit{vbss}(D,S-s) }{ \mathit{vbss}(D,S)}
+\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
 \]
-e.g. the difference in virtual best solver score when removing $s$ from the computation. This will be a number between 0 and 1 with 0 indicating that $s$ made no impact on the \emph{vbss} and 1 indicating that $s$ is the only solver that solved anything in the division. 
+where the maximum of an empty set is 0 (i.e., no contribution if a benchmark
+is unsolved).
+
+The virtual best solver \emph{CPU time score} $\mathit{vbss}_c$ and
+the virtual best solver \emph{wall-clock time score} $\mathit{vbss}_w$ for a
+division $D$ with competitive sound solvers $S$ is given as 
+\[
+\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
+\]
+\[
+\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
+\]
+where the minimum of an empty set is 2400 seconds
+(no solver was able to solve the benchmark).
+
+In other words, for the single query track,
+$\mathit{vbss}_c(D,S)$  and $\mathit{vbss}_w(D,S)$ is the
+smallest amount of CPU time and wall-clock time taken to solve all benchmarks
+solved in division $D$ using all sound competitive solvers in $S$.
+
+Let $S$ be the set of competitive solvers competing in division $D$.
+The \emph{correctness rank} $\mathit{vbss}_n$, the \emph{CPU time rank}
+$\mathit{vbss}_c$ and the \emph{wall-clock time rank} $\mathit{vbss}_w$
+of solver $s \in S$ in division $D$ are then defined as
+\[
+1- \frac{\mathit{vbss}_n(D,S-s) }{ \mathit{vbss}_n (D,S)}
+\hspace{3em}
+1- \frac{\mathit{vbss}_c(D,S) }{ \mathit{vbss}_c(D,S-s)}
+\hspace{3em}
+1- \frac{\mathit{vbss}_w(D,S) }{ \mathit{vbss}_w(D,S-s)}
+\]
+i.e., the difference in virtual best solver score when removing $s$ from the
+computation.
+
+These ranks will be numbers between 0 and 1 with 0 indicating that $s$ made no
+impact on the \emph{vbss} and 1 indicating that $s$ is the only solver that
+solved anything in the division.
 %
-The \emph{largest contribution winner} is the solver across all divisions with the highest (largest) rank. Again, this can be computed per scoring system.
+The ranks for a division $D$ in a given track will be normalized by multiplying
+with $\frac{n_D}{N}$, where $n_D$ corresponds to the number of competitive
+solver/benchmark pairs in division $D$ and $N$ being the overall number of
+competitive solver/benchmark pairs of this track.
+
+The \emph{largest contribution winner} is the solver across all divisions with
+the highest (largest) normalized correctness rank. Again, this can be computed
+per scoring system. In case of a tie, the winner is determined as the solver
+with the higher corresponding normalized CPU (resp. wall-clock) time rank for
+sequential (resp. parallel) scoring.
 
 \subsection{Other Recognitions}
 

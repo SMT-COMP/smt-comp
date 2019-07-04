@@ -203,6 +203,8 @@ def add_solvers_in_space(space, solvers):
 # Currently, this only considers non-competing solvers as given via '--nc'.
 def is_competitive(solvers):
     global g_args
+    if g_args.include_non_competitive:
+        return True
     count = len(solvers)
     for nc in g_args.non_competing:
         for s in solvers:
@@ -301,6 +303,10 @@ def main():
                         dest="excluded_solvers",
                         help="generate space excluding the listed "\
                              "solvers (StarExec IDs, wrapped IDs if -w)")
+    parser.add_argument("--include-non-competitive",
+                        default=False,
+                        action="store_true",
+                        help="include non-competitive divisions")
     g_args = parser.parse_args()
 
     if not os.path.exists(g_args.space_xml):

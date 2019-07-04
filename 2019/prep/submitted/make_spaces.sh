@@ -11,6 +11,7 @@ IN_SPACE_INC="../incremental-space.xml"
 
 ### Benchmark selection
 SELECT_SQ="$SCRIPTDIR/../selection/single_query/benchmark_selection_single_query_2019_no_strings"
+SELECT_SQ_STRINGS="$SCRIPTDIR/../selection/single_query/benchmark_selection_single_query_2019_strings"
 
 SELECT_INC="$SCRIPTDIR/../selection/incremental/benchmark_selection_incremental_2019"
 SELECT_INC_UNKNOWN="$SCRIPTDIR/../selection/incremental/benchmark_selection_incremental_2019_status_unknown"
@@ -55,6 +56,7 @@ OUT_SPACE_SQ=
 OUT_SPACE_SQ_FIXED=
 OUT_SPACE_SQ_FIXED_NC=
 OUT_SPACE_SQ_2018=
+OUT_SPACE_SQ_STRINGS=
 # Challenge Track - non-incremental
 OUT_SPACE_CHALL_NON_INC=
 OUT_SPACE_CHALL_NON_INC_FIXED=
@@ -85,11 +87,13 @@ do
       echo
       echo "  options:"
       echo "    -h, --help           Print this message and exit"
-      echo "    --sq          <file> Single Query track output xml"
-      echo "    --sq-fixed    <file> Single Query track output xml for fixed"
-      echo "                         (non-competing) solvers"
-      echo "    --sq-2018     <file> Single Query track output xml for best "
-      echo "                         solvers 2018"
+      echo "    --sq          <file> Single Query track (no strings) output xml"
+      echo "    --sq-fixed    <file> Single Query track (no strings) output xml"
+      echo "                         for fixed (non-competing) solvers"
+      echo "    --sq-2018     <file> Single Query track (no strings) output xml"
+      echo "                         for best solvers 2018"
+      echo "    --sq-strings  <file> Single Query track (strings only) "
+      echo "                         output xml"
       echo "    --inc         <file> Incremental track output xml"
       echo "    --inc-unknown <file> Incremental track for benchmarks with"
       echo "                         unknown status output xml"
@@ -117,6 +121,10 @@ do
     --sq)
       shift
       OUT_SPACE_SQ=$1
+      ;;
+    --sq-strings)
+      shift
+      OUT_SPACE_SQ_STRINGS=$1
       ;;
     --sq-fixed)
       shift
@@ -200,6 +208,9 @@ done
 # Single Query Track
 [[ -n $OUT_SPACE_SQ ]] && \
 python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --exclude-solvers "$FIXED_SOLVERS_NON_COMPETITIVE_SQ,$SOLVERS_2018_SQ"
+# Single Query Track - strings
+[[ -n $OUT_SPACE_SQ_STRINGS ]] && \
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ_STRINGS" -t single_query --select "$SELECT_SQ_STRINGS" -w --include-non-competitive
 # Single Query Track - fixed STP versions
 [[ -n $OUT_SPACE_SQ_FIXED_NC ]] && \
 python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ_FIXED_NC" -t single_query --select "$SELECT_SQ" -w --nc $NON_COMPETITIVE_SOLVERS_SQ --solvers $FIXED_SOLVERS_NON_COMPETITIVE_SQ
