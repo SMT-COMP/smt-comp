@@ -556,6 +556,13 @@ def process_csv(csv,
     if 'expected' not in data.columns:
         data['expected'] = None
 
+    # Make sure that the expected column contains RESULT_SAT, RESULT_UNSAT or
+    # RESULT_UNKNOWN. For some exported StarExec data, the expected column is
+    # '-', which can happen when extracting the status of a benchmark fails
+    # while uploading the benchmark to StarExec.
+    data.loc[~data.expected.isin({RESULT_SAT, RESULT_UNSAT}),
+             'expected'] = RESULT_UNKNOWN
+
     start = time.time() if g_args.show_timestamps else None
     data = add_division_family_info(data, g_args.family)
     if g_args.show_timestamps:
@@ -806,12 +813,24 @@ def biggest_lead_ranking(data, sequential):
             first = first.iloc[0]
             second = second.iloc[0]
 
+            # If no solver was able to solve a single instance, there is no
+            # winner for this division.
+            if first.score_correct == 0:
+                continue
+
+            if sequential:
+                time_first =  first.score_cpu_time
+                time_second = second.score_cpu_time
+            else:
+                time_first =  first.score_wallclock_time
+                time_second = second.score_wallclock_time
+
             # Compute score and time distance between first and second in the
             # division.
             # Note: The time score is only used if solvers have the same score
             # lead.
             score = ((1 + first.score_correct) / (1 + second.score_correct))
-            time = ((1 + second.score_cpu_time) / (1 + first.score_cpu_time))
+            time = (1 + time_second) / (1 + time_first)
             scores.append((score,
                            time,
                            get_solver_name(first.solver_id),
@@ -836,14 +855,18 @@ def biggest_lead_ranking(data, sequential):
 # division if the results of 'solver' are excluded. This function corresponds
 # to function vbss(D,S) as defined in section 7.3.2 of the SMT-COMP'19 rules.
 #
-def vbss(division_data, solver_id):
+def vbss(division_data, solver_id, sequential):
 
-    # For VBS we only consider correctly solved benchmarks
-    data = division_data[(division_data.solver_id != solver_id)
-                         & (division_data.error == 0)]
+    # Remove 'solver_id' and compute the virtual best score and cpu_time.
+    data = division_data[division_data.solver_id != solver_id]
 
-    sort_columns = ['benchmark', 'score_correct', 'cpu_time']
+    sort_columns = ['benchmark', 'score_correct']
     sort_asc = [True, False, True]
+
+    if sequential:
+        sort_columns.append('cpu_time')
+    else:
+        sort_columns.append('wallclock_time')
 
     # Get job pair with the highest correctly solved score, which was solved
     # the fastest.
@@ -851,7 +874,10 @@ def vbss(division_data, solver_id):
                 by=sort_columns, ascending=sort_asc).groupby(
                         'benchmark', as_index=False).first()
     assert len(data_vbs) == len(data.benchmark.unique())
-    return (data_vbs.score_correct.sum(), data_vbs.cpu_time.sum())
+
+    if sequential:
+        return (data_vbs.score_correct.sum(), data_vbs.cpu_time.sum())
+    return (data_vbs.score_correct.sum(), data_vbs.wallclock_time.sum())
 
 
 # Largest Contribution Ranking.
@@ -862,42 +888,62 @@ def vbss(division_data, solver_id):
 # Note: The function prints the list of division winners sorted by the computed
 #       largest contribution score.
 #
-def largest_contribution_ranking(data, time_limit):
+def largest_contribution_ranking(data, time_limit, sequential):
     start = time.time() if g_args.show_timestamps else None
 
-    # Penalize solvers with 'time_limit' if they they were not able to solve
-    # a benchmark. This is required for the cpu_time impact score computation.
-    data.loc[data.correct == 0, ['cpu_time']] = time_limit
+    # Set cpu_time/wallclock_time to 'time_limit' if solvers were not able to
+    # solve the instance. This ensures that if no solver is able to solve the
+    # instance, vbss(D,S) picks 'time_limit' seconds. This corresponds to the
+    # min({}) = 2400 seconds in the SMT-COMP'19 rules.
+    data.loc[data.correct == 0,
+             ['cpu_time', 'wallclock_time']] = [time_limit, time_limit]
 
-    data = data[(data.competitive == True)]
+    # Only consider competitive solvers.
+    data = data[data.competitive == True]
 
     num_job_pairs_total = 0
     scores_top = []
     for division, div_data in data.groupby('division'):
-        solvers = div_data.solver_id.unique()
+        solvers_total = div_data.solver_id.unique()
 
-        # Skip non-competitive divisions
-        if not is_competitive_division(solvers):
+        # Filter out unsound solvers.
+        data_error = div_data[div_data.error > 0]
+        solvers_sound = solvers_total
+        if len(data_error) > 0:
+            solvers_error = set(data_error.solver_id.unique())
+            # Filter out job pairs of unsound solvers.
+            div_data = div_data[~div_data.solver_id.isin(solvers_error)]
+            solvers_sound = div_data.solver_id.unique()
+
+        # Skip divisions with less than 3 competitive solvers.
+        if len(solvers_sound) < 3:
             continue
 
+        # Note: For normalization we consider the original number of job pairs,
+        #       including unsound solvers.
         division_size = div_data.division_size.iloc[0]
-        num_job_pairs_total += division_size * len(solvers)
+        num_job_pairs_total += division_size * len(solvers_total)
 
         # Compute the scores for the virtual best solver
-        vbs_score_correct, vbs_cpu_time = vbss(div_data, '')
+        vbs_score_correct, vbs_time = vbss(div_data, '', sequential)
 
-        # Compute the correct_score and cpu_time impact of removing a solver
-        # from the virtual best solver.
+        # If no solver was able to solve a single instance, there is no
+        # winner for this division.
+        if vbs_score_correct == 0:
+            continue
+
+        # Compute the correct_score and cpu_time/wallclock_time impact of
+        # removing a solver from the virtual best solver.
         scores_div = []
-        for solver in solvers:
-            cur_score_correct, cur_cpu_time = vbss(div_data, solver)
+        for solver in solvers_sound:
+            cur_score_correct, cur_time = vbss(div_data, solver, sequential)
 
             impact_score = 1 - cur_score_correct / vbs_score_correct
-            impact_time = 1 - vbs_cpu_time / cur_cpu_time
+            impact_time = 1 - vbs_time / cur_time
 
             scores_div.append((impact_score,
                                impact_time,
-                               len(solvers),
+                               len(solvers_total),
                                division_size,
                                get_solver_name(solver),
                                division))
@@ -1340,7 +1386,7 @@ def main():
             data.append(df)
             print(group_and_rank_solver(df, g_args.sequential))
             biggest_lead_ranking(df, g_args.sequential)
-            largest_contribution_ranking(df, time_limit)
+            largest_contribution_ranking(df, time_limit, g_args.sequential)
 #            # Sanity check for previous years
 #            if year in ('2015', '2016', '2017', '2018'):
 #                check_winners(
