@@ -325,6 +325,7 @@ def group_and_rank_solver(data, sequential):
         'score_wallclock_time': sum,
         'timeout' : sum,
         'memout' : sum,
+        'unsolved': sum,
         'competitive': 'first',
         'division_size': 'first',
         })
@@ -405,6 +406,7 @@ def score(division,
     data_new['competitive'] = data_new.solver_id.map(is_competitive_solver)
     data_new['timeout'] = 0
     data_new['memout'] = 0
+    data_new['unsolved'] = 0
 
     # Set the column that is used to determine if a benchmark was solved
     # within the time limit.
@@ -496,6 +498,8 @@ def score(division,
             data_new.loc[solved_sat.index, 'correct_sat'] = 1
             data_new.loc[solved_unsat.index, 'correct_unsat'] = 1
 
+    # Determine unsolved benchmarks.
+    data_new.loc[data_new.correct == 0, 'unsolved'] = 1
 
     # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
     # 'family_scores' dictionary (use_families == False).
@@ -1020,7 +1024,7 @@ def md_table_details(df, track, scoring, n_benchmarks):
             lines.append("  solved_unsat: {}".format(
                 row.correct_unsat))
             lines.append("  unsolved: {}".format(
-                n_benchmarks - row.correct))
+                row.unsolved))
         lines.append("  timeout: {}".format(
             row.timeout))
         lines.append("  memout: {}".format(
