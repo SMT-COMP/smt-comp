@@ -976,9 +976,12 @@ def largest_contribution_ranking(data, time_limit, sequential):
 # Generate competition results and .md files for website
 
 def md_get_winner(df):
-    solver_id = df[(df.competitive == True) \
-                & (df['rank'] == 1)].iloc[0].solver_id
-    return get_solver_name(solver_id)
+    winner = df[(df.competitive == True) & (df['rank'] == 1)].iloc[0]
+    # If the first ranked solver has a score of 0, there are no winners for
+    # this division.
+    if winner.score_correct == 0:
+        return ''
+    return get_solver_name(winner.solver_id)
 
 def md_table_details(df, track, scoring, n_benchmarks):
     lines = ["{}:".format(scoring)]
