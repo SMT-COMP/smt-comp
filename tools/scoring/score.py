@@ -998,7 +998,7 @@ def md_table_details(df, track, scoring, n_benchmarks):
             round(row.score_cpu_time, 3)))
         lines.append("  WallScore: {}".format(
             round(row.score_wallclock_time, 3)))
-        if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
+        if track == OPT_TRACK_SQ and track == OPT_TRACK_CHALL_SQ:
             lines.append("  solved: {}".format(
                 row.correct))
             lines.append("  solved_sat: {}".format(
@@ -1101,6 +1101,47 @@ def write_md_file_inc(division,
     outfile.write("\n".join([str_div, str_par, '---\n']))
 
 
+def write_md_file_uc(division,
+                     n_benchmarks,
+                     data_seq, data_par,
+                     year,
+                     path,
+                     ext_str,
+                     track,
+                     track_str,
+                     time):
+    # general info about the current division
+    str_div = \
+            "---\n"\
+            "layout: result_uc\n"\
+            "resultdate: {}\n"\
+            "division: {}\n"\
+            "track: {}\n"\
+            "n_benchmarks: {}\n"\
+            "time_limit: {}\n"\
+            "\n"\
+            "winner_seq: {}\n"\
+            "winner_par: {}\n"\
+            .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    division,
+                    track_str,
+                    n_benchmarks,
+                    time,
+                    md_get_winner(data_seq),
+                    md_get_winner(data_par))
+    # division scores
+    str_seq   = md_table_details(data_seq, track, 'sequential', n_benchmarks)
+    str_par   = md_table_details(data_par, track, 'parallel', n_benchmarks)
+    # write md file
+    year_path = os.path.join(path, year)
+    if not os.path.exists(year_path): os.mkdir(year_path)
+    track_path = os.path.join(year_path, track)
+    if not os.path.exists(track_path): os.mkdir(track_path)
+    outfile = open(
+            os.path.join(track_path, "{}{}".format(division, ext_str)), "w")
+    outfile.write("\n".join([str_div, str_seq, str_par, '---\n']))
+
+
 def to_md_files(results_seq,
                 results_par,
                 results_sat,
@@ -1161,8 +1202,15 @@ def to_md_files(results_seq,
                               TRACK_INC,
                               time)
         elif track == OPT_TRACK_UC:
-            ext = EXT_UC
-            track_str = TRACK_UC
+            write_md_file_uc(division,
+                             n_benchmarks,
+                             data_seq, data_par,
+                             year,
+                             path,
+                             EXT_UC,
+                             track,
+                             TRACK_UC,
+                             time)
         elif track == OPT_TRACK_MV:
             ext = EXT_MV
             track_str = TRACK_MV
