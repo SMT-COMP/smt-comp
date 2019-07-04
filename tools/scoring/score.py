@@ -1149,19 +1149,20 @@ def write_md_file_inc(division,
     outfile.write("\n".join([str_div, str_par, '---\n']))
 
 
-def write_md_file_uc(division,
-                     n_benchmarks,
-                     data_seq, data_par,
-                     year,
-                     path,
-                     ext_str,
-                     track,
-                     track_str,
-                     time):
+def write_md_file_others(division,
+                         n_benchmarks,
+                         data_seq, data_par,
+                         year,
+                         path,
+                         ext_str,
+                         track,
+                         track_str,
+                         time,
+                         is_experimental=False):
     # general info about the current division
     str_div = \
             "---\n"\
-            "layout: result_uc\n"\
+            "layout: result_{}\n"\
             "resultdate: {}\n"\
             "division: {}\n"\
             "track: {}\n"\
@@ -1170,7 +1171,8 @@ def write_md_file_uc(division,
             "\n"\
             "winner_seq: {}\n"\
             "winner_par: {}\n"\
-            .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            .format('exp' if is_experimental else 'others',
+                    datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     division,
                     track_str,
                     n_benchmarks,
@@ -1250,7 +1252,7 @@ def to_md_files(results_seq,
                               TRACK_INC,
                               time)
         elif track == OPT_TRACK_UC:
-            write_md_file_uc(division,
+            write_md_file_others(division,
                              n_benchmarks,
                              data_seq, data_par,
                              year,
@@ -1260,8 +1262,16 @@ def to_md_files(results_seq,
                              TRACK_UC,
                              time)
         elif track == OPT_TRACK_MV:
-            ext = EXT_MV
-            track_str = TRACK_MV
+            write_md_file_others(division,
+                                 n_benchmarks,
+                                 data_seq, data_par,
+                                 year,
+                                 path,
+                                 EXT_MV,
+                                 track,
+                                 TRACK_MV,
+                                 time,
+                                 OPT_TRACK_MV in g_args.exp_tracks)
         elif track == OPT_TRACK_CHALL_SQ:
             write_md_file_sq(division,
                              n_benchmarks,
@@ -1427,6 +1437,11 @@ def parse_args():
                                  OPT_TRACK_MV, OPT_TRACK_CHALL_SQ,
                                  OPT_TRACK_CHALL_INC],
                         help="A string identifying the competition track")
+    gen_md.add_argument("--exp-tracks",
+                        metavar="track[,track...]",
+                        action="store",
+                        help="list with experimental tracks "\
+                             "(see -T for track names)")
 
     g_args = parser.parse_args()
 
@@ -1437,6 +1452,9 @@ def parse_args():
     g_args.year = g_args.year.split(',') if g_args.year else []
     g_args.time = g_args.time.split(',') if g_args.time else []
     g_args.time = [int(t) for t in g_args.time]
+
+    g_args.exp_tracks = g_args.exp_tracks.split(',') \
+            if g_args.exp_tracks else []
 
     if len(g_args.year) != len(g_args.csv):
         die ("Number of given years and csv files does not match.")
