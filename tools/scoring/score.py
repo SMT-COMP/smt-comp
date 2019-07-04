@@ -432,20 +432,14 @@ def score(division,
 
     # Column 'model_validator_status' only exists in the model validation track.
     model_validation = 'model_validator_status' in data.columns
+    if model_validation:
+        data_new['model_validator_status'] = data['model_validator_status']
 
     # Note: For incremental tracks we have to consider all benchmarks (also
     #       the ones that run into resource limits).
     if incremental:
         data_new['correct'] = data['correct-answers']
         data_new['error'] = data['wrong-answers']
-    # Note: The model validator reports INVALID if a solver crashes on an
-    #       instance. Hence, only when a solver reports statisfiable, we
-    #       check the status of the model validator.
-    elif model_validation:
-        data_new.loc[(data.result == RESULT_SAT)
-                     & (data.model_validator_status == 'VALID'), 'correct'] = 1
-        data_new.loc[(data.result == RESULT_SAT)
-                     & (data.model_validator_status == 'INVALID'), 'error'] = 1
     # Set correct/error column for solved benchmarks.
     else:
         # Filter job pairs based on given verdict. For the sat/unsat scoring
@@ -479,6 +473,15 @@ def score(division,
         if unsat_core:
             data_new.loc[solved.index, 'correct'] = data['reduction']
             data_new.loc[solved.index, 'error'] = data['result-is-erroneous']
+        # Note: The model validator reports INVALID if a solver crashes on an
+        #       instance. Hence, only when a solver reports statisfiable, we
+        #       check the status of the model validator.
+        elif model_validation:
+            solved = solved[solved.result == RESULT_SAT]
+            solved_valid = solved[solved.model_validator_status == 'VALID']
+            solved_invalid = solved[solved.model_validator_status == 'INVALID']
+            data_new.loc[solved_valid.index, 'correct'] = 1
+            data_new.loc[solved_invalid.index, 'error'] = 1
         else:
             data_new.loc[solved.index, 'correct'] = 1
 
