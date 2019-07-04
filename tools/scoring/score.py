@@ -39,12 +39,12 @@ RESULT_SAT = 'sat'
 RESULT_UNSAT = 'unsat'
 
 # Tracks
-TRACK_SQ = "Single Query Track"
-TRACK_INC = "Incremental Track"
-TRACK_CHALL_SQ = "Challenge Track (non-incremental)"
-TRACK_CHALL_INC = "Challenge Track (incremental)"
-TRACK_UC = "Unsat Core Track"
-TRACK_MV = "Model Validation Track"
+TRACK_SQ = "track_single_query"
+TRACK_INC = "track_incremental"
+TRACK_CHALL_SQ = "track_single_query_challenge"
+TRACK_CHALL_INC = "track_incremental_challenge"
+TRACK_UC = "track_unsat_core"
+TRACK_MV = "track_model_validation"
 
 # Track options
 OPT_TRACK_SQ = "sq"
@@ -998,7 +998,7 @@ def md_table_details(df, track, scoring, n_benchmarks):
             round(row.score_cpu_time, 3)))
         lines.append("  WallScore: {}".format(
             round(row.score_wallclock_time, 3)))
-        if track == OPT_TRACK_SQ and track == OPT_TRACK_CHALL_SQ:
+        if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
             lines.append("  solved: {}".format(
                 row.correct))
             lines.append("  solved_sat: {}".format(
