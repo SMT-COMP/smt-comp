@@ -35,7 +35,7 @@ def main():
             print("error: given file does not exist: {}".format(csv))
             sys.exit(1)
         data.append(pandas.read_csv(csv, dtype=str, engine='python'))
-    result = pandas.concat(data, ignore_index=True, sort=True)
+    result = pandas.concat(data, ignore_index=True, sort=False)
     result.sort_values('pair id', ascending=True, inplace=True)
     result.drop_duplicates(
                     keep='last',
