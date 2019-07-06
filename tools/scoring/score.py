@@ -442,6 +442,7 @@ def score(division,
     if incremental:
         data_new['correct'] = data['correct-answers']
         data_new['error'] = data['wrong-answers']
+        data_new['num_check_sat'] = data['num_check_sat']
     # Set correct/error column for solved benchmarks.
     else:
         # Filter job pairs based on given verdict. For the sat/unsat scoring
@@ -570,8 +571,11 @@ def process_csv(csv,
     cols = cols.map(lambda x: x.replace(' ', '_'))
     data.columns = cols
 
+    incremental = 'wrong-answers' in data.columns
+
     # For incremental tracks, the CSV does not contain the 'expected' column.
-    if 'expected' not in data.columns:
+    if incremental:
+        assert 'expected' not in data.columns
         data['expected'] = None
 
     # Make sure that the expected column contains RESULT_SAT, RESULT_UNSAT or
@@ -585,6 +589,22 @@ def process_csv(csv,
     data = add_division_family_info(data, g_args.family)
     if g_args.show_timestamps:
         log('time add_division_family: {}'.format(time.time() - start))
+
+    # Read a CSV file with the number of check-sat calls for each
+    # benchmark.
+    # For incremental problems, we need the number of check-sat calls per
+    # benchmark in order to correctly compute the largest contribution time
+    # ranking.
+    if incremental and g_args.incremental:
+        check_sat_info = pandas.read_csv(g_args.incremental)
+        divisions = check_sat_info.benchmark.str.split('/', n=1).str[0]
+        benchmarks = check_sat_info.benchmark.str.split('/', n=1).str[1]
+        checks = check_sat_info.num_check_sat
+        status = dict(((d, b), n)
+                        for d, b, n in zip(divisions, benchmarks, checks))
+        data['num_check_sat'] = \
+            data[['division', 'benchmark']].apply(
+                lambda x: status.get((x.division, x.benchmark), 0), axis=1)
 
     # -: consider all divisions
     # else list with divisions to consider
@@ -891,7 +911,7 @@ def vbss(division_data, solver_id, sequential):
     data_vbs = data.sort_values(
                 by=sort_columns, ascending=sort_asc).groupby(
                         'benchmark', as_index=False).first()
-    assert len(data_vbs) == len(data.benchmark.unique())
+    assert len(data_vbs.benchmark.unique()) == len(division_data.benchmark.unique())
 
     if sequential:
         return (data_vbs.score_correct.sum(), data_vbs.cpu_time.sum())
@@ -913,7 +933,13 @@ def largest_contribution_ranking(data, time_limit, sequential):
     # solve the instance. This ensures that if no solver is able to solve the
     # instance, vbss(D,S) picks 'time_limit' seconds. This corresponds to the
     # min({}) = 2400 seconds in the SMT-COMP'19 rules.
-    data.loc[data.correct == 0,
+    # Note: For incremental problems we set the cpu_time/wallclock_time to
+    # 'time_limit' if not all check-sat calls were answered.
+    if 'num_check_sat' in data.columns:
+        timeout = data[data.correct < data.num_check_sat]
+    else:
+        timeout = data[data.correct == 0]
+    data.loc[timeout.index,
              ['cpu_time', 'wallclock_time']] = [time_limit, time_limit]
 
     # Only consider competitive solvers.
@@ -955,6 +981,8 @@ def largest_contribution_ranking(data, time_limit, sequential):
         scores_div = []
         for solver in solvers_sound:
             cur_score_correct, cur_time = vbss(div_data, solver, sequential)
+            assert cur_score_correct <= vbs_score_correct
+            assert cur_time >= vbs_time
 
             impact_score = 1 - cur_score_correct / vbs_score_correct
             impact_time = 1 - vbs_time / cur_time
@@ -1351,6 +1379,9 @@ def parse_args():
                         action="store_true",
                         default=False,
                         help="Enable logging")
+    parser.add_argument('-i', '--incremental',
+                        type=str,
+                        help='CSV containing incremental status information')
 
     required = parser.add_argument_group("required arguments")
     required.add_argument("-c", "--csv",
