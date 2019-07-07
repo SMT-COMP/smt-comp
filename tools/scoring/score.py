@@ -28,11 +28,6 @@ import math
 import time
 import datetime
 
-g_args = None
-
-g_competitive = {}
-g_solver_names = {}
-
 # StarExec result strings
 RESULT_UNKNOWN = 'starexec-unknown'
 RESULT_SAT = 'sat'
@@ -72,7 +67,24 @@ EXT_CHALL_INC = "-challenge-incremental.md"
 EXT_UC = "-unsat-core.md"
 EXT_MV = "-model-validation.md"
 
+g_args = None
 
+g_competitive = {}
+g_solver_names = {}
+
+g_tracks = { OPT_TRACK_SQ: TRACK_SQ,
+             OPT_TRACK_INC: TRACK_INC,
+             OPT_TRACK_CHALL_SQ: TRACK_CHALL_SQ,
+             OPT_TRACK_CHALL_INC: TRACK_CHALL_INC,
+             OPT_TRACK_UC: TRACK_UC,
+             OPT_TRACK_MV: TRACK_MV }
+
+g_exts = { OPT_TRACK_SQ: EXT_SQ,
+           OPT_TRACK_INC: EXT_INC,
+           OPT_TRACK_CHALL_SQ: EXT_CHALL_SQ,
+           OPT_TRACK_CHALL_INC: EXT_CHALL_INC,
+           OPT_TRACK_UC: EXT_UC,
+           OPT_TRACK_MV: EXT_MV }
 
 ###############################################################################
 # Helper functions
@@ -837,8 +849,9 @@ def biggest_lead_ranking(data, sequential):
 
     data = group_and_rank_solver(data, sequential)
     data = data[data['competitive'] == True]
+    scores = dict()
     for year, ydata in data.groupby('year'):
-        scores = []
+        scores[year] = []
         for division, div_data in ydata.groupby('division'):
             # Skip non-competitive divisions
             if not is_competitive_division(div_data.solver_id.unique()):
@@ -870,22 +883,23 @@ def biggest_lead_ranking(data, sequential):
             # lead.
             score = ((1 + first.score_correct) / (1 + second.score_correct))
             time = (1 + time_second) / (1 + time_first)
-            scores.append((score,
+            scores[year].append((score,
                            time,
                            get_solver_name(first.solver_id),
                            get_solver_name(second.solver_id),
                            division))
+        scores[year] = sorted(scores[year], reverse=True)
 
-        scores_sorted = sorted(scores, reverse=True)
-        print('{} Biggest Lead Ranking'.format(year) +
-              '(Score, 1st Solver, 2nd Solver, Division)')
-        for s in scores_sorted:
-            print(s)
+#        scores_sorted = sorted(scores[year], reverse=True)
+#        print('{} Biggest Lead Ranking'.format(year) +
+#              '(Score, 1st Solver, 2nd Solver, Division)')
+#        for s in scores_sorted:
+#            print(s)
 
     if g_args.show_timestamps:
         log('time biggest_lead_ranking: {}'.format(time.time() - start))
 
-    return scores_sorted
+    return scores
 
 
 # Largest Contribution Ranking.
@@ -946,72 +960,74 @@ def largest_contribution_ranking(data, time_limit, sequential):
     # Only consider competitive solvers.
     data = data[data.competitive == True]
 
-    num_job_pairs_total = 0
-    scores_top = []
-    for division, div_data in data.groupby('division'):
-        solvers_total = div_data.solver_id.unique()
+    weighted_scores = dict()
+    for year, ydata in data.groupby('year'):
+        num_job_pairs_total = 0
+        scores_top = []
+        for division, div_data in data.groupby('division'):
+            solvers_total = div_data.solver_id.unique()
 
-        # Filter out unsound solvers.
-        data_error = div_data[div_data.error > 0]
-        solvers_sound = solvers_total
-        if len(data_error) > 0:
-            solvers_error = set(data_error.solver_id.unique())
-            # Filter out job pairs of unsound solvers.
-            div_data = div_data[~div_data.solver_id.isin(solvers_error)]
-            solvers_sound = div_data.solver_id.unique()
+            # Filter out unsound solvers.
+            data_error = div_data[div_data.error > 0]
+            solvers_sound = solvers_total
+            if len(data_error) > 0:
+                solvers_error = set(data_error.solver_id.unique())
+                # Filter out job pairs of unsound solvers.
+                div_data = div_data[~div_data.solver_id.isin(solvers_error)]
+                solvers_sound = div_data.solver_id.unique()
 
-        # Skip divisions with less than 3 competitive solvers.
-        if len(solvers_sound) < 3:
-            continue
+            # Skip divisions with less than 3 competitive solvers.
+            if len(solvers_sound) < 3:
+                continue
 
-        # Note: For normalization we consider the original number of job pairs,
-        #       including unsound solvers.
-        division_size = div_data.division_size.iloc[0]
-        num_job_pairs_total += division_size * len(solvers_total)
+            # Note: For normalization we consider the original number of job pairs,
+            #       including unsound solvers.
+            division_size = div_data.division_size.iloc[0]
+            num_job_pairs_total += division_size * len(solvers_total)
 
-        # Compute the scores for the virtual best solver
-        vbs_score_correct, vbs_time = vbss(div_data, '', sequential)
+            # Compute the scores for the virtual best solver
+            vbs_score_correct, vbs_time = vbss(div_data, '', sequential)
 
-        # If no solver was able to solve a single instance, there is no
-        # winner for this division.
-        if vbs_score_correct == 0:
-            continue
+            # If no solver was able to solve a single instance, there is no
+            # winner for this division.
+            if vbs_score_correct == 0:
+                continue
 
-        # Compute the correct_score and cpu_time/wallclock_time impact of
-        # removing a solver from the virtual best solver.
-        scores_div = []
-        for solver in solvers_sound:
-            cur_score_correct, cur_time = vbss(div_data, solver, sequential)
-            assert cur_score_correct <= vbs_score_correct
-            assert cur_time >= vbs_time
+            # Compute the correct_score and cpu_time/wallclock_time impact of
+            # removing a solver from the virtual best solver.
+            scores_div = []
+            for solver in solvers_sound:
+                cur_score_correct, cur_time = vbss(div_data, solver, sequential)
+                assert cur_score_correct <= vbs_score_correct
+                #assert cur_time >= vbs_time
 
-            impact_score = 1 - cur_score_correct / vbs_score_correct
-            impact_time = 1 - vbs_time / cur_time
+                impact_score = 1 - cur_score_correct / vbs_score_correct
+                impact_time = 1 - vbs_time / cur_time
 
-            scores_div.append((impact_score,
-                               impact_time,
-                               len(solvers_total),
-                               division_size,
-                               get_solver_name(solver),
-                               division))
+                scores_div.append((impact_score,
+                                   impact_time,
+                                   len(solvers_total),
+                                   division_size,
+                                   get_solver_name(solver),
+                                   division))
 
-        scores_div_sorted = sorted(scores_div, reverse=True)
-        # Pick the solver with the highest impact
-        scores_top.append(scores_div_sorted[0])
+            scores_div_sorted = sorted(scores_div, reverse=True)
+            # Pick the solver with the highest impact
+            scores_top.append(scores_div_sorted[0])
 
-    # Normalize scores based on division job pairs/total job pairs as defined
-    # in section 7.3.2 of the SMT-COMP'19 rules.
-    weighted_scores = []
-    for tup in scores_top:
-        impact_score, impact_time, n_solvers, n_benchmarks = tup[:4]
-        weight = n_solvers * n_benchmarks / num_job_pairs_total
-        w_score, w_time = impact_score * weight, impact_time * weight
-        weighted_scores.append(
-            (w_score, w_time, n_solvers, n_benchmarks, tup[4], tup[5]))
-
-    print('Largest Contribution Ranking')
-    for s in sorted(weighted_scores, reverse=True):
-        print(s)
+        # Normalize scores based on division job pairs/total job pairs as defined
+        # in section 7.3.2 of the SMT-COMP'19 rules.
+        weighted_scores[year] = []
+        for tup in scores_top:
+            impact_score, impact_time, n_solvers, n_benchmarks = tup[:4]
+            weight = n_solvers * n_benchmarks / num_job_pairs_total
+            w_score, w_time = impact_score * weight, impact_time * weight
+            weighted_scores[year].append(
+                (w_score, w_time, n_solvers, n_benchmarks, tup[4], tup[5]))
+        weighted_scores[year] = sorted(weighted_scores[year], reverse=True)
+        #print('Largest Contribution Ranking')
+        #for s in sorted(weighted_scores[year], reverse=True):
+        #    print(s)
 
     if g_args.show_timestamps:
         log('time largest_contribution_ranking: {}'.format(time.time() - start))
@@ -1066,10 +1082,9 @@ def write_md_file_sq(division,
                      data_seq, data_par, data_sat, data_unsat, data_24s,
                      year,
                      path,
-                     ext_str,
                      track,
-                     track_str,
                      time):
+    global g_tracks, g_exts
     # general info about the current division
     str_div = \
             "---\n"\
@@ -1087,7 +1102,7 @@ def write_md_file_sq(division,
             "winner_24s: {}\n"\
             .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     division,
-                    track_str,
+                    g_tracks[track],
                     n_benchmarks,
                     time,
                     md_get_winner(data_seq),
@@ -1107,7 +1122,8 @@ def write_md_file_sq(division,
     track_path = os.path.join(year_path, track)
     if not os.path.exists(track_path): os.mkdir(track_path)
     outfile = open(
-            os.path.join(track_path, "{}{}".format(division, ext_str)), "w")
+            os.path.join(track_path, "{}{}".format(
+                division, g_exts[track])), "w")
     outfile.write("\n".join([
         str_div, str_seq, str_par, str_sat, str_unsat, str_24s, '---\n']))
 
@@ -1116,10 +1132,9 @@ def write_md_file_inc(division,
                       data_par,
                       year,
                       path,
-                      ext_str,
                       track,
-                      track_str,
                       time):
+    global g_tracks, g_exts
     # general info about the current division
     str_div = \
             "---\n"\
@@ -1133,7 +1148,7 @@ def write_md_file_inc(division,
             "winner_par: {}\n"\
             .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     division,
-                    track_str,
+                    g_tracks[track],
                     n_benchmarks,
                     time,
                     md_get_winner(data_par))
@@ -1145,7 +1160,8 @@ def write_md_file_inc(division,
     track_path = os.path.join(year_path, track)
     if not os.path.exists(track_path): os.mkdir(track_path)
     outfile = open(
-            os.path.join(track_path, "{}{}".format(division, ext_str)), "w")
+            os.path.join(track_path, "{}{}".format(
+                division, g_exts[track])), "w")
     outfile.write("\n".join([str_div, str_par, '---\n']))
 
 
@@ -1154,11 +1170,10 @@ def write_md_file_others(division,
                          data_seq, data_par,
                          year,
                          path,
-                         ext_str,
                          track,
-                         track_str,
                          time,
                          is_experimental=False):
+    global g_tracks, g_exts
     # general info about the current division
     str_div = \
             "---\n"\
@@ -1174,7 +1189,7 @@ def write_md_file_others(division,
             .format('exp' if is_experimental else 'others',
                     datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     division,
-                    track_str,
+                    g_tracks[track],
                     n_benchmarks,
                     time,
                     md_get_winner(data_seq),
@@ -1188,7 +1203,8 @@ def write_md_file_others(division,
     track_path = os.path.join(year_path, track)
     if not os.path.exists(track_path): os.mkdir(track_path)
     outfile = open(
-            os.path.join(track_path, "{}{}".format(division, ext_str)), "w")
+            os.path.join(track_path, "{}{}".format(
+                division, g_exts[track])), "w")
     outfile.write("\n".join([str_div, str_seq, str_par, '---\n']))
 
 
@@ -1237,9 +1253,7 @@ def to_md_files(results_seq,
                              data_seq, data_par, data_sat, data_unsat, data_24s,
                              year,
                              path,
-                             EXT_SQ,
                              track,
-                             TRACK_SQ,
                              time)
         elif track == OPT_TRACK_INC:
             write_md_file_inc(division,
@@ -1247,9 +1261,7 @@ def to_md_files(results_seq,
                               data_par,
                               year,
                               path,
-                              EXT_INC,
                               track,
-                              TRACK_INC,
                               time)
         elif track == OPT_TRACK_UC:
             write_md_file_others(division,
@@ -1257,9 +1269,7 @@ def to_md_files(results_seq,
                              data_seq, data_par,
                              year,
                              path,
-                             EXT_UC,
                              track,
-                             TRACK_UC,
                              time)
         elif track == OPT_TRACK_MV:
             write_md_file_others(division,
@@ -1267,9 +1277,7 @@ def to_md_files(results_seq,
                                  data_seq, data_par,
                                  year,
                                  path,
-                                 EXT_MV,
                                  track,
-                                 TRACK_MV,
                                  time,
                                  OPT_TRACK_MV in g_args.exp_tracks)
         elif track == OPT_TRACK_CHALL_SQ:
@@ -1278,9 +1286,7 @@ def to_md_files(results_seq,
                              data_seq, data_par, data_sat, data_unsat, data_24s,
                              year,
                              path,
-                             EXT_CHALL_SQ,
                              track,
-                             TRACK_CHALL_SQ,
                              time)
         elif track == OPT_TRACK_CHALL_INC:
             write_md_file_inc(division,
@@ -1288,11 +1294,220 @@ def to_md_files(results_seq,
                               data_par,
                               year,
                               path,
-                              EXT_CHALL_INC,
                               track,
-                              TRACK_CHALL_INC,
                               time)
 
+def md_file_comp_bl(bl):
+    str_bl = []
+    for div_bl in bl:
+        str_bl.append("- name: {}\n"\
+                      "  second: {}\n"\
+                      "  correctScore: {:.8f}\n"\
+                      "  timeScore: {:.8f}\n"\
+                      "  division: {}".format(
+                      div_bl[2], div_bl[3], div_bl[0], div_bl[1], div_bl[4]))
+    return "\n".join(str_bl)
+
+def to_md_files_comp_biggest_lead(results_seq,
+                                  results_par,
+                                  results_sat,
+                                  results_unsat,
+                                  results_24s,
+                                  path,
+                                  time_limit,
+                                  track):
+    global g_tracks, g_exts, g_args
+
+    bl_seq = biggest_lead_ranking(results_seq, True)
+    bl_par = biggest_lead_ranking(results_par, False)
+    bl_sat = biggest_lead_ranking(results_sat, False)
+    bl_unsat = biggest_lead_ranking(results_unsat, False)
+    bl_24s = biggest_lead_ranking(results_24s, False)
+
+    for year in bl_seq:
+        assert year in bl_par
+        assert year in bl_sat
+        assert year in bl_unsat
+        assert year in bl_24s
+        if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+            str_comp = \
+                    "---\n"\
+                    "layout: result_comp\n"\
+                    "resultdate: {}\n"\
+                    "track: {}\n"\
+                    "recognition: biggest_lead\n"\
+                    "\n"\
+                    "winner_seq: {}\n"\
+                    "winner_par: {}\n"\
+                    "winner_sat: {}\n"\
+                    "winner_unsat: {}\n"\
+                    "winner_24s: {}\n"\
+                    "\n"\
+                    .format(datetime.datetime.now().strftime(
+                                "%Y-%m-%d %H:%M:%S"),
+                            g_tracks[track],
+                            bl_seq[year][0][2],
+                            bl_par[year][0][2],
+                            bl_sat[year][0][2],
+                            bl_unsat[year][0][2],
+                            bl_24s[year][0][2])
+        elif track == OPT_TRACK_INC or track == OPT_TRACK_CHALL_INC:
+            str_comp = \
+                    "---\n"\
+                    "layout: result_comp\n"\
+                    "resultdate: {}\n"\
+                    "track: {}\n"\
+                    "recognition: biggest_lead\n"\
+                    "\n"\
+                    "winner_par: {}\n"\
+                    "\n"\
+                    .format(datetime.datetime.now().strftime(
+                                "%Y-%m-%d %H:%M:%S"),
+                            g_tracks[track],
+                            bl_par[year][0][2])
+        else:
+            str_comp = \
+                    "---\n"\
+                    "layout: result_comp\n"\
+                    "resultdate: {}\n"\
+                    "track: {}\n"\
+                    "recognition: biggest_lead\n"\
+                    "\n"\
+                    "winner_seq: {}\n"\
+                    "winner_par: {}\n"\
+                    "\n"\
+                    .format(datetime.datetime.now().strftime(
+                                "%Y-%m-%d %H:%M:%S"),
+                            g_tracks[track],
+                            bl_seq[year][0][2],
+                            bl_par[year][0][2])
+
+        str_bl = []
+        str_bl.append("{}{}".format(
+            "sequential:\n", md_file_comp_bl(bl_seq[year])))
+        str_bl.append("{}{}".format(
+            "parallel:\n", md_file_comp_bl(bl_par[year])))
+        str_bl.append("{}{}".format(
+            "sat:\n", md_file_comp_bl(bl_sat[year])))
+        str_bl.append("{}{}".format(
+            "unsat:\n", md_file_comp_bl(bl_unsat[year])))
+        str_bl.append("{}{}".format(
+            "twentyfour:\n", md_file_comp_bl(bl_24s[year])))
+        str_bl = "\n".join(str_bl)
+        # write md file
+        year_path = os.path.join(path, year)
+        if not os.path.exists(year_path): os.mkdir(year_path)
+        track_path = os.path.join(year_path, track)
+        if not os.path.exists(track_path): os.mkdir(track_path)
+        outfile = open(os.path.join(
+            track_path, "biggest-lead{}".format(g_exts[track])), "w")
+        outfile.write("\n".join([str_comp, str_bl, '---\n']))
+
+
+def md_file_comp_lc(lc):
+    str_lc = []
+    for div_lc in lc:
+        str_lc.append("- name: {}\n"\
+                      "  correctScore: {:.8f}\n"\
+                      "  timeScore: {:.8f}\n"\
+                      "  division: {}".format(
+                      div_lc[4], div_lc[0], div_lc[1], div_lc[5]))
+    return "\n".join(str_lc)
+
+def to_md_files_comp_largest_contribution(results_seq,
+                                          results_par,
+                                          results_sat,
+                                          results_unsat,
+                                          results_24s,
+                                          path,
+                                          time_limit,
+                                          track):
+    global g_tracks, g_exts, g_args
+
+    lc_seq = largest_contribution_ranking(results_seq, time_limit, True)
+    lc_par = largest_contribution_ranking(results_par, time_limit, False)
+    lc_sat = largest_contribution_ranking(results_sat, time_limit, False)
+    lc_unsat = largest_contribution_ranking(results_unsat, time_limit, False)
+    lc_24s = largest_contribution_ranking(results_24s, time_limit, False)
+
+    for year in lc_seq:
+        assert year in lc_par
+        assert year in lc_sat
+        assert year in lc_unsat
+        assert year in lc_24s
+        if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+            str_comp = \
+                    "---\n"\
+                    "layout: result_comp\n"\
+                    "resultdate: {}\n"\
+                    "track: {}\n"\
+                    "recognition: largest_contribution\n"\
+                    "\n"\
+                    "winner_seq: {}\n"\
+                    "winner_par: {}\n"\
+                    "winner_sat: {}\n"\
+                    "winner_unsat: {}\n"\
+                    "winner_24s: {}\n"\
+                    "\n"\
+                    .format(datetime.datetime.now().strftime(
+                                "%Y-%m-%d %H:%M:%S"),
+                            g_tracks[track],
+                            lc_seq[year][0][4],
+                            lc_par[year][0][4],
+                            lc_sat[year][0][4],
+                            lc_unsat[year][0][4],
+                            lc_24s[year][0][4])
+        elif track == OPT_TRACK_INC or track == OPT_TRACK_CHALL_INC:
+            str_comp = \
+                    "---\n"\
+                    "layout: result_comp\n"\
+                    "resultdate: {}\n"\
+                    "track: {}\n"\
+                    "recognition: largest_contribution\n"\
+                    "\n"\
+                    "winner_par: {}\n"\
+                    "\n"\
+                    .format(datetime.datetime.now().strftime(
+                                "%Y-%m-%d %H:%M:%S"),
+                            g_tracks[track],
+                            lc_par[year][0][4])
+        else:
+            str_comp = \
+                    "---\n"\
+                    "layout: result_comp\n"\
+                    "resultdate: {}\n"\
+                    "track: {}\n"\
+                    "recognition: largest_contribution\n"\
+                    "\n"\
+                    "winner_seq: {}\n"\
+                    "winner_par: {}\n"\
+                    "\n"\
+                    .format(datetime.datetime.now().strftime(
+                                "%Y-%m-%d %H:%M:%S"),
+                            g_tracks[track],
+                            lc_seq[year][0][4],
+                            lc_par[year][0][4])
+
+        str_lc = []
+        str_lc.append("{}{}".format(
+            "sequential:\n", md_file_comp_lc(lc_seq[year])))
+        str_lc.append("{}{}".format(
+            "parallel:\n", md_file_comp_lc(lc_par[year])))
+        str_lc.append("{}{}".format(
+            "sat:\n", md_file_comp_lc(lc_sat[year])))
+        str_lc.append("{}{}".format(
+            "unsat:\n", md_file_comp_lc(lc_unsat[year])))
+        str_lc.append("{}{}".format(
+            "twentyfour:\n", md_file_comp_lc(lc_24s[year])))
+        str_lc = "\n".join(str_lc)
+        # write md file
+        year_path = os.path.join(path, year)
+        if not os.path.exists(year_path): os.mkdir(year_path)
+        track_path = os.path.join(year_path, track)
+        if not os.path.exists(track_path): os.mkdir(track_path)
+        outfile = open(os.path.join(
+            track_path, "largest-contribution{}".format(g_exts[track])), "w")
+        outfile.write("\n".join([str_comp, str_lc, '---\n']))
 
 
 def gen_results_md_files(csv, time_limit, year, path):
@@ -1345,6 +1560,23 @@ def gen_results_md_files(csv, time_limit, year, path):
                 path,
                 g_args.track,
                 time_limit)
+    to_md_files_comp_biggest_lead(results_seq,
+                                  results_par,
+                                  results_sat,
+                                  results_unsat,
+                                  results_24s,
+                                  path,
+                                  time_limit,
+                                  g_args.track)
+    to_md_files_comp_largest_contribution(results_seq,
+                                          results_par,
+                                          results_sat,
+                                          results_unsat,
+                                          results_24s,
+                                          path,
+                                          time_limit,
+                                          g_args.track)
+
 
 
 ###############################################################################
