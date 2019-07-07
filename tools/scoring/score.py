@@ -443,6 +443,7 @@ def score(division,
         data_new['correct'] = data['correct-answers']
         data_new['error'] = data['wrong-answers']
         data_new['num_check_sat'] = data['num_check_sat']
+        data_new['unsolved'] = data_new.num_check_sat - data_new.correct
     # Set correct/error column for solved benchmarks.
     else:
         # Filter job pairs based on given verdict. For the sat/unsat scoring
@@ -499,8 +500,8 @@ def score(division,
             data_new.loc[solved_sat.index, 'correct_sat'] = 1
             data_new.loc[solved_unsat.index, 'correct_unsat'] = 1
 
-    # Determine unsolved benchmarks.
-    data_new.loc[data_new.correct == 0, 'unsolved'] = 1
+        # Determine unsolved benchmarks.
+        data_new.loc[data_new.correct == 0, 'unsolved'] = 1
 
     # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
     # 'family_scores' dictionary (use_families == False).
@@ -1051,6 +1052,7 @@ def md_table_details(df, track, scoring, n_benchmarks):
                 row.correct_sat))
             lines.append("  solved_unsat: {}".format(
                 row.correct_unsat))
+        if track != OPT_TRACK_UC:
             lines.append("  unsolved: {}".format(
                 row.unsolved))
         lines.append("  timeout: {}".format(
