@@ -851,7 +851,6 @@ def biggest_lead_ranking(data, sequential):
     data = data[data['competitive'] == True]
     scores = dict()
     for year, ydata in data.groupby('year'):
-        scores[year] = []
         for division, div_data in ydata.groupby('division'):
             # Skip non-competitive divisions
             if not is_competitive_division(div_data.solver_id.unique()):
@@ -883,12 +882,14 @@ def biggest_lead_ranking(data, sequential):
             # lead.
             score = ((1 + first.score_correct) / (1 + second.score_correct))
             time = (1 + time_second) / (1 + time_first)
+            if year not in scores: scores[year] = []
             scores[year].append((score,
                            time,
                            get_solver_name(first.solver_id),
                            get_solver_name(second.solver_id),
                            division))
-        scores[year] = sorted(scores[year], reverse=True)
+        if year in scores:
+            scores[year] = sorted(scores[year], reverse=True)
 
 #        scores_sorted = sorted(scores[year], reverse=True)
 #        print('{} Biggest Lead Ranking'.format(year) +
@@ -1017,14 +1018,15 @@ def largest_contribution_ranking(data, time_limit, sequential):
 
         # Normalize scores based on division job pairs/total job pairs as defined
         # in section 7.3.2 of the SMT-COMP'19 rules.
-        weighted_scores[year] = []
         for tup in scores_top:
             impact_score, impact_time, n_solvers, n_benchmarks = tup[:4]
             weight = n_solvers * n_benchmarks / num_job_pairs_total
             w_score, w_time = impact_score * weight, impact_time * weight
+            if year not in weighted_scores: weighted_scores[year] = []
             weighted_scores[year].append(
                 (w_score, w_time, n_solvers, n_benchmarks, tup[4], tup[5]))
-        weighted_scores[year] = sorted(weighted_scores[year], reverse=True)
+        if year in weighted_scores:
+            weighted_scores[year] = sorted(weighted_scores[year], reverse=True)
         #print('Largest Contribution Ranking')
         #for s in sorted(weighted_scores[year], reverse=True):
         #    print(s)
@@ -1094,6 +1096,7 @@ def write_md_file_sq(division,
             "track: {}\n"\
             "n_benchmarks: {}\n"\
             "time_limit: {}\n"\
+            "mem_limit: 60\n"\
             "\n"\
             "winner_seq: {}\n"\
             "winner_par: {}\n"\
@@ -1144,6 +1147,7 @@ def write_md_file_inc(division,
             "track: {}\n"\
             "n_benchmarks: {}\n"\
             "time_limit: {}\n"\
+            "mem_limit: 60\n"\
             "\n"\
             "winner_par: {}\n"\
             .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -1183,6 +1187,7 @@ def write_md_file_others(division,
             "track: {}\n"\
             "n_benchmarks: {}\n"\
             "time_limit: {}\n"\
+            "mem_limit: 60\n"\
             "\n"\
             "winner_seq: {}\n"\
             "winner_par: {}\n"\
@@ -1308,6 +1313,13 @@ def md_file_comp_bl(bl):
                       div_bl[2], div_bl[3], div_bl[0], div_bl[1], div_bl[4]))
     return "\n".join(str_bl)
 
+def value(d, y, i, j):
+    if y not in d:
+        return ''
+    if not d[y]:
+        return ''
+    return d[y][i][j]
+
 def to_md_files_comp_biggest_lead(results_seq,
                                   results_par,
                                   results_sat,
@@ -1325,10 +1337,10 @@ def to_md_files_comp_biggest_lead(results_seq,
     bl_24s = biggest_lead_ranking(results_24s, False)
 
     for year in bl_seq:
-        assert year in bl_par
-        assert year in bl_sat
-        assert year in bl_unsat
-        assert year in bl_24s
+        #assert year in bl_par
+        #assert year in bl_sat
+        #assert year in bl_unsat
+        #assert year in bl_24s
         if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
             str_comp = \
                     "---\n"\
@@ -1346,11 +1358,11 @@ def to_md_files_comp_biggest_lead(results_seq,
                     .format(datetime.datetime.now().strftime(
                                 "%Y-%m-%d %H:%M:%S"),
                             g_tracks[track],
-                            bl_seq[year][0][2],
-                            bl_par[year][0][2],
-                            bl_sat[year][0][2],
-                            bl_unsat[year][0][2],
-                            bl_24s[year][0][2])
+                            value(bl_seq, year, 0, 2),
+                            value(bl_par, year, 0, 2),
+                            value(bl_sat, year, 0, 2),
+                            value(bl_unsat, year, 0, 2),
+                            value(bl_24s, year, 0, 2))
         elif track == OPT_TRACK_INC or track == OPT_TRACK_CHALL_INC:
             str_comp = \
                     "---\n"\
@@ -1364,7 +1376,7 @@ def to_md_files_comp_biggest_lead(results_seq,
                     .format(datetime.datetime.now().strftime(
                                 "%Y-%m-%d %H:%M:%S"),
                             g_tracks[track],
-                            bl_par[year][0][2])
+                            value(bl_par, year, 0, 2))
         else:
             str_comp = \
                     "---\n"\
@@ -1379,20 +1391,20 @@ def to_md_files_comp_biggest_lead(results_seq,
                     .format(datetime.datetime.now().strftime(
                                 "%Y-%m-%d %H:%M:%S"),
                             g_tracks[track],
-                            bl_seq[year][0][2],
-                            bl_par[year][0][2])
+                            value(bl_seq, year, 0, 2),
+                            value(bl_par, year, 0, 2))
 
         str_bl = []
         str_bl.append("{}{}".format(
-            "sequential:\n", md_file_comp_bl(bl_seq[year])))
+            "sequential:\n", md_file_comp_bl(bl_seq.get(year, ''))))
         str_bl.append("{}{}".format(
-            "parallel:\n", md_file_comp_bl(bl_par[year])))
+            "parallel:\n", md_file_comp_bl(bl_par.get(year, ''))))
         str_bl.append("{}{}".format(
-            "sat:\n", md_file_comp_bl(bl_sat[year])))
+            "sat:\n", md_file_comp_bl(bl_sat.get(year, ''))))
         str_bl.append("{}{}".format(
-            "unsat:\n", md_file_comp_bl(bl_unsat[year])))
+            "unsat:\n", md_file_comp_bl(bl_unsat.get(year, ''))))
         str_bl.append("{}{}".format(
-            "twentyfour:\n", md_file_comp_bl(bl_24s[year])))
+            "twentyfour:\n", md_file_comp_bl(bl_24s.get(year, ''))))
         str_bl = "\n".join(str_bl)
         # write md file
         year_path = os.path.join(path, year)
@@ -1431,10 +1443,10 @@ def to_md_files_comp_largest_contribution(results_seq,
     lc_24s = largest_contribution_ranking(results_24s, time_limit, False)
 
     for year in lc_seq:
-        assert year in lc_par
-        assert year in lc_sat
-        assert year in lc_unsat
-        assert year in lc_24s
+        #assert year in lc_par
+        #assert year in lc_sat
+        #assert year in lc_unsat
+        #assert year in lc_24s
         if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
             str_comp = \
                     "---\n"\
@@ -1452,11 +1464,11 @@ def to_md_files_comp_largest_contribution(results_seq,
                     .format(datetime.datetime.now().strftime(
                                 "%Y-%m-%d %H:%M:%S"),
                             g_tracks[track],
-                            lc_seq[year][0][4],
-                            lc_par[year][0][4],
-                            lc_sat[year][0][4],
-                            lc_unsat[year][0][4],
-                            lc_24s[year][0][4])
+                            value(lc_seq, year, 0, 4),
+                            value(lc_par, year, 0, 4),
+                            value(lc_sat, year, 0, 4),
+                            value(lc_unsat, year, 0, 4),
+                            value(lc_24s, year, 0, 4))
         elif track == OPT_TRACK_INC or track == OPT_TRACK_CHALL_INC:
             str_comp = \
                     "---\n"\
@@ -1470,7 +1482,7 @@ def to_md_files_comp_largest_contribution(results_seq,
                     .format(datetime.datetime.now().strftime(
                                 "%Y-%m-%d %H:%M:%S"),
                             g_tracks[track],
-                            lc_par[year][0][4])
+                            value(lc_par, year, 0, 4))
         else:
             str_comp = \
                     "---\n"\
@@ -1485,20 +1497,20 @@ def to_md_files_comp_largest_contribution(results_seq,
                     .format(datetime.datetime.now().strftime(
                                 "%Y-%m-%d %H:%M:%S"),
                             g_tracks[track],
-                            lc_seq[year][0][4],
-                            lc_par[year][0][4])
+                            value(lc_seq, year, 0, 4),
+                            value(lc_par, year, 0, 4))
 
         str_lc = []
         str_lc.append("{}{}".format(
-            "sequential:\n", md_file_comp_lc(lc_seq[year])))
+            "sequential:\n", md_file_comp_lc(lc_seq.get(year, ''))))
         str_lc.append("{}{}".format(
-            "parallel:\n", md_file_comp_lc(lc_par[year])))
+            "parallel:\n", md_file_comp_lc(lc_par.get(year, ''))))
         str_lc.append("{}{}".format(
-            "sat:\n", md_file_comp_lc(lc_sat[year])))
+            "sat:\n", md_file_comp_lc(lc_sat.get(year, ''))))
         str_lc.append("{}{}".format(
-            "unsat:\n", md_file_comp_lc(lc_unsat[year])))
+            "unsat:\n", md_file_comp_lc(lc_unsat.get(year, ''))))
         str_lc.append("{}{}".format(
-            "twentyfour:\n", md_file_comp_lc(lc_24s[year])))
+            "twentyfour:\n", md_file_comp_lc(lc_24s.get(year, ''))))
         str_lc = "\n".join(str_lc)
         # write md file
         year_path = os.path.join(path, year)
