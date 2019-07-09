@@ -463,13 +463,15 @@ def score(division,
         # either the expected status is sat/unsat or a solver solves the
         # instance.
         if filter_result:
+            # Save original result for  determining unsolved benchmarks
+            data_new['result_orig'] = data_new['result']
+
             expected = set([filter_result, RESULT_UNKNOWN])
             data_with_result = \
                 data_new[(data_new.expected == filter_result)
                          | ((data_new.result == filter_result)
                             & (data_new.expected.isin(expected)))]
             benchmarks = set(data_with_result.benchmark.unique())
-            #data_new = data_new[data_new.benchmark.isin(benchmarks)]
             data_new.loc[~data_new.benchmark.isin(benchmarks),
                          ['cpu_time', 'wallclock_time', 'result']] = \
                             [0.0, 0.0, RESULT_UNKNOWN]
@@ -513,7 +515,28 @@ def score(division,
             data_new.loc[solved_unsat.index, 'correct_unsat'] = 1
 
         # Determine unsolved benchmarks.
-        data_new.loc[data_new.correct == 0, 'unsolved'] = 1
+        # If 'filter_result' is given, a benchmark is unsolved if:
+        # 1) expected is 'filter_result' and the benchmark is unsolved
+        # 2) expected is RESULT_UNKNOWN and at least one solver was able to
+        #    solve the benchmark with result != 'filter_result'.
+        # For example, for the sat score we don't consider benchmarks as
+        # unsolved if they are either expected to be unsatisfiable or solved as
+        # unsatisfiable
+        if filter_result:
+            # Filter solved unknown benchmarks with a result other than
+            # 'filter_result'.
+            solved_unknowns =
+                data_new[(data_new.expected == RESULT_UNKNOWN)
+                         & (data_new.result_orig != filter_result)
+                         & (data_new.result_orig != RESULT_UNKNOWN)]
+            benchmarks = set(solved_unknowns.benchmark.unique())
+            expected = set([filter_result, RESULT_UNKNOWN])
+            data_new.loc[(data_new.correct == 0)
+                         & data_new.expected.isin(expected)
+                         & ~data_new.benchmark.isin(unknowns),
+                         'unsolved'] = 1
+        else:
+            data_new.loc[data_new.correct == 0, 'unsolved'] = 1
 
     # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
     # 'family_scores' dictionary (use_families == False).
