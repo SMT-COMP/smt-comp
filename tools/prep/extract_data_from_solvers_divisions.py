@@ -199,7 +199,7 @@ def write_mds(path):
         ofile_name = \
                 "{}.md".format(s['solver_name']).replace(" ", "_").replace("/", "_")
         outfile = open(os.path.join(path, ofile_name), "w")
-        md_str = "---\nlayout: participant\n{}\nlogics:\n{}\n---".format(
+        md_str = "---\nlayout: participant\n{}\ndivisions:\n{}\n---".format(
                 attr_fields_str, logic_fields_str)
         outfile.write(md_str)
 
