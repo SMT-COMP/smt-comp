@@ -160,7 +160,7 @@ def read_csv(fname):
             g_submissions[submission['solver_name']] = submission
 
 # Converts the structures in g_submission to mds
-def write_mds(path):
+def write_mds(year, path):
     global g_sum_seed
     for sname in g_submissions:
         s = g_submissions[sname]
@@ -199,8 +199,11 @@ def write_mds(path):
         ofile_name = \
                 "{}.md".format(s['solver_name']).replace(" ", "_").replace("/", "_")
         outfile = open(os.path.join(path, ofile_name), "w")
-        md_str = "---\nlayout: participant\n{}\ndivisions:\n{}\n---".format(
-                attr_fields_str, logic_fields_str)
+        md_str = "---\n"\
+                 "layout: participant\n"\
+                 "year: {}\n"\
+                 "{}\ndivisions:\n{}\n---".format(
+                         year, attr_fields_str, logic_fields_str)
         outfile.write(md_str)
 
 def print_div_competitiveness(o_path, canonical):
@@ -264,48 +267,51 @@ def read_canon(f):
 
 if __name__ == '__main__':
     parser = ArgumentParser(
-            usage="%s "\
-                  "<solvers-divisions: csv> "\
-                  "<yaml-path: path> "\
-                  "<canon-json: file> "\
-                  "<competitiveness-suggestion-path: path> "\
-                  "\n\n"\
-                  "Extract csv data from solvers_divisions_final.csv "\
-                  "into per-solver yaml files for the website.  In "\
-                  "addition prints a suggestion for non-competitive "\
-                  "divisions based on the mapping from the solver "\
-                  "versions to their canonical version.  Outputs "\
-                  "also the competition seed base seed (to which "\
-                  "randomness must still be added. " % sys.argv[0])
-    parser.add_argument (
-            "solver_divisions",
+            description = "Extract csv data from solvers_divisions_final.csv "\
+                          "into per-solver .md files for the website. "\
+                          "Output competition seed base seed (to which "\
+                          "randomness (NYSE index) must still be added. "\
+                          "Optionally, identify non-competitive divisions "\
+                          "based on the given mapping from solver variants "\
+                          "their canonical version.")
+    parser.add_argument ("solver_divisions",
             help="the main csv from solver registrations")
-    parser.add_argument(
-            "yaml_path",
-            help="output path for generated yaml files for the participants")
-    parser.add_argument(
-            "canon_json",
-            help="The connection between a solver and its variants as "\
-            "determined by the judges")
-    parser.add_argument(
-            "noncompeting_sug_path",
-            help="The files produced by the script suggesting which "\
-            "divisions are not competitive and the reasons, one for each "\
-            "track.")
+    parser.add_argument("md_path",
+            help="output path for generated .md files for the participants")
+    parser.add_argument("year",
+            help="the year of the competition")
+    parser.add_argument("-c", "--canon",
+            default=None,
+            help="a json file identifying the variants of a solver as "\
+                 "determined by the judges. (requires -n)")
+    parser.add_argument("-n", "--non-competing",
+            default=None,
+            help="the path for the generated output files if --canon is "\
+                 "given; these output files suggest which divisions "\
+                 "are not competitive and the reasons, one for each track. "\
+                 "(requires -c)")
 
     args = parser.parse_args()
 
+    if not args.canon and args.non_competing:
+        die("Missing solver variants json file")
     if not os.path.exists(args.solver_divisions):
-        die("file not found: {}".format(args.solver_divisions))
-    if not os.path.exists(args.yaml_path):
-        die("path not found: {}".format(args.yaml_path))
-    if not os.path.exists(args.canon_json):
-        die("file not found: {}".format(args.canon_json))
-    if not os.path.exists(args.noncompeting_sug_path):
-        os.mkdir(args.noncompeting_sug_path)
+        die("File not found: {}".format(args.solver_divisions))
+    if not os.path.exists(args.md_path):
+        die("Path not found: {}".format(args.md_path))
 
     read_csv(args.solver_divisions)
-    canonical = read_canon(args.canon_json)
-    print_div_competitiveness(args.noncompeting_sug_path, canonical)
-    write_mds(args.yaml_path)
+
+    if args.canon:
+        if not os.path.exists(args.canon):
+            die("File not found: {}".format(args.canon))
+        if not args.non_competing:
+            die("Missing output files path")
+        if not os.path.exists(args.non_competing):
+            os.mkdir(args.non_competing)
+        canonical = read_canon(args.canon)
+        print_div_competitiveness(args.non_competing, canonical)
+
+    write_mds(args.year, args.md_path)
+
     print("Seeds (sum mod 2^30): {}".format(g_sum_seed % (2**30)))
