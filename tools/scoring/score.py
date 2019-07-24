@@ -1093,6 +1093,7 @@ def write_md_file(division,
             "---\n"\
             "layout: result\n"\
             "resultdate: {}\n\n"\
+            "year: {}\n\n"\
             "divisions: divisions_{}\n"\
             "participants: participants_{}\n\n"\
             "division: {}\n"\
@@ -1101,6 +1102,7 @@ def write_md_file(division,
             "time_limit: {}\n"\
             "mem_limit: 60\n"\
             .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    year,
                     year,
                     year,
                     division,
@@ -1283,12 +1285,14 @@ def to_md_files_comp_biggest_lead(results_seq,
         str_comp.append( "---\n"\
                          "layout: result_comp\n"\
                          "resultdate: {}\n\n"\
+                         "year: {}\n\n"\
                          "results: results_{}\n"\
                          "participants: participants_{}\n\n"\
                          "track: {}\n"\
                          "recognition: biggest_lead\n"\
                          .format(datetime.datetime.now().strftime(
                                      "%Y-%m-%d %H:%M:%S"),
+                                 year,
                                  year,
                                  year,
                                  g_tracks[track]))
@@ -1366,12 +1370,14 @@ def to_md_files_comp_largest_contribution(results_seq,
         str_comp.append("---\n"\
                         "layout: result_comp\n"\
                         "resultdate: {}\n\n"\
+                        "year: {}\n\n"\
                         "results: results_{}\n"\
                         "participants: participants_{}\n\n"\
                         "track: {}\n"\
                         "recognition: largest_contribution\n"\
                         .format(datetime.datetime.now().strftime(
                                 "%Y-%m-%d %H:%M:%S"),
+                                year,
                                 year,
                                 year,
                                 g_tracks[track]))
