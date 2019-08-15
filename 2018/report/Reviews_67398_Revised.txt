@@ -1,0 +1,230 @@
+*** Review 1 ***
+
+ The paper overall improved since the first submission, but there are still issues to be fixed, some of them already reported in the review of the first version.
+ 
+ * Organization
+ 
+- information about ranking should all stay in the related section, while
+there are related information, e.g. in the first part of Section 7 - Results.
+
+- outline of the content of Section 8 describes only part of its content (the first three sub-sections).
+
+* Quality
+
+- The paper still contains a number of issues, minor or not, detailed at the end of this review.
+
+-  In Section 2 the fact that "appointment should happen ... " is of relative interest and could be omitted. The same holds for the day in which the events took place.
+
+* Rules
+
+- basically incorrect results are "ignored" by omitting the benchmark if the status is not known - this comment still remains. The authors updated the text. I see their points and analysis, which I appreciated, through I think that this is an issue that should be dealt with more care. Correctness is very important for solvers when checking in particular real benchmarks (HW- and SW-verification, etc).
+
+* Significance of the results
+
+ - the paper and its analysis now contain many numbers and data, which is very appropriate for e competition report in my opinion. But, basically, no explanation is in place. What I expect to get out of a report, other than commenting the numbers, is their explanation, e.g.: what are the techniques implemented in solvers that overall performed better? Rr better, what techniques implemented in solvers led to an efficient solvers on a particular benchmark? why such techniques led to positive results on benchmarks with (a) given structure/characteristics?
+ 
+ - last paragraph of Section 7.1 that gives motivations for MathTSAT and Z3 to be industrial-strenght tool, and states Z3 training, are either not clear or somehow not convincing as motivations. The paragraph should be clarified, or can be omitted.
+ 
+ - Table 16 should not consider, in my opinion, divisions in which there was only one sound solvers, otherwise the concept of "solved uniquely" is trivially true.
+ 
+ * Relation to other competitions
+ 
+ - in the conclusions section authors mention the changes that will be implemented in 2019: it would be interesting to state which of the changes mentioned are already in place in other related solver's competitions (e.g., SAT, ASP, QBF, SV ...) .
+
+ 
+ * Minor points
+ 
+ Introduction
+ 
+ - "Hence there is" ->  - "Hence there is" ->
+ 
+ - there is reference broken at pg. 2
+ 
+ Section 2
+ 
+ - does the event was co-located with any conference in particular in 2018?
+ 
+ - "permitted" -> "allowed"
+ 
+ Section 3
+ 
+ - "increased by" -> "increased of" ?
+ 
+ Section 4
+ 
+ - "discontinued partly" -> "partly discontinued" ?
+ 
+ - "lacking tool support" -> "lacking of tool support" (This recurs later.)
+ 
+ - "whose precise" ->  ", whose precise"
+ 
+ - "DT" looks not to be introduced
+ 
+ - the concept of "benchmarks families" is used at the beginning of pg. 7 but it has not been introduced
+ 
+ - "and in 2018, there were" ->   "while in 2018, there were"
+ 
+- e \in \{0,1 \} is defined, but than it is said to be the number of returned statuses...are they aligned? Please clarify
+
+Section 6
+
+- "executing" -> "performing"
+
+- there is an huge space at pg. 14
+
+- Table 9: there are two team members for solver STP that miss affiliation
+
+- "Table 11 summarizes these figures". It would be probably useful to explicitly mention the figure numbers
+
+Section 7
+
+- "are also taking" -> "were taken"
+
+- referring in the text to colors may not be a good choice for b/w printing
+
+- In Sec. 7.1 "assume was trained" -> "assume that it was trained"
+
+Section 8
+
+- "the fact that in 2015," ->  "the fact that, in 2015,"
+ 
+ - "degression of Z3" ?
+ 
+ - "rank highly" -> "rank in high position" ? (This recurs later.)
+ 
+ - "has relatively few" -> "has few"
+ 
+ - "quotient" -> "ratio" ?
+ 
+ - "a benchmarks" ->  "a benchmark"
+ 
+ - "problem" and "benchmark" are used for the same concept here. Maybe they can be unified
+ 
+ - in Table 17, does 1.0 means they are sequential? In case these numbers could be omitted
+ 
+ - "As in the previous, this" -> "As in the previous analysis, this"
+ 
+ - "Unsurprisingly the" ->   "Unsurprisingly, the"
+ 
+ - "and not Vampire." -> - "and not by Vampire."
+ 
+ Section 9
+ 
+- "The last FLoC Olympiad was a period of ..." -> are you referring to "the time between the two FLoC Olympiads" ?
+
+ References
+ 
+ They could be made more uniform, e.g.
+ 
+ - [7] vs. [12], where the same journal is referred with contracted form or full name
+ 
+ - Isn't [13] a CADE paper? In case, the way the conference name is mentioned is very different to [14], which is a CADE paper as well
+ 
+ - [38] contains the only acronym for journal name
+
+============================================
+
+*** Review 2 ***
+
+ummary: This is a much improved revision of this paper. I'm very happy to see
+the additional sections and paragraphs, especially Sec 8! I think this paper is
+ready for publication, modulo a few minor (essentially typesetting) issues (see
+below).
+
+Details:
+
+4.1 Scoring: A good addition. I think it would be great if the changes to the
+scoring system over the years would be analyzed, to see whether they did indeed
+have the intended effect. This has been started in 8.6, but a more
+comprehensive analysis would be great (possibly as a separate submission here
+or elsewhere).
+
+(28), Tbl 7: Thanks for the revision of the table, but I'm not sure listing
+more team members to "the best of our knowledge" is a good idea. If I were to
+do that, I would be bound to miss someone... Maybe just list the main
+institution? Or perhaps ask the submitter who they would want to be listed? I
+think there should be enough time to do that.
+
+General: Gray and grey are the worst colors to use. On my (Xerox color-laser)
+printer, all of the gray text in tables and figures are almost or completely
+unreadable. For instance, on white (bleached) paper there is not even a faint
+trace of the gray vertical line in Figures 3/4; I had to switch to the screen
+to see what this refers to.
+
+Fig 5/6: These could be significantly smaller :)
+
+Fig 3/4: Starting the X-axis at an arbitrary point is always a bit fishy. This
+way, any tiny difference can be overemphasized to achieve any level of
+impressiveness that the author choses. For instance, 144k vs 136k instances
+(casually read off the plot) is a 3.5% increase, but this is an irrelevant
+detail as explained in the text. All four series are also of exactly the same
+shape. I think a cactus plot is simply not the right tool for this job.
+
+============================================
+
+*** Review 3 ***
+
+
+This is a revised version of a paper describing
+the years 2015-2018 of the SMT competition.
+The important changes requested last time were addressed,
+and new content was added in Section 8,
+which discusses interesting questions
+and adds substantial value to the paper.
+
+There are only a few minor improvements that should be made before publication:
+
+In the definition of the raw benchmark score (Sect. 4.1),
+it is not clear why CPU time is bounded at 4T
+(the fact that only 4 cores are available only comes later).
+
+In the remainder of Sect. 4.1, the term "benchmark family" is used,
+but this is never defined.
+This could be added to the definitions part in the beginning of Sect. 4.
+
+In the definition of "Competition-Wide Score (Main Track)",
+it says "since the weight already takes".
+This seems like the weighted division score is used as input for this computation,
+but another sentence of this definition explicitly uses
+the solver's raw score for this computation.
+So what weight is referred to here?
+
+In tables 3-5, please keep the regular numbers right-aligned.
+In LaTeX, the easiest way to do this is probably to use separate columns
+for the regular numbers and the number in brackets,
+and potentially shrink the space between each pair of columns.
+
+It is said that "StarExec ensures the reproducibility of the competition".
+If we use the terminology of ACM
+(https://www.acm.org/publications/policies/artifact-review-badging),
+the better term would be "replicability" instead of "reproducibility",
+because StarExec allows a different team to replicate the results
+with the same experimental setup.
+In the next sentence, commas should be placed before and after "e.g.".
+
+For tables 7-9, a smaller font size could be used
+(like in Table 12).
+
+The first paragraph of Sect. 8 mentions only three aspects,
+but more aspects are analyzed.
+
+Figure 5 seems unnecessary, because the difference is not visible anyway.
+Just listing the numbers would be sufficient.
+
+Especially in Sect. 8, there are many larger numbers.
+For readability, it would be better if all numbers larger than 9999
+would use a thin space as thousand separator,
+e.g., $1\,000\,000$ or using siunitx which can do this automatically
+with \num{1000000}.
+(Please do not use other characters as thousand separator
+because this can be confusing for international readers.)
+
+In Sect. 8.4, it would be better to refer to bounded model checking
+instead of just model checking.
+Other model checking algorithms use many SMT queries
+where the discussed property does not hold.
+
+
+On the middle of page 2, there is an unresolved reference ([?]).
+
+Footnote 1 is on the wrong page.
