@@ -131,7 +131,8 @@ DONE
 
 > - referring in the text to colors may not be a good choice for b/w printing
 
-TODO
+WONTFIX (there is no reference to colors other than an explanation of
+what they mean)
 
 > - In Sec. 7.1 "assume was trained" -> "assume that it was trained"
 
@@ -295,7 +296,7 @@ TODO
 > for the regular numbers and the number in brackets,
 > and potentially shrink the space between each pair of columns.
 
-TODO
+DONE
 
 > It is said that "StarExec ensures the reproducibility of the competition".
 > If we use the terminology of ACM

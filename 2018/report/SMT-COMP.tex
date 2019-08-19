@@ -779,68 +779,66 @@ $\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$,
 where the sum is over all competitive divisions into which the solver
 was entered.
 
-
-
 \begin{table}
-  \caption{Number of benchmarks used in the \maintrack (by division). Numbers in brackets indicate the (rounded) percentage of problems with different statuses, which are (sat/unsat) in 2015 and 2016, and (sat/unsat/unknown) in 2017 and 2018.}
+  \caption{Number of benchmarks used in the \maintrack (by division). Numbers in parentheses indicate the (rounded) percentage of problems with different statuses, which are (sat/unsat) in 2015 and 2016, and (sat/unsat/unknown) in 2017 and 2018.}
   \label{table:benchmarks-main-track}
   \centering
-  \scalebox{.9}[.775]{\begin{tabular}{lrrrr}
+  \scalebox{.9}[.775]{\begin{tabular}{lr@{\hskip3pt}cr@{\hskip3pt}cr@{\hskip3pt}cr@{\hskip3pt}c}
     \toprule
-    Division & \multicolumn{1}{c}{2015} & \multicolumn{1}{c}{2016} & \multicolumn{1}{c}{2017} & \multicolumn{1}{c}{2018} \\
+    Division & \multicolumn{2}{c}{2015} & \multicolumn{2}{c}{2016} & \multicolumn{2}{c}{2017} & \multicolumn{2}{c}{2018} \\
     \midrule
-    ABVFP & - & - & - & 1 \gray{(0/0/100)}\\
-    ALIA & 42 \gray{(2/98)} & 42 \gray{(2/98)} & 42 \gray{(2/98/0)} & 42 \gray{(2/98/0)}\\
-    AUFBVDTLIA & - & - & 1709 \gray{(0/1/98)} & 1709 \gray{(0/1/98)}\\
-    AUFDTLIA & - & - & 728 \gray{(0/0/100)} & 728 \gray{(0/0/100)}\\
-    AUFLIA & 4 \gray{(25/75)} & 4 \gray{(25/75)} & 4 \gray{(25/75/0)} & 4 \gray{(25/75/0)}\\
-    AUFLIRA & 19849 \gray{(1/99)} & 19849 \gray{(1/99)} & 20011 \gray{(0/99/1)} & 20011 \gray{(0/99/1)}\\
-    AUFNIRA & 1050 \gray{(0/100)} & 1050 \gray{(0/100)} & 1480 \gray{(0/71/29)} & 1480 \gray{(0/71/29)}\\
-    BV & 85 \gray{(34/66)} & 85 \gray{(34/66)} & 5151 \gray{(2/2/97)} & 5751 \gray{(10/86/4)}\\
-    BVFP & - & - & - & 24 \gray{(0/0/100)}\\
-    FP & - & - & - & 61 \gray{(0/0/100)}\\
-    LIA & 201 \gray{(5/95)} & 201 \gray{(5/95)} & 388 \gray{(38/60/2)} & 388 \gray{(38/60/2)}\\
-    LRA & 339 \gray{(6/94)} & 339 \gray{(6/94)} & 2419 \gray{(17/46/38)} & 2419 \gray{(29/64/8)}\\
-    NIA & 9 \gray{(67/33)} & 9 \gray{(67/33)} & 14 \gray{(43/29/29)} & 14 \gray{(43/29/29)}\\
-    NRA & 3788 \gray{(0/100)} & 3788 \gray{(0/100)} & 3811 \gray{(0/100/0)} & 3813 \gray{(0/100/0)}\\
-    QF\_ABV & 14720 \gray{(68/32)} & 14720 \gray{(68/32)} & 15061 \gray{(69/31/0)} & 15066 \gray{(69/31/0)}\\
-    QF\_ABVFP & - & - & - & 18129 \gray{(78/22/1)}\\
-    QF\_ALIA & 134 \gray{(40/60)} & 139 \gray{(42/58)} & 139 \gray{(42/58/0)} & 139 \gray{(42/58/0)}\\
-    QF\_ANIA & 6 \gray{(0/100)} & 8 \gray{(0/100)} & 8 \gray{(0/100/0)} & 8 \gray{(0/100/0)}\\
-    QF\_AUFBV & 37 \gray{(16/84)} & 37 \gray{(16/84)} & 31 \gray{(19/81/0)} & 31 \gray{(19/81/0)}\\
-    QF\_AUFLIA & 1009 \gray{(49/51)} & 1009 \gray{(49/51)} & 1009 \gray{(49/51/0)} & 1009 \gray{(49/51/0)}\\
-    QF\_AUFNIA & 21 \gray{(29/71)} & 21 \gray{(29/71)} & 17 \gray{(29/71/0)} & 17 \gray{(29/71/0)}\\
-    QF\_AX & 551 \gray{(49/51)} & 551 \gray{(49/51)} & 551 \gray{(49/51/0)} & 551 \gray{(49/51/0)}\\
-    QF\_BV & 26414 \gray{(35/65)} & 26414 \gray{(35/65)} & 40043 \gray{(32/59/8)} & 40102 \gray{(36/64/0)}\\
-    QF\_BVFP & 7 \gray{(14/86)} & 7 \gray{(14/86)} & 17215 \gray{(81/18/0)} & 17215 \gray{(81/18/0)}\\
-    QF\_DT & - & - & 8000 \gray{(0/0/100)} & 8000 \gray{(45/55/0)}\\
-    QF\_FP & 34413 \gray{(50/50)} & 34413 \gray{(50/50)} & 40302 \gray{(50/50/1)} & 40300 \gray{(50/50/1)}\\
-    QF\_IDL & 2094 \gray{(61/39)} & 2094 \gray{(61/39)} & 2193 \gray{(58/37/5)} & 2193 \gray{(58/37/4)}\\
-    QF\_LIA & 5839 \gray{(51/49)} & 5839 \gray{(51/49)} & 6141 \gray{(52/46/2)} & 6947 \gray{(55/43/1)}\\
-    QF\_LIRA & 6 \gray{(17/83)} & 6 \gray{(17/83)} & 7 \gray{(14/71/14)} & 7 \gray{(14/71/14)}\\
-    QF\_LRA & 1626 \gray{(61/39)} & 1626 \gray{(61/39)} & 1649 \gray{(57/41/2)} & 1649 \gray{(57/41/1)}\\
-    QF\_NIA & 8475 \gray{(98/2)} & 8593 \gray{(96/4)} & 23876 \gray{(59/13/28)} & 23876 \gray{(59/20/20)}\\
-    QF\_NIRA & 2 \gray{(0/100)} & 2 \gray{(0/100)} & 3 \gray{(0/67/33)} & 3 \gray{(0/67/33)}\\
-    QF\_NRA & 10184 \gray{(52/48)} & 10245 \gray{(52/48)} & 11354 \gray{(44/47/10)} & 11489 \gray{(44/47/9)}\\
-    QF\_RDL & 220 \gray{(49/51)} & 220 \gray{(49/51)} & 255 \gray{(43/44/13)} & 255 \gray{(43/44/13)}\\
-    QF\_SLIA & - & - & - & 72705 \gray{(0/0/100)}\\
-    QF\_UF & 6649 \gray{(38/62)} & 6649 \gray{(38/62)} & 6650 \gray{(38/62/0)} & 7423 \gray{(42/58/0)}\\
-    QF\_UFBV & 31 \gray{(0/100)} & 31 \gray{(0/100)} & 31 \gray{(0/100/0)} & 1224 \gray{(53/47/0)}\\
-    QF\_UFIDL & 441 \gray{(24/76)} & 441 \gray{(24/76)} & 428 \gray{(25/75/0)} & 428 \gray{(25/75/0)}\\
-    QF\_UFLIA & 598 \gray{(67/33)} & 598 \gray{(67/33)} & 583 \gray{(69/31/0)} & 583 \gray{(69/31/0)}\\
-    QF\_UFLRA & 1627 \gray{(48/52)} & 1627 \gray{(48/52)} & 1284 \gray{(60/40/0)} & 1284 \gray{(60/40/0)}\\
-    QF\_UFNIA & 7 \gray{(0/100)} & 7 \gray{(0/100)} & 7 \gray{(0/100/0)} & 7 \gray{(0/100/0)}\\
-    QF\_UFNRA & 34 \gray{(47/53)} & 34 \gray{(47/53)} & 36 \gray{(58/31/11)} & 36 \gray{(58/31/11)}\\
-    UF & 2839 \gray{(28/72)} & 2839 \gray{(28/72)} & 7562 \gray{(10/44/46)} & 7562 \gray{(10/46/44)}\\
-    UFBV & 71 \gray{(25/75)} & 71 \gray{(25/75)} & 200 \gray{(34/48/17)} & 200 \gray{(34/48/17)}\\
-    UFDT & - & - & 4535 \gray{(0/9/90)} & 4527 \gray{(1/41/58)}\\
-    UFDTLIA & - & - & 303 \gray{(0/0/100)} & 303 \gray{(0/0/100)}\\
-    UFIDL & 68 \gray{(9/91)} & 68 \gray{(9/91)} & 68 \gray{(4/84/12)} & 68 \gray{(4/84/12)}\\
-    UFLIA & 8404 \gray{(0/100)} & 8404 \gray{(0/100)} & 10137 \gray{(0/76/24)} & 10137 \gray{(0/76/23)}\\
-    UFLRA & 25 \gray{(20/80)} & 25 \gray{(20/80)} & 15 \gray{(33/67/0)} & 15 \gray{(33/67/0)}\\
-    UFNIA & 2319 \gray{(0/100)} & 2319 \gray{(0/100)} & 3308 \gray{(0/74/26)} & 3308 \gray{(0/74/26)}\\
+    ABVFP & -- & & -- & & -- & & 1 & \gray{(0/0/100)}\\
+    ALIA & 42 & \gray{(2/98)} & 42 & \gray{(2/98)} & 42 & \gray{(2/98/0)} & 42 & \gray{(2/98/0)}\\
+    AUFBVDTLIA & -- & & -- & & 1709 & \gray{(0/1/98)} & 1709 & \gray{(0/1/98)}\\
+    AUFDTLIA & -- & & -- & & 728 & \gray{(0/0/100)} & 728 & \gray{(0/0/100)}\\
+    AUFLIA & 4 & \gray{(25/75)} & 4 & \gray{(25/75)} & 4 & \gray{(25/75/0)} & 4 & \gray{(25/75/0)}\\
+    AUFLIRA & 19849 & \gray{(1/99)} & 19849 & \gray{(1/99)} & 20011 & \gray{(0/99/1)} & 20011 & \gray{(0/99/1)}\\
+    AUFNIRA & 1050 & \gray{(0/100)} & 1050 & \gray{(0/100)} & 1480 & \gray{(0/71/29)} & 1480 & \gray{(0/71/29)}\\
+    BV & 85 & \gray{(34/66)} & 85 & \gray{(34/66)} & 5151 & \gray{(2/2/97)} & 5751 & \gray{(10/86/4)}\\
+    BVFP & -- & & -- & & -- & & 24 & \gray{(0/0/100)}\\
+    FP & -- & & -- & & -- & & 61 & \gray{(0/0/100)}\\
+    LIA & 201 & \gray{(5/95)} & 201 & \gray{(5/95)} & 388 & \gray{(38/60/2)} & 388 & \gray{(38/60/2)}\\
+    LRA & 339 & \gray{(6/94)} & 339 & \gray{(6/94)} & 2419 & \gray{(17/46/38)} & 2419 & \gray{(29/64/8)}\\
+    NIA & 9 & \gray{(67/33)} & 9 & \gray{(67/33)} & 14 & \gray{(43/29/29)} & 14 & \gray{(43/29/29)}\\
+    NRA & 3788 & \gray{(0/100)} & 3788 & \gray{(0/100)} & 3811 & \gray{(0/100/0)} & 3813 & \gray{(0/100/0)}\\
+    QF\_ABV & 14720 & \gray{(68/32)} & 14720 & \gray{(68/32)} & 15061 & \gray{(69/31/0)} & 15066 & \gray{(69/31/0)}\\
+    QF\_ABVFP & -- & & -- & & -- & & 18129 & \gray{(78/22/1)}\\
+    QF\_ALIA & 134 & \gray{(40/60)} & 139 & \gray{(42/58)} & 139 & \gray{(42/58/0)} & 139 & \gray{(42/58/0)}\\
+    QF\_ANIA & 6 & \gray{(0/100)} & 8 & \gray{(0/100)} & 8 & \gray{(0/100/0)} & 8 & \gray{(0/100/0)}\\
+    QF\_AUFBV & 37 & \gray{(16/84)} & 37 & \gray{(16/84)} & 31 & \gray{(19/81/0)} & 31 & \gray{(19/81/0)}\\
+    QF\_AUFLIA & 1009 & \gray{(49/51)} & 1009 & \gray{(49/51)} & 1009 & \gray{(49/51/0)} & 1009 & \gray{(49/51/0)}\\
+    QF\_AUFNIA & 21 & \gray{(29/71)} & 21 & \gray{(29/71)} & 17 & \gray{(29/71/0)} & 17 & \gray{(29/71/0)}\\
+    QF\_AX & 551 & \gray{(49/51)} & 551 & \gray{(49/51)} & 551 & \gray{(49/51/0)} & 551 & \gray{(49/51/0)}\\
+    QF\_BV & 26414 & \gray{(35/65)} & 26414 & \gray{(35/65)} & 40043 & \gray{(32/59/8)} & 40102 & \gray{(36/64/0)}\\
+    QF\_BVFP & 7 & \gray{(14/86)} & 7 & \gray{(14/86)} & 17215 & \gray{(81/18/0)} & 17215 & \gray{(81/18/0)}\\
+    QF\_DT & -- & & -- & & 8000 & \gray{(0/0/100)} & 8000 & \gray{(45/55/0)}\\
+    QF\_FP & 34413 & \gray{(50/50)} & 34413 & \gray{(50/50)} & 40302 & \gray{(50/50/1)} & 40300 & \gray{(50/50/1)}\\
+    QF\_IDL & 2094 & \gray{(61/39)} & 2094 & \gray{(61/39)} & 2193 & \gray{(58/37/5)} & 2193 & \gray{(58/37/4)}\\
+    QF\_LIA & 5839 & \gray{(51/49)} & 5839 & \gray{(51/49)} & 6141 & \gray{(52/46/2)} & 6947 & \gray{(55/43/1)}\\
+    QF\_LIRA & 6 & \gray{(17/83)} & 6 & \gray{(17/83)} & 7 & \gray{(14/71/14)} & 7 & \gray{(14/71/14)}\\
+    QF\_LRA & 1626 & \gray{(61/39)} & 1626 & \gray{(61/39)} & 1649 & \gray{(57/41/2)} & 1649 & \gray{(57/41/1)}\\
+    QF\_NIA & 8475 & \gray{(98/2)} & 8593 & \gray{(96/4)} & 23876 & \gray{(59/13/28)} & 23876 & \gray{(59/20/20)}\\
+    QF\_NIRA & 2 & \gray{(0/100)} & 2 & \gray{(0/100)} & 3 & \gray{(0/67/33)} & 3 & \gray{(0/67/33)}\\
+    QF\_NRA & 10184 & \gray{(52/48)} & 10245 & \gray{(52/48)} & 11354 & \gray{(44/47/10)} & 11489 & \gray{(44/47/9)}\\
+    QF\_RDL & 220 & \gray{(49/51)} & 220 & \gray{(49/51)} & 255 & \gray{(43/44/13)} & 255 & \gray{(43/44/13)}\\
+    QF\_SLIA & -- & & -- & & -- & & 72705 & \gray{(0/0/100)}\\
+    QF\_UF & 6649 & \gray{(38/62)} & 6649 & \gray{(38/62)} & 6650 & \gray{(38/62/0)} & 7423 & \gray{(42/58/0)}\\
+    QF\_UFBV & 31 & \gray{(0/100)} & 31 & \gray{(0/100)} & 31 & \gray{(0/100/0)} & 1224 & \gray{(53/47/0)}\\
+    QF\_UFIDL & 441 & \gray{(24/76)} & 441 & \gray{(24/76)} & 428 & \gray{(25/75/0)} & 428 & \gray{(25/75/0)}\\
+    QF\_UFLIA & 598 & \gray{(67/33)} & 598 & \gray{(67/33)} & 583 & \gray{(69/31/0)} & 583 & \gray{(69/31/0)}\\
+    QF\_UFLRA & 1627 & \gray{(48/52)} & 1627 & \gray{(48/52)} & 1284 & \gray{(60/40/0)} & 1284 & \gray{(60/40/0)}\\
+    QF\_UFNIA & 7 & \gray{(0/100)} & 7 & \gray{(0/100)} & 7 & \gray{(0/100/0)} & 7 & \gray{(0/100/0)}\\
+    QF\_UFNRA & 34 & \gray{(47/53)} & 34 & \gray{(47/53)} & 36 & \gray{(58/31/11)} & 36 & \gray{(58/31/11)}\\
+    UF & 2839 & \gray{(28/72)} & 2839 & \gray{(28/72)} & 7562 & \gray{(10/44/46)} & 7562 & \gray{(10/46/44)}\\
+    UFBV & 71 & \gray{(25/75)} & 71 & \gray{(25/75)} & 200 & \gray{(34/48/17)} & 200 & \gray{(34/48/17)}\\
+    UFDT & -- & & -- & & 4535 & \gray{(0/9/90)} & 4527 & \gray{(1/41/58)}\\
+    UFDTLIA & -- & & -- & & 303 & \gray{(0/0/100)} & 303 & \gray{(0/0/100)}\\
+    UFIDL & 68 & \gray{(9/91)} & 68 & \gray{(9/91)} & 68 & \gray{(4/84/12)} & 68 & \gray{(4/84/12)}\\
+    UFLIA & 8404 & \gray{(0/100)} & 8404 & \gray{(0/100)} & 10137 & \gray{(0/76/24)} & 10137 & \gray{(0/76/23)}\\
+    UFLRA & 25 & \gray{(20/80)} & 25 & \gray{(20/80)} & 15 & \gray{(33/67/0)} & 15 & \gray{(33/67/0)}\\
+    UFNIA & 2319 & \gray{(0/100)} & 2319 & \gray{(0/100)} & 3308 & \gray{(0/74/26)} & 3308 & \gray{(0/74/26)}\\
     \midrule
-    Total      & 154238 \gray{(40/60)} & 154424 \gray{(40/60)} & 256973 \gray{(37/46/17)} & 333241 \gray{(33/39/28)}\\
+    Total      & 154238 & \gray{(40/60)} & 154424 & \gray{(40/60)} & 256973 & \gray{(37/46/17)} & 333241 & \gray{(33/39/28)}\\
     \bottomrule
   \end{tabular}}
 \end{table}
@@ -1444,7 +1442,7 @@ be known precisely.
   \caption{VBS in terms of correct \texttt{check-sat} answers
   (out of 30370517 total)
   within a time limit of 2400s
-  on common benchmarks 2015-2018 of all logics in the \apptrack.}
+  on common benchmarks 2015--2018 of all logics in the \apptrack.}
   \label{fig:progress-all-app}
 \end{figure}
 
@@ -1483,7 +1481,7 @@ three tracks.
 For the \emph{\maintrack}, we determine the VBS as the best wall-clock
 performance per (correctly solved) instance with the time limit of 1200s used
 in the competitions 2017 and 2018. Figure~\ref{fig:progress-all} visualizes VBS
-performance on common benchmarks from 2015-2018 as cactus plot.
+performance on common benchmarks from 2015--2018 as cactus plot.
 Figure~\ref{fig:progress} shows VBS performance on common benchmarks over pairs
 of consecutive years from 2014 to 2018.  Both plots show the wall-clock solving
 time per instance over all instances, sorted by solving time.
