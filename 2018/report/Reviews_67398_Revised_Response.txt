@@ -313,7 +313,8 @@ DONE
 > For tables 7-9, a smaller font size could be used
 > (like in Table 12).
 
-TODO
+WONTFIX (I tried but didn't manage to make the participants tables fit
+on two pages instead of three)
 
 > The first paragraph of Sect. 8 mentions only three aspects,
 > but more aspects are analyzed.
