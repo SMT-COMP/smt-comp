@@ -11,7 +11,7 @@ TODO
 
 > - outline of the content of Section 8 describes only part of its content (the first three sub-sections).
 
-TODO
+DONE
 
 > * Quality
 >
@@ -319,7 +319,7 @@ on two pages instead of three)
 > The first paragraph of Sect. 8 mentions only three aspects,
 > but more aspects are analyzed.
 
-TODO
+DONE
 
 > Figure 5 seems unnecessary, because the difference is not visible anyway.
 > Just listing the numbers would be sufficient.
