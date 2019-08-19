@@ -7,6 +7,7 @@
 %\usepackage{pst-tree}
 \usepackage{xspace}
 \usepackage{enumitem}
+\usepackage{siunitx}
 
 %\usepackage[numbers,sort&compress]{natbib}
 
@@ -464,8 +465,8 @@ All problems used in the SMT Competition come from the SMT Library
 various sources.  The SMT Library is available from a public
 repository~\cite{smtlib-repository}, and each new release is mirrored
 on StarExec.  Users of SMT solvers are encouraged to submit new and
-interesting benchmarks to the library, which has grown from 1,352
-benchmarks in~2005~\cite{BdMS05} to 347,011 benchmarks in 2018.
+interesting benchmarks to the library, which has grown from \num{1352}
+benchmarks in~2005~\cite{BdMS05} to \num{347011} benchmarks in 2018.
 
 Benchmarks in the SMT Library are written in the SMT-LIB
 language~\cite{BarFT-RR-17}, a text-based format that defines the
@@ -529,8 +530,8 @@ such as bounded model
 checking~\cite{Gunther:2014:IBS:2632362.2632374}, where SMT solvers
 interact with other tools in a feedback loop.
 
-The 2018 release of the SMT Library contained 336,844 non-incremental
-benchmarks in 51 logics, as well as~10,167 incremental benchmarks
+The 2018 release of the SMT Library contained \num{336844} non-incremental
+benchmarks in 51 logics, as well as~\num{10167} incremental benchmarks
 (with a total of nearly 32 million {\tt check-sat} commands) in 26
 logics.  Table~\ref{table:smtlib} presents further data on the size of
 the SMT Library since~2015.  While the library usually grows from one
@@ -539,7 +540,7 @@ logics, continuous curation efforts may also cause benchmarks to be
 removed or reclassified on occasion, thereby causing individual logics
 or even the entire library to shrink.  From~2015 to~2018, the total
 number of benchmarks has increased by~68\,\%.  The largest benchmark
-in the 2018 release had a size of 1,041~MB; the total size of the
+in the 2018 release had a size of \num{1041}~MB; the total size of the
 release was 91~GB.
 
 \begin{table}
@@ -608,16 +609,16 @@ or unsat-core generation.
 
 \paragraph{Eligible Benchmarks.}
 Some benchmarks typically have to be
-excluded for syntactic reasons: in 2015 and 2016, 11,966 benchmarks
+excluded for syntactic reasons: in 2015 and 2016, \num{11966} benchmarks
 were excluded because they contained partial or underspecified
 operations (e.g., bit-vector division), whose precise semantics were
 being debated at the time.  Additionally in~2016, one benchmark was
 excluded because it contained incorrect status information.  In~2017,
-1,104 benchmarks were excluded because their logic had been classified
+\num{1104} benchmarks were excluded because their logic had been classified
 incorrectly, and 8~benchmarks were excluded because of incorrect or
 missing status information.  Moreover, divisions containing datatypes
 ({DT})---which were new in~2017---were excluded from the Unsat-Core
-track because of inadequate tool support.  In~2018, 3,603~benchmarks were
+track because of inadequate tool support.  In~2018, \num{3603}~benchmarks were
 excluded because they contained named terms (a feature of the SMT-LIB
 language that is not permitted in competition benchmarks), and
 5~benchmarks were excluded because of missing status information.
@@ -732,7 +733,7 @@ only, since application track benchmarks may be partially solved. Defining a
 useful sequential score for the application track would require information not
 provided by the raw score, e.g., detailed timing information for each result.
 
-\paragraph{Benchmark Weights (\maintrack and \ucoretrack 2016-2018).} The \emph{weight} of a
+\paragraph{Benchmark Weights (\maintrack and \ucoretrack 2016--2018).} The \emph{weight} of a
 benchmark in the main track is computed as $\alpha = (1 + \ln F)/F$,
 where~$F\geq 1$ is the size of the benchmark's family.  We then define its
 \emph{normalized weight} as $\alpha' = \alpha / (\sum_{i\in F} \alpha_i)$,
@@ -741,7 +742,7 @@ reasonable compromise between linearly combining numbers of benchmarks, which
 would overemphasize large families, and simply averaging the fraction of
 benchmarks solved, which would overemphasize small families.
 
-\paragraph{Weighted Division Scores (\maintrack and \ucoretrack 2016-2018).}
+\paragraph{Weighted Division Scores (\maintrack and \ucoretrack 2016--2018).}
 The \emph{(weighted) score} of a solver in a division of the \maintrack and
 \ucoretrack with $M$ benchmarks is then defined as the weighted sum of all raw
 scores $$\sum_{b\in M} \alpha'_b \cdot \langle e_b \cdot N, n_b \cdot N,
@@ -979,13 +980,13 @@ Jobs consist of individual \emph{job pairs}.  Each job pair
 corresponds to a specific solver/benchmark combination.
 Figure~\ref{fig:job-pairs} shows the total number of job pairs for the
 SMT Competition from~2015 to~2018.  Over this period, the number has
-grown by~72\,\%, from~1,028,615 job pairs in~2015 to~1,776,062 job
+grown by~72\,\%, from~\num{1028615} job pairs in~2015 to~\num{1776062} job
 pairs in~2018.  (This is the number of unique solver/benchmark
 combinations that were part of the competition.  The number of job
 pairs that were actually run is even higher: test jobs and job pairs
 that had to be re-run, e.g., because of issues with the StarExec
 infrastructure, are not included.)  For comparison, the~2014
-competition only ran~339,714 job pairs~\cite{CDW14}.
+competition only ran~\num{339714} job pairs~\cite{CDW14}.
 
 Also shown in Figure~\ref{fig:job-pairs} is the total wall-clock time
 (summed over all job pairs) for the competition.  This has more than
@@ -1401,7 +1402,7 @@ be known precisely.
   \centering
   \scalebox{.45}{\includegraphics{%
         plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_Main_Track_2015-2018.pdf}}
-  \caption{VBS on common benchmarks 2015-2018 of all logics in the \maintrack
+  \caption{VBS on common benchmarks 2015--2018 of all logics in the \maintrack
   with a time limit of 1200s. Number of common benchmarks is indicated with a
   gray vertical line.}
   \label{fig:progress-all}
@@ -1454,7 +1455,7 @@ be known precisely.
   \vspace{-5ex}
   \caption{VBS in terms of number of unsat core reductions
   within a time limit of 2400s
-  on common benchmarks 2016-2018 of all logics in the \ucoretrack.}
+  on common benchmarks 2016--2018 of all logics in the \ucoretrack.}
   \label{fig:progress-all-uc}
 \end{figure}
 
@@ -1484,32 +1485,32 @@ Figure~\ref{fig:progress} shows VBS performance on common benchmarks over pairs
 of consecutive years from 2014 to 2018.  Both plots show the wall-clock solving
 time per instance over all instances, sorted by solving time.
 %
-Between 2014 (67426 benchmarks) and 2015 (154238 benchmarks),
-the number of common benchmarks is 67070;
-between 2015 and 2016 (154424 benchmarks) it is 154238;
-between 2016 and 2017 (238758 benchmarks) it is 145236;
-and between 2017 and 2018 (333241 benchmarks) it is 226429.
+Between 2014 (\num{67426} benchmarks) and 2015 (\num{154238} benchmarks),
+the number of common benchmarks is \num{67070};
+between 2015 and 2016 (\num{154424} benchmarks) it is \num{154238};
+between 2016 and 2017 (\num{238758} benchmarks) it is \num{145236};
+and between 2017 and 2018 (\num{333241} benchmarks) it is \num{226429}.
 The number of solved instances on these sets of common benchmarks
 increased from 2014 to 2015 by 0.1\%, from 2016 to 2017 by 3.9\%,
 and from 2017 to 2018 by 0.3\%.
 Interestingly, it decreased from 2015 to 2016 by 3.5\%.
-This is mainly due to the fact that, in 2015, more than 5600 benchmarks of
+This is mainly due to the fact that, in 2015, more than \num{5600} benchmarks of
 division QF\_FP where solved by one of the two participating configurations of
-Z3 that no one else could solve, and in 2016 Z3 did not participate in this
+Z3 that no one else could solve, and in~2016 Z3 did not participate in this
 division.
 
 For the \emph{\apptrack}, we determine the VBS as the best performance
 in terms of number of correct \texttt{check-sat} answers within the time limit
 of 2400s (the time limit of the \apptrack in the competitions
-2015-2018).
+2015--2018).
 The total number of eligible \texttt{check-sat} queries (i.e., all queries with
 status sat or unsat up to the first query with status unknown) on
-common benchmarks from 2015-2018 is 30370517.
+common benchmarks from 2015--2018 is \num{30370517}.
 Figure~\ref{fig:progress-all-app} visualizes VBS performance on these
 benchmarks as a bar plot.
 In 2015, already 99.95\% of the eligible queries were answered correctly,
 which naturally does not leave a lot of room for improvement.
-In 2016, performance decreased by 185625 correct answers (0.61\%),
+In 2016, performance decreased by \num{185625} correct answers (0.61\%),
 which can be entirely attributed to a performance regression
 of Z3 on 2 benchmarks in the QF\_NIA division.
 %(on which in 2016, CVC4 then
@@ -1519,14 +1520,13 @@ For the \emph{\ucoretrack}, we determine the VBS as the best performance in
 terms of \emph{reduction}, i.e., the difference in the number of assertions
 of the input formula and the unsat core, within the time limit
 of 2400s (the time limit of the \ucoretrack in the competitions
-2016-2018).
+2016--2018).
 Figure~\ref{fig:progress-all-app} visualizes VBS performance on the common
-benchmarks (91455 total) from 2016-2018 as a bar plot.
-For 32377 of these benchmarks, extracting an unsat core is trivial since
+benchmarks (\num{91455} total) from 2016--2018 as a bar plot.
+For \num{32377} of these benchmarks, extracting an unsat core is trivial since
 they contain only one single \texttt{assert} command.
 They are thus also not considered in the bar plot, since their maximum
 possible reduction is trivially 0.
-
 
 \subsection{Unique Solutions}
 
@@ -1735,7 +1735,7 @@ solver, depending on the technique).
 
 In 2016 the \maintrack competition scoring was changed to weight the correctness score for benchmarks by the size of the family the benchmark belongs to. Here we ask what the winners would have been if this change had not been made. The answer to this question is given in Table~\ref{tab:results:total:solved}. Relatively few changes would have occurred. Unsurprisingly, the differences are in the larger and more structured divisions.
 
-Whilst producing these results we noticed that the description of what constitutes a family had been incorrectly interpreted by the scoring scripts in 2016-2018. After fixing this misinterpretation we note that only a single division winner changes---in 2017 AUFNIRA should have been won by CVC4 and not by Vampire.
+Whilst producing these results we noticed that the description of what constitutes a family had been incorrectly interpreted by the scoring scripts in 2016--2018. After fixing this misinterpretation we note that only a single division winner changes---in 2017 AUFNIRA should have been won by CVC4 and not by Vampire.
 
 The combination of the small changes in winners and the lack of difference a misinterpretation of the notion of family made suggests that families do not have a significant impact on the competition.
 
@@ -1768,8 +1768,8 @@ performance for SMT solvers.
 The last FLoC Olympiad was a period of significant growth for the SMT
 Competition.  The average number of solver submissions increased
 from~12 (for 2005--2014) to~26 (for 2015--2018).  The number of
-SMT-LIB benchmarks used in the competition increased from~77,352
-in~2014~\cite{CDW14} to 342,498 in 2018.  This is partly because new
+SMT-LIB benchmarks used in the competition increased from~\num{77352}
+in~2014~\cite{CDW14} to \num{342498} in 2018.  This is partly because new
 benchmarks were added to the SMT Library, but also because benchmarks
 with unknown status are now eligible for the competition, and because
 the competition now uses all eligible benchmarks (rather than a
@@ -1779,8 +1779,8 @@ Since the re-introduction of the \ucoretrack in~2016, the
 competition again has three separate tracks.  This, together with new
 logics in the SMT Library, has brought the total number of competition
 divisions to 115 in~2018, up from just 40 divisions
-in~2014~\cite{CDW14}.  The number of job pairs increased from 339,714
-in~2014 to~1,776,062~in 2018, and the total wall-clock time in~2018
+in~2014~\cite{CDW14}.  The number of job pairs increased from \num{339714}
+in~2014 to~\num{1776062} in 2018, and the total wall-clock time in~2018
 exceeded 7.6~years.  By these measures, the SMT Competition is one of
 the largest competitions in automated reasoning.
 

@@ -334,7 +334,7 @@ TODO
 > (Please do not use other characters as thousand separator
 > because this can be confusing for international readers.)
 
-TODO
+DONE (in the text only, not in tables)
 
 > In Sect. 8.4, it would be better to refer to bounded model checking
 > instead of just model checking.
