@@ -19,7 +19,7 @@ DONE
 >
 > -  In Section 2 the fact that "appointment should happen ... " is of relative interest and could be omitted. The same holds for the day in which the events took place.
 
-TODO
+DONE
 
 > * Rules
 >
