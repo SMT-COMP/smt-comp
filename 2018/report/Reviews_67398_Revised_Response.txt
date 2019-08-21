@@ -167,7 +167,7 @@ DONE
 
 >  - "quotient" -> "ratio" ?
 
-TODO
+WONTFIX (quotient is the correct word here)
 
 >  - "a benchmarks" ->  "a benchmark"
 
