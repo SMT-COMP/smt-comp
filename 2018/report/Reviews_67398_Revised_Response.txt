@@ -32,7 +32,10 @@ disagreements; of course we agree that correctness is important)
 >
 >  - the paper and its analysis now contain many numbers and data, which is very appropriate for e competition report in my opinion. But, basically, no explanation is in place. What I expect to get out of a report, other than commenting the numbers, is their explanation, e.g.: what are the techniques implemented in solvers that overall performed better? Rr better, what techniques implemented in solvers led to an efficient solvers on a particular benchmark? why such techniques led to positive results on benchmarks with (a) given structure/characteristics?
 
-TODO
+WONTFIX (while interesting, this is way out of scope for this paper.
+We, as organizers, are not the developers of most of the solvers (nor
+the source of most benchmarks), so there is no practical way for us to
+determine what exactly was the cause for improvement)
 
 >  - last paragraph of Section 7.1 that gives motivations for MathTSAT and Z3 to be industrial-strenght tool, and states Z3 training, are either not clear or somehow not convincing as motivations. The paragraph should be clarified, or can be omitted.
 
@@ -152,7 +155,7 @@ DONE
 
 >  - "degression of Z3" ?
 
-DONE
+DONE (degression -> regression)
 
 >  - "rank highly" -> "rank in high position" ? (This recurs later.)
 
