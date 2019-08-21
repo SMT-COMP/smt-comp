@@ -107,7 +107,7 @@ DONE
 
 > - e \in \{0,1 \} is defined, but than it is said to be the number of returned statuses...are they aligned? Please clarify
 
-TODO
+DONE (changed to clarify that e \in \{0,1\} only for the Main Track)
 
 > Section 6
 >
@@ -194,7 +194,8 @@ DONE
 >
 > - "The last FLoC Olympiad was a period of ..." -> are you referring to "the time between the two FLoC Olympiads" ?
 
-WONTFIX (yes; and this is correct usage of the word Olympiad)
+WONTFIX (we are referring to the time between the two FLoC Olympic
+Games; this is correct usage of the word Olympiad)
 
 >  References
 >
