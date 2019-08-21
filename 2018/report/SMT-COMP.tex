@@ -657,22 +657,29 @@ Another paradigm shift concerns the treatment of benchmarks with
 unknown status.  Because of the difficulty to judge solver responses
 for such benchmarks, SMT Competitions until 2015 only used benchmarks
 whose status was known (i.e., that had been solved previously by
-existing SMT solvers).  In 2015, 30,717 non-incremental benchmarks
+existing SMT solvers).  In 2015, \num{30717} non-incremental benchmarks
 from the SMT Library were not used for the competition because their
 status was unknown.  However, this approach was criticized for
 imitating existing solvers rather than truly innovating.  In~2016,
-the SMT Library contained 29,724 non-incremental benchmarks with
+the SMT Library contained \num{29724} non-incremental benchmarks with
 unknown status; solver performance on these was evaluated but reported
 separately.  Since 2017, all non-incremental benchmarks are eligible
 for the competition's \maintrack regardless of status, and they
 directly affect the competition results.  Solver responses for such
 benchmarks are assumed to be correct, unless there is a disagreement
-between two or more (otherwise sound e.g. on problems with known status) solvers.  Benchmarks with
-disagreements are removed from the competition results.  This conservative approach was chosen over a voting system as this situation is expected to be rare as the SMT-LIB organisers go to a significant effort prior to each competition to update the statuses of problems. A manual investigation is therefore preferred over an automated resolution. Disagreements are reported to the solvers involved and in all cases have led to bugs in solvers being identified and fixed.
-In 2016,
-there were disagreements on 79 benchmarks; in 2017, only one benchmark
-was removed; while in 2018, there were no disagreements between
-otherwise sound solvers.
+between two or more solvers that are otherwise (i.e., on problems with
+known status) sound.  Benchmarks with disagreements are removed from
+the competition results.  This conservative approach was chosen over a
+voting system as the latter is unreliable (especially in divisions
+with few solvers), could lead to a solver being punished wrongly, and
+could be gamed by entering multiple copies of a solver into the
+competition.  Moreover, the size and time frame of the competition
+demand an automated resolution.  Disagreements are reported to the
+solver developers involved, who typically perform a manual
+investigation at their leisure, and in all cases have led to bugs in
+solvers being identified and fixed.  In 2016, there were disagreements
+on 79 benchmarks; in 2017, only one benchmark was removed; while in
+2018, there were no disagreements between otherwise sound solvers.
 
 For incremental benchmarks, the situation is different: an incremental
 benchmark is ineligible for the \apptrack if its first {\tt

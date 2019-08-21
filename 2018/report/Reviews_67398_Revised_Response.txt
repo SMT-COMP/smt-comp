@@ -25,7 +25,8 @@ TODO
 >
 > - basically incorrect results are "ignored" by omitting the benchmark if the status is not known - this comment still remains. The authors updated the text. I see their points and analysis, which I appreciated, through I think that this is an issue that should be dealt with more care. Correctness is very important for solvers when checking in particular real benchmarks (HW- and SW-verification, etc).
 
-TODO
+DONE (updated to better motivate the removal of benchmarks with
+disagreements; of course we agree that correctness is important)
 
 > * Significance of the results
 >
