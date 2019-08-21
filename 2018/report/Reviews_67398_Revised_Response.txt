@@ -39,7 +39,11 @@ TODO
 
 >  - Table 16 should not consider, in my opinion, divisions in which there was only one sound solvers, otherwise the concept of "solved uniquely" is trivially true.
 
-TODO
+WONTFIX (a unique solution is a unique solution, regardless of *why*
+no other solver found a solution; the definition suggested by the
+reviewer is not stable under adding a dummy solver that always
+responds "unknown"; and some divisions/years in which there was only
+one sound solver are explicitly mentioned in the text)
 
 >  * Relation to other competitions
 >
