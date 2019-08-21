@@ -100,7 +100,7 @@ DONE
 
 >  - "DT" looks not to be introduced
 
-TODO
+WONTFIX ("DT" for algebraic datatypes is introduced in Section 3)
 
 >  - the concept of "benchmarks families" is used at the beginning of pg. 7 but it has not been introduced
 
