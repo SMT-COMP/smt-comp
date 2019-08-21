@@ -36,7 +36,8 @@ TODO
 
 >  - last paragraph of Section 7.1 that gives motivations for MathTSAT and Z3 to be industrial-strenght tool, and states Z3 training, are either not clear or somehow not convincing as motivations. The paragraph should be clarified, or can be omitted.
 
-TODO
+DONE (the paragraph was added in response to earlier reviewer feedback
+and has been rephrased)
 
 >  - Table 16 should not consider, in my opinion, divisions in which there was only one sound solvers, otherwise the concept of "solved uniquely" is trivially true.
 
