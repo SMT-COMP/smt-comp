@@ -359,8 +359,9 @@ Complete data about past competitions since 2015 (and partly for
 earlier competitions) is available from the competition website,
 \url{http://www.smtcomp.org}.  This includes detailed results for each
 solver/benchmark combination, totaling nearly 6 million data records
-(about 1.1~GB in CSV format).  Competition solvers and benchmarks may
-be downloaded from StarExec, \url{https://www.starexec.org}.
+(about \SI{1.1}{GB} in CSV format).  Competition solvers and
+benchmarks may be downloaded from StarExec,
+\url{https://www.starexec.org}.
 
 The rest of this paper is structured as follows.  In
 Section~\ref{sec:goals}, we present the goals and organization of the
@@ -369,7 +370,8 @@ and library, and Section~\ref{sec:benchmarks} discusses competition
 divisions and benchmarks.  The competition is being run on StarExec,
 which is described in Section~\ref{sec:starexec}.
 Section~\ref{sec:participants} gives an overview of participating
-solvers.  Selected competition results are presented in
+solvers, and Section~\ref{sec:scoring} discusses the scoring rules.
+Selected competition results are presented in
 Section~\ref{sec:results}, and analyzed in more detail in
 Section~\ref{sec:analysis}.  We conclude with suggestions for future
 SMT Competitions in Section~\ref{sec:conclusions}.
@@ -526,18 +528,18 @@ such as bounded model
 checking~\cite{Gunther:2014:IBS:2632362.2632374}, where SMT solvers
 interact with other tools in a feedback loop.
 
-The 2018 release of the SMT Library contained \num{336844} non-incremental
-benchmarks in 51 logics, as well as~\num{10167} incremental benchmarks
-(with a total of nearly 32 million {\tt check-sat} commands) in 26
-logics.  Table~\ref{table:smtlib} presents further data on the size of
-the SMT Library since~2015.  While the library usually grows from one
-year to the other because of the inclusion of new benchmarks and
-logics, continuous curation efforts may also cause benchmarks to be
-removed or reclassified on occasion, thereby causing individual logics
-or even the entire library to shrink.  From~2015 to~2018, the total
-number of benchmarks has increased by~68\,\%.  The largest benchmark
-in the 2018 release had a size of \num{1041}~MB; the total size of the
-release was 91~GB.
+The 2018 release of the SMT Library contained \num{336844}
+non-incremental benchmarks in 51 logics, as well as~\num{10167}
+incremental benchmarks (with a total of nearly 32 million {\tt
+  check-sat} commands) in 26 logics.  Table~\ref{table:smtlib}
+presents further data on the size of the SMT Library since~2015.
+While the library usually grows from one year to the other because of
+the inclusion of new benchmarks and logics, continuous curation
+efforts may also cause benchmarks to be removed or reclassified on
+occasion, thereby causing individual logics or even the entire library
+to shrink.  From~2015 to~2018, the total number of benchmarks has
+increased by~68\,\%.  The largest benchmark in the 2018 release had a
+size of \SI{1041}{MB}; the total size of the release was \SI{91}{GB}.
 
 \begin{table}
   \caption{Number of benchmarks and logics in the SMT Library}
@@ -693,94 +695,6 @@ were available, and hence the corresponding SMT-LIB logic was not
 actually a competition division in that track and year.  The size of
 divisions varies widely, from just one benchmark in ABVFP to~\num{72705}
 benchmarks in QF\_SLIA.
-
-\subsection{Scoring}
-
-The \emph{raw benchmark score} of a solver is a quadruple $\langle
-e, n, w, c\rangle$, with
-\begin{itemize}[noitemsep]
-  \item \makebox[5em][l]{$e\geq 0$} number of erroneous results (usually~$e = 0$)
-  \item \makebox[5em][l]{$0 \leq n \leq N$} number of correct results (resp.~\emph{reduction} for the \ucoretrack)
-  \item \makebox[5em][l]{$w \in [0,T]$} wall-clock time in seconds (real-valued)
-  \item \makebox[5em][l]{$c \in [0, 4T]$} CPU time in seconds (real-valued)
-\end{itemize}
-\noindent
-For the \maintrack and \apptrack, $e$ is the number of returned statuses that disagree with the given expected status; $e \in \{0,1\}$ for the \maintrack.  (As described above, disagreements between solvers on benchmarks with unknown status lead to the benchmark being disregarded.)  For the \ucoretrack, $e$ includes, in addition, the number of returned unsat cores that are ill-formed or are not, in fact, unsatisfiable (as validated by a selection of other solvers selected by organizers).
-
-For the \maintrack and \apptrack,
-$N$ is defined as the number of {\tt check-sat} commands ($N=1$ for the \maintrack), and
-$n$ is defined as the number of correct results.
-For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
-and~$n$ is defined as the \emph{reduction}, i.e., the difference between $N$
-and the size of the unsat core returned by the solver.
-
-This raw score corresponds to the \emph{raw parallel score} (all values are
-determined for solver performance within the wall-clock time limit).  To
-evaluate sequential performance, we derive a \emph{raw sequential score} by
-imposing a (virtual) CPU time limit equal to the wall-clock time limit~$T$.  A
-solver result is taken into consideration for the sequential score only if the
-solver process terminates within this CPU time limit.
-
-Until 2015, the competition used these raw scores for all tracks to determine
-the division score of a solver as the sum of the scores of all benchmarks in
-that division.
-Fewer errors in a division takes precedence over more correct solutions
-(resp.~reduction), which takes precedence over less wall-clock time taken,
-which takes precedence over less CPU time taken.
-However, since there are vast differences in size between benchmark families in
-the SMT Library, the competition since~2016 uses a scoring method that assigns
-a weight to each benchmark in the \maintrack and \ucoretrack in order to
-de-emphasize large benchmark families~\cite{rules16,rules17,rules18}.
-For application track divisions, division scores were still based on raw scores
-only, since application track benchmarks may be partially solved. Defining a
-useful sequential score for the application track would require information not
-provided by the raw score, e.g., detailed timing information for each result.
-
-\paragraph{Benchmark Weights (\maintrack and \ucoretrack 2016--2018).} The \emph{weight} of a
-benchmark in the main track is computed as $\alpha = (1 + \ln F)/F$,
-where~$F\geq 1$ is the size of the benchmark's family.  We then define its
-\emph{normalized weight} as $\alpha' = \alpha / (\sum_{i\in F} \alpha_i)$,
-where the sum is over all benchmarks in the division.  The log scaling seems a
-reasonable compromise between linearly combining numbers of benchmarks, which
-would overemphasize large families, and simply averaging the fraction of
-benchmarks solved, which would overemphasize small families.
-
-\paragraph{Weighted Division Scores (\maintrack and \ucoretrack 2016--2018).}
-The \emph{(weighted) score} of a solver in a division of the \maintrack and
-\ucoretrack with $M$ benchmarks is then defined as the weighted sum of all raw
-scores $$\sum_{b\in M} \alpha'_b \cdot \langle e_b \cdot N, n_b \cdot N,
-w_b, c_b\rangle$$ where the sum is over all benchmarks in the division to
-assess parallel performance, and the weighted sum of all sequential scores to
-assess sequential performance.
-
-\paragraph{Competition-Wide Score (\maintrack).}
-A competition-wide metric for the main track, separately for
-parallel and sequential performance, was defined as follows.
-
-Let $N_i$ be the total number of benchmarks in division~$i$ that were used in the
-competition (and not removed because of disagreements), and let $\langle e_i, n_i, w_i, c_i\rangle$ be a solver's
-raw score for this division.
-%
-In 2015 and 2016,
-the \emph{competition-wide raw score} for a solver was defined as
-%
-$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -e_i) \log N_i$,
-%
-where the sum is over all competitive
-divisions into which the solver was
-entered.
-%
-In 2017, the (per-division) penalty for erroneous results was changed from the
-number of errors to a fixed constant, since the weight already takes the number
-of benchmarks in the division into account, and multiplying it by the number of
-errors overemphasizes large divisions.
-In 2017 and 2018,
-the \emph{competition-wide raw score} for a solver was thus defined as
-%
-$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$,
-%
-where the sum is over all competitive divisions into which the solver
-was entered.
 
 \begin{table}
   \caption{Number of benchmarks used in the \maintrack (by division). Numbers in parentheses indicate the (rounded) percentage of problems with different statuses, which are (sat/unsat) in 2015 and 2016, and (sat/unsat/unknown) in 2017 and 2018.}
@@ -1220,6 +1134,97 @@ submissions~\cite{CDW14}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Scoring}
+\label{sec:scoring}
+
+The \emph{raw benchmark score} of a solver is a quadruple $\langle
+e, n, w, c\rangle$, with
+\begin{itemize}[noitemsep]
+  \item \makebox[5em][l]{$e\geq 0$} number of erroneous results (usually~$e = 0$)
+  \item \makebox[5em][l]{$0 \leq n \leq N$} number of correct results (resp.~\emph{reduction} for the \ucoretrack)
+  \item \makebox[5em][l]{$w \in [0,T]$} wall-clock time in seconds (real-valued)
+  \item \makebox[5em][l]{$c \in [0, 4T]$} CPU time in seconds (real-valued)
+\end{itemize}
+\noindent
+For the \maintrack and \apptrack, $e$ is the number of returned statuses that disagree with the given expected status; $e \in \{0,1\}$ for the \maintrack.  (As described above, disagreements between solvers on benchmarks with unknown status lead to the benchmark being disregarded.)  For the \ucoretrack, $e$ includes, in addition, the number of returned unsat cores that are ill-formed or are not, in fact, unsatisfiable (as validated by a selection of other solvers selected by organizers).
+
+For the \maintrack and \apptrack,
+$N$ is defined as the number of {\tt check-sat} commands ($N=1$ for the \maintrack), and
+$n$ is defined as the number of correct results.
+For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
+and~$n$ is defined as the \emph{reduction}, i.e., the difference between $N$
+and the size of the unsat core returned by the solver.
+
+This raw score corresponds to the \emph{raw parallel score} (all values are
+determined for solver performance within the wall-clock time limit).  To
+evaluate sequential performance, we derive a \emph{raw sequential score} by
+imposing a (virtual) CPU time limit equal to the wall-clock time limit~$T$.  A
+solver result is taken into consideration for the sequential score only if the
+solver process terminates within this CPU time limit.
+
+Until 2015, the competition used these raw scores for all tracks to determine
+the division score of a solver as the sum of the scores of all benchmarks in
+that division.
+Fewer errors in a division takes precedence over more correct solutions
+(resp.~reduction), which takes precedence over less wall-clock time taken,
+which takes precedence over less CPU time taken.
+However, since there are vast differences in size between benchmark families in
+the SMT Library, the competition since~2016 uses a scoring method that assigns
+a weight to each benchmark in the \maintrack and \ucoretrack in order to
+de-emphasize large benchmark families~\cite{rules16,rules17,rules18}.
+For application track divisions, division scores were still based on raw scores
+only, since application track benchmarks may be partially solved. Defining a
+useful sequential score for the application track would require information not
+provided by the raw score, e.g., detailed timing information for each result.
+
+\paragraph{Benchmark Weights (\maintrack and \ucoretrack 2016--2018).} The \emph{weight} of a
+benchmark in the main track is computed as $\alpha = (1 + \ln F)/F$,
+where~$F\geq 1$ is the size of the benchmark's family.  We then define its
+\emph{normalized weight} as $\alpha' = \alpha / (\sum_{i\in F} \alpha_i)$,
+where the sum is over all benchmarks in the division.  The log scaling seems a
+reasonable compromise between linearly combining numbers of benchmarks, which
+would overemphasize large families, and simply averaging the fraction of
+benchmarks solved, which would overemphasize small families.
+
+\paragraph{Weighted Division Scores (\maintrack and \ucoretrack 2016--2018).}
+The \emph{(weighted) score} of a solver in a division of the \maintrack and
+\ucoretrack with $M$ benchmarks is then defined as the weighted sum of all raw
+scores $$\sum_{b\in M} \alpha'_b \cdot \langle e_b \cdot N, n_b \cdot N,
+w_b, c_b\rangle$$ where the sum is over all benchmarks in the division to
+assess parallel performance, and the weighted sum of all sequential scores to
+assess sequential performance.
+
+\paragraph{Competition-Wide Score (\maintrack).}
+A competition-wide metric for the main track, separately for
+parallel and sequential performance, was defined as follows.
+
+Let $N_i$ be the total number of benchmarks in division~$i$ that were used in the
+competition (and not removed because of disagreements), and let $\langle e_i, n_i, w_i, c_i\rangle$ be a solver's
+raw score for this division.
+%
+In 2015 and 2016,
+the \emph{competition-wide raw score} for a solver was defined as
+%
+$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -e_i) \log N_i$,
+%
+where the sum is over all competitive
+divisions into which the solver was
+entered.
+%
+In 2017, the (per-division) penalty for erroneous results was changed from the
+number of errors to a fixed constant, since the weight already takes the number
+of benchmarks in the division into account, and multiplying it by the number of
+errors overemphasizes large divisions.
+In 2017 and 2018,
+the \emph{competition-wide raw score} for a solver was thus defined as
+%
+$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$,
+%
+where the sum is over all competitive divisions into which the solver
+was entered.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Results}
 \label{sec:results}
 
@@ -1413,9 +1418,9 @@ be known precisely.
   \centering
   \scalebox{.45}{\includegraphics{%
         plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_Main_Track_2015-2018.pdf}}
-  \caption{VBS on common benchmarks 2015--2018 of all logics in the \maintrack
-  with a time limit of 1200s. Number of common benchmarks is indicated with a
-  gray vertical line.}
+  \caption{VBS on common benchmarks 2015--2018 of all logics in the
+    \maintrack with a time limit of \SI{1200}{s}.  Number of common
+    benchmarks is indicated with a gray vertical line.}
   \label{fig:progress-all}
 \end{figure}
 
@@ -1441,9 +1446,9 @@ be known precisely.
     plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_Main_Track_2017-2018.pdf}}
     \caption{2017 vs.~2018}
   \end{subfigure}
-  \caption{VBS on common benchmarks for pairs of years of all logics in the
-  \maintrack with a time limit of 1200s. Number of common benchmarks is
-  indicated with a gray vertical line.}
+  \caption{VBS on common benchmarks for pairs of years of all logics
+    in the \maintrack with a time limit of \SI{1200}{s}.  Number of
+    common benchmarks is indicated with a gray vertical line.}
   \label{fig:progress}
 \end{figure}
 
@@ -1452,10 +1457,9 @@ be known precisely.
   \scalebox{.45}{\includegraphics{%
   plot/pdf/bar_plot-Virtual_Best_Solver_(VBS)_Application_Track_2015-2018.pdf}}
   \vspace{-5ex}
-  \caption{VBS in terms of correct \texttt{check-sat} answers
-  (out of 30370517 total)
-  within a time limit of 2400s
-  on common benchmarks 2015--2018 of all logics in the \apptrack.}
+  \caption{VBS in terms of correct \texttt{check-sat} answers (out of
+    \num{30370517} total) within a time limit of \SI{2400}{s} on
+    common benchmarks 2015--2018 of all logics in the \apptrack.}
   \label{fig:progress-all-app}
 \end{figure}
 
@@ -1464,9 +1468,9 @@ be known precisely.
   \scalebox{.45}{\includegraphics{%
   plot/pdf/bar_plot-Virtual_Best_Solver_(VBS)_Unsat_Core_Track_2016-2018.pdf}}
   \vspace{-5ex}
-  \caption{VBS in terms of number of unsat core reductions
-  within a time limit of 2400s
-  on common benchmarks 2016--2018 of all logics in the \ucoretrack.}
+  \caption{VBS in terms of number of unsat core reductions within a
+    time limit of \SI{2400}{s} on common benchmarks 2016--2018 of all
+    logics in the \ucoretrack.}
   \label{fig:progress-all-uc}
 \end{figure}
 
