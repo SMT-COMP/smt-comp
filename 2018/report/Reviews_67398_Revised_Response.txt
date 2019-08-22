@@ -236,7 +236,10 @@ DONE
 > comprehensive analysis would be great (possibly as a separate submission here
 > or elsewhere).
 
-TODO
+WONTFIX (we have carried out some analysis to answer this question;
+there is certainly ample opportunity for further analysis, but the
+present paper already covers a lot of material and we cannot expand
+its scope forevermore)
 
 > (28), Tbl 7: Thanks for the revision of the table, but I'm not sure listing
 > more team members to "the best of our knowledge" is a good idea. If I were to
