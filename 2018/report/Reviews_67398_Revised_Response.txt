@@ -123,7 +123,7 @@ DONE (executing -> exercising)
 
 > - there is an huge space at pg. 14
 
-TODO
+DONE
 
 > - Table 9: there are two team members for solver STP that miss affiliation
 
