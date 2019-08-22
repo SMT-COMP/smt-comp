@@ -255,7 +255,10 @@ TODO
 > trace of the gray vertical line in Figures 3/4; I had to switch to the screen
 > to see what this refers to.
 
-TODO
+WONTFIX (we concede that gray text can be problematic with certain
+printers; however, other colors can be equally problematic, and some
+of the tables and figures contain a lot of information, which we find
+difficult to condense without the use of color)
 
 > Fig 5/6: These could be significantly smaller :)
 
@@ -268,7 +271,9 @@ TODO
 > detail as explained in the text. All four series are also of exactly the same
 > shape. I think a cactus plot is simply not the right tool for this job.
 
-TODO
+WONTFIX (starting the x-axis at 0 would render the plots unexpressive;
+a cactus plot may not be ideal but we haven't been able to find a
+better tool)
 
 > ============================================
 >
