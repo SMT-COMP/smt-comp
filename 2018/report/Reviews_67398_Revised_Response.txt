@@ -344,7 +344,9 @@ DONE
 > Figure 5 seems unnecessary, because the difference is not visible anyway.
 > Just listing the numbers would be sufficient.
 
-TODO
+WONTFIX (we have a similar figure for each track; omitting it for the
+Application Track merely for space reasons seems unnessary, and it
+does serve to show that the difference is hardly visible)
 
 > Especially in Sect. 8, there are many larger numbers.
 > For readability, it would be better if all numbers larger than 9999
