@@ -1155,20 +1155,22 @@ imposing a (virtual) CPU time limit equal to the wall-clock time limit~$T$.  A
 solver result is taken into consideration for the sequential score only if the
 solver process terminates within this CPU time limit.
 
-Until 2015, the competition used these raw scores for all tracks to determine
-the division score of a solver as the sum of the scores of all benchmarks in
-that division.
-Fewer errors in a division takes precedence over more correct solutions
-(resp.~reduction), which takes precedence over less wall-clock time taken,
-which takes precedence over less CPU time taken.
-However, since there are vast differences in size between benchmark families in
-the SMT Library, the competition since~2016 uses a scoring method that assigns
-a weight to each benchmark in the \maintrack and \ucoretrack in order to
-de-emphasize large benchmark families~\cite{rules16,rules17,rules18}.
-For application track divisions, division scores were still based on raw scores
-only, since application track benchmarks may be partially solved. Defining a
-useful sequential score for the application track would require information not
-provided by the raw score, e.g., detailed timing information for each result.
+Until 2015, the competition used these raw scores for all tracks to
+determine the division score of a solver as the sum of the scores of
+all benchmarks in that division.  Fewer errors in a division takes
+precedence over more correct solutions (resp.~reduction), which takes
+precedence over less wall-clock time taken, which takes precedence
+over less CPU time taken.  However, since there are vast differences
+in size between benchmark families (i.e., groups of benchmarks with
+similar characteristics) in the SMT Library, the competition
+since~2016 uses a scoring method that assigns a weight to each
+benchmark in the \maintrack and \ucoretrack in order to de-emphasize
+large benchmark families~\cite{rules16,rules17,rules18}.  For
+application track divisions, division scores were still based on raw
+scores only, since application track benchmarks may be partially
+solved.  Defining a useful sequential score for the application track
+would require information not provided by the raw score, e.g.,
+detailed timing information for each result.
 
 \paragraph{Benchmark Weights (\maintrack and \ucoretrack 2016--2018).} The \emph{weight} of a
 benchmark in the main track is computed as $\alpha = (1 + \ln F)/F$,

@@ -104,7 +104,8 @@ WONTFIX ("DT" for algebraic datatypes is introduced in Section 3)
 
 >  - the concept of "benchmarks families" is used at the beginning of pg. 7 but it has not been introduced
 
-TODO
+DONE (reference to benchmark families removed on page 7; they are now
+discussed in Section 7)
 
 >  - "and in 2018, there were" ->   "while in 2018, there were"
 
