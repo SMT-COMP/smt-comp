@@ -176,7 +176,7 @@ DONE
 
 >  - "problem" and "benchmark" are used for the same concept here. Maybe they can be unified
 
-TODO
+DONE
 
 >  - in Table 17, does 1.0 means they are sequential? In case these numbers could be omitted
 

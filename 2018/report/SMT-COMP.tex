@@ -656,7 +656,7 @@ separately.  Since 2017, all non-incremental benchmarks are eligible
 for the competition's \maintrack regardless of status, and they
 directly affect the competition results.  Solver responses for such
 benchmarks are assumed to be correct, unless there is a disagreement
-between two or more solvers that are otherwise (i.e., on problems with
+between two or more solvers that are otherwise (i.e., on benchmarks with
 known status) sound.  Benchmarks with disagreements are removed from
 the competition results.  This conservative approach was chosen over a
 voting system as the latter is unreliable (especially in divisions
@@ -688,7 +688,7 @@ divisions varies widely, from just one benchmark in ABVFP to~\num{72705}
 benchmarks in QF\_SLIA.
 
 \begin{table}
-  \caption{Number of benchmarks used in the \maintrack (by division). Numbers in parentheses indicate the (rounded) percentage of problems with different statuses, which are (sat/unsat) in 2015 and 2016, and (sat/unsat/unknown) in 2017 and 2018.}
+  \caption{Number of benchmarks used in the \maintrack (by division). Numbers in parentheses indicate the (rounded) percentage of benchmarks with different statuses, which are (sat/unsat) in 2015 and 2016, and (sat/unsat/unknown) in 2017 and 2018.}
   \label{table:benchmarks-main-track}
   \centering
   \scalebox{.9}[.775]{\begin{tabular}{lr@{\hskip3pt}cr@{\hskip3pt}cr@{\hskip3pt}cr@{\hskip3pt}c}
@@ -1142,6 +1142,42 @@ of the unsatisfiable core is used instead of the number of correct
 responses.  A detailed description of the scoring can be found in the
 competition rules~\cite{rules18}.
 
+The \emph{raw benchmark score} of a solver is thus a quadruple
+$\langle e, n, w, c\rangle$, with
+\begin{itemize}[noitemsep]
+  \item \makebox[5em][l]{$e\geq 0$} number of erroneous responses (usually~$e = 0$),
+  \item \makebox[5em][l]{$0 \leq n \leq N$} number of correct responses (resp.~\emph{reduction} for the \ucoretrack),
+  \item \makebox[5em][l]{$w \in [0,T]$} wall-clock time in seconds (real-valued),
+  \item \makebox[5em][l]{$c \in [0, 4T]$} CPU time in seconds (real-valued).
+\end{itemize}
+%
+For the \maintrack and \apptrack, $e$ is the number of returned
+statuses that disagree with the given expected status; $e \in \{0,1\}$
+for the \maintrack.  (As described in Section~\ref{sec:benchmarks},
+disagreements between otherwise sound solvers on benchmarks with
+unknown status lead to the benchmark being disregarded.)  For the
+\ucoretrack, $e$ includes, in addition, the number of returned unsat
+cores that are ill-formed or are not, in fact, unsatisfiable (as
+validated by a selection of other solvers selected by organizers).
+
+For the \maintrack and \apptrack,
+$N$ is defined as the number of {\tt check-sat} commands ($N=1$ for the \maintrack), and
+$n$ is defined as the number of correct results.
+For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
+and~$n$ is defined as the \emph{reduction}, i.e., the difference between $N$
+and the size of the unsat core returned by the solver.
+
+This raw score corresponds to the \emph{raw parallel score} (all values are
+determined for solver performance within the wall-clock time limit).  To
+evaluate sequential performance, we derive a \emph{raw sequential score} by
+imposing a (virtual) CPU time limit equal to the wall-clock time limit~$T$.  A
+solver result is taken into consideration for the sequential score only if the
+solver process terminates within this CPU time limit.
+
+
+
+
+
 As discussed in Section~\ref{sec:benchmarks}, \maintrack benchmarks
 with unknown status are removed from the competition results if two
 (or more) solvers that are sound on benchmarks with known status
@@ -1166,30 +1202,8 @@ divisions.
 
 
 
-The \emph{raw benchmark score} of a solver is a quadruple $\langle
-e, n, w, c\rangle$, with
-\begin{itemize}[noitemsep]
-  \item \makebox[5em][l]{$e\geq 0$} number of erroneous results (usually~$e = 0$)
-  \item \makebox[5em][l]{$0 \leq n \leq N$} number of correct results (resp.~\emph{reduction} for the \ucoretrack)
-  \item \makebox[5em][l]{$w \in [0,T]$} wall-clock time in seconds (real-valued)
-  \item \makebox[5em][l]{$c \in [0, 4T]$} CPU time in seconds (real-valued)
-\end{itemize}
-\noindent
-For the \maintrack and \apptrack, $e$ is the number of returned statuses that disagree with the given expected status; $e \in \{0,1\}$ for the \maintrack.  (As described above, disagreements between solvers on benchmarks with unknown status lead to the benchmark being disregarded.)  For the \ucoretrack, $e$ includes, in addition, the number of returned unsat cores that are ill-formed or are not, in fact, unsatisfiable (as validated by a selection of other solvers selected by organizers).
 
-For the \maintrack and \apptrack,
-$N$ is defined as the number of {\tt check-sat} commands ($N=1$ for the \maintrack), and
-$n$ is defined as the number of correct results.
-For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
-and~$n$ is defined as the \emph{reduction}, i.e., the difference between $N$
-and the size of the unsat core returned by the solver.
 
-This raw score corresponds to the \emph{raw parallel score} (all values are
-determined for solver performance within the wall-clock time limit).  To
-evaluate sequential performance, we derive a \emph{raw sequential score} by
-imposing a (virtual) CPU time limit equal to the wall-clock time limit~$T$.  A
-solver result is taken into consideration for the sequential score only if the
-solver process terminates within this CPU time limit.
 
 Until 2015, the competition used these raw scores for all tracks to
 determine the division score of a solver as the sum of the scores of
@@ -1227,7 +1241,7 @@ assess sequential performance.
 
 
 \subsection{Competition-Wide Ranking}
-\label{sec:scoring:floc}
+\label{sec:scoring-floc}
 
 In 2014, the SMT Competition was part of the FLoC Olympic Games, which
 sponsored three Kurt G\"odel medals.  These were awarded to the winner
@@ -1281,6 +1295,20 @@ $\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$,
 where the sum is over all competitive divisions into which the solver
 was entered.
 
+A contentious issue with this ranking has been the scoring of
+incorrect solver responses.  In the division rankings, an incorrect
+response causes a solver to be ranked below all correct solvers for
+that division.  But the competition's \maintrack consists of many
+independent divisions.  A solver bug that affects one division need
+not manifest itself in other divisions.  To balance the strong
+interest in correct solvers against the risk of stifling innovation,
+the competition-wide ranking was revised in~2017 to use a fixed
+numeric penalty for each division with incorrect responses.  The value
+of this penalty is currently set so that entering a (possibly buggy)
+solver that can solve all benchmarks into a division has a positive
+expected score if the probability that a soundness bug in the solver
+will be triggered is below~$20\,\%$.~\cite{rules18}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Results}
@@ -1317,7 +1345,7 @@ maintained and tuned for applications.  The reasons for non-entry into
 the competition are orthogonal to their suitability for the
 competition.  Indeed, Z3 has been entered into the competition
 competitively in the past, and one can assume that it was trained on
-the current problems.  The fact that industrial-strength solvers
+the current benchmarks.  The fact that industrial-strength solvers
 perform well in the competition supports the notion that the
 benchmarks in the competition are industrially relevant.
 
@@ -1333,19 +1361,20 @@ benchmarks in the competition are industrially relevant.
 \label{sec:floc}
 
 Table~\ref{table:competition-wide-ranking} shows the best three
-solvers according to the competition-wide ranking for 2015--2018.
-Also shown is Z3, which ranked in high position each year but was
-running hors concours.  Sequential and parallel performance are
-reported separately.
+\maintrack solvers according to the competition-wide ranking for
+2015--2018.  Also shown is Z3, which ranked in high position each year
+but was running hors concours.  Sequential and parallel performance
+are reported separately.
 %
 Note that scores are not directly comparable between different years:
 the set of benchmarks changes from one year to the other, and also the
-formula to compute the score changed (see below).  Moreover, readers
-should keep in mind that this ranking---like any method that maps the
-performance of solvers for a broad range of logics to a
-one-dimensional value---is inherently limited.  We refer to the
-individual division rankings (Section~\ref{sec:division-rankings}) for
-more detailed information about each solver.
+formula to compute the score changed (see
+Section~\ref{sec:scoring-floc}).  Moreover, readers should keep in
+mind that this ranking---like any method that maps the performance of
+solvers for a broad range of logics to a one-dimensional value---is
+inherently limited.  We refer to the individual division rankings
+(Section~\ref{sec:division-rankings}) for more detailed information
+about each solver.
 
 \begin{table}
   \caption{Competition-wide ranking for the \maintrack: best solvers (by year)}
@@ -1377,21 +1406,7 @@ more detailed information about each solver.
 \end{table}
 \footnotetext{This was a distinct version of CVC4 that was designated as experimental.}
 
-A contentious issue with this ranking has been the scoring of
-incorrect solver responses.  In the division rankings, an incorrect
-response causes a solver to be ranked below all correct solvers for
-that division.  But the competition's \maintrack consists of many
-independent divisions.  A solver bug that affects one division need
-not manifest itself in other divisions.  To balance the strong
-interest in correct solvers against the risk of stifling innovation,
-the competition-wide ranking was revised in~2017 to use a fixed
-numeric penalty for each division with incorrect responses.  The value
-of this penalty is currently set so that entering a (possibly buggy)
-solver that can solve all benchmarks into a division has a positive
-expected score if the probability that a soundness bug in the solver
-will be triggered is below~$20\,\%$.~\cite{rules18}
-
-The 2018 edition of the competition was again part of the FLoC Olympic
+The 2018 edition of the competition was part of the FLoC Olympic
 Games, which sponsored seven medals.  The competition organizers
 awarded the following solvers:
 \begin{itemize}
@@ -1401,9 +1416,9 @@ awarded the following solvers:
 \item the solvers that won the QF\_BV division in the \maintrack
   (Boolector and MinkeyRink; see Table~\ref{tab:winners-main}),
 \item the solver that won the most competitive divisions in the
-  \apptrack (Yices2),
+  \apptrack (Yices2; see Table~\ref{tab:winners-application}),
 \item the solver that won the most competitive divisions in the
-  \ucoretrack (Yices2).
+  \ucoretrack (Yices2; see Table~\ref{tab:winners-unsat-core}).
 \end{itemize}
 
 In comparison to the competition-wide ranking for the \maintrack, the
@@ -1507,15 +1522,15 @@ To give a measure of overall progress in solver performance we
 use the notion of \emph{virtual best solver} (VBS) over all divisions of all
 three tracks.
 
-For the \emph{\maintrack}, we determine the VBS as the best wall-clock
-performance per (correctly solved) instance with the time limit of 1200s used
+For the \maintrack, we determine the VBS as the best wall-clock
+performance per (correctly solved) instance with the time limit of \SI{1200}{s} used
 in the competitions 2017 and 2018. Figure~\ref{fig:progress-all} visualizes VBS
 performance on common benchmarks from 2015--2018 as cactus plot.
 Figure~\ref{fig:progress} shows VBS performance on common benchmarks over pairs
 of consecutive years from 2014 to 2018.  Both plots show the wall-clock solving
 time per instance over all instances, sorted by solving time.
 %
-Between 2014 (\num{67426} benchmarks) and 2015 (\num{154238} benchmarks),
+Between 2014 (\num{67426} benchmarks) and~2015 (\num{154238} benchmarks),
 the number of common benchmarks is \num{67070};
 between 2015 and 2016 (\num{154424} benchmarks) it is \num{154238};
 between 2016 and 2017 (\num{238758} benchmarks) it is \num{145236};
@@ -1529,9 +1544,9 @@ division QF\_FP where solved by one of the two participating configurations of
 Z3 that no one else could solve, and in~2016 Z3 did not participate in this
 division.
 
-For the \emph{\apptrack}, we determine the VBS as the best performance
+For the \apptrack, we determine the VBS as the best performance
 in terms of number of correct \texttt{check-sat} answers within the time limit
-of 2400s (the time limit of the \apptrack in the competitions
+of \SI{2400}{s} (the time limit of the \apptrack in the competitions
 2015--2018).
 The total number of eligible \texttt{check-sat} queries (i.e., all queries with
 status sat or unsat up to the first query with status unknown) on
@@ -1544,16 +1559,16 @@ In 2016, performance decreased by \num{185625} correct answers (0.61\%),
 which can be entirely attributed to a performance regression
 of Z3 on two benchmarks in the QF\_NIA division.
 
-For the \emph{\ucoretrack}, we determine the VBS as the best performance in
-terms of \emph{reduction}, i.e., the difference in the number of assertions
+For the \ucoretrack, we determine the VBS as the best performance in
+terms of reduction, i.e., the difference in the number of assertions
 of the input formula and the unsat core, within the time limit
-of 2400s (the time limit of the \ucoretrack in the competitions
+of \SI{2400}{s} (the time limit of the \ucoretrack in the competitions
 2016--2018).
 Figure~\ref{fig:progress-all-app} visualizes VBS performance on the common
 benchmarks (\num{91455} total) from 2016--2018 as a bar plot.
 For \num{32377} of these benchmarks, extracting an unsat core is trivial since
 they contain only one single \texttt{assert} command.
-They are thus also not considered in the bar plot, since their maximum
+They are thus not considered in the bar plot, since their maximum
 possible reduction is trivially 0.
 
 \subsection{Unique Solutions}
@@ -1707,10 +1722,10 @@ lists a solver if the result has changed. A non-competing solver is listed by
 itself if it was not the overall best performing solver of that division but
 now outperforms the winning competitive solver, and the winning competing
 solver did not change.
-It is interesting to note that we see some new solvers winning divisions that did not win any division in the main results. For example, Alt-Ergo solves the most satisfiable problems in AUFLIA and ALIA in 2018, and SMTInterpol performs very well on unsatisfiable problems in QF\_LIA.
+It is interesting to note that we see some new solvers winning divisions that did not win any division in the main results. For example, Alt-Ergo solves the most satisfiable benchmarks in AUFLIA and ALIA in 2018, and SMTInterpol performs very well on unsatisfiable benchmarks in QF\_LIA.
 
 
-We only consider the \maintrack here, which contains a mixture of problems that
+We only consider the \maintrack here, which contains a mixture of benchmarks that
 are satisfiable and unsatisfiable. A percentage of satisfiable, unsatisfiable
 and unknown status benchmarks per division and year is given in
 Table~\ref{table:benchmarks-main-track}.  For the \apptrack, this analysis is
