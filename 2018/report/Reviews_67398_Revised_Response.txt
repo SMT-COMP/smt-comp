@@ -7,7 +7,8 @@
 > - information about ranking should all stay in the related section, while
 > there are related information, e.g. in the first part of Section 7 - Results.
 
-TODO
+DONE (all information about the scoring rules was moved into a new
+Section 7)
 
 > - outline of the content of Section 8 describes only part of its content (the first three sub-sections).
 
@@ -293,13 +294,13 @@ better tool)
 > it is not clear why CPU time is bounded at 4T
 > (the fact that only 4 cores are available only comes later).
 
-TODO
+DONE (raw benchmark scores are now introduced in a new Section 7)
 
 > In the remainder of Sect. 4.1, the term "benchmark family" is used,
 > but this is never defined.
 > This could be added to the definitions part in the beginning of Sect. 4.
 
-TODO
+DONE (benchmark families are now introduced in a new Section 7)
 
 > In the definition of "Competition-Wide Score (Main Track)",
 > it says "since the weight already takes".
@@ -308,7 +309,7 @@ TODO
 > the solver's raw score for this computation.
 > So what weight is referred to here?
 
-TODO
+DONE (the division weight, log N_i)
 
 > In tables 3-5, please keep the regular numbers right-aligned.
 > In LaTeX, the easiest way to do this is probably to use separate columns

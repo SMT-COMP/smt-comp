@@ -600,7 +600,7 @@ for each track and division.  Thus, competing solvers do not need to support
 all logics, and may or may not support features such as incremental solving
 or unsat-core generation.
 
-\paragraph{Eligible Benchmarks.}
+\paragraph{Eligible benchmarks.}
 Some benchmarks typically have to be
 excluded for syntactic reasons: in 2015 and 2016, \num{11966} benchmarks
 were excluded because they contained partial or underspecified
@@ -631,7 +631,7 @@ language that is not permitted in competition benchmarks), and
   \end{tabular}
 \end{table}
 
-\paragraph{Benchmark Selection.}
+\paragraph{Benchmark selection.}
 SMT Competitions until~2014 employed a pseudo-random selection process
 to further cull the number of benchmarks used in the competition.
 However, a 2013 evaluation of SMT-COMP and SMT-LIB found that this
@@ -641,7 +641,7 @@ computational resources available to the competition since its move to
 StarExec, this finding prompted a paradigm shift.  Since 2015, the
 competition is evaluating all solvers on all eligible benchmarks.
 
-\paragraph{Benchmarks with Unknown Status.}
+\paragraph{Benchmarks with unknown status.}
 Another paradigm shift concerns the treatment of benchmarks with
 unknown status.  Because of the difficulty to judge solver responses
 for such benchmarks, SMT Competitions until 2015 only used benchmarks
@@ -1128,6 +1128,10 @@ submissions~\cite{CDW14}.
 \section{Scoring}
 \label{sec:scoring}
 
+A detailed description of the scoring can be found in the competition
+rules~\cite{rules18}.  We summarize the most important aspects in this
+section.
+
 \subsection{Division Rankings}
 \label{sec:scoring-division-rankings}
 
@@ -1136,12 +1140,8 @@ metric that is based, first, on the number of erroneous responses
 (which is usually~0, but solvers that did give erroneous responses are
 ranked below solvers that did not); second, on the number of correct
 responses; third and fourth, on the wall-clock and CPU time,
-respectively, that the solver process consumed.  For the \ucoretrack
-(which uses unsatisfiable benchmarks only), the reduction in the size
-of the unsatisfiable core is used instead of the number of correct
-responses.  A detailed description of the scoring can be found in the
-competition rules~\cite{rules18}.
-
+respectively, that the solver process consumed.
+%
 The \emph{raw benchmark score} of a solver is thus a quadruple
 $\langle e, n, w, c\rangle$, with
 \begin{itemize}[noitemsep]
@@ -1153,30 +1153,18 @@ $\langle e, n, w, c\rangle$, with
 %
 For the \maintrack and \apptrack, $e$ is the number of returned
 statuses that disagree with the given expected status; $e \in \{0,1\}$
-for the \maintrack.  (As described in Section~\ref{sec:benchmarks},
-disagreements between otherwise sound solvers on benchmarks with
-unknown status lead to the benchmark being disregarded.)  For the
-\ucoretrack, $e$ includes, in addition, the number of returned unsat
-cores that are ill-formed or are not, in fact, unsatisfiable (as
-validated by a selection of other solvers selected by organizers).
+for the \maintrack.  For the \ucoretrack, $e$ includes, in addition,
+the number of returned unsat cores that are ill-formed or are not, in
+fact, unsatisfiable (as validated by a selection of solvers selected
+by the organizers).
 
-For the \maintrack and \apptrack,
-$N$ is defined as the number of {\tt check-sat} commands ($N=1$ for the \maintrack), and
-$n$ is defined as the number of correct results.
-For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
-and~$n$ is defined as the \emph{reduction}, i.e., the difference between $N$
-and the size of the unsat core returned by the solver.
-
-This raw score corresponds to the \emph{raw parallel score} (all values are
-determined for solver performance within the wall-clock time limit).  To
-evaluate sequential performance, we derive a \emph{raw sequential score} by
-imposing a (virtual) CPU time limit equal to the wall-clock time limit~$T$.  A
-solver result is taken into consideration for the sequential score only if the
-solver process terminates within this CPU time limit.
-
-
-
-
+For the \maintrack and \apptrack, $N$ is defined as the number of {\tt
+  check-sat} commands ($N=1$ for the \maintrack), and $n$ is defined
+as the number of correct responses.  For the \ucoretrack (which uses
+unsatisfiable benchmarks only), $N$ is defined as the number of named
+top-level assertions, and~$n$ is defined as the \emph{reduction},
+i.e., the difference between $N$ and the size of the unsat core
+returned by the solver.
 
 As discussed in Section~\ref{sec:benchmarks}, \maintrack benchmarks
 with unknown status are removed from the competition results if two
@@ -1184,63 +1172,67 @@ with unknown status are removed from the competition results if two
 disagree on their result.  Otherwise, solver responses for benchmarks
 with unknown status are assumed to be correct.
 
+A division is \emph{competitive} if at least two substantially
+different solvers (i.e., solvers from two different teams) were
+submitted.  (Experimental divisions are never competitive.)  Official
+winners were declared only for competitive divisions.
+
+\paragraph{Parallel vs.\ sequential performance.}
+
 All solvers are run with four cores available, and the time limit~$T$
 that is imposed on each job pair (see Table~\ref{table:time-limits})
 is a wall-clock limit.  Thus, solvers that take advantage of
 parallelism might use up to~$4T$ CPU time.  For the \maintrack and the
 \ucoretrack, the competition reports parallel and sequential
-performance separately.  The latter is determined by imposing a
-(virtual) CPU time limit of~$T$.  For the \apptrack, only
+performance separately.  The raw benchmark score corresponds to the
+\emph{raw parallel score}---all values are determined for solver
+performance within the wall-clock time limit.  We derive a \emph{raw
+  sequential score} by imposing a (virtual) CPU time limit equal to
+the wall-clock time limit~$T$.  A solver response is taken into
+consideration for the sequential score only if the solver process
+terminates within this CPU time limit.  For the \apptrack, only
 parallel performance is reported (because response times to individual
 {\tt check-sat} commands are not recorded by StarExec).
 
-A division is \emph{competitive} if
-at least two substantially different solvers (i.e., solvers from two
-different teams) were submitted.  (Experimental divisions are never
-competitive.)  Official winners were declared only for competitive
-divisions.
-
-
-
-
-
+\paragraph{Benchmark weights.}
 
 Until 2015, the competition used these raw scores for all tracks to
 determine the division score of a solver as the sum of the scores of
-all benchmarks in that division.  Fewer errors in a division takes
-precedence over more correct solutions (resp.~reduction), which takes
-precedence over less wall-clock time taken, which takes precedence
-over less CPU time taken.  However, since there are vast differences
-in size between benchmark families (i.e., groups of benchmarks with
-similar characteristics) in the SMT Library, the competition
-since~2016 uses a scoring method that assigns a weight to each
-benchmark in the \maintrack and \ucoretrack in order to de-emphasize
-large benchmark families~\cite{rules16,rules17,rules18}.  For
-application track divisions, division scores were still based on raw
-scores only, since application track benchmarks may be partially
-solved.  Defining a useful sequential score for the application track
-would require information not provided by the raw score, e.g.,
-detailed timing information for each result.
+all benchmarks in that division.  However, there are vast differences
+in size between benchmark \emph{families} (i.e., groups of benchmarks
+with similar characteristics) in the SMT Library.  The pseudo-random
+selection process of benchmarks that was used until~2014 (see
+Section~\ref{sec:benchmarks}) ensured that large families were not
+overemphasized in the competition.  Since~2016, the competition uses a
+scoring method that assigns a weight to each benchmark in the
+\maintrack and \ucoretrack to achieve the same
+goal~\cite{rules16,rules17,rules18}.
 
-\paragraph{Benchmark Weights (\maintrack and \ucoretrack 2016--2018).} The \emph{weight} of a
-benchmark in the main track is computed as $\alpha = (1 + \ln F)/F$,
-where~$F\geq 1$ is the size of the benchmark's family.  We then define its
-\emph{normalized weight} as $\alpha' = \alpha / (\sum_{i\in F} \alpha_i)$,
-where the sum is over all benchmarks in the division.  The log scaling seems a
-reasonable compromise between linearly combining numbers of benchmarks, which
-would overemphasize large families, and simply averaging the fraction of
-benchmarks solved, which would overemphasize small families.
+The \emph{weight} of a benchmark~$b$ in the \maintrack is computed as
+$\alpha_b = (1 + \ln F_b)/F_b$, where $F_b \geq 1$ is the size of the
+benchmark's family.  We then define its \emph{normalized weight} as
+$\alpha'_b = \alpha_b / (\sum_{b'} \alpha_{b'})$, where the sum is
+over all benchmarks in the division.  The logarithmic scaling seems a
+reasonable compromise between linearly combining numbers of
+benchmarks, which would overemphasize large families, and simply
+averaging the fraction of benchmarks solved, which would overemphasize
+small families.
 
-\paragraph{Weighted Division Scores (\maintrack and \ucoretrack 2016--2018).}
-The \emph{(weighted) score} of a solver in a division of the \maintrack and
-\ucoretrack with $M$ benchmarks is then defined as the weighted sum of all raw
-scores $$\sum_{b\in M} \alpha'_b \cdot \langle e_b \cdot N, n_b \cdot N,
-w_b, c_b\rangle$$ where the sum is over all benchmarks in the division to
-assess parallel performance, and the weighted sum of all sequential scores to
-assess sequential performance.
+The \emph{(weighted) score} of a solver in a (\maintrack or
+\ucoretrack) division~$D$ is then defined as the weighted sum of all
+raw scores
+%
+$$\sum_{b\in D} \alpha'_b \cdot \langle e_b \cdot |D|, n_b \cdot |D|, w_b,
+  c_b\rangle$$
+%
+where the sum is over all benchmarks in the division, and~$|D|$ is the
+number of benchmarks in~$D$.  This is computed separately for parallel
+and sequential performance.
 
+For \apptrack divisions, division scores were still based on raw
+scores only, since \apptrack benchmarks may be partially solved.
 
-\subsection{Competition-Wide Ranking}
+\subsection{Competition-Wide Ranking (\maintrack)}
 \label{sec:scoring-floc}
 
 In 2014, the SMT Competition was part of the FLoC Olympic Games, which
@@ -1258,56 +1250,39 @@ logics does not need to be the best in any one of them to rank in high
 position.
 
 The competition-wide ranking for the \maintrack was retained and
-refined after~2014.  Table~\ref{table:competition-wide-ranking} shows
-the best three solvers according to this ranking for 2015--2018.  Also
-shown is Z3, which ranked in high position each year but was running
-hors concours.  Sequential and parallel performance are reported
-separately.
-
-
-
-\paragraph{Competition-Wide Score (\maintrack).}
-A competition-wide metric for the main track, separately for
-parallel and sequential performance, was defined as follows.
-
-Let $N_i$ be the total number of benchmarks in division~$i$ that were used in the
-competition (and not removed because of disagreements), and let $\langle e_i, n_i, w_i, c_i\rangle$ be a solver's
-raw score for this division.
+refined after~2014.  Sequential and parallel performance are reported
+separately.  Let $N_i$ be the total number of benchmarks in
+division~$i$ that were used in the competition (and not removed
+because of disagreements), and let $\langle e_i, n_i, w_i, c_i\rangle$
+be a solver's raw score for this division.
 %
-In 2015 and 2016,
-the \emph{competition-wide raw score} for a solver was defined as
+In 2015 and~2016, the \emph{competition-wide raw score} for a solver
+was defined as
 %
-$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -e_i) \log N_i$,
-%
-where the sum is over all competitive
-divisions into which the solver was
-entered.
-%
-In 2017, the (per-division) penalty for erroneous results was changed from the
-number of errors to a fixed constant, since the weight already takes the number
-of benchmarks in the division into account, and multiplying it by the number of
-errors overemphasizes large divisions.
-In 2017 and 2018,
-the \emph{competition-wide raw score} for a solver was thus defined as
-%
-$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$,
+$$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -e_i) \log N_i$$
 %
 where the sum is over all competitive divisions into which the solver
 was entered.
-
-A contentious issue with this ranking has been the scoring of
-incorrect solver responses.  In the division rankings, an incorrect
-response causes a solver to be ranked below all correct solvers for
-that division.  But the competition's \maintrack consists of many
-independent divisions.  A solver bug that affects one division need
-not manifest itself in other divisions.  To balance the strong
-interest in correct solvers against the risk of stifling innovation,
-the competition-wide ranking was revised in~2017 to use a fixed
-numeric penalty for each division with incorrect responses.  The value
-of this penalty is currently set so that entering a (possibly buggy)
-solver that can solve all benchmarks into a division has a positive
-expected score if the probability that a soundness bug in the solver
-will be triggered is below~$20\,\%$.~\cite{rules18}
+%
+In 2017, the (per-division) penalty for erroneous results was changed
+from the number of errors to a fixed constant, since the division
+weight~$\log N_i$ already takes the number of benchmarks in the
+division into account, and multiplying it by the number of errors
+overemphasizes large divisions.  In 2017 and 2018, the
+\emph{competition-wide raw score} for a solver was thus defined as
+%
+$$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$$
+%
+The value of this constant was chosen to balance the strong interest
+in correct solvers against the risk of stifling innovation.  In the
+division rankings (Section~\ref{sec:scoring-division-rankings}), an
+incorrect response causes a solver to be ranked below all correct
+solvers for that division.  But the competition's \maintrack consists
+of many independent divisions; a solver bug that affects one division
+need not manifest itself in other divisions.  With the current value,
+entering a (possibly buggy) solver that can solve all benchmarks into
+a division has a positive expected score if the probability that a
+soundness bug in the solver will be triggered is below~$20\,\%$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
