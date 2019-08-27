@@ -262,7 +262,7 @@ difficult to condense without the use of color)
 
 > Fig 5/6: These could be significantly smaller :)
 
-TODO
+DONE
 
 > Fig 3/4: Starting the X-axis at an arbitrary point is always a bit fishy. This
 > way, any tiny difference can be overemphasized to achieve any level of
@@ -346,7 +346,8 @@ DONE
 
 WONTFIX (we have a similar figure for each track; omitting it for the
 Application Track merely for space reasons seems unnecessary, and it
-serves to show that the difference is hardly visible)
+serves to show that the difference is hardly visible---however, we
+reduced the size of the figure)
 
 > Especially in Sect. 8, there are many larger numbers.
 > For readability, it would be better if all numbers larger than 9999

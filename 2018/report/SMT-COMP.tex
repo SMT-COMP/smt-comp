@@ -1449,24 +1449,26 @@ be known precisely.
 
 \begin{figure}
   \centering
-  \scalebox{.45}{\includegraphics{%
-  plot/pdf/bar_plot-Virtual_Best_Solver_(VBS)_Application_Track_2015-2018.pdf}}
-  \vspace{-5ex}
-  \caption{VBS in terms of correct \texttt{check-sat} answers (out of
-    \num{30370517} total) within a time limit of \SI{2400}{s} on
-    common benchmarks 2015--2018 of all logics in the \apptrack.}
-  \label{fig:progress-all-app}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \scalebox{.45}{\includegraphics{%
-  plot/pdf/bar_plot-Virtual_Best_Solver_(VBS)_Unsat_Core_Track_2016-2018.pdf}}
-  \vspace{-5ex}
-  \caption{VBS in terms of number of unsat core reductions within a
-    time limit of \SI{2400}{s} on common benchmarks 2016--2018 of all
-    logics in the \ucoretrack.}
-  \label{fig:progress-all-uc}
+  \begin{minipage}{0.47\textwidth}
+    \centering
+    \scalebox{.31}{\includegraphics{%
+        plot/pdf/bar_plot-Virtual_Best_Solver_(VBS)_Application_Track_2015-2018.pdf}}
+    \vspace{-5ex}
+    \caption{VBS in terms of correct \texttt{check-sat} answers (out
+      of \num{30370517} total) within a time limit of \SI{2400}{s} on
+      common benchmarks 2015--2018 of all logics in the \apptrack.}
+    \label{fig:progress-all-app}
+  \end{minipage}\hfill
+  \begin{minipage}{0.47\textwidth}
+    \centering
+    \scalebox{.31}{\includegraphics{%
+        plot/pdf/bar_plot-Virtual_Best_Solver_(VBS)_Unsat_Core_Track_2016-2018.pdf}}
+    \vspace{-5ex}
+    \caption{VBS in terms of number of unsat core reductions within a
+      time limit of \SI{2400}{s} on common benchmarks 2016--2018 of
+      all logics in the \ucoretrack.}
+    \label{fig:progress-all-uc}
+  \end{minipage}
 \end{figure}
 
 \section{Further Analysis}
