@@ -372,4 +372,4 @@ DONE
 
 > Footnote 1 is on the wrong page.
 
-TODO
+DONE
