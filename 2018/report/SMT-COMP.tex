@@ -1259,19 +1259,19 @@ be a solver's raw score for this division.
 In 2015 and~2016, the \emph{competition-wide raw score} for a solver
 was defined as
 %
-$$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -e_i) \log N_i$$
+$$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -e_i) \ln N_i$$
 %
 where the sum is over all competitive divisions into which the solver
 was entered.
 %
 In 2017, the (per-division) penalty for erroneous results was changed
 from the number of errors to a fixed constant, since the division
-weight~$\log N_i$ already takes the number of benchmarks in the
+weight~$\ln N_i$ already takes the number of benchmarks in the
 division into account, and multiplying it by the number of errors
 overemphasizes large divisions.  In 2017 and 2018, the
 \emph{competition-wide raw score} for a solver was thus defined as
 %
-$$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \log_e N_i$$
+$$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \ln N_i$$
 %
 The value of this constant was chosen to balance the strong interest
 in correct solvers against the risk of stifling innovation.  In the

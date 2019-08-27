@@ -309,7 +309,7 @@ DONE (benchmark families are now introduced in a new Section 7)
 > the solver's raw score for this computation.
 > So what weight is referred to here?
 
-DONE (the division weight, log N_i)
+DONE (we were referring to the division weight, ln N_i)
 
 > In tables 3-5, please keep the regular numbers right-aligned.
 > In LaTeX, the easiest way to do this is probably to use separate columns
