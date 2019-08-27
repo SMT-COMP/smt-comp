@@ -248,7 +248,7 @@ its scope forevermore)
 > institution? Or perhaps ask the submitter who they would want to be listed? I
 > think there should be enough time to do that.
 
-TODO
+DONE (we asked the development teams)
 
 > General: Gray and grey are the worst colors to use. On my (Xerox color-laser)
 > printer, all of the gray text in tables and figures are almost or completely
