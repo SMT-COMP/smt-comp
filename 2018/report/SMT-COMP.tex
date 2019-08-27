@@ -1130,6 +1130,44 @@ submissions~\cite{CDW14}.
 \section{Scoring}
 \label{sec:scoring}
 
+\subsection{Division Rankings}
+\label{sec:scoring-division-rankings}
+
+Solvers in each division (of each track) are ranked according to a
+metric that is based, first, on the number of erroneous responses
+(which is usually~0, but solvers that did give erroneous responses are
+ranked below solvers that did not); second, on the number of correct
+responses; third and fourth, on the wall-clock and CPU time,
+respectively, that the solver process consumed.  For the \ucoretrack
+(which uses unsatisfiable benchmarks only), the reduction in the size
+of the unsatisfiable core is used instead of the number of correct
+responses.  A detailed description of the scoring can be found in the
+competition rules~\cite{rules18}.
+
+As discussed in Section~\ref{sec:benchmarks}, \maintrack benchmarks
+with unknown status are removed from the competition results if two
+(or more) solvers that are sound on benchmarks with known status
+disagree on their result.  Otherwise, solver responses for benchmarks
+with unknown status are assumed to be correct.
+
+All solvers are run with four cores available, and the time limit~$T$
+that is imposed on each job pair (see Table~\ref{table:time-limits})
+is a wall-clock limit.  Thus, solvers that take advantage of
+parallelism might use up to~$4T$ CPU time.  For the \maintrack and the
+\ucoretrack, the competition reports parallel and sequential
+performance separately.  The latter is determined by imposing a
+(virtual) CPU time limit of~$T$.  For the \apptrack, only
+parallel performance is reported (because response times to individual
+{\tt check-sat} commands are not recorded by StarExec).
+
+A division is \emph{competitive} if
+at least two substantially different solvers (i.e., solvers from two
+different teams) were submitted.  (Experimental divisions are never
+competitive.)  Official winners were declared only for competitive
+divisions.
+
+
+
 The \emph{raw benchmark score} of a solver is a quadruple $\langle
 e, n, w, c\rangle$, with
 \begin{itemize}[noitemsep]
@@ -1189,6 +1227,33 @@ w_b, c_b\rangle$$ where the sum is over all benchmarks in the division to
 assess parallel performance, and the weighted sum of all sequential scores to
 assess sequential performance.
 
+
+\subsection{Competition-Wide Ranking}
+\label{sec:scoring:floc}
+
+In 2014, the SMT Competition was part of the FLoC Olympic Games, which
+sponsored three Kurt G\"odel medals.  These were awarded to the winner
+of the \maintrack's QF\_BV division (which had historically been the
+logic with the largest number of solver submissions and job pairs), as
+well as to the two best \maintrack solvers according to a
+competition-wide ranking that had been instituted especially for this
+purpose~\cite{CDW14}.  This ranking combines each solver's performance
+across all competitive \maintrack divisions into a single score,
+giving more weight to larger divisions, and to solvers that solve a
+large fraction of the benchmarks~\cite{rules18}.  It emphasizes
+breadth of solver participation---a solver participating in many
+logics does not need to be the best in any one of them to rank in high
+position.
+
+The competition-wide ranking for the \maintrack was retained and
+refined after~2014.  Table~\ref{table:competition-wide-ranking} shows
+the best three solvers according to this ranking for 2015--2018.  Also
+shown is Z3, which ranked in high position each year but was running
+hors concours.  Sequential and parallel performance are reported
+separately.
+
+
+
 \paragraph{Competition-Wide Score (\maintrack).}
 A competition-wide metric for the main track, separately for
 parallel and sequential performance, was defined as follows.
@@ -1225,39 +1290,6 @@ was entered.
 
 \subsection{Division Rankings}
 \label{sec:division-rankings}
-
-Solvers in each division (of each track) are ranked according to a
-metric that is based, first, on the number of erroneous responses
-(which is usually~0, but solvers that did give erroneous responses are
-ranked below solvers that did not); second, on the number of correct
-responses; third, on the wall-clock and CPU time that the solver
-process consumed.  For the \ucoretrack (which uses unsatisfiable
-benchmarks only), the reduction in the size of the unsatisfiable core
-is used instead of the number of correct responses.  A detailed
-description of the scoring can be found in the competition
-rules~\cite{rules18}.
-
-As discussed in Section~\ref{sec:benchmarks}, \maintrack benchmarks
-with unknown status are removed from the competition results if two
-(or more) solvers that are sound on benchmarks with known status
-disagree on their result.  Otherwise, solver responses for benchmarks
-with unknown status are assumed to be correct.
-
-All solvers are run with four cores available, and the time limit~$T$
-that is imposed on each job pair (see Table~\ref{table:time-limits})
-is a wall-clock limit.  Thus, solvers that take advantage of
-parallelism might use up to~$4T$ CPU time.  For the \maintrack and the
-\ucoretrack, the competition reports parallel and sequential
-performance separately.  The latter is determined by imposing a
-(virtual) CPU time limit of~$T$.  For the \apptrack, only
-parallel performance is reported (because response times to individual
-{\tt check-sat} commands are not recorded by StarExec).
-
-A division is \emph{competitive} if
-at least two substantially different solvers (i.e., solvers from two
-different teams) were submitted.  (Experimental divisions are never
-competitive.)  Official winners were declared only for competitive
-divisions.
 
 Tables~\ref{tab:winners-main}--\ref{tab:winners-unsat-core} show the
 highest-ranked solvers for all (competitive and non-competitive) division from
@@ -1302,26 +1334,11 @@ benchmarks in the competition are industrially relevant.
 \subsection{Competition-Wide Ranking}
 \label{sec:floc}
 
-In 2014, the SMT Competition was part of the FLoC Olympic Games, which
-sponsored three Kurt G\"odel medals.  These were awarded to the winner
-of the \maintrack's QF\_BV division (which had historically been the
-logic with the largest number of solver submissions and job pairs), as
-well as to the two best \maintrack solvers according to a
-competition-wide ranking that had been instituted especially for this
-purpose~\cite{CDW14}.  This ranking combines each solver's performance
-across all competitive \maintrack divisions into a single score,
-giving more weight to larger divisions, and to solvers that solve a
-large fraction of the benchmarks~\cite{rules18}.  It emphasizes
-breadth of solver participation---a solver participating in many
-logics does not need to be the best in any one of them to rank in high
-position.
-
-The competition-wide ranking for the \maintrack was retained and
-refined after~2014.  Table~\ref{table:competition-wide-ranking} shows
-the best three solvers according to this ranking for 2015--2018.  Also
-shown is Z3, which ranked in high position each year but was running
-hors concours.  Sequential and parallel performance are reported
-separately.
+Table~\ref{table:competition-wide-ranking} shows the best three
+solvers according to the competition-wide ranking for 2015--2018.
+Also shown is Z3, which ranked in high position each year but was
+running hors concours.  Sequential and parallel performance are
+reported separately.
 %
 Note that scores are not directly comparable between different years:
 the set of benchmarks changes from one year to the other, and also the
