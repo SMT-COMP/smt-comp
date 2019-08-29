@@ -3,47 +3,33 @@
   \label{tab:winners-application}
   \centering
   \scalebox{.805}{%
-  \begin{tabular}{r@{\hskip 1em}>{\columncolor{white}[.25em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][0.5em]}c}
+  \renewcommand{\arraystretch}{1.01}%
+  \begin{tabular}{r>{\columncolor{white}[.25em][.5em]}c>{\columncolor{white}[.5em][.5em]}c>{\columncolor{white}[.5em][.5em]}c>{\columncolor{white}[.5em][0.5em]}c}
     \toprule
     \rc{white}
-    Division        & 2015                           & 2016                      & 2017                     & 2018                           \\
+    Division        & 2015                        & 2016                               & 2017                     & 2018                                     \\
     \midrule
-    \rc{cvc4}
-    \wc ALIA        & \nonc CVC4 \nc{Z3}             & \nonc \wc \nc{Z3}         & \nonc CVC4 \nc{Z3}       & \nonc CVC4 \nc{Z3}             \\
-    \rc{cvc4}
-    \wc ANIA        & \nonc CVC4 \nc{Z3}             & \nonc \wc \nc{Z3}         & \nonc CVC4               & \nonc CVC4                     \\
-    \wc AUFNIRA     &                                &                           &                          & \nonc \cc{cvc4} CVC4           \\
-    \wc BV          &                                &                           &                          & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
-    \rc{cvc4}
-    \wc LIA         & \nonc CVC4 \nc{Z3}             & \nonc \wc \nc{Z3}         & \nonc CVC4 \nc{Z3}       & \nonc CVC4 \nc{Z3}             \\
-    \wc QF\_ABV     &                                &                           &                          & \cc{bool} Boolector            \\
-    \rc{smti}
-    \wc QF\_ALIA    & \cc{yices} Yices2 \nc{Z3}      & SMTInterpol \nc{Z3}       & SMTInterpol \nc{Z3}      & SMTInterpol \nc{Z3}            \\
-    \rc{cvc4}
-    \wc QF\_ANIA    & \nonc CVC4 \nc{Z3}             & \nonc \wc \nc{Z3}         & \nonc CVC4 \nc{Z3}       & \nonc CVC4 \nc{Z3}             \\
-    \wc QF\_AUFBV   &                                &                           &                          & \cc{yices} Yices2              \\
-    \rc{yices}
-    \wc QF\_AUFLIA  & Yices2                         & Yices2                    & Yices2                   & Yices2                         \\
-    \rc{yices}
-    \wc QF\_BV      & Yices2 \nc{MathSAT}            & Yices2 \nc{MathSAT}       & Yices2 \nc{MathSAT}      & Yices2 \nc{MathSAT}            \\
-    \wc QF\_BVFP    &                                &                           & \nonc \wc \nc{Z3}        & \nonc \cc{cvc4} CVC4           \\
-    \wc QF\_FP      &                                &                           & \nonc \wc \nc{Z3}        & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
-
-    \rc{yices}
-    \wc QF\_LIA     & Yices2                         & Yices2                    & Yices2                   & Yices2                         \\
-    \rc{smti}
-    \wc QF\_LRA     & \cc{yices} Yices2 \nc{MathSAT} & SMTInterpol \nc{MathSAT}  & SMTInterpol \nc{MathSAT} & \cc{yices} Yices2 \nc{MathSAT} \\
-    \rc{cvc4}
-    \wc QF\_NIA     & \nonc CVC4 \nc{Z3}             & \nonc \wc \nc{CVC4}       & \nonc CVC4               & CVC4                           \\
-    \wc QF\_UFBV    &                                &                           &                          & \cc{bool} Boolector            \\
-    \rc{cvc4}
-    \wc QF\_UFLIA   & CVC4 \nc{Z3}                   & \cc{yices} Yices2 \nc{Z3} & CVC4 \nc{Z3}             & \cc{smti} SMTInterpol \nc{Z3}  \\
-    \rc{yices}
-    \wc QF\_UFLRA   & Yices2 \nc{Z3}                 & Yices2 \nc{Z3}            & Yices2                   & Yices2 \nc{Z3}                 \\
-    \rc{cvc4}
-    \wc QF\_UFNIA   & \nonc CVC4 \nc{Z3}             & \nonc \wc \nc{Z3}         & \nonc CVC4 \nc{Z3}       & CVC4 \nc{Z3}                   \\
-    \rc{cvc4}
-    \wc UFLRA       & \nonc CVC4 \nc{Z3}             & \nonc \wc \nc{Z3}         & \nonc CVC4 \nc{Z3}       & \nonc CVC4 \nc{Z3}             \\
+     ALIA        & \nonc \cc{cvc4} CVC4 \nc{Z3}   & \nonc  \nc{Z3}                     & \nonc \cc{cvc4} CVC4 \nc{Z3}       & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
+     ANIA        & \nonc \cc{cvc4} CVC4 \nc{Z3}   & \nonc  \nc{Z3}                     & \nonc \cc{cvc4} CVC4               & \nonc \cc{cvc4} CVC4           \\
+     AUFNIRA     &                                &                                    &                                    & \nonc \cc{cvc4} CVC4           \\
+     BV          &                                &                                    &                                    & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
+     LIA         & \nonc \cc{cvc4} CVC4 \nc{Z3}   & \nonc  \nc{Z3}                     & \nonc \cc{cvc4} CVC4 \nc{Z3}       & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
+     QF\_ABV     &                                &                                    &                                    & \cc{bool} Boolector            \\
+     QF\_ALIA    & \cc{yices} Yices2 \nc{Z3}      & \cc{smti} SMTInterpol \nc{Z3}      & \cc{smti} SMTInterpol \nc{Z3}      & \cc{smti} SMTInterpol \nc{Z3}  \\
+     QF\_ANIA    & \nonc \cc{cvc4} CVC4 \nc{Z3}   & \nonc  \nc{Z3}                     & \nonc \cc{cvc4} CVC4 \nc{Z3}       & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
+     QF\_AUFBV   &                                &                                    &                                    & \cc{yices} Yices2              \\
+     QF\_AUFLIA  & \cc{yices} Yices               & \cc{yices} Yices                   & \cc{yices} Yices                   & \cc{yices} Yices               \\
+     QF\_BV      & \cc{yices} Yices \nc{MathSAT}  & \cc{yices} Yices \nc{MathSAT}      & \cc{yices} Yices \nc{MathSAT}      & \cc{yices} Yices \nc{MathSAT}  \\
+     QF\_BVFP    &                                &                                    & \nonc  \nc{Z3}                     & \nonc \cc{cvc4} CVC4           \\
+     QF\_FP      &                                &                                    & \nonc  \nc{Z3}                     & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
+     QF\_LIA     & \cc{yices} Yices               & \cc{yices} Yices                   & \cc{yices} Yices                   & \cc{yices} Yices               \\
+     QF\_LRA     & \cc{yices} Yices2 \nc{MathSAT} & \cc{smti} SMTInterpol \nc{MathSAT} & \cc{smti} SMTInterpol \nc{MathSAT} & \cc{yices} Yices2 \nc{MathSAT} \\
+     QF\_NIA     & \nonc \cc{cvc4} CVC4 \nc{Z3}   & \nonc  \nc{\cc{cvc4} CVC4}         & \nonc \cc{cvc4} CVC4               & \cc{cvc4} CVC4                 \\
+     QF\_UFBV    &                                &                                    &                                    & \cc{bool} Boolector            \\
+     QF\_UFLIA   & \cc{cvc4} CVC4 \nc{Z3}         & \cc{yices} Yices2 \nc{Z3}          & \cc{cvc4} CVC4 \nc{Z3}             & \cc{smti} SMTInterpol \nc{Z3}  \\
+     QF\_UFLRA   & \cc{yices} Yices \nc{Z3}       & \cc{yices} Yices \nc{Z3}           & \cc{yices} Yices                   & \cc{yices} Yices \nc{Z3}       \\
+     QF\_UFNIA   & \nonc \cc{cvc4} CVC4 \nc{Z3}   & \nonc  \nc{Z3}                     & \nonc \cc{cvc4} CVC4 \nc{Z3}       & \cc{cvc4} CVC4 \nc{Z3}         \\
+     UFLRA       & \nonc \cc{cvc4} CVC4 \nc{Z3}   & \nonc  \nc{Z3}                     & \nonc \cc{cvc4} CVC4 \nc{Z3}       & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
     \bottomrule
   \end{tabular}
   }

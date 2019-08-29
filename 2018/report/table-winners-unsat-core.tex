@@ -3,89 +3,55 @@
   \label{tab:winners-unsat-core}
   \centering
   \scalebox{.88}{%
-    \begin{tabular}{r@{\hskip 1em}>{\nonc \columncolor{white}[.25em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}c}
+    \renewcommand{\arraystretch}{1.01}%
+    \begin{tabular}{r>{\columncolor{white}[.25em][.8em]}r@{\hskip .8em}|@{\hskip .5em}>{\columncolor{white}[.5em][.5em]}l>{\columncolor{white}[.5em][.8em]}r@{\hskip .8em}|@{\hskip .5em}>{\columncolor{white}[.5em][.5em]}l>{\columncolor{white}[.5em][.8em]}r@{\hskip .8em}|@{\hskip .5em}>{\columncolor{white}[.5em][0.5em]}l}
       \toprule
-      \rc{white}
-      Division       & 2016                                & 2017                              & 2018                           \\
+       Division       & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{2016                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{2017                              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{2018                          } \\
       \midrule
-      \rc{cvc4}
-      \wc ALIA       & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \wc AUFBVDTLIA &                                     &                                   & \nonc \cc{cvc4} CVC4           \\
-      \rc{cvc4}
-      \wc AUFLIA     & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc AUFLIRA    & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc AUFNIRA    & \wc \nc{Z3}                         & \nonc CVC4                        & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc BV         & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \rc{cvc4}
-      \wc LIA        & \wc \nc{veriT}                      & \nonc CVC4                        & \nonc CVC4 \nc{Z3}             \\
-      \rc{cvc4}
-      \wc LRA        & \wc \nc{veriT}                      & \nonc CVC4                        & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc NIA        & \wc \nc{Z3}                         & \nonc CVC4 / CVC4 \nc{Z3}         & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc NRA        & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \wc QF\_ABV    & \wc \nc{Z3}                         & \nonc \cc{cvc4} CVC4 \nc{Z3}      & \cc{yices} Yices2              \\
-      \wc QF\_ABVFP  &                                      & ---                              & \nonc \cc{cvc4} CVC4           \\
-      \rc{smti}
-      \wc QF\_ALIA   & SMTInterpol \nc{Z3}                 & SMTInterpol \nc{Z3}               & \cc{yices} Yices2 \nc{Z3}      \\
-      \rc{cvc4}
-      \wc QF\_ANIA   & \wc \nc{Z3}                         & \nonc CVC4                        & \nonc CVC4                     \\
-      \wc QF\_AUFBV  & \nc{Z3}                             & \nonc \cc{cvc4} CVC4 \nc{MathSAT} & \cc{yices} Yices2 \nc{MathSAT} \\
-      \rc{cvc4}
-      \wc QF\_AUFLIA & \cc{smti} SMTInterpol \nc{Z3}       & CVC4                              & CVC4                           \\
-      \rc{cvc4}
-      \wc QF\_AUFNIA & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \rc{smti}
-      \wc QF\_AX     & SMTInterpol \nc{Z3}                 & SMTInterpol \nc{Z3}               & \cc{yices} Yices2              \\
-      \wc QF\_BV     & \nc{MathSAT}                        & \nonc \cc{cvc4} CVC4 \nc{MathSAT} & \cc{yices} Yices2              \\
-      \wc QF\_BVFP   & \nc{Z3}                             & \nonc \nc{Z3}                     & \nonc \cc{cvc4} CVC4 \nc{Z3}   \\
-      \wc QF\_DT     &                                     &                                   & \nonc \cc{cvc4} CVC4           \\
-      \wc QF\_FP     & \nc{MathSAT}                        & \nonc \nc{Z3}                     & \nonc \cc{cvc4} CVC4           \\
-      \rc{cvc4}
-      \wc QF\_IDL    & \cc{smti} SMTInterpol \nc{Z3}       & CVC4 \nc{Z3}                      & CVC4 \nc{Z3}                   \\
-      \rc{smti}
-      \wc QF\_LIA    & SMTInterpol \nc{Z3}                 & SMTInterpol / SMTInterpol \nc{Z3} & SMTInterpol                    \\
-      \rc{cvc4}
-      \wc QF\_LIRA   & \cc{smti} SMTInterpol \nc{Z3}       & CVC4 \nc{Z3}                      & CVC4 \nc{Z3}                   \\
-      \rc{smti}
-      \wc QF\_LRA    & SMTInterpol                         & SMTInterpol                       & SMTInterpol                    \\
-      \rc{cvc4}
-      \wc QF\_NIA    & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \rc{cvc4}
-      \wc QF\_NIRA   & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \rc{cvc4}
-      \wc QF\_NRA    & \wc \nc{Z3}                         & \nonc CVC4                        & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc QF\_RDL    & \cc{smti} SMTInterpol \nc{veriT}    & CVC4 \nc{Z3}                      & CVC4 \nc{Z3}                   \\
-      \rc{cvc4}
-      \wc QF\_UF     & \cc{smti} SMTInterpol \nc{MathSAT}  & CVC4                              & CVC4                           \\
-      \wc QF\_UFBV   & \nc{MathSAT}                        & \nonc \cc{cvc4} CVC4 \nc{MathSAT} & \cc{yices} Yices2 \nc{Z3}      \\
-      \rc{smti}
-      \wc QF\_UFIDL  & SMTInterpol \nc{Z3}                 & SMTInterpol \nc{Z3}               & \cc{yices} Yices2              \\
-      \rc{smti}
-      \wc QF\_UFLIA  & SMTInterpol \nc{MathSAT}            & SMTInterpol \nc{Z3}               & SMTInterpol \nc{Z3}            \\
-      \rc{smti}
-      \wc QF\_UFLRA  & SMTInterpol \nc{Z3}                 & SMTInterpol \nc{MathSAT}          & \cc{yices} Yices2 \nc{MathSAT} \\
-      \rc{cvc4}
-      \wc QF\_UFNIA  & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \rc{cvc4}
-      \wc QF\_UFNRA  & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \rc{cvc4}
-      \wc UF         & \wc \nc{Z3}                         & \nonc CVC4                        & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc UFBV       & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4                     \\
-      \wc UFDT       &                                     &                                   & \nonc \cc{cvc4} CVC4           \\
-      \rc{cvc4}
-      \wc UFIDL      & \wc \nc{Z3}                         & \nonc CVC4                        & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc UFLIA      & \wc \nc{Z3}                         & \nonc CVC4                        & \nonc CVC4                     \\
-      \rc{cvc4}
-      \wc UFLRA      & \wc \nc{Z3}                         & \nonc CVC4 \nc{Z3}                & \nonc CVC4 \nc{Z3}             \\
-      \rc{cvc4}
-      \wc UFNIA      & \wc \nc{Z3}                         & \nonc CVC4                        & \nonc CVC4                     \\
+       ALIA       & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       AUFBVDTLIA & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{                                  } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{                                  } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       AUFLIA     & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       AUFLIRA    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       AUFNIRA    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       BV         & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       LIA        & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{veriT}                       } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       LRA        & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{veriT}                       } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       NIA        & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \nonc \cc{cvc4} CVC4 & \nonc \cc{cvc4} CVC4 \nc{Z3}                                      & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       NRA        & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       QF\_ABV    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{yices} Yices2             } \\
+       QF\_ABVFP  & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{                                  } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{---                               } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       QF\_ALIA   & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{yices} Yices2 \nc{Z3}     } \\
+       QF\_ANIA   & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       QF\_AUFBV  & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nc{Z3}                           } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{MathSAT} } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{yices} Yices2 \nc{MathSAT}} \\
+       QF\_AUFLIA & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4                    } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4                } \\
+       QF\_AUFNIA & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       QF\_AX     & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{yices} Yices2             } \\
+       QF\_BV     & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nc{MathSAT}                      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{MathSAT} } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{yices} Yices2             } \\
+       QF\_BVFP   & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nc{Z3}                           } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \nc{Z3}                     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       QF\_DT     & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{                                  } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{                                  } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       QF\_FP     & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nc{MathSAT}                      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \nc{Z3}                     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       QF\_IDL    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4 \nc{Z3}            } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4 \nc{Z3}        } \\
+       QF\_LIA    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \cc{smti} SMTInterpol & \cc{smti} SMTInterpol \nc{Z3}                                    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol         } \\
+       QF\_LIRA   & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4 \nc{Z3}            } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4 \nc{Z3}        } \\
+       QF\_LRA    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol             } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol             } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol         } \\
+       QF\_NIA    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       QF\_NIRA   & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       QF\_NRA    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       QF\_RDL    & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{veriT}  } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4 \nc{Z3}            } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4 \nc{Z3}        } \\
+       QF\_UF     & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{MathSAT}} & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4                    } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{cvc4} CVC4                } \\
+       QF\_UFBV   & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nc{MathSAT}                      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{MathSAT} } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{yices} Yices2 \nc{Z3}     } \\
+       QF\_UFIDL  & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{yices} Yices2             } \\
+       QF\_UFLIA  & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{MathSAT}} & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3} } \\
+       QF\_UFLRA  & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{Z3}     } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{smti} SMTInterpol \nc{MathSAT}} & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\cc{yices} Yices2 \nc{MathSAT}} \\
+       QF\_UFNIA  & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       QF\_UFNRA  & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       UF         & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       UFBV       & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       UFDT       & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{                                  } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{                                  } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       UFIDL      & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       UFLIA      & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
+       UFLRA      & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}      } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4 \nc{Z3}  } \\
+       UFNIA      & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{ \nc{Z3}                          } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4              } & \multicolumn{2}{>{\columncolor{white}[.5em][.5em]}c}{\nonc \cc{cvc4} CVC4          } \\
       \bottomrule
     \end{tabular}
   }

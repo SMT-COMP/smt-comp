@@ -68,6 +68,7 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 \colorlet{alt}{LimeGreen!10}
 \colorlet{verit}{MidnightBlue!10}
 \colorlet{stp}{Fuchsia!10}
+\colorlet{mink}{Magenta!10}
 \colorlet{nonc}{black!55}
 
 \newcommand{\cc}[1]{\cellcolor{#1}}
@@ -1298,17 +1299,17 @@ highest-ranked solvers for all (competitive and non-competitive) divisions from
 2015--2018.
 We include solvers that were running hors concours (and hence non-competing
 and ineligible to be recognized as official competition winners).
-Non-com-petitive divisions use gray font.
+Non-com-petitive divisions use gray font. % TODO superscript?
 Entries $A [B]$ indicate that solver $A$ was the highest competing solver,
 but non-competing solver $B$ actually ranked best if non-competing solvers
 were taken into consideration.
 Entries
-$A/B$ indicate that solver~$A$ ranked first considering sequential
+$A|B$ indicate that solver~$A$ ranked first considering sequential
 performance, while~$B$ ranked first considering parallel performance.
 When the same solver ranked first in both, which is most often the
 case, its name appears just once.
-Table cell colors (other than white) indicate the best competing sequential
-solver performance; no cell color indicates that the best sequential solver
+Table cell colors (other than white) indicate the best competing
+solver performance; no cell color indicates that the best solver
 performance was by a non-competing solver and no competing solvers participated
 in that division.
 Full division rankings are available from the competition website.
