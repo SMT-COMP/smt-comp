@@ -1068,7 +1068,7 @@ solver versions since 2015.
     Vampire           &    &      &  2 &      &  1 &      &  1 &      \\
     veriT             &  1 &      &  1 &      &  3 &      &  2 &      \\
     XSat              &    &      &    &      &  1 &      &    &      \\
-    Yices2            &  3 &      &  2 &      &  2 &      &  3 &      \\
+    Yices            &  3 &      &  2 &      &  2 &      &  3 &      \\
     Z3                &  2 & [+1] &    & [+1] &    & [+1] &    & [+1] \\
     \midrule
     Total             & 26 & [+4] & 32 & [+5] & 22 & [+4] & 25 & [+6] \\
@@ -1366,7 +1366,7 @@ about each solver.
          &        & (sequential) & (parallel) & & & & (sequential) & (parallel) \\ \cmidrule{1-4} \cmidrule{6-9}
          & [Z3]              & 159.36 & 159.36 & &    & [Z3]   & 185.09 & 185.09 \\
       1. & CVC4              & 144.67 & 144.74 & & 1. & CVC4   & 180.95 & 181.19 \\
-      2. & CVC4(exp)\footnotemark & 140.47 & 140.51 & & 2. & Yices2 & 119.29 & 119.29 \\
+      2. & CVC4(exp)\footnotemark & 140.47 & 140.51 & & 2. & Yices & 119.29 & 119.29 \\
       3. & Yices             & 101.91 & 101.91 & & 3. & veriT  &  75.11 &  75.11 \\ \cmidrule[\heavyrulewidth]{1-4} \cmidrule[\heavyrulewidth]{6-9}
   \end{tabular}}
 
@@ -1379,7 +1379,7 @@ about each solver.
          &        & (sequential) & (parallel) & & & & (sequential) & (parallel) \\ \cmidrule{1-4} \cmidrule{6-9}
          & [Z3]        & 171.99 & 171.99 & & 1. & CVC4        & 211.99 & 211.99 \\
       1. & CVC4        & 161.38 & 161.76 & &    & [Z3]        & 186.19 & 186.19 \\
-      2. & Yices2      & 110.63 & 110.63 & & 2. & Yices2      & 115.26 & 115.26 \\
+      2. & Yices      & 110.63 & 110.63 & & 2. & Yices      & 115.26 & 115.26 \\
       3. & SMTInterpol &  65.96 &  66.00 & & 3. & SMTInterpol &  65.32 &  65.38 \\ \cmidrule[\heavyrulewidth]{1-4} \cmidrule[\heavyrulewidth]{6-9}
   \end{tabular}}
 \end{table}
@@ -1390,14 +1390,14 @@ Games, which sponsored seven medals.  The competition organizers
 awarded the following solvers:
 \begin{itemize}
 \item The best three \maintrack solvers according to the
-  competition-wide ranking (CVC4, Yices2, and SMTInterpol; see
+  competition-wide ranking (CVC4, Yices, and SMTInterpol; see
   Table~\ref{table:competition-wide-ranking}),
 \item the solvers that won the QF\_BV division in the \maintrack
   (Boolector and MinkeyRink; see Table~\ref{tab:winners-main}),
 \item the solver that won the most competitive divisions in the
-  \apptrack (Yices2; see Table~\ref{tab:winners-application}),
+  \apptrack (Yices; see Table~\ref{tab:winners-application}),
 \item the solver that won the most competitive divisions in the
-  \ucoretrack (Yices2; see Table~\ref{tab:winners-unsat-core}).
+  \ucoretrack (Yices; see Table~\ref{tab:winners-unsat-core}).
 \end{itemize}
 
 In comparison to the competition-wide ranking for the \maintrack, the
@@ -1613,7 +1613,7 @@ competition-wide ranking.
     Vampire           &       & 130   & 753   & 652    \\
     veriT             & 7     & 19    & 55    & 57     \\
     XSat              &       &       & 0     &        \\
-    Yices2            & 86    & 128   & 2379  & 1535   \\
+    Yices            & 86    & 128   & 2379  & 1535   \\
     Z3                & 6118  & 244   & 40992 & 888    \\
     \midrule
     Total             & 11224 & 29442 & 55175 & 104527 \\
@@ -1676,7 +1676,7 @@ parallelism.
     Vampire           &     & 3.4 & 3.9 & 4.0 \\
     veriT             & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
     XSat              &     &     & 1.8 &     \\
-    Yices2            & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
+    Yices            & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
     Z3                & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} & \textcolor{gray}{1.0} \\
     \midrule
     All solvers       & 1.0 & 1.3 & 1.3 & 1.3 \\
