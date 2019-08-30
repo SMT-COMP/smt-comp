@@ -1422,7 +1422,7 @@ be known precisely.
   \centering
   \scalebox{.45}{\includegraphics{%
         plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_Main_Track_2015-2018.pdf}}
-  \caption{VBS on common benchmarks 2015--2018 of all logics in the
+  \caption{VBS on common benchmarks 2015--2018 of all divisions in the
     \maintrack with a time limit of \SI{1200}{s}.  Number of common
     benchmarks is indicated with a gray vertical line.}
   \label{fig:progress-all}
@@ -1450,9 +1450,9 @@ be known precisely.
     plot/pdf/cactus_plot-Virtual_Best_Solver_(VBS)_Main_Track_2017-2018.pdf}}
     \caption{2017 vs.~2018}
   \end{subfigure}
-  \caption{VBS on common benchmarks for pairs of years of all logics
-    in the \maintrack with a time limit of \SI{1200}{s}.  Number of
-    common benchmarks is indicated with a gray vertical line.}
+  \caption{VBS on common benchmarks for pairs of years of all \maintrack
+  divisions with a time limit of \SI{1200}{s}.  Number of common benchmarks is
+  indicated with a gray vertical line.}
   \label{fig:progress}
 \end{figure}
 
@@ -1465,7 +1465,7 @@ be known precisely.
     \vspace{-5ex}
     \caption{VBS in terms of correct \texttt{check-sat} answers (out
       of \num{30370517} total) within a time limit of \SI{2400}{s} on
-      common benchmarks 2015--2018 of all logics in the \apptrack.}
+      common benchmarks 2015--2018 of all divisions in the \apptrack.}
     \label{fig:progress-all-app}
   \end{minipage}\hfill
   \begin{minipage}{0.47\textwidth}
@@ -1475,7 +1475,7 @@ be known precisely.
     \vspace{-5ex}
     \caption{VBS in terms of number of unsat core reductions within a
       time limit of \SI{2400}{s} on common benchmarks 2016--2018 of
-      all logics in the \ucoretrack.\\${}$}
+      all divisions in the \ucoretrack.\\${}$}
     \label{fig:progress-all-uc}
   \end{minipage}
 \end{figure}
@@ -1696,12 +1696,15 @@ Therefore, it is interesting to ask whether the winners of divisions of a track
 might have changed if benchmarks in that division had been restricted to one of
 these results.  Tables~\ref{tab:results:sat}-\ref{tab:results:unsat} show the
 changes in division winners if only satisfiable or unsatisfiable results are
-given. This table is in reference to Table~\ref{tab:winners-main} and only
-lists a solver if the result has changed. A non-competing solver is listed by
-itself if it was not the overall best performing solver of that division but
-now outperforms the winning competitive solver, and the winning competing
-solver did not change.
-It is interesting to note that we see some new solvers winning divisions that did not win any division in the main results. For example, Alt-Ergo solves the most satisfiable benchmarks in AUFLIA and ALIA in 2018, and SMTInterpol performs very well on unsatisfiable benchmarks in QF\_LIA.
+given. These tables only lists the result for a division if it has changed
+with respect to Table~\ref{tab:winners-main}. A non-competing solver is listed
+by itself if there was no competing solver with a positive division score under
+the given constraints.
+It is interesting to note that we see some new solvers winning divisions that
+did not win any division in the main results. For example, veriT solves the
+most satisfiable benchmarks in QF\_UFIDL in 2018 and the most unsatisfiable
+benchmarks in all four years in UFLRA, and SMTInterpol performs very well on
+unsatisfiable benchmarks in QF\_LIA.
 
 
 We only consider the \maintrack here, which contains a mixture of benchmarks that
@@ -1732,9 +1735,9 @@ time limit.  Table~\ref{tab:results:24s} shows the results of virtually
 imposing a time limit of 24 seconds\footnote{This time limit is used for the
 new 24 seconds score introduced in SMT-COMP 2019 and was inspired by a use case
 at Amazon.} in the \maintrack.  As in the previous analysis, this highlights the
-different winners under this new scheme only. Here we see STP winning a
-division for the first time in our analysis (QF\_BV in 2016) and Yices2
-performing well.
+different winners under this new scheme only. Here we see Alt-Ergo (AUFLIRA in
+2018) and STP (QF\_BV in 2016) winning a division for the first time in our
+analysis, and Yices performing well.
 
 We only consider the \maintrack here, since for the other two tracks, the
 results are less interesting.  In the \apptrack, for such low time limits we
