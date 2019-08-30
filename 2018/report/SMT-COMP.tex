@@ -1760,7 +1760,20 @@ solver, depending on the technique).
 
 In 2016 the \maintrack competition scoring was changed to weight the correctness score for benchmarks by the size of the family the benchmark belongs to. Here we ask what the winners would have been if this change had not been made. The answer to this question is given in Table~\ref{tab:results:total:solved}. Relatively few changes would have occurred. Unsurprisingly, the differences are in the larger and more structured divisions.
 
-Whilst producing these results we noticed that the description of what constitutes a family had been incorrectly interpreted by the scoring scripts in 2016--2018. After fixing this misinterpretation we note that only a single division winner changes---in 2017 AUFNIRA should have been won by CVC4 and not by Vampire.
+Whilst producing these results we noticed that the description of what
+constitutes a family had been incorrectly interpreted by the scoring scripts in
+2016--2018. The scoring scripts interpreted the bottom most directory
+containing benchmarks in a logic as family, while the rules stated that the top
+most subdirectory in a logic is to be interpreted as family. After fixing this
+misinterpretation we note that only five division winners change---in 2018,
+division AUFLIRA should have been won by Vampire instead of CVC4; in 2016,
+AUFNIRA should have been won by CVC4 instead of Vampire; in 2016 and 2017,
+QF\_LIA should have been won by Yices instead of CVC4; and in 2018, QF\_NRA
+should have been won by CVC4 instead of Yices.
+Table~\ref{tab:results:total:top} shows the results in the Main Track when
+the top most subdirectory in a logic is interpreted as family in reference
+to the competition results in Table~\ref{tab:winners-main}, where the bottom
+most directory was interpreted as family.
 
 The combination of the small changes in winners and the lack of difference a misinterpretation of the notion of family made suggests that families do not have a significant impact on the competition.
 
