@@ -141,30 +141,6 @@ def add_division_family_info(data, family_definition):
     data['benchmark'] = split.str[0]
     data['division'] = split.str[1]
     data['family'] = split.str[2]
-
-#    print('##########################################################')
-#    print(data['family'].unique())
-#    print('***********************************')
-#
-#    if family_definition == "top":
-#        if g_args.log:
-#            log("Using top-level directories for fam")
-#            # Take top-level sub-directories as family
-#            data['family'] = numpy.where(
-#                                data['benchmark'].str.count('/') > 1,
-#                                data['benchmark'].str.split('/').str[1],
-#                                '-')
-#    elif family_definition == "bot":
-#        if g_args.log:
-#            log("Using bottom-level directories for fam")
-#            # Take immediate super-directory as family
-#            data['family'] = data.benchmark.apply(lambda x : x[(1+x.index('/')):(x.rfind('/'))])
-#    else:
-#        die ("family option not supported: {}".format(fam))
-#
-#    print(data['family'].unique())
-#    print('------------------------------------------------------')
-
     return data
 
 # Drop any rows that contain benchmarks with status unknown where two otherwise
@@ -228,6 +204,12 @@ def get_solver_variant(solver_id):
         return '[{}]'.format(name)
     return name
 
+# Do not consider solver variants for determining if a division is
+# competitive.
+# Uses get_solver_name(solver) to get the base version of solver.
+def is_competitive_division(solvers):
+    return len(set([get_solver_name(x) for x in solvers])) > 1
+
 # Compute family score modifiers.
 # This is based on the presentation in the SMT-COMP 2017 rules document
 # and is basically the same in all rules documents.
@@ -249,85 +231,6 @@ def get_family_scores(data):
                             for family, alpha_b in raw_fam_scores.items())
 
     return family_scores
-
-# Selects the winners (e.g. rank 0) from the results for a division and year
-# Returns these as a list (there may be more than one)
-# TODO: needs to be refactored with new dataframe layout
-#def select(results, division, year):
-#    return results[(results.year == year)
-#                   & (results.division == division)].groupby(
-#                        ['year', 'division']).first()['solver'].tolist()
-
-# The same as select but turns the winners into a pretty string
-# TODO: needs to be refactored with new dataframe layout
-#def select_str(results, division, year):
-#  winners = select_winners(results[(results.year == year)
-#                                   & (results.division == division)])
-#  winners_strs = sorted(map(lambda s: get_solver_name(s) if is_competitive_solver(year,s) else "["+get_solver_name(s)+"]", winners))
-#  return " ".join(winners_strs)
-
-
-# TODO: needs to be refactored with new solvers input file layout
-# Checks the winners recorded in new_results against an existing winners.csv file
-# This was used to validate this script against previous results computed by
-# other scripts
-#def check_winners(new_results, year, sequential):
-#    global g_args
-#    assert year in ('2015', '2016', '2017', '2018')
-#
-#    # First load the previous files from a winners file, which should be a CSV
-#    winners_old = pandas.read_csv("winners.csv")
-#
-#    # Select sequential winners only
-#    if sequential:
-#        for year in g_args.year:
-#            winners_old[year] = winners_old[year].str.split('/').str[0]
-#    # Select parallel winners only
-#    else:
-#        for year in g_args.year:
-#            winners_old[year] = winners_old[year].str.split('/').str[-1]
-#
-#    old = winners_old[['Division', year]].set_index(['Division'])
-#    old.columns = ['solver_old']
-#
-#    # Get all division winners from year 'year'.
-#    new = new_results.xs(year)
-#    new = new[new['rank'] == 1][['solver']]
-#    new['solver'] = new['solver'].map(get_solver_name)
-#    new = new.groupby(level=0).agg({'solver': lambda x: ' '.join(
-#                sorted(x, key=lambda x: (is_competitive_solver(x, year), x)))})
-#
-#    merged = new.merge(old, left_index=True, right_index=True, how='outer')
-#    diff = merged[(merged.solver.notna() | merged.solver_old.notna())
-#                  & (merged.solver != merged.solver_old)]
-#
-#    if len(diff) > 0:
-#        print('Found difference in old and new results {}:'.format(year))
-#        print(diff[['solver_old', 'solver']])
-
-# Turns a set of results into a LaTeX table that lists winners/best solvers
-# per division as listed in the report for 2015-2018.
-# TODO: needs to be refactored with new dataframe layout
-#def to_latex_for_report(results):
-#     print("\begin{tabular}{"\
-#           "r@{\hskip 1em}>{\columncolor{white}[.25em][.5em]}"\
-#           "c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}"\
-#           "c@{\hskip 1em}>{\columncolor{white}[.5em][.5em]}"\
-#           "c@{\hskip 1em}>{\columncolor{white}[.5em][0.5em]}c}")
-#     print("\\toprule")
-#     print("Division & 2015 & 2016 & 2017 & 2018 \\\\")
-#     print("\\hline\\hline")
-#
-#     divisions = results.division.unique()
-#     for division in divisions:
-#       print("\\wc {} & {} & {} & {} & {} \\\\".format(
-#           division,
-#           select_str(results, division, "2015"),
-#           select_str(results, division, "2016"),
-#           select_str(results, division, "2017"),
-#           select_str(results, division, "2018")))
-#     print("\\bottomrule")
-#     print("\\end{tabular}")
 
 def map_solver_id(row, column):
     global g_competitive, g_solver_names, g_solver_variants
@@ -574,7 +477,6 @@ def score(division,
 ###############################################################################
 # Processing
 
-
 # Process a CSV file with results of one track.
 # csv          : the input csv
 # year         : the string identifying the year of the results
@@ -686,50 +588,6 @@ def process_csv(csv,
 ###############################################################################
 # Report 2015-2018
 
-# Use the names in the file name_lookups.csv to rename the names of solvers
-# This is used to print nice output. If you want to change how a solver
-# appears in output you should update name_lookups.csv
-def report_rename_solvers(data):
-    data.solver = data.solver.map(get_solver_name)
-    return data
-
-# TODO: needs to be refactored with new solvers input file layout
-#def report_read_competitive():
-#    global g_non_competitive
-#    with open('noncompetitive.csv', mode='r') as f:
-#        reader = csv.reader(f)
-#        for rows in reader:
-#            year = rows[0]
-#            solver = rows[1]
-#
-#            if year not in g_non_competitive:
-#                g_non_competitive[year] = set()
-#            g_non_competitive[year].add(solver)
-
-# TODO: needs to be refactored with new solvers input file layout
-#def report_read_solver_names():
-#    global g_solver_names
-#    with open('name_lookup.csv', mode='r') as f:
-#      reader = csv.reader(f)
-#      g_solver_names = dict((r[0], r[1]) for r in reader)
-
-# Finds the difference between two sets of results, allows us to compare two
-# scoring mechanisms.l This was useful when preparing the SMT-COMP journal
-# paper and for discussing how scoring rules could be changed.
-#def report_project(normal,other):
-#    #normal = report_rename_solvers(normal)
-#    #other = report_rename_solvers(other)
-#    different = pandas.concat(
-#            [normal,other],
-#            keys=['normal','other']).drop_duplicates(
-#                    keep=False,
-#                    subset=['solver_id','rank'])
-#    if different.empty:
-#        return different
-#    other_different = different.loc['other']
-#    return other_different
-
-
 # Auxiliary function to compute results for years 2015-2018.
 #
 # time_limit: minimum of this limit and the limit used in the competition for
@@ -821,9 +679,6 @@ def join_winners_latex(x):
     for winner in x:
         # w is a string of the form:
         # <winner> [<non-competitive best if any>]
-        ##if not winner or winner == numpy.nan:
-        ##    winners.append(numpy.nan)
-        ##else:
         if winner:
             w = winner.split()[0]
             assert(w[0] == '[' or w[0] == '-' or w in report_latex_color_map), \
@@ -833,8 +688,6 @@ def join_winners_latex(x):
             winner = "{}{}".format(
                         "\\cc{{{}}} ".format(color) if color else '', winner)
         winners.append(winner)
-            #if winner not in winners:
-            #    winners.append(winner)
     # In case of a diff table, we can have either seq or par be empty but
     # we still need to distinguish this case since we want to display this
     # as ' | <par>' or '<seq> | '. Hence we sanitize and replace empty seq
@@ -858,7 +711,6 @@ def join_winners_diff(x):
         winner_new = x[1]
         if winner_old != winner_new:
             return winner_new
-    #return numpy.nan
     return ''
 
 def escape_underscore(x):
@@ -870,22 +722,23 @@ def get_winners_for_report(df):
     # In some cases there are more than one non-competitive solvers due to how
     # non-competitive solvers are ranked. We only keep the first
     # non-competitive solver.
-    df = df.reset_index().drop_duplicates(['year', 'division', 'competitive'], keep='first').sort_values(
-            by='competitive', ascending=False)
+    df = df.reset_index()\
+            .drop_duplicates(['year', 'division', 'competitive'], keep='first')\
+            .sort_values(by='competitive', ascending=False)
     return df.groupby(['year', 'division'])['solver_name'].apply(' '.join)
 
 # Generate and print results table for report:
 #
-# latex:   Print colored results latex table (non-competitive divisions have to be
-#          marked manually from this output).
+# latex:   Print colored results latex table (non-competitive divisions have to
+#          be marked manually from this output).
 # default: Print dataframe without any decorations.
 def gen_results_table_for_report(winners_seq,
                                  winners_par,
                                  latex=False,
                                  diff=False):
-    # Merge sequential and parallel
+    # merge sequential and parallel
     df = pandas.concat([winners_seq, winners_par])
-    # If diff table, drop rows with no diff (= no entries)
+    # if diff table, drop rows with no diff (= no entries)
     df = df.reset_index()
     # join winners (winner first, best non-competing (if any) second)
     if latex:
@@ -895,7 +748,7 @@ def gen_results_table_for_report(winners_seq,
         df = df.groupby(['year', 'division'])['solver_name'].apply(
                 join_winners)
     df = df.unstack(level=0)
-    # Drop rows with no entry for a denser table that only shows the diff
+    # drop rows with no entry for a denser table that only shows the diff
     if diff:
         empty_cell = "\\multicolumn{2}{>{\\columncolor{white}[.5em][.5em]}c}{}"
         df.replace(empty_cell, numpy.nan, inplace=True)
@@ -904,9 +757,11 @@ def gen_results_table_for_report(winners_seq,
         df.dropna(subset=['2015', '2016', '2017', '2018'],
                   how='all',
                   inplace=True)
-    # Print the table.
-    if latex:
-        # Latex tabular header string
+    # print the table
+    if not latex:
+        print(df.fillna(''))
+    else:
+        # latex tabular header string
         col_year_r = "r@{\\hskip .8em}|@{\\hskip .5em}"\
                      ">{\\columncolor{white}[.5em][.5em]}"
         col_year_l = "l>{\\columncolor{white}[.5em][.8em]}"
@@ -914,7 +769,7 @@ def gen_results_table_for_report(winners_seq,
                 "{}{}{}{}{}{}{}l".format(col_year_r, col_year_l,
                                          col_year_r, col_year_l,
                                          col_year_r, col_year_l, col_year_r)
-        # We split columns into seq/par performance
+        # we split columns into seq/par performance
         df.rename(columns={'2015':\
                 '\\multicolumn{2}{>{\\columncolor{white}[.5em][.5em]}c}{2015}',
                            '2016':\
@@ -925,7 +780,7 @@ def gen_results_table_for_report(winners_seq,
                 '\\multicolumn{2}{>{\\columncolor{white}[.5em][.5em]}c}{2018}'},
                  inplace=True)
 
-        # Increase column width to avoid that pandas truncates cell content
+        # increase column width to avoid that pandas truncates cell content
         with pandas.option_context("max_colwidth", 1000):
             res = df.fillna(
                     '\\multicolumn{2}{>{\\columncolor{white}[.5em][.5em]}c}{}')\
@@ -934,9 +789,15 @@ def gen_results_table_for_report(winners_seq,
                                     .replace('_', '\_')     \
                                     .replace('division','')
             print(res)
-    else:
-        print(df.fillna(''))
 
+
+# Generate results diff table for report. Only contains entries that differ
+# with respect to the original results.
+#
+# winners_seq, winners_par:             the original results
+# winners_other_seq, winners_other_par: the results with respect to different
+#                                       constraints (e.g., only sat, only unsat,
+#                                       different time limit, ...)
 def gen_results_diff_table_for_report(winners_seq,
                                        winners_par,
                                        winners_other_seq,
@@ -960,10 +821,6 @@ def gen_results_diff_table_for_report(winners_seq,
 
 def gen_results_for_report():
     global g_args
-
-    #report_read_competitive()
-    #report_read_solver_names()
-
     print("----------------------------------------------------------------")
     print("SCORE")
     print("----------------------------------------------------------------")
@@ -972,12 +829,7 @@ def gen_results_for_report():
     score_par = gen_results_for_report_aux(None, 2400, False)
     winners_seq = get_winners_for_report(score_seq)
     winners_par = get_winners_for_report(score_par)
-    #print("grouped seq::::")
-    #score_seq['solver_name'] = score_seq['solver_id'].map(get_solver_variant)
-    #print(score_seq[['rank', 'solver_name', 'correct', 'correct_sat', 'correct_unsat', 'unsolved', 'score_cpu_time', 'score_wallclock_time']])
-    #print("grouped seq end")
     gen_results_table_for_report(winners_seq, winners_par, True)
-
     print("----------------------------------------------------------------")
     print("SAT SCORE")
     print("----------------------------------------------------------------")
@@ -991,7 +843,6 @@ def gen_results_for_report():
                                       winners_sat_par,
                                       True,
                                       True)
-
     print("----------------------------------------------------------------")
     print("UNSAT SCORE")
     print("----------------------------------------------------------------")
@@ -1005,7 +856,6 @@ def gen_results_for_report():
                                       winners_unsat_par,
                                       True,
                                       True)
-
     print("----------------------------------------------------------------")
     print("24s SCORE")
     print("----------------------------------------------------------------")
@@ -1019,7 +869,6 @@ def gen_results_for_report():
                                       winners_24s_par,
                                       True,
                                       True)
-
     print("----------------------------------------------------------------")
     print("NO FAMILIES SCORE")
     print("----------------------------------------------------------------")
@@ -1035,7 +884,6 @@ def gen_results_for_report():
                                       winners_nofam_par,
                                       True,
                                       True)
-
     print("----------------------------------------------------------------")
     print("NO UNKNOWN SCORE")
     print("----------------------------------------------------------------")
@@ -1051,47 +899,12 @@ def gen_results_for_report():
                                       winners_nounknown_par,
                                       True,
                                       True)
-
-    #vbs_winners(score)
-    #biggest_lead_ranking(score,"a_score")
     if g_args.show_timestamps:
         log('time parallel: {}'.format(time.time() - start))
 
 
-    #print("Total Solved")
-    #by_total_scored  = gen_results_for_report_aux(
-    #        None, 2400, True, False, g_args.sequential)
-    #biggest_lead_ranking(by_total_scored,"e_total")
-    #by_total_scored_new = report_project(select_winners(score),select_winners(by_total_scored))
-    #to_latex_for_report(by_total_scored_new)
-
-    #print("Without unknowns")
-    #without_unknowns  = gen_results_for_report_aux(
-    #         None, 2400, False, True, g_args.sequential)
-    #without_unknowns_new = report_project(select_winners(score),select_winners(without_unknowns))
-    #to_latex_for_report(without_unknowns_new)
-
-# Checks winners for a fixed number of years
-def check_all_winners(results, sequential):
-    global g_args
-
-    print("Check differences")
-    for year in g_args.year:
-        print(year)
-        check_winners(results, year, sequential)
-
-# Select winners from given years and divisions.
-def select_winners(data):
-  top = data.copy()
-  #res =  top[(data.Rank==0) & (data.competitive==True)]
-  res =  top[(data['rank'] == 1)]
-  return res
-
-# Do not consider solver variants for determining if a division is
-# competitive.
-# Uses get_solver_name(solver) to get the base version of solver.
-def is_competitive_division(solvers):
-    return len(set([get_solver_name(x) for x in solvers])) > 1
+###############################################################################
+# Competition-Wide Recognitions
 
 # Biggest Lead Ranking.
 #
