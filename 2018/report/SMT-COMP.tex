@@ -331,7 +331,7 @@ Historically, SMT solvers have focused on quantifier-free formulas and
 decidable combinations of background theories.  Increasingly, however,
 SMT solvers also support quantified formulas.  Hence there is overlap
 between SMT solving and automated theorem proving for quantified
-Boolean formulas (QBF), first-order logic, and even higher-order
+Boolean formulas~(QBF), first-order logic, and even higher-order
 logic~\cite{DBLP:journals/corr/abs-1712-01486}.
 
 The International Satisfiability Modulo Theories Competition
@@ -652,12 +652,14 @@ whose status was known (i.e., that had been solved previously by
 existing SMT solvers).  In 2015, \num{30717} non-incremental benchmarks
 from the SMT Library were not used for the competition because their
 status was unknown.  However, this approach was criticized for
-imitating existing solvers rather than truly innovating.  In~2016,
+rewarding imitation of existing solvers rather than true innovation.  In~2016,
 the SMT Library contained \num{29724} non-incremental benchmarks with
 unknown status; solver performance on these was evaluated but reported
 separately.  Since 2017, all non-incremental benchmarks are eligible
 for the competition's \maintrack regardless of status, and they
-directly affect the competition results.  Solver responses for such
+directly affect the competition results.
+
+Solver responses for such
 benchmarks are assumed to be correct, unless there is a disagreement
 between two or more solvers that are otherwise (i.e., on benchmarks with
 known status) sound.  Benchmarks with disagreements are removed from
@@ -980,7 +982,7 @@ weeks.
   \label{fig:job-pairs}
 \end{figure}
 
-The use of StarExec ensures the \emph{replicability} of the competition. The publicly accessible space \url{https://www.starexec.org/starexec/secure/explore/spaces.jsp?id=2641} stores all of the information required to rerun the competition, e.g., all benchmarks and copies of all tools. In addition, a GitHub organization (\url{https://github.com/SMT-COMP/smt-comp}) has been set up to archive previous results and store the tools used by organizers to run the competition.
+The use of StarExec ensures the replicability of the competition. The publicly accessible space \url{https://www.starexec.org/starexec/secure/explore/spaces.jsp?id=2641} stores all of the information required to rerun the competition, e.g., all benchmarks and copies of all tools. In addition, a GitHub organization (\url{https://github.com/SMT-COMP/smt-comp}) has been set up to archive previous results and store the tools used by organizers to run the competition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1009,16 +1011,13 @@ contributing team members (in alphabetical order) and their
 institutional affiliations (if any; these may have changed over time)
 as reported by the development teams.
 
-Further, there was no restriction on the number of solver versions participants
-may submit, but the organizers reserved the right to not accept multiple
-versions of a solver in case the number of solver submissions is too large for
-the computational resources. In the past four years, exercising this right was
-not necessary.
-%
-Many of these solvers were submitted in multiple years.  Additionally,
-to promote a wide comparison between tools, developers are allowed to
-submit multiple versions of a solver, e.g., for different competition
-tracks or with differently tuned internal components.
+Further, to promote a wide comparison between tools, there was no
+restriction on the number of solver versions participants may submit,
+e.g., for different competition tracks or with differently tuned
+internal components.  Organizers reserved the right to not accept
+multiple versions of a solver in case the number of solver submissions
+is too large given the computational resources, but in the past four
+years, exercising this right was not necessary.
 Table~\ref{table:participants-history} shows in more detail how many
 versions of each solver were submitted in each year.
 
@@ -1031,6 +1030,20 @@ of their solver, including a list of its authors and an explanation of
 the SMT solving approach used.  System descriptions are published on
 the competition website.  They were submitted for about 60\,\% of all
 solver versions since 2015.
+
+In addition to the solvers that were submitted to the competition by
+their respective developers, the organizers included the most recent
+stable versions of MathSAT and Z3 for comparison purposes.  Both
+solvers are strong tools, but---except for two experimental versions
+of Z3 in 2015---their development teams chose not to prepare
+competition versions.  These solvers were therefore participating hors
+concours.  Moreover, in 2015 a bug was discovered in the \apptrack
+version of Boolector and a fixed version was submitted after the
+deadline; in 2016, the CVC4 team did not enter their solver into the
+\apptrack; and in 2018, an experimental version of CVC4 as
+well as the OpenSMT2 solver were submitted after the deadline.  These
+solvers were also participating hors concours.  In result tables, they
+are listed with their name in square brackets (e.g., [MathSAT]).
 
 \include{table-participants}
 
@@ -1076,20 +1089,6 @@ solver versions since 2015.
   \end{tabular}
 \end{table}
 
-In addition to the solvers that were submitted to the competition by
-their respective developers, the organizers included the most recent
-stable versions of MathSAT and Z3 for comparison purposes.  Both
-solvers are strong tools, but---except for two experimental versions
-of Z3 in 2015---their development teams chose not to prepare
-competition versions.  These solvers were therefore participating hors
-concours.  Moreover, in 2015 a bug was discovered in the \apptrack
-version of Boolector and a fixed version was submitted after the
-deadline; in 2016, the CVC4 team did not enter their solver into the
-\apptrack; and in 2018, an experimental version of CVC4 as
-well as the OpenSMT2 solver were submitted after the deadline.  These
-solvers were also participating hors concours.  In result tables, they
-are listed with their name in square brackets (e.g., [MathSAT]).
-
 Table~\ref{table:participation-by-track} summarizes these numbers and
 shows how many solver versions were submitted to each track of the
 competition.  Note that solver versions may be entered into multiple
@@ -1099,13 +1098,13 @@ is typically less than the sum over all tracks.
 It can be easy for developers to create multiple versions of their
 solver, which may differ only in configuration settings or other minor
 details.  We caution against over-interpreting these numbers, which to
-some extent depend on how experimental development teams were in any
+some extent depend on how adventurous development teams were in any
 given year.
 
 By number of solver versions submitted, the competitions in 2015--2018
 were the four largest in the history of SMT-COMP.  On average, 26
 solver versions were submitted each year since 2015.  In contrast, the
-competitions from 2005--2014 only received an average of 12
+competitions from 2005--2014 only received an average of~12
 submissions~\cite{CDW14}.
 
 \begin{table}
@@ -1223,14 +1222,13 @@ averaging the fraction of benchmarks solved, which would overemphasize
 small families.
 
 The \emph{(weighted) score} of a solver in a (\maintrack or
-\ucoretrack) division~$D$ is then defined as the weighted sum of all
+\ucoretrack) division~$i$ is then defined as the weighted sum of all
 raw scores
 %
-$$\sum_{b\in D} \alpha'_b \cdot \langle e_b \cdot |D|, n_b \cdot |D|, w_b,
-  c_b\rangle$$
+$$\sum_{b\in i} \alpha'_b \cdot \langle e_b \cdot N_i, n_b \cdot N_i, w_b, c_b\rangle$$
 %
-where the sum is over all benchmarks in the division, and~$|D|$ is the
-number of benchmarks in~$D$.  This is computed separately for parallel
+where the sum is over all benchmarks in the division, and~$N_i$ is the
+number of benchmarks in~$i$.  This is computed separately for parallel
 and sequential scores.
 
 For \apptrack divisions, division scores were still based on raw
@@ -1277,16 +1275,16 @@ overemphasizes large divisions.  In 2017 and 2018, the
 %
 $$\sum_i (e_i == 0 \,?\, (n_i/N_i)^2 : -4) \ln N_i$$
 %
-The value of this constant was chosen to balance the strong interest
-in correct solvers against the risk of stifling innovation.  In the
-division rankings (Section~\ref{sec:scoring-division-rankings}), an
-incorrect response causes a solver to be ranked below all correct
-solvers for that division.  But the competition's \maintrack consists
-of many independent divisions; a solver bug that affects one division
-need not manifest itself in other divisions.  With the current value,
-entering a (possibly buggy) solver that can solve all benchmarks into
-a division has a positive expected score if the probability that a
-soundness bug in the solver will be triggered is below~$20\,\%$.
+The value~$-4$ was chosen to balance the strong interest in correct
+solvers against the risk of stifling innovation.  In the division
+rankings (Section~\ref{sec:scoring-division-rankings}), an incorrect
+response causes a solver to be ranked below all correct solvers for
+that division.  But the competition's \maintrack consists of many
+independent divisions; a solver bug that affects one division need not
+manifest itself in other divisions.  With this value, entering a
+(possibly buggy) solver that can solve all benchmarks into a division
+has a positive expected score if the probability that a soundness bug
+in the solver will be triggered is below~$20\,\%$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1493,13 +1491,12 @@ with unknown status.
 
 \subsection{Progress in Solver Performance}
 
-The SMT Competition consists of several tracks with a multitude of divisions
-per track.
-Not all participating solvers enter all tracks, and the majority of
-participants participates only in a handful of divisions.
-To give a measure of overall progress in solver performance we
-use the notion of \emph{virtual best solver} (VBS) over all divisions of all
-three tracks.
+The SMT Competition consists of several tracks with a multitude of
+divisions per track.  Not all participating solvers enter all tracks,
+and the majority of solvers participates only in a handful of
+divisions.  To give a measure of overall progress in solver
+performance we use, for each of the three tracks, the notion of a
+\emph{virtual best solver} (VBS) over all divisions.
 
 For the \maintrack, we determine the VBS as the best wall-clock
 performance per (correctly solved) instance with the time limit of \SI{1200}{s} used
@@ -1509,19 +1506,18 @@ Figure~\ref{fig:progress} shows VBS performance on common benchmarks over pairs
 of consecutive years from 2014 to 2018.  Both plots show the wall-clock solving
 time per instance over all instances, sorted by solving time.
 %
-Between 2014 (\num{67426} benchmarks) and~2015 (\num{154238} benchmarks),
-the number of common benchmarks is \num{67070};
-between 2015 and 2016 (\num{154424} benchmarks) it is \num{154238};
-between 2016 and 2017 (\num{238758} benchmarks) it is \num{145236};
-and between 2017 and 2018 (\num{333241} benchmarks) it is \num{226429}.
+Between 2014 (\num{67426} benchmarks) and~2015 (\num{154238}
+benchmarks), the number of common benchmarks is \num{67070}; between
+2015 and 2016 (\num{154424} benchmarks) it is \num{154238}; between
+2016 and 2017 (\num{238758} benchmarks) it is \num{145236}; and
+between 2017 and 2018 (\num{333241} benchmarks) it is \num{226429}.
 The number of solved instances on these sets of common benchmarks
-increased from 2014 to 2015 by 0.1\%, from 2016 to 2017 by 3.9\%,
-and from 2017 to 2018 by 0.3\%.
-Interestingly, it decreased from 2015 to 2016 by 3.5\%.
-This is mainly due to the fact that, in 2015, more than \num{5600} benchmarks of
-division QF\_FP where solved by one of the two participating configurations of
-Z3 that no one else could solve, and in~2016 Z3 did not participate in this
-division.
+increased from 2014 to 2015 by 0.1\%, from 2016 to 2017 by 3.9\%, and
+from 2017 to 2018 by 0.3\%.  Interestingly, it decreased from 2015 to
+2016 by 3.5\%.  This is mainly due to the fact that, in 2015, more
+than \num{5600} benchmarks of division QF\_FP were solved by one of
+the two participating configurations of Z3 but by no other solver, and
+in~2016 Z3 did not participate in this division.
 
 For the \apptrack, we determine the VBS as the best performance
 in terms of number of correct \texttt{check-sat} answers within the time limit
@@ -1577,8 +1573,8 @@ divisions in which there was only one sound solver: in~2016, MathSAT
 was the only solver to support QF\_FP; in~2017, Z3 was the only sound
 solver in QF\_FP; and in~2018, CVC4 was the only solver to support
 QF\_SLIA, as well as the only sound solver in QF\_ABVFP.  Note that
-divisions with fewer than two competing solvers do not affect the
-competition-wide ranking.
+divisions with fewer than two competing solvers are non-competitive
+and do not affect the competition-wide ranking.
 
 \begin{table}
   \caption{Number of \maintrack benchmarks uniquely solved by each
@@ -1631,16 +1627,13 @@ use up to four times as much CPU time, sequential and parallel
 division winners are most often identical, as are sequential and
 parallel scores for the competition-wide ranking.
 
-%TODO: discuss whether this can be attributed to the hardness
-%distribution of benchmarks (cf. VBS plot)
-
 In Table~\ref{table:parallelism}, we report the quotient of CPU time
-over wall-clock time (summed up over all \maintrack benchmarks) for
-each solver, as well as for all solvers combined.  When there were
-multiple versions of a solver (such as a sequential and a parallel
-version), only the highest value is shown.  We note that this quotient
-is close to~1 for most solvers: only about 4--8 \maintrack solvers
-each year were participating with a version that made use of
+over wall-clock time (summed up over all benchmarks) for each
+\maintrack solver, as well as for all solvers combined.  When there
+were multiple versions of a solver (such as a sequential and a
+parallel version), only the highest value is shown.  We note that this
+quotient is close to~1 for most solvers: only about 4--8 \maintrack
+solvers each year were participating with a version that made use of
 parallelism.
 
 \begin{table}
@@ -1686,38 +1679,37 @@ parallelism.
 
 \subsection{Focusing on Satisfiability or Unsatisfiability}
 
-In many cases, an SMT application produces either mainly satisfiable or mainly
-unsatisfiable queries to the SMT solver.  A typical example is bounded model checking,
-where a query is only satisfiable if a property of the model does not hold.  As
-a consequence, some solvers may implement specialized techniques and
-optimizations for the more frequent (the expected) case.
+In many cases, an SMT application produces either mainly satisfiable
+or mainly unsatisfiable queries to the SMT solver.  A typical example
+is bounded model checking, where a query is only satisfiable if a
+property of the model does not hold.  As a consequence, some solvers
+may implement specialized techniques and optimizations for the more
+frequent (the expected) case.
 %
-Therefore, it is interesting to ask whether the winners of divisions of a track
-might have changed if benchmarks in that division had been restricted to one of
-these results.  Tables~\ref{tab:results:sat}-\ref{tab:results:unsat} show the
-changes in division winners if only satisfiable or unsatisfiable results are
-given. These tables only lists the result for a division if it has changed
-with respect to Table~\ref{tab:winners-main}. A non-competing solver is listed
-by itself if there was no competing solver with a positive division score under
-the given constraints.
-It is interesting to note that we see some new solvers winning divisions that
-did not win any division in the main results. For example, veriT solves the
-most satisfiable benchmarks in QF\_UFIDL in 2018 and the most unsatisfiable
-benchmarks in all four years in UFLRA, and SMTInterpol performs very well on
-unsatisfiable benchmarks in QF\_LIA.
+Therefore, it is interesting to ask whether the winners of divisions
+of a track might have changed if benchmarks in that division had been
+restricted to one of these results.
+Tables~\ref{tab:results:sat}--\ref{tab:results:unsat} show the changes
+in division winners if only satisfiable or unsatisfiable results are
+considered.  These tables only lists the result for a division if it
+has changed with respect to Table~\ref{tab:winners-main}.  A
+non-competing solver is listed by itself if there was no competing
+solver with a positive division score under the given constraints.  It
+is interesting to note that we see some new solvers winning divisions
+that did not win any division in the main results.  For example, veriT
+solves the most satisfiable benchmarks in QF\_UFIDL in 2018 and the
+most unsatisfiable benchmarks in all four years in UFLRA, and
+SMTInterpol performs very well on unsatisfiable benchmarks in QF\_LIA.
 
-
-We only consider the \maintrack here, which contains a mixture of benchmarks that
-are satisfiable and unsatisfiable. A percentage of satisfiable, unsatisfiable
-and unknown status benchmarks per division and year is given in
-Table~\ref{table:benchmarks-main-track}.  For the \apptrack, this analysis is
-less meaningful since a benchmark usually contains a multitude of both
-satisfiable and unsatisfiable incremental queries
-(which may depend on each other).
-For the \ucoretrack, only known unsatisfiable benchmarks from the \maintrack
-are used, which renders this analysis useless for this track.
-
-
+We only consider the \maintrack here, which contains a mixture of
+benchmarks that are satisfiable and unsatisfiable.  A percentage of
+satisfiable, unsatisfiable and unknown status benchmarks per division
+and year is given in Table~\ref{table:benchmarks-main-track}.  For the
+\apptrack, this analysis is less meaningful since a benchmark usually
+contains a multitude of both satisfiable and unsatisfiable incremental
+queries (which may depend on each other).  For the \ucoretrack, only
+known unsatisfiable benchmarks from the \maintrack are used, which
+renders this analysis useless for this track.
 
 \input{table-winners-main-sat-unsat}
 
