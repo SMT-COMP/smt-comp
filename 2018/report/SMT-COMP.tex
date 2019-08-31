@@ -3,13 +3,9 @@
 \usepackage{jsat}
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage{booktabs}
-%\usepackage[pdf]{pstricks}
-%\usepackage{pst-tree}
 \usepackage{xspace}
 \usepackage{enumitem}
 \usepackage{siunitx}
-
-%\usepackage[numbers,sort&compress]{natbib}
 
 \usepackage{pifont}
 \usepackage{multirow}
@@ -28,8 +24,6 @@ numbers=none,
 keywordstyle=\bfseries\sffamily,
 keywordstyle={[2]\bfseries\sffamily\underbar}
 }
-
-%\usepackage{showframe}   % debug
 
 %\input epsf
 \special{papersize=8.5in,11in}
@@ -92,7 +86,6 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
   \name{Tjark Weber {\normalfont (competition chair, 2015--2018)}}
   \email{tjark.weber@it.uu.se} \\
   \addr Uppsala University \\
-  %Uppsala \\
   Sweden
   \AND
   \name{Sylvain Conchon {\normalfont (co-organizer, 2015--2016)}}
@@ -103,19 +96,16 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
   \name{David D\'{e}harbe {\normalfont (co-organizer, 2015--2016)}}
   \email{david.deharbe@clearsy.com} \\
   \addr ClearSy Systems Engineering \\
-  %Aix-en-Provence \\
   France
   \AND
   \name{Matthias Heizmann {\normalfont (co-organizer, 2016--2018)}}
   \email{heizmann@informatik.uni-freiburg.de} \\
   \addr University of Freiburg \\
-  %City \\
   Germany
   \AND
   \name{Aina Niemetz {\normalfont (co-organizer, 2018)}}
   \email{niemetz@cs.stanford.edu} \\
   \addr Stanford University\\
-  %Stanford \\
   USA
   \AND
   \name{Giles Reger {\normalfont (co-organizer, 2017--2018)}}
@@ -153,145 +143,6 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 %% appropriate), and give a summary of the main technical
 %% contributions to the field, as well as discussions on lessons
 %% learned and suggestions for improvements for future competitions.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Changes 2015:
-%% \begin{itemize}
-%% \item All solvers will be run with $n=4$ cores available.  We will
-%%   recognize both best sequential and best parallel performance in all
-%%   \maintrack divisions, using different CPU time limits.
-%% \item The division scoring will take time spent on unsolved benchmarks
-%%   into account.  Previous competitions only considered time spent on
-%%   solved benchmarks.  However, the number of solved benchmarks still
-%%   takes precedence over run-time.
-%% \item In addition to recognizing the best solver in each division, we
-%%   will recognize solvers that perform best according to
-%%   competition-wide criteria, emphasizing breadth of supported logics.
-%%   These criteria will be a refinement of the criteria used for the
-%%   FLoC Olympic Games medals in~2014.
-%% \item We plan to include new divisions for floating-point arithmetic.
-%%   These should be considered experimental in~2015, and will not be
-%%   included in the competition-wide ranking.
-%% \item We plan to run solvers on all eligible benchmarks.  Previous
-%%   competitions used a proper subset of eligible benchmarks, causing
-%%   competition results to be affected by a random selection process.
-%% \end{itemize}
-
-%% Changes 2016:
-%% \begin{itemize}
-%% \item Benchmarks will use (a subset of) version~2.5 of the SMT-LIB
-%%   language.  \emph{Rationale:} This is the latest version of the
-%%   SMT-LIB language.  It was released on 2015-06-28, and is largely
-%%   backwards-compatible to version~2.0, which was used for SMT-COMP
-%%   2015.
-%% \item Solver output may affect the score even when the solver does not
-%%   terminate within the time limit.  (In 2015, \maintrack solver output
-%%   was ignored if the solver subsequently timed out.)  Solvers should
-%%   take care not to accidentally produce output that contains
-%%   \texttt{sat} or \texttt{unsat} even when they are killed.
-%%   \emph{Rationale:} Users are likely to trust solver responses even
-%%   when the solver continues to run for some time.
-%% \item Divisions for floating-point arithmetic are no longer
-%%   experimental, and will be considered competitive if the necessary
-%%   requirements (see Section~\ref{sec:scoring}) are met.
-%%   \emph{Rationale:} Floating-point divisions were experimental in
-%%   2015.  By now, their definition is sufficiently stable, and they are
-%%   supported by several solvers.
-%% \item Division scores will be based on a weighted sum of scores for
-%%   benchmark families.  \emph{Rationale:} For some years now, SMT-COMPs
-%%   have had sufficient computational resources to evaluate all solver
-%%   entrants on all eligible benchmarks.  As a side-effect, the
-%%   weighting of benchmark families that was achieved in early SMT-COMPs
-%%   through a careful selection of benchmarks (based on benchmark
-%%   difficulty and category) was lost.  Since there are vast differences
-%%   in size between benchmark families, we believe that a weighting that
-%%   de-emphasizes large benchmark families (see
-%%   Section~\ref{sec:division-scoring}) will lead to more meaningful
-%%   competition results.
-%% \item The \ucoretrack that was introduced in SMT-COMP 2012, but
-%%   discontinued in 2013-2015 (partly because of the competition's move
-%%   to StarExec), is back.  It will be experimental in 2016; its results
-%%   will be reported, but no official winners will be announced.
-%%   \emph{Rationale:} Unsat cores are important in many applications of
-%%   SMT solving.  The track was discontinued primarily for
-%%   infrastructure and resource reasons.  We are pleased that we can
-%%   finally offer it again, but we ask for your understanding in case of
-%%   mishaps while we port the required tools.
-%% \item Best industrial performance will no longer be recognized
-%%   separately.  \emph{Rationale:} While there is agreement in the SMT
-%%   community to emphasize problems that come from real applications,
-%%   industrial performance largely coincided with overall performance in
-%%   SMT-COMP 2015.  We consider the effort to determine and report it
-%%   separately no longer justified.
-%% \end{itemize}
-
-%% Changes 2017:
-%% \begin{itemize}
-%% \item Submission of accompanying information for solvers is via a web
-%%   form (rather than by email to the organizers).  \emph{Rationale:}
-%%   Email submissions were often incomplete, leading to ambiguity and
-%%   further inquiries.  The form provides a more structured way of
-%%   submitting information.
-%% \item Benchmarks will use (a subset of) version~2.6 of the SMT-LIB
-%%   language.  \emph{Rationale:} This is the latest version of the
-%%   SMT-LIB language.  It is largely backwards-compatible with earlier
-%%   versions (in particular~2.0 and~2.5).
-%% \item Benchmarks that use partial bit-vector functions, such as
-%%   \texttt{bvudiv}, or underspecified floating-point functions, such as
-%%   \texttt{fp.min}, will be eligible for the competition again.
-%%   \emph{Rationale:} A conclusion on the semantics of these functions
-%%   has finally been reached, and the status of affected SMT-LIB
-%%   benchmarks has been updated accordingly.
-%% \item Benchmarks with unknown status will be eligible for the
-%%   competition's \maintrack.  In 2016, solver performance on benchmarks
-%%   with unknown status was evaluated but reported separately; in 2017,
-%%   it will directly affect the competition results.  \emph{Rationale:}
-%%   Using only benchmarks with known status (i.e., benchmarks that have
-%%   been solved before) to determine the competition results unjustly
-%%   favors imitation of existing solvers over true innovation.
-%% \item In the competition-wide scoring, the (per-division) penalty for
-%%   erroneous results is changed from the number of errors to a fixed
-%%   constant (multiplied by the weight of the respective division).
-%%   \emph{Rationale:} The weight already takes the number of benchmarks
-%%   in the division into account; multiplying it by the number of errors
-%%   overemphasizes large divisions.
-%% \item The \ucoretrack, which was re-introduced in 2016, is no
-%%   longer experimental.  Its divisions will be considered competitive
-%%   if the necessary requirements (see Section~\ref{sec:scoring}) are
-%%   met.  \emph{Rationale:} Rules and tool support for the unsat-core
-%%   track proved sufficiently stable in 2016.
-%% \item The competition will feature experimental divisions for
-%%   benchmarks that use algebraic datatypes.  \emph{Rationale:}
-%%   Algebraic datatypes are specified in the draft SMT-LIB~2.6 standard,
-%%   which is expected to become official in the near future, and are
-%%   already supported by some solvers.  Benchmarks that use datatypes
-%%   have recently been added to SMT-LIB.
-%% \end{itemize}
-
-%% Changes 2018:
-%% \begin{itemize}
-%% \item The time limit per solver/benchmark pair is anticipated to be at
-%%   most 20 minutes in the \maintrack, and at most 40 minutes in the
-%%   other tracks.  \emph{Rationale:} Already in 2017, the time limit for
-%%   the \maintrack was reduced to 20 minutes (down from 40 minutes in
-%%   earlier years) to cope with the inclusion of a large number of
-%%   benchmarks with unknown status.
-%% \item In the \ucoretrack, the unsatisfiability check for the
-%%   returned core will be based on a simple majority vote.  The case
-%%   that a solver finds its own core satisfiable will no longer be
-%%   treated specially.  \emph{Rationale:} This allows to simplify the
-%%   post-processing of \ucoretrack results considerably.
-%% \item In 2017, the competition featured experimental divisions for
-%%   benchmarks that use algebraic datatypes.  These divisions will be
-%%   regular (non-experimental) in 2018. \emph{Rationale:} Algebraic
-%%   datatypes are specified in the latest official release (Version~2.6)
-%%   of the SMT-LIB standard.
-%% \item The competition will feature an experimental divisions for
-%%   benchmarks that use strings.  \emph{Rationale:} Corresponding
-%%   theories and benchmarks are expected to be added to SMT-LIB in the
-%%   near future.
-%% \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -342,13 +193,24 @@ Modulo Theories.  Solvers are submitted to the competition by their
 developers, and pitted against each other in a number of tracks and
 divisions.
 
-The SMT Competition is one of a growing number of tool competitions in the broad area of formal methods, which are summarised in a recent review of the area~\cite{toolympics}. The two closest competitions in terms of goals and design are the SAT competition (\url{http://www.satcompetition.org/}), which evaluates SAT solvers, and CASC (\url{http://www.tptp.org/CASC/}), which evaluates automated theorem provers (ATPs). In recent years, we have seen a blurring of lines between SMT-COMP and CASC with SMT solvers competing in CASC and ATPs competing in SMT-COMP. The main (informal) distinction remains that SMT-COMP focuses on problems that are heavy in theories, whereas CASC focuses on problems heavy in quantifiers.
-Another closely related competition is SV-COMP (\url{https://sv-comp.sosy-lab.org}) where many tools rely on advances in SMT solving technology.
+The SMT Competition is one of a growing number of tool competitions in
+the broad area of formal methods, which are summarised in a recent
+review of the area~\cite{toolympics}. The two closest competitions in
+terms of goals and design are the SAT competition
+(\url{http://www.satcompetition.org/}), which evaluates SAT solvers,
+and CASC (\url{http://www.tptp.org/CASC/}), which evaluates automated
+theorem provers (ATPs). In recent years, we have seen a blurring of
+lines between SMT-COMP and CASC with SMT solvers competing in CASC and
+ATPs competing in SMT-COMP. The main (informal) distinction remains
+that SMT-COMP focuses on problems that are heavy in theories, whereas
+CASC focuses on problems heavy in quantifiers.  Another closely
+related competition is SV-COMP (\url{https://sv-comp.sosy-lab.org})
+where many tools rely on advances in SMT solving technology.
 
-The SMT Competition was part of the Federated Logic
-Conference (FLoC) Olympic Games, which comprised 14 competitions in
-various areas of computational logic, in Vienna in~2014, and again in
-Oxford~(UK) in~2018.  It was last described in a 2014 competition
+The SMT Competition was part of the Federated Logic Conference (FLoC)
+Olympic Games, which comprised 14 competitions in various areas of
+computational logic, in Vienna in~2014, and again in Oxford~(UK)
+in~2018.  It was last described in a 2014 competition
 report~\cite{CDW14}.  In this paper, we report on the design and
 selected results of the competition during the last FLoC Olympiad,
 from 2015 to~2018.
@@ -433,13 +295,12 @@ with the SMT-LIB maintainers---to release a new version of the SMT
 Library (see Section~\ref{sec:smtlib}).  SMT-LIB releases were made on
 June~1 in 2015, on May~23 in 2016, on June~5 in 2017, and on May~20 in
 2018.  Anyone may submit new benchmarks to the SMT Library, and
-competitors are allowed to tune their solvers accordingly.
-Therefore all benchmarks eligible for the competition must be released
-at least some time before the final solver submission deadline.  To
-give the SMT-LIB maintainers sufficient time for curation, the
-deadline for new benchmark contributions has usually been about four
-to six weeks before the initial solver deadline, typically in April or
-early May.
+competitors are allowed to tune their solvers accordingly.  Therefore
+all benchmarks eligible for the competition must be released at least
+some time before the final solver submission deadline.  To give the
+SMT-LIB maintainers sufficient time for curation, the deadline for new
+benchmark contributions has usually been about four to six weeks
+before the initial solver deadline, typically in April or early May.
 
 The competition rules are revised each year, and a (near final) draft
 version of the rules is made public on the competition website around
@@ -569,55 +430,55 @@ solvers~\cite{DBLP:conf/cade/Weber16}.
 \section{Competition Divisions and Benchmarks}
 \label{sec:benchmarks}
 
-The SMT Competition consists of several tracks.  Each track is further split
-into (logic) \emph{divisions}, where each division corresponds to a logic from
-the SMT Library.  As indicated in
-Tables~\ref{table:smtlib}--\ref{table:divisions}, there are slightly fewer
-divisions (Table~\ref{table:divisions}) than logics in the SMT Library
-(Table~\ref{table:smtlib}) because not every logic contains benchmarks eligible
-for the competition.
+The SMT Competition consists of several tracks.  Each track is further
+split into (logic) \emph{divisions}, where each division corresponds
+to a logic from the SMT Library.  As indicated in
+Tables~\ref{table:smtlib}--\ref{table:divisions}, there are slightly
+fewer divisions (Table~\ref{table:divisions}) than logics in the SMT
+Library (Table~\ref{table:smtlib}) because not every logic contains
+benchmarks eligible for the competition.
 
 \paragraph{Tracks.}
-The \emph{\maintrack}, which
-has been a staple of the competition since its
-inception in 2005, features non-incremental benchmarks.  The
+The \emph{\maintrack}, which has been a staple of the competition
+since its inception in 2005, features non-incremental benchmarks.  The
 \emph{\apptrack}, which has been part of the competition since
 2011~\cite{BDdMOS13}, features incremental benchmarks.  These
 benchmarks are passed to each solver one command at a time by a trace
 executor, which waits for the solver's response before passing the
 next benchmark command (to prevent look-ahead behavior).  The
-\emph{\ucoretrack} uses \maintrack benchmarks that are known to
-be unsatisfiable, and solvers are evaluated on their ability to find
+\emph{\ucoretrack} uses \maintrack benchmarks that are known to be
+unsatisfiable, and solvers are evaluated on their ability to find
 small unsatisfiable cores (i.e., a small but still unsatisfiable
-subset of the benchmark's assertions).  The \ucoretrack had first
-been part of the competition in 2012~\cite{CGBD12}, but was then
+subset of the benchmark's assertions).  The \ucoretrack had first been
+part of the competition in 2012~\cite{CGBD12}, but was then
 discontinued (partly because of the competition's move to StarExec and
-inadequate tool support).  It was re-introduced as an experimental track
-in 2016, and has been a regular competition track again since~2017.
+inadequate tool support).  It was re-introduced as an experimental
+track in 2016, and has been a regular competition track again
+since~2017.
 
 \paragraph{Divisions.}
 Table~\ref{table:divisions} shows the number of divisions in each
 track since~2015.  Participants can choose which tracks and divisions
 they want to enter, and competition results are reported separately
-for each track and division.  Thus, competing solvers do not need to support
-all logics, and may or may not support features such as incremental solving
-or unsat-core generation.
+for each track and division.  Thus, competing solvers do not need to
+support all logics, and may or may not support features such as
+incremental solving or unsat-core generation.
 
 \paragraph{Eligible benchmarks.}
-Some benchmarks typically have to be
-excluded for syntactic reasons: in 2015 and 2016, \num{11966} benchmarks
-were excluded because they contained partial or underspecified
-operations (e.g., bit-vector division), whose precise semantics were
-being debated at the time.  Additionally in~2016, one benchmark was
-excluded because it contained incorrect status information.  In~2017,
-\num{1104} benchmarks were excluded because their logic had been classified
-incorrectly, and 8~benchmarks were excluded because of incorrect or
-missing status information.  Moreover, divisions containing datatypes
-({DT})---which were new in~2017---were excluded from the Unsat-Core
-track because of inadequate tool support.  In~2018, \num{3603}~benchmarks were
-excluded because they contained named terms (a feature of the SMT-LIB
-language that is not permitted in competition benchmarks), and
-5~benchmarks were excluded because of missing status information.
+Some benchmarks typically have to be excluded for syntactic reasons:
+in 2015 and 2016, \num{11966} benchmarks were excluded because they
+contained partial or underspecified operations (e.g., bit-vector
+division), whose precise semantics were being debated at the time.
+Additionally in~2016, one benchmark was excluded because it contained
+incorrect status information.  In~2017, \num{1104} benchmarks were
+excluded because their logic had been classified incorrectly, and
+8~benchmarks were excluded because of incorrect or missing status
+information.  Moreover, divisions containing datatypes ({DT})---which
+were new in~2017---were excluded from the Unsat-Core track because of
+inadequate tool support.  In~2018, \num{3603}~benchmarks were excluded
+because they contained named terms (a feature of the SMT-LIB language
+that is not permitted in competition benchmarks), and 5~benchmarks
+were excluded because of missing status information.
 
 \begin{table}
   \caption{Number of divisions in each competition track}
@@ -649,48 +510,51 @@ Another paradigm shift concerns the treatment of benchmarks with
 unknown status.  Because of the difficulty to judge solver responses
 for such benchmarks, SMT Competitions until 2015 only used benchmarks
 whose status was known (i.e., that had been solved previously by
-existing SMT solvers).  In 2015, \num{30717} non-incremental benchmarks
-from the SMT Library were not used for the competition because their
-status was unknown.  However, this approach was criticized for
-rewarding imitation of existing solvers rather than true innovation.  In~2016,
-the SMT Library contained \num{29724} non-incremental benchmarks with
-unknown status; solver performance on these was evaluated but reported
-separately.  Since 2017, all non-incremental benchmarks are eligible
-for the competition's \maintrack regardless of status, and they
-directly affect the competition results.
+existing SMT solvers).  In 2015, \num{30717} non-incremental
+benchmarks from the SMT Library were not used for the competition
+because their status was unknown.  However, this approach was
+criticized for rewarding imitation of existing solvers rather than
+true innovation.  In~2016, the SMT Library contained \num{29724}
+non-incremental benchmarks with unknown status; solver performance on
+these was evaluated but reported separately.  Since 2017, all
+non-incremental benchmarks are eligible for the competition's
+\maintrack regardless of status, and they directly affect the
+competition results.
 
-Solver responses for such
-benchmarks are assumed to be correct, unless there is a disagreement
-between two or more solvers that are otherwise (i.e., on benchmarks with
-known status) sound.  Benchmarks with disagreements are removed from
-the competition results.  This conservative approach was chosen over a
-voting system as the latter is unreliable (especially in divisions
-with few solvers), could lead to a solver being punished wrongly, and
-could be gamed by entering multiple copies of a solver into the
-competition.  Moreover, the size and time frame of the competition
-demand an automated resolution.  Disagreements are reported to the
-solver developers involved, who typically perform a manual
-investigation at their leisure, and in all cases have led to bugs in
-solvers being identified and fixed.  In 2016, there were disagreements
-on 79 benchmarks; in 2017, only one benchmark was removed; while in
-2018, there were no disagreements between otherwise sound solvers.
+Solver responses for such benchmarks are assumed to be correct, unless
+there is a disagreement between two or more solvers that are otherwise
+(i.e., on benchmarks with known status) sound.  Benchmarks with
+disagreements are removed from the competition results.  This
+conservative approach was chosen over a voting system as the latter is
+unreliable (especially in divisions with few solvers), could lead to a
+solver being punished wrongly, and could be gamed by entering multiple
+copies of a solver into the competition.  Moreover, the size and time
+frame of the competition demand an automated resolution.
+Disagreements are reported to the solver developers involved, who
+typically perform a manual investigation at their leisure, and in all
+cases have led to bugs in solvers being identified and fixed.  In
+2016, there were disagreements on 79 benchmarks; in 2017, only one
+benchmark was removed; while in 2018, there were no disagreements
+between otherwise sound solvers.
 
 For incremental benchmarks, the situation is different: an incremental
-benchmark is ineligible for the \apptrack if its first {\tt
-  check-sat} command has unknown status.  Otherwise, the prefix of the
-benchmark that only contains {\tt check-sat} commands with known
-status is eligible.  The main reason for this difference is that the
-competition tools for the \apptrack (in particular, the trace
-executor) had not been adapted yet to support {\tt check-sat}
-commands with unknown status. Even though the trace executor has now been modified, we cannot check what impact this may have had on previous results without rerunning the \apptrack as the trace executor drives the solver.
+benchmark is ineligible for the \apptrack if its first {\tt check-sat}
+command has unknown status.  Otherwise, the prefix of the benchmark
+that only contains {\tt check-sat} commands with known status is
+eligible.  The main reason for this difference is that the competition
+tools for the \apptrack (in particular, the trace executor) had not
+been adapted yet to support {\tt check-sat} commands with unknown
+status. Even though the trace executor has now been modified, we
+cannot check what impact this may have had on previous results without
+rerunning the \apptrack as the trace executor drives the solver.
 
 Tables~\ref{table:benchmarks-main-track}--\ref{table:benchmarks-unsat-core-track}
 show the number of benchmarks that were used in each competition track
 and division since~2015.  A dash indicates that no eligible benchmarks
 were available, and hence the corresponding SMT-LIB logic was not
 actually a competition division in that track and year.  The size of
-divisions varies widely, from just one benchmark in ABVFP to~\num{72705}
-benchmarks in QF\_SLIA.
+divisions varies widely, from just one benchmark in ABVFP
+to~\num{72705} benchmarks in QF\_SLIA.
 
 \begin{table}
   \caption{Number of benchmarks used in the \maintrack (by division). Numbers in parentheses indicate the (rounded) percentage of benchmarks with different statuses, which are (sat/unsat) in 2015 and 2016, and (sat/unsat/unknown) in 2017 and 2018.}
@@ -891,8 +755,8 @@ Jobs consist of individual \emph{job pairs}.  Each job pair
 corresponds to a specific solver/benchmark combination.
 Figure~\ref{fig:job-pairs} shows the total number of job pairs for the
 SMT Competition from~2015 to~2018.  Over this period, the number has
-grown by~72\,\%, from~\num{1028615} job pairs in~2015 to~\num{1776062} job
-pairs in~2018.  (This is the number of unique solver/benchmark
+grown by~72\,\%, from~\num{1028615} job pairs in~2015 to~\num{1776062}
+job pairs in~2018.  (This is the number of unique solver/benchmark
 combinations that were part of the competition.  The number of job
 pairs that were actually run is even higher: test jobs and job pairs
 that had to be re-run, e.g., because of issues with the StarExec
@@ -982,7 +846,14 @@ weeks.
   \label{fig:job-pairs}
 \end{figure}
 
-The use of StarExec ensures the replicability of the competition. The publicly accessible space \url{https://www.starexec.org/starexec/secure/explore/spaces.jsp?id=2641} stores all of the information required to rerun the competition, e.g., all benchmarks and copies of all tools. In addition, a GitHub organization (\url{https://github.com/SMT-COMP/smt-comp}) has been set up to archive previous results and store the tools used by organizers to run the competition.
+The use of StarExec ensures the replicability of the competition. The
+publicly accessible space
+\url{https://www.starexec.org/starexec/secure/explore/spaces.jsp?id=2641}
+stores all of the information required to rerun the competition, e.g.,
+all benchmarks and copies of all tools. In addition, a GitHub
+organization (\url{https://github.com/SMT-COMP/smt-comp}) has been set
+up to archive previous results and store the tools used by organizers
+to run the competition.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -997,13 +868,13 @@ this information was collected by email.  Since 2017, a web form is
 being used for this purpose.  This has greatly reduced the number of
 incomplete or ambiguous submissions.
 
-Participants are required to be authors of the tool they submit.
-In 2015--2018, the competition rules did not further define authorship,
-but it is understood that an author contributed code to the tool.
-As a special case of this rule, participants are required to identify
-if their tool is a wrapper tool, i.e., any solver that calls (or is in some
-other way based on) one or more SMT solvers of which the author of the tool
-is not an author.
+Participants are required to be authors of the tool they submit.  In
+2015--2018, the competition rules did not further define authorship,
+but it is understood that an author contributed code to the tool.  As
+a special case of this rule, participants are required to identify if
+their tool is a wrapper tool, i.e., any solver that calls (or is in
+some other way based on) one or more SMT solvers of which the author
+of the tool is not an author.
 
 Tables~\ref{table:participants1}--\ref{table:participants3} list the
 solvers that participated between~2015 and~2018, together with
@@ -1021,12 +892,12 @@ years, exercising this right was not necessary.
 Table~\ref{table:participants-history} shows in more detail how many
 versions of each solver were submitted in each year.
 
-Participants were not required to provide source code with their submission.
-There were no licensing requirements/restrictions for the submitted binaries
-of the participating solvers.
+Participants were not required to provide source code with their
+submission.  There were no licensing requirements/restrictions for the
+submitted binaries of the participating solvers.
 %
-Participants were encouraged to submit a short system description
-of their solver, including a list of its authors and an explanation of
+Participants were encouraged to submit a short system description of
+their solver, including a list of its authors and an explanation of
 the SMT solving approach used.  System descriptions are published on
 the competition website.  They were submitted for about 60\,\% of all
 solver versions since 2015.
@@ -1040,10 +911,10 @@ competition versions.  These solvers were therefore participating hors
 concours.  Moreover, in 2015 a bug was discovered in the \apptrack
 version of Boolector and a fixed version was submitted after the
 deadline; in 2016, the CVC4 team did not enter their solver into the
-\apptrack; and in 2018, an experimental version of CVC4 as
-well as the OpenSMT2 solver were submitted after the deadline.  These
-solvers were also participating hors concours.  In result tables, they
-are listed with their name in square brackets (e.g., [MathSAT]).
+\apptrack; and in 2018, an experimental version of CVC4 as well as the
+OpenSMT2 solver were submitted after the deadline.  These solvers were
+also participating hors concours.  In result tables, they are listed
+with their name in square brackets (e.g., [MathSAT]).
 
 \include{table-participants}
 
@@ -1148,10 +1019,14 @@ respectively, that the solver process consumed.
 The \emph{raw benchmark score} of a solver is thus a quadruple
 $\langle e, n, w, c\rangle$, with
 \begin{itemize}[noitemsep]
-  \item \makebox[5em][l]{$e\geq 0$} number of erroneous responses (usually~$e = 0$),
-  \item \makebox[5em][l]{$0 \leq n \leq N$} number of correct responses (resp.~\emph{reduction} for the \ucoretrack),
-  \item \makebox[5em][l]{$w \in [0,T]$} wall-clock time in seconds (real-valued),
-  \item \makebox[5em][l]{$c \in [0, 4T]$} CPU time in seconds (real-valued).
+  \item \makebox[5em][l]{$e\geq 0$} number of erroneous responses
+    (usually~$e = 0$),
+  \item \makebox[5em][l]{$0 \leq n \leq N$} number of correct
+    responses (resp.~\emph{reduction} for the \ucoretrack),
+  \item \makebox[5em][l]{$w \in [0,T]$} wall-clock time in seconds
+    (real-valued),
+  \item \makebox[5em][l]{$c \in [0, 4T]$} CPU time in seconds
+    (real-valued).
 \end{itemize}
 %
 For the \maintrack and \apptrack, $e$ is the number of returned
@@ -1295,24 +1170,21 @@ in the solver will be triggered is below~$20\,\%$.
 \label{sec:division-rankings}
 
 Tables~\ref{tab:winners-main}--\ref{tab:winners-unsat-core} show the
-highest-ranked solvers for all (competitive and non-competitive) divisions from
-2015--2018.
-We include solvers that were running hors concours (and hence non-competing
-and ineligible to be recognized as official competition winners).
-Non-com-petitive divisions use gray font. % TODO superscript?
-Entries $A [B]$ indicate that solver $A$ was the highest competing solver,
-but non-competing solver $B$ actually ranked best if non-competing solvers
-were taken into consideration.
-Entries
-$A|B$ indicate that solver~$A$ ranked first considering sequential
+highest-ranked solvers for all (competitive and non-competitive)
+divisions from 2015--2018.  We include solvers that were running hors
+concours (and hence non-competing and ineligible to be recognized as
+official competition winners).  Non-com-petitive divisions use gray
+font.  Entries $A [B]$ indicate that solver $A$ was the highest
+competing solver, but non-competing solver $B$ actually ranked best if
+non-competing solvers were taken into consideration.  Entries $A|B$
+indicate that solver~$A$ ranked first considering sequential
 performance, while~$B$ ranked first considering parallel performance.
 When the same solver ranked first in both, which is most often the
-case, its name appears just once.
-Table cell colors (other than white) indicate the best competing
-solver performance; no cell color indicates that the best solver
-performance was by a non-competing solver and no competing solvers participated
-in that division.
-Full division rankings are available from the competition website.
+case, its name appears just once.  Table cell colors (other than
+white) indicate the best competing solver performance; no cell color
+indicates that the best solver performance was by a non-competing
+solver and no competing solvers participated in that division.  Full
+division rankings are available from the competition website.
 
 It is interesting to note that the non-competing solvers MathSAT and
 Z3 often appear as the best performing solver.  We view this as
@@ -1399,8 +1271,8 @@ awarded the following solvers:
 \end{itemize}
 
 In comparison to the competition-wide ranking for the \maintrack, the
-metric used for the \apptrack and \ucoretrack---simply counting
-the number of competitive divisions that a solver has won---was rather
+metric used for the \apptrack and \ucoretrack---simply counting the
+number of competitive divisions that a solver has won---was rather
 unsophisticated.  Future editions of the competition should perhaps
 refine this to use a ranking scheme that is more similar to the
 \maintrack ranking, by weighing divisions according to their relative
@@ -1408,11 +1280,10 @@ importance, and also by rewarding good performance from solvers other
 than division winners.  A difficulty in adapting the \maintrack
 ranking for the other tracks is that each \maintrack benchmark is
 worth one point (before benchmark weights are applied) if solved
-correctly, while benchmarks in the \apptrack and \ucoretrack
-are worth widely varying numbers of points.  Moreover, in the
-\ucoretrack, the size of the smallest unsatisfiable core---and
-hence the number of points attainable on any given benchmark---may not
-be known precisely.
+correctly, while benchmarks in the \apptrack and \ucoretrack are worth
+widely varying numbers of points.  Moreover, in the \ucoretrack, the
+size of the smallest unsatisfiable core---and hence the number of
+points attainable on any given benchmark---may not be known precisely.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1499,12 +1370,13 @@ performance we use, for each of the three tracks, the notion of a
 \emph{virtual best solver} (VBS) over all divisions.
 
 For the \maintrack, we determine the VBS as the best wall-clock
-performance per (correctly solved) instance with the time limit of \SI{1200}{s} used
-in the competitions 2017 and 2018. Figure~\ref{fig:progress-all} visualizes VBS
-performance on common benchmarks from 2015--2018 as cactus plot.
-Figure~\ref{fig:progress} shows VBS performance on common benchmarks over pairs
-of consecutive years from 2014 to 2018.  Both plots show the wall-clock solving
-time per instance over all instances, sorted by solving time.
+performance per (correctly solved) instance with the time limit of
+\SI{1200}{s} used in the competitions 2017 and 2018.
+Figure~\ref{fig:progress-all} visualizes VBS performance on common
+benchmarks from 2015--2018 as cactus plot.  Figure~\ref{fig:progress}
+shows VBS performance on common benchmarks over pairs of consecutive
+years from 2014 to 2018.  Both plots show the wall-clock solving time
+per instance over all instances, sorted by solving time.
 %
 Between 2014 (\num{67426} benchmarks) and~2015 (\num{154238}
 benchmarks), the number of common benchmarks is \num{67070}; between
@@ -1519,32 +1391,30 @@ than \num{5600} benchmarks of division QF\_FP were solved by one of
 the two participating configurations of Z3 but by no other solver, and
 in~2016 Z3 did not participate in this division.
 
-For the \apptrack, we determine the VBS as the best performance
-in terms of number of correct \texttt{check-sat} answers within the time limit
-of \SI{2400}{s} (the time limit of the \apptrack in the competitions
-2015--2018).
-The total number of eligible \texttt{check-sat} queries (i.e., all queries with
-status sat or unsat up to the first query with status unknown) on
-common benchmarks from 2015--2018 is \num{30370517}.
-Figure~\ref{fig:progress-all-app} visualizes VBS performance on these
-benchmarks as a bar plot.
-In 2015, already 99.95\% of the eligible queries were answered correctly,
-which naturally does not leave a lot of room for improvement.
-In 2016, performance decreased by \num{185625} correct answers (0.61\%),
-which can be entirely attributed to a performance regression
-of Z3 on two benchmarks in the QF\_NIA division.
+For the \apptrack, we determine the VBS as the best performance in
+terms of number of correct \texttt{check-sat} answers within the time
+limit of \SI{2400}{s} (the time limit of the \apptrack in the
+competitions 2015--2018).  The total number of eligible
+\texttt{check-sat} queries (i.e., all queries with status sat or unsat
+up to the first query with status unknown) on common benchmarks from
+2015--2018 is \num{30370517}.  Figure~\ref{fig:progress-all-app}
+visualizes VBS performance on these benchmarks as a bar plot.  In
+2015, already 99.95\% of the eligible queries were answered correctly,
+which naturally does not leave a lot of room for improvement.  In
+2016, performance decreased by \num{185625} correct answers (0.61\%),
+which can be entirely attributed to a performance regression of Z3 on
+two benchmarks in the QF\_NIA division.
 
 For the \ucoretrack, we determine the VBS as the best performance in
 terms of reduction, i.e., the difference in the number of assertions
-of the input formula and the unsat core, within the time limit
-of \SI{2400}{s} (the time limit of the \ucoretrack in the competitions
-2016--2018).
-Figure~\ref{fig:progress-all-uc} visualizes VBS performance on the common
-benchmarks (\num{91455} total) from 2016--2018 as a bar plot.
-For \num{32377} of these benchmarks, extracting an unsat core is trivial since
-they contain only one single \texttt{assert} command.
-They are thus not considered in the bar plot, since their maximum
-possible reduction is trivially 0.
+of the input formula and the unsat core, within the time limit of
+\SI{2400}{s} (the time limit of the \ucoretrack in the competitions
+2016--2018).  Figure~\ref{fig:progress-all-uc} visualizes VBS
+performance on the common benchmarks (\num{91455} total) from
+2016--2018 as a bar plot.  For \num{32377} of these benchmarks,
+extracting an unsat core is trivial since they contain only one single
+\texttt{assert} command.  They are thus not considered in the bar
+plot, since their maximum possible reduction is trivially 0.
 
 \subsection{Unique Solutions}
 
@@ -1714,75 +1584,90 @@ renders this analysis useless for this track.
 \input{table-winners-main-sat-unsat}
 
 %%%%%%%%%%%%%%%%%%%%
+
 \subsection{Very Quick Solutions}
 
-Different application domains of SMT typically impose a wide range of time
-limits (from hours to seconds). In domains with very low time limits, these
-limits are, in the incremental case, usually even defined per incremental
-query.  With 20 and 40 minutes, the time limits used in the competition for all
-tracks in all four years were relatively long and the same for all benchmarks,
-thus agnostic to the application domain of a benchmark.  Hence, it is
-interesting to investigate how the results change if we consider a much shorter
-time limit.  Table~\ref{tab:results:24s} shows the results of virtually
-imposing a time limit of 24 seconds\footnote{This time limit is used for the
-new 24 seconds score introduced in SMT-COMP 2019 and was inspired by a use case
-at Amazon.} in the \maintrack.  As in the previous analysis, this highlights the
-different winners under this new scheme only. Here we see Alt-Ergo (AUFLIRA in
-2018) and STP (QF\_BV in 2016) winning a division for the first time in our
+Different application domains of SMT typically impose a wide range of
+time limits (from hours to seconds). In domains with very low time
+limits, these limits are, in the incremental case, usually even
+defined per incremental query.  With 20 and 40 minutes, the time
+limits used in the competition for all tracks in all four years were
+relatively long and the same for all benchmarks, thus agnostic to the
+application domain of a benchmark.  Hence, it is interesting to
+investigate how the results change if we consider a much shorter time
+limit.  Table~\ref{tab:results:24s} shows the results of virtually
+imposing a time limit of 24 seconds\footnote{This time limit is used
+  for the new 24 seconds score introduced in SMT-COMP 2019 and was
+  inspired by a use case at Amazon.} in the \maintrack.  As in the
+previous analysis, this highlights the different winners under this
+new scheme only. Here we see Alt-Ergo (AUFLIRA in 2018) and STP
+(QF\_BV in 2016) winning a division for the first time in our
 analysis, and Yices performing well.
 
-We only consider the \maintrack here, since for the other two tracks, the
-results are less interesting.  In the \apptrack, for such low time limits we
-are rather interested in a time limit per query, which we are unable to impose
-on the existing data since it is not possible to extract wallclock run time
-information per incremental query from the data of the competitions (as
-mentioned above, StarExec does not record this information).  In the
-\ucoretrack, the main focus is on producing small unsat-cores and solving times
-are of secondary interest.  Additionally, benchmarks with known unsatisfiable
-status from the \maintrack are used, and thus these results are already
-available from the \maintrack analysis in Table~\ref{tab:results:24s}
-(disregarding the fact that enabling unsat core production may slow down a
-solver, depending on the technique).
-
+We only consider the \maintrack here, since for the other two tracks,
+the results are less interesting.  In the \apptrack, for such low time
+limits we are rather interested in a time limit per query, which we
+are unable to impose on the existing data since it is not possible to
+extract wallclock run time information per incremental query from the
+data of the competitions (as mentioned above, StarExec does not record
+this information).  In the \ucoretrack, the main focus is on producing
+small unsat-cores and solving times are of secondary interest.
+Additionally, benchmarks with known unsatisfiable status from the
+\maintrack are used, and thus these results are already available from
+the \maintrack analysis in Table~\ref{tab:results:24s} (disregarding
+the fact that enabling unsat core production may slow down a solver,
+depending on the technique).
 
 \input{table-winners-main-24s}
 
 %%%%%%%%%%%%%%%%%
+
 \subsection{Do Families Matter?}
 
-In 2016 the \maintrack competition scoring was changed to weight the correctness score for benchmarks by the size of the family the benchmark belongs to. Here we ask what the winners would have been if this change had not been made. The answer to this question is given in Table~\ref{tab:results:total:solved}. Relatively few changes would have occurred. Unsurprisingly, the differences are in the larger and more structured divisions.
+In 2016 the \maintrack competition scoring was changed to weight the
+correctness score for benchmarks by the size of the family the
+benchmark belongs to. Here we ask what the winners would have been if
+this change had not been made. The answer to this question is given in
+Table~\ref{tab:results:total:solved}. Relatively few changes would
+have occurred. Unsurprisingly, the differences are in the larger and
+more structured divisions.
 
 Whilst producing these results we noticed that the description of what
-constitutes a family had been incorrectly interpreted by the scoring scripts in
-2016--2018. The scoring scripts interpreted the bottom most directory
-containing benchmarks in a logic as family, while the rules stated that the top
-most subdirectory in a logic is to be interpreted as family. After fixing this
-misinterpretation we note that only five division winners change---in 2018,
-division AUFLIRA should have been won by Vampire instead of CVC4; in 2016,
-AUFNIRA should have been won by CVC4 instead of Vampire; in 2016 and 2017,
-QF\_LIA should have been won by Yices instead of CVC4; and in 2018, QF\_NRA
-should have been won by CVC4 instead of Yices.
-Table~\ref{tab:results:total:top} shows the results in the Main Track when
-the top most subdirectory in a logic is interpreted as family in reference
-to the competition results in Table~\ref{tab:winners-main}, where the bottom
-most directory was interpreted as family.
+constitutes a family had been incorrectly interpreted by the scoring
+scripts in 2016--2018. The scoring scripts interpreted the bottom most
+directory containing benchmarks in a logic as family, while the rules
+stated that the top most subdirectory in a logic is to be interpreted
+as family. After fixing this misinterpretation we note that only five
+division winners change---in 2018, division AUFLIRA should have been
+won by Vampire instead of CVC4; in 2016, AUFNIRA should have been won
+by CVC4 instead of Vampire; in 2016 and 2017, QF\_LIA should have been
+won by Yices instead of CVC4; and in 2018, QF\_NRA should have been
+won by CVC4 instead of Yices.  Table~\ref{tab:results:total:top} shows
+the results in the Main Track when the top most subdirectory in a
+logic is interpreted as family in reference to the competition results
+in Table~\ref{tab:winners-main}, where the bottom most directory was
+interpreted as family.
 
-The combination of the small changes in winners and the lack of difference a misinterpretation of the notion of family made suggests that families do not have a significant impact on the competition.
+The combination of the small changes in winners and the lack of
+difference a misinterpretation of the notion of family made suggests
+that families do not have a significant impact on the competition.
 
 \input{table-winners-main-families}
+
 %%%%%%%%%%%%%%%%%
+
 \subsection{What Impact Did Adding Unknowns in the \maintrack Have?}
 
-Until 2016, only benchmarks with known status were used in the \maintrack. In
-2016, benchmarks with unknown status were evaluated separately, but not
-considered in the overall results of the track.  Since 2017, non-incremental
-benchmarks with unknown status were eligible for the \maintrack.
-Table~\ref{tab:results:unknowns} shows alternative winners for 2017 and 2018 if
-benchmarks with unknown status had not been included.
-
-
+Until 2016, only benchmarks with known status were used in the
+\maintrack. In 2016, benchmarks with unknown status were evaluated
+separately, but not considered in the overall results of the track.
+Since 2017, non-incremental benchmarks with unknown status were
+eligible for the \maintrack.  Table~\ref{tab:results:unknowns} shows
+alternative winners for 2017 and 2018 if benchmarks with unknown
+status had not been included.
 
 \input{table-winners-main-unknown}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusions}
@@ -1799,18 +1684,18 @@ The last FLoC Olympiad was a period of significant growth for the SMT
 Competition.  The average number of solver submissions increased
 from~12 (for 2005--2014) to~26 (for 2015--2018).  The number of
 SMT-LIB benchmarks used in the competition increased from~\num{77352}
-in~2014~\cite{CDW14} to \num{342498} in 2018.  This is partly because new
-benchmarks were added to the SMT Library, but also because benchmarks
-with unknown status are now eligible for the competition, and because
-the competition now uses all eligible benchmarks (rather than a
-randomly selected subset).
+in~2014~\cite{CDW14} to \num{342498} in 2018.  This is partly because
+new benchmarks were added to the SMT Library, but also because
+benchmarks with unknown status are now eligible for the competition,
+and because the competition now uses all eligible benchmarks (rather
+than a randomly selected subset).
 
-Since the re-introduction of the \ucoretrack in~2016, the
-competition again has three separate tracks.  This, together with new
-logics in the SMT Library, has brought the total number of competition
-divisions to 115 in~2018, up from just 40 divisions
-in~2014~\cite{CDW14}.  The number of job pairs increased from \num{339714}
-in~2014 to~\num{1776062} in 2018, and the total wall-clock time in~2018
+Since the re-introduction of the \ucoretrack in~2016, the competition
+again has three separate tracks.  This, together with new logics in
+the SMT Library, has brought the total number of competition divisions
+to 115 in~2018, up from just 40 divisions in~2014~\cite{CDW14}.  The
+number of job pairs increased from \num{339714} in~2014
+to~\num{1776062} in 2018, and the total wall-clock time in~2018
 exceeded 7.6~years.  By these measures, the SMT Competition is one of
 the largest competitions in automated reasoning.
 
