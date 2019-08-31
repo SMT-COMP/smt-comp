@@ -45,7 +45,7 @@ keywordstyle={[2]\bfseries\sffamily\underbar}
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\bottomfraction}{0.85}
 \renewcommand{\textfraction}{0.15}
-\renewcommand{\floatpagefraction}{0.7}
+\renewcommand{\floatpagefraction}{0.75}
 
 \colorlet{bool}{blue!10}
 \colorlet{cvc4}{cyan!10}
@@ -397,8 +397,9 @@ the inclusion of new benchmarks and logics, continuous curation
 efforts may also cause benchmarks to be removed or reclassified on
 occasion, thereby causing individual logics or even the entire library
 to shrink.  From~2015 to~2018, the total number of benchmarks has
-increased by~68\,\%.  The largest benchmark in the 2018 release had a
-size of \SI{1041}{MB}; the total size of the release was \SI{91}{GB}.
+increased by~\SI{68}{\percent}.  The largest benchmark in the 2018
+release had a size of \SI{1041}{MB}; the total size of the release was
+\SI{91}{GB}.
 
 \begin{table}
   \caption{Number of benchmarks and logics in the SMT Library}
@@ -755,12 +756,12 @@ Jobs consist of individual \emph{job pairs}.  Each job pair
 corresponds to a specific solver/benchmark combination.
 Figure~\ref{fig:job-pairs} shows the total number of job pairs for the
 SMT Competition from~2015 to~2018.  Over this period, the number has
-grown by~72\,\%, from~\num{1028615} job pairs in~2015 to~\num{1776062}
-job pairs in~2018.  (This is the number of unique solver/benchmark
-combinations that were part of the competition.  The number of job
-pairs that were actually run is even higher: test jobs and job pairs
-that had to be re-run, e.g., because of issues with the StarExec
-infrastructure, are not included.)  For comparison, the~2014
+grown by~\SI{72}{\percent}, from~\num{1028615} job pairs in~2015
+to~\num{1776062} job pairs in~2018.  (This is the number of unique
+solver/benchmark combinations that were part of the competition.  The
+number of job pairs that were actually run is even higher: test jobs
+and job pairs that had to be re-run, e.g., because of issues with the
+StarExec infrastructure, are not included.)  For comparison, the~2014
 competition only ran~\num{339714} job pairs~\cite{CDW14}.
 
 Also shown in Figure~\ref{fig:job-pairs} is the total wall-clock time
@@ -899,8 +900,8 @@ submitted binaries of the participating solvers.
 Participants were encouraged to submit a short system description of
 their solver, including a list of its authors and an explanation of
 the SMT solving approach used.  System descriptions are published on
-the competition website.  They were submitted for about 60\,\% of all
-solver versions since 2015.
+the competition website.  They were submitted for about
+\SI{60}{\percent} of all solver versions since 2015.
 
 In addition to the solvers that were submitted to the competition by
 their respective developers, the organizers included the most recent
@@ -916,7 +917,7 @@ OpenSMT2 solver were submitted after the deadline.  These solvers were
 also participating hors concours.  In result tables, they are listed
 with their name in square brackets (e.g., [MathSAT]).
 
-\include{table-participants}
+\input{table-participants}
 
 \begin{table}
   \caption{Number of versions submitted for each solver (by year).
@@ -1159,7 +1160,7 @@ independent divisions; a solver bug that affects one division need not
 manifest itself in other divisions.  With this value, entering a
 (possibly buggy) solver that can solve all benchmarks into a division
 has a positive expected score if the probability that a soundness bug
-in the solver will be triggered is below~$20\,\%$.
+in the solver will be triggered is below~\SI{20}{\percent}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1198,11 +1199,11 @@ the current benchmarks.  The fact that industrial-strength solvers
 perform well in the competition supports the notion that the
 benchmarks in the competition are industrially relevant.
 
-\include{table-winners-main}
+\input{table-winners-main}
 
-\include{table-winners-application}
+\input{table-winners-application}
 
-\include{table-winners-unsat-core}
+\input{table-winners-unsat-core}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1384,12 +1385,13 @@ benchmarks), the number of common benchmarks is \num{67070}; between
 2016 and 2017 (\num{238758} benchmarks) it is \num{145236}; and
 between 2017 and 2018 (\num{333241} benchmarks) it is \num{226429}.
 The number of solved instances on these sets of common benchmarks
-increased from 2014 to 2015 by 0.1\%, from 2016 to 2017 by 3.9\%, and
-from 2017 to 2018 by 0.3\%.  Interestingly, it decreased from 2015 to
-2016 by 3.5\%.  This is mainly due to the fact that, in 2015, more
-than \num{5600} benchmarks of division QF\_FP were solved by one of
-the two participating configurations of Z3 but by no other solver, and
-in~2016 Z3 did not participate in this division.
+increased from 2014 to 2015 by \SI{0.1}{\percent}, from 2016 to 2017
+by \SI{3.9}{\percent}, and from 2017 to 2018 by \SI{0.3}{\percent}.
+Interestingly, it decreased from 2015 to 2016 by \SI{3.5}{\percent}.
+This is mainly due to the fact that, in 2015, more than \num{5600}
+benchmarks of division QF\_FP were solved by one of the two
+participating configurations of Z3 but by no other solver, and in~2016
+Z3 did not participate in this division.
 
 For the \apptrack, we determine the VBS as the best performance in
 terms of number of correct \texttt{check-sat} answers within the time
@@ -1399,11 +1401,12 @@ competitions 2015--2018).  The total number of eligible
 up to the first query with status unknown) on common benchmarks from
 2015--2018 is \num{30370517}.  Figure~\ref{fig:progress-all-app}
 visualizes VBS performance on these benchmarks as a bar plot.  In
-2015, already 99.95\% of the eligible queries were answered correctly,
-which naturally does not leave a lot of room for improvement.  In
-2016, performance decreased by \num{185625} correct answers (0.61\%),
-which can be entirely attributed to a performance regression of Z3 on
-two benchmarks in the QF\_NIA division.
+2015, already \SI{99.95}{\percent} of the eligible queries were
+answered correctly, which naturally does not leave a lot of room for
+improvement.  In 2016, performance decreased by \num{185625} correct
+answers (\SI{0.61}{\percent}), which can be entirely attributed to a
+performance regression of Z3 on two benchmarks in the QF\_NIA
+division.
 
 For the \ucoretrack, we determine the VBS as the best performance in
 terms of reduction, i.e., the difference in the number of assertions
