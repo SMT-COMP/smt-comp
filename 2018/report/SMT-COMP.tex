@@ -1723,24 +1723,30 @@ Workshop.
 
 \paragraph{The Next Competition}
 
-Preparations for the 2019 iteration of the competition are underway and a number of changes have already been decided. These include
-
+At the time of writing, the 2019 iteration of the competition has just come to a close. It was too late to be included in this report but certain changes were made, partly influenced by the writing of this report. The three main changes were:
 \begin{itemize}
-  \item the introduction of new \emph{additional scores} for
+    \item \emph{Additional Scores.} This report made it clear that simply looking at the number of problems solved was a simplified view. In 2019 the competition introduced new \emph{additional scores} for
     satisfiable/unsatisfiable benchmarks and benchmarks solved within 24
-    seconds in the \maintrack,
+    seconds in the \maintrack. Organising results by satisfiability is not new. The SAT competition previously split satisfiable and unsatisfiable benchmarks into separate tracks, but merged them completely from 2016. The CASC competition separates \emph{theorems} and \emph{non-theorems} for most tracks. However, other competitions do not tend to look at short time limits (CASC had the SLH division in 2017).
+
+  \item \emph{Benchmarks.}  Partly to combat the growing size of SMT-LIB, and partly to inject more competition-like variability and focus into the results, in 2019 the competition removed \emph{non-competitive divisions} and then filtered
+    benchmarks to exclude those seen as \emph{trivial} (taken as those solved
+    by all competitors in the previous competition in less than 1 second). This brings it closer to the CASC competition where a small subset of problems are chosen based on difficultly, although there was no inclusion of a difficultly measure in benchmark selection beyond the initial filtering. The SAT competition takes a different approach to benchmark selection with a \emph{bring your own benchmark} approach.
+
+\item \emph{Competition-Wide Scoring.} Motivated by the need to avoid competition-wide scoring becoming overly focussed on the \emph{breadth} of a solver, in 2019 the competition replaced the notion of \emph{competition-wide scoring} with awards that do not attempt to compare divisions. Two awards were introduced -- the \emph{Largest Contribution} award looked at the contribution a solver made to the virtual best solver, and the \emph{Biggest Lead} award measured the distance between the winner and second place. No other competition (that we are aware of) attempts to rank solvers across multiple areas in this way. However, the CASC competition does have a notion of \emph{State of the Art Contribution}, similar to the largest contribution measure.
+
+\end{itemize}
+Other changes include
+\begin{itemize}
+
 	\item the inclusion of {\tt check-sat} commands with unknown status in
   the \apptrack,
-  \item the removal of \emph{non-competitive divisions} and the filtering of
-    benchmarks to exclude those seen as \emph{trivial} (taken as those solved
-    by all competitors in the previous competition in less than 1 second),
+
   \item the introduction of a new experimental \emph{model validation track}
     with a single QF\_BV division where the models produced by solvers are
     checked,
   \item the introduction of a new \emph{industrial challenge track} consisting
-    of unsolved benchmarks submitted specifically for the track,
-  \item the replacement of the notion of \emph{competition-wide scoring} with
-    awards that do not attempt to compare divisions.
+    of unsolved benchmarks submitted specifically for the track.
 \end{itemize}
 
 
