@@ -55,7 +55,7 @@ one sound solver are explicitly mentioned in the text)
 >
 >  - in the conclusions section authors mention the changes that will be implemented in 2019: it would be interesting to state which of the changes mentioned are already in place in other related solver's competitions (e.g., SAT, ASP, QBF, SV ...) .
 
-TODO
+DONE
 
 >  * Minor points
 >
@@ -128,7 +128,8 @@ DONE
 
 > - Table 9: there are two team members for solver STP that miss affiliation
 
-TODO
+DONE (these two have no affiliation; we have changed the text to
+clarify that affiliations are optional)
 
 > - "Table 11 summarizes these figures". It would be probably useful to explicitly mention the figure numbers
 
