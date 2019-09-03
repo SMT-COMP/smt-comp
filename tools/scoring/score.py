@@ -899,8 +899,20 @@ def gen_results_for_report():
                                       winners_nounknown_par,
                                       True,
                                       True)
-    if g_args.show_timestamps:
-        log('time parallel: {}'.format(time.time() - start))
+    print("----------------------------------------------------------------")
+    print("FAMILIES TOP")
+    print("----------------------------------------------------------------")
+    g_args.family = 'top'
+    score_famtop_seq = gen_results_for_report_aux(None, 2400, True)
+    score_famtop_par = gen_results_for_report_aux(None, 2400, False)
+    winners_famtop_seq = get_winners_for_report(score_famtop_seq)
+    winners_famtop_par = get_winners_for_report(score_famtop_par)
+    gen_results_diff_table_for_report(winners_seq,
+                                      winners_par,
+                                      winners_famtop_seq,
+                                      winners_famtop_par,
+                                      True,
+                                      True)
 
 
 ###############################################################################
