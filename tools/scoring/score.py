@@ -236,7 +236,8 @@ def map_solver_id(row, column):
     global g_competitive, g_solver_names, g_solver_variants
     if column not in row:
         return
-    solver_id = int(row[column]) if not pandas.isnull(row[column]) else None
+    solver_id_str = row[column]
+    solver_id = int(solver_id_str) if solver_id_str else None
     if solver_id:
         g_competitive[solver_id] = row[COL_COMPETING] == 'yes'
         g_solver_names[solver_id] = row[COL_SOLVER_NAME]
