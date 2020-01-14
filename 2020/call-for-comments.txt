@@ -35,8 +35,8 @@ SMT-COMP'20 is organized under the direction of the SMT Steering
 committee. The organizing team for SMT-COMP'20 is:
 
   * Haniel Barbosa - Universidade Federal de Minas Gerais, Brazil
-  * Antti Hyvarinen (chair) - Universita della Svizzera italiana, Switzerland
   * Jochen Hoenicke - Albert-Ludwigs-Universität Freiburg, Germany
+  * Antti Hyvarinen (chair) - Universita della Svizzera italiana, Switzerland
 
 
 This is a call for three things:
