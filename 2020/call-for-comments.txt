@@ -1,0 +1,320 @@
+﻿======================================================================
+
+   15th International Satisfiability Modulo Theories Competition
+                           (SMT-COMP'20)
+
+                          July 4-5, 2019
+                          Paris, France
+
+                         CALL FOR COMMENTS
+                        CALL FOR BENCHMARKS
+                    PRELIMINARY CALL FOR SOLVERS
+
+======================================================================
+
+
+We are pleased to announce the 2020 edition of SMT-COMP.
+
+
+SMT-COMP is the annual competition among Satisfiability Modulo
+Theories (SMT) solvers.
+
+The goals of SMT-COMP'20 are to encourage scientific advances in the
+power and scope of solvers, to stimulate the community to explore and
+discuss shared challenges, to promote tools and their usage, to engage
+and include new members of the community (in a fun environment) and to
+support the SMT-LIB project in its efforts to promote and develop the
+SMT-LIB format and collect and collate relevant benchmarks.
+
+The results of SMT-COMP'20 will be announced at the SMT Workshop (July 4-5),
+which is affiliated with the 10th International Joint Conference on Automated
+Reasoning (IJCAR 2020).
+
+
+SMT-COMP'20 is organized under the direction of the SMT Steering
+committee. The organizing team for SMT-COMP'20 is:
+
+  * Haniel Barbosa - Universidade Federal de Minas Gerais, Brazil
+  * Antti Hyvarinen (chair) - Universita della Svizzera italiana, Switzerland
+  * Jochen Hoenicke - Albert-Ludwigs-Universität Freiburg, Germany
+
+
+This is a call for three things:
+
+
+CALL FOR COMMENTS:
+
+
+The organizing team is preparing the schedule and rules for 2020. To
+further the above goals, we propose to make several changes to the
+format of SMT-COMP'20.
+
+Any comments you may have on these proposed changes, on how to improve
+the competition or to redirect its focus are welcome and will be
+considered by the team. We particularly appreciate comments received
+before * February 11th, 2020 *.
+
+
+1. Benchmark selection.
+
+Since 2015, the organizers of SMT-COMP chose to evaluate all solvers
+on all relevant benchmarks. As a consequence, results became more
+predictable, and the fixed set of benchmarks may encourage solver
+developers to overfit the problem set. Overall, this seems more of an
+evaluation than a competition.
+
+Furthermore many of the problems in SMT-LIB can now be considered
+'easy', or at least 'unsurprising'. For example, in the last iteration
+of the competition 78% of the 258,741 main track benchmarks were
+solved by all supported solvers within the time limit (71% within 1
+second). In 7 (out of 46) logics, over 99% of benchmarks were solved
+by all solvers.
+
+To shift the focus towards challenging benchmarks, reduce the number
+of benchmarks to be able to run with a longer timeout, and bring back
+the competitive aspect, we propose the following alternative benchmark
+selection scheme:
+
+* As a first step we will remove all benchmarks in a division that
+  were solved by *all* solvers (including non-competing solvers) in
+  this division in under a second during last year's competition.
+
+* From the remaining benchmarks we will randomly select a minimum of
+  300 benchmarks. If the division contains less, we include all
+  benchmarks.  If 50% of the eligible benchmarks in the division
+  exceed 300, we select 50% of the benchmarks.
+
+* Benchmarks will be (pseudo)-randomly selected without considering
+  the difficulty, category, or family of a benchmark.  Rationale:
+  difficulty is hard to quantify and easy benchmarks are already
+  removed, categories are already reasonably distributed (around 78%
+  of the non-incremental and almost 100% of the incremental
+  benchmarks are labelled 'industrial') and benchmark weights
+  normalized with respect to family size are allowed for in the
+  scoring formula.
+
+
+2. Increase time limit to 40 minutes.
+
+In 2017, the competition time limit was decreased to 20 minutes due to
+the infeasibility of running all submitted solvers on all benchmarks
+of a division. The new benchmark selection strategy enables us to
+extend the time limit back to 40 minutes.
+
+
+3. Different application domains require different time limits.
+
+For example software verification traditionally requires much lower
+time limits, compared to hardware verification.
+To reward solvers optimized for different use cases, we propose two
+new tracks this year:
+
+a. New industry challenge track.
+   This track will contain unsolved SMT-LIB benchmarks, with an
+   emphasis on those coming from industrial applications. We will also
+   include benchmarks nominated by the community as challenging and of
+   interest. In this track, solvers will run with a significantly
+   longer time limit, e.g., several hours. We additionally encourage
+   the community to submit new benchmarks for this track.
+
+b. New 24-second score.
+   In the main track the competition currently gives separate scores
+   for sequential and parallel performance. To reward tools that solve
+   problems quickly we will introduce a third '24-second score' for
+   the number of problems solved within 24 seconds (wall clock time).
+
+
+4. Mandatory system descriptions for submitted solvers.
+
+As part of a submission, SMT-COMP entrants are now required to provide
+a short (1–2 pages) description of the system. This should include a
+list of all authors of the system, their present institutional
+affiliations, and any appropriate acknowledgements. The programming
+language(s) and basic SMT solving approach employed should be
+described (e.g., lazy integration of a Nelson-Oppen combination with
+SAT, translation to SAT, etc.). System descriptions should also
+include a URL for a web site for the submitted tool.
+
+The main incentive for this change is twofold. First, we want to
+improve transparency when submitted solvers are wrapper tools
+according to the rules of the competition.  Second, we want to
+encourage documentation of technical improvements that lead to the
+current results.
+
+
+5. Do not run non-competitive divisions.
+
+A division in a track is competitive if at least two substantially
+different solvers (i.e., solvers from two different teams) were
+submitted. Although the organizers may enter other solvers for
+comparison purposes, only solvers that are explicitly submitted by
+their authors determine whether a division is competitive, and are
+eligible to be designated as winners.
+
+
+6. New experimental model generation track for QF_BV.
+
+In many SMT applications, model generation is an essential feature.
+Currently, none of the SMT-COMP tracks require model generation. One
+of the challenges is that the model format is not consistent across
+different solvers. While imposing a standard over all logics is
+challenging, there are several logics where it is straightforward. For
+this reason, this year we are planning to include a new experimental
+model generation track for QF_BV. In the future we hope to expand this
+track to other logics as a way of pushing for model standardization.
+
+
+7. Rename tracks.
+
+We will rename 'Application Track' to 'Incremental Track' and 'Main
+Track' to 'Single Problem Track'.
+
+We believe the current names are misleading, as the current 'Main
+Track' also contains problems coming from applications.  Additionally,
+having it called 'Main' de-emphasizes the importance of the other
+tracks and use cases of SMT.
+
+
+
+We would additionally like to pose the following open ended questions
+to the community:
+
+
+Q1. Should SMT-COMP include new logics?
+    * Last year strings were an experimental division (and the semantics
+      are still not fixed). Should this remain experimental? How should
+      we encourage new solvers and benchmarks for this track?
+    * A new SMT-LIB theory for reals with transcendental functions is
+      also in progress. Is it mature enough to feature in the
+      competition (as an experimental division)?
+
+
+Q2. In 2016 a new scoring scheme was introduced, where benchmark
+    weights are normalized with respect to their family size. The goal
+    was to not have large benchmark families dominate the solver score
+    (as opposed to simply counting the number of correctly solved
+     instances while adding a penalty for incorrect results). The
+    current scoring system, however, now emphasizes very small
+    benchmark families (now these families are what may dominate the
+    score). We would appreciate suggestions for a new scoring scheme
+    that strikes a balance between these two trends.
+
+
+Q3. What is a benchmark family?
+    The previous question assumes benchmarks are sensibly collected
+    into families. The previous rules use the directory structure to
+    define families with each family given by a top-level directory.
+    However, it is not clear that the way that SMT-LIB is curated
+    leads to sensible families with this approach as the current
+    approach is to place benchmarks submitted by one person for a
+    logic into a single directory -- there is no reason to assume that
+    these benchmarks are related. We suggest that using the lowest
+    level directory structure may be more appropriate but are there
+    any alternative definitions of family that could be used?
+
+
+Q4. Is it important to have 'overall' winners?
+    If so, how should we achieve this? The current approach is
+    completely dependent on the number of logics supported by the
+    tool. If not overall winners, do we want a higher-level notion of
+    winner than a division winner?  What is the best way to
+    acknowledge the success of solvers and motivate newcomers whilst
+    keeping the competition fun?
+
+
+
+CALL FOR BENCHMARKS:
+
+
+Do you have interesting or hard benchmarks that can be made public? Want the
+world's best SMT solvers to compete to solve *your* problems? Submit your
+benchmarks to SMT-LIB and SMT-COMP!
+
+
+Please let us know as soon as possible if you are considering
+submitting benchmarks, even if the material is not quite ready. We
+will work in close cooperation with the SMT-LIB maintainers to
+integrate such benchmarks into SMT-LIB. The deadline for submission of
+new benchmarks to be used in the 2020 competition is
+* March 1st, 2020 *.
+
+
+We would encourage new benchmarks in the following logics (which
+appear to have 'stagnated' in the sense that the benchmarks in
+them are no longer challenging to competitive solvers):
+
+ALIA
+AUFLIA
+AUFNIRA
+NIA
+NRA
+QF_ANIA
+QF_AUFBV
+QF_AUFNIA
+QF_DT
+QF_FP
+QF_LIRA
+QF_NIRA
+QF_RDL
+QF_UFBV
+QF_UFIDL
+QF_UFLIA
+QF_UFLRA
+QF_UFNIA
+QF_UFNRA
+UFBV
+UFIDL
+UFLRA
+
+
+We would also like to extend our call for benchmarks to include
+benchmarks with some additional information:
+
+1. For the Industrial Challenge Track we would like to receive
+   difficult benchmarks that are important to you and either unsolved,
+   or unsolved within some reasonable time limit. We would
+   particularly like benchmarks that come with a description of why
+   they are difficult/important. Of course, if this is not possible
+   then new challenging benchmarks are always appreciated.
+
+2. We would appreciate receiving benchmarks that you want solved
+   quickly (e.g.  in under 24 seconds) but currently struggle to.
+   Please add the required solution time as a comment to the
+   benchmark. If we receive many benchmarks of this kind we may
+   consider a new track in the future that specifically focuses on
+   benchmarks requiring short time limits.
+
+
+
+PRELIMINARY CALL FOR SOLVERS:
+
+
+A submission deadline for solvers will be announced along with the
+rules.  However, it is useful to the organizing team to know in
+advance which and how many solvers may be entering. If you have not
+submitted a solver before, or if you think there may be unusual
+circumstances, we request that you let us know at your earliest
+convenience if you think you may be submitting one or more solvers to
+SMT-COMP'19. Note that this year we require a system description for
+all submitted solvers as part of the submission of the final solver
+versions.
+
+
+
+COMMUNICATION:
+
+
+The competition website is at www.smtcomp.org.
+
+The SMT-COMP repository is at https://github.com/smt-comp.
+
+Public email regarding the competition may be sent to
+smt-comp@cs.nyu.edu.
+
+Announcements will be sent to both smt-comp@cs.nyu.edu and
+smt-announce@googlegroups.com.
+
+
+Sincerely,
+
+The organizing team
