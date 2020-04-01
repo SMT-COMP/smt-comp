@@ -62,7 +62,6 @@
 \def\header#1{\medskip\noindent\textbf{#1}}
 
 \author{%
-\todo{check}
 Haniel Barbosa\\
 Universidade Federal de Minas Gerais\\
 Brazil\\
@@ -70,7 +69,7 @@ Brazil\\
 \and
 Jochen Hoenicke\\
 Universit\"at Freiburg\\
-Germany
+Germany\\
 {\small\href{mailto:hoenicke@informatik.uni-freiburg.de}{\texttt{hoenicke@informatik.uni-freiburg.de}}}\\
 \and
 Antti Hyvarinen (chair)\\
@@ -112,7 +111,7 @@ competition web site, \url{http://www.smtcomp.org}.
 
 \begin{description}
 \item[March~1] Deadline for new benchmark contributions.
-\item[May~1] Final versions of competition tools (e.g., benchmark
+\item[April~20] Final versions of competition tools (e.g., benchmark
   scrambler) are made available.  Benchmark libraries are frozen.
 \item[May~4] Deadline for first versions of solvers (for all tracks),
   including information about which tracks and divisions are being
@@ -173,7 +172,7 @@ version,\footnote{Earlier versions of this document include
 SMT-COMP~2020.
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
-  \item {\bf Portfolio Solvers are Forbidden.} \todo{check}
+  \item {\bf Portfolio Solvers are Forbidden.}
     This year we explicitly forbid the submission of so-called
     portfolio solvers as competition entries.  We acknowledge that
     judging what constitutes a portfolio SMT solver is difficult.
@@ -181,191 +180,76 @@ The principal changes from the previous competition rules are the following:
     challenge, and plan to apply an equally historical approach where
     we write down a ``law'', act as its ``judges'', and have a few
     ``precedents''.
-
     Here we define a portfolio solver as ``a solver using a combination of
     two or more sub-solvers, developed by different groups of authors, on
     the same component or abstraction of the input problem.'' For example, a
     solver using one subsolver to solve the ground abstraction of a
     quantified problem is allowed, while a solver using two or more
     subsolvers from different groups of authors is not.
-    \todo{Something about  hybrid solvers?}
+    \rationale{The goal of the competition is to evaluate and improve
+      the state of the art of SMT solving. By just combining existing
+      solvers and running them in parallel it is possible to win the
+      competition without contributing anything new.}
 
-    \todo{rationale}
-
-  \item {\bf Mandatory System Descriptions.}
-    SMT-COMP entrants are now required to provide a short (1–2 pages)
-    description of the system.
-    \rationale{The main incentive for this
-    change is twofold.  First, we want to improve transparency when submitted
-    solvers are wrapper or derived tools according to the rules of the
-    competition.  Second, we want to encourage documenting technical
-    improvements that lead to the current results.}
-
-  \item {\bf Limit the Number of Solvers.} \todo{NEW}
+  \item {\bf Limit the Number of Solvers.}
     This year solver development teams may only submit more than one
     entry if they are substantially different.  A justification must
     be provided for the difference.  We strongly encourage the teams
     to keep the number of solvers per team per category at at most
     two.
-
+%
     \rationale{The organizers wishes to keep the total run-time of the
       competition small, in case of unforeseen problems that require
       to rerun the whole competition.  The idea in allowing up to two
       submissions is to encourage the development of new, experimental
-      techniques by allowing an “alternative solver” to be submitted
+      techniques by allowing an ``alternative solver'' to be submitted
       while keeping the competition manageable.}
 
-  \item {\bf Naming Convention for Derived Tools.}
-    This year, we require that a derived tool (a tool based on and extending
-    another SMT solver) should follow the \emph{naming convention} {[name of
-    base solver]-[my solver name]}.
-    \rationale{Give credit where credit is due.}
 
   \item {\bf Combine stdout and stderr.}
     This year, output to the standard error channel is not ignored, but
     treated the same as output to the standard output channel.
-
+    Solvers should not write anything to the standard error channel.
+%
     \rationale{Due to limitations of starexec, the standard error channel
-      and standard output channel are not separated.  The previous year the
+      and standard output channel are not separated.  In the previous year, the
       organizers had to work around the limitation by wrapping the submitted
       solvers in a script that ignored stderr.  By changing the rule we avoid
-      that the organizers have to change the submitted solvers.}
-    
-%  \item {\bf Incremental Track.}
-%    In previous years, benchmarks were not eligible for the \inctrack
-%    if their first \akey{check-sat} command had unknown status.  Similarly, the
-%    trace executor used to send commands from the benchmark to the solver's
-%    standard input channel stopped execution at the first \akey{check-sat}
-%    command with unknown status. This year, benchmarks whose first
-%    \akey{check-sat} command has unknown status are eligible for the
-%    \inctrack and trace execution is only stopped before the solver
-%    completes a benchmark if the execution runs into the time limit.
-%    \rationale{The previous limitations were imposed by the trace
-%    executor, which now has been extended to support executing solvers on
-%    benchmarks beyond \akey{check-sat} commands with unknown status.}
+      that the organizers have to change the submitted solvers.}    
 
-  \item {\bf New \mvaltrack for QF\_BV.}
-    This year, we introduce a new experimental \mvaltrack for the QF\_BV logic.
-    The benchmarks for this track will include all eligible \emph{non-incremental}
-    QF\_BV benchmarks with known satisfiable status in SMT-LIB.
-    Participating solvers are required to support the \akey{get-model} command.
-    \rationale{In many SMT applications, model generation is an essential
-    feature.  Previously, none of the SMT-COMP tracks required model
-    generation. One of the challenges is that the model format is not
-    consistent across different solvers. While imposing a standard over all
-    logics is challenging, there are several logics (e.g., QF\_BV) where it is
-    straightforward.  In the future we hope to expand this track to other
-    logics as a way of pushing for model standardization.  Since the QF\_BV
-    division was the one with the largest number of participants in previous
-    years,  we hope for a high number of participants in this track.  }
+%  \item {\bf The \mvaltrack is extended to other logics.}
+%    This year, we introduce a new experimental \mvaltrack for the logics QF\_IDL, QF\_RDL, QF\_LIA, QF\_LRA, QF\_LIRA.
+%    The benchmarks for this track will include all eligible \emph{non-incremental}
+%    QF\_BV benchmarks with known satisfiable status in SMT-LIB.
+%    Participating solvers are required to support the \akey{get-model} command.
+%    \rationale{In many SMT applications, model generation is an essential
+%    feature.  Previously, none of the SMT-COMP tracks required model
+%    generation. One of the challenges is that the model format is not
+%    consistent across different solvers. While imposing a standard over all
+%    logics is challenging, there are several logics (e.g., QF\_BV) where it is
+%    straightforward.  In the future we hope to expand this track to other
+%    logics as a way of pushing for model standardization.  Since the QF\_BV
+%    division was the one with the largest number of participants in previous
+%    years,  we hope for a high number of participants in this track.  }
 
-  \item {\bf New \challtrack.}
-    This year, we introduce a new \challtrack.  This track will contain
-    new challenging SMT-LIB benchmarks (with an emphasis on industrial
-    applications) that are either unsolved or unsolved within some reasonable
-    time limit, as indicated by the benchmark submitters.  We will also include
-    benchmarks nominated by the community as challenging and of interest. In
-    this track, solvers will run with a significantly longer time limit.
-    \rationale{ Different application domains require different time limits.
-    For example software verification traditionally requires much lower time
-    limits, compared to hardware verification.  To reward solvers optimized for
-    different use cases, we propose this new track and a new score for
-    benchmarks solved within a very low time limit (see item ``New Scores in
-    the \maintrack''). See Section~\ref{sec:exec:industry-challenge} for the
-    logics included in the \challtrack for this year. }
+  \item \todo{\challtrack}
 
   \item {\bf Time Limit.} The time limit per solver/benchmark pair is
     anticipated to be at most 20 minutes in the \maintrack, \inctrack,
-    \ucoretrack and \mvaltrack.  For the \challtrack, it is anticipated to be
-    at most 720 (12 hours) minutes.
+    \ucoretrack and \mvaltrack.
     \rationale{The time limit for the Main Track is
-    reduced to 20 minutes (down from 40 minutes in earlier years) \todo{rationale}.
-    For the \challtrack, 12 hours seem to be a reasonable compromise for the
-    expected number of participants and benchmarks submitted to this track.}
+      reduced to 20 minutes (down from 40 minutes in the previous years),
+      to make running the competition more manageable}
 
-  \item {\bf Benchmark Selection.} \todo{update}
-    Since 2015, the competition evaluated all
-    solvers on all eligible benchmarks in SMT-LIB.  This year, we will
-    use an alternative benchmark selection scheme that selects a subset
-    of the eligible benchmarks. The benchmark selection will be random,
-    but will guarantee inclusion of newly submitted benchmarks.  The upper
-    bound for the size of each division is not fixed, but
-    depends on the size of the corresponding logic.  Prior to this
-    selection, we will remove all benchmarks in a division that were
-    solved by all solvers (including non-competing solvers) in this
-    division in under one second in last year's competition.
-    \rationale{Evaluating solvers on all eligible benchmarks in SMT-LIB
-    makes results more predictable and seems to be more of an evaluation
-    than a competition.  In the Main track last year,
-    78\% of the 258,741 benchmarks were solved by all supported solvers
-    within the time limit (71\% within 1 second). In 7 (out of 46)
-    logics, over 99\% of benchmarks were solved by all solvers.
-    Removing `easy' (or at least `unsurprising') benchmarks attempts to
-    shift the focus towards challenging benchmarks, in particular since
-    we now use an alternative benchmark selection scheme.  It can be
-    argued that the size of a logic in SMT-LIB can be seen as an
-    indicator of its relevance.  We thus do not use a fixed upper bound
-    for the size of a division in order to reflect the suggested
-    importance of a division.}
+  \item {\bf Benchmark Selection.}
+    This year we reduce the percentage of the benchmarks that are run in the competition.
+    \rationale{The goal is to make running the competition more managable.}
 
-  \item {\bf Scoring Scheme.}
-    This year, we will abandon the weighted scoring scheme that was introduced
-    for the Main Track and \ucoretrack in 2016. We will fall back to the
-    scoring scheme based on the number of solved instances that was last used
-    in 2015.
-    \rationale{ Since 2016, the competition has used a scoring scheme based on
-    benchmark weights in order to de-emphasize large benchmark families.  The
-    scoring scheme is fairly complicated and not necessarily intuitive.  It
-    further makes comparing results in papers with results from the competition
-    more difficult.  A recent analysis of competition data from 2015-2018 for a
-    report on the competition of these years (currently under submission to
-    JSAT) suggests that benchmark families do not have a significant impact on
-    the (weighted) scores  When determining winners for each division using
-    the scoring scheme of 2015, the winners for only 7 divisions (out of 139)
-    over all three years would have changed.  While producing these results we
-    further noticed that the description of what constitutes a benchmark family
-    (as stated in the rules documents) had been incorrectly interpreted by the
-    scoring scripts in 2016-2018. After fixing this misinterpretation, only one
-    single division winner changes - in 2017 AUFNIRA should have been won by
-    CVC4 and not Vampire.}
+  \item {\bf The Strings Division is not experimental.}
+    The last years competition introduced a experimental divisions for benchmarks that
+    use strings. This year, the String division is no longer experimental.
 
-  \item {\bf New Scores in the \maintrack.}
-    This year, additionally to the separate scores given for sequential and
-    parallel performance, we will reward three new scores in the \maintrack.
-    The \emph{24-second score} will reward solving performance within a time
-    limit of 24 seconds (wall clock time), the \emph{sat score} will reward
-    performance on satisfiable instances, and the \emph{unsat score} will
-    reward performance on unsatisfiable instances.
-    \rationale{ Different application domains of SMT typically impose a wide
-    range of time limits (from hours to seconds).  Previous time limits used in
-    the competition were the same for all benchmarks and thus agnostic to the
-    application domain of a benchmark.  The new \challtrack and the new
-    24-second score try to address use cases on both extreme ends of the
-    spectrum.  Further, in many cases an SMT application produces either mainly
-    satisfiable or mainly unsatisfiable queries to the SMT solver.  The new sat
-    and unsat scores are intended to reward solvers that implement specialized
-    techniques and optimizations for either case.}
-
-  \item {\bf Do Not Run Non-Competitive Divisions.}
-    This year, we will not run non-competitive divions.
-    \rationale{Evaluating solvers in non-competitive divisions is more in the
-    spirit of an evaluation than a competition.}
-
-  \item {\bf Experimental Strings Division.}
-    The competition will feature experimental divisions for benchmarks that
-    use strings. Participating solvers must implement the semantics of the
-    current SMT-LIB draft for the theory of unicode strings
-    (\url{http://smtlib.cs.uiowa.edu/theories-UnicodeStrings.shtml}).
-    \rationale{Corresponding theories and benchmarks are expected to be added
-    to SMT-LIB in the near future.}
-
-  \item {\bf Competition-Wide Recognitions.}
-    This year, we will replace the previous notion of competi\-tion-wide scoring
-    as introduced for the Main Track in 2014 (and improved over the years)
-    with recognitions for all tracks that do not directly compare divisions.
-    \rationale{Competi\-tion-wide scoring was introduced as a metric to
-    compare solver performance across all divisions. It is, by definition,
-    biased towards solvers that enter a large number of divisions.}
+    \rationale{The final specification of the string theory has been officially released.}
 
 \end{itemize}
 
@@ -380,7 +264,18 @@ A Satisfiability Modulo Theories (SMT) solver that can enter SMT-COMP is a tool 
 (un)satisfia\-bility of benchmarks from the SMT-LIB benchmark library
 (\url{http://www.smt-lib.org/benchmarks.shtml}).
 
-\todo{Portfolio Tool}
+\header{Portfolio Solver.}
+%
+A \emph{portfolio solver} is a solver using a combination of two or
+more sub-solvers, developed by different groups of authors, on the
+same component or abstraction of the input problem.  For example, a
+solver using one subsolver to solve the ground abstraction of a
+quantified problem is allowed, while a solver using two or more
+subsolvers from different groups of authors is not.
+Porfolio solver are in general \textbf{not allowed}.
+If you are unsure if your tool is a portfolio solver according to this
+definition and you feel that it should be allowed contact the
+organizers of the SMT-COMP for clarification.
 
 \header{Wrapper Tool.}
 %
@@ -482,11 +377,11 @@ The organizers reserve the right to include other solvers of interest
 (such as entrants in previous SMT competitions) in the competition,
 e.g., for comparison purposes.
 
-\header{Attendance.}\todo{fix this!}
+%\header{Attendance.}
 %
-Submitters of an SMT-COMP entrant are not required (but encouraged) to be
-physically present at the competition or the SMT Workshop to participate or
-win.
+%Submitters of an SMT-COMP entrant are not required (but encouraged) to be
+%physically present at the competition or the SMT Workshop to participate or
+%win.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -692,7 +587,9 @@ ignored.  Solvers that exit before the time limit without reporting a result
 (e.g., due to exhausting memory or crashing) \emph{and} do not produce output
 that includes \texttt{sat}, \texttt{unsat}, \texttt{unknown} or other track
 specific output as specified in the individual track sections e.g. unsat cores
-or models, will be considered to have aborted.
+or models, will be considered to have aborted.  Note that there is no
+distinction between output and error channel and tools should not write any
+message to the error channel that could be misinterpreted as a wrong result.
 
 \header{Persistent State.}
 %
@@ -724,7 +621,7 @@ same way as output sent to the standard output channel. \todo{okay?}
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
-pair.\todo{we said 20 minutes, right?}
+pair.
 
 \header{Post-Processor.}
 This track will use
@@ -773,13 +670,13 @@ the answers defined in the SMT-LIB format specification, that is, with
 an answer of \texttt{sat}, \texttt{unsat}, or \texttt{unknown} for
 \akey{check-sat} commands, and with a \texttt{success} answer for
 other commands.
-Solver must not write anything to the standard error channel. \todo{okay?}
+Solvers must not write anything to the standard error channel.
 
 \header{Benchmark Selection.} See page~\pageref{benchmark-selection}.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
-pair.\todo{20 min}
+pair.
 
 \header{Trace Executor.} This track will use the trace executor
 to execute a solver on an incremental benchmark file.
@@ -849,7 +746,7 @@ formulas that have not been asserted before), or (iii) the returned
 unsatisfiable core is not, in fact, unsatisfiable.
 %
 If the solver replies \texttt{unsat} to \akey{check-sat} but gives no
-response to \akey{get-model}, this is considered as no reduction, i.e.,
+response to \akey{get-unsat-core}, this is considered as no reduction, i.e.,
 as if the solver would have returned the entire benchmark as an unsat
 core.
 
