@@ -170,6 +170,12 @@ version,\footnote{Earlier versions of this document include
   Matthias Heizmann, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
 	and Tjark Weber.}  describes the rules and competition procedures for
 SMT-COMP~2020.
+%
+\ah{As in previous years, we have revised the rules slightly.  Some rule
+changes in 2020 aim specifically at making the competition more
+manageable to run, as both the popularity of the competition and the
+benchmark library have grown over time.}
+%
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
   \item {\bf Portfolio Solvers are Forbidden.}
@@ -211,11 +217,11 @@ The principal changes from the previous competition rules are the following:
     treated the same as output to the standard output channel.
     Solvers should not write anything to the standard error channel.
 %
-    \rationale{Due to limitations of starexec, the standard error channel
-      and standard output channel are not separated.  In the previous year, the
+    \rationale{Starexec does not distinguish between the standard error
+      and output channels.  In the previous year, the
       organizers had to work around the limitation by wrapping the submitted
       solvers in a script that ignored stderr.  By changing the rule we avoid
-      that the organizers have to change the submitted solvers.}    
+      that the organizers have to change the submitted solvers.}
 
 %  \item {\bf The \mvaltrack is extended to other logics.}
 %    This year, we introduce a new experimental \mvaltrack for the logics QF\_IDL, QF\_RDL, QF\_LIA, QF\_LRA, QF\_LIRA.
@@ -246,11 +252,18 @@ The principal changes from the previous competition rules are the following:
     \rationale{The goal is to make running the competition more managable.}
 
   \item {\bf The Strings Division is not experimental.}
-    The last years competition introduced a experimental divisions for benchmarks that
+    The last year's competition introduced a experimental divisions for benchmarks that
     use strings. This year, the String division is no longer experimental.
 
     \rationale{The final specification of the string theory has been officially released.}
+\item \ah{{\bf Model validation track for QF\_BV is not
+        experimental.}
+        Last year's competition introduced the experimental model
+        validation track for QF\_BV.  This year this will be a standard
+        track.}
 
+        \rationale{There was no issues with the track, so there is no
+        reason to keep it experimental.}
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -771,7 +784,8 @@ This track will use
 as a post-processor
 to validate and accumulate the results.
 
-\subsection{\mvaltrack (experimental)}
+\subsection{\mvaltrack (experimental)}\ah{Experimental and non
+experimental?}
 \label{sec:exec:model}
 The \mvaltrack will evaluate the capability of solvers to produce models for
 satisfiable problems.  Performance of solvers will be measured by correctness
@@ -792,7 +806,7 @@ standard.
 
 \header{Result.}
 The result of a solver is considered erroneous if the response to the
-\akey{checks-sat} command is \texttt{unsat}, if the returned model is not
+\akey{check-sat} command is \texttt{unsat}, if the returned model is not
 well-formed (e.g. does not provide a definition for all the user-declared
 function symbols), or if the returned model does not satisfy the benchmark.
 
@@ -810,7 +824,7 @@ The model validator tool will output
     \begin{itemize}[noitemsep,topsep=0pt]
       \item an \texttt{unsat} solver response to \akey{check-sat},
       \item partial models,
-      \item malformed models (except if this due to reaching the time limit
+      \item malformed models (except if this is due to reaching the time limit
         while printing),
       \item models that do not satisfy the input problem; and
     \end{itemize}
@@ -904,7 +918,7 @@ the \challtrack, the following selection process will be used.
   \begin{itemize}
     \item \emph{\maintrack.} All benchmarks that were solved by all
       solvers (including non-competitive solvers) in less than one second in
-      the corresponding track in 2018.
+          the corresponding track in 2018 \ah{or 2019}.
     \item \emph{\ucoretrack.} All benchmarks with only a single assertion.
   \end{itemize}
 \item \emph{Cap the number of instances in a division.}
@@ -918,7 +932,7 @@ the \challtrack, the following selection process will be used.
   \item \label{bench-sel-600} if $300 < n \leq 600$, a subset of 300 instances
     from the logic will be selected;
   \item \label{bench-sel-more} and if $n > 600$,
-    50\% of the benchmarks of the logic will be selected.
+      \ah{40\%} of the benchmarks of the logic will be selected.
   \end{enumerate}
 \end{enumerate}
 %
@@ -965,7 +979,9 @@ entrants other than the organizers'.  Additionally, the integer part
 of \todo{one hundred times} the opening value of the New York Stock Exchange Composite Index on
 the first day the exchange is open on or after the date specified in
 the timeline (Section~\ref{sec:important}) will be added to the other
-seeding values. \todo{Should we provide more randomness by multiplying it with 100?  It has two or three trailing digits}  This helps provide transparency, by guaranteeing that
+seeding values. \todo{Should we provide more randomness by multiplying
+it with 100?  It has two or three trailing digits} \ah{Two.  Does it
+sometimes have three?} This helps provide transparency, by guaranteeing that
 the organizers cannot manipulate the seed in favor of or against any
 particular submitted solver.
 
