@@ -7,7 +7,7 @@
 \usepackage{xspace}
 \usepackage{enumitem}
 
-%\usepackage{draftwatermark}
+\usepackage{draftwatermark}
 %\usepackage{showframe}   % debug
 
 \hyphenation{data-types}
@@ -341,10 +341,13 @@ and made publicly available.  StarExec supports solver configurations;
 for clarity, \emph{each submitted solver must have one configuration
   only}.  Moreover, the organizers must be informed of the solver's
 presence \emph{and the tracks and divisions in which it is
-  participating} via the web form at
+  participating} via the web form at a location we will disclose on a
+  later date.
+  \iffalse
 \begin{center}
   \todo{\url{https://forms.gle/todo}}
 \end{center}
+\fi
 A submission \textbf{must} also include a \emph{system description} (see below)
 and a \emph{32-bit unsigned integer}.
  These integer numbers, collected from all submissions, are used to seed
@@ -380,7 +383,7 @@ Organizers will check that they contain sufficient information
 and may withdraw a system if its description is not sufficiently updated upon
 request
 
-\header{Multiple versions.}\todo{check}
+\header{Multiple versions.}
 %
 The intent of the organizers is to promote as wide a comparison among
 solvers and solver options as possible.  However, to keep the number of
@@ -1169,7 +1172,7 @@ Two solvers \emph{disagree} on a benchmark if one of them reported \texttt{sat}
 and the other reported \texttt{unsat}.
 
 \header{Removal of Disagreements.}
-Before division scores are computed for the \maintrack,% and \challtrack,
+Before division scores are computed for the \maintrack{},
 benchmarks with \emph{unknown status} are removed from the competition results
 if two (or more) solvers that are sound on benchmarks with known status
 disagree on their result.
