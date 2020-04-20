@@ -3,6 +3,7 @@
 import argparse
 import csv
 import random
+import re
 
 #==============================================================================
 # Selection parameters
@@ -160,6 +161,9 @@ def parse_args():
                     help="Filter out benchmarks based on csv (default: " \
                          "previous year's results, --unsat: benchmarks with " \
                          "status and num asserts)")
+    ap.add_argument('-l', '--logics', dest='filter_logic',
+                    help="Filter out benchmarks not in any of the given " \
+                    "logics (semicolon separated) (default: all logics)")
     ap.add_argument('-o', '--out', dest='out',
                     help='Output file name to print selected benchmarks')
     ap.add_argument('--unsat', dest='unsat', action='store_true',
@@ -277,11 +281,18 @@ def main():
                     reduction
                  ))
 
+    # empty mean all logics are kept
+    filter_logics = []
+    if args.filter_logic:
+      filter_logics = args.filter_logic.split(";")
+      print("Filter logics: {0}".format(filter_logics))
 
     # 'all_benchmarks' now contains all eligible benchmarks (inclucing new
     # benchmarks.
     for logic, families in sorted(all_benchmarks.items()):
-
+        if filter_logics and not logic in filter_logics:
+          # print("Ignoring logic {0}".format(logic))
+          continue
         # Collect all eligible benchmarks.
         eligible_benchmarks = set()
         for family, benchmarks in families.items():
