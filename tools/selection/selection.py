@@ -181,7 +181,7 @@ def is_eligible(results, unsat_core):
     if unsat_core:
         assert len(results) == 1
         for status, num_asserts in results:
-            return num_asserts > NUM_ASSERTS 
+            return num_asserts > NUM_ASSERTS
     # Else determine number of solvers that were able to correctly solve
     # the benchmark within 'TIME_LIMIT' seconds.
     num_solved = 0
