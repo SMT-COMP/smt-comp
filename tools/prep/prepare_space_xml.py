@@ -226,7 +226,7 @@ def add_solvers():
     incremental_space = root.find('.//Space[@name="incremental"]')
     non_incremental_space = root.find('.//Space[@name="non-incremental"]')
     for space in [incremental_space, non_incremental_space]:
-        if space:
+        if space is not None:
             n = 1 # number of benchmarks to keep in each family
             # filter benchmarks
             if filter_benchmarks:
