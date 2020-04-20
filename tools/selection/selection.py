@@ -189,7 +189,7 @@ def is_eligible(results, unsat_core):
     # Else determine number of solvers that were able to correctly solve
     # the benchmark within 'TIME_LIMIT' seconds.
     num_solved = 0
-    for solver_name, status, cpu_time, expected, num_asserts in results:
+    for solver_name, status, cpu_time, expected in results:
         if status in ('unsat', 'sat') \
            and expected in ('starexec-unknown', status) \
            and cpu_time <= TIME_LIMIT:
