@@ -4,6 +4,7 @@ import argparse
 import csv
 import random
 import re
+import sys
 
 #==============================================================================
 # Selection parameters
@@ -36,38 +37,51 @@ COL_EXPECTED = 'expected'
 COL_ASSERTS = 'number of asserts'
 
 #==============================================================================
-LOGICS = set(["ABVFP", "ALIA", "AUFBVDTLIA", "AUFDTLIA", "AUFLIA",
-    "AUFLIRA", "AUFNIA", "AUFNIRA", "BV", "BVFP", "FP", "LIA", "LRA",
-    "NIA", "NRA", "QF_ABV", "QF_ABVFP", "QF_ALIA", "QF_ANIA",
-    "QF_AUFBV", "QF_AUFLIA", "QF_AUFNIA", "QF_AX", "QF_BV", "QF_BVFP",
-    "QF_BVFPLRA", "QF_DT", "QF_FP", "QF_FPLRA", "QF_IDL", "QF_LIA",
-    "QF_LIRA", "QF_LRA", "QF_NIA", "QF_NIRA", "QF_NRA", "QF_RDL",
-    "QF_S", "QF_SLIA", "QF_UF", "QF_UFBV", "QF_UFIDL", "QF_UFLIA",
-    "QF_UFLRA", "QF_UFNIA", "QF_UFNRA", "UF", "UFBV", "UFDT", "UFDTLIA",
-    "UFDTNIA", "UFIDL", "UFLIA", "UFLRA", "UFNIA"])
+LOGICS = set([
+        'ABVFP', 'ALIA', 'AUFBVDTLIA', 'AUFDTLIA', 'AUFLIA', 'AUFLIRA',
+        'AUFNIA', 'AUFNIRA', 'BV', 'BVFP', 'FP', 'LIA', 'LRA', 'NIA',
+        'NRA', 'QF_ABV', 'QF_ABVFP', 'QF_ALIA', 'QF_ANIA', 'QF_AUFBV',
+        'QF_AUFLIA', 'QF_AUFNIA', 'QF_AX', 'QF_BV', 'QF_BVFP',
+        'QF_BVFPLRA', 'QF_DT', 'QF_FP', 'QF_FPLRA', 'QF_IDL', 'QF_LIA',
+        'QF_LIRA', 'QF_LRA', 'QF_NIA', 'QF_NIRA', 'QF_NRA', 'QF_RDL',
+        'QF_S', 'QF_SLIA', 'QF_UF', 'QF_UFBV', 'QF_UFIDL', 'QF_UFLIA',
+        'QF_UFLRA', 'QF_UFNIA', 'QF_UFNRA', 'UF', 'UFBV', 'UFDT',
+        'UFDTLIA', 'UFDTNIA', 'UFIDL', 'UFLIA', 'UFLRA', 'UFNIA', 'ABV',
+        'ABVFPLRA', 'AUFDTLIRA', 'AUFDTNIRA', 'AUFFPDTLIRA', 'BVFPLRA',
+        'FPLRA', 'QF_ABVFPLRA', 'QF_UFFP', 'UFDTLIRA', 'UFDTNIRA',
+        'UFFPDTLIRA', 'UFFPDTNIRA'
+        ])
 #==============================================================================
 
 # Get the benchmark name from a raw string.  The benchmarks may be
 # prepended with a path.  The actual name is assumed to start with the
 # first occurrence of a known logic name.
-def getBenchmarkName(raw_str):
+def get_benchmark_name(raw_str):
     raw_split = raw_str.strip().split('/')
     while (len(raw_split) > 0 and raw_split[0] not in LOGICS):
         raw_split.pop(0)
     return "/".join(raw_split)
 
+def split_benchmark_to_logic_family(benchmark):
+    benchmark_split = benchmark.split("/")
+    logic = benchmark_split[0]
+    family = '/'.join(benchmark_split[:-1])
+    benchmark = '/'.join(benchmark_split)
+    return (logic, family, benchmark)
+
 def read_benchmarks(file_name):
     # Maps benchmarks to corresponding logic and family.
-    # benchmarksk[logic][family] = set(benchmarks...)
+    # benchmarks[logic][family] = set(benchmarks...)
     benchmarks = {}
     num_families = 0
     num_benchmarks = 0
     with open(file_name, 'r') as infile:
         for benchmark in infile.readlines():
-            benchmark_split = getBenchmarkName(benchmark.strip()).split('/')
-            logic = benchmark_split[0]
-            family = '/'.join(benchmark_split[:-1])
-            benchmark = '/'.join(benchmark_split)
+            benchmark_name = get_benchmark_name(benchmark.strip())
+            (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark_name)
+            if logic == "":
+                print(benchmark)
+                assert(False)
             if not logic in benchmarks:
                 benchmarks[logic] = {}
             if not family in benchmarks[logic]:
@@ -79,7 +93,7 @@ def read_benchmarks(file_name):
 
 def read_data_unsat(file_name):
     # Map logics to a dict mapping solvers to
-    # {(benchmark, family): num_asserts}
+    # {(benchmark, family): (status, num_asserts)}
     data = {}
     with open(file_name, 'r') as file:
         reader = csv.reader(file)
@@ -89,11 +103,8 @@ def read_data_unsat(file_name):
 
             # Read data
             benchmark = drow[COL_BENCHMARK].strip()
-            benchmark_split = getBenchmarkName(benchmark).split('/')
-            benchmark = '/'.join(benchmark_split)
-            family = '/'.join(benchmark_split[:-1])
-            logic = benchmark_split[0]
-
+            benchmark = get_benchmark_name(benchmark)
+            (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark)
             # Results for each benchmark is stored as list of tuples.
             # data[logic][family][benchmark] = [...]
             if logic not in data:
@@ -103,7 +114,8 @@ def read_data_unsat(file_name):
 
             assert(benchmark not in data[logic][family])
 
-            data[logic][family][benchmark] = int(drow[COL_ASSERTS])
+            data[logic][family][benchmark] = (drow[COL_STATUS],
+                    int(drow[COL_ASSERTS]))
 
     return data
 
@@ -121,10 +133,8 @@ def read_data_results(file_name):
 
             # Read data
             benchmark = drow[COL_BENCHMARK].strip()
-            benchmark_split = getBenchmarkName(benchmark).split('/')
-            benchmark = '/'.join(benchmark_split)
-            family = '/'.join(benchmark_split[:-1])
-            logic = benchmark_split[0]
+            benchmark = get_benchmark_name(benchmark)
+            (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark)
 
             # Results for each benchmark is stored as list of tuples.
             # data[logic][family][benchmark] = [...]
@@ -149,47 +159,102 @@ def read_data_results(file_name):
 
     return data
 
-def filter_uninteresting_unsat(solving_data, asrts_data, all_benchmarks, removed_benchmarks, print_stats):
-    # Filter out uninteresting benchmarks from 'all_benchmarks'.
-    num_removed_per_logic = {}
-    for logic, families in sorted(asrts_data.items()):
+def is_eligible_unsat(status, num_asrts):
+    # A benchmark is eligible for the unsat core track if the following
+    # conditions hold: it
+    #  - has more assertions than the minimum limit
+    #  - has status unsat
+    return num_asrts >= NUM_ASSERTS and status == 'unsat'
 
-        num_removed_per_logic[logic] = 0
+def is_eligible_standard(results):
+    # Determine number of solvers that were able to correctly solve
+    # the benchmark within 'TIME_LIMIT' seconds.
+    num_solved = 0
+    for solver_name, status, cpu_time, expected in results:
+        if status in ('unsat', 'sat') \
+           and expected in ('starexec-unknown', status) \
+           and cpu_time <= TIME_LIMIT:
+            num_solved += 1
+    # All solvers correctly solved 'benchmark' within 'TIME_LIMIT'
+    # seconds, hence remove benchmark from 'all_benchmarks'.
+    #
+    # Note: We require that at least two solvers were in the division.
+    if num_solved >= 2 and num_solved == len(results):
+        return False
+    return True
 
-        if (logic not in all_benchmarks):
-            print(logic)
+
+
+def sanity_check_standard(data_list, selected_benchmarks, removed_benchmarks):
+    if data_list == []:
+        return
+
+    for benchmark in selected_benchmarks:
+        (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark)
+
+        for data, path in data_list:
+            results_logic = data.get(logic, {})
+            results_family = results_logic.get(family, {})
+            results_benchmark = results_family.get(benchmark, [])
+
+            if not is_eligible_standard(results_benchmark):
+                print(benchmark)
+                print('\n'.join([str(x) for x in results_benchmark]))
+                assert(False)
+
+    for benchmark in removed_benchmarks:
+        (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark)
+
+        ineligibility_justified = False
+        for data in data_list:
+            results_logic = data.get(logic, {})
+            results_family = results_logic.get(family, {})
+            results_benchmark = results_family.get(benchmark, [])
+
+            if not is_eligible_standard(results_benchmark):
+                ineligibility_justified = True
+
+        if not ineligibility_justified:
+            print(benchmark)
+            print('\n'.join([str(x) for x in results_benchmark]))
             assert(False)
 
-        for family, benchmarks in families.items():
-            assert(family in all_benchmarks[logic])
+def sanity_check_unsat(unsat_data, selected_benchmarks, removed_benchmarks):
 
-            for benchmark, num_asrts in benchmarks.items():
-                # Benchmark may have already been removed
-                if benchmark not in all_benchmarks[logic][family]:
-                    continue
+    for benchmark in selected_benchmarks:
+        (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark)
+        n_asrts_logic = unsat_data.get(logic, {})
+        n_asrts_family = n_asrts_logic.get(family, {})
+        (status, n_asrts) = n_asrts_family.get(benchmark, ('unknown', 0))
+        if not is_eligible_unsat(status, n_asrts):
+            print(benchmark, status, n_asrts)
+            assert False
 
-                if logic not in solving_data or \
-                        family not in solving_data[logic] or \
-                        benchmark not in solving_data[logic][family]:
-                    # Remove since the result is unknown
-                    num_removed_per_logic[logic] += 1
-                    all_benchmarks[logic][family].remove(benchmark)
-                    removed_benchmarks.append(benchmark)
-                else:
-                    results = solving_data[logic][family][benchmark]
-                    asrts = asrts_data[logic][family][benchmark]
-                    if not is_eligible_unsat(results, asrts):
-                        all_benchmarks[logic][family].remove(benchmark)
-                        removed_benchmarks.append(benchmark)
-                        num_removed_per_logic[logic] += 1
+    for benchmark in sorted(removed_benchmarks):
+        (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark)
 
-    return num_removed_per_logic
+        n_asrts_logic = unsat_data.get(logic, {})
+        n_asrts_family = n_asrts_logic.get(family, {})
+        (status, n_asrts) = n_asrts_family.get(benchmark, ('unknown', 0))
 
-def filter_uninteresting_standard(data, all_benchmarks, removed_benchmarks, print_stats):
-    # Filter out uninteresting benchmarks from 'all_benchmarks'.
+        if is_eligible_unsat(status, n_asrts):
+            print(benchmark)
+            assert False
+
+# Filter out uninteresting benchmarks from 'all_benchmarks'.
+# input:
+#  data               - the solving data
+#  all_benchmarks     - all currently interesting benchmarks
+#  removed_benchmarks - benchmarks that have been removed
+# output:
+#  num_removed_per_logic - map from a logic to number of removed
+#                          benchmarks in that logic.
+# all_benchmarks and removed_benchmarks are changed by the function
+
+def filter_uninteresting_standard(data, all_benchmarks,
+        removed_benchmarks):
     num_removed_per_logic = {}
     for logic, families in sorted(data.items()):
-
 
         # Logics might have changed compared to last year.
         if logic not in all_benchmarks:
@@ -215,158 +280,108 @@ def filter_uninteresting_standard(data, all_benchmarks, removed_benchmarks, prin
 
     return num_removed_per_logic
 
-def sanity_check_standard(data_list, selected_benchmarks, removed_benchmarks):
-    if data_list == []:
-        return
+def filter_asserts_status(asrts_data, all_benchmarks, num_all_benchmarks,
+        stats):
+    num_removed_per_logic = {}
+    removed_benchmarks = []
 
-    for benchmark in selected_benchmarks:
-        benchmark_split = benchmark.split('/')
-        logic = benchmark_split[0]
-        family = '/'.join(benchmark_split[:-1])
+    for logic, families in sorted(asrts_data.items()):
+        num_removed_per_logic[logic] = 0
 
-        for data in data_list:
-            results_logic = data.get(logic, {})
-            results_family = results_logic.get(family, {})
-            results_benchmark = results_family.get(benchmark, [])
-
-            if not is_eligible_standard(results_benchmark):
-                print(benchmark)
-                print('\n'.join([str(x) for x in results_benchmark]))
-                assert(False)
-
-    for benchmark in removed_benchmarks:
-        benchmark_split = benchmark.split('/')
-        logic = benchmark_split[0]
-        family = '/'.join(benchmark_split[:-1])
-
-        ineligibility_justified = False
-        for data in data_list:
-            results_logic = data.get(logic, {})
-            results_family = results_logic.get(family, {})
-            results_benchmark = results_family.get(benchmark, [])
-
-            if not is_eligible_standard(results_benchmark):
-                ineligibility_justified = True
-
-        if not ineligibility_justified:
-            print(benchmark)
-            print('\n'.join([str(x) for x in results_benchmark]))
+        if (logic not in all_benchmarks):
+            print(logic)
             assert(False)
 
-def sanity_check_unsat(results_list, unsat_data, selected_benchmarks, removed_benchmarks):
-    if results_list == [] or not unsat_data:
-        return
+        for family, benchmarks in families.items():
+            assert(family in all_benchmarks[logic])
 
-    for benchmark in selected_benchmarks:
-        benchmark_split = benchmark.split('/')
-        logic = benchmark_split[0]
-        family = '/'.join(benchmark_split[:-1])
+            for benchmark, (status, num_asrts) in benchmarks.items():
+                if num_asrts < NUM_ASSERTS or status != 'unsat':
+                    all_benchmarks[logic][family].remove(benchmark)
+                    removed_benchmarks.append(benchmark)
+                    num_removed_per_logic[logic] += 1
+    if stats:
+        print_stats(num_removed_per_logic, num_all_benchmarks)
 
-        for results in results_list:
-            results_logic = results.get(logic, {})
-            results_family = results_logic.get(family, {})
-            results_benchmark = results_family.get(benchmark, [])
+    return (removed_benchmarks, all_benchmarks, num_removed_per_logic)
 
-            n_asrts_logic = unsat_data.get(logic, {})
-            n_asrts_family = n_asrts_logic.get(family, {})
-            n_asrts_benchmark = n_asrts_family.get(benchmark, 0)
+# main_filter_standard: Remove benchmarks on the standard tracks based
+# on multiple years' results.
+# Input:
+#  filter_csvs        - list of filter data to be used for filtering
+#  all_benchmarks     - all available bechmarks
+#  num_all_benchmarks - A map from logic to number of benchmarks it has
+#  stats              - A boolean flag to print statistics
+# Output:
+#  removed_benchmarks - a list containing the benchmarks removed by the filtering
+#  all_benchmarks     - a map containing benchmarks not removed by the filtering
 
-            if not is_eligible_unsat(results_benchmark, n_asrts_benchmark):
-                print(benchmark)
-                print('\n'.join([str(x) for x in results_benchmark]))
-            assert is_eligible_unsat(results_benchmark, n_asrts_benchmark)
+def main_filter_standard(filter_csvs, all_benchmarks,
+        num_all_benchmarks, stats):
 
-    for benchmark in removed_benchmarks:
-        benchmark_split = benchmark.split('/')
-        logic = benchmark_split[0]
-        family = '/'.join(benchmark_split[:-1])
+    removed_benchmarks = []
 
-        ineligibility_justified = False
-        for results in results_list:
-            results_logic = results.get(logic, {})
-            results_family = results_logic.get(family, {})
-            results_benchmark = results_family.get(benchmark, [])
+    for (filter_csv, name) in filter_csvs:
+        print("Filtering based on {}".format(name))
+        num_removed_per_logic = filter_uninteresting_standard(filter_csv, all_benchmarks, \
+                    removed_benchmarks)
 
-            n_asrts_logic = unsat_data.get(logic, {})
-            n_asrts_family = n_asrts_logic.get(family, {})
-            n_asrts_benchmark = n_asrts_family.get(benchmark, 0)
+    if stats:
+        print_stats(num_removed_per_logic, num_all_benchmarks)
 
-            if not is_eligible_unsat(results_benchmark, n_asrts_benchmark):
-                ineligibility_justified = True
+    return (removed_benchmarks, all_benchmarks)
 
-        if not ineligibility_justified:
-            print(benchmark)
-            assert(False)
+# main_filter_unsat: Remove benchmarks on the unsat tracks based
+# on multiple years' results and nuber of assertions
+# Input:
+#  all_benchmarks     - all available bechmarks
+#  num_all_benchmarks - A map from logic to number of benchmarks it has
+#  asrts_data         - Data mapping benchmark to its status and number of
+#                       assertions
+#  stats              - A boolean flag to print statistics
+# Output:
+#  removed_benchmarks - a list containing the benchmarks removed by the filtering
+#  all_benchmarks     - a map containing benchmarks not removed by the filtering
+def main_filter_unsat(all_benchmarks, num_all_benchmarks, asrts_data, stats):
 
-def parse_args():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('-s', '--seed', dest='seed', type=int, help='RNG seed',
-                    required=True)
-    ap.add_argument('-b', '--benchmarks', dest='benchmarks_file',
-                    help='List of benchmarks to be selected',
-                    required=True)
-    ap.add_argument('-n', '--new-benchmarks', dest='new_benchmarks_file',
-                    help='List of new benchmarks to be selected',
-                    required=True)
-    ap.add_argument('-l', '--logics', dest='filter_logic',
-                    help="Filter out benchmarks not in any of the given " \
-                    "logics (semicolon separated) (default: all logics)")
-    ap.add_argument('-f', '--filter', dest='filter_csv', action='append',
-                    help="Filter out benchmarks based on csv")
-    ap.add_argument('-o', '--out', dest='out',
-                    help='Output file name to print selected benchmarks')
-    ap.add_argument('--unsat', dest='unsat',
-                    help="Filter for unsat core track")
-    ap.add_argument('--print-stats', dest="print_stats",
-                    action='store_true',
-                    help='Print statistics')
-    ap.add_argument('--print-eligible', dest='print_eligible',
-                    action='store_true',
-                    help='Print eligible benchmarks')
-    ap.add_argument('--prefix', dest='prefix', default='',
-                    help='The prefix to prepend to selected benchmark lines')
-    return ap.parse_args()
+    print("Filtering based on assert counts and statuses")
+    (removed_benchmarks, all_benchmarks, num_removed_per_logic) = \
+        filter_asserts_status(asrts_data, all_benchmarks, num_all_benchmarks,
+                stats)
 
-def is_eligible_unsat(solving_data, num_asrts):
-    # A benchmark is eligible for the unsat core track if the following
-    # conditions hold: it
-    #  - has more assertions than the minimum limit
-    #  - is known to be unsat or is unknown, 
-    #  - all solvers have shown it unsat
-    #  - at least two solvers have solved it
-    num_solved_unsats = 0
-    for solver_name, status, cpu_time, expected in solving_data:
-        if status == 'unsat' \
-                and expected in ('starexec-unknown', 'unsat'):
-            num_solved_unsats += 1
-    # All solvers correctly showed 'benchmark' to be unsat
-    # Note: We require that at least two solvers were in the division.
-    if num_solved_unsats >= 2 and num_solved_unsats == len(solving_data):
-        return num_asrts >= NUM_ASSERTS
+    return (removed_benchmarks, all_benchmarks)
 
-    return False
+def print_stats(num_removed_per_logic, num_all_benchmarks):
 
-def is_eligible_standard(results):
-    # Determine number of solvers that were able to correctly solve
-    # the benchmark within 'TIME_LIMIT' seconds.
-    num_solved = 0
-    for solver_name, status, cpu_time, expected in results:
-        if status in ('unsat', 'sat') \
-           and expected in ('starexec-unknown', status) \
-           and cpu_time <= TIME_LIMIT:
-            num_solved += 1
-    # All solvers correctly solved 'benchmark' within 'TIME_LIMIT'
-    # seconds, hence remove benchmark from 'all_benchmarks'.
-    #
-    # Note: We require that at least two solvers were in the division.
-    if num_solved >= 2 and num_solved == len(results):
-        return False
-    return True
+    # Print statistics on the reduction achieved by ignoring uninteresting
+    # benchmarks.
+    for logic in num_removed_per_logic:
+        num_total = num_all_benchmarks.get(logic, 0)
+        num_removed = num_removed_per_logic[logic]
+        reduction = \
+            float(num_removed) / float(num_total) if num_total > 0 else 0.0
+        print('{:15s}{:6d}{:20s} {:.2%} removed'.format(
+                '{}:'.format(logic),
+                num_total - num_removed,
+                '\t (out of {})'.format(num_total),
+                reduction
+             ))
 
 
 def main():
 
     args = parse_args()
+
+    if args.filter_csv != None and args.unsat != None:
+        print("Provided filter_csvs (%s) and unsat (%s), but these "\
+                "are mutually exclusive" % (", ".join(args.filter_csv),
+                    args.unsat))
+        sys.exit(1)
+
+    if args.filter_csv == None:
+        filter_csv = []
+    else:
+        filter_csv = args.filter_csv
 
     # Set up RNG
     random.seed(args.seed)
@@ -395,47 +410,32 @@ def main():
     selected_benchmarks = []
     removed_benchmarks = []
 
-    # Load data csvs to base filtering of 'uninteresting benchmarks' on.
-    # Default: results csv from previous year
-    # Unsat Core: csv with benchmark,number of assertions
-    data = {}
-    if args.unsat:
-        unsat_data = read_data_unsat(args.unsat)
-
-    # empty mean all logics are kept
+    # empty means all logics are kept
     filter_logics = []
     if args.filter_logic:
         filter_logics = args.filter_logic.split(";")
         print("Filter logics: {0}".format(filter_logics))
 
+    # Load data csvs to base filtering of 'uninteresting benchmarks' on.
+    # Default: results csv from previous year
+    # Unsat Core: csv with benchmark,number of assertions
+
     data_list = []
-    for filter_csv in args.filter_csv:
-        print("Filtering based on {}".format(filter_csv))
-        data_list.append(read_data_results(filter_csv))
-        data = data_list[-1]
-        if not args.unsat:
-            num_removed_per_logic = filter_uninteresting_standard(data, all_benchmarks, \
-                        removed_benchmarks, args.print_stats)
-        if args.unsat:
-            num_removed_per_logic = filter_uninteresting_unsat(data, unsat_data, \
-                    all_benchmarks, removed_benchmarks, args.print_stats)
+    for path in filter_csv:
+        data_list.append((read_data_results(path), path))
 
-        # Print statistics on the reduction achieved by ignoring uninteresting
-        # benchmarks.
-        if args.print_stats:
-            for logic in num_removed_per_logic:
-                num_total = num_all_benchmarks.get(logic, 0)
-                num_removed = num_removed_per_logic[logic]
-                reduction = \
-                    float(num_removed) / float(num_total) if num_total > 0 else 0.0
-                print('{:15s}{:6d}{:20s} {:.2%} removed'.format(
-                        '{}:'.format(logic),
-                        num_total - num_removed,
-                        '\t (out of {})'.format(num_total),
-                        reduction
-                     ))
+    if (not args.unsat):
+        (removed_bencharks, all_benchmarks) = \
+            main_filter_standard(data_list, all_benchmarks,
+                    num_all_benchmarks, args.print_stats)
+    else:
+        data = {}
+        unsat_data = read_data_unsat(args.unsat)
 
-                num_all_benchmarks[logic] -= num_removed_per_logic[logic]
+        (removed_benchmarks, all_benchmarks) = \
+                main_filter_unsat(all_benchmarks,
+                        num_all_benchmarks, unsat_data,
+                        args.print_stats)
 
     # 'all_benchmarks' now contains all eligible benchmarks (inclucing new
     # benchmarks.
@@ -497,7 +497,7 @@ def main():
         selected_benchmarks.extend(sorted(selected))
 
     if (args.unsat):
-        sanity_check_unsat(data_list, unsat_data, selected_benchmarks, removed_benchmarks)
+        sanity_check_unsat(unsat_data, selected_benchmarks, removed_benchmarks)
     else:
         sanity_check_standard(data_list, selected_benchmarks, removed_benchmarks)
 
@@ -508,6 +508,34 @@ def main():
                           for b in selected_benchmarks]
             outfile.write('\n'.join(benchmarks))
 
+def parse_args():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('-s', '--seed', dest='seed', type=int, help='RNG seed',
+                    required=True)
+    ap.add_argument('-b', '--benchmarks', dest='benchmarks_file',
+                    help='List of benchmarks to be selected',
+                    required=True)
+    ap.add_argument('-n', '--new-benchmarks', dest='new_benchmarks_file',
+                    help='List of new benchmarks to be selected',
+                    required=True)
+    ap.add_argument('-l', '--logics', dest='filter_logic',
+                    help="Filter out benchmarks not in any of the given " \
+                    "logics (semicolon separated) (default: all logics)")
+    ap.add_argument('-f', '--filter', dest='filter_csv', action='append',
+                    help="Filter out benchmarks based on csv")
+    ap.add_argument('-o', '--out', dest='out',
+                    help='Output file name to print selected benchmarks')
+    ap.add_argument('--unsat', dest='unsat',
+                    help="Filter for unsat core track")
+    ap.add_argument('--print-stats', dest="print_stats",
+                    action='store_true',
+                    help='Print statistics')
+    ap.add_argument('--print-eligible', dest='print_eligible',
+                    action='store_true',
+                    help='Print eligible benchmarks')
+    ap.add_argument('--prefix', dest='prefix', default='',
+                    help='The prefix to prepend to selected benchmark lines')
+    return ap.parse_args()
 
 if __name__ == '__main__':
     main()
