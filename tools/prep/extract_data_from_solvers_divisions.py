@@ -173,8 +173,14 @@ def write_mds(year, path):
                     s_logics[logic] = []
                 s_logics[logic].append(track)
 
-        attr_fields_str = "\n".join(map(lambda x: "{}: {}".format(
-            x, md_descr[x]), md_descr.keys()))
+        def quote(s):
+            if (s != "" and s[0] == '"'):
+                return s
+            else:
+                return '"%s"' % s
+
+        attr_fields_str = "\n".join(map(lambda x: '{}: {}'.format(
+            x, quote(md_descr[x])), md_descr.keys()))
 
         logic_fields = []
         for l in s_logics:
