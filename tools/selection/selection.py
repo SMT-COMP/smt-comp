@@ -17,12 +17,12 @@ NUM_ASSERTS = 2
 
 # The rules give the following rules for the number of selected benchmarks
 # (a) If a logic contains < 300 instances, all instances will be selected
-# (b) If a logic contains between 300 and 600, a subset of 300 will be selected
-# (c) If a logic contains > 600 then 40% will be selected
+# (b) If a logic contains between 300 and 750, a subset of 300 will be selected
+# (c) If a logic contains > 750 then 40% will be selected
 # The following three variables represent the parameters in these rules so that
 # they can be modified if needed
 NUM_LOWER = 300
-NUM_UPPER = 600
+NUM_UPPER = 750
 PERCENT = 0.4
 
 #==============================================================================
