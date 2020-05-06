@@ -309,7 +309,8 @@ the wrapper tool expects to improve on the wrapped solvers.
 \header{Derived Tool.}
 %
 A \emph{derived tool} is defined as any solver that is \emph{based on and
-extends} another SMT solver (the \emph{base solver}).  Its system description
+extends} another SMT solver (the \emph{base solver}) from a different
+group of authors.  Its system description
 \textbf{must} explicitly acknowledge
 the solver it is based on and extends.  It \emph{should} further make clear
 technical innovations by which the derived tool expects to improve on the
@@ -940,9 +941,9 @@ the following selection process will be used.
   \begin{enumerate}
   \vspace{-1ex}
     \item \label{bench-sel-300} if $n \le 300$, all instances will be selected;
-  \item \label{bench-sel-600} if $300 < n \leq 600$, a subset of 300 instances
+  \item \label{bench-sel-600} if $300 < n \leq 750$, a subset of 300 instances
     from the logic will be selected;
-  \item \label{bench-sel-more} and if $n > 600$,
+  \item \label{bench-sel-more} and if $n > 750$,
       40\% of the benchmarks of the logic will be selected.
   \end{enumerate}
 \end{enumerate}
