@@ -45,4 +45,15 @@ Follow these steps per track:
     the single query track you should also add `--filter results.csv`, where
     `results.csv` contains the track results from the previous competition.
 
+6.  To make the selection for unsat core track, you need the results
+    from the single-query track, and the number of assertions.  The
+    number of assertions can be computed for instance with the
+    scrambler.  For example:
+    ```
+    for file in $(find . -name '*.smt2'); do
+        n_asrts=$(~/src/scrambler/scrambler -count-asserts true < $file 2>&1 1>/dev/null |sed -n 's/^; Number of assertions: \([0-9][0-9]*\)/\1/p'); echo "$file,$n_asrts";
+    done > asrt-count.csv
+    ```
+    This will take some time.
+
 

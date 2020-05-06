@@ -9,54 +9,23 @@ import re
 
 g_submissions = None
 
-g_logics_all = {
-        'track_single_query'     : [
-            'ABVFP','ALIA','AUFBVDTLIA','AUFDTLIA','AUFLIA','AUFLIRA','AUFNIA',
-            'AUFNIRA','BV','BVFP','FP','LIA','LRA','NIA','NRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
-            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP','QF_FPLRA',
-            'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA','QF_NIRA','QF_NRA',
-            'QF_RDL','QF_S','QF_SLIA','QF_UF','QF_UFBV','QF_UFIDL','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
-            'UFDTNIA','UFIDL','UFLIA','UFLRA','UFNIA',
-            ],
-        'track_incremental'      : [
-            'ABVFP','ALIA','ANIA','AUFNIRA','BV','BVFP','LIA','LRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFBVLIA',
-            'QF_AUFBVNIA','QF_AUFLIA','QF_BV','QF_BVFP','QF_FP','QF_LIA',
-            'QF_LRA','QF_NIA','QF_UF','QF_UFBV','QF_UFBVLIA','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','UFLRA',
-            ],
-        'track_challenge'        : [
-            'QF_BV (non-incremental)',
-            'QF_BV (incremental)',
-            'QF_ABV (non-incremental)',
-            'QF_ABV (incremental)',
-            'QF_AUFBV (non-incremental)',
-            'QF_AUFBV (incremental)',
-            ],
-        'track_unsat_core'       : [
-            'ABVFP','ALIA','AUFBVDTLIA','AUFDTLIA','AUFLIA','AUFLIRA','AUFNIA',
-            'AUFNIRA','BV','BVFP','FP','LIA','LRA','NIA','NRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
-            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP','QF_FPLRA',
-            'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA','QF_NIRA','QF_NRA',
-            'QF_RDL','QF_S','QF_SLIA','QF_UF','QF_UFBV','QF_UFIDL','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
-            'UFDTNIA','UFIDL','UFLIA','UFLRA','UFNIA',
-            ],
-        'track_model_validation' : ['QF_BV']
-        }
+from extract_data_from_solvers_divisions import g_logics_all as g_logics_all
+from extract_data_from_solvers_divisions import TRACK_SINGLE_QUERY_RAW as TRACK_SINGLE_QUERY_RAW
+from extract_data_from_solvers_divisions import TRACK_INCREMENTAL_RAW as TRACK_INCREMENTAL_RAW
+from extract_data_from_solvers_divisions import TRACK_UNSAT_CORE_RAW as TRACK_UNSAT_CORE_RAW
+from extract_data_from_solvers_divisions import TRACK_MODEL_VALIDATION_RAW as TRACK_MODEL_VALIDATION_RAW
 
-COL_SINGLE_QUERY_TRACK = 'Select all divisions in the Single-Query (previously: Main) Track and the Unsat-Core Track to submit the solver to (use checkbox ALL for all divisions): '
-COL_INCREMENTAL_TRACK = 'Select all divisions in the Incremental Track to submit the solver to (use checkbox ALL for all divisions):'
-COL_MODEL_VALIDATION_TRACK = 'Select all divisions in the Model-Validation Track (experimental) to submit the solver to:'
-COL_CHALLENGE_TRACK = 'Select all divisions in the Industry-Challenge Track to submit the solver to (use checkbox ALL for all divisions):'
+COL_SINGLE_QUERY_TRACK = 'Select all divisions in the Single-Query (previously: Main) Track and the Unsat-Core Track to submit the solver to: '
+COL_INCREMENTAL_TRACK = 'Select all divisions in the Incremental Track to submit the solver to:'
+COL_MODEL_VALIDATION_TRACK = 'Select all divisions in the Model-Validation Track to submit the solver to:'
 COL_VARIANT = 'If this solver is a VARIANT of another submission, e.g. an experimental version, provide the name and the StarExec ID of the main solver, otherwise leave blank.'
-COL_WRAPPER = 'If this solver is a WRAPPER TOOL (i.e., it includes and calls one or more other SMT solvers, see Section 4 of the competition rules at https://smt-comp.github.io/2019/rules19.pdf), list ALL wrapped solvers and their exact version here, otherwise leave blank.'
-COL_DERIVED = 'If this solver is a DERIVED TOOL (i.e., any solver that is based on or extends another SMT solver, see Section 4 of the competition rules at https://smt-comp.github.io/2019/rules19.pdf), provide the name of the original tool here. A derived tool should follow the naming convention [name-of-base-solver]-[my-solver-name].'
-COL_CERTIFICATES = 'Certificates will be awarded to winning teams. To allow us to print the correct number, please indicate how many certificates you would need.'
+COL_WRAPPER = 'If this solver is a WRAPPER TOOL (i.e., it includes and calls one or more other SMT solvers, see Section 4 of the competition rules at https://smt-comp.github.io/2020/rules20.pdf), list ALL wrapped solvers and their exact version here, otherwise leave blank.'
+COL_DERIVED = 'If this solver is a DERIVED TOOL (i.e., any solver that is based on or extends another SMT solver, see Section 4 of the competition rules at https://smt-comp.github.io/2020/rules20.pdf), provide the name of the original tool here. A derived tool should follow the naming convention [name-of-base-solver]-[my-solver-name].'
 COL_TEAM = 'Please list all contributors that you wish to be acknowledged here'
+COL_SEED = 'Seed'
+COL_HOMEPAGE = 'Solver homepage'
+COL_SYSDESCR = 'System description URL'
+COL_SYSDESCR_NAME = 'Title of the system description'
 
 # Print error message and exit.
 def die(msg):
@@ -80,11 +49,10 @@ def read_csv(fname):
                     'solver\.jsp\?id=(\d+)', drow['Link to StarExec solver'])
             assert(m)
             submission['solver_id'] = m.group(1)
-            submission['track_incremental'] = drow[COL_INCREMENTAL_TRACK].split(';')
-            submission['track_model_validation'] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
-            submission['track_challenge'] = drow[COL_CHALLENGE_TRACK].split(';')
-            submission['track_single_query'] = []
-            submission['track_unsat_core'] = []
+            submission[TRACK_INCREMENTAL_RAW] = drow[COL_INCREMENTAL_TRACK].split(';')
+            submission[TRACK_MODEL_VALIDATION_RAW] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
+            submission[TRACK_SINGLE_QUERY_RAW] = []
+            submission[TRACK_UNSAT_CORE_RAW] = []
             m = re.search('solver\.jsp\?id=(\d+)', drow[COL_VARIANT])
             if not m:
                 submission['variant'] = drow[COL_VARIANT]
@@ -93,7 +61,10 @@ def read_csv(fname):
             submission['wrapper'] = drow[COL_WRAPPER]
             submission['derived'] = drow[COL_DERIVED]
             submission['team'] = drow[COL_TEAM]
-            submission['certificates'] = drow[COL_CERTIFICATES]
+            submission['seed'] = drow[COL_SEED]
+            submission['homepage'] = drow[COL_HOMEPAGE]
+            submission['sysdescr_url'] = drow[COL_SYSDESCR]
+            submission['sysdescr_name'] = drow[COL_SYSDESCR_NAME]
 
             # Collect logics for single-query and unsat core track.
             #
@@ -103,22 +74,22 @@ def read_csv(fname):
             for key, value in drow.items():
                 if not key.startswith(COL_SINGLE_QUERY_TRACK):
                     continue
+                logic = key.replace(COL_SINGLE_QUERY_TRACK, '')
                 if not value:
                     continue
-                logic = key.replace(COL_SINGLE_QUERY_TRACK, '')
                 assert logic[0] == '['
                 assert logic[-1] == ']'
                 logic = logic[1:-1]
                 tracks = value.split(';')
                 if 'Single-Query Track' in tracks:
-                    submission['track_single_query'].append(logic)
+                    submission[TRACK_SINGLE_QUERY_RAW].append(logic)
                 if 'Unsat Core Track' in tracks:
-                    submission['track_unsat_core'].append(logic)
+                    submission[TRACK_UNSAT_CORE_RAW].append(logic)
 
-            if not submission['track_incremental'] and \
-               not submission['track_model_validation'] and \
-               not submission['track_single_query'] and \
-               not submission['track_unsat_core']:
+            if not submission[TRACK_INCREMENTAL_RAW] and \
+               not submission[TRACK_MODEL_VALIDATION_RAW] and \
+               not submission[TRACK_SINGLE_QUERY_RAW] and \
+               not submission[TRACK_UNSAT_CORE_RAW]:
                 die('Configuration "{}" '\
                     'does not participate in any track'.format(
                         submission['solver_name']))
@@ -133,12 +104,16 @@ def read_csv(fname):
 # Columns are separated by ',' and divisions are separated by ';'.
 def write_csv(fname):
     with open(fname, 'w') as outfile:
-        outfile.write("{},{},{},{},{},{},{},{},{},{},{},{},{},\n".format(
+        outfile.write("{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},\n".format(
+            "Preliminary Solver ID",
             "Solver ID",
             "Solver Name",
+            "Solver homepage",
+            "System description URL",
+            "System description name",
+            "Competing",
             "Single Query Track",
             "Incremental Track",
-            "Challenge Track",
             "Model Validation Track",
             "Unsat Core Track",
             "Variant Of",
@@ -146,29 +121,34 @@ def write_csv(fname):
             "Derived Tool",
             "Contact",
             "Team Members",
-            "Certificates"
+            "Seed",
             ))
         for submission in g_submissions:
-            outfile.write("{},\"{}\",".format(
-                submission['solver_id'], submission['solver_name']))
-            for track in ['track_single_query',
-                          'track_incremental',
-                          'track_challenge',
-                          'track_model_validation',
-                          'track_unsat_core']:
+            outfile.write("{},{},\"{}\",\"{}\",\"{}\",\"{}\",{},".format(
+                submission['solver_id'],
+                -1,
+                submission['solver_name'],
+                submission['homepage'],
+                submission['sysdescr_url'],
+                submission['sysdescr_name'],
+                "yes"))
+            for track in [TRACK_SINGLE_QUERY_RAW,
+                          TRACK_INCREMENTAL_RAW,
+                          TRACK_MODEL_VALIDATION_RAW,
+                          TRACK_UNSAT_CORE_RAW]:
                 if submission[track] == ['ALL']:
                     outfile.write(";".join(g_logics_all[track]))
                 else:
                     outfile.write(";".join(submission[track]))
                 outfile.write(",")
             outfile.write(
-                    "\"{}\",\"{}\",\"{}\",\"{}\",\"{}\",\"{}\"".format(
+                    "\"{}\",\"{}\",\"{}\",\"{}\",\"{}\",{}".format(
                         submission['variant'],
                         submission['wrapper'],
                         submission['derived'],
                         submission['username'],
                         submission['team'],
-                        submission['certificates']
+                        submission['seed']
                         ))
             outfile.write("\n")
 

@@ -14,50 +14,47 @@ g_submissions = None
 
 TRACK_SINGLE_QUERY_RAW = 'track_single_query'
 TRACK_INCREMENTAL_RAW = 'track_incremental'
-TRACK_SINGLE_QUERY_CHALLENGE_RAW = 'track_single_query_challenge'
-TRACK_INCREMENTAL_CHALLENGE_RAW = 'track_incremental_challenge'
 TRACK_UNSAT_CORE_RAW = 'track_unsat_core'
 TRACK_MODEL_VALIDATION_RAW = 'track_model_validation'
 
 g_logics_all = {
         TRACK_SINGLE_QUERY_RAW     : [
-            'ABVFP','ALIA','AUFBVDTLIA','AUFDTLIA','AUFLIA','AUFLIRA','AUFNIA',
-            'AUFNIRA','BV','BVFP','FP','LIA','LRA','NIA','NRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
-            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP','QF_FPLRA',
-            'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA','QF_NIRA','QF_NRA',
-            'QF_RDL','QF_S','QF_SLIA','QF_UF','QF_UFBV','QF_UFIDL','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
-            'UFDTNIA','UFIDL','UFLIA','UFLRA','UFNIA',
+            'ABV','ABVFP','ABVFPLRA','ALIA','AUFBVDTLIA','AUFDTLIA',
+            'AUFDTLIRA','AUFDTNIRA','AUFFPDTLIRA','AUFLIA','AUFLIRA',
+            'AUFNIA', 'AUFNIRA','BV','BVFP','BVFPLRA','FP','FPLRA',
+            'LIA','LRA','NIA','NRA','QF_ABV', 'QF_ABVFP','QF_ABVFPLRA',
+            'QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
+            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP',
+            'QF_FPLRA', 'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA',
+            'QF_NIRA','QF_NRA', 'QF_RDL','QF_S','QF_SLIA','QF_UF',
+            'QF_UFBV','QF_UFFP','QF_UFIDL','QF_UFLIA', 'QF_UFLRA',
+            'QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
+            'UFDTLIRA', 'UFDTNIA','UFDTNIRA','UFFPDTLIRA','UFFPDTNIRA',
+            'UFIDL','UFLIA','UFLRA','UFNIA',
             ],
         TRACK_INCREMENTAL_RAW      : [
             'ABVFP','ALIA','ANIA','AUFNIRA','BV','BVFP','LIA','LRA','QF_ABV',
             'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFBVLIA',
             'QF_AUFBVNIA','QF_AUFLIA','QF_BV','QF_BVFP','QF_FP','QF_LIA',
-            'QF_LRA','QF_NIA','QF_UF','QF_UFBV','QF_UFBVLIA','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','UFLRA',
-            ],
-        TRACK_SINGLE_QUERY_CHALLENGE_RAW        : [
-            'QF_BV',
-            'QF_ABV',
-            'QF_AUFBV',
-            ],
-        TRACK_INCREMENTAL_CHALLENGE_RAW        : [
-            'QF_BV',
-            'QF_ABV',
-            'QF_AUFBV',
+            'QF_LRA','QF_NIA','QF_UF','QF_UFBV','QF_UFBVLIA','QF_UFFP',
+            'QF_UFLIA', 'QF_UFLRA','QF_UFNIA','UF','UFLRA','UFNIA','UFNRA'
             ],
         TRACK_UNSAT_CORE_RAW       : [
-            'ABVFP','ALIA','AUFBVDTLIA','AUFDTLIA','AUFLIA','AUFLIRA','AUFNIA',
-            'AUFNIRA','BV','BVFP','FP','LIA','LRA','NIA','NRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
-            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP','QF_FPLRA',
-            'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA','QF_NIRA','QF_NRA',
-            'QF_RDL','QF_S','QF_SLIA','QF_UF','QF_UFBV','QF_UFIDL','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
-            'UFDTNIA','UFIDL','UFLIA','UFLRA','UFNIA',
+            'ABV','ABVFP','ABVFPLRA','ALIA','AUFBVDTLIA','AUFDTLIA',
+            'AUFDTLIRA','AUFDTNIRA','AUFFPDTLIRA','AUFLIA','AUFLIRA',
+            'AUFNIA', 'AUFNIRA','BV','BVFP','BVFPLRA','FP','FPLRA',
+            'LIA','LRA','NIA','NRA','QF_ABV', 'QF_ABVFP','QF_ABVFPLRA',
+            'QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
+            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP',
+            'QF_FPLRA', 'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA',
+            'QF_NIRA','QF_NRA', 'QF_RDL','QF_S','QF_SLIA','QF_UF',
+            'QF_UFBV','QF_UFFP','QF_UFIDL','QF_UFLIA', 'QF_UFLRA',
+            'QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
+            'UFDTLIRA', 'UFDTNIA','UFDTNIRA','UFFPDTLIRA','UFFPDTNIRA',
+            'UFIDL','UFLIA','UFLRA','UFNIA',
             ],
-        TRACK_MODEL_VALIDATION_RAW : ['QF_BV']
+        TRACK_MODEL_VALIDATION_RAW : ['QF_BV', 'QF_IDL', 'QF_RDL', 'QF_LIA',
+            'QF_LRA', 'QF_LIRA']
         }
 
 
@@ -81,16 +78,12 @@ COL_COMPETING = 'Competing'
 # Tracks
 COL_SINGLE_QUERY_TRACK = 'Single Query Track'
 COL_INCREMENTAL_TRACK = 'Incremental Track'
-COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
-COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
 
 track_raw_names_to_pretty_names = {
         TRACK_SINGLE_QUERY_RAW: COL_SINGLE_QUERY_TRACK,
         TRACK_INCREMENTAL_RAW: COL_INCREMENTAL_TRACK,
-        TRACK_SINGLE_QUERY_CHALLENGE_RAW: COL_CHALLENGE_TRACK_SINGLE_QUERY,
-        TRACK_INCREMENTAL_CHALLENGE_RAW: COL_CHALLENGE_TRACK_INCREMENTAL,
         TRACK_UNSAT_CORE_RAW: COL_UNSAT_CORE_TRACK,
         TRACK_MODEL_VALIDATION_RAW: COL_MODEL_VALIDATION_TRACK,
         }
@@ -136,21 +129,16 @@ def read_csv(fname):
         for row in reader:
             drow = dict(zip(iter(header), iter(row)))
             submission = dict()
-
             for (subm_key, md_key, div_key) in g_properties:
                 submission[subm_key] = drow[div_key]
 
             submission[TRACK_SINGLE_QUERY_RAW] = drow[COL_SINGLE_QUERY_TRACK].split(';')
             submission[TRACK_INCREMENTAL_RAW] = drow[COL_INCREMENTAL_TRACK].split(';')
-            submission[TRACK_SINGLE_QUERY_CHALLENGE_RAW] = drow[COL_CHALLENGE_TRACK_SINGLE_QUERY].split(';')
-            submission[TRACK_INCREMENTAL_CHALLENGE_RAW] = drow[COL_CHALLENGE_TRACK_INCREMENTAL].split(';')
             submission[TRACK_UNSAT_CORE_RAW] = drow[COL_UNSAT_CORE_TRACK].split(';')
             submission[TRACK_MODEL_VALIDATION_RAW] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
 
             if not submission[TRACK_SINGLE_QUERY_RAW] and \
                not submission[TRACK_INCREMENTAL_RAW] and \
-               not submission[TRACK_SINGLE_QUERY_CHALLENGE_RAW] and \
-               not submission[TRACK_INCREMENTAL_CHALLENGE_RAW] and\
                not submission[TRACK_UNSAT_CORE_RAW] and \
                not submission[TRACK_MODEL_VALIDATION_RAW]:
                 die('Configuration "{}" '\
@@ -185,8 +173,14 @@ def write_mds(year, path):
                     s_logics[logic] = []
                 s_logics[logic].append(track)
 
-        attr_fields_str = "\n".join(map(lambda x: "{}: {}".format(
-            x, md_descr[x]), md_descr.keys()))
+        def quote(s):
+            if (s != "" and s[0] == '"'):
+                return s
+            else:
+                return '"%s"' % s
+
+        attr_fields_str = "\n".join(map(lambda x: '{}: {}'.format(
+            x, quote(md_descr[x])), md_descr.keys()))
 
         logic_fields = []
         for l in s_logics:
