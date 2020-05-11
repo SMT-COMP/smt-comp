@@ -123,7 +123,7 @@ unzip_solver()
   echo ">> unzip solver"
   SOLVER_DIR=$1
   pushd "${SOLVER_DIR}"
-  unzip -o "${NAME}.zip"
+  unzip -q -o "${NAME}.zip"
   popd
 }
 
@@ -134,7 +134,7 @@ wrap_solver()
   NEW_SOLVER_DIR=$2
   cp -r "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
   echo "${NEW_SOLVER_DIR}/bin/starexec_run_default"
-  mv "${NEW_SOLVER_DIR}/bin/starexec_run_default" "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
+  mv "${NEW_SOLVER_DIR}/bin/starexec_run_"* "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
   res=$?
   cp -r ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
   if [ $res -ne 0 ]
@@ -149,7 +149,7 @@ zip_solver()
   echo ">> zip solver"
   NEW_SOLVER_DIR=$1
   pushd "${NEW_SOLVER_DIR}"
-  zip -r "../${NAME}-${WRAPPED_NAME}.zip" *
+  zip -q -r "../${NAME}-${WRAPPED_NAME}.zip" *
   popd
 }
 
