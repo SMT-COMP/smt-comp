@@ -6,6 +6,7 @@ import subprocess
 import os
 
 COL_SOLVER_ID = 'Solver ID'
+COL_PRELIM_SOLVER_ID = 'Preliminary Solver ID'
 COL_SOLVER_NAME = 'Solver Name'
 COL_SINGLE_QUERY_TRACK = 'Single Query Track'
 COL_INCREMENTAL_TRACK = 'Incremental Track'
@@ -29,6 +30,9 @@ if __name__ == '__main__':
     parser.add_argument ("-d", dest="download_only", action="store_true",
                          default=False,
                          help="download solvers only")
+    parser.add_argument ("-x", dest="unzip_only", action="store_true",
+                         default=False,
+                         help="unzip solvers only")
     parser.add_argument ("-w", dest="wrap_only", action="store_true",
                          default=False,
                          help="wrap solvers only")
@@ -50,7 +54,11 @@ if __name__ == '__main__':
             help="the StarExec space id for model validation track wrapped solvers")
     parser.add_argument ("--uc", dest="space_id_uc",
             help="the StarExec space id for unsat core track wrapped solvers")
+    parser.add_argument ("--prelim", dest="preliminary", action="store_true",
+            help="wrap the preliminary solvers")
     args = parser.parse_args()
+    if args.preliminary:
+        COL_SOLVER_ID = COL_PRELIM_SOLVER_ID
 
     if not os.path.exists(args.csv):
         die("file not found: {}".format(args.csv))
@@ -72,6 +80,8 @@ if __name__ == '__main__':
             add_args = []
             if args.download_only:
                 add_args.append("-d")
+            if args.unzip_only:
+                add_args.append("-x")
             if args.wrap_only:
                 add_args.append("-w")
             if args.upload_only:
@@ -103,7 +113,7 @@ if __name__ == '__main__':
             if args.space_id_inc and incremental_track:
                 print('wrapping for incremental track')
                 script_args.extend(add_args)
-                script_args.extend(['./wrap_solver.sh', 'wrapped-inc', 'wrapper_inc', solver_id, args.space_id_inc, "solvers-inc"])
+                script_args.extend(['wrapped-inc', 'wrapper_inc', solver_id, args.space_id_inc, "solvers-inc"])
                 p = subprocess.Popen(script_args)
                 p.communicate()
 

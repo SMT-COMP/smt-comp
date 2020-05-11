@@ -10,11 +10,13 @@ if [ $# -eq 5 ]
 then
   WRAP=yes
   DOWNLOAD=yes
+  UNZIP=yes
   UPLOAD=yes
   ZIP=yes
 else
   WRAP=no
   DOWNLOAD=no
+  UNZIP=no
   UPLOAD=no
   ZIP=no
 fi
@@ -31,6 +33,7 @@ do
       echo "  options:"
       echo "    -h, --help    print this message and exit"
       echo "    -d            download only"
+      echo "    -x            unzip only"
       echo "    -w            wrap solver only"
       echo "    -u            upload solver only"
       echo "    -z            only zip solver from existing wrapped dir when wrapping"
@@ -39,6 +42,9 @@ do
       ;;
     -d)
       DOWNLOAD=yes
+      ;;
+    -x)
+      UNZIP=yes
       ;;
     -w)
       WRAP=yes
@@ -160,7 +166,7 @@ then
   fi
 fi
 
-[ $DOWNLOAD == "yes" ] && \
+[ $UNZIP == "yes" ] && \
   unzip_solver "${SOLVER_DIR}"
 
 NEW_SOLVER_DIR="${WRAPPED_SOLVER_DIR}/${NAME}-${WRAPPED_NAME}"
