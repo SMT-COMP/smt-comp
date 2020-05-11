@@ -11,8 +11,8 @@ Follow these steps per track:
 
    Run:
    ```
-     sh prepare_benchmarks_list.sh <path-to-new-benchmarks> > benchmarks_new.txt
-     sh prepare_benchmarks_list.sh <path-to-all-benchmarks> > benchmarks_all.txt
+     sh prepare_benchmark_list.sh <path-to-new-benchmarks> > benchmarks_new.txt
+     sh prepare_benchmark_list.sh <path-to-all-benchmarks> > benchmarks_all.txt
    ```
 
    Each benchmark must be in one line starting with the logic string.
