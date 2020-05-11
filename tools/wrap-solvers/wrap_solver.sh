@@ -80,11 +80,13 @@ upload_solver()
 
   SOLVER=$1
   SOLVER_NAME=$2
-  COMMAND="pushsolver f=${SOLVER} n=${SOLVER_NAME} id=${SPACE_ID} downloadable="
-  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
-login u=${USERNAME} p=${PASSWORD}
-${COMMAND}
-EOF
+#  COMMAND="pushsolver f=${SOLVER} n=${SOLVER_NAME} id=${SPACE_ID} downloadable="
+#  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
+#login u=${USERNAME} p=${PASSWORD}
+#${COMMAND}
+#EOF
+  mkdir -p upload
+  cp "${SOLVER}" upload
 }
 
 get_solver_info()
@@ -92,11 +94,14 @@ get_solver_info()
   echo ">> get solver info"
 
   ID=$1
-  COMMAND="viewsolver id=${ID}"
-  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
-login u=${USERNAME} p=${PASSWORD}
-${COMMAND}
-EOF
+#  COMMAND="viewsolver id=${ID}"
+#  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
+#login u=${USERNAME} p=${PASSWORD}
+#${COMMAND}
+#EOF
+  curl -s 'https://www.starexec.org/starexec/secure/details/solver.jsp?id='${ID} | \
+	perl -ne '/<td>name<\/td>/ and do {$name=1; next }; 
+                  $name && /<td>(.*)<\/td>/ and do { print "name= \"$1\"\n"; exit }'
 }
 
 download_solver()
@@ -105,11 +110,12 @@ download_solver()
 
   ID=$1
   OUT=$2
-  COMMAND="getsolver id=${ID} out=${OUT}"
-  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
-login u=${USERNAME} p=${PASSWORD}
-${COMMAND}
-EOF
+#  COMMAND="getsolver id=${ID} out=${OUT}"
+#  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
+#login u=${USERNAME} p=${PASSWORD}
+#${COMMAND}
+#EOF
+  cp download/${ID}.zip "${OUT}"
 }
 
 unzip_solver()
