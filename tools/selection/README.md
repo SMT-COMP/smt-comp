@@ -74,5 +74,5 @@ Follow these steps per track:
     and the unsat core selection can now be done with
 
     ```
-    $ ./selection.py -b benchmarks_all.txt -n benchmarks_new.txt --unsat asrts-statuses.csv -s >seed> -o <outfile>
+    $ ./selection.py -b benchmarks_all.txt -n benchmarks_new.txt --unsat asrts-statuses.csv -s <seed> -o <outfile>
     ```
