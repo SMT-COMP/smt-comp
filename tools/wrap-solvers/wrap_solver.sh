@@ -4,7 +4,7 @@
 
 
 SCRIPTDIR=`dirname $(readlink -f "$0")`
-source "$SCRIPTDIR/login.sh"
+#source "$SCRIPTDIR/login.sh"
 
 if [ $# -eq 5 ]
 then

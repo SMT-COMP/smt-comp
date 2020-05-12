@@ -63,6 +63,10 @@ if __name__ == '__main__':
     if not os.path.exists(args.csv):
         die("file not found: {}".format(args.csv))
 
+    if args.space_id_inc and \
+       not os.path.exists("wrapper_inc/smtlib2_trace_executor"):
+        die("Please, copy the smtlib2_trace_executor binary to wrapper_inc")
+
     with open(args.csv, 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter=',', quotechar='"')
         header = next(reader)
