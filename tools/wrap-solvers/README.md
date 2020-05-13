@@ -13,20 +13,23 @@ a work around, where we manually download the solvers.
 
 1. ~~Copy `login.sh.template` to `login.sh` and fill in your credentials~~.
 
-   Create a subdirectoy called `download`, where you download all using the default setting.
-   Rename the downloaded zip file to *ID*.zip, where *ID* is the solver id.
+   Create a subdirectoy called `download`, where you download all solvers
+   using the default setting. Rename the downloaded zip file to *ID*.zip,
+   where *ID* is the solver id.
 
 2. Copy a current binary of the
 [trace executor](https://github.com/smt-comp/trace-executor)
 into directory `wrapper_inc`
 
-3. `./wrap_solvers.py <solvers: csv> [ --sq <space: id> ] [ --inc <space_inc: id> ] [ --mv <space_mv: id> ] [ --uc <space_uc: id> ]`
+3. `./wrap_solvers.py <solvers: csv> [ --prelim ] [ --sq <space: id> ] [ --inc <space_inc: id> ] [ --mv <space_mv: id> ] [ --uc <space_uc: id> ]`
 
 ```
 <solvers: csv>   is a csv file with the solver ids as in
                  2020/registration/solvers_divisions_final.csv
 
-<space: id>      the StarExec space id of the solver space for non-incremental
+--prelim         if set, use the preliminary solver ids
+
+<space: id>      the StarExec space id of the solver space for single query
                  solvers
 
 <space_inc: id>  the StarExec space id of the solver space for incremental
