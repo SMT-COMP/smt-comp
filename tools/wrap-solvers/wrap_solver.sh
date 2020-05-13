@@ -4,17 +4,19 @@
 
 
 SCRIPTDIR=`dirname $(readlink -f "$0")`
-source "$SCRIPTDIR/login.sh"
+#source "$SCRIPTDIR/login.sh"
 
 if [ $# -eq 5 ]
 then
   WRAP=yes
   DOWNLOAD=yes
+  UNZIP=yes
   UPLOAD=yes
   ZIP=yes
 else
   WRAP=no
   DOWNLOAD=no
+  UNZIP=no
   UPLOAD=no
   ZIP=no
 fi
@@ -31,6 +33,7 @@ do
       echo "  options:"
       echo "    -h, --help    print this message and exit"
       echo "    -d            download only"
+      echo "    -x            unzip only"
       echo "    -w            wrap solver only"
       echo "    -u            upload solver only"
       echo "    -z            only zip solver from existing wrapped dir when wrapping"
@@ -39,6 +42,9 @@ do
       ;;
     -d)
       DOWNLOAD=yes
+      ;;
+    -x)
+      UNZIP=yes
       ;;
     -w)
       WRAP=yes
@@ -74,11 +80,13 @@ upload_solver()
 
   SOLVER=$1
   SOLVER_NAME=$2
-  COMMAND="pushsolver f=${SOLVER} n=${SOLVER_NAME} id=${SPACE_ID} downloadable="
-  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
-login u=${USERNAME} p=${PASSWORD}
-${COMMAND}
-EOF
+#  COMMAND="pushsolver f=${SOLVER} n=${SOLVER_NAME} id=${SPACE_ID} downloadable="
+#  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
+#login u=${USERNAME} p=${PASSWORD}
+#${COMMAND}
+#EOF
+  mkdir -p upload
+  cp "${SOLVER}" upload
 }
 
 get_solver_info()
@@ -86,11 +94,14 @@ get_solver_info()
   echo ">> get solver info"
 
   ID=$1
-  COMMAND="viewsolver id=${ID}"
-  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
-login u=${USERNAME} p=${PASSWORD}
-${COMMAND}
-EOF
+#  COMMAND="viewsolver id=${ID}"
+#  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
+#login u=${USERNAME} p=${PASSWORD}
+#${COMMAND}
+#EOF
+  curl -s 'https://www.starexec.org/starexec/secure/details/solver.jsp?id='${ID} | \
+	perl -ne '/<td>name<\/td>/ and do {$name=1; next }; 
+                  $name && /<td>(.*)<\/td>/ and do { print "name= \"$1\"\n"; exit }'
 }
 
 download_solver()
@@ -99,11 +110,12 @@ download_solver()
 
   ID=$1
   OUT=$2
-  COMMAND="getsolver id=${ID} out=${OUT}"
-  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
-login u=${USERNAME} p=${PASSWORD}
-${COMMAND}
-EOF
+#  COMMAND="getsolver id=${ID} out=${OUT}"
+#  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
+#login u=${USERNAME} p=${PASSWORD}
+#${COMMAND}
+#EOF
+  cp download/${ID}.zip "${OUT}"
 }
 
 unzip_solver()
@@ -111,7 +123,7 @@ unzip_solver()
   echo ">> unzip solver"
   SOLVER_DIR=$1
   pushd "${SOLVER_DIR}"
-  unzip -o "${NAME}.zip"
+  unzip -q -o "${NAME}.zip"
   popd
 }
 
@@ -122,7 +134,7 @@ wrap_solver()
   NEW_SOLVER_DIR=$2
   cp -r "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
   echo "${NEW_SOLVER_DIR}/bin/starexec_run_default"
-  mv "${NEW_SOLVER_DIR}/bin/starexec_run_default" "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
+  mv "${NEW_SOLVER_DIR}/bin/starexec_run_"* "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
   res=$?
   cp -r ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
   if [ $res -ne 0 ]
@@ -137,7 +149,7 @@ zip_solver()
   echo ">> zip solver"
   NEW_SOLVER_DIR=$1
   pushd "${NEW_SOLVER_DIR}"
-  zip -r "../${NAME}-${WRAPPED_NAME}.zip" *
+  zip -q -r "../${NAME}-${WRAPPED_NAME}.zip" *
   popd
 }
 
@@ -160,7 +172,7 @@ then
   fi
 fi
 
-[ $DOWNLOAD == "yes" ] && \
+[ $UNZIP == "yes" ] && \
   unzip_solver "${SOLVER_DIR}"
 
 NEW_SOLVER_DIR="${WRAPPED_SOLVER_DIR}/${NAME}-${WRAPPED_NAME}"
