@@ -38,18 +38,19 @@ COL_ASSERTS = 'number of asserts'
 
 #==============================================================================
 LOGICS = set([
-        'ABVFP', 'ALIA', 'AUFBVDTLIA', 'AUFDTLIA', 'AUFLIA', 'AUFLIRA',
-        'AUFNIA', 'AUFNIRA', 'BV', 'BVFP', 'FP', 'LIA', 'LRA', 'NIA',
-        'NRA', 'QF_ABV', 'QF_ABVFP', 'QF_ALIA', 'QF_ANIA', 'QF_AUFBV',
-        'QF_AUFLIA', 'QF_AUFNIA', 'QF_AX', 'QF_BV', 'QF_BVFP',
-        'QF_BVFPLRA', 'QF_DT', 'QF_FP', 'QF_FPLRA', 'QF_IDL', 'QF_LIA',
-        'QF_LIRA', 'QF_LRA', 'QF_NIA', 'QF_NIRA', 'QF_NRA', 'QF_RDL',
-        'QF_S', 'QF_SLIA', 'QF_UF', 'QF_UFBV', 'QF_UFIDL', 'QF_UFLIA',
+        'ABVFP', 'ALIA', 'ANIA', 'AUFBVDTLIA', 'AUFDTLIA', 'AUFLIA',
+        'AUFLIRA', 'AUFNIA', 'AUFNIRA', 'BV', 'BVFP', 'FP', 'LIA',
+        'LRA', 'NIA', 'NRA', 'QF_ABV', 'QF_ABVFP', 'QF_ALIA', 'QF_ANIA',
+        'QF_AUFBV', 'QF_AUFBVLIA', 'QF_AUFBVNIA', 'QF_AUFLIA',
+        'QF_AUFNIA', 'QF_AX', 'QF_BV', 'QF_BVFP', 'QF_BVFPLRA', 'QF_DT',
+        'QF_FP', 'QF_FPLRA', 'QF_IDL', 'QF_LIA', 'QF_LIRA', 'QF_LRA',
+        'QF_NIA', 'QF_NIRA', 'QF_NRA', 'QF_RDL', 'QF_S', 'QF_SLIA',
+        'QF_UF', 'QF_UFBV', 'QF_UFBVLIA', 'QF_UFIDL', 'QF_UFLIA',
         'QF_UFLRA', 'QF_UFNIA', 'QF_UFNRA', 'UF', 'UFBV', 'UFDT',
         'UFDTLIA', 'UFDTNIA', 'UFIDL', 'UFLIA', 'UFLRA', 'UFNIA', 'ABV',
         'ABVFPLRA', 'AUFDTLIRA', 'AUFDTNIRA', 'AUFFPDTLIRA', 'BVFPLRA',
         'FPLRA', 'QF_ABVFPLRA', 'QF_UFFP', 'UFDTLIRA', 'UFDTNIRA',
-        'UFFPDTLIRA', 'UFFPDTNIRA'
+        'UFFPDTLIRA', 'UFFPDTNIRA', 'UFNIA', 'UFNRA'
         ])
 #==============================================================================
 
@@ -58,8 +59,15 @@ LOGICS = set([
 # first occurrence of a known logic name.
 def get_benchmark_name(raw_str):
     raw_split = raw_str.strip().split('/')
-    while (len(raw_split) > 0 and raw_split[0] not in LOGICS):
-        raw_split.pop(0)
+
+    while (len(raw_split) > 0):
+        if raw_split[0].upper() not in LOGICS:
+            raw_split.pop(0)
+        else:
+            break
+    if (len(raw_split) == 0):
+        print("Logic not found: %s" % raw_str)
+    raw_split[0] = raw_split[0].upper()
     return "/".join(raw_split)
 
 def split_benchmark_to_logic_family(benchmark):
@@ -76,11 +84,14 @@ def read_benchmarks(file_name):
     num_families = 0
     num_benchmarks = 0
     with open(file_name, 'r') as infile:
+        lineno=0
         for benchmark in infile.readlines():
+            lineno += 1
             benchmark_name = get_benchmark_name(benchmark.strip())
             (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark_name)
             if logic == "":
-                print(benchmark)
+                print("File %s line %d logic empty:\n- %s\n- %s\n- %s" %\
+                        (file_name, lineno, logic, family, benchmark))
                 assert(False)
             if not logic in benchmarks:
                 benchmarks[logic] = {}
@@ -228,16 +239,16 @@ def sanity_check_status(unsat_data, selected_benchmarks,
         removed_benchmarks, unsat):
 
     if unsat:
-        sanity_check = is_eligible_unsat
+        is_eligible = is_eligible_unsat
     else:
-        sanity_check = is_eligible_sat
+        is_eligible = is_eligible_sat
 
     for benchmark in selected_benchmarks:
         (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark)
         n_asrts_logic = unsat_data.get(logic, {})
         n_asrts_family = n_asrts_logic.get(family, {})
         (status, n_asrts) = n_asrts_family.get(benchmark, ('unknown', 0))
-        if not sanity_check(status, n_asrts):
+        if not is_eligible(status, n_asrts):
             print(benchmark, status, n_asrts)
             assert False
 
@@ -248,7 +259,7 @@ def sanity_check_status(unsat_data, selected_benchmarks,
         n_asrts_family = n_asrts_logic.get(family, {})
         (status, n_asrts) = n_asrts_family.get(benchmark, ('unknown', 0))
 
-        if sanity_check(status, n_asrts):
+        if is_eligible(status, n_asrts):
             print(benchmark)
             assert False
 
