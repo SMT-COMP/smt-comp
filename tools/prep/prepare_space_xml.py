@@ -50,6 +50,8 @@ def read_csv():
     track = g_args.track
     use_wrapped = g_args.wrapped
     col_solver_id = COL_SOLVER_ID
+    if g_args.preliminary:
+      col_solver_id = COL_SOLVER_ID_PRELIM
     if use_wrapped:
         if track == TRACK_SINGLE_QUERY:
             col_solver_id = COL_SOLVER_ID_WRAPPED_SQ
@@ -289,6 +291,9 @@ def main():
     parser.add_argument("-s","--select",
             action="store",dest="select",default="none",
             help="A list of benchmarks to select", required=False)
+    parser.add_argument("-p",
+            action="store_true", dest="preliminary", default=False,
+            help="use preliminary solver IDs")
     parser.add_argument("-w",
             action="store_true", dest="wrapped", default=False,
             help="use wrapped solver IDs")
