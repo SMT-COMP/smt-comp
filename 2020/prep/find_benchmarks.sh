@@ -2,6 +2,8 @@
 
 SCRAMBLER=`dirname $(readlink -f "$0")`/../../../scrambler/scrambler
 YEAR=2020
+LANG=C  # fix sorting
+export LANG
 
 if [ "$#" == 0 -o \! -d "$1" ]; then
   echo "USAGE: find_benchmarks.sh <path-to-smtlib>"
@@ -35,4 +37,5 @@ mv SMT-LIB_non_incremental_benchmarks_new.txt SMT-LIB_non_incremental_benchmarks
 done) < SMT-LIB_non_incremental_benchmarks_new-orig.txt | sort | uniq > SMT-LIB_non_incremental_benchmarks_new.txt
 
 ../../tools/selection/make_statuses_and_asserts.sh $SCRAMBLER $1/non-incremental > SMT-LIB_non_incremental_benchmarks_all_assertions_unsorted.csv
-sort SMT-LIB_non_incremental_benchmarks_all_assertions_unsorted.csv > SMT-LIB_non_incremental_benchmarks_all_assertions.csv
+head -n 1 SMT-LIB_non_incremental_benchmarks_all_assertions_unsorted.csv > SMT-LIB_non_incremental_benchmarks_all_assertions.csv
+tail -n +2 SMT-LIB_non_incremental_benchmarks_all_assertions_unsorted.csv | sort >> SMT-LIB_non_incremental_benchmarks_all_assertions.csv
