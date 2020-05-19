@@ -104,7 +104,7 @@ def read_csv(fname):
 # Columns are separated by ',' and divisions are separated by ';'.
 def write_csv(fname):
     with open(fname, 'w') as outfile:
-        outfile.write("{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},\n".format(
+        outfile.write("{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}\n".format(
             "Preliminary Solver ID",
             "Solver ID",
             "Solver Name",
