@@ -37,21 +37,17 @@ COL_EXPECTED = 'expected'
 COL_ASSERTS = 'number of asserts'
 
 #==============================================================================
-LOGICS = set([
-        'ABVFP', 'ALIA', 'ANIA', 'AUFBVDTLIA', 'AUFDTLIA', 'AUFLIA',
-        'AUFLIRA', 'AUFNIA', 'AUFNIRA', 'BV', 'BVFP', 'FP', 'LIA',
-        'LRA', 'NIA', 'NRA', 'QF_ABV', 'QF_ABVFP', 'QF_ALIA', 'QF_ANIA',
-        'QF_AUFBV', 'QF_AUFBVLIA', 'QF_AUFBVNIA', 'QF_AUFLIA',
-        'QF_AUFNIA', 'QF_AX', 'QF_BV', 'QF_BVFP', 'QF_BVFPLRA', 'QF_DT',
-        'QF_FP', 'QF_FPLRA', 'QF_IDL', 'QF_LIA', 'QF_LIRA', 'QF_LRA',
-        'QF_NIA', 'QF_NIRA', 'QF_NRA', 'QF_RDL', 'QF_S', 'QF_SLIA',
-        'QF_UF', 'QF_UFBV', 'QF_UFBVLIA', 'QF_UFIDL', 'QF_UFLIA',
-        'QF_UFLRA', 'QF_UFNIA', 'QF_UFNRA', 'UF', 'UFBV', 'UFDT',
-        'UFDTLIA', 'UFDTNIA', 'UFIDL', 'UFLIA', 'UFLRA', 'UFNIA', 'ABV',
-        'ABVFPLRA', 'AUFDTLIRA', 'AUFDTNIRA', 'AUFFPDTLIRA', 'BVFPLRA',
-        'FPLRA', 'QF_ABVFPLRA', 'QF_UFFP', 'UFDTLIRA', 'UFDTNIRA',
-        'UFFPDTLIRA', 'UFFPDTNIRA', 'UFNIA', 'UFNRA'
-        ])
+LOGICS = set([ 'ABVFP', 'ALIA', 'ANIA', 'AUFBVDTLIA', 'AUFBVDTNIA', 'AUFDTLIA',
+'AUFFPDTNIRA', 'AUFLIA', 'AUFLIRA', 'AUFNIA', 'AUFNIRA', 'BV', 'BVFP', 'FP',
+'LIA', 'LRA', 'NIA', 'NRA', 'QF_ABV', 'QF_ABVFP', 'QF_ALIA', 'QF_ANIA',
+'QF_AUFBV', 'QF_AUFBVLIA', 'QF_AUFBVNIA', 'QF_AUFLIA', 'QF_AUFNIA', 'QF_AX',
+'QF_BV', 'QF_BVFP', 'QF_BVFPLRA', 'QF_DT', 'QF_FP', 'QF_FPLRA', 'QF_IDL',
+'QF_LIA', 'QF_LIRA', 'QF_LRA', 'QF_NIA', 'QF_NIRA', 'QF_NRA', 'QF_RDL', 'QF_S',
+'QF_SLIA', 'QF_UF', 'QF_UFBV', 'QF_UFBVLIA', 'QF_UFIDL', 'QF_UFLIA',
+'QF_UFLRA', 'QF_UFNIA', 'QF_UFNRA', 'UF', 'UFBV', 'UFDT', 'UFDTLIA', 'UFDTNIA',
+'UFIDL', 'UFLIA', 'UFLRA', 'UFNIA', 'ABV', 'ABVFPLRA', 'AUFDTLIRA',
+'AUFDTNIRA', 'AUFFPDTLIRA', 'BVFPLRA', 'FPLRA', 'QF_ABVFPLRA', 'QF_UFFP',
+'UFDTLIRA', 'UFDTNIRA', 'UFFPDTLIRA', 'UFFPDTNIRA', 'UFNIA', 'UFNRA' ])
 #==============================================================================
 
 # Get the benchmark name from a raw string.  The benchmarks may be
@@ -313,10 +309,8 @@ def filter_asserts_status(asrts_data, all_benchmarks, num_all_benchmarks,
         if (logic not in all_benchmarks):
             print(logic)
             assert(False)
-
         for family, benchmarks in families.items():
             assert(family in all_benchmarks[logic])
-
             for benchmark, (status, num_asrts) in benchmarks.items():
                 if unsat:
                     if num_asrts < NUM_ASSERTS or status != 'unsat':
@@ -356,6 +350,7 @@ def main_filter_standard(filter_csvs, all_benchmarks,
                     removed_benchmarks)
 
     if stats:
+        print("Number of benchmarks per logic after filtering:")
         print_stats(num_removed_per_logic, num_all_benchmarks)
 
     return (removed_benchmarks, all_benchmarks)
@@ -489,6 +484,7 @@ def main():
 
     # 'all_benchmarks' now contains all eligible benchmarks (inclucing new
     # benchmarks.
+    total_selected = 0
     for logic, families in sorted(all_benchmarks.items()):
         if filter_logics and not logic in filter_logics:
             # print("Ignoring logic {0}".format(logic))
@@ -515,6 +511,7 @@ def main():
             num_select = int(PERCENT * num_eligible)
 
         print("For {:15s} selected {}".format(logic, num_select))
+        total_selected += num_select
 
         if args.print_eligible:
             for benchmark in eligible_benchmarks:
@@ -546,6 +543,7 @@ def main():
 
         selected_benchmarks.extend(sorted(selected))
 
+    print("Total selected: {}".format(total_selected))
     if (args.unsat):
         sanity_check_status(unsat_data, selected_benchmarks,
                 removed_benchmarks, True)
