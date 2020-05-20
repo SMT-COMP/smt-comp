@@ -132,6 +132,7 @@ wrap_solver()
   echo ">> wrap solver"
   SOLVER_DIR=$1
   NEW_SOLVER_DIR=$2
+  rm -rf "${NEW_SOLVER_DIR}"
   cp -r "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
   echo "${NEW_SOLVER_DIR}/bin/starexec_run_default"
   mv "${NEW_SOLVER_DIR}/bin/starexec_run_"* "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
