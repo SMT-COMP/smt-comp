@@ -5,9 +5,9 @@
 Download SMT-LIB repositories.  Make three subdirectories:
 
 1. `non-incremental` where you checkout the repositories from
-    https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/<LOGIC>.git
+    https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/
 2. `incremental` where you checkout the repositories from
-    https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks-inc/<logic>.git
+    https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks-inc/
 3. checkout the repository
     https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks-tmp/benchmarks-pending.git
    to `benchmarks-pending`.
