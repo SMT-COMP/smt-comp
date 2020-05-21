@@ -13,8 +13,8 @@ NEW_SQ_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_new.txt"
 FILTER_SQ_CSV_2018="$SCRIPTDIR/../../../2018/csv/Main_Track.csv"
 FILTER_SQ_CSV_2019="$SCRIPTDIR/../../../2019/results/Single_Query_Track.csv"
 
-BENCHMARKS_INC="$SCRIPTDIR/../SMT-LIB_incremental_benchmarks_all.txt"
-NEW_INC_CSV="$SCRIPTDIR/../SMT-LIB_incremental_benchmarks_new.txt"
+BENCHMARKS_INC="$SCRIPTDIR/../SMT-LIB_incremental_benchmarks_all_filtered.txt"
+NEW_INC_CSV="$SCRIPTDIR/../SMT-LIB_incremental_benchmarks_new_filtered.txt"
 FILTER_INC_CSV_2018="$SCRIPTDIR/../../../2018/csv/Application_Track.csv"
 FILTER_INC_CSV_2019="$SCRIPTDIR/../../../2019/results/Incremental_Track.csv"
 
