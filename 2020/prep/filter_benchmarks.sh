@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# script to filter out broken benchmarks from the incremental track.
+
+### function filter_benchmark
+# Filters the benchmarks that occur in the given file.
+# arg $1: the file containing the benchmarks that should be removed
+# stdin: the file that should be filtered
+# stdout: the filtered file
 filter_benchmark () {
     perl -e '
     %filter=();
