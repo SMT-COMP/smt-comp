@@ -194,7 +194,7 @@ def write_mds(year, path):
                 "{}.md".format(s['solver_name']).replace(" ", "_").replace("/", "_")
         outfile = open(os.path.join(path, ofile_name), "w")
         md_str = "---\n"\
-                 "layout: participant\n"\
+                 "layout: participant_2020\n"\
                  "year: {}\n"\
                  "{}\ndivisions:\n{}\n---".format(
                          year, attr_fields_str, logic_fields_str)
