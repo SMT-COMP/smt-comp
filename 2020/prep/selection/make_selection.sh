@@ -35,7 +35,7 @@ printf "+++++++++++\n\nSQ TRACK\n\n"
 python $SELECT --filter "$FILTER_SQ_CSV_2019" --filter "$FILTER_SQ_CSV_2018" --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/"
 
 printf "+++++++++++\n\nINC TRACK\n\n"
-python $SELECT --filter "$FILTER_INC_CSV_2019" --filter "$FILTER_INC_CSV_2018" --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/"
+python $SELECT --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/"
 
 printf "+++++++++++\n\nUC TRACK\n\n"
 python $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s $SEED --print-stats --out "$OUT_UC" --prefix "/non-incremental/" --unsat "$FILTER_UC_CSV"
