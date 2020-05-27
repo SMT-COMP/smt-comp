@@ -50,7 +50,7 @@ if __name__ == '__main__':
     ofile_name = "participants.md"
     outfile = open(os.path.join(args.md_path, ofile_name), "w")
     md_str = "---\n"\
-             "layout: participants_2020\n\n"\
+             "layout: participants\n\n"\
              "year: {}\n"\
              "participants: participants_{}\n\n"\
              "nyse:\n"\
