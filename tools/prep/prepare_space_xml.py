@@ -33,6 +33,8 @@ COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
 COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
+# Other Columns
+COL_IS_COMPETING = 'Competing'
 
 # Print error message and exit.
 def die(msg):
@@ -86,6 +88,8 @@ def read_csv():
             elif track == TRACK_UNSAT_CORE:
                 divisions = drow[COL_UNSAT_CORE_TRACK].split(';')
             assert (divisions)
+            if drow[COL_IS_COMPETING] == "no":
+                g_args.non_competing.append(solver_id)
 
             for division in divisions:
                 if division == "":
