@@ -25,16 +25,19 @@ BENCHMARKS_MV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
 NEW_MV_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_new.txt"
 FILTER_MV_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all_assertions.csv"
 
+# Note that python2 and python3 disagree on random choice function.
+# Always use python3 to get reproducible results.
 SEED=332349782
+PYTHON=python3
 
 printf "MV TRACK\n\n"
-python $SELECT --benchmarks "$BENCHMARKS_MV" --new-benchmarks "$NEW_MV_CSV" -s $SEED --print-stats --out "$OUT_MV" --prefix "/non-incremental/" --logic "QF_BV;QF_LIA;QF_LRA;QF_LIRA;QF_RDL;QF_IDL" --sat "$FILTER_MV_CSV"
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_MV" --new-benchmarks "$NEW_MV_CSV" -s $SEED --print-stats --out "$OUT_MV" --prefix "/non-incremental/" --logic "QF_BV;QF_LIA;QF_LRA;QF_LIRA;QF_RDL;QF_IDL" --sat "$FILTER_MV_CSV"
 
 printf "+++++++++++\n\nSQ TRACK\n\n"
-python $SELECT --filter "$FILTER_SQ_CSV_2019" --filter "$FILTER_SQ_CSV_2018" --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/"
+$PYTHON $SELECT --filter "$FILTER_SQ_CSV_2019" --filter "$FILTER_SQ_CSV_2018" --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/"
 
 printf "+++++++++++\n\nINC TRACK\n\n"
-python $SELECT --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/"
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/"
 
 printf "+++++++++++\n\nUC TRACK\n\n"
-python $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s $SEED --print-stats --out "$OUT_UC" --prefix "/non-incremental/" --unsat "$FILTER_UC_CSV"
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s $SEED --print-stats --out "$OUT_UC" --prefix "/non-incremental/" --unsat "$FILTER_UC_CSV"
