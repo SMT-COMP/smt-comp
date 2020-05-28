@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-from extract_data_from_solvers_divisions import g_logics_all as g_logics_all
+from extract_data_from_solvers_divisions import read_divisions
 import sys
 import os
+
+g_logics_all = None
+g_logics_to_tracks = None
 
 # Print error message and exit.
 def die(msg):
@@ -30,6 +33,8 @@ def get_division_str(divisions_indexed_by_tracks):
 if __name__ == '__main__':
     parser = ArgumentParser(
             description = "Generate participants.md file for website.")
+    parser.add_argument ("-d", "--divisions", required=True,
+            help="a json file with the tracks and divisions (required)")
     parser.add_argument ("-y", "--year",
             required=True,
             help="the year of the competition")
@@ -47,6 +52,7 @@ if __name__ == '__main__':
     if not len(args.nyse) == 2:
         die("Invalid NYSE data")
 
+    g_logics_all, g_logics_to_tracks = read_divisions(args.divisions)
     ofile_name = "participants.md"
     outfile = open(os.path.join(args.md_path, ofile_name), "w")
     md_str = "---\n"\

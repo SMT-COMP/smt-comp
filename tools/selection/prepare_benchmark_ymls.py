@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
+import json
 import sys
 import os
 import re
@@ -17,54 +18,6 @@ TRACK_SINGLE_QUERY_CHALLENGE_RAW = 'track_single_query_challenge'
 TRACK_INCREMENTAL_CHALLENGE_RAW = 'track_incremental_challenge'
 TRACK_UNSAT_CORE_RAW = 'track_unsat_core'
 TRACK_MODEL_VALIDATION_RAW = 'track_model_validation'
-
-g_logics_all = {
-        TRACK_SINGLE_QUERY_RAW     : [
-            'ABVFP','ALIA','AUFBVDTLIA','AUFDTLIA','AUFLIA','AUFLIRA','AUFNIA',
-            'AUFNIRA','BV','BVFP','FP','LIA','LRA','NIA','NRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
-            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP','QF_FPLRA',
-            'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA','QF_NIRA','QF_NRA',
-            'QF_RDL','QF_S','QF_SLIA','QF_UF','QF_UFBV','QF_UFIDL','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
-            'UFDTNIA','UFIDL','UFLIA','UFLRA','UFNIA',
-            ],
-        TRACK_INCREMENTAL_RAW      : [
-            'ABVFP','ALIA','ANIA','AUFNIRA','BV','BVFP','LIA','LRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFBVLIA',
-            'QF_AUFBVNIA','QF_AUFLIA','QF_BV','QF_BVFP','QF_FP','QF_LIA',
-            'QF_LRA','QF_NIA','QF_UF','QF_UFBV','QF_UFBVLIA','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','UFLRA',
-            ],
-        TRACK_SINGLE_QUERY_CHALLENGE_RAW        : [
-            'QF_BV',
-            'QF_ABV',
-            'QF_AUFBV',
-            ],
-        TRACK_INCREMENTAL_CHALLENGE_RAW        : [
-            'QF_BV',
-            'QF_ABV',
-            'QF_AUFBV',
-            ],
-        TRACK_UNSAT_CORE_RAW       : [
-            'ABVFP','ALIA','AUFBVDTLIA','AUFDTLIA','AUFLIA','AUFLIRA','AUFNIA',
-            'AUFNIRA','BV','BVFP','FP','LIA','LRA','NIA','NRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
-            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP','QF_FPLRA',
-            'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA','QF_NIRA','QF_NRA',
-            'QF_RDL','QF_S','QF_SLIA','QF_UF','QF_UFBV','QF_UFIDL','QF_UFLIA',
-            'QF_UFLRA','QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
-            'UFDTNIA','UFIDL','UFLIA','UFLRA','UFNIA',
-            ],
-        TRACK_MODEL_VALIDATION_RAW : ['QF_BV']
-        }
-
-all_logics = []
-for k in g_logics_all:
-    for l in g_logics_all[k]:
-        all_logics.append(l)
-
-all_logics = set(all_logics)
 
 # Tracks
 COL_SINGLE_QUERY_TRACK = 'Single Query Track'
@@ -84,18 +37,13 @@ track_raw_names_to_pretty_names = {
         }
 
 usage_str = """
-
-Produce yamls suitable for showing in the web site from lists of files
-submitted to starexec.  The file lists are given as arguments specifying
-which track they relate to, and contain lines in the form
-
-/non-incremental/ALIA/piVC/piVC_0f7c6a.smt2
-
-Usage:
-
-  $ %s %s
-
+Produce the md files for the divisions directory on the smt-comp site that
+shows the number of selected benchmarks.
 """
+
+# Read divisions from a JSON formatted file.
+def read_divisions(fname):
+    return json.load(open(fname))
 
 def fillLogic(logic_data, track, bm_files, noncomp_files):
     print("Filling logic_data for track %s using benchmark files `%s'"\
@@ -127,7 +75,7 @@ def fillLogic(logic_data, track, bm_files, noncomp_files):
 
     return logic_data
 
-def tostring(logic_name, logic_el):
+def tostring(year, logic_name, logic_el):
     track_str_list = []
     comments = []
     for track in logic_el:
@@ -139,48 +87,51 @@ def tostring(logic_name, logic_el):
         for i in range(0, len(tr_el[3])):
             comments.append(tr_el[3][i])
     yaml_str = """---
-layout: logic
+layout: division
+year: %d
 division: %s
 description: %s
 tracks:
 %s
 ---
 %s
-""" % (logic_name, SMTLIB_DESCR_TEMPLATE % logic_name, \
+""" % (year, logic_name, SMTLIB_DESCR_TEMPLATE % logic_name, \
         "\n".join(track_str_list), "\n".join(comments))
     return yaml_str
 
-def printYaml(logic_name, logic_el, path):
+def printYaml(year, logic_name, logic_el, path):
 
     p = os.path.join(path, "%s.md" % logic_name)
-    s = tostring(logic_name, logic_el)
+    s = tostring(year, logic_name, logic_el)
     open(p, 'w').write(s)
 
 if __name__ == '__main__':
-    tracks = list(map(lambda x: x.replace('track_', ''), g_logics_all.keys()))
+    tracks = list(map(lambda x: x.replace('track_', ''), track_raw_names_to_pretty_names.keys()))
 
-    s = usage_str % (sys.argv[0], sys.argv[0])
-    parser = ArgumentParser(usage = s)
+    parser = ArgumentParser(usage=usage_str)
+    parser.add_argument("-d", "--divisions", type=str, required=True,
+            help="a json file containing the divisions")
+    parser.add_argument("-y", "--year", type=int, required=True,
+            help="the competition year")
 
     for argname in tracks:
-        help_str = "A list of files containing the "\
+        help_str = "A comma separated list of files containing the "\
                 "selected %s benchmarks" % \
                 track_raw_names_to_pretty_names['track_%s' % argname]
         parser.add_argument("--%s" % argname, metavar="file", type=str,
-                nargs='*', dest=argname, help=help_str)
+                dest=argname, help=help_str)
 
         argname_nc = "%s_noncompetitive" % argname
-        hel_str = "A list of files containing the "\
+        hel_str = "A comma separated list of files containing the "\
                 "non competitive logics in track %s" % \
                 track_raw_names_to_pretty_names['track_%s' % argname]
         parser.add_argument("--%s-noncompetitive" % argname, \
-                metavar = "file", type=str, nargs='*', dest=argname_nc, \
+                metavar = "file", type=str, dest=argname_nc, \
                 help=help_str)
 
 
-    parser.add_argument("--yaml-path", metavar="path", type=str,
-            dest='yaml_path', required=True, help="path where the yaml"\
-            "files should be placed")
+    parser.add_argument("output_dir", type=str,
+            help="directory where the division files should be placed")
 
     args = parser.parse_args()
 
@@ -190,11 +141,15 @@ if __name__ == '__main__':
 
         if tr_files == None:
             tr_files = []
+        else:
+            tr_files = tr_files.split(",")
 
         tr_nocomp_files = eval("args.%s_noncompetitive" % x)
 
         if tr_nocomp_files == None:
             tr_nocomp_files = []
+        else:
+            tr_nocomp_files = tr_nocomp_files.split(",")
 
         tracks_to_files[x] = (tr_files, tr_nocomp_files)
 
@@ -202,10 +157,16 @@ if __name__ == '__main__':
             if not os.path.exists(f):
                 die("File not found: {}".format(f))
 
-    if not os.path.exists(args.yaml_path):
-        die("Path not found: {}".format(args.yaml_path))
+    if not os.path.exists(args.output_dir):
+        die("Path not found: {}".format(args.output_dir))
 
     logic_data = {}
+    all_logics = []
+    division_info = read_divisions(args.divisions)
+    tracks = list(map(lambda x: x.replace('track_', ''), division_info.keys()))
+    for track in division_info:
+        all_logics.extend(division_info[track])
+    all_logics = set(all_logics)
     for logic in all_logics:
         logic_data[logic] = {}
         for track in tracks:
@@ -216,5 +177,5 @@ if __name__ == '__main__':
         logic_data = fillLogic(logic_data, tr, bm_files, noncomp_files)
 
     for logic in all_logics:
-        printYaml(logic, logic_data[logic], args.yaml_path)
+        printYaml(args.year, logic, logic_data[logic], args.output_dir)
 
