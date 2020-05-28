@@ -203,7 +203,7 @@ def print_div_competitiveness(o_path, canonical):
             part_set_filtered = filter(lambda x: g_submissions[x]['competing'] == 'yes', part_set)
             if len(set(part_set_filtered)) <= 1:
                 ofd.write("%s\n" % division)
-                ofd.write("# %s %s track participated %s.\n" %\
+                ofd.write("# %s %s participated %s.\n" %\
                         (division,
                             track_raw_names_to_pretty_names[track], \
                             "by no solver" if len(set(part_set)) == 0 \
