@@ -253,6 +253,8 @@ def add_solvers():
                     # divisions, which are then removed below.
                     if is_competitive(solvers):
                       add_solvers_in_space(subspace, solvers)
+                    else:
+                      print("Removing division {} without enough competitive solvers".format(division))
             # remove spaces without solvers
             remove_spaces_without_solvers(space)
             # remove top-level non-incremental/incremental space tag
