@@ -1,0 +1,7 @@
+{
+    "CVC4": ["CVC4-inc", "CVC4-mv", "CVC4-uc"],
+    "SMT-RAT": ["SMT-RAT-CAlC", "SMT-RAT-MCSAT"],
+    "STP + CMS": ["STP + MergeSAT"],
+    "Yices 2": ["Yices 2 Model Validation", "Yices 2 incremental"],
+    "MathSAT5": ["MathSAT5-mv"]
+}

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
+from collections import OrderedDict
 import csv
 import json
 
@@ -9,62 +10,14 @@ import os
 import re
 
 g_sum_seed = 0
-
 g_submissions = None
+g_logics_all = None
+g_logics_to_tracks = None
 
 TRACK_SINGLE_QUERY_RAW = 'track_single_query'
 TRACK_INCREMENTAL_RAW = 'track_incremental'
 TRACK_UNSAT_CORE_RAW = 'track_unsat_core'
 TRACK_MODEL_VALIDATION_RAW = 'track_model_validation'
-
-g_logics_all = {
-        TRACK_SINGLE_QUERY_RAW     : [
-            'ABV','ABVFP','ABVFPLRA','ALIA','AUFBVDTLIA','AUFDTLIA',
-            'AUFDTLIRA','AUFDTNIRA','AUFFPDTLIRA','AUFLIA','AUFLIRA',
-            'AUFNIA', 'AUFNIRA','BV','BVFP','BVFPLRA','FP','FPLRA',
-            'LIA','LRA','NIA','NRA','QF_ABV', 'QF_ABVFP','QF_ABVFPLRA',
-            'QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
-            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP',
-            'QF_FPLRA', 'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA',
-            'QF_NIRA','QF_NRA', 'QF_RDL','QF_S','QF_SLIA','QF_UF',
-            'QF_UFBV','QF_UFFP','QF_UFIDL','QF_UFLIA', 'QF_UFLRA',
-            'QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
-            'UFDTLIRA', 'UFDTNIA','UFDTNIRA','UFFPDTLIRA','UFFPDTNIRA',
-            'UFIDL','UFLIA','UFLRA','UFNIA',
-            ],
-        TRACK_INCREMENTAL_RAW      : [
-            'ABVFP','ALIA','ANIA','AUFNIRA','BV','BVFP','LIA','LRA','QF_ABV',
-            'QF_ABVFP','QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFBVLIA',
-            'QF_AUFBVNIA','QF_AUFLIA','QF_BV','QF_BVFP','QF_FP','QF_LIA',
-            'QF_LRA','QF_NIA','QF_UF','QF_UFBV','QF_UFBVLIA','QF_UFFP',
-            'QF_UFLIA', 'QF_UFLRA','QF_UFNIA','UF','UFLRA','UFNIA','UFNRA'
-            ],
-        TRACK_UNSAT_CORE_RAW       : [
-            'ABV','ABVFP','ABVFPLRA','ALIA','AUFBVDTLIA','AUFDTLIA',
-            'AUFDTLIRA','AUFDTNIRA','AUFFPDTLIRA','AUFLIA','AUFLIRA',
-            'AUFNIA', 'AUFNIRA','BV','BVFP','BVFPLRA','FP','FPLRA',
-            'LIA','LRA','NIA','NRA','QF_ABV', 'QF_ABVFP','QF_ABVFPLRA',
-            'QF_ALIA','QF_ANIA','QF_AUFBV','QF_AUFLIA','QF_AUFNIA',
-            'QF_AX','QF_BV','QF_BVFP','QF_BVFPLRA','QF_DT','QF_FP',
-            'QF_FPLRA', 'QF_IDL','QF_LIA','QF_LIRA','QF_LRA','QF_NIA',
-            'QF_NIRA','QF_NRA', 'QF_RDL','QF_S','QF_SLIA','QF_UF',
-            'QF_UFBV','QF_UFFP','QF_UFIDL','QF_UFLIA', 'QF_UFLRA',
-            'QF_UFNIA','QF_UFNRA','UF','UFBV','UFDT','UFDTLIA',
-            'UFDTLIRA', 'UFDTNIA','UFDTNIRA','UFFPDTLIRA','UFFPDTNIRA',
-            'UFIDL','UFLIA','UFLRA','UFNIA',
-            ],
-        TRACK_MODEL_VALIDATION_RAW : ['QF_BV', 'QF_IDL', 'QF_RDL', 'QF_LIA',
-            'QF_LRA', 'QF_LIRA']
-        }
-
-
-
-g_logics_to_tracks = {}
-for track in g_logics_all:
-    for logic in g_logics_all[track]:
-        if not logic in g_logics_to_tracks:
-            g_logics_to_tracks[logic] = []
-        g_logics_to_tracks[logic].append(track)
 
 COL_PRELIMINARY_SOLVER_ID = 'Preliminary Solver ID'
 COL_SOLVER_ID = 'Solver ID'
@@ -117,6 +70,17 @@ g_properties = [
 def die(msg):
     print("error: {}".format(msg))
     sys.exit(1)
+
+# Read divisions from a JSON formatted file.
+def read_divisions(fname):
+    logics_all=json.load(open(fname))
+    logics_to_tracks={}
+    for track in logics_all:
+        for logic in logics_all[track]:
+            if not logic in logics_to_tracks:
+                logics_to_tracks[logic] = []
+            logics_to_tracks[logic].append(track)
+    return (logics_all, logics_to_tracks)
 
 # Read csv with submissions data from solvers_divisions_final.
 def read_csv(fname):
@@ -214,18 +178,23 @@ def print_div_competitiveness(o_path, canonical):
             competitiveness[track][division] = set()
 
     for s in g_submissions:
-        s_canon = canonical[s]
+        if s in canonical:
+            s_canon = canonical[s]
+        else:
+            s_canon = s
         for track in track_raw_names_to_pretty_names.keys():
             for division in g_submissions[s][track]:
                 if division == "":
+                    continue
+                if not division in competitiveness[track]:
+                    print("WARNING: Solver %s entered in non-existing division %s in %s"
+                          % (s_canon, division, track))
                     continue
                 if s_canon not in competitiveness[track][division]:
                     competitiveness[track][division].add(s_canon)
 
     for track in competitiveness:
-        # single_query_2019_noncomp.txt
         ofile = os.path.join(o_path, track.replace("track_", ""))
-        ofile = "%s_2019_noncomp.txt" % ofile
         ofd = open(ofile, 'w')
 
         for division in competitiveness[track]:
@@ -234,10 +203,11 @@ def print_div_competitiveness(o_path, canonical):
             part_set_filtered = filter(lambda x: g_submissions[x]['competing'] == 'yes', part_set)
             if len(set(part_set_filtered)) <= 1:
                 ofd.write("%s\n" % division)
-                ofd.write("# %s %s track participated only by %s.\n" %\
+                ofd.write("# %s %s participated %s.\n" %\
                         (division,
                             track_raw_names_to_pretty_names[track], \
-                                    ", ".join(set(part_set))))
+                            "by no solver" if len(set(part_set)) == 0 \
+                            else "only by " + (", ".join(set(part_set)))))
         ofd.close()
 
 def read_canon(f):
@@ -268,6 +238,8 @@ if __name__ == '__main__':
                           "Optionally, identify non-competitive divisions "\
                           "based on the given mapping from solver variants "\
                           "their canonical version.")
+    parser.add_argument ("-d", "--divisions", required=True,
+            help="a json file with the tracks and divisions (required)")
     parser.add_argument ("solver_divisions",
             help="the main csv from solver registrations")
     parser.add_argument("md_path",
@@ -294,6 +266,7 @@ if __name__ == '__main__':
     if not os.path.exists(args.md_path):
         die("Path not found: {}".format(args.md_path))
 
+    g_logics_all,g_logics_to_tracks = read_divisions(args.divisions)
     read_csv(args.solver_divisions)
 
     if args.canon:
