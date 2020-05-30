@@ -10,10 +10,11 @@ fi
 
 SCRAMBLER=$1
 SMTLIB_DIR=$2
+LANG=C
 
 echo "benchmark,number of asserts,status"
 cd $SMTLIB_DIR
-find . -name '*.smt2' | while read file; do
+find . -name '*.smt2' | sort | while read file; do
    n_asrts=$($SCRAMBLER -count-asserts true < "$file" 2>&1 >/dev/null | \
              sed -n 's/^; Number of assertions: \([0-9][0-9]*\)/\1/p')
    status=$(grep '([ \t]*set-info[ \t][ \t]*:status[ \t].*[ \t]*)' < "$file" | \
