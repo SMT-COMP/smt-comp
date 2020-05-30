@@ -37,3 +37,4 @@ mv SMT-LIB_non_incremental_benchmarks_new.txt SMT-LIB_non_incremental_benchmarks
 done) < SMT-LIB_non_incremental_benchmarks_new-orig.txt | sort | uniq > SMT-LIB_non_incremental_benchmarks_new.txt
 
 ../../tools/selection/make_statuses_and_asserts.sh $SCRAMBLER $1/non-incremental > SMT-LIB_non_incremental_benchmarks_all_assertions.csv
+../../tools/scoring/make_num_check_sat.sh $1/incremental > SMT-LIB_incremental_benchmarks_num_check_sat.csv
