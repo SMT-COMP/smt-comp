@@ -17,7 +17,7 @@ fi
 for track in incremental non-incremental; do
   utrack=$(echo $track | tr '-' '_')
   # find benchmarks and convert logic to upper-case
-  (cd $1/$track; find -name \*.smt2) | perl -pe 's!./[\/]*/!\U$&\E!' | sort > SMT-LIB_${utrack}_benchmarks_all.txt
+  (cd $1/$track; find -name \*.smt2) | perl -pe 's!^./[^/]*/!\U$&\E!' | sort > SMT-LIB_${utrack}_benchmarks_all.txt
   # find new benchmarks
   (cd $1/benchmarks-pending/DONE/$YEAR/$track; find -name \*.smt2) | sort > SMT-LIB_${utrack}_benchmarks_new.txt
 done
@@ -36,6 +36,4 @@ mv SMT-LIB_non_incremental_benchmarks_new.txt SMT-LIB_non_incremental_benchmarks
   fi
 done) < SMT-LIB_non_incremental_benchmarks_new-orig.txt | sort | uniq > SMT-LIB_non_incremental_benchmarks_new.txt
 
-../../tools/selection/make_statuses_and_asserts.sh $SCRAMBLER $1/non-incremental > SMT-LIB_non_incremental_benchmarks_all_assertions_unsorted.csv
-head -n 1 SMT-LIB_non_incremental_benchmarks_all_assertions_unsorted.csv > SMT-LIB_non_incremental_benchmarks_all_assertions.csv
-tail -n +2 SMT-LIB_non_incremental_benchmarks_all_assertions_unsorted.csv | sort >> SMT-LIB_non_incremental_benchmarks_all_assertions.csv
+../../tools/selection/make_statuses_and_asserts.sh $SCRAMBLER $1/non-incremental > SMT-LIB_non_incremental_benchmarks_all_assertions.csv
