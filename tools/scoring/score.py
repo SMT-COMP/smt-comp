@@ -184,6 +184,10 @@ def remove_disagreements(data):
         i = 1
         for b in exclude:
             log('[{}] {}'.format(i, b))
+            bad_solvers = data[(data.benchmark == b) & (~data.solver.isin(unsound_solvers))
+                          & ((data.result == RESULT_SAT)
+                              | (data.result == RESULT_UNSAT))]
+            print(bad_solvers[["solver", "result", "cpu_time"]].to_string(header=None, index=False))
             i += 1
 
     # Exclude benchmarks on which solvers disagree.
