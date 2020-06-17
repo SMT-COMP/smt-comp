@@ -4,7 +4,7 @@ SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 OUTPUT=results
 
-PREPARE="$SCRIPTDIR/../../tools/scoring/score.py"
+SCORE="$SCRIPTDIR/../../tools/scoring/score.py"
 
 RESULTS_SQ="$SCRIPTDIR/../results/Single_Query_Track.csv"
 RESULTS_SQ_STRINGS="$SCRIPTDIR/../../2019/results/Single_Query_Track_strings.csv"
@@ -34,21 +34,22 @@ do
       echo
       echo "  options:"
       echo "    -h, --help     Print this message and exit"
+      echo "    --all          All tracks"
       echo "    --sq           Single Query track (no strings)"
-      echo "    --sq-strings   Single Query track (only strings)"
       echo "    --inc          Incremental track "
-      echo "    --csq          Challenge track non-incremental "
-      echo "    --cinc         Challenge track incremental "
       echo "    --uc           Unsat Core track "
       echo "    --mv           Model Validation track "
       echo
       exit
       ;;
+    --all)
+      GEN_SQ=yes
+      GEN_INC=yes
+      GEN_UC=yes
+      GEN_MV=yes
+      ;;
     --sq)
       GEN_SQ=yes
-      ;;
-    --sq-strings)
-      GEN_SQ_STRINGS=yes
       ;;
     --inc)
       GEN_INC=yes
@@ -72,12 +73,12 @@ done
 mkdir -p $OUTPUT
 
 [[ -n $GEN_SQ ]] && \
-python3 $PREPARE -y 2020 --csv $RESULTS_SQ  -t $TIME --gen-md $OUTPUT -T sq -S $SOLVERS_CSV
+python3 $SCORE -y 2020 --csv $RESULTS_SQ  -t $TIME --gen-md $OUTPUT -T sq -S $SOLVERS_CSV
 [[ -n $GEN_SQ_STRINGS ]] && \
-python3 $PREPARE -y 2020 --csv $RESULTS_SQ_STRINGS  -t $TIME --gen-md $OUTPUT -T sq -S $SOLVERS_CSV
+python3 $SCORE -y 2020 --csv $RESULTS_SQ_STRINGS  -t $TIME --gen-md $OUTPUT -T sq -S $SOLVERS_CSV
 [[ -n $GEN_INC ]] && \
-python3 $PREPARE -y 2020 --csv $RESULTS_INC  -t $TIME --gen-md $OUTPUT -T inc -S $SOLVERS_CSV -i $INC_NUM_CHECK_SAT
+python3 $SCORE -y 2020 --csv $RESULTS_INC  -t $TIME --gen-md $OUTPUT -T inc -S $SOLVERS_CSV -i $INC_NUM_CHECK_SAT
 [[ -n $GEN_UC ]] && \
-python3 $PREPARE -y 2020 --csv $RESULTS_UC  -t $TIME --gen-md $OUTPUT -T uc -S $SOLVERS_CSV
+python3 $SCORE -y 2020 --csv $RESULTS_UC  -t $TIME --gen-md $OUTPUT -T uc -S $SOLVERS_CSV
 [[ -n $GEN_MV ]] && \
-python3 $PREPARE -y 2020 --csv $RESULTS_MV  -t $TIME --gen-md $OUTPUT -T mv -S $SOLVERS_CSV
+python3 $SCORE -y 2020 --csv $RESULTS_MV  -t $TIME --gen-md $OUTPUT -T mv -S $SOLVERS_CSV
