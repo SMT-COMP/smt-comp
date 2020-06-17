@@ -1628,6 +1628,47 @@ def to_md_files_comp_largest_contribution(results_seq,
             outfile.write("\n".join([str_comp, str_lc, '---\n']))
 
 
+# Generate results .md file for competition-wide overview for a track.
+#
+# year         : The year of the competition
+# path         : The path of the directory to write the .md files.
+# track        : A string identifying the track, use one of the variables
+#                  - TRACK_SQ
+#                  - TRACK_INC
+#                  - TRACK_CHALL_SQ
+#                  - TRACK_CHALL_INC
+#                  - TRACK_UC
+#                  - TRACK_MV
+def to_md_files_comp_summary(year, path, track):
+    global g_tracks, g_exts, g_args
+    scores = []
+    if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
+        scores.append("sequential")
+    scores.append("parallel")
+    if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+        scores.append("sat")
+        scores.append("unsat")
+        scores.append("twentyfour")
+
+    str_results = ("---\n"\
+                   "layout: results_summary\n"\
+                   "track: {track}\n"\
+                   "scores: {scores}\n"\
+                   "year: {year}\n"\
+                   "results: results_{year}\n"\
+                   "divisions: divisions_{year}\n"\
+                   "participants: participants_{year}\n"\
+                   "---\n"
+                   .format(year=year,
+                           scores=",".join(scores),
+                           track=g_tracks[track]))
+
+    # write md file
+    file_path = os.path.join(path, "results{}".format(g_exts[track]))
+    with open(file_path, "w") as outfile:
+        outfile.write(str_results)
+
+
 # Generate all results .md files for the competition website.
 #
 # csv       : The input csv with the competition results.
@@ -1700,7 +1741,9 @@ def gen_results_md_files(csv, time_limit, year, path, path_comp):
                                           path_comp,
                                           time_limit,
                                           g_args.track)
-
+    to_md_files_comp_summary(year,
+                             path_comp,
+                             g_args.track)
 
 
 ###############################################################################
