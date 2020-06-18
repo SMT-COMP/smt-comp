@@ -20,6 +20,8 @@ SELECT_INC="$SCRIPTDIR/../selection/final/benchmark_selection_incremental"
 SELECT_MV="$SCRIPTDIR/../selection/final/benchmark_selection_model_validation"
 SELECT_UC="$SCRIPTDIR/../selection/final/benchmark_selection_unsat_core"
 
+COMPETITIVE_SQ="28856,28855,28854,28859,28868,28867,28862,28866,28879,28878,28863,28864,28865,28857,28858,28876,28860,28874,28880,28869,28861,28873,28881"
+
 ### Output space xml files
 # Single Query
 OUT_SPACE_SQ=
@@ -122,3 +124,7 @@ python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_MV" -t model_vali
 # Unsat Core Track
 [[ -n $OUT_SPACE_UC ]] && \
 python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_UC" -t unsat_core --select "$SELECT_UC" -w
+
+# Single Query Track BestOf and fixed solvers
+[[ -n $OUT_SPACE_SQ ]] && \
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w --exclude-solvers "$COMPETITIVE_SQ"
