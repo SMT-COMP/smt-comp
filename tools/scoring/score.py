@@ -1883,7 +1883,8 @@ def main():
             print(lc)
 
             if (g_args.bestof):
-              winners = grouped[(grouped["rank"] == 1) & grouped.competitive]
+              # get winner *including non-competitive*
+              winners = grouped[(grouped["rank"] == 1)]
               print("Best competitive solvers:\n" + winners[["name"]].to_csv())
 
         result = pandas.concat(data, ignore_index = True)
