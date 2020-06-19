@@ -1809,8 +1809,8 @@ def parse_args():
                         type=str,
                         help='CSV containing incremental status information')
     parser.add_argument("-b", "--bestof",
-                        action="store_true",
-                        default=False,
+                        type=str,
+                        default="",
                         help="list the best competing solvers, per division, of given year, in a csv with year/division/name")
 
     required = parser.add_argument_group("required arguments")
@@ -1938,10 +1938,21 @@ def main():
             print(bl)
             print(lc)
 
-            if (g_args.bestof):
+            if (g_args.bestof != ""):
               # get winner *including non-competitive*
-              winners = grouped[(grouped["rank"] == 1)]
-              print("Best competitive solvers:\n" + winners[["name"]].to_csv())
+              winners = grouped[\
+                          (grouped["rank"] == 1) &\
+                          (grouped["score_correct"] > 0) &\
+                          (grouped["score_error"] == 0)
+                        ]
+              winners = winners.reset_index()\
+                .drop_duplicates(["year", "division"], keep="first")
+
+
+              winners[["year", "division", "name","solver_id"]]\
+                      .to_csv(path_or_buf = g_args.bestof, \
+                              columns = ["division", "name","solver_id"], \
+                              index = False)
 
         result = pandas.concat(data, ignore_index = True)
 
