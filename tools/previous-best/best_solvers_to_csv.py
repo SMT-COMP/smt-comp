@@ -41,6 +41,13 @@ def parse_args():
 
     parser = ArgumentParser()
 
+    parser.add_argument("-O", "--output",
+            action="store",
+            dest="outfile",
+            default="/dev/stdout",
+            required=False,
+            help="The output file")
+
     required = parser.add_argument_group("required arguments")
     required.add_argument("-s", "--single-query",
             action="store",
@@ -112,6 +119,8 @@ if __name__ == '__main__':
 
     with open(g_args.old_registration) as old_registration:
         old_registration = csv.DictReader(open(g_args.old_registration))
+
+        out = open(g_args.outfile, 'w')
         for row in old_registration:
             if row[REG_NAME_COL] not in winners:
                 continue
@@ -140,5 +149,5 @@ if __name__ == '__main__':
                 else:
                     new_winner_row.append('')
 
-            print(",".join(new_winner_row))
-
+            out.write("%s\n" % ",".join(new_winner_row))
+        out.close()
