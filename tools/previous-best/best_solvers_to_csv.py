@@ -121,6 +121,7 @@ if __name__ == '__main__':
         old_registration = csv.DictReader(open(g_args.old_registration))
 
         out = open(g_args.outfile, 'w')
+        out.write("%s\n" % ",".join(list(new_header.keys())))
         for row in old_registration:
             if row[REG_NAME_COL] not in winners:
                 continue
