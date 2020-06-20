@@ -1,14 +1,11 @@
 #! /bin/bash
 
-SCRIPTDIR=`dirname $(readlink -f "$0")`
+SCRIPTDIR=`dirname $(greadlink -f "$0")`
 
 PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"
 SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_final.csv"
 
-# SOLVERS_SQ_CSV="$SCRIPTDIR/../../registration/sq-cvc4-yices.csv"
-# SOLVERS_INC_CSV="$SCRIPTDIR/../../registration/inc-cvc4-yices.csv"
-# SOLVERS_MV_CSV="$SCRIPTDIR/../../registration/mv-cvc4-yices.csv"
-# SOLVERS_UC_CSV="$SCRIPTDIR/../../registration/uc-cvc4-yices.csv"
+INCLUDE_NONCOMPETITIVE=""
 
 ### Input space xml files
 IN_SPACE_NON_INC="../non-incremental-space.xml"
@@ -19,8 +16,6 @@ SELECT_SQ="$SCRIPTDIR/../selection/final/benchmark_selection_single_query"
 SELECT_INC="$SCRIPTDIR/../selection/final/benchmark_selection_incremental"
 SELECT_MV="$SCRIPTDIR/../selection/final/benchmark_selection_model_validation"
 SELECT_UC="$SCRIPTDIR/../selection/final/benchmark_selection_unsat_core"
-
-COMPETITIVE_SQ="28856,28855,28854,28859,28868,28867,28862,28866,28879,28878,28863,28864,28865,28857,28858,28876,28860,28874,28880,28869,28861,28873,28881"
 
 ### Output space xml files
 # Single Query
@@ -68,6 +63,7 @@ do
       echo "    --inc         <file> Incremental track output xml"
       echo "    --uc          <file> Unsat Core track output xml"
       echo "    --mv          <file> Model Validation track output xml"
+      echo "    --solvdiv     <file> An optional alternative solvers divisions file"
       echo
       exit
       ;;
@@ -99,6 +95,11 @@ do
       shift
       OUT_SPACE_MV=$1
       ;;
+    --solvdiv)
+      shift
+      SOLVERS_CSV=$1
+      INCLUDE_NONCOMPETITIVE="--include-non-competitive"
+      ;;
     -*)
         echo "ERROR: invalid option '$1'"
         exit 1
@@ -111,20 +112,20 @@ done
 
 # Single Query Track
 [[ -n $OUT_SPACE_SQ ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w "$INCLUDE_NONCOMPETITIVE"
 
 # Incremental Track
 [[ -n $OUT_SPACE_INC ]] && \
-python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w "$INCLUDE_NONCOMPETITIVE"
+
 
 # Model Validation Track
 [[ -n $OUT_SPACE_MV ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_MV" -t model_validation --select "$SELECT_MV" -w
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_MV" -t model_validation --select "$SELECT_MV" -w "$INCLUDE_NONCOMPETITIVE"
+
 
 # Unsat Core Track
 [[ -n $OUT_SPACE_UC ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_UC" -t unsat_core --select "$SELECT_UC" -w
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_UC" -t unsat_core --select "$SELECT_UC" -w "$INCLUDE_NONCOMPETITIVE"
 
-# Single Query Track BestOf and fixed solvers
-[[ -n $OUT_SPACE_SQ ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w --exclude-solvers "$COMPETITIVE_SQ"
+
