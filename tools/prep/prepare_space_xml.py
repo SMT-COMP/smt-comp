@@ -255,7 +255,7 @@ def add_solvers():
                     # Only add solvers if the division is competitive.
                     # Consequently, solvers do not get added to non-competitive
                     # divisions, which are then removed below.
-                    if is_competitive(solvers):
+                    if g_args.run_noncompetitive or is_competitive(solvers):
                       add_solvers_in_space(subspace, solvers)
                     else:
                       print("Removing division {} without enough competitive solvers".format(division))
@@ -316,6 +316,7 @@ def main():
                              "solvers (StarExec IDs, wrapped IDs if -w)")
     parser.add_argument("--include-non-competitive",
                         default=False,
+                        dest="run_noncompetitive",
                         action="store_true",
                         help="include non-competitive divisions")
     g_args = parser.parse_args()
