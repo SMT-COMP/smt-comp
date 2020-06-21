@@ -14,11 +14,17 @@ fi
 
 BENCHMARKDIR=$1
 
-# We search for benchmarks containing '(mod ' or '(div ' in linear arithmetic
-# or '(forall ' or '(exists ' in quantifier free divisions.
+# We search for benchmarks containing '(forall ' or '(exists ' in quantifier free divisions.
 
 (cd $1/non-incremental; 
- grep -l -E '\((mod|div) ' -R *LI*;
- grep -l -E '\((exists|forall) ' -R QF_*) > blacklist_nonincremental.txt
+ grep -l -E '\((exists|forall) ' -R QF_*) | sort -u > blacklist_nonincremental_quantifiers.txt
 
+# We search for two-dimensional arrays and arrays to Bool in non-incremental/ABV
+# and for two-dimensional arrays in incremental/*a*lia
+
+(cd $1/non-incremental; 
+ grep -l -E '\(Array \(_ BitVec [0-9]*\) (\(Array |Bool)' -R ABV) | sort -u > blacklist_nonincremental_arraytype.txt
+(cd $1/incremental; 
+ grep -l -E '\(Array Int \(Array ' -R alia qf_alia qf_auflia) | \
+ perl -pe 's/^[^\/]*/\U$&/' | sort -u > blacklist_incremental_arraytype.txt
 

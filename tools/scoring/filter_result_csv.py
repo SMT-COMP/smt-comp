@@ -13,6 +13,12 @@ import csv
 import os
 import sys
 
+# Print error message and exit.
+def die(msg):
+    print("error: {}".format(msg))
+    sys.exit(1)
+
+
 def read_exclude_file(path):
     filter = {}
     with open(path, "r") as file:
