@@ -14,9 +14,14 @@ RESULTS_INC="$SCRIPTDIR/../results/Incremental_Track.csv"
 RESULTS_UC="$SCRIPTDIR/../results/Unsat_Core_Track.csv"
 RESULTS_MV="$SCRIPTDIR/../results/Model_Validation_Track.csv"
 
+cat blacklist_nonincremental_*.txt | sort -u > blacklist_nonincremental.txt
+cat blacklist_incremental_*.txt | sort -u > blacklist_incremental.txt
+
 BLACKLIST_SQ="blacklist_nonincremental.txt"
 BLACKLIST_UC="blacklist_nonincremental.txt"
 BLACKLIST_MV="blacklist_nonincremental.txt"
+BLACKLIST_INC="blacklist_incremental.txt"
+
 
 INC_NUM_CHECK_SAT="$SCRIPTDIR/../prep/SMT-LIB_incremental_benchmarks_num_check_sat.csv"
 
@@ -82,7 +87,8 @@ mkdir -p $OUTPUT
 $PYTHON $FILTER $RESULTS_SQ --exclude $BLACKLIST_SQ > sq-filtered.csv && \
 $PYTHON $SCORE -y 2020 --csv sq-filtered.csv  -t $TIME --gen-md $OUTPUT -T sq -S $SOLVERS_CSV
 [[ -n $GEN_INC ]] && \
-$PYTHON $SCORE -y 2020 --csv $RESULTS_INC  -t $TIME --gen-md $OUTPUT -T inc -S $SOLVERS_CSV -i $INC_NUM_CHECK_SAT
+$PYTHON $FILTER $RESULTS_INC --exclude $BLACKLIST_INC > inc-filtered.csv && \
+$PYTHON $SCORE -y 2020 --csv inc-filtered.csv -t $TIME --gen-md $OUTPUT -T inc -S $SOLVERS_CSV -i $INC_NUM_CHECK_SAT
 [[ -n $GEN_UC ]] && \
 $PYTHON $FILTER $RESULTS_UC --exclude $BLACKLIST_UC > uc-filtered.csv && \
 $PYTHON $SCORE -y 2020 --csv uc-filtered.csv  -t $TIME --gen-md $OUTPUT -T uc -S $SOLVERS_CSV
