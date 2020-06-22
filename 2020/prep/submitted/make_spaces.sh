@@ -115,20 +115,28 @@ done
 
 # Single Query Track
 [[ -n $OUT_SPACE_SQ ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" -t single_query --select "$SELECT_SQ" -w "$INCLUDE_NONCOMPETITIVE"
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" \
+    -t single_query --select "$SELECT_SQ" -w \
+    $(echo $INCLUDE_NONCOMPETITIVE)
 
 # Incremental Track
 [[ -n $OUT_SPACE_INC ]] && \
-python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" -t incremental --select "$SELECT_INC" -w "$INCLUDE_NONCOMPETITIVE"
+python $PREPARE "$IN_SPACE_INC" "$SOLVERS_CSV" "$OUT_SPACE_INC" \
+    -t incremental --select "$SELECT_INC" -w \
+    $(echo $INCLUDE_NONCOMPETITIVE)
 
 
 # Model Validation Track
 [[ -n $OUT_SPACE_MV ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_MV" -t model_validation --select "$SELECT_MV" -w "$INCLUDE_NONCOMPETITIVE"
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_MV" \
+    -t model_validation --select "$SELECT_MV" -w \
+    $(echo $INCLUDE_NONCOMPETITIVE)
 
 
 # Unsat Core Track
 [[ -n $OUT_SPACE_UC ]] && \
-python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_UC" -t unsat_core --select "$SELECT_UC" -w "$INCLUDE_NONCOMPETITIVE"
+python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_UC" \
+    -t unsat_core --select "$SELECT_UC" -w \
+    $(echo $INCLUDE_NONCOMPETITIVE)
 
 

@@ -209,7 +209,7 @@ def add_solvers_in_space(space, solvers):
 # Currently, this only considers non-competing solvers as given via '--nc'.
 def is_competitive(solvers):
     global g_args
-    if g_args.include_non_competitive:
+    if g_args.run_noncompetitive:
         return True
     count = len(solvers)
     for nc in g_args.non_competing:
