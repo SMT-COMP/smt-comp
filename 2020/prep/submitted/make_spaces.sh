@@ -1,6 +1,9 @@
 #! /bin/bash
 
-SCRIPTDIR=`dirname $(greadlink -f "$0")`
+# For MacOS, available through brew install coreutils
+#SCRIPTDIR=`dirname $(greadlink -f "$0")`
+SCRIPTDIR=`dirname $(readlink -f "$0")`
+
 
 PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"
 SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_final.csv"
