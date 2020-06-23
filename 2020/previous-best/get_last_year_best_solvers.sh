@@ -8,7 +8,7 @@ INCREMENTAL_RESULTS_2019="../../2019/results/Incremental_Track.csv"
 UNSAT_CORE_RESULTS_2019="../../2019/results/Unsat_Core_Track.csv"
 MODEL_VALIDATION_RESULTS_2019="../../2019/results/Model_Validation_Track.csv"
 
-INCREMENTAL_NUM_CHECKSATS_2019="./num_check_sats_2019.csv"
+INCREMENTAL_NUM_CHECKSATS_2019="../../2019/prep/incremental_num_check_sat.csv"
 
 SOLVERS_DIVISIONS_2019="../../2019/registration/solvers_divisions_final.csv"
 SOLVERS_DIVISIONS_2020="../../2020/registration/solvers_divisions_final.csv"
@@ -66,4 +66,3 @@ ${BESTTOCSVS} \
 
 echo "Suggestions written to ${SOLVERS_DIVISIONS_SUGGESTIONS}."
 echo "Check and add them to ${SOLVERS_DIVISIONS_2020}."
-

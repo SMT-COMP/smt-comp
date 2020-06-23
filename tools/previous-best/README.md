@@ -1,6 +1,6 @@
 ## Previous year's winners
 
-Given the best solvers from last year, `best_solvers_to_csv.py` search them from the
+Given the best solvers from last year, `best_solvers_to_csv.py` searches for them from the
 corresponding year's registration csv file and produce csv lines
 according to the new year's registration csv format so that the
 best solvers are inserted as non-competitive entries in the
@@ -18,4 +18,3 @@ to `solvers_divisions.csv`.
 See
 [`get_last_year_best_solvers.sh`](../2020/prep/submitted/get_last_year_best_solvers.sh)
 on how to construct the input files.
-
