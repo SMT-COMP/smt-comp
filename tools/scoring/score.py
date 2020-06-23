@@ -1190,12 +1190,13 @@ def largest_contribution_ranking(data, time_limit, sequential):
 # Get winner for division and score for results .md files.
 # df: The dataframe containing all data for a division and score.
 def md_get_div_winner(df):
-    winner = df[(df.competitive == True) & (df['rank'] == 1)].iloc[0]
-    # If the first ranked solver has a score of 0, there are no winners for
-    # this division.
-    if winner.score_correct == 0:
-        return '\"-\"'
-    return get_solver_name(winner.solver_id)
+    if not df[(df.competitive == True) & (df['rank'] == 1)].empty:
+        winner = df[(df.competitive == True) & (df['rank'] == 1)].iloc[0]
+        # If the first ranked solver has a score of 0, there are no winners for
+        # this division.
+        if winner.score_correct > 0:
+            return get_solver_name(winner.solver_id)
+    return '\"-\"'
 
 # Get division score details for results .md files.
 #
