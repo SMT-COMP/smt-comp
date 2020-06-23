@@ -117,7 +117,7 @@ done
 [[ -n $OUT_SPACE_SQ ]] && \
 python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_SQ" \
     -t single_query --select "$SELECT_SQ" -w \
-    $(echo $INCLUDE_NONCOMPETITIVE)
+    $INCLUDE_NONCOMPETITIVE
 
 # Incremental Track
 [[ -n $OUT_SPACE_INC ]] && \
@@ -138,5 +138,4 @@ python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_MV" \
 python $PREPARE "$IN_SPACE_NON_INC" "$SOLVERS_CSV" "$OUT_SPACE_UC" \
     -t unsat_core --select "$SELECT_UC" -w \
     $(echo $INCLUDE_NONCOMPETITIVE)
-
 
