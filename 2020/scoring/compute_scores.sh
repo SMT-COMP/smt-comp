@@ -116,7 +116,7 @@ fi
 if [[ ${PROCESS_UC} == "true" ]]; then
     TMP_UC_2019_ORDERED=$(mktemp).uc_2019_ordered
 
-    echo "Reordering mv 2019 columns according to original"
+    echo "Reordering uc 2019 columns according to original"
     ${COLORDER} -o ${UC_ORIG} -a ${UC_2019} > ${TMP_UC_2019_ORDERED}
 
     echo "Joining uc info"
