@@ -2,7 +2,7 @@
 
 # For MacOS, available through brew install coreutils
 #SCRIPTDIR=`dirname $(greadlink -f "$0")`
-SCRIPTDIR=`dirname $(readlink -f "$0")`
+SCRIPTDIR=`dirname $(readlink -f "$0" 2 > /dev/null || greadlink -f "$0" )`
 
 
 PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"
