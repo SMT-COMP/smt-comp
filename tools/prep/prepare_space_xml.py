@@ -255,7 +255,7 @@ def add_solvers():
                     # Only add solvers if the division is competitive.
                     # Consequently, solvers do not get added to non-competitive
                     # divisions, which are then removed below.
-                    if g_args.run_noncompetitive or is_competitive(solvers):
+                    if is_competitive(solvers):
                       add_solvers_in_space(subspace, solvers)
                     else:
                       print("Removing division {} without enough competitive solvers".format(division))
