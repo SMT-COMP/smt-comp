@@ -9,7 +9,7 @@ INC_XML=incremental.xml
 SQ_XML=single-query.xml
 
 MAIN_SOLVERS_CSV=$(mktemp)
-csvgrep -i -c 7 -r '^201[89]-.*$' ${SOLVERS_CSV} > ${MAIN_SOLVERS_CSV}
+csvgrep -i -c 7 -r '^201[89]-.*$' ${SOLVERS_CSV} |csvgrep -i -c 7 -r '.*-fixed$' > ${MAIN_SOLVERS_CSV}
 
 ${MAKESPACES} --sq ${SQ_XML} --solvdiv ${MAIN_SOLVERS_CSV}
 ${MAKESPACES} --mv ${MV_XML} --solvdiv ${MAIN_SOLVERS_CSV}
