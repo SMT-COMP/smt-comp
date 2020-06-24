@@ -11,10 +11,10 @@ SQ_XML=single-query.xml
 MAIN_SOLVERS_CSV=$(mktemp)
 csvgrep -i -c 7 -r '^201[89]-.*$' ${SOLVERS_CSV} > ${MAIN_SOLVERS_CSV}
 
-${MAKESPACES} --sq ${SQ_XML}
-${MAKESPACES} --mv ${MV_XML}
-${MAKESPACES} --uc ${UC_XML}
-${MAKESPACES} --inc ${INC_XML}
+${MAKESPACES} --sq ${SQ_XML} --solvdiv ${MAIN_SOLVERS_CSV}
+${MAKESPACES} --mv ${MV_XML} --solvdiv ${MAIN_SOLVERS_CSV}
+${MAKESPACES} --uc ${UC_XML} --solvdiv ${MAIN_SOLVERS_CSV}
+${MAKESPACES} --inc ${INC_XML} --solvdiv ${MAIN_SOLVERS_CSV}
 
 rm ${MAIN_SOLVERS_CSV}
 

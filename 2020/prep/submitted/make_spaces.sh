@@ -62,6 +62,7 @@ do
       echo
       echo "  options:"
       echo "    -h, --help           Print this message and exit"
+      echo "    --include-nc         Run also non-competitive divisions"
       echo "    --sq          <file> Single Query track (no strings) output xml"
       echo "    --inc         <file> Incremental track output xml"
       echo "    --uc          <file> Unsat Core track output xml"
@@ -101,6 +102,8 @@ do
     --solvdiv)
       shift
       SOLVERS_CSV=$1
+      ;;
+    --include-nc)
       INCLUDE_NONCOMPETITIVE="--include-non-competitive"
       ;;
     -*)

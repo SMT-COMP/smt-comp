@@ -11,10 +11,10 @@ SQ_XML=single-query-best-of-2019.xml
 BEST_2019_SOLVERS_CSV=$(mktemp)
 csvgrep -c 7 -r '^201[89]-.*$' ${SOLVERS_CSV} > ${BEST_2019_SOLVERS_CSV}
 
-${MAKESPACES} --mv ${MV_XML} --solvdiv ${BEST_2019_SOLVERS_CSV}
-${MAKESPACES} --uc ${UC_XML} --solvdiv ${BEST_2019_SOLVERS_CSV}
-${MAKESPACES} --inc ${INC_XML} --solvdiv ${BEST_2019_SOLVERS_CSV}
-${MAKESPACES} --sq ${SQ_XML} --solvdiv ${BEST_2019_SOLVERS_CSV}
+${MAKESPACES} --mv ${MV_XML} --solvdiv ${BEST_2019_SOLVERS_CSV} --include-nc
+${MAKESPACES} --uc ${UC_XML} --solvdiv ${BEST_2019_SOLVERS_CSV} --include-nc
+${MAKESPACES} --inc ${INC_XML} --solvdiv ${BEST_2019_SOLVERS_CSV} --include-nc
+${MAKESPACES} --sq ${SQ_XML} --solvdiv ${BEST_2019_SOLVERS_CSV} --include-nc
 
 rm ${BEST_2019_SOLVERS_CSV}
 
