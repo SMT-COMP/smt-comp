@@ -130,8 +130,14 @@ if [[ ${PROCESS_UC} == "true" ]]; then
 fi
 
 if [[ ${PROCESS_SQ} == "true" ]]; then
+    echo "Removing solver ID 24160 from 2019"
+    TMP_SQ_NO24160=$(mktemp).fixed
+    csvgrep -i -c 5 -m 24160 ${SQ_2019} > ${TMP_SQ_NO24160}
+
     echo "Joining sq info"
-    ${JOINSCORE} ${SQ_ORIG} ${SQ_2019} > ${SQ_JOIN}
+    ${JOINSCORE} ${SQ_ORIG} ${TMP_SQ_NO24160} > ${SQ_JOIN}
+
+    rm ${TMP_SQ_NO24160}
 
     echo "Computing sq scores"
     ${SCORE} -T sq -S ${SOLVERSDIVS} -t 1200 -y 2020 \
