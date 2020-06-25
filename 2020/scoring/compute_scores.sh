@@ -32,7 +32,7 @@ PROCESS_SQ="false"
 
 MV_FIX_PATTERN='s/\([^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,[^,]*,\)\(.*\)$/\1"\2"/g'
 function fixModelValCsv {
-    sed ${MV_FIX_PATTERN} < $1
+    cat $1 |dos2unix |sed ${MV_FIX_PATTERN}
 }
 
 # output usage if called without parameters
@@ -87,7 +87,7 @@ mkdir -p ${RESULTS}
 
 if [[ ${PROCESS_INC} == "true" ]]; then
     echo "Joining inc info"
-    ${JOINSCORE} ${INC_ORIG} ${INC_2019} > ${INC_JOIN}
+    ${JOINSCORE} ${INC_ORIG} ${INC_2019} |dos2unix > ${INC_JOIN}
 
     echo "Computing inc scores"
     ${SCORE} -T inc -S ${SOLVERSDIVS} -t 1200 -y 2020 \
@@ -120,7 +120,7 @@ if [[ ${PROCESS_UC} == "true" ]]; then
     ${COLORDER} -o ${UC_ORIG} -a ${UC_2019} > ${TMP_UC_2019_ORDERED}
 
     echo "Joining uc info"
-    ${JOINSCORE} ${UC_ORIG} ${TMP_UC_2019_ORDERED} > ${UC_JOIN}
+    ${JOINSCORE} ${UC_ORIG} ${TMP_UC_2019_ORDERED} |dos2unix > ${UC_JOIN}
 
     rm ${TMP_UC_2019_ORDERED}
 
@@ -135,7 +135,7 @@ if [[ ${PROCESS_SQ} == "true" ]]; then
     csvgrep -i -c 5 -m 24160 ${SQ_2019} > ${TMP_SQ_NO24160}
 
     echo "Joining sq info"
-    ${JOINSCORE} ${SQ_ORIG} ${TMP_SQ_NO24160} > ${SQ_JOIN}
+    ${JOINSCORE} ${SQ_ORIG} ${TMP_SQ_NO24160} |dos2unix > ${SQ_JOIN}
 
     rm ${TMP_SQ_NO24160}
 

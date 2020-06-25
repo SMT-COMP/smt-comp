@@ -17,5 +17,5 @@ while [[ $# -ne 0 ]]; do
     done
     shift
 done
-) |csvsort -c 2
+) |csvsort -c 2 -y 0 --no-inference
 
