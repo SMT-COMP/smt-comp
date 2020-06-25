@@ -36,6 +36,6 @@ if __name__ == '__main__':
                 if col in drow:
                     new_row.append(drow[col])
                 else:
-                    new_row.append("")
-            print(",".join(new_row))
+                    new_row.append("-")
+            print("%s\r" % ",".join(new_row))
 

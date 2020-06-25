@@ -9,7 +9,6 @@ SCORE="$SCRIPTDIR/../../tools/scoring/score.py"
 FILTER="$SCRIPTDIR/../../tools/scoring/filter_result_csv.py"
 
 RESULTS_SQ="$SCRIPTDIR/../results/Single_Query_Track.csv"
-RESULTS_SQ_STRINGS="$SCRIPTDIR/../../2019/results/Single_Query_Track_strings.csv"
 RESULTS_INC="$SCRIPTDIR/../results/Incremental_Track.csv"
 RESULTS_UC="$SCRIPTDIR/../results/Unsat_Core_Track.csv"
 RESULTS_MV="$SCRIPTDIR/../results/Model_Validation_Track.csv"
@@ -25,12 +24,11 @@ BLACKLIST_INC="blacklist_incremental.txt"
 
 INC_NUM_CHECK_SAT="$SCRIPTDIR/../prep/SMT-LIB_incremental_benchmarks_num_check_sat.csv"
 
-TIME=2400
+TIME=1200
 
 SOLVERS_CSV="$SCRIPTDIR/../registration/solvers_divisions_final.csv"
 
 GEN_SQ=
-GEN_SQ_STRINGS=
 GEN_INC=
 GEN_UC=
 GEN_MV=
