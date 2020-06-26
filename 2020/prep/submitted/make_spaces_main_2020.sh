@@ -9,6 +9,10 @@ INC_XML=incremental.xml
 SQ_XML=single-query.xml
 
 MAIN_SOLVERS_CSV=$(mktemp)
+
+echo "Note! This script is designed for year 2020."
+echo "The script will not be safe next year."
+
 csvgrep -i -c 7 -r '^201[89]-.*$' ${SOLVERS_CSV} |csvgrep -i -c 7 -r '.*-fixed$' > ${MAIN_SOLVERS_CSV}
 
 ${MAKESPACES} --sq ${SQ_XML} --solvdiv ${MAIN_SOLVERS_CSV}
