@@ -8,16 +8,20 @@ PATCH_CSV=../../tools/scoring/patch_csv.py
 
 INC_ORIG_IN=incremental/Job_info_orig.csv
 INC_2019_IN=incremental/Job_info_2019.csv
+INC_FIXED_IN=incremental/Job_info_fixed.csv
 INC_OUT=../results/Incremental_Track.csv
 
 MV_ORIG_IN=model-validation/Job_info_orig.csv
 MV_2019_IN=model-validation/Job_info_2019.csv
+MV_FIXED_IN=model-validation/Job_info_fixed.csv
 MV_OUT=../results/Model_Validation_Track.csv
 
 UC_ORIG_IN=unsat-core/Job_info_orig.csv
 UC_2019_IN=unsat-core/Job_info_2019.csv
+UC_FIXED_IN=unsat-core/Job_info_fixed.csv
 UC_OUT=../results/Unsat_Core_Track.csv
 
+# The SQ 2019 job has already the fixed solvers as well
 SQ_ORIG_IN=single-query/Job_info_orig.csv
 SQ_2019_IN=single-query/Job_info_2019.csv
 SQ_PATCH=SQ-wrong-sat-result.csv
@@ -78,44 +82,56 @@ done
 
 if [[ ${PROCESS_INC} == "true" ]]; then
     echo "Joining inc info"
-    ${JOINSCORE} ${INC_ORIG_IN} ${INC_2019_IN} > ${INC_OUT}
+#    ${JOINSCORE} ${INC_ORIG_IN} ${INC_2019_IN} > ${INC_OUT}
+    ${JOINSCORE} ${INC_ORIG_IN} ${INC_2019_IN} ${INC_FIXED_IN} > ${INC_OUT}
 fi
 
 if [[ ${PROCESS_MV} == "true" ]]; then
-    TMP_MV_2019_ORDERED=$(mktemp --tmpdir mv_2019_ordered.XXXXXX)
+    TMP_MV_2019_ORDERED=$(mktemp -t mv_2019_ordered.XXXXXX)
+    TMP_MV_FIXED_ORDERED=$(mktemp -t mv_fixed_ordered.XXXXXX)
 
     echo "Adding the error column to mv 2019"
     ${COLORDER} -o ${MV_ORIG_IN} -a ${MV_2019_IN} > ${TMP_MV_2019_ORDERED}
+    echo "Adding the error column to mv fixed"
+    ${COLORDER} -o ${MV_ORIG_IN} -a ${MV_FIXED_IN} > ${TMP_MV_FIXED_ORDERED}
 
     echo "Fixing mv csvs"
-    TMP_MV_ORIG_FIXED=$(mktemp --tmpdir mv_orig_fixed.XXXXXX)
-    TMP_MV_2019_FIXED=$(mktemp --tmpdir mv_2019_fixed.XXXXXX)
+
+    TMP_MV_ORIG_FIXED=$(mktemp -t mv_orig_fixed.XXXXXX)
+    TMP_MV_2019_FIXED=$(mktemp -t mv_2019_fixed.XXXXXX)
+    TMP_MV_FIXED_FIXED=$(mktemp -t mv_fixed_fixed.XXXXXX)
 
     fixModelValCsv ${MV_ORIG_IN} > ${TMP_MV_ORIG_FIXED}
     fixModelValCsv ${TMP_MV_2019_ORDERED} > ${TMP_MV_2019_FIXED}
+    fixModelValCsv ${TMP_MV_FIXED_ORDERED} > ${TMP_MV_FIXED_FIXED}
 
     echo "Joining mv info"
-    ${JOINSCORE} ${TMP_MV_ORIG_FIXED} ${TMP_MV_2019_FIXED} > ${MV_OUT}
+    ${JOINSCORE} ${TMP_MV_ORIG_FIXED} \
+        ${TMP_MV_2019_FIXED} ${TMP_MV_FIXED_FIXED} > ${MV_OUT}
 
-    rm ${TMP_MV_ORIG_FIXED} ${TMP_MV_2019_FIXED} ${TMP_MV_2019_ORDERED}
+    rm ${TMP_MV_ORIG_FIXED} ${TMP_MV_2019_FIXED} \
+        ${TMP_MV_2019_ORDERED} \
+        ${TMP_MV_FIXED_FIXED} ${TMP_MV_FIXED_ORDERED}
 fi
 
 if [[ ${PROCESS_UC} == "true" ]]; then
-    TMP_UC_2019_ORDERED=$(mktemp --tmpdir uc_2019_ordered.XXXXXX)
+    TMP_UC_2019_ORDERED=$(mktemp -t uc_2019_ordered.XXXXXX)
 
     echo "Reordering uc 2019 columns according to original"
     ${COLORDER} -o ${UC_ORIG_IN} -a ${UC_2019_IN} > ${TMP_UC_2019_ORDERED}
+    echo "Reordering uc fixed columns according to original"
+    ${COLORDER} -o ${UC_ORIG_IN} -a ${UC_FIXED_IN} > ${TMP_UC_2019_ORDERED}
 
     echo "Joining uc info"
-    ${JOINSCORE} ${UC_ORIG_IN} ${TMP_UC_2019_ORDERED} > ${UC_OUT}
+    ${JOINSCORE} ${UC_ORIG_IN} ${TMP_UC_2019_ORDERED} ${TMP_UC_FIXED_ORDERED} > ${UC_OUT}
 
-    rm ${TMP_UC_2019_ORDERED}
+    rm ${TMP_UC_2019_ORDERED} ${TMP_UC_FIXED_ORDERED}
 fi
 
 if [[ ${PROCESS_SQ} == "true" ]]; then
     echo "Removing solver ID 24160 from 2019"
-    TMP_SQ_NO24160=$(mktemp --tmpdir fixed.XXXXXX)
-    TMP_SQ_PATCHED=$(mktemp --tmpdir patched.XXXXXX)
+    TMP_SQ_NO24160=$(mktemp -t fixed.XXXXXX)
+    TMP_SQ_PATCHED=$(mktemp -t patched.XXXXXX)
     csvgrep -i -c "solver id" -m 24160 ${SQ_2019_IN} > ${TMP_SQ_NO24160}
 
     echo "Patching wrongly classified results"
