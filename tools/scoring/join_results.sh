@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [[ $# -ne 2 ]]; then
+if [[ $# -lt 2 ]]; then
     echo "Usage: $0 base-result.csv [adjunct-result.csv [...]]"
     exit 1
 fi
