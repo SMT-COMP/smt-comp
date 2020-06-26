@@ -1,6 +1,7 @@
 #! /bin/bash
 
-SCRIPTDIR=`dirname $(readlink -f "$0")`
+SCRIPTDIR=`dirname $(greadlink -f "$0")`
+#SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 OUTPUT=results
 
