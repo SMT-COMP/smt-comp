@@ -9,6 +9,10 @@ INC_XML=incremental-best-of-2019.xml
 SQ_XML=single-query-best-of-2019.xml
 
 BEST_2019_SOLVERS_CSV=$(mktemp)
+
+echo "Note! This script is designed for year 2020."
+echo "The script will not be safe next year."
+
 csvgrep -c 7 -r '^201[89]-.*$' ${SOLVERS_CSV} > ${BEST_2019_SOLVERS_CSV}
 
 ${MAKESPACES} --mv ${MV_XML} --solvdiv ${BEST_2019_SOLVERS_CSV} --include-nc

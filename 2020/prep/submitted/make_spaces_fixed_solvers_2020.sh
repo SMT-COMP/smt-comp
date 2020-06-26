@@ -8,6 +8,9 @@ UC_XML=unsat-core-fixed.xml
 INC_XML=incremental-fixed.xml
 SQ_XML=single-query-fixed.xml
 
+echo "Note! This script is designed for year 2020."
+echo "The script will not be safe next year."
+
 FIXED_SOLVERS_CSV=$(mktemp)
 csvgrep -c 7 -r '.*-fixed' ${SOLVERS_CSV} > ${FIXED_SOLVERS_CSV}
 
