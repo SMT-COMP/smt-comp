@@ -406,6 +406,7 @@ def score(division,
     model_validation = 'model_validator_status' in data.columns
     if model_validation:
         data_new['model_validator_status'] = data['model_validator_status']
+        data_new['model_validator_exception'] = data['model_validator_exception']
 
     # Note: For incremental tracks we have to consider all benchmarks (also
     #       the ones that run into resource limits).
@@ -453,7 +454,19 @@ def score(division,
         elif model_validation:
             solved = solved[solved.result == RESULT_SAT]
             solved_valid = solved[solved.model_validator_status == 'VALID']
-            solved_invalid = solved[solved.model_validator_status == 'INVALID']
+
+            if int(year) <= 2019:
+                solved_invalid = solved[solved.model_validator_status == 'INVALID']
+            else:
+                # Note: The model validator does not report a result, even if
+                #       the solver produces an invalid model or the solver
+                #       reports unsat.  We check for particular error messages
+                #       that indicate crashes, timeouts, or sat without
+                #       any model ("sat expected" or "( expected").
+                incomplete_model = data_new['model_validator_exception']\
+                                   .str.contains("(?:\(|sat) expected")
+                solved_invalid = data_new[(data_new.model_validator_status == 'INVALID')
+                                          & (incomplete_model == False)]
             data_new.loc[solved_valid.index, 'correct'] = 1
             data_new.loc[solved_invalid.index, 'error'] = 1
         else:
