@@ -113,11 +113,10 @@ fi
 if [[ ${PROCESS_SQ} == "true" ]]; then
     echo "Removing solver ID 24160 from 2019"
     TMP_SQ_NO24160=$(mktemp).fixed
-    csvgrep -i -c 5 -m 24160 ${SQ_2019_IN} > ${TMP_SQ_NO24160}
+    csvgrep -i -c "solver id" -m 24160 ${SQ_2019_IN} > ${TMP_SQ_NO24160}
 
     echo "Joining sq info"
     ${JOINSCORE} ${SQ_ORIG_IN} ${TMP_SQ_NO24160} > ${SQ_OUT}
 
     rm ${TMP_SQ_NO24160}
 fi
-
