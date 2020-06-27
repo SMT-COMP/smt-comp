@@ -406,6 +406,7 @@ def score(division,
     model_validation = 'model_validator_status' in data.columns
     if model_validation:
         data_new['model_validator_status'] = data['model_validator_status']
+        data_new['model_validator_error'] = data['model_validator_error']
         data_new['model_validator_exception'] = data['model_validator_exception']
 
     # Note: For incremental tracks we have to consider all benchmarks (also
@@ -463,10 +464,14 @@ def score(division,
                 #       reports unsat.  We check for particular error messages
                 #       that indicate crashes, timeouts, or sat without
                 #       any model ("sat expected" or "( expected").
+                #       Due to some unknown problem the jobs on fixed and
+                #       best of 2019 solvers produced no entries ("-") in
+                #       that column.
                 incomplete_model = data_new['model_validator_exception']\
-                                   .str.contains("(?:\(|sat) expected")
+                        .str.contains("^(?:.*: \( expected|.*: sat expected|-)$")
                 solved_invalid = data_new[(data_new.model_validator_status == 'INVALID')
-                                          & (incomplete_model == False)]
+                                          & ((data_new.model_validator_error != 'unhandled_exception')
+                                             | (incomplete_model == False))]
             data_new.loc[solved_valid.index, 'correct'] = 1
             data_new.loc[solved_invalid.index, 'error'] = 1
         else:
