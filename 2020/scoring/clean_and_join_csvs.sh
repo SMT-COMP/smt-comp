@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 SCORE=../../tools/scoring/score.py
 JOINSCORE=../../tools/scoring/join_results.sh
 COLORDER=../previous-best/unify_column_order.py
 SOLVERSDIVS=../registration/solvers_divisions_final.csv
+PATCH_CSV=../../tools/scoring/patch_csv.py
 
 INC_ORIG_IN=incremental/Job_info_orig.csv
 INC_2019_IN=incremental/Job_info_2019.csv
@@ -19,6 +20,7 @@ UC_OUT=../results/Unsat_Core_Track.csv
 
 SQ_ORIG_IN=single-query/Job_info_orig.csv
 SQ_2019_IN=single-query/Job_info_2019.csv
+SQ_PATCH=SQ-wrong-sat-result.csv
 SQ_OUT=../results/Single_Query_Track.csv
 
 PROCESS_INC="false"
@@ -112,11 +114,16 @@ fi
 
 if [[ ${PROCESS_SQ} == "true" ]]; then
     echo "Removing solver ID 24160 from 2019"
-    TMP_SQ_NO24160=$(mktemp).fixed
+    TMP_SQ_NO24160=$(mktemp XXX.fixed)
+    TMP_SQ_PATCHED=$(mktemp XXX.patched)
     csvgrep -i -c "solver id" -m 24160 ${SQ_2019_IN} > ${TMP_SQ_NO24160}
 
-    echo "Joining sq info"
-    ${JOINSCORE} ${SQ_ORIG_IN} ${TMP_SQ_NO24160} > ${SQ_OUT}
+    echo "Patching wrongly classified results"
+    ${PATCH_CSV} -o ${SQ_ORIG_IN} -p ${SQ_PATCH} > ${TMP_SQ_PATCHED}
+    #diff -u0 ${SQ_ORIG_IN} ${TMP_SQ_PATCHED}
 
-    rm ${TMP_SQ_NO24160}
+    echo "Joining sq info"
+    ${JOINSCORE} ${TMP_SQ_PATCHED} ${TMP_SQ_NO24160} > ${SQ_OUT}
+
+    rm ${TMP_SQ_NO24160} ${TMP_SQ_PATCHED}
 fi
