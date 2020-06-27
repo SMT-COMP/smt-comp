@@ -82,14 +82,14 @@ if [[ ${PROCESS_INC} == "true" ]]; then
 fi
 
 if [[ ${PROCESS_MV} == "true" ]]; then
-    TMP_MV_2019_ORDERED=$(mktemp).mv_2019_ordered
+    TMP_MV_2019_ORDERED=$(mktemp --tmpdir mv_2019_ordered.XXXXXX)
 
     echo "Adding the error column to mv 2019"
     ${COLORDER} -o ${MV_ORIG_IN} -a ${MV_2019_IN} > ${TMP_MV_2019_ORDERED}
 
     echo "Fixing mv csvs"
-    TMP_MV_ORIG_FIXED=$(mktemp).mv_orig_fixed
-    TMP_MV_2019_FIXED=$(mktemp).mv_2019_fixed
+    TMP_MV_ORIG_FIXED=$(mktemp --tmpdir mv_orig_fixed.XXXXXX)
+    TMP_MV_2019_FIXED=$(mktemp --tmpdir mv_2019_fixed.XXXXXX)
 
     fixModelValCsv ${MV_ORIG_IN} > ${TMP_MV_ORIG_FIXED}
     fixModelValCsv ${TMP_MV_2019_ORDERED} > ${TMP_MV_2019_FIXED}
@@ -101,7 +101,7 @@ if [[ ${PROCESS_MV} == "true" ]]; then
 fi
 
 if [[ ${PROCESS_UC} == "true" ]]; then
-    TMP_UC_2019_ORDERED=$(mktemp).uc_2019_ordered
+    TMP_UC_2019_ORDERED=$(mktemp --tmpdir uc_2019_ordered.XXXXXX)
 
     echo "Reordering uc 2019 columns according to original"
     ${COLORDER} -o ${UC_ORIG_IN} -a ${UC_2019_IN} > ${TMP_UC_2019_ORDERED}
@@ -114,8 +114,8 @@ fi
 
 if [[ ${PROCESS_SQ} == "true" ]]; then
     echo "Removing solver ID 24160 from 2019"
-    TMP_SQ_NO24160=$(mktemp XXX.fixed)
-    TMP_SQ_PATCHED=$(mktemp XXX.patched)
+    TMP_SQ_NO24160=$(mktemp --tmpdir fixed.XXXXXX)
+    TMP_SQ_PATCHED=$(mktemp --tmpdir patched.XXXXXX)
     csvgrep -i -c "solver id" -m 24160 ${SQ_2019_IN} > ${TMP_SQ_NO24160}
 
     echo "Patching wrongly classified results"
