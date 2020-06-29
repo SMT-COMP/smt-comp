@@ -4,6 +4,7 @@
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 OUTPUT=../results/_results_2020
+LANG=C
 
 PYTHON=python3
 SCORE="$SCRIPTDIR/../../tools/scoring/score.py"

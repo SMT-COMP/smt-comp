@@ -1,7 +1,7 @@
 # Generating Blacklists for SMT-LIB
 
 The blacklists contain benchmarks that are not following the syntactic
-restrictions of their respective divisions.  We distinguish three cases
+restrictions of their respective divisions.  We distinguish these cases
 
 1. Quantifiers in quantifier-free benchmarks.  This list was generated with
    `grep -l -R -E '\((exists|forall) ' QF_*`
@@ -47,3 +47,13 @@ done | \
     java -jar ~/smtinterpol-2.5-682-g35be1729.jar -script LinearArithmeticChecker \
       2>/dev/null > benchmark_nonincremental_nonlinear.txt
 ```
+
+4. Benchmarks in non-incremental in which solvers disagree.  The list was
+   created with
+
+```
+grep "... in " ../analyse_results/incremental_disagreements.txt | cut -c8-
+```
+
+   The benchmarks with disagreeing unsound solvers were removed from the list
+   manually.
