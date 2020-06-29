@@ -1,5 +1,11 @@
 ### Compute the scores for the website by combining different jobs
 
+First you need to download the "job information" from StarExec. Make
+sure the option "include ids" is checked. If the Job is public, you can
+download using curl:
+
+```curl -o Job${JOBID}_info.zip "https://www.starexec.org/starexec/secure/download?type=job&id=${JOBID}&returnids=true"```
+
 Once results are downloaded form starexec, the scores are computed in
 two phases.  First by combining the jobs, and by then processing them
 into results taking into account benchmark blacklists.
@@ -14,9 +20,11 @@ folder as the main smt-comp repository.
 #### Constructing the scores
 
 Create to this folder the directories `incremental`, `model-validation`
-`unsat-core` and `single-query`, and place in them the `Job*_info.csv`
-files from starexec main job is called `Job_info_orig.csv` and the
-best-of-2019 job is called `Job_info_2019.csv`.
+`unsat-core` and `single-query`, and place in them the
+`../results/<track>/Job*_info.csv`.
+Files from starexec main job should be called `Job_info_orig.csv`,
+best-of-2019 job is called `Job_info_2019.csv`, and the fixed job
+`Job_info_fixed.csv`.
 
 The joined files are then computed by running
 
@@ -28,4 +36,4 @@ Finally, the `md`s can be created by running
 
 ```./make_mds.sh --all```
 
-The `md`s are placed in `results`.
+The `md`s are placed in `../results/_results_2020`.
