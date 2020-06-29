@@ -6,26 +6,28 @@ COLORDER=../previous-best/unify_column_order.py
 SOLVERSDIVS=../registration/solvers_divisions_final.csv
 PATCH_CSV=../../tools/scoring/patch_csv.py
 
-INC_ORIG_IN=incremental/Job_info_orig.csv
-INC_2019_IN=incremental/Job_info_2019.csv
-INC_FIXED_IN=incremental/Job_info_fixed.csv
-INC_OUT=../results/Incremental_Track.csv
+RESULTS=../results
 
-MV_ORIG_IN=model-validation/Job_info_orig.csv
-MV_2019_IN=model-validation/Job_info_2019.csv
-MV_FIXED_IN=model-validation/Job_info_fixed.csv
-MV_OUT=../results/Model_Validation_Track.csv
+INC_ORIG_IN=${RESULTS}/incremental/Job_info_orig.csv
+INC_2019_IN=${RESULTS}/incremental/Job_info_2019.csv
+INC_FIXED_IN=${RESULTS}/incremental/Job_info_fixed.csv
+INC_OUT=${RESULTS}/Incremental_Track.csv
 
-UC_ORIG_IN=unsat-core/Job_info_orig.csv
-UC_2019_IN=unsat-core/Job_info_2019.csv
-UC_FIXED_IN=unsat-core/Job_info_fixed.csv
-UC_OUT=../results/Unsat_Core_Track.csv
+MV_ORIG_IN=${RESULTS}/model-validation/Job_info_orig.csv
+MV_2019_IN=${RESULTS}/model-validation/Job_info_2019.csv
+MV_FIXED_IN=${RESULTS}/model-validation/Job_info_fixed.csv
+MV_OUT=${RESULTS}/Model_Validation_Track.csv
+
+UC_ORIG_IN=${RESULTS}/unsat-core/Job_info_orig.csv
+UC_2019_IN=${RESULTS}/unsat-core/Job_info_2019.csv
+UC_FIXED_IN=${RESULTS}/unsat-core/Job_info_fixed.csv
+UC_OUT=${RESULTS}/Unsat_Core_Track.csv
 
 # The SQ 2019 job has already the fixed solvers as well
-SQ_ORIG_IN=single-query/Job_info_orig.csv
-SQ_2019_IN=single-query/Job_info_2019.csv
+SQ_ORIG_IN=${RESULTS}/single-query/Job_info_orig.csv
+SQ_2019_IN=${RESULTS}/single-query/Job_info_2019.csv
 SQ_PATCH=SQ-wrong-sat-result.csv
-SQ_OUT=../results/Single_Query_Track.csv
+SQ_OUT=${RESULTS}/Single_Query_Track.csv
 
 PROCESS_INC="false"
 PROCESS_UC="false"
@@ -82,7 +84,6 @@ done
 
 if [[ ${PROCESS_INC} == "true" ]]; then
     echo "Joining inc info"
-#    ${JOINSCORE} ${INC_ORIG_IN} ${INC_2019_IN} > ${INC_OUT}
     ${JOINSCORE} ${INC_ORIG_IN} ${INC_2019_IN} ${INC_FIXED_IN} > ${INC_OUT}
 fi
 
