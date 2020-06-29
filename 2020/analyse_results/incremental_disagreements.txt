@@ -1,0 +1,140 @@
+0.00/0.06	sat	0.61/0.68	unsat	0.77/0.81	unsat	16.29/16.36	unsat	0.00/0.10	unsat
+... in QF_BVFP/schanda/spark/int_to_float_complex.smt2
+21.30/20.86	unsat	2.78/2.41	unsat	45.66/45.41	WRONG solver response: got sat, expected unsat	3.00/2.71	unsat	2.97/2.60	unsat	168.39/168.04	unsat
+... in QF_NIA/UltimateLTLAutomizer/Problem14_prop_000.c.smt2
+62.11/60.65	unsat	7.89/6.85	unsat	295.91/294.73	WRONG solver response: got sat, expected unsat	8.42/7.57	unsat	8.59/7.50	unsat	921.30/920.21	unsat
+... in QF_NIA/UltimateLTLAutomizer/Problem14_prop_010.c.smt2
+20.52/20.10	unsat	2.44/2.20	unsat	45.77/45.51	WRONG solver response: got sat, expected unsat	2.92/2.70	unsat	2.63/2.34	unsat	165.18/164.84	unsat
+... in QF_NIA/UltimateLTLAutomizer/Problem14_prop_022.c.smt2
+45.13/44.23	unsat	4.97/4.30	unsat	736.57/735.81	WRONG solver response: got sat, expected unsat		5.26/4.59	unsat	
+... in QF_NIA/UltimateLTLAutomizer/Problem15_prop_016.c.smt2
+0.00/0.11	unsat	3.43/1.54	'	1.63/0.63	sat	0.00/0.04	unsat	1.61/0.65	unsat
+0.00/0.12	unsat	3.43/1.54	EOF	1.74/0.66	sat	0.00/0.04	unsat	1.61/0.68	unsat
+0.00/0.13	unsat		1.74/0.68	sat	0.00/0.04	unsat	1.80/0.71	unsat
+... in UF/20190906-CLEARSY/0000/00302.smt2
+0.00/0.08	unsat	3.36/1.51	'	1.33/0.58	sat	0.00/0.03	unsat	1.40/0.59	unsat
+0.00/0.09	unsat	3.36/1.51	EOF	1.33/0.60	sat	0.00/0.03	unsat	1.40/0.61	unsat
+0.00/0.10	unsat		1.63/0.66	sat	0.00/0.03	unsat	1.61/0.68	unsat
+0.00/0.10	unsat		1.63/0.67	sat	0.00/0.03	unsat	1.61/0.69	unsat
+0.00/0.10	unsat		1.83/0.69	sat	0.00/0.03	unsat	1.61/0.70	unsat
+0.00/0.11	unsat		1.83/0.70	sat	0.00/0.03	unsat	1.61/0.71	unsat
+0.00/0.11	unsat		1.83/0.74	sat	0.00/0.04	unsat	1.86/0.75	unsat
+0.00/0.13	unsat		2.26/0.82	sat	0.00/0.04	unsat	2.05/0.83	unsat
+0.00/0.13	unsat		2.26/0.83	sat	0.00/0.04	unsat	2.05/0.85	unsat
+0.00/0.14	unsat		2.33/0.84	sat	0.00/0.04	unsat	2.31/0.86	unsat
+0.00/0.14	unsat		2.33/0.85	sat	0.00/0.04	unsat	2.31/0.87	unsat
+0.00/0.14	unsat		2.33/0.86	sat	0.00/0.04	unsat	2.38/0.88	unsat
+0.00/0.15	unsat		2.33/0.87	sat	0.00/0.04	unsat	2.38/0.89	unsat
+... in UF/20190906-CLEARSY/0000/00307.smt2
+0.00/0.29	unsat		3.75/1.31	sat	0.00/0.08	unsat	3.70/1.31	unsat
+0.00/0.36	unsat		4.43/1.53	sat	0.00/0.09	unsat	4.24/1.52	unsat
+0.00/0.38	unsat		4.43/1.57	sat	0.00/0.09	unsat	4.52/1.56	unsat
+0.00/0.43	unsat		4.97/1.72	sat	0.00/0.10	unsat	4.95/1.70	unsat
+... in UF/20190906-CLEARSY/0001/00001.smt2
+0.00/0.24	unsat		56.51/42.17	sat	1.57/1.64	unsat	54.15/39.05	unsat
+... in UF/20190906-CLEARSY/0001/00077.smt2
+0.00/0.18	unknown		2.36/0.83	unsat	0.00/0.41	sat	1164.89/385.11	unknown
+... in UF/20190906-CLEARSY/0001/00097.smt2
+0.00/0.20	unsat		2.59/0.96	sat	0.00/0.06	unsat	2.57/0.95	unsat
+... in UF/20190906-CLEARSY/0001/00104.smt2
+0.00/0.13	unsat		111.49/69.37	sat	0.00/0.12	unsat	84.29/53.82	unsat
+0.00/0.15	unsat		275.85/206.56	sat	0.00/0.27	unsat	196.53/146.65	unsat
+0.00/0.16	unsat		321.94/248.57	sat	0.00/0.27	unsat	196.53/146.67	unsat
+0.00/0.16	unsat		369.17/291.06	sat	0.00/0.27	unsat	196.53/146.70	unsat
+... in UF/20190906-CLEARSY/0001/00172.smt2
+0.00/0.38	unsat		769.36/731.42	sat	4.36/4.38	unsat	741.77/712.00	unsat
+0.00/0.41	unsat		820.59/780.45	sat	4.86/4.95	unsat	769.62/735.39	unsat
+0.00/0.42	unsat		846.90/805.62	sat	4.86/4.95	unsat	769.62/735.40	unsat
+0.00/0.42	unsat		871.66/829.68	sat	4.86/4.95	unsat	769.72/735.41	unsat
+... in UF/20190906-CLEARSY/0001/00288.smt2
+0.00/0.16	unsat		2.57/0.92	sat	0.00/0.04	unsat	2.57/0.94	unsat
+0.00/0.16	unsat		2.57/0.94	sat	0.00/0.04	unsat	2.57/0.96	unsat
+0.00/0.18	unsat		2.68/0.99	sat	0.00/0.04	unsat	2.84/1.01	unsat
+0.00/0.18	unsat		2.68/1.00	sat	0.00/0.04	unsat	2.84/1.02	unsat
+0.00/0.18	unsat		2.68/1.01	sat	0.00/0.04	unsat	2.84/1.03	unsat
+0.00/0.19	unsat		2.68/1.02	sat	0.00/0.04	unsat	2.84/1.04	unsat
+0.00/0.20	unsat		2.92/1.06	sat	0.00/0.04	unsat	2.84/1.08	unsat
+0.00/0.22	unsat		3.07/1.14	sat	0.00/0.05	unsat	3.07/1.16	unsat
+0.00/0.22	unsat		3.27/1.15	sat	0.00/0.05	unsat	3.07/1.17	unsat
+0.00/0.22	unsat		3.27/1.16	sat	0.00/0.05	unsat	3.40/1.20	unsat
+0.00/0.23	unsat		3.34/1.17	sat	0.00/0.05	unsat	3.45/1.21	unsat
+0.00/0.23	unsat		3.34/1.20	sat	0.00/0.05	unsat	3.45/1.22	unsat
+0.00/0.23	unsat		3.34/1.21	sat	0.00/0.05	unsat	3.53/1.23	unsat
+... in UF/20190906-CLEARSY/0001/00310.smt2
+0.00/0.04	sat		0.00/0.54	unsat	0.00/0.02	sat	1.28/0.55	sat
+0.00/0.04	sat		0.00/0.54	unsat	0.00/0.02	sat	1.28/0.55	sat
+0.00/0.04	sat		0.00/0.54	unsat	0.00/0.02	sat	1.28/0.55	sat
+0.00/0.04	sat		0.00/0.54	unsat	0.00/0.02	sat	1.28/0.56	sat
+0.00/0.04	sat		0.00/0.54	unsat	0.00/0.02	sat	1.34/0.56	sat
+... in UF/20190906-CLEARSY/0008/00017.smt2
+0.00/0.27	unsat		2.94/1.03	sat	0.64/0.67	unsat	2.87/1.04	unsat
+... in UF/20190906-CLEARSY/0012/00009.smt2
+0.00/0.19	unsat		2.14/0.82	sat	0.00/0.05	unsat	2.12/0.83	sat
+... in UF/20190906-CLEARSY/0012/00092.smt2
+0.00/0.18	unsat		19.57/6.55	sat	0.00/0.34	unsat	23.60/7.92	unsat
+... in UF/20190906-CLEARSY/0015/00015.smt2
+0.00/0.21	unsat		11.33/3.77	sat	0.00/0.09	unsat	14.15/4.70	unsat
+... in UF/20190906-CLEARSY/0015/00019.smt2
+0.00/0.11	unsat		2.15/0.81	sat	0.00/0.03	unsat	2.12/0.83	unsat
+0.00/0.11	unsat		2.15/0.82	sat	0.00/0.03	unsat	2.12/0.83	unsat
+... in UF/20190906-CLEARSY/0015/00116.smt2
+0.00/0.42	unsat		4.27/1.52	sat	0.00/0.09	unsat	4.46/1.54	unsat
+... in UF/20190906-CLEARSY/0015/00206.smt2
+0.00/0.14	unsat		17.17/6.00	sat	0.00/0.13	unsat	18.89/6.41	unsat
+0.00/0.18	unsat		18.28/6.35	sat	0.00/0.13	unsat	19.27/6.48	unsat
+... in UF/20190906-CLEARSY/0015/00210.smt2
+0.00/0.18	unsat		20.25/6.83	sat	0.00/0.35	unsat	19.80/6.63	unsat
+... in UF/20190906-CLEARSY/0016/00042.smt2
+0.00/0.12	unsat		1.57/0.71	sat	0.00/0.03	unsat	1.69/0.72	unsat
+... in UF/20190906-CLEARSY/0016/00053.smt2
+0.00/0.38	unsat		93.84/74.68	sat	1.76/1.78	unsat	88.17/71.62	unsat
+... in UF/20190906-CLEARSY/0016/00434.smt2
+0.00/0.06	unsat	3.11/1.45	'	11.76/5.06	sat	0.00/0.09	unsat	8.76/3.13	unsat
+0.00/0.09	unsat		20.09/9.69	sat	0.00/0.13	unsat	12.66/5.43	unsat
+0.00/0.11	unsat		25.01/13.51	sat	0.00/0.18	unsat	16.31/7.40	unsat
+0.00/0.14	unsat		29.68/17.96	sat	0.00/0.23	unsat	19.82/9.79	unsat
+0.00/0.16	unsat		35.01/22.32	sat	0.00/0.28	unsat	22.27/11.96	unsat
+0.00/0.18	unsat		38.91/26.05	sat	0.00/0.32	unsat	24.61/13.84	unsat
+0.00/0.21	unsat		42.58/29.65	sat	0.00/0.37	unsat	26.64/15.73	unsat
+... in UF/20190906-CLEARSY/0016/00442.smt2
+0.00/0.09	unsat		14.12/4.73	sat	0.00/0.14	unsat	14.80/4.99	unsat
+0.00/0.12	unsat		17.98/6.03	sat	0.00/0.19	unsat	18.12/6.09	unsat
+... in UF/20190906-CLEARSY/0016/00461.smt2
+0.00/0.06	unsat		1.18/0.56	sat	0.00/0.02	unsat	0.00/0.52	unsat
+0.00/0.10	unsat		1.56/0.72	sat	0.00/0.03	unsat	1.61/0.63	unsat
+... in UF/20190906-CLEARSY/0016/00466.smt2
+0.00/0.30	unsat		36.90/18.38	sat	0.00/0.24	unsat	37.57/18.61	unsat
+... in UF/20190906-CLEARSY/0016/00568.smt2
+1.26/1.32	unsat		855.85/823.44	sat	5.07/5.10	unsat	852.93/818.18	unsat
+... in UF/20190906-CLEARSY/0016/00600.smt2
+0.00/0.16	unsat		17.73/5.92	sat	0.00/0.11	unsat	17.11/5.78	unsat
+... in UF/20190906-CLEARSY/0016/00688.smt2
+0.00/0.24	unsat		28.47/10.41	sat	0.00/0.20	unsat	25.79/10.13	unsat
+... in UF/20190906-CLEARSY/0016/00693.smt2
+0.00/0.06	unsat		1.21/0.61	sat	0.00/0.02	unsat	1.25/0.56	unsat
+... in UF/20190906-CLEARSY/0017/00003.smt2
+0.00/0.51	unsat		2.32/0.88	sat	0.00/0.08	unsat	2.26/0.88	unsat
+... in UF/20190906-CLEARSY/0020/00012.smt2
+0.77/0.79	unsat		4.47/1.55	sat	0.00/0.14	unsat	4.56/1.60	unsat
+0.77/0.84	unsat		4.78/1.64	sat	0.00/0.15	unsat	4.94/1.70	unsat
+0.87/0.89	unsat		5.05/1.74	sat	0.00/0.15	unsat	5.32/1.81	unsat
+0.90/0.92	unsat		5.30/1.80	sat	0.00/0.16	unsat	5.45/1.87	unsat
+0.93/0.96	unsat		5.38/1.84	sat	0.00/0.16	unsat	5.45/1.92	unsat
+0.93/0.99	unsat		5.38/1.89	sat	0.00/0.17	unsat	5.70/1.98	unsat
+1.00/1.03	unsat		5.67/1.93	sat	0.00/0.18	unsat	5.87/2.03	unsat
+... in UF/20190906-CLEARSY/0021/00019.smt2
+0.00/0.06	unsat		1.23/0.57	sat	0.00/0.03	unsat	0.00/0.57	unsat
+0.00/0.07	unsat		1.23/0.57	sat	0.00/0.03	unsat	0.00/0.57	unsat
+0.00/0.08	unsat		1.23/0.61	sat	0.00/0.03	unsat	1.60/0.62	unsat
+... in UF/20190906-CLEARSY/0022/00004.smt2
+0.00/0.05	unsat		0.00/0.48	sat	0.00/0.04	unsat	0.00/0.50	unsat
+0.00/0.05	unsat		0.00/0.49	sat	0.00/0.04	unsat	0.00/0.50	unsat
+0.00/0.05	unsat		0.00/0.49	sat	0.00/0.04	unsat	0.00/0.51	unsat
+0.00/0.06	unsat		0.00/0.50	sat	0.00/0.04	unsat	0.00/0.52	unsat
+0.00/0.06	unsat		0.00/0.50	sat	0.00/0.04	unsat	1.26/0.52	unsat
+0.00/0.06	unsat		0.00/0.51	sat	0.00/0.04	unsat	1.26/0.53	unsat
+0.00/0.08	unsat		1.37/0.57	sat	0.00/0.05	unsat	1.30/0.58	unsat
+0.00/0.08	unsat		1.37/0.58	sat	0.00/0.05	unsat	1.30/0.60	unsat
+... in UF/20190906-CLEARSY/0023/00245.smt2
+0.00/0.19	unsat		1.77/0.71	sat	0.00/0.05	unsat	1.83/0.72	unsat
+... in UF/20190906-CLEARSY/0024/00342.smt2
