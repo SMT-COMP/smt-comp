@@ -168,8 +168,9 @@ def remove_disagreements(data):
     solved_unknown = solved_unknown.drop_duplicates(
                             subset=['benchmark', 'result'])
 
-    # Group by benchmarks and count the number of results.
-    grouped_results = solved_unknown.groupby('benchmark', as_index=False).agg(
+    # Group by division + benchmarks and count the number of results. It's
+    # necessary to group by division as well as family+name can give duplicates
+    grouped_results = solved_unknown.groupby(['division', 'benchmark'], as_index=False).agg(
                             {'result': 'count'})
 
     # If the number of results is more than one, we have disagreeing solvers,
@@ -177,13 +178,13 @@ def remove_disagreements(data):
     # benchmark.
     disagreements = grouped_results[grouped_results['result'] > 1]
 
-    exclude = set(disagreements.benchmark)
+    exclude = list(zip(disagreements['division'], disagreements['benchmark']))
 
     if g_args.log:
         log('Found {} disagreements:'.format(len(exclude)))
         i = 1
-        for b in exclude:
-            log('[{}] {}'.format(i, b))
+        for d, b in exclude:
+            log('[{}] {}/{}'.format(i, d, b))
             bad_solvers = data[(data.benchmark == b) & (~data.solver.isin(unsound_solvers))
                           & ((data.result == RESULT_SAT)
                               | (data.result == RESULT_UNSAT))]
@@ -191,7 +192,7 @@ def remove_disagreements(data):
             i += 1
 
     # Exclude benchmarks on which solvers disagree.
-    data = data[~(data.benchmark.isin(exclude))]
+    data = data[~(data.benchmark.isin(set(disagreements.benchmark)))]
     return data
 
 # Return true if the solver with given id is competitive.
