@@ -13,7 +13,7 @@ MAIN_SOLVERS_CSV=$(mktemp)
 echo "Note! This script is designed for year 2020."
 echo "The script will not be safe next year."
 
-csvgrep -i -c 7 -r '^201[89]-.*$' ${SOLVERS_CSV} |csvgrep -i -c 7 -r '.*-fixed$' > ${MAIN_SOLVERS_CSV}
+csvgrep -i -c "Solver Name" -r '^(20[0-9][0-9]-.*|.*-fixed)$' ${SOLVERS_CSV} > ${MAIN_SOLVERS_CSV}
 
 ${MAKESPACES} --sq ${SQ_XML} --solvdiv ${MAIN_SOLVERS_CSV}
 ${MAKESPACES} --mv ${MV_XML} --solvdiv ${MAIN_SOLVERS_CSV}
