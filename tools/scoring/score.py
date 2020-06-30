@@ -1276,12 +1276,14 @@ def md_write_file(division,
             "year: {}\n\n"\
             "divisions: divisions_{}\n"\
             "participants: participants_{}\n\n"\
+            "disagreements: disagreements_{}\n"\
             "division: {}\n"\
             "track: {}\n"\
             "n_benchmarks: {}\n"\
             "time_limit: {}\n"\
             "mem_limit: 60\n"\
             .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    year,
                     year,
                     year,
                     year,
