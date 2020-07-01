@@ -130,10 +130,10 @@ if [[ ${PROCESS_UC} == "true" ]]; then
 fi
 
 if [[ ${PROCESS_SQ} == "true" ]]; then
-    echo "Removing solver ID 24160 from 2019"
     TMP_SQ_NO24160=$(mktemp -t fixed.XXXXXX)
     TMP_SQ_PATCHED=$(mktemp -t patched.XXXXXX)
-    csvgrep -i -c "solver id" -m 24160 ${SQ_2019_IN} > ${TMP_SQ_NO24160}
+    echo "Removing solver IDs 24160 from 2019 and 29388 from fixed"
+    csvgrep -i -c "solver id" -m 24160 ${SQ_2019_IN} |csvgrep -i -c "solver id" -m 29388 > ${TMP_SQ_NO24160}
 
     echo "Patching wrongly classified results"
     ${PATCH_CSV} -o ${SQ_ORIG_IN} -p ${SQ_PATCH} > ${TMP_SQ_PATCHED}
