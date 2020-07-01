@@ -1680,6 +1680,7 @@ def to_md_files_comp_summary(year, path, track):
                    "results: results_{year}\n"\
                    "divisions: divisions_{year}\n"\
                    "participants: participants_{year}\n"\
+                   "disagreements: disagreements_{year}\n"\
                    "---\n"
                    .format(year=year,
                            scores=",".join(scores),
