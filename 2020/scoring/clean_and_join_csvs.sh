@@ -132,6 +132,11 @@ fi
 if [[ ${PROCESS_SQ} == "true" ]]; then
     TMP_SQ_NO24160=$(mktemp -t fixed.XXXXXX)
     TMP_SQ_PATCHED=$(mktemp -t patched.XXXXXX)
+    # 24160 is a 2019 winner that was mistakenly run as an only solver
+    #       in a division.
+    # 29388 is a fixed solver which turned out to
+    #       be unsound and its removal was requested by the solver
+    #       developer.
     echo "Removing solver IDs 24160 from 2019 and 29388 from fixed"
     csvgrep -i -c "solver id" -m 24160 ${SQ_2019_IN} |csvgrep -i -c "solver id" -m 29388 > ${TMP_SQ_NO24160}
 
