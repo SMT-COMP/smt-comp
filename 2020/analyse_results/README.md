@@ -1,6 +1,6 @@
 # Analysis Tools
 
-These small scripts searches for benchmarks where the solvers
+These small scripts search for benchmarks where the solvers
 disagreed during the competition.
 
 ## Constructing single-query disagreement mds

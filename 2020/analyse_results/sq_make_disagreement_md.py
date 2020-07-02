@@ -83,5 +83,5 @@ if __name__ == '__main__':
                 ostr_list.append("  - name: %s" % (solver_name))
                 ostr_list.append("    result: %s" % divisions[div][bm][solver])
         ostr_list.append("---")
-        open(os.path.join(args.outdir, "%s.md" % div),
+        open(os.path.join(args.outdir, "%s-incremental.md" % div),
                 'w').write("\n".join(ostr_list))
