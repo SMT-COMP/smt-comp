@@ -8,15 +8,31 @@ import re
 from argparse import ArgumentParser
 import datetime
 
+COL_PAIR = 'pair id'
+COL_BM = 'benchmark'
+COL_SID = 'solver id'
+COL_QUERY = 'query'
+COL_RES = 'result'
+COL_SOLVERS_NAME = 'Solver Name'
+COL_SOLVERS_SID = 'Wrapped Solver ID Incremental'
+
+jobs = dict()
 divisions = dict()
+solver_names = dict()
 
 def parse_args():
-    parser = ArgumentParser(description="Read a list of incremental benchmarks and check their job outputs for disagreements. Report all disagreements in result files.")
+    parser = ArgumentParser(description="Read a list of disagreements reported by incremental_search_disagreements.py. Report all disagreements in result files.")
 
-    parser.add_argument("-j", "--jobdir",
+    parser.add_argument("-c", "--csvfile",
             action="store",
             required="true",
-            help="The directory containing all Job outputs"
+            help="The csvfile for the incremental job"
+            )
+
+    parser.add_argument("-s", "--solvers",
+            action="store",
+            required="true",
+            help="The solver registration csv"
             )
 
     parser.add_argument("-o", "--outdir",
@@ -27,46 +43,39 @@ def parse_args():
 
     return parser.parse_args()
 
-def evaluate_benchmark(jobdir, division, family, bench):
-    global divisions
-    solvers = []
-    allresults = []
-    maxlen = 0
-    for outputfile in glob.glob(str.format(
-            "{jobdir}/Job*_output/*Incremental*/{division}/{family}/*/{bench}/*.txt",
-            jobdir=jobdir, division=division, family=family, bench=bench)):
-        m = re.match(".*/([^/]*)___[^/]*/.*", outputfile)
-        solvers.append(m.group(1))
-        results = []
-        with open(outputfile, "r") as output:
-            for line in output:
-                m = re.match("^\d+\.\d+/\d+\.\d+\t(sat|unsat)$", line)
-                if m:
-                    results.append(m.group(1))
-                else:
-                    results.append("unknown")
-        allresults.append(results)
-        maxlen = max(maxlen, len(results))
-    if not allresults:
-        return
-    for i in range(1,maxlen):
-        column = [result[i-1] if i <= len(result) else "unknown" for result in allresults]
-        if ("sat" in column) and ("unsat" in column):
-            divergingresults = dict()
-            for (solver, result) in zip(solvers, column):
-                if result == "sat" or result == "unsat":
-                    divergingresults[solver] = result
-            if not division in divisions:
-                divisions[division] = dict()
-            fullpath = family + "/" + bench + " query " + str(i)
-            divisions[division][fullpath] = divergingresults
 
 if __name__ == '__main__':
     args = parse_args()
 
-    for line in sys.stdin:
-        m = re.match("([^/]*)/(.*)/([^/]*)\n", line)
-        evaluate_benchmark(args.jobdir, m.group(1), m.group(2), m.group(3))
+    with open(args.csvfile, "r") as csvfile:
+        csvreader = csv.reader(csvfile)
+        header = next(csvreader)
+        for row in csvreader:
+            drow = dict(zip(iter(header), iter(row)))
+            jobs[drow[COL_PAIR]] = (drow[COL_BM], drow[COL_SID])
+
+    with open(args.solvers) as solvers:
+        s_reader = csv.reader(solvers)
+        s_header = next(s_reader)
+        solver_names = dict()
+        for row in s_reader:
+            drow = dict(zip(iter(s_header), iter(row)))
+            solver_names[drow[COL_SOLVERS_SID]] = drow[COL_SOLVERS_NAME]
+        
+    csvreader = csv.reader(sys.stdin)
+    header = next(csvreader)
+    for row in csvreader:
+        drow = dict(zip(iter(header), iter(row)))
+        benchmark, solver = jobs[drow[COL_PAIR]]
+        m = re.match("[^/]*/(([^/]*)/.*)", benchmark)
+        div = m.group(2)
+        bench = m.group(1)
+        if not div in divisions:
+            divisions[div] = dict()
+        file = bench + " query " + drow[COL_QUERY]
+        if not file in divisions[div]:
+            divisions[div][file] = dict()
+        divisions[div][file][solver] = drow[COL_RES]
 
     for div in divisions:
         ostr_list = []
@@ -74,7 +83,7 @@ if __name__ == '__main__':
         ostr_list.append("layout: disagreements")
         ostr_list.append("year: 2020")
         ostr_list.append("gendate: %s" % datetime.datetime.now())
-        ostr_list.append("track: track_single_query")
+        ostr_list.append("track: track_incremental")
         ostr_list.append("participants: participants_2020")
         ostr_list.append("division: %s" % div)
         ostr_list.append("benchmarks:")
@@ -82,7 +91,8 @@ if __name__ == '__main__':
             ostr_list.append("- name: %s" % bm)
             ostr_list.append("- jobs:")
             for solver in divisions[div][bm]:
-                ostr_list.append("  - name: %s" % (solver))
+                solver_name = solver_names[solver]
+                ostr_list.append("  - name: %s" % (solver_name))
                 ostr_list.append("    result: %s" % divisions[div][bm][solver])
         ostr_list.append("---")
         open(os.path.join(args.outdir, "%s-incremental.md" % div),
