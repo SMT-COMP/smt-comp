@@ -5,6 +5,7 @@ import json
 import sys
 import os
 import re
+import csv
 
 def die(msg):
     print("error: {}".format(msg))
@@ -113,6 +114,8 @@ if __name__ == '__main__':
             help="a json file containing the divisions")
     parser.add_argument("-y", "--year", type=int, required=True,
             help="the competition year")
+    parser.add_argument("-e", "--experimental", type=str, required=True,
+            help="a csv files containing experimental divisions")
 
     for argname in tracks:
         help_str = "A comma separated list of files containing the "\
@@ -122,7 +125,7 @@ if __name__ == '__main__':
                 dest=argname, help=help_str)
 
         argname_nc = "%s_noncompetitive" % argname
-        hel_str = "A comma separated list of files containing the "\
+        help_str = "A comma separated list of files containing the "\
                 "non competitive logics in track %s" % \
                 track_raw_names_to_pretty_names['track_%s' % argname]
         parser.add_argument("--%s-noncompetitive" % argname, \
@@ -164,6 +167,7 @@ if __name__ == '__main__':
     all_logics = []
     division_info = read_divisions(args.divisions)
     tracks = list(map(lambda x: x.replace('track_', ''), division_info.keys()))
+
     for track in division_info:
         all_logics.extend(division_info[track])
     all_logics = set(all_logics)
@@ -175,6 +179,17 @@ if __name__ == '__main__':
     for tr in tracks:
         (bm_files, noncomp_files) = tracks_to_files[tr]
         logic_data = fillLogic(logic_data, tr, bm_files, noncomp_files)
+
+    if args.experimental:
+        with open(args.experimental) as expfile:
+            reader = csv.reader(expfile)
+            header = next(reader)
+
+            for row in reader:
+                drow = dict(zip(iter(header), iter(row)))
+                logic = drow['logic']
+                track = drow['track']
+                logic_data[logic][track][2] = 'experimental'
 
     for logic in all_logics:
         printYaml(args.year, logic, logic_data[logic], args.output_dir)
