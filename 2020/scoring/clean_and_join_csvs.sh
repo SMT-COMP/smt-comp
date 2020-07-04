@@ -83,8 +83,26 @@ do
 done
 
 if [[ ${PROCESS_INC} == "true" ]]; then
+
+    TMP_INC_2019_FIXED=$(mktemp -t inc_2019_fixed.XXXXXX)
+
+    # These solvers were accidentally run in a division that was not
+    # competitive (CVC4 the only competitor)
+    echo "Removing"
+    echo " - 2018-Z3 (incremental) (19996) from QF_ANIA and"
+    echo " - 2019-MathSAT-na-ext (23971) from QF_AUFBVNIA"
+
+    csvgrep -i -c 'solver id' -m 19996 \
+        -c 'benchmark' -r '^[^/]*/QF_ANIA/' \
+        ${INC_2019_IN} | \
+        csvgrep -i -c 'solver id' -m 23971 \
+            -c 'benchmark' -r '^[^/]*/QF_AUFBVNIA/' \
+            > ${TMP_INC_2019_FIXED}
+
     echo "Joining inc info"
-    ${JOINSCORE} ${INC_ORIG_IN} ${INC_2019_IN} ${INC_FIXED_IN} > ${INC_OUT}
+    ${JOINSCORE} ${INC_ORIG_IN} ${TMP_INC_2019_FIXED} ${INC_FIXED_IN} > ${INC_OUT}
+
+    rm ${TMP_INC_2019_FIXED}
 fi
 
 if [[ ${PROCESS_MV} == "true" ]]; then
