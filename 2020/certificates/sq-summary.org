@@ -1,0 +1,39 @@
+* CVC4
+
+ABVFP (All), ABVFPLRA (All), ALIA (Unsat), AUFBVDTLIA (All), AUFDTLIA (All), AUFDTLIRA (Seq, Par, Unsat, 24s), AUFDTNIRA (24s), AUFFPDTLIRA (Seq, Par, Unsat, 24s), AUFLIA (Sat), AUFLIRA (Seq), AUFNIRA (Seq), BV (All), BVFP (All), BVFPLRA (All), FP (All), FPLRA (Seq, Par, Sat, 24s), LIA (All), LRA (All), NIA (Seq, Par, Sat, 24s), QF_ABVFPLRA (Seq, Par, Sat, Unsat), QF_AUFNIA (All), QF_BVFPLRA (Seq, Par, Sat, 24s), QF_DT (All), QF_IDL (Unsat), QF_LIA (Seq, Par, Sat), QF_NIA (Seq, Par, Sat), QF_S (All), QF_SLIA (All), QF_UFNIA (Seq, Par, Unsat, 24s), UF (Unsat), UFBV (Seq, Par, Unsat, 24s), UFDT (Seq, Par, Sat, Unsat), UFDTLIA (Seq, Par, Unsat), UFDTLIRA (Seq, Par, Sat, 24s), UFDTNIRA (Seq, 24s), UFFPDTLIRA (All), UFFPDTNIRA (Seq, Par, Unsat, 24s), UFIDL (All), UFLIA (Seq, Par, Unsat, 24s), UFNIA (All)
+
+* SMTInterpol
+
+ALIA (Seq, Par, Sat, 24s), QF_LIA (Unsat), UFLIA (Sat)
+
+* Vampire
+
+AUFDTNIRA (Seq, Par, Unsat), AUFLIA (Seq, Par, Unsat, 24s), AUFLIRA (Par, Unsat, 24s), AUFNIRA (Par, Unsat, 24s), NIA (Unsat), NRA (Seq, Par, Unsat, 24s), UF (Seq, Par, Sat, 24s), UFDTLIA (24s), UFDTLIRA (Unsat), UFDTNIA (Seq, Par, Unsat, 24s), UFDTNIRA (Par, Unsat)
+
+* Bitwuzla
+
+QF_ABV (All), QF_ABVFP (All), QF_BV (All), QF_BVFP (All), QF_FP (Seq, Par, Sat, Unsat), QF_UFBV (24s), QF_UFFP (Seq, Par, Unsat, 24s)
+
+* COLIBRI
+
+QF_ABVFPLRA (24s), QF_BVFPLRA (Unsat), QF_FP (24s), QF_FPLRA (All)
+
+* Yices2
+
+QF_ALIA (All), QF_ANIA (All), QF_AUFBV (All), QF_AUFLIA (All), QF_AX (All), QF_IDL (Seq, Par, Sat, 24s), QF_LIA (24s), QF_LIRA (All), QF_LRA (24s), QF_NIA (Unsat, 24s), QF_NRA (All), QF_RDL (All), QF_UF (All), QF_UFBV (Seq, Par, Sat, Unsat), QF_UFIDL (All), QF_UFLIA (All), QF_UFLRA (All), QF_UFNIA (Sat), QF_UFNRA (All)
+
+* OpenSMT
+
+QF_LRA (Seq, Par, Sat, Unsat)
+
+* SMT-RAT
+
+QF_NIRA (Seq, Par, Unsat)
+
+* Alt-Ergo
+
+UFDT (24s), UFLRA (seq, par, 24s)
+
+* veriT
+
+UFLRA (unsat)
