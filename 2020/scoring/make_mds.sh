@@ -94,4 +94,6 @@ $PYTHON $FILTER $RESULTS_UC --exclude $BLACKLIST_UC > uc-filtered.csv && \
 $PYTHON $SCORE -y 2020 --csv uc-filtered.csv  -t $TIME --gen-md $OUTPUT -T uc -S $SOLVERS_CSV
 [[ -n $GEN_MV ]] && \
 $PYTHON $FILTER $RESULTS_MV --exclude $BLACKLIST_MV > mv-filtered.csv && \
-$PYTHON $SCORE -y 2020 --csv mv-filtered.csv  -t $TIME --gen-md $OUTPUT -T mv -S $SOLVERS_CSV
+$PYTHON $SCORE -y 2020 --csv mv-filtered.csv  -t $TIME \
+    --gen-md $OUTPUT -T mv -S $SOLVERS_CSV \
+    --omit-competition-wide-winners

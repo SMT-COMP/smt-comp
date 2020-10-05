@@ -1481,7 +1481,8 @@ def to_md_files_comp_biggest_lead(results_seq,
                                   results_24s,
                                   path,
                                   time_limit,
-                                  track):
+                                  track,
+                                  produce_winner):
     global g_tracks, g_exts, g_args
 
     bl_seq = biggest_lead_ranking(results_seq, True)
@@ -1509,28 +1510,48 @@ def to_md_files_comp_biggest_lead(results_seq,
                                  year,
                                  g_tracks[track]))
 
-        str_comp.append("winner_par: {}".format(
-            md_comp_get_value(bl_par, year, 0, 2)))
+        if (produce_winner):
+            winner_par_str = md_comp_get_value(bl_par, year, 0, 2)
+        else:
+            winner_par_str = "\"-\""
+
+        str_comp.append("winner_par: {}".format(winner_par_str))
+
         str_bl.append("{}{}".format(
             "parallel:\n",
             md_comp_get_div_biggest_lead(bl_par.get(year, ''))))
 
         if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
+            if (produce_winner):
+                winner_seq_str = md_comp_get_value(bl_seq, year, 0, 2)
+            else:
+                winner_seq_str = "\"-\""
+
             str_comp.insert(
                     1,
                     "winner_seq: {}".format(
-                        md_comp_get_value(bl_seq, year, 0, 2)))
+                        winner_seq_str))
             str_bl.insert (0, "{}{}".format(
                 "sequential:\n",
                 md_comp_get_div_biggest_lead(bl_seq.get(year, ''))))
 
         if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+
+            if (produce_winner):
+                winner_sat = md_comp_get_value(bl_sat, year, 0, 2)
+                winner_unsat = md_comp_get_value(bl_unsat, year, 0, 2)
+                winner_24s = md_comp_get_value(bl_24s, year, 0, 2)
+            else:
+                winner_sat = "\"-\""
+                winner_unsat = "\"-\""
+                winner_24s = "\"-\""
+
             str_comp.append("winner_sat: {}\n"\
                             "winner_unsat: {}\n"\
                             "winner_24s: {}"\
-                            .format(md_comp_get_value(bl_sat, year, 0, 2),
-                                    md_comp_get_value(bl_unsat, year, 0, 2),
-                                    md_comp_get_value(bl_24s, year, 0, 2)))
+                            .format(winner_sat, winner_unsat,
+                                winner_24s))
+
             str_bl.append("{}{}".format(
                 "sat:\n",
                 md_comp_get_div_biggest_lead(bl_sat.get(year, ''))))
@@ -1587,7 +1608,8 @@ def to_md_files_comp_largest_contribution(results_seq,
                                           results_24s,
                                           path,
                                           time_limit,
-                                          track):
+                                          track,
+                                          produce_winner):
     global g_tracks, g_exts, g_args
 
     lc_seq = largest_contribution_ranking(results_seq, time_limit, True)
@@ -1615,25 +1637,47 @@ def to_md_files_comp_largest_contribution(results_seq,
                                 year,
                                 g_tracks[track]))
 
-        str_comp.append("winner_par: {}\n".format(
-                md_comp_get_value(lc_par, year, 0, 4)))
+        if (produce_winner):
+            par_winner_str = md_comp_get_value(lc_par, year, 0, 4)
+        else:
+            par_winner_str = "\"-\""
+
+        str_comp.append("winner_par: {}\n".format(par_winner_str))
+
         str_lc.append("{}{}".format(
                 "parallel:\n", md_comp_get_div_largest_contribution(lc_par.get(year, ''))))
 
         if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
+
+            if (produce_winner):
+                seq_winner_str = md_comp_get_value(lc_seq, year, 0, 4)
+            else:
+                seq_winner_str = "\"-\""
+
             str_comp.insert(
-                1, "winner_seq: {}\n".format(
-                    md_comp_get_value(lc_seq, year, 0, 4)))
+                1, "winner_seq: {}\n".format(seq_winner_str))
+
             str_lc.insert(0, "{}{}".format(
                     "sequential:\n", md_comp_get_div_largest_contribution(lc_seq.get(year, ''))))
 
         if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+
+            if (produce_winner):
+                winner_sat_str = md_comp_get_value(lc_sat, year, 0, 4)
+                winner_unsat_str = md_comp_get_value(lc_unsat, year, 0, 4)
+                winner_24s_str = md_comp_get_value(lc_24s, year, 0, 4)
+            else:
+                winner_sat_str = "\"-\""
+                winner_unsat_str = "\"-\""
+                winner_24s_str = "\"-\""
+
+
             str_comp.append("winner_sat: {}\n"\
                             "winner_unsat: {}\n"\
                             "winner_24s: {}\n"\
-                            .format(md_comp_get_value(lc_sat, year, 0, 4),
-                                    md_comp_get_value(lc_unsat, year, 0, 4),
-                                    md_comp_get_value(lc_24s, year, 0, 4)))
+                            .format(winner_sat_str, winner_unsat_str,
+                                winner_24s_str))
+
             str_lc.append("{}{}".format(
                 "sat:\n", md_comp_get_div_largest_contribution(lc_sat.get(year, ''))))
             str_lc.append("{}{}".format(
@@ -1755,7 +1799,8 @@ def gen_results_md_files(csv, time_limit, year, path, path_comp):
                                   results_24s,
                                   path_comp,
                                   time_limit,
-                                  g_args.track)
+                                  g_args.track,
+                                  not g_args.omit_competition_wide_winners)
     to_md_files_comp_largest_contribution(results_seq,
                                           results_par,
                                           results_sat,
@@ -1763,7 +1808,8 @@ def gen_results_md_files(csv, time_limit, year, path, path_comp):
                                           results_24s,
                                           path_comp,
                                           time_limit,
-                                          g_args.track)
+                                          g_args.track,
+                                          not g_args.omit_competition_wide_winners)
     to_md_files_comp_summary(year,
                              path_comp,
                              g_args.track)
@@ -1866,6 +1912,12 @@ def parse_args():
                                  OPT_TRACK_MV, OPT_TRACK_CHALL_SQ,
                                  OPT_TRACK_CHALL_INC],
                         help="A string identifying the competition track")
+    gen_md.add_argument("--omit-competition-wide-winners",
+                        default=False,
+                        action='store_true',
+                        help="Do not produce the competition-wide "\
+                            "winners in the md (e.g., if the whole "\
+                            "track is experimental)")
 
     g_args = parser.parse_args()
 
