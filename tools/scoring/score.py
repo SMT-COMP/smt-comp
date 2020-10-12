@@ -981,15 +981,15 @@ def gen_results_for_report():
 # data      : The dataframe as returned by process_csv.
 # sequential: True if results are to be computed for sequential performance.
 #
-# return    : A dictionary, mapping from year to list of tuples with one tuple
-#             per division; a tuple contains
-#             (
-#                 <score>,               # the biggest lead score
-#                 <time>,                # the biggest lead time score
-#                 <first solver name>,   # name of first ranked solver
-#                 <second solver name>,  # name of second ranked solver
-#                 <division>             # name of division
-#             )
+# return    : A dictionary, mapping from year to list of dicts
+#             with one dict per division; a dict contains
+#             {
+#                 'score': <score>,                    # the biggest lead score
+#                 'time': <time>,                      # the biggest lead time score
+#                 'first_name': <first solver name>,   # name of first ranked solver
+#                 'second_name': <second solver name>, # name of second ranked solver
+#                 'division': <division>               # name of division
+#             }
 def biggest_lead_ranking(data, sequential):
     start = time.time() if g_args.show_timestamps else None
 
@@ -1029,13 +1029,20 @@ def biggest_lead_ranking(data, sequential):
             score = ((1 + first.score_correct) / (1 + second.score_correct))
             time = (1 + time_second) / (1 + time_first)
             if year not in scores: scores[year] = []
-            scores[year].append((score,
-                                 time,
-                                 get_solver_name(first.solver_id),
-                                 get_solver_name(second.solver_id),
-                                 division))
+            fields = ['score', 'time', 'first_name', 'second_name', \
+                    'division']
+            scores[year].append(dict(zip(fields, (score, time,
+                get_solver_name(first.solver_id),
+                get_solver_name(second.solver_id), division))))
+#            scores[year].append((score,
+#                                 time,
+#                                 get_solver_name(first.solver_id),
+#                                 get_solver_name(second.solver_id),
+#                                 division))
         if year in scores:
-            scores[year] = sorted(scores[year], reverse=True)
+            scores[year] = sorted(scores[year], \
+                    key = lambda x: (x['score'], x['time']), \
+                    reverse=True)
 
     if g_args.show_timestamps:
         log('time biggest_lead_ranking: {}'.format(time.time() - start))
@@ -1090,13 +1097,14 @@ def vbss(division_data, solver_id, sequential):
 #
 # return: A dictionary, mapping from year to list of tuples with one tuple per
 #         division; a tuple contains
-#         (
-#             <score>,               # the largest contribution score
-#             <time>,                # the largest contribution time score
-#             <n_solvers>,           # the number of solvers in the division
-#             <division_size>,       # the number of benchmarks in the division
-#             <division>             # name of division
-#         )
+#         {
+#             'score': <score>,                  # the largest contribution score
+#             'time': <time>,                    # the largest contribution time score
+#             'n_solvers': <n_solvers>,          # the number of solvers in the division
+#             'division_size': <division_size>,  # the number of benchmarks in the division
+#             'first_name': <solver_name>,       # the solver name
+#             'division': <division>             # name of division
+#         }
 def largest_contribution_ranking(data, time_limit, sequential):
     start = time.time() if g_args.show_timestamps else None
 
@@ -1178,10 +1186,14 @@ def largest_contribution_ranking(data, time_limit, sequential):
             weight = n_solvers * n_benchmarks / num_job_pairs_total
             w_score, w_time = impact_score * weight, impact_time * weight
             if year not in weighted_scores: weighted_scores[year] = []
-            weighted_scores[year].append(
-                (w_score, w_time, n_solvers, n_benchmarks, tup[4], tup[5]))
+            fields = ['score', 'time', 'n_solvers', 'division_size',
+                    'first_name', 'division']
+            weighted_scores[year].append(dict(zip(fields,\
+                (w_score, w_time, n_solvers, n_benchmarks, tup[4],\
+                    tup[5]))))
         if year in weighted_scores:
-            weighted_scores[year] = sorted(weighted_scores[year], reverse=True)
+            weighted_scores[year] = sorted(weighted_scores[year], \
+                    key = lambda x: (x['score'], x['time']), reverse=True)
 
     if g_args.show_timestamps:
         log('time largest_contribution_ranking: {}'.format(time.time() - start))
@@ -1436,15 +1448,20 @@ def to_md_files(results_seq,
 # Get score details for competition-wide biggest lead recognition .md file
 # for a division and score.
 # bl: The dataframe containing all biggest lead data for a division and score.
-def md_comp_get_div_biggest_lead(bl):
+def md_comp_get_div_biggest_lead(bl, expdivs = []):
     str_bl = []
     for div_bl in bl:
+
         str_bl.append("- name: {}\n"\
                       "  second: {}\n"\
                       "  correctScore: {:.8f}\n"\
                       "  timeScore: {:.8f}\n"\
-                      "  division: {}".format(
-                      div_bl[2], div_bl[3], div_bl[0], div_bl[1], div_bl[4]))
+                      "  division: {}\n"\
+                      "  experimental: {}".format( \
+                      div_bl['first_name'], div_bl['second_name'], \
+                      div_bl['score'], div_bl['time'], \
+                      div_bl['division'], \
+                      ((div_bl['division'] in expdivs) and "true") or "false"))
     return "\n".join(str_bl)
 
 # Get value from competition-wide recognitions data.
@@ -1456,6 +1473,21 @@ def md_comp_get_value(comp_data, year, i, j):
     if not comp_data[year]:
         return ''
     return comp_data[year][i][j]
+
+def md_comp_get_nonexperimental_winner(comp_data, year, exp_divisions):
+    if year not in comp_data:
+        return ''
+    if not comp_data[year]:
+        return ''
+
+    non_experimentals = list(\
+            filter(lambda x: x['division'] not in exp_divisions,\
+                comp_data[year]))
+
+    if len(non_experimentals) > 0:
+        return non_experimentals[0]['first_name']
+    else:
+        return None
 
 # Generate results .md file for competition-wide biggest lead contribution for
 # a track.
@@ -1482,7 +1514,7 @@ def to_md_files_comp_biggest_lead(results_seq,
                                   path,
                                   time_limit,
                                   track,
-                                  produce_winner):
+                                  expdivs):
     global g_tracks, g_exts, g_args
 
     bl_seq = biggest_lead_ranking(results_seq, True)
@@ -1510,21 +1542,23 @@ def to_md_files_comp_biggest_lead(results_seq,
                                  year,
                                  g_tracks[track]))
 
-        if (produce_winner):
-            winner_par_str = md_comp_get_value(bl_par, year, 0, 2)
-        else:
+        winner_par_str = \
+                md_comp_get_nonexperimental_winner(bl_par, \
+                year, expdivs)
+        if winner_par_str == None:
             winner_par_str = "\"-\""
 
         str_comp.append("winner_par: {}".format(winner_par_str))
 
         str_bl.append("{}{}".format(
             "parallel:\n",
-            md_comp_get_div_biggest_lead(bl_par.get(year, ''))))
+            md_comp_get_div_biggest_lead(bl_par.get(year, ''), expdivs)))
 
         if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
-            if (produce_winner):
-                winner_seq_str = md_comp_get_value(bl_seq, year, 0, 2)
-            else:
+            winner_seq_str = \
+                    md_comp_get_nonexperimental_winner(bl_seq, \
+                    year, expdivs)
+            if winner_seq_str == None:
                 winner_seq_str = "\"-\""
 
             str_comp.insert(
@@ -1533,17 +1567,22 @@ def to_md_files_comp_biggest_lead(results_seq,
                         winner_seq_str))
             str_bl.insert (0, "{}{}".format(
                 "sequential:\n",
-                md_comp_get_div_biggest_lead(bl_seq.get(year, ''))))
+                md_comp_get_div_biggest_lead(bl_seq.get(year, ''),
+                    expdivs)))
 
         if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
 
-            if (produce_winner):
-                winner_sat = md_comp_get_value(bl_sat, year, 0, 2)
-                winner_unsat = md_comp_get_value(bl_unsat, year, 0, 2)
-                winner_24s = md_comp_get_value(bl_24s, year, 0, 2)
-            else:
+            winner_sat = md_comp_get_nonexperimental_winner(bl_sat, \
+                    year, expdivs)
+            winner_unsat = md_comp_get_nonexperimental_winner(bl_unsat, \
+                    year, expdivs)
+            winner_24s = md_comp_get_nonexperimental_winner(bl_24s, \
+                    year, expdivs)
+            if not winner_sat:
                 winner_sat = "\"-\""
+            if not winner_unsat:
                 winner_unsat = "\"-\""
+            if not winner_24s:
                 winner_24s = "\"-\""
 
             str_comp.append("winner_sat: {}\n"\
@@ -1554,13 +1593,16 @@ def to_md_files_comp_biggest_lead(results_seq,
 
             str_bl.append("{}{}".format(
                 "sat:\n",
-                md_comp_get_div_biggest_lead(bl_sat.get(year, ''))))
+                md_comp_get_div_biggest_lead(bl_sat.get(year, ''),
+                    expdivs)))
             str_bl.append("{}{}".format(
                 "unsat:\n",
-                md_comp_get_div_biggest_lead(bl_unsat.get(year, ''))))
+                md_comp_get_div_biggest_lead(bl_unsat.get(year, ''),
+                    expdivs)))
             str_bl.append("{}{}".format(
                 "twentyfour:\n",
-                md_comp_get_div_biggest_lead(bl_24s.get(year, ''))))
+                md_comp_get_div_biggest_lead(bl_24s.get(year, ''),
+                    expdivs)))
 
         str_comp = "\n".join(str_comp)
         str_bl = "\n".join(str_bl)
@@ -1574,14 +1616,17 @@ def to_md_files_comp_biggest_lead(results_seq,
 # .md file for a division and score.
 # lc: The dataframe containing all largest contribution data for a division
 #     and score.
-def md_comp_get_div_largest_contribution(lc):
+def md_comp_get_div_largest_contribution(lc, expdivs = []):
     str_lc = []
     for div_lc in lc:
         str_lc.append("- name: {}\n"\
                       "  correctScore: {:.8f}\n"\
                       "  timeScore: {:.8f}\n"\
-                      "  division: {}".format(
-                      div_lc[4], div_lc[0], div_lc[1], div_lc[5]))
+                      "  division: {}\n"\
+                      "  experimental: {}".format(\
+                      div_lc['first_name'], div_lc['score'],\
+                      div_lc['time'], div_lc['division'], \
+                      ((div_lc['division'] in expdivs) and "true") or "false"))
     return "\n".join(str_lc)
 
 # Generate results .md file for competition-wide biggest lead contribution for
@@ -1609,7 +1654,7 @@ def to_md_files_comp_largest_contribution(results_seq,
                                           path,
                                           time_limit,
                                           track,
-                                          produce_winner):
+                                          expdivs):
     global g_tracks, g_exts, g_args
 
     lc_seq = largest_contribution_ranking(results_seq, time_limit, True)
@@ -1637,40 +1682,51 @@ def to_md_files_comp_largest_contribution(results_seq,
                                 year,
                                 g_tracks[track]))
 
-        if (produce_winner):
-            par_winner_str = md_comp_get_value(lc_par, year, 0, 4)
-        else:
+        par_winner_str = \
+                md_comp_get_nonexperimental_winner(lc_par, year, expdivs)
+        if not par_winner_str:
             par_winner_str = "\"-\""
 
         str_comp.append("winner_par: {}\n".format(par_winner_str))
 
         str_lc.append("{}{}".format(
-                "parallel:\n", md_comp_get_div_largest_contribution(lc_par.get(year, ''))))
+                "parallel:\n",
+                md_comp_get_div_largest_contribution(\
+                        lc_par.get(year, ''), expdivs)))
 
         if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
 
-            if (produce_winner):
-                seq_winner_str = md_comp_get_value(lc_seq, year, 0, 4)
-            else:
+            seq_winner_str = \
+                    md_comp_get_nonexperimental_winner(lc_seq, \
+                    year, expdivs)
+            if not seq_winner_str:
                 seq_winner_str = "\"-\""
 
             str_comp.insert(
                 1, "winner_seq: {}\n".format(seq_winner_str))
 
             str_lc.insert(0, "{}{}".format(
-                    "sequential:\n", md_comp_get_div_largest_contribution(lc_seq.get(year, ''))))
+                    "sequential:\n", \
+                    md_comp_get_div_largest_contribution(\
+                    lc_seq.get(year, ''), expdivs)))
 
         if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+            winner_sat_str = \
+                    md_comp_get_nonexperimental_winner(lc_sat, \
+                    year, expdivs)
+            winner_unsat_str = \
+                    md_comp_get_nonexperimental_winner(lc_unsat, \
+                    year, expdivs)
+            winner_24s_str = \
+                    md_comp_get_nonexperimental_winner(lc_24s, \
+                    year, expdivs)
 
-            if (produce_winner):
-                winner_sat_str = md_comp_get_value(lc_sat, year, 0, 4)
-                winner_unsat_str = md_comp_get_value(lc_unsat, year, 0, 4)
-                winner_24s_str = md_comp_get_value(lc_24s, year, 0, 4)
-            else:
+            if not winner_sat_str:
                 winner_sat_str = "\"-\""
+            if not winner_unsat_str:
                 winner_unsat_str = "\"-\""
+            if not winner_24s_str:
                 winner_24s_str = "\"-\""
-
 
             str_comp.append("winner_sat: {}\n"\
                             "winner_unsat: {}\n"\
@@ -1800,7 +1856,7 @@ def gen_results_md_files(csv, time_limit, year, path, path_comp):
                                   path_comp,
                                   time_limit,
                                   g_args.track,
-                                  not g_args.omit_competition_wide_winners)
+                                  g_args.experimental_divisions)
     to_md_files_comp_largest_contribution(results_seq,
                                           results_par,
                                           results_sat,
@@ -1809,7 +1865,7 @@ def gen_results_md_files(csv, time_limit, year, path, path_comp):
                                           path_comp,
                                           time_limit,
                                           g_args.track,
-                                          not g_args.omit_competition_wide_winners)
+                                          g_args.experimental_divisions)
     to_md_files_comp_summary(year,
                              path_comp,
                              g_args.track)
@@ -1912,12 +1968,11 @@ def parse_args():
                                  OPT_TRACK_MV, OPT_TRACK_CHALL_SQ,
                                  OPT_TRACK_CHALL_INC],
                         help="A string identifying the competition track")
-    gen_md.add_argument("--omit-competition-wide-winners",
-                        default=False,
-                        action='store_true',
-                        help="Do not produce the competition-wide "\
-                            "winners in the md (e.g., if the whole "\
-                            "track is experimental)")
+    gen_md.add_argument("--expdivs",
+                        metavar="expdiv[,expdiv...]",
+                        default=None,
+                        help="List the experimental divisions in "\
+                                "the selected track")
 
     g_args = parser.parse_args()
 
@@ -1933,6 +1988,10 @@ def parse_args():
             os.mkdir(g_args.gen_md[0])
         if not os.path.exists(g_args.gen_md[1]):
             os.mkdir(g_args.gen_md[1])
+
+        g_args.experimental_divisions = set(\
+            g_args.expdivs.split(',') if \
+            g_args.expdivs else [])
 
     g_args.csv = g_args.csv.split(',') if g_args.csv else []
     g_args.year = g_args.year.split(',') if g_args.year else []
