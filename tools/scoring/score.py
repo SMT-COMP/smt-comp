@@ -1034,11 +1034,7 @@ def biggest_lead_ranking(data, sequential):
             scores[year].append(dict(zip(fields, (score, time,
                 get_solver_name(first.solver_id),
                 get_solver_name(second.solver_id), division))))
-#            scores[year].append((score,
-#                                 time,
-#                                 get_solver_name(first.solver_id),
-#                                 get_solver_name(second.solver_id),
-#                                 division))
+
         if year in scores:
             scores[year] = sorted(scores[year], \
                     key = lambda x: (x['score'], x['time']), \
