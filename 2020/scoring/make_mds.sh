@@ -96,4 +96,4 @@ $PYTHON $SCORE -y 2020 --csv uc-filtered.csv  -t $TIME --gen-md $OUTPUT -T uc -S
 $PYTHON $FILTER $RESULTS_MV --exclude $BLACKLIST_MV > mv-filtered.csv && \
 $PYTHON $SCORE -y 2020 --csv mv-filtered.csv  -t $TIME \
     --gen-md $OUTPUT -T mv -S $SOLVERS_CSV \
-    --omit-competition-wide-winners
+    --expdivs QF_LIA,QF_IDL,QF_LRA,QF_RDL,QF_LIRA
