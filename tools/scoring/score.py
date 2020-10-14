@@ -1460,21 +1460,19 @@ def md_comp_get_div_biggest_lead(bl, expdivs = []):
                       ((div_bl['division'] in expdivs) and "true") or "false"))
     return "\n".join(str_bl)
 
-# Get value from competition-wide recognitions data.
+# Get the name of the highest-scoring solver from competition-wide
+# recognitions data, ignoring the experimental divisions scores.  If
+# there is no winner, return the special name \"-\"
 # comp_data: The data for a competition-wide recognition. Maps 'year' to a list
 #            of tuples with the actual recognition data.
-def md_comp_get_value(comp_data, year, i, j):
-    if year not in comp_data:
-        return ''
-    if not comp_data[year]:
-        return ''
-    return comp_data[year][i][j]
+# year: The year of interest
+# exp_division: a list of experimental division names
 
 def md_comp_get_nonexperimental_winner(comp_data, year, exp_divisions):
     if year not in comp_data:
-        return ''
+        return '"-"'
     if not comp_data[year]:
-        return ''
+        return '"-"'
 
     non_experimentals = list(\
             filter(lambda x: x['division'] not in exp_divisions,\
@@ -1483,7 +1481,7 @@ def md_comp_get_nonexperimental_winner(comp_data, year, exp_divisions):
     if len(non_experimentals) > 0:
         return non_experimentals[0]['first_name']
     else:
-        return None
+        return '"-"'
 
 # Generate results .md file for competition-wide biggest lead contribution for
 # a track.
@@ -1541,8 +1539,6 @@ def to_md_files_comp_biggest_lead(results_seq,
         winner_par_str = \
                 md_comp_get_nonexperimental_winner(bl_par, \
                 year, expdivs)
-        if winner_par_str == None:
-            winner_par_str = "\"-\""
 
         str_comp.append("winner_par: {}".format(winner_par_str))
 
@@ -1554,15 +1550,10 @@ def to_md_files_comp_biggest_lead(results_seq,
             winner_seq_str = \
                     md_comp_get_nonexperimental_winner(bl_seq, \
                     year, expdivs)
-            if winner_seq_str == None:
-                winner_seq_str = "\"-\""
 
-            str_comp.insert(
-                    1,
-                    "winner_seq: {}".format(
+            str_comp.insert(1, "winner_seq: {}".format(
                         winner_seq_str))
-            str_bl.insert (0, "{}{}".format(
-                "sequential:\n",
+            str_bl.insert (0, "{}{}".format("sequential:\n",
                 md_comp_get_div_biggest_lead(bl_seq.get(year, ''),
                     expdivs)))
 
@@ -1574,12 +1565,6 @@ def to_md_files_comp_biggest_lead(results_seq,
                     year, expdivs)
             winner_24s = md_comp_get_nonexperimental_winner(bl_24s, \
                     year, expdivs)
-            if not winner_sat:
-                winner_sat = "\"-\""
-            if not winner_unsat:
-                winner_unsat = "\"-\""
-            if not winner_24s:
-                winner_24s = "\"-\""
 
             str_comp.append("winner_sat: {}\n"\
                             "winner_unsat: {}\n"\
@@ -1606,7 +1591,6 @@ def to_md_files_comp_biggest_lead(results_seq,
         file_path = os.path.join(path, "biggest-lead{}".format(g_exts[track]))
         with open(file_path, "w") as outfile:
             outfile.write("\n".join([str_comp, str_bl, '---\n']))
-
 
 # Get score details for competition-wide largest contribution recognition
 # .md file for a division and score.
@@ -1680,8 +1664,6 @@ def to_md_files_comp_largest_contribution(results_seq,
 
         par_winner_str = \
                 md_comp_get_nonexperimental_winner(lc_par, year, expdivs)
-        if not par_winner_str:
-            par_winner_str = "\"-\""
 
         str_comp.append("winner_par: {}\n".format(par_winner_str))
 
@@ -1695,8 +1677,6 @@ def to_md_files_comp_largest_contribution(results_seq,
             seq_winner_str = \
                     md_comp_get_nonexperimental_winner(lc_seq, \
                     year, expdivs)
-            if not seq_winner_str:
-                seq_winner_str = "\"-\""
 
             str_comp.insert(
                 1, "winner_seq: {}\n".format(seq_winner_str))
@@ -1716,13 +1696,6 @@ def to_md_files_comp_largest_contribution(results_seq,
             winner_24s_str = \
                     md_comp_get_nonexperimental_winner(lc_24s, \
                     year, expdivs)
-
-            if not winner_sat_str:
-                winner_sat_str = "\"-\""
-            if not winner_unsat_str:
-                winner_unsat_str = "\"-\""
-            if not winner_24s_str:
-                winner_24s_str = "\"-\""
 
             str_comp.append("winner_sat: {}\n"\
                             "winner_unsat: {}\n"\
