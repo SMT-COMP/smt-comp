@@ -179,17 +179,21 @@ benchmark library have grown over time.
 %
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
-  \item {\bf The option \akey{:print-success} is explicitly set to true or false.}
-    Previous competitions set this option to \akey{true} for the incremental track.
-    In addition, this competition will set the option to \akey{false} for all
-    other tracks.
-    
+  \item {\bf The option \akey{:print-success} is explicitly set to
+    true or false.}  Previous competitions set this option to
+    \akey{true} for the incremental track.  In addition, this
+    competition will set the option to \akey{false} for all other
+    tracks.
     \rationale{According to the standard the default value of
       \akey{:print-success} is true.  So a conforming solver would
       unnecessarily print \akey{success} after each command that needs
-      to be stored and skipped by the post-processors.
-      Additionally, solvers can use this option as indication whether
-      incremental checking is desired.}
+      to be stored and skipped by the post-processors.  Additionally,
+      solvers can use this option as indication whether incremental
+      checking is desired.}
+
+    We were asked to set the \akey{:incremental} option to true for
+    the incremental track.  However this is problematic, because it is
+    not a standard option and solvers may not support it.
   
   \item {\bf Error result is for unsoundness, only.}
     Previous competitions marked malformed output in the unsat core and
@@ -219,31 +223,22 @@ The principal changes from the previous competition rules are the following:
 
   \item {\bf Punishment of unsound results is adapted to fix sat/unsat scores.}
     
-  \item {\bf TODO LIFT? Limit the Number of Solvers.}
-    This year solver development teams may only submit more than one
-    entry if they are substantially different.  A justification must
-    be provided for the difference.  We strongly encourage the teams
-    to keep the number of solvers per team per category at at most
-    two.
-
-    \rationale{The organizers wish to keep the total run-time of the
-      competition small, in case of unforeseen problems that require
-      to rerun the whole competition.  The idea in allowing up to two
-      submissions is to encourage the development of new, experimental
-      techniques by allowing an ``alternative solver'' to be submitted
-      while keeping the competition manageable.}
-
-
-  \item {\bf TODO: Time Limit.} The time limit per solver/benchmark pair is
-    anticipated to be at most 20 minutes in the \maintrack, \inctrack,
-    \ucoretrack and \mvaltrack.
-    \rationale{The time limit for the Main Track is
-      reduced to 20 minutes (down from 40 minutes in the previous years),
-      to make running the competition more manageable}
+    Previously an unsound response for a benchmark did punish the
+    score corresponding to the benchmark status.  We fix it to count
+    errors to the score that correspond to the solver output, not the
+    benchmark status.
+    \rationale{If a solver returns \texttt{unsat} for a
+      satisfiable benchmark, all other \texttt{unsat} responses of the
+      solver are no longer trustworthy.  So it is the unsat score of
+      the solver that must be punished.  The \texttt{sat} responses
+      may still be trustworthy.  In the extreme case, a solver that
+      always return \texttt{unsat} would a high error score for the
+      unsat category under the new rules, and would get no points at
+      all for the sat category.}
 
   \item {\bf Benchmark Selection.}
-    This year we reduce the percentage of the benchmarks that are run in the competition.
-    \rationale{The goal is to make running the competition more managable.}
+    This year we increase the percentage of the benchmarks that are run in the competition back to 50 \%.
+    \rationale{We feel that increasing the number of benchmarks is managable and 50 \% is a more round number than 40 \%.}
 
   \item {\bf The Strings Division is not experimental.}
     The last year's competition introduced a experimental divisions for benchmarks that
@@ -262,6 +257,8 @@ The principal changes from the previous competition rules are the following:
   \item {\bf \mvaltrack.}  Last year's competition introduced the experimental
     divisions QF\_IDL, QF\_RDL, QF\_LIA, QF\_LRA, QF\_LIRA in the
     model validation track.  This year these will no longer be experimental.
+    In addition, new experimental divisions QF\_UF, QF\_UFBV,
+    QF\_UFIDL, QF\_UFLIA, QF\_UFLRA will be added.
 
   \rationale{There were only small issues with these divisions, so there is no
     reason to keep it experimental. For the new divisions, as before, given the
@@ -288,7 +285,7 @@ same component or abstraction of the input problem.  For example, a
 solver using one subsolver to solve the ground abstraction of a
 quantified problem is allowed, while a solver using two or more
 subsolvers from different groups of authors is not.
-Porfolio solver are in general \textbf{not allowed}.
+Portfolio solver are in general \textbf{not allowed}.
 If you are unsure if your tool is a portfolio solver according to this
 definition and you feel that it should be allowed contact the
 organizers of the SMT-COMP for clarification.
