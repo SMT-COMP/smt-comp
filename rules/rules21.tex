@@ -240,19 +240,18 @@ The principal changes from the previous competition rules are the following:
     This year we increase the percentage of the benchmarks that are run in the competition back to 50 \%.
     \rationale{We feel that increasing the number of benchmarks is managable and 50 \% is a more round number than 40 \%.}
 
-  \item {\bf The Strings Division is not experimental.}
-    The last year's competition introduced a experimental divisions for benchmarks that
-    use strings. This year, the String division is no longer experimental.
+  \item {\bf Stricter checks for output in single query track.}
+    It is now checked that the output in the single query track starts with
+    sat or unsat.  Error messages before such an output is no longer ignored
+    and are treated as an \texttt{unknown} result.
+    {\bf Note:} Solver authors should make sure not to print any debugging
+    output.  This includes debugging output on stderr, because the
+    post-processors cannot distinguish between stderr and stdout.
 
-  \rationale{The final specification of the string theory has been officially released.}
-
-  \item {\bf Model syntax in \mvaltrack.}  The syntax used in the
-    model validation track did not conform to the SMTLIB standard.
-    The difference is that the syntax used previously included an
-    additional keyword \texttt{model} after the opening parenthesis in
-    the output.  This year we support both the SMTLIB syntax and the
-    old syntax.  We urge solver writers to upgrade their solver to use
-    the new syntax.
+  \rationale{A solver that does not support the full logic may
+    report errors and then continue ignoring the failed assertion.  This
+    way, it may be flagged as unsound under the old rules, even though it
+    clearly indicated the error.}
 
   \item {\bf \mvaltrack.}  Last year's competition introduced the experimental
     divisions QF\_IDL, QF\_RDL, QF\_LIA, QF\_LRA, QF\_LIRA in the
@@ -264,6 +263,22 @@ The principal changes from the previous competition rules are the following:
     reason to keep it experimental. For the new divisions, as before, given the
     inconsistencies across different model producing solvers, we proceed in an
     experimental fashion to push for model standardization.}
+
+  \item {\bf Model syntax in \mvaltrack.}  The syntax used in the
+    model validation track did not conform to the SMT-LIB standard.
+    The difference is that the syntax used previously included an
+    additional keyword \texttt{model} after the opening parenthesis in
+    the output.  This year we support both the SMT-LIB syntax and the
+    old syntax.  We urge solver writers to upgrade their solver to use
+    the new syntax.
+
+    We added new tracks for UF logics. According to the SMT-LIB standard,
+    model values of uninterpreted sorts should use the syntax
+    \texttt{(as @name Sort)}.
+    In particular the model validator needs to know the sort of the model
+    value.  Furthermore, it is implicitly assumed that model values
+    differ if they have different names.
+
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
