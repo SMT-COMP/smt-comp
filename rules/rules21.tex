@@ -28,6 +28,8 @@
 \newcommand{\ucoretrack}{Unsat-Core Track\xspace}
 \newcommand{\mvaltrack}{Model-Validation Track\xspace}
 \newcommand{\challtrack}{Industry-Challenge Track\xspace}
+\newcommand{\paralleltrack}{Parallel Track\xspace}
+\newcommand{\cloudtrack}{Cloud Track\xspace}
 
 \newcommand{\rationale}[1]{\hskip .5em{\textit{Rationale:} #1}\xspace}
 
@@ -154,7 +156,8 @@ solving.
 
 SMT-COMP 2021 will have four tracks: the \maintrack (before 2019: Main Track),
 the \inctrack (before 2019: Application Track), the \ucoretrack, and the
-\mvaltrack.
+\mvaltrack.  In addition there will be two experimental tracks sponsored
+by AWS: the \paralleltrack{} and the \cloudtrack{}.
 %
 Within each track there are multiple divisions, where each division
 uses benchmarks from a specific group of SMT-LIB logics.
@@ -281,7 +284,7 @@ Logics: BVFP, FP, BVFPLRA, FPLRA
     Previous competitions marked malformed output in the unsat core and
     the model validation track as errors.  These errors basically disqualify
     a solver that outputs a slightly malformed model.  This year the error
-    result is only given for unsat cores that are not unsatifiable or models
+    result is only given for unsat cores that are not unsatisfiable or models
     that don't satisfy the formula. Of courses, answering sat in unsat
     core track or unsat in model validation track is still considered an
     error.
@@ -319,8 +322,14 @@ Logics: BVFP, FP, BVFPLRA, FPLRA
       all for the sat category.}
 
   \item {\bf Benchmark Selection.}
-    This year we increase the percentage of the benchmarks that are run in the competition back to 50 \%.
-    \rationale{We feel that increasing the number of benchmarks is managable and 50 \% is a more round number than 40 \%.}
+      Apart from the \cloudtrack{} and the \paralleltrack{}, this year we
+        increase the percentage of the benchmarks that are run in the
+        competition back to 50 \%.
+    \rationale{We feel that increasing the number of benchmarks is
+    manageable and 50 \% is a more round number than 40 \%.  The
+    \cloudtrack{} and \paralleltrack{} need to be run on a more
+    restricted set because of the amount of parallel resources we
+    provide for the tracks.}
 
   \item {\bf Stricter checks for output in single query track.}
     It is now checked that the output in the single query track starts with
@@ -382,7 +391,8 @@ same component or abstraction of the input problem.  For example, a
 solver using one subsolver to solve the ground abstraction of a
 quantified problem is allowed, while a solver using two or more
 subsolvers from different groups of authors is not.
-Portfolio solver are in general \textbf{not allowed}.
+Portfolio solver are in general \textbf{allowed only in the
+\paralleltrack{} and \cloudtrack{}}.
 If you are unsure if your tool is a portfolio solver according to this
 definition and you feel that it should be allowed contact the
 organizers of the SMT-COMP for clarification.
@@ -409,7 +419,10 @@ original solver.  A derived tool should follow the \emph{naming convention}
 \header{SMT Solver Submission.}
 %
 An entrant to SMT-COMP is a solver submitted by its authors using
-the StarExec (\url{http://www.starexec.org}) service.
+the StarExec (\url{http://www.starexec.org}) service, or, for
+\paralleltrack{} and \cloudtrack{}, otherwise communicated to the
+organisers.
+
 
 \header{Solver execution.}
 %
@@ -427,7 +440,8 @@ the StarExec user guide,
 \header{Participation in the Competition.}
 %
 For participation in SMT-COMP, a solver must be uploaded to StarExec
-and made publicly available.  StarExec supports solver configurations;
+and made publicly available, or communicated separately to the
+organisers for the \cloudtrack{} and \paralleltrack{}.  StarExec supports solver configurations;
 for clarity, \emph{each submitted solver must have one configuration
   only}.  Moreover, the organizers must be informed of the solver's
 presence \emph{and the tracks and divisions in which it is
@@ -459,7 +473,7 @@ A system description \emph{should} further include the following information
   \item in case of a \emph{wrapper} or \emph{derived tool}: details of
     technical innovations by which a wrapper or derived tool expects to improve
     on the wrapped solvers or base solver
-  \item appropriate acknowledgement of tools other than SMT solvers called by
+  \item appropriate acknowledgment of tools other than SMT solvers called by
     the system (e.g., SAT solvers) that are not written by the authors of the
     submitted solver, and
   \item a link to a website for the submitted tool.
@@ -498,19 +512,23 @@ e.g., for comparison purposes.
 
 \subsection*{Deadlines}
 
-SMT-COMP entrants must be submitted via StarExec (solvers) \emph{and}
+SMT-COMP entrants must be submitted via StarExec (solvers), or
+communicated separately to the organisers for the \paralleltrack{} and
+\cloudtrack{}, \emph{and}
 the above web form (accompanying information) until the end of
 {\bf May~30, 2021} anywhere on earth.
 After this date \emph{no new entrants} will be accepted.
-However, updates to existing entrants on StarExec
+However, updates to existing entrants on StarExec or \paralleltrack{}
+and \cloudtrack{}
 will be accepted until the end of {\bf June~13, 2021} anywhere on earth.
 
 We strongly encourage participants to use this grace period
 \emph{only} for the purpose of fixing any bugs that may be discovered,
 and not for adding new features, as there may be no opportunity to do
-extensive testing using StarExec after the initial deadline.
+extensive testing using StarExec or other means after the initial deadline.
 
-The solver versions that are present on StarExec at the conclusion of
+The solver versions that are present on StarExec or communicated
+otherwise to the organisers for \paralleltrack{}and \cloudtrack{} at the conclusion of
 the grace period will be the ones used for the competition.  Versions
 submitted after this time will not be used.  The organizers reserve
 the right to start the competition itself at any time after the open
@@ -528,9 +546,9 @@ competition.
 
 Solvers will be publicly evaluated in all tracks and divisions into
 which they have been entered.  All results of the competition will be
-made public. Solvers will be made publicly available after the competition and it is a minimum licence requirement that (i) solvers can be distributed in this way, and (ii) all submitted solvers may be freely used for academic evaluation purposes.
+made public. Solvers will be made publicly available after the competition and it is a minimum license requirement that (i) solvers can be distributed in this way, and (ii) all submitted solvers may be freely used for academic evaluation purposes.
 
-%\an{intro of the section maybe, we should add there that solvers will be archived on the website and so on. Interestingly, we replied to the reviewer in the report that the solvers are publicly available in the StarExec space when asked about reproducability, but in the past it was never defined under which terms.}
+%\an{intro of the section maybe, we should add there that solvers will be archived on the website and so on. Interestingly, we replied to the reviewer in the report that the solvers are publicly available in the StarExec space when asked about reproducibility, but in the past it was never defined under which terms.}
 
 
 \subsection{Logistics}
@@ -701,6 +719,9 @@ processes.  We expect the memory limit per solver/benchmark pair to be
 on the order of 60\,GB.  The values of both the time limit and the
 memory limit are available to a solver process through environment
 variables.  See the StarExec user guide for more information.
+
+The limits for \paralleltrack{} and \cloudtrack{} are available at
+\url{https://smt-comp.github.io/2021/news/2021-02-05-parallel-and-cloud-tracks}.
 
 \header{Persistent State.}
 %
@@ -947,6 +968,36 @@ to validate and accumulate the results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{\paralleltrack{}}
+The \paralleltrack{} will evaluate the capability of solvers to
+determine the satisfiability of problems in a shared-memory parallel
+computing environment.  The track will be experimental.
+
+\header{Benchmark Selection.}
+We will select non-incremental benchmarks from the smt-lib divisions
+based on the participating solvers.  In total 500 instances will be
+chosen such that their run times are sufficiently high based on our
+estimation.  The track will be experimental.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per
+solver/benchmark pair.
+
+\subsection{\cloudtrack{}}
+The \cloudtrack{} will evaluate the capability of solvers to determine
+the satisfiability of problems in a distributed computing environment.
+
+\header{Benchmark Selection.}
+We will select non-incremental benchmarks from the smt-lib divisions
+based on the participating solvers.  In total 500 instances will be
+chosen such that their run times are sufficiently high based on our
+estimation.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per
+solver/benchmark pair.
+
+
 \section{Benchmarks and Problem Divisions}
 
 \header{Divisions.}
@@ -965,9 +1016,10 @@ eligible to be designated as winners.
 We will \textbf{not} run \emph{non-competitive} divisions.
 
 \header{Benchmark sources.}
-Benchmarks for each division will be drawn from the SMT-LIB benchmark library.
-The \maintrack will use a subset of all \emph{non-incremental} benchmarks and
-the \inctrack will use a subset of all \emph{incremental} benchmarks.
+Benchmarks for each division will be drawn from the SMT-LIB benchmark
+library.  The \maintrack, \paralleltrack{} and \cloudtrack{} will use a
+subset of all \emph{non-incremental} benchmarks and the \inctrack will
+use a subset of all \emph{incremental} benchmarks.
 %
 % The \challtrack will use all incremental and non-incremental benchmarks
 % dedicated to this track by their submitters.
@@ -1161,9 +1213,9 @@ as~$\langle e_S, n_S, c_S\rangle$, where
   time limit of~$T$.}
 \end{itemize}
 
-\subsubsection{\maintrack}% and \challtrack}
-  For the \maintrack the error score $e$ and the correctly
-  solved score $n$ are defined as
+\subsubsection{\maintrack, \paralleltrack, and \cloudtrack}
+  For the \maintrack, \paralleltrack, and \cloudtrack the error score
+  $e$ and the correctly solved score $n$ are defined as
   \begin{itemize}
   \item $e=0$ and $n=0$ if the solver
     \begin{itemize}[noitemsep,nolistsep]
@@ -1295,12 +1347,13 @@ precedence over less CPU time taken.
 \subsubsection{Sequential Score}
 
 The sequential score for a division is computed for \emph{all} tracks
-\emph{except} the \inctrack
-% and incremental benchmarks in the \challtrack
+\emph{except} the \inctrack, \paralleltrack, and \cloudtrack.
 \footnote{Since incremental track benchmarks may be partially
 solved, defining a useful sequential performance for the incremental track
 would require information not provided by the parallel performance, e.g.,
-detailed timing information for each result.}.  It is defined for a
+detailed timing information for each result.  Due to the nature of
+\paralleltrack and \cloudtrack we will not consider the sequential
+scores}.  It is defined for a
 participating solver in a division with $M$ benchmarks as the sum of all the
 individual sequential benchmark scores:
 $$\sum_{b\in M} \langle e_b^s, n_b^s, w_b^s, c_b^s\rangle$$.
@@ -1363,7 +1416,7 @@ The \emph{wall-clock time rank} of division $D$ is given as
 The \emph{biggest lead winner} is the winner of the division with the highest
 (largest) correctness rank. In case of a tie, the winner is determined as the
 solver with the higher corresponding CPU (resp. wall-clock) time rank for
-sequantial (resp. parallel) scoring.
+sequential (resp. parallel) scoring.
 This can be computed per scoring system.
 
 \subsubsection{Largest Contribution Ranking}
