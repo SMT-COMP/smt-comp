@@ -157,7 +157,7 @@ the \inctrack (before 2019: Application Track), the \ucoretrack, and the
 \mvaltrack.
 %
 Within each track there are multiple divisions, where each division
-uses benchmarks from a specific SMT-LIB logic (or group of logics).
+uses benchmarks from a specific group of SMT-LIB logics.
 We will recognize winners as measured by number of benchmarks solved
 (taking into account the weighting detailed in
 Section~\ref{sec:scoring}); we will also recognize solvers based on
@@ -180,6 +180,87 @@ validation track.
 %
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
+  \item {\bf \maintrack.} Previously, every logic in the \maintrack was its own
+  division.  There are currently over 60 logics in SMT-LIB, which makes a short
+  summary of the results impossible.  On the other hand the competition-wide
+  scoring does a comparison between solvers that cannot be sensibly compared as
+  they support completely disjoint logics. To get a better overview, this year
+  we have in the \maintrack divisions combining related logics, thus reducing
+  the number of divisions and obtaining more manageable and meaningful results.
+  Rather than logics, solvers will declare the divisions they enter in the
+  \maintrack. They will be ranked by the number of benchmarks they solve across
+  all logics in the divisions entered.
+  \begin{itemize}
+    \item Quantifier-free divisions:
+    \begin{itemize}
+      \item QF\_Equality\\
+Logics: QF\_UF, QF\_AX, QF\_DT
+\item QF\_Equality+LinearArith\\
+Logics: QF\_ALIA, QF\_AUFLIA, QF\_UFLIA, QF\_UFLRA, QF\_UFIDL
+\item QF\_Equality+NonLinearArith\\
+Logics: QF\_UFNRA, QF\_UFNIA, QF\_ANIA, QF\_AUFNIA
+\item QF\_Equality+BVArith\\
+Logics: QF\_ABV, QF\_UFBV, QF\_AUFBV
+\item QF\_LinearIntArith\\
+Logics: QF\_LIA, QF\_LIRA, QF\_IDL
+\item QF\_LinearRealArith\\
+Logics: QF\_LRA, QF\_RDL
+\item QF\_BV
+\item QF\_FPArith\\
+Logics: QF\_FP, QF\_UFFP, QF\_FPLRA, QF\_BVFP, QF\_ABVFP, QF\_BVFPLRA, QF\_ABVFPLRA
+\item QF\_NonLinearIntArith\\
+Logics: QF\_NIA, QF\_NIRA
+\item QF\_NRA
+\item QF\_Strings\\
+Logics: QF\_S, QF\_SLIA
+
+    \end{itemize}
+    \item Divisions with quantifiers:
+    \begin{itemize}
+      \item Equality\\
+Logics: UF, UFDT
+\item Equality+LinearArith\\
+Logics: ALIA, AUFLIA, UFLIA, UFIDL, AUFLIRA, UFLRA, UFDTLIA, UFDTLIRA, AUFDTLIA, AUFDTLIRA
+\item Equality+MachineArith\\
+Logics: AUFFPDTLIRA, UFFPDTLIRA, UFFPDTNIRA, ABVFP, ABVFPLRA, UFBV, AUFBVDTLIA
+\item Equality+NonLinearArith\\
+Logics: AUFDTNIRA, UFDTNIA, UFDTNIRA, AUFNIA, AUFNIRA, UFNIA
+\item Arith\\
+Logics: LRA, LIA, NIA, NRA
+\item BV
+\item FPArith\\
+Logics: BVFP, FP, BVFPLRA, FPLRA
+    \end{itemize}
+  \end{itemize}
+
+
+
+  \rationale{We are aware that any partitioning of logics into divisions can be
+    disadvantageous to some solvers that support some but not all logics in the
+    division. We believe however that to a lesser extent this situation is already
+    common, thinking of different features among problems in the same logic. So in
+    our view the disadvantages are offset by the benefit of having a better
+    presentation of the results. Regardless, results per logic will still be
+    accessible within the results page of a given division, similarly to how one can
+    now see the different scores other than sequential for a given logic.
+
+    The divisions above were defined according to the following rationale:
+
+
+    \begin{itemize}
+      \item Similar logics that do not standout by themselves were combined.
+      \item Integer and real, as well as bit-vector and floating-point,
+      arithmetics are separated
+      \begin{itemize}
+        \item Note that the ``Arith'' division goes against this. However, its
+        composing logics do not standout out by themselves as currently
+        represented in SMT-LIB.
+      \end{itemize}
+      \item Arrays and datatypes are handled in a similar enough way to UF to be combined with it.
+        \item Floating-point logics are combined since generally this is the dominating component for any logic contaning FP.
+    \end{itemize}
+  }
+
   \item {\bf The option \akey{:print-success} is explicitly set to
     true or false.}  Previous competitions set this option to
     \akey{true} for the incremental track.  In addition, this
@@ -639,7 +720,7 @@ machines, e.g., over the network.
 \label{sec:exec:single}
 
 The \maintrack track will consist of selected non-incremental benchmarks in
-each of the competitive logic divisions.  Each benchmark will be presented to
+each of the competitive divisions.  Each benchmark will be presented to
 the solver as its first command-line argument.  The solver is then expected to
 report on its standard output channel whether the formula is satisfiable
 (\texttt{sat}) or unsatisfiable (\texttt{unsat}).  A solver may also report
@@ -869,8 +950,10 @@ to validate and accumulate the results.
 \section{Benchmarks and Problem Divisions}
 
 \header{Divisions.}
+
 Within each track there are multiple divisions, and each division selects
-benchmarks from a specific SMT-LIB logic in the SMT-LIB benchmark library.
+benchmarks from a specific group of SMT-LIB logics in the SMT-LIB benchmark
+library.
 
 \header{Competitive Divisions.}
 A division in a track is competitive if at least two substantially
@@ -903,9 +986,12 @@ maintainers intend to make a new release of the benchmark library
 publicly available on or close to this date.
 
 \header{Benchmark demographics.}
-The set of all SMT-LIB benchmarks in a given division can be naturally
-partitioned to sets containing benchmarks that are similar from the user
-community perspective.  Such benchmarks could all come from the same
+%
+The set of all SMT-LIB benchmarks in the logics of a given division can be
+naturally partitioned to sets containing benchmarks that are similar from the
+user community perspective.
+%
+Such benchmarks could all come from the same
 application domain, be generated by the same tool, or have some other
 obvious common identity.
 %
@@ -914,10 +1000,10 @@ directory hierarchy in SMT-LIB.  In many cases the hierarchy consists of
 the top-level directories each corresponding to a submitter, who has
 further imposed a hierarchy on the benchmarks.
 %
-The organizers believe that the submitters have the best information on
-the common identity of their benchmarks and therefore partition each
-division based on the bottom-level directory imposed by each submitter.
-These partitions are referred to as \emph{families}.
+The organizers believe that the submitters have the best information on the
+common identity of their benchmarks and therefore partition each logic in a
+division based on the bottom-level directory imposed by each submitter.  These
+partitions are referred to as \emph{families}.
 
 \header{Benchmark selection.} \label{benchmark-selection}
 The competition will use a large subset of SMT-LIB benchmarks, with some
@@ -943,7 +1029,7 @@ the following selection process will be used.
   \end{itemize}
 \item \emph{Cap the number of instances in a division.}
   The number of benchmarks in a division based on the size of the
-  corresponding logic in SMT-LIB will be limited as follows.
+  corresponding logics in SMT-LIB will be limited as follows.
   Let $n$ be the number of benchmarks in an SMT-LIB logic, then
   \begin{enumerate}
   \vspace{-1ex}
@@ -1166,6 +1252,10 @@ will reward solving performance within a time limit of 24 seconds (wall clock
 time), the \emph{sat score} will reward (parallel) performance on satisfiable
 instances, and the \emph{unsat score} will reward (parallel) performance on
 unsatisfiable instances.
+%
+Finally, for the \maintrack all the above scores, in divisions composed by more
+than one logic, will be presented not only for the overall division but also for
+each logic composing the division.
 
 \header{Sound Solver.}
 A solver is \emph{sound} on benchmarks with \emph{known status} for a division
