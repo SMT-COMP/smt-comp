@@ -451,13 +451,14 @@ and made publicly available, or communicated separately to the
 organisers for the \cloudtrack{} and \paralleltrack{}.  StarExec supports solver configurations;
 for clarity, \emph{each submitted solver must have one configuration
   only}.  Moreover, the organizers must be informed of the solver's
-presence \emph{and the tracks and divisions in which it is
-  participating} via the web form at
+presence \emph{and the tracks and divisions which it enters} via the
+web form at
 \begin{center}
   \url{https://forms.gle/9Eged2txtvJxGXeD9}
 \end{center}
-For each track the submission should specify the logics which are
-supported by the solver.  A submission \textbf{must} also include a
+For each track the submission must specify the logics which are
+supported by the solver.  The solver will enter all divisions where it
+supports at least one logic.  A submission \textbf{must} also include a
 link to the \emph{system description} (see below) and a \emph{32-bit
   unsigned integer}.  These integer numbers, collected from all
 submissions, are used to seed competition tools.
@@ -556,7 +557,7 @@ Solvers will be publicly evaluated in all tracks and divisions into
 which they have been entered.
 %
 A solver enters a division in a track if it supports at least one
-logics in this division.
+logic in this division.
 %
 A solver not supporting all logics in a division will not be run on
 the benchmarks from the unsupported logics and will be scored as if it
