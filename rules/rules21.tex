@@ -1002,7 +1002,7 @@ solver/benchmark pair.
 \section{Benchmarks and Problem Divisions}
 
 \header{Divisions.}
-
+%
 Within each track there are multiple divisions, and each division selects
 benchmarks from a specific group of SMT-LIB logics in the SMT-LIB benchmark
 library.
@@ -1061,7 +1061,7 @@ partitions are referred to as \emph{families}.
 \header{Benchmark selection.} \label{benchmark-selection}
 The competition will use a large subset of SMT-LIB benchmarks, with some
 guarantees on including new benchmarks.  In \textbf{all} tracks
-% \textbf{except} the \challtrack,
+\textbf{except} the \paralleltrack and \cloudtrack
 the following selection process will be used.
 \begin{enumerate}
 \item \emph{Remove inappropriate benchmarks.} The
@@ -1165,8 +1165,7 @@ e, n, w, c\rangle$, with
 \end{itemize}
 
 \header{Error Score ($\mathbf{e}$).}
-For the \maintrack, and \inctrack,%
-% and \challtrack
+For the \maintrack, \inctrack, \paralleltrack, and \cloudtrack
 $e$ is the number of returned
 statuses that disagree with the given expected status (as described above,
 disagreements on benchmarks with unknown status lead to the benchmark being
@@ -1177,7 +1176,8 @@ validated by a selection of other solvers selected by organizers).  For the
 not full satisfiable models.
 
 \header{Correctly Solved Score ($\mathbf{n}$).}
-For the \maintrack, \inctrack, and \mvaltrack,
+For the \maintrack, \inctrack, \mvaltrack, \paralleltrack, and
+\cloudtrack,
 $N$ is defined as the number of \akey{check-sat} commands, and
 $n$ is defined as the number of correct results.
 For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
