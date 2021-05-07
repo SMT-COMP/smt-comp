@@ -183,16 +183,16 @@ validation track.
 %
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
-  \item {\bf \maintrack.} Previously, every logic in the \maintrack was its own
-  division.  There are currently over 60 logics in SMT-LIB, which makes a short
-  summary of the results impossible.  On the other hand the competition-wide
-  scoring does a comparison between solvers that cannot be sensibly compared as
-  they support completely disjoint logics. To get a better overview, this year
-  we have in the \maintrack divisions combining related logics, thus reducing
-  the number of divisions and obtaining more manageable and meaningful results.
-  Rather than logics, solvers will declare the divisions they enter in the
-  \maintrack. They will be ranked by the number of benchmarks they solve across
-  all logics in the divisions entered.
+  \item {\bf Divisions now may contain more than one logic.} Previously, every
+  division was comprised of a single logic. There are currently over 60 logics
+  in SMT-LIB, which makes a short summary of the results impossible.  On the
+  other hand the competition-wide scoring does a comparison between solvers that
+  cannot be sensibly compared as they support completely disjoint logics. To get
+  a better overview, this year divisions will combine related logics, thus
+  reducing the number of divisions and obtaining more manageable and meaningful
+  results.  Rather than logics, solvers will declare the divisions they
+  enter. They will be ranked by the number of benchmarks they solve across all
+  logics in the divisions entered.
   \begin{itemize}
     \item Quantifier-free divisions:
     \begin{itemize}
@@ -242,8 +242,6 @@ Logics: BVFP, FP, BVFPLRA, FPLRA
     \end{itemize}
   \end{itemize}
 
-
-
   \rationale{We are aware that any partitioning of logics into divisions can be
     disadvantageous to some solvers that support some but not all logics in the
     division. We believe however that to a lesser extent this situation is already
@@ -254,7 +252,6 @@ Logics: BVFP, FP, BVFPLRA, FPLRA
     now see the different scores other than sequential for a given logic.
 
     The divisions above were defined according to the following rationale:
-
 
     \begin{itemize}
       \item Similar logics that do not standout by themselves were combined.
@@ -351,13 +348,15 @@ Logics: BVFP, FP, BVFPLRA, FPLRA
     clearly indicated the error.}
 
   \item {\bf \mvaltrack.}  Last year's competition introduced the experimental
-    divisions QF\_IDL, QF\_RDL, QF\_LIA, QF\_LRA, QF\_LIRA in the
-    model validation track.  This year these will no longer be experimental.
-    In addition, new experimental divisions QF\_UF, QF\_UFBV,
-    QF\_UFIDL, QF\_UFLIA, QF\_UFLRA will be added.
+  divisions QF\_IDL, QF\_RDL, QF\_LIA, QF\_LRA, QF\_LIRA in the model validation
+  track.  This year, the divisions containing these logics will no longer be
+  experimental.  In addition, we will add this year new experimental divisions
+  QF\_Equality (only with QF\_UF benchmarks), QF\_Equality+LinearArith (only with
+  QF\_UFIDL, QF\_UFLIA, and QF\_UFLRA benchmarks), and QF\_Equality+Bitvec (only with
+  QF\_UFBV benchmarks).
 
-  \rationale{There were only small issues with these divisions, so there is no
-    reason to keep it experimental. For the new divisions, as before, given the
+  \rationale{There were only small issues with last year's divisions, so there is no
+    reason to keep them experimental. For the new divisions, as before, given the
     inconsistencies across different model producing solvers, we proceed in an
     experimental fashion to push for model standardization.}
 
@@ -1312,9 +1311,9 @@ time), the \emph{sat score} will reward (parallel) performance on satisfiable
 instances, and the \emph{unsat score} will reward (parallel) performance on
 unsatisfiable instances.
 %
-Finally, for the \maintrack all the above scores, in divisions composed by more
-than one logic, will be presented not only for the overall division but also for
-each logic composing the division.
+Finally, in divisions composed by more than one logic, all the above scores will
+be presented not only for the overall division but also for each logic composing
+the division.
 
 \header{Sound Solver.}
 A solver is \emph{sound} on benchmarks with \emph{known status} for a division
