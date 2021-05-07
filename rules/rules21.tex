@@ -197,25 +197,29 @@ The principal changes from the previous competition rules are the following:
     \item Quantifier-free divisions:
     \begin{itemize}
       \item QF\_Equality\\
-Logics: QF\_UF, QF\_AX, QF\_DT
+Logics: QF\_UF, QF\_AX, QF\_DT, QF\_UFDT
 \item QF\_Equality+LinearArith\\
 Logics: QF\_ALIA, QF\_AUFLIA, QF\_UFLIA, QF\_UFLRA, QF\_UFIDL
 \item QF\_Equality+NonLinearArith\\
 Logics: QF\_UFNRA, QF\_UFNIA, QF\_ANIA, QF\_AUFNIA
-\item QF\_Equality+BVArith\\
+\item QF\_Equality+Bitvec\\
 Logics: QF\_ABV, QF\_UFBV, QF\_AUFBV
+\item QF\_Equality+Bitvec+Arith\\
+Logics: QF\_AUFBVLIA, QF\_AUFBVNIA, QF\_UFBVLIA
 \item QF\_LinearIntArith\\
 Logics: QF\_LIA, QF\_LIRA, QF\_IDL
 \item QF\_LinearRealArith\\
 Logics: QF\_LRA, QF\_RDL
-\item QF\_BV
+\item QF\_Bitvec\\
+Logics: QF\_BV
 \item QF\_FPArith\\
-Logics: QF\_FP, QF\_UFFP, QF\_FPLRA, QF\_BVFP, QF\_ABVFP, QF\_BVFPLRA, QF\_ABVFPLRA
+Logics: QF\_FP, QF\_UFFP, QF\_FPLRA, QF\_BVFP, QF\_ABVFP, QF\_AUFBVFP, QF\_BVFPLRA, QF\_ABVFPLRA
 \item QF\_NonLinearIntArith\\
 Logics: QF\_NIA, QF\_NIRA
-\item QF\_NRA
+\item QF\_NonLinearRealArith\\
+Logics: QF\_NRA
 \item QF\_Strings\\
-Logics: QF\_S, QF\_SLIA
+Logics: QF\_S, QF\_SLIA, QF\_SNIA
 
     \end{itemize}
     \item Divisions with quantifiers:
@@ -225,12 +229,14 @@ Logics: UF, UFDT
 \item Equality+LinearArith\\
 Logics: ALIA, AUFLIA, UFLIA, UFIDL, AUFLIRA, UFLRA, UFDTLIA, UFDTLIRA, AUFDTLIA, AUFDTLIRA
 \item Equality+MachineArith\\
-Logics: AUFFPDTLIRA, UFFPDTLIRA, UFFPDTNIRA, ABVFP, ABVFPLRA, UFBV, AUFBVDTLIA
+Logics: AUFFPDTLIRA, UFFPDTLIRA, UFFPDTNIRA, ABVFP, ABVFPLRA, AUFBV, AUFBVFP,
+AUFBVDTLIA, UFBV, UFBVFP, UFBVLIA
 \item Equality+NonLinearArith\\
-Logics: AUFDTNIRA, UFDTNIA, UFDTNIRA, AUFNIA, AUFNIRA, UFNIA
+Logics: ANIA, AUFDTNIRA, UFDTNIA, UFDTNIRA, AUFNIA, AUFNIRA, UFNIA, UFNRA
 \item Arith\\
 Logics: LRA, LIA, NIA, NRA
-\item BV
+\item Bitvec\\
+Logics: BV
 \item FPArith\\
 Logics: BVFP, FP, BVFPLRA, FPLRA
     \end{itemize}
