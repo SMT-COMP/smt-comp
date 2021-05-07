@@ -454,12 +454,13 @@ for clarity, \emph{each submitted solver must have one configuration
 presence \emph{and the tracks and divisions in which it is
   participating} via the web form at
 \begin{center}
-  \url{https://forms.gle/WRbJrawdb1Sko6uz5}
+  \url{https://forms.gle/9Eged2txtvJxGXeD9}
 \end{center}
-A submission \textbf{must} also include a \emph{system description} (see below)
-and a \emph{32-bit unsigned integer}.
- These integer numbers, collected from all submissions, are used to seed
- competition tools.
+For each track the submission should specify the logics which are
+supported by the solver.  A submission \textbf{must} also include a
+link to the \emph{system description} (see below) and a \emph{32-bit
+  unsigned integer}.  These integer numbers, collected from all
+submissions, are used to seed competition tools.
 
 \header{System description.}
 %
@@ -552,8 +553,20 @@ competition.
 \section{Execution of Solvers}
 
 Solvers will be publicly evaluated in all tracks and divisions into
-which they have been entered.  All results of the competition will be
-made public. Solvers will be made publicly available after the competition and it is a minimum license requirement that (i) solvers can be distributed in this way, and (ii) all submitted solvers may be freely used for academic evaluation purposes.
+which they have been entered.
+%
+A solver enters a division in a track if it supports at least one
+logics in this division.
+%
+A solver not supporting all logics in a division will not be run on
+the benchmarks from the unsupported logics and will be scored as if it
+returned the result \texttt{unknown} within zero time.
+%
+All results of the competition will be made public. Solvers will be
+made publicly available after the competition and it is a minimum
+license requirement that (i) solvers can be distributed in this way,
+and (ii) all submitted solvers may be freely used for academic
+evaluation purposes.
 
 %\an{intro of the section maybe, we should add there that solvers will be archived on the website and so on. Interestingly, we replied to the reviewer in the report that the solvers are publicly available in the StarExec space when asked about reproducibility, but in the past it was never defined under which terms.}
 
@@ -1097,10 +1110,10 @@ the following selection process will be used.
   \begin{enumerate}
   \vspace{-1ex}
     \item \label{bench-sel-300} if $n \le 300$, all instances will be selected;
-  \item \label{bench-sel-600} if $300 < n \leq 750$, a subset of 300 instances
+  \item \label{bench-sel-600} if $300 < n \leq 600$, a subset of 300 instances
     from the logic will be selected;
-  \item \label{bench-sel-more} and if $n > 750$,
-      40\% of the benchmarks of the logic will be selected.
+  \item \label{bench-sel-more} and if $n > 600$,
+      50\% of the benchmarks of the logic will be selected.
   \end{enumerate}
 \end{enumerate}
 %
