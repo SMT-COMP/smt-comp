@@ -355,10 +355,12 @@ Logics: BVFP, FP, BVFPLRA, FPLRA
   QF\_UFIDL, QF\_UFLIA, and QF\_UFLRA benchmarks), and QF\_Equality+Bitvec (only with
   QF\_UFBV benchmarks).
 
-  \rationale{There were only small issues with last year's divisions, so there is no
-    reason to keep them experimental. For the new divisions, as before, given the
-    inconsistencies across different model producing solvers, we proceed in an
-    experimental fashion to push for model standardization.}
+  \rationale{There were only small issues with last year's divisions, so there
+    is no reason to keep them experimental. For the new divisions, as before,
+    given the inconsistencies across different model producing solvers, we
+    proceed in an experimental fashion to push for model standardization. Since
+    both arrays and datatypes add further complications on top of uninterpreted
+    functions, we exclude benchmarks containing those.}
 
   \item {\bf Model syntax in \mvaltrack.}  The syntax used in the
     model validation track did not conform to the SMT-LIB standard.
@@ -911,16 +913,19 @@ The \mvaltrack will evaluate the capability of solvers to produce models for
 satisfiable problems.  Performance of solvers will be measured by correctness
 and well-formedness of the model they provide.
 
-\header{Benchmark Selection.}
-This track has the divisions
-QF\_BV, QF\_IDL, QF\_RDL, QF\_LIA, QF\_LRA, QF\_LIRA,
-QF\_UFIDL, QF\_UFLIA, and QF\_UFLRA.
+\header{Benchmark Selection.}  This track has the divisions QF\_Bitvec,
+QF\_LinearIntArith, QF\_LinearRealArith, QF\_Equality (only with QF\_UF
+benchmarks), QF\_Equality+LinearArith (only with QF\_UFIDL, QF\_UFLIA, and
+QF\_UFLRA benchmarks), and QF\_Equality+Bitvec (only with QF\_UFBV benchmarks).
 %
-This year all UF logics (with uninterpreted functions) are experimental divisions.
+This year all divisions with UF logics (with uninterpreted functions) are
+experimental divisions.
 %
-It will run on a
+The track will run on a
 selection of non-incremental benchmarks with status \texttt{sat} from these
 logics (as described on page~\pageref{benchmark-selection}).
+%
+We exclude from the selection all benchmarks containing arrays or datatypes.
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-model)} to request a
