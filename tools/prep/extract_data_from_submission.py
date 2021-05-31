@@ -15,17 +15,22 @@ from extract_data_from_solvers_divisions import TRACK_INCREMENTAL_RAW as TRACK_I
 from extract_data_from_solvers_divisions import TRACK_UNSAT_CORE_RAW as TRACK_UNSAT_CORE_RAW
 from extract_data_from_solvers_divisions import TRACK_MODEL_VALIDATION_RAW as TRACK_MODEL_VALIDATION_RAW
 
-COL_SINGLE_QUERY_TRACK = 'Select all divisions in the Single-Query (previously: Main) Track and the Unsat-Core Track to submit the solver to: '
-COL_INCREMENTAL_TRACK = 'Select all divisions in the Incremental Track to submit the solver to:'
-COL_MODEL_VALIDATION_TRACK = 'Select all divisions in the Model-Validation Track to submit the solver to:'
-COL_VARIANT = 'If this solver is a VARIANT of another submission, e.g. an experimental version, provide the name and the StarExec ID of the main solver, otherwise leave blank.'
-COL_WRAPPER = 'If this solver is a WRAPPER TOOL (i.e., it includes and calls one or more other SMT solvers, see Section 4 of the competition rules at https://smt-comp.github.io/2020/rules20.pdf), list ALL wrapped solvers and their exact version here, otherwise leave blank.'
-COL_DERIVED = 'If this solver is a DERIVED TOOL (i.e., any solver that is based on or extends another SMT solver, see Section 4 of the competition rules at https://smt-comp.github.io/2020/rules20.pdf), provide the name of the original tool here. A derived tool should follow the naming convention [name-of-base-solver]-[my-solver-name].'
-COL_TEAM = 'Please list all contributors that you wish to be acknowledged here'
-COL_SEED = 'Seed'
-COL_HOMEPAGE = 'Solver homepage'
-COL_SYSDESCR = 'System description URL'
-COL_SYSDESCR_NAME = 'Title of the system description'
+
+class ColumnNames:
+    def __init__(self, year):
+        rules = "rules" if int(year) >= 2021 else f"rules{year[2:4]}"
+        self.SINGLE_QUERY_TRACK = 'Select all divisions in the Single-Query (previously: Main) Track and the Unsat-Core Track to submit the solver to: '
+        self.INCREMENTAL_TRACK = 'Select all divisions in the Incremental Track to submit the solver to:'
+        self.MODEL_VALIDATION_TRACK = 'Select all divisions in the Model-Validation Track to submit the solver to:'
+        self.VARIANT = 'If this solver is a VARIANT of another submission, e.g. an experimental version, provide the name and the StarExec ID of the main solver, otherwise leave blank.'
+        self.WRAPPER = f'If this solver is a WRAPPER TOOL (i.e., it includes and calls one or more other SMT solvers, see Section 4 of the competition rules at https://smt-comp.github.io/{year}/{rules}.pdf), list ALL wrapped solvers and their exact version here, otherwise leave blank.'
+        self.DERIVED = f'If this solver is a DERIVED TOOL (i.e., any solver that is based on or extends another SMT solver, see Section 4 of the competition rules at https://smt-comp.github.io/{year}/{rules}.pdf), provide the name of the original tool here. A derived tool should follow the naming convention [name-of-base-solver]-[my-solver-name].'
+        self.TEAM = 'Please list all contributors that you wish to be acknowledged here'
+        self.SEED = 'Seed'
+        self.HOMEPAGE = 'Solver homepage'
+        self.SYSDESCR = 'System description URL'
+        self.SYSDESCR_NAME = 'Title of the system description'
+
 
 # Print error message and exit.
 def die(msg):
@@ -33,7 +38,7 @@ def die(msg):
     sys.exit(1)
 
 # Read csv with submissions data from Google Form.
-def read_csv(fname):
+def read_csv(col, fname):
     global g_submissions, g_logics_all
     with open(fname) as file:
         reader = csv.reader(file, delimiter=',')
@@ -49,22 +54,22 @@ def read_csv(fname):
                     'solver\.jsp\?id=(\d+)', drow['Link to StarExec solver'])
             assert(m)
             submission['solver_id'] = m.group(1)
-            submission[TRACK_INCREMENTAL_RAW] = drow[COL_INCREMENTAL_TRACK].split(';')
-            submission[TRACK_MODEL_VALIDATION_RAW] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
+            submission[TRACK_INCREMENTAL_RAW] = drow[col.INCREMENTAL_TRACK].split(';')
+            submission[TRACK_MODEL_VALIDATION_RAW] = drow[col.MODEL_VALIDATION_TRACK].split(';')
             submission[TRACK_SINGLE_QUERY_RAW] = []
             submission[TRACK_UNSAT_CORE_RAW] = []
-            m = re.search('solver\.jsp\?id=(\d+)', drow[COL_VARIANT])
+            m = re.search('solver\.jsp\?id=(\d+)', drow[col.VARIANT])
             if not m:
-                submission['variant'] = drow[COL_VARIANT]
+                submission['variant'] = drow[col.VARIANT]
             else:
                 submission['variant'] = m.group(1)
-            submission['wrapper'] = drow[COL_WRAPPER]
-            submission['derived'] = drow[COL_DERIVED]
-            submission['team'] = drow[COL_TEAM]
-            submission['seed'] = drow[COL_SEED]
-            submission['homepage'] = drow[COL_HOMEPAGE]
-            submission['sysdescr_url'] = drow[COL_SYSDESCR]
-            submission['sysdescr_name'] = drow[COL_SYSDESCR_NAME]
+            submission['wrapper'] = drow[col.WRAPPER]
+            submission['derived'] = drow[col.DERIVED]
+            submission['team'] = drow[col.TEAM]
+            submission['seed'] = drow[col.SEED]
+            submission['homepage'] = drow[col.HOMEPAGE]
+            submission['sysdescr_url'] = drow[col.SYSDESCR]
+            submission['sysdescr_name'] = drow[col.SYSDESCR_NAME]
 
             # Collect logics for single-query and unsat core track.
             #
@@ -72,9 +77,9 @@ def read_csv(fname):
             # The resulting csv thus had logic columns that stated which
             # tracks are entered for these two tracks.
             for key, value in drow.items():
-                if not key.startswith(COL_SINGLE_QUERY_TRACK):
+                if not key.startswith(col.SINGLE_QUERY_TRACK):
                     continue
-                logic = key.replace(COL_SINGLE_QUERY_TRACK, '')
+                logic = key.replace(col.SINGLE_QUERY_TRACK, '')
                 if not value:
                     continue
                 assert logic[0] == '['
@@ -104,9 +109,13 @@ def read_csv(fname):
 # Columns are separated by ',' and divisions are separated by ';'.
 def write_csv(fname):
     with open(fname, 'w') as outfile:
-        outfile.write("{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}\n".format(
+        outfile.write(",".join([
             "Preliminary Solver ID",
             "Solver ID",
+            "Wrapped Solver ID Single Query",
+            "Wrapped Solver ID Incremental",
+            "Wrapped Solver ID Model Validation",
+            "Wrapped Solver ID Unsat Core",
             "Solver Name",
             "Solver homepage",
             "System description URL",
@@ -122,11 +131,11 @@ def write_csv(fname):
             "Contact",
             "Team Members",
             "Seed",
-            ))
+            ]) + "\n")
         for submission in g_submissions:
-            outfile.write("{},{},\"{}\",\"{}\",\"{}\",\"{}\",{},".format(
+            outfile.write("{},-1,,,,,\"{}\",\"{}\",\"{}\",\"{}\",{},"
+                          .format(
                 submission['solver_id'],
-                -1,
                 submission['solver_name'],
                 submission['homepage'],
                 submission['sysdescr_url'],
@@ -157,9 +166,11 @@ def write_csv(fname):
 if __name__ == '__main__':
     parser = ArgumentParser(
             usage="extract_data_from_submission "\
-                  "<submissions: csv> <outfile: csv>\n\n"
+                  "<year> <submissions: csv> <outfile: csv>\n\n"
                   "Extract and convert csv data from submission form into "
                   "uniformly formatted csv.")
+    parser.add_argument("year",
+            help="the year of the competition")
     parser.add_argument (
             "in_csv", help="the input submissions csv from Google Forms")
     parser.add_argument (
@@ -169,5 +180,6 @@ if __name__ == '__main__':
     if not os.path.exists(args.in_csv):
         die("file not found: {}".format(args.in_csv))
 
-    read_csv(args.in_csv)
+    col = ColumnNames(args.year)
+    read_csv(col, args.in_csv)
     write_csv(args.out_csv)
