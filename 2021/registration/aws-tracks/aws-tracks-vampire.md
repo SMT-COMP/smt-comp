@@ -1,0 +1,43 @@
+Competitor: Vampire
+ - Name: Vampire
+ - Authors: Giles Reger, Martin Suda, Andrei Voronkov, Evgeny
+   Kotelnikov, Laura Kovacs, Martin Riener, Michael Rawson, Bernhard
+   Gleiss, Jakob Rath, Ahmed Bhayat, Johannes Schoisswohl, Petra Hozzova
+   and Marton Hajdu
+ - tracks:
+     - cloud track
+     - parallel track
+ - AWS account: 136496101110
+ - Enters:
+   - Equality:
+     - UF
+     - UFDT
+   - Equality + LinearArith:
+     - ALIA
+     - AUFLIA
+     - UFLIA
+     - UFIDL
+     - AURLIRA
+     - UFLRA
+     - UFDTLIA
+     - UFDTLIRA
+     - AUFDTLIA
+     - AUFDTLIRA
+   - Equality + NonLinearArith
+     - ANIA
+     - AUFDTNIRA
+     - UFDTNIA
+     - UFDTNIRA
+     - AUFNIA
+     - AUFNIRA
+     - UFNIA
+     - UFNRA
+   - Arith
+     - LRA
+     - LIA
+     - NIA
+     - NRA
+  - URL of the GitHub: https://github.com/vprover/vampire 
+  - commit: n/a
+  - branch: n/a
+
