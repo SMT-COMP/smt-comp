@@ -2,11 +2,9 @@
 
 from argparse import ArgumentParser
 from extract_data_from_solvers_divisions import read_divisions
+import json
 import sys
 import os
-
-g_logics_all = None
-g_logics_to_tracks = None
 
 # Print error message and exit.
 def die(msg):
@@ -26,6 +24,27 @@ def get_division_str(divisions_indexed_by_tracks):
         sub_division_fields = "- name: {}\n  tracks:\n{}".format(
                 l, "\n".join(
                     map(lambda x: "  - {}".format(x), divisions[l])))
+        division_fields.append(sub_division_fields)
+    division_fields_str = "\n".join(division_fields)
+    return division_fields_str
+
+def get_new_division_str(logics_by_divisions_indexed_by_tracks):
+    divisions = {}
+    logics = {}
+    for track in logics_by_divisions_indexed_by_tracks:
+        for d in logics_by_divisions_indexed_by_tracks[track]:
+            if d not in divisions:
+                divisions[d] = []
+                logics[d] = set()
+            divisions[d].append(track)
+            logics[d].update(logics_by_divisions_indexed_by_tracks[track][d])
+
+    division_fields = []
+    for d in sorted(divisions):
+        sub_division_fields = "- name: {}\n  logics:\n{}\n  tracks:\n{}".format(
+            d,
+            "\n".join(map(lambda x: f"  - {x}", logics[d])),
+            "\n".join(map(lambda x: f"  - {x}", divisions[d])))
         division_fields.append(sub_division_fields)
     division_fields_str = "\n".join(division_fields)
     return division_fields_str
@@ -52,9 +71,15 @@ if __name__ == '__main__':
     if not len(args.nyse) == 2:
         die("Invalid NYSE data")
 
-    g_logics_all, g_logics_to_tracks = read_divisions(args.divisions)
     ofile_name = "participants.md"
     outfile = open(os.path.join(args.md_path, ofile_name), "w")
+    with open(args.divisions) as div_json:
+        divisions_all = json.load(div_json)
+    if int(args.year) >= 2021:
+        division_str = get_new_division_str(divisions_all)
+    else:
+        division_str = get_division_str(divisions_all)
+
     md_str = "---\n"\
              "layout: participants\n\n"\
              "year: {}\n"\
@@ -67,6 +92,6 @@ if __name__ == '__main__':
                  args.year,
                  args.nyse[0],
                  args.nyse[1],
-                 get_division_str(g_logics_all))
+                 division_str)
     outfile.write(md_str)
 
