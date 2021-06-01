@@ -43,7 +43,7 @@ def get_new_division_str(logics_by_divisions_indexed_by_tracks):
     for d in sorted(divisions):
         sub_division_fields = "- name: {}\n  logics:\n{}\n  tracks:\n{}".format(
             d,
-            "\n".join(map(lambda x: f"  - {x}", logics[d])),
+            "\n".join(map(lambda x: f"  - {x}", sorted(logics[d]))),
             "\n".join(map(lambda x: f"  - {x}", divisions[d])))
         division_fields.append(sub_division_fields)
     division_fields_str = "\n".join(division_fields)
