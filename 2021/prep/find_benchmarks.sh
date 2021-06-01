@@ -19,7 +19,7 @@ for track in incremental non-incremental; do
   # find benchmarks and convert logic to upper-case
   (cd $1/$track; find -name \*.smt2) | perl -pe 's!^./[^/]*/!\U$&\E!' | sort > SMT-LIB_${utrack}_benchmarks_all.txt
   # find new benchmarks
-  (cd $1/benchmarks-pending/DONE/$YEAR/$track; find -name \*.smt2) | sort > SMT-LIB_${utrack}_benchmarks_new.txt
+  (cd $1/pending-$YEAR/DONE/$track; find -name \*.smt2) | sort > SMT-LIB_${utrack}_benchmarks_new.txt
 done
 
 # some new benchmarks were moved or removed immediately before the release.
