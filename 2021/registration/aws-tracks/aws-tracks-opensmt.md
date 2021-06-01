@@ -1,7 +1,6 @@
-Competitor: OpenSMT cube-and-conquer
- - Name: OpenSMT cube-and-conquer
- - Authors: Masoud Asadzadeh, Antti Hyvärinen, Martin Blicha, Sepideh
-   Asadi, Matteo Marescotti, Leonardo Alt and Natasha Sharygina 
+Competitor: SMTS cube-and-conquer
+ - Name: SMTS cube-and-conquer
+ - Authors: Masoud Asadzadeh, Antti Hyvärinen, Martin Blicha, Sepideh Asadi, Matteo Marescotti, Leonardo Alt and Natasha Sharygina 
  - tracks:
      - cloud track
  - AWS account: 683804625309

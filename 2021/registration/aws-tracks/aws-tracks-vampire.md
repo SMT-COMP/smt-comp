@@ -1,9 +1,6 @@
 Competitor: Vampire
  - Name: Vampire
- - Authors: Giles Reger, Martin Suda, Andrei Voronkov, Evgeny
-   Kotelnikov, Laura Kovacs, Martin Riener, Michael Rawson, Bernhard
-   Gleiss, Jakob Rath, Ahmed Bhayat, Johannes Schoisswohl, Petra Hozzova
-   and Marton Hajdu
+ - Authors: Giles Reger, Martin Suda, Andrei Voronkov, Evgeny Kotelnikov, Laura Kovacs, Martin Riener, Michael Rawson, Bernhard Gleiss, Jakob Rath, Ahmed Bhayat, Johannes Schoisswohl, Petra Hozzova and Marton Hajdu
  - tracks:
      - cloud track
      - parallel track
@@ -17,7 +14,7 @@ Competitor: Vampire
      - AUFLIA
      - UFLIA
      - UFIDL
-     - AURLIRA
+     - AUFLIRA
      - UFLRA
      - UFDTLIA
      - UFDTLIRA

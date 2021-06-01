@@ -18,6 +18,8 @@ TRACK_SINGLE_QUERY_RAW = 'track_single_query'
 TRACK_INCREMENTAL_RAW = 'track_incremental'
 TRACK_UNSAT_CORE_RAW = 'track_unsat_core'
 TRACK_MODEL_VALIDATION_RAW = 'track_model_validation'
+TRACK_CLOUD_RAW = 'track_cloud'
+TRACK_PARALLEL_RAW = 'track_parallel'
 
 COL_PRELIMINARY_SOLVER_ID = 'Preliminary Solver ID'
 COL_SOLVER_ID = 'Solver ID'
@@ -33,12 +35,16 @@ COL_SINGLE_QUERY_TRACK = 'Single Query Track'
 COL_INCREMENTAL_TRACK = 'Incremental Track'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
+COL_CLOUD_TRACK = 'Cloud Track'
+COL_PARALLEL_TRACK = 'Parallel Track'
 
 track_raw_names_to_pretty_names = {
         TRACK_SINGLE_QUERY_RAW: COL_SINGLE_QUERY_TRACK,
         TRACK_INCREMENTAL_RAW: COL_INCREMENTAL_TRACK,
         TRACK_UNSAT_CORE_RAW: COL_UNSAT_CORE_TRACK,
         TRACK_MODEL_VALIDATION_RAW: COL_MODEL_VALIDATION_TRACK,
+        TRACK_CLOUD_RAW: COL_CLOUD_TRACK,
+        TRACK_PARALLEL_RAW: COL_PARALLEL_TRACK
         }
 
 COL_VARIANT_OF = 'Variant Of'
@@ -100,11 +106,15 @@ def read_csv(fname):
             submission[TRACK_INCREMENTAL_RAW] = drow[COL_INCREMENTAL_TRACK].split(';')
             submission[TRACK_UNSAT_CORE_RAW] = drow[COL_UNSAT_CORE_TRACK].split(';')
             submission[TRACK_MODEL_VALIDATION_RAW] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
+            submission[TRACK_CLOUD_RAW] = drow[COL_CLOUD_TRACK].split(';')
+            submission[TRACK_PARALLEL_RAW] = drow[COL_PARALLEL_TRACK].split(';')
 
             if not submission[TRACK_SINGLE_QUERY_RAW] and \
                not submission[TRACK_INCREMENTAL_RAW] and \
                not submission[TRACK_UNSAT_CORE_RAW] and \
-               not submission[TRACK_MODEL_VALIDATION_RAW]:
+               not submission[TRACK_MODEL_VALIDATION_RAW] and\
+               not submission[TRACK_CLOUD_RAW] and\
+               not submission[TRACK_PARALLEL_RAW]:
                 die('Configuration "{}" '\
                     'does not participate in any track'.format(
                         submission['solver_name']))
