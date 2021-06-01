@@ -80,7 +80,10 @@
 	    "QF_AUFBVLIA", "QF_AUFBVNIA", "QF_UFBVLIA"
 	],
 	"QF_LinearIntArith" : [
-	    "QF_LIA", "QF_LRA"
+	    "QF_LIA"
+	],
+	"QF_LinearRealArith" : [
+	    "QF_LRA"
 	],
 	"QF_Bitvec" : [
 	    "QF_BV"
