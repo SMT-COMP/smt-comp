@@ -1,7 +1,6 @@
 Competitor: STP-CMS-Cloud
  - Name: STP-CMS-Cloud
- - Authors: Trevor Hansen, Andrew V. Jones, Norbert Manthey, Ryan
-   Govostes, Mate Soos, Vijay Ganesh and Dan Liew
+ - Authors: Trevor Hansen, Andrew V. Jones, Norbert Manthey, Ryan Govostes, Mate Soos, Vijay Ganesh and Dan Liew
  - tracks:
      - cloud track
      - parallel track
@@ -9,7 +8,7 @@ Competitor: STP-CMS-Cloud
  - Enters:
      - QF Bitvec:
        - QF_BV
- - URL of the GitHub: https://github.com/vprover/vampire 
+ - URL of the GitHub: https://github.com/stp/smtcomp-cloud-2021
  - branch: master
  - commit: n/a
 
