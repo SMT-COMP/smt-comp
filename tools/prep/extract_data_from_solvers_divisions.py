@@ -106,8 +106,8 @@ def read_csv(fname):
             submission[TRACK_INCREMENTAL_RAW] = drow[COL_INCREMENTAL_TRACK].split(';')
             submission[TRACK_UNSAT_CORE_RAW] = drow[COL_UNSAT_CORE_TRACK].split(';')
             submission[TRACK_MODEL_VALIDATION_RAW] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
-            submission[TRACK_CLOUD_RAW] = drow[COL_CLOUD_TRACK].split(';')
-            submission[TRACK_PARALLEL_RAW] = drow[COL_PARALLEL_TRACK].split(';')
+            submission[TRACK_CLOUD_RAW] = drow[COL_CLOUD_TRACK].split(';') if COL_CLOUD_TRACK in drow else []
+            submission[TRACK_PARALLEL_RAW] = drow[COL_PARALLEL_TRACK].split(';') if COL_PARALLEL_TRACK in drow else []
 
             if not submission[TRACK_SINGLE_QUERY_RAW] and \
                not submission[TRACK_INCREMENTAL_RAW] and \
