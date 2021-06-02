@@ -12,9 +12,7 @@
 	    "QF_UFNIA", "QF_UFNRA"
 	],
 	"QF_Equality+Bitvec" : [
-	    "QF_ABV", "QF_AUFBV", "QF_BV", "QF_UFBV"
-	],
-	"QF_Equality+Bitvec+Arith" : [
+	    "QF_ABV", "QF_AUFBV", "QF_UFBV"
 	],
 	"QF_LinearIntArith" : [
 	    "QF_IDL", "QF_LIA", "QF_LIRA"
@@ -23,6 +21,7 @@
 	    "QF_LRA", "QF_RDL"
 	],
 	"QF_Bitvec" : [
+	    "QF_BV"
 	],
 	"QF_FPArith" : [
 	    "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
@@ -129,9 +128,7 @@
 	    "QF_UFNIA", "QF_UFNRA"
 	],
 	"QF_Equality+Bitvec" : [
-	    "QF_ABV", "QF_AUFBV", "QF_BV", "QF_UFBV"
-	],
-	"QF_Equality+Bitvec+Arith" : [
+	    "QF_ABV", "QF_AUFBV", "QF_UFBV"
 	],
 	"QF_LinearIntArith" : [
 	    "QF_IDL", "QF_LIA", "QF_LIRA"
@@ -140,6 +137,7 @@
 	    "QF_LRA", "QF_RDL"
 	],
 	"QF_Bitvec" : [
+	    "QF_BV"
 	],
 	"QF_FPArith" : [
 	    "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
