@@ -5,6 +5,9 @@ TESTING=1
 if [ $TESTING == 1 ]; then
     mkdir -p testing
 
+    # use last year's seed
+    SEED=332349782
+
     OUT_SQ="testing/benchmark_selection_single_query"
     OUT_INC="testing/benchmark_selection_incremental"
     OUT_MV="testing/benchmark_selection_model_validation"
@@ -12,9 +15,11 @@ if [ $TESTING == 1 ]; then
 
     RATIO=0.05
     NUM_LOWER=10
-    
 else
     mkdir -p final
+
+    SEED=xxxxx
+
     OUT_SQ="final/benchmark_selection_single_query"
     OUT_INC="final/benchmark_selection_incremental"
     OUT_MV="final/benchmark_selection_model_validation"
@@ -46,7 +51,6 @@ FILTER_MV_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all_assertions.c
 
 # Note that python2 and python3 disagree on random choice function.
 # Always use python3 to get reproducible results.
-SEED=332349782
 PYTHON=python3
 
 printf "MV TRACK\n\n"
