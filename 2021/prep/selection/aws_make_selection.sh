@@ -1,0 +1,139 @@
+#! /bin/bash
+
+function get_abs_path {
+  echo $(cd $(dirname $1); pwd)/$(basename $1)
+}
+
+function preselect {
+    mode=$1
+    output=$2
+    logics=$3
+    $PYTHON $SELECT_PRE \
+        --justification "$FILTER_CSV_2020" \
+        --justification "$FILTER_CSV_2019" \
+        --justification "$FILTER_CSV_2018" \
+        --benchmarks "$BENCHMARKS" \
+        --print-stats \
+        --out "${output}" \
+        --prefix "/non-incremental/" \
+        --logic "${logics}" \
+        --selection-mode ${mode}
+}
+
+function genlogics {
+    instances=$1
+    cat ${instances} \
+        |sed 's,/non-incremental/\([^/]*\)/.*,\1,g' \
+        |sort |uniq -c > ${instances}-logics
+}
+
+function picknums {
+    hard_logics=$1
+    unsolved_logics=$2
+    numbers=$3
+    ${PICKNUM} \
+        ${hard_logics} \
+        ${unsolved_logics} \
+        ${MIN_BENCHMARKS} \
+        > ${numbers}
+}
+
+function selectfinal {
+    numbers=$1
+    hard_benchmarks=$2
+    unsolved_benchmarks=$3
+    final_selection=$4
+
+    ${PYTHON} ${SELECT_FINAL} \
+        ${numbers} \
+        ${hard_benchmarks} \
+        ${unsolved_benchmarks} \
+        ${SEED} \
+        > ${final_selection}
+}
+
+OUT_CLOUD="final/benchmark_selection_cloud"
+SELECTION_NUMBERS_CLOUD="final/benchmark_selection_cloud_numbers.json"
+SELECTION_CLOUD="final/benchmark_selection_cloud.txt"
+OUT_PARALLEL="final/benchmark_selection_parallel"
+SELECTION_NUMBERS_PARALLEL="final/benchmark_selection_parallel_numbers.json"
+SELECTION_PARALLEL="final/benchmark_selection_parallel.txt"
+
+MIN_BENCHMARKS=400
+
+SCRIPTDIR=`get_abs_path $(dirname "$0")`
+SELECT_PRE="$SCRIPTDIR/../../../tools/selection/selection_additive.py"
+PICKNUM="${SCRIPTDIR}/aws_pick_instance_nums.py" 
+SELECT_FINAL="${SCRIPTDIR}/aws_select_final.py"
+AWS_SCRAMBLER="${SCRIPTDIR}/aws_scramble_and_rename.sh"
+
+BENCHMARKS="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
+FILTER_CSV_2018="$SCRIPTDIR/../../../2018/csv/Main_Track.csv"
+FILTER_CSV_2019="$SCRIPTDIR/../../../2019/results/Single_Query_Track.csv"
+FILTER_CSV_2020="$SCRIPTDIR/../../../2020/results/Single_Query_Track.csv"
+
+CLOUD_LOGICS="UF;UFDT;ALIA;AUFLIA;UFLIA;UFIDL;AUFLIRA;UFLRA;UFDTLIA;UFDTLIRA;AUFDTLIA;AUFDTLIRA;AUFDTNIRA;UFDTNIA;UFDTNIRA;AUFNIA;AUFNIRA;UFNIA;LRA;LIA;NIA;NRA;BV;QF_ABV;QF_BV;QF_BVFP;QF_FP;QF_IDL;QF_LIA;QF_LIRA;QF_LRA;QF_NIA;QF_NRA;QF_UF;QF_UFNRA;UFBV;QF_RDL"
+PARALLEL_LOGICS="UF;UFDT;ALIA;AUFLIA;UFLIA;UFIDL;AUFLIRA;UFLRA;UFDTLIA;UFDTLIRA;AUFDTLIA;AUFDTLIRA;AUFDTNIRA;UFDTNIA;UFDTNIRA;AUFNIA;AUFNIRA;UFNIA;LRA;LIA;NIA;NRA;BV;QF_ABV;QF_BV;QF_BVFP;QF_FP;QF_IDL;QF_LIA;QF_LIRA;QF_LRA;QF_NIA;QF_NRA;QF_UF;QF_UFNRA;UFBV"
+
+RATIO=1.0
+NUM_LOWER=500
+
+# Note that python2 and python3 disagree on random choice function.
+# Always use python3 to get reproducible results.
+SEED=332349782
+PYTHON=python3
+
+if [ $# != 2 ]; then
+    echo "Usage: $0 <smt-lib-root> <competition-root>"
+    exit 1
+fi
+
+smt_lib_root=$1
+competition_root=$2
+
+mkdir -p final
+
+printf "+++++++++++\n\nCLOUD TRACK\n\n"
+
+preselect hard-only ${OUT_CLOUD}-hard ${CLOUD_LOGICS}
+preselect unsolved-only ${OUT_CLOUD}-unsolved ${CLOUD_LOGICS}
+
+sort ${OUT_CLOUD}-unsolved > ${OUT_CLOUD}-unsolved.sorted
+mv ${OUT_CLOUD}-unsolved.sorted ${OUT_CLOUD}-unsolved
+sort ${OUT_CLOUD}-hard > ${OUT_CLOUD}-hard.sorted
+mv ${OUT_CLOUD}-hard.sorted ${OUT_CLOUD}-hard
+
+genlogics ${OUT_CLOUD}-unsolved
+genlogics ${OUT_CLOUD}-hard
+
+picknums ${OUT_CLOUD}-hard-logics ${OUT_CLOUD}-unsolved-logics ${SELECTION_NUMBERS_CLOUD}
+
+selectfinal ${SELECTION_NUMBERS_CLOUD} ${OUT_CLOUD}-hard ${OUT_CLOUD}-unsolved ${SELECTION_CLOUD}
+
+printf "+++++++++++\n\nPARALLEL TRACK\n\n"
+
+preselect hard-only ${OUT_PARALLEL}-hard ${PARALLEL_LOGICS}
+preselect unsolved-only ${OUT_PARALLEL}-unsolved ${PARALLEL_LOGICS}
+
+genlogics ${OUT_PARALLEL}-unsolved
+genlogics ${OUT_PARALLEL}-hard
+
+sort ${OUT_PARALLEL}-unsolved > ${OUT_PARALLEL}-unsolved.sorted
+mv ${OUT_PARALLEL}-unsolved.sorted ${OUT_PARALLEL}-unsolved
+sort ${OUT_PARALLEL}-hard > ${OUT_PARALLEL}-hard.sorted
+mv ${OUT_PARALLEL}-hard.sorted ${OUT_PARALLEL}-hard
+
+picknums ${OUT_PARALLEL}-hard-logics ${OUT_PARALLEL}-unsolved-logics ${SELECTION_NUMBERS_PARALLEL}
+
+selectfinal ${SELECTION_NUMBERS_PARALLEL} ${OUT_PARALLEL}-hard ${OUT_PARALLEL}-unsolved ${SELECTION_PARALLEL}
+
+${AWS_SCRAMBLER} ${smt_lib_root} \
+    ${SELECTION_PARALLEL} \
+    ${competition_root}/parallel \
+    ${SEED} > final/parallel-map.csv
+
+${AWS_SCRAMBLER} ${smt_lib_root} \
+    ${SELECTION_CLOUD} \
+    ${competition_root}/cloud \
+    ${SEED} > final/cloud-map.csv
+
