@@ -13,8 +13,8 @@ if [ $TESTING == 1 ]; then
     OUT_MV="testing/benchmark_selection_model_validation"
     OUT_UC="testing/benchmark_selection_unsat_core"
 
-    RATIO=0.05
-    NUM_LOWER=10
+    RATIO=0.01
+    NUM_LOWER=5
 else
     mkdir -p final
 
