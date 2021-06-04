@@ -15,16 +15,6 @@ TIME_LIMIT = 1
 # Set the minimum for number of asserts in unsat core track
 NUM_ASSERTS = 2
 
-# The rules give the following rules for the number of selected benchmarks
-# (a) If a logic contains < 300 instances, all instances will be selected
-# (b) If a logic contains between 300 and 750, a subset of 300 will be selected
-# (c) If a logic contains > 750 then 40% will be selected
-# The following three variables represent the parameters in these rules so that
-# they can be modified if needed
-NUM_LOWER = 300
-NUM_UPPER = 750
-PERCENT = 0.4
-
 #==============================================================================
 
 COL_BENCHMARK = 'benchmark'
@@ -503,12 +493,20 @@ def main():
             continue
 
         # Determine number of benchmarks to select.
-        if num_eligible <= NUM_LOWER:
+        # The rules give the following rules for the number of selected benchmarks
+        # (a) If a logic contains < num_lower instances, all instances will
+        #     be selected
+        # (b) If a logic contains between num_lower and num_upper, a subset
+        #     of num_lower will be selected
+        # (c) If a logic contains > num_upper then ratio * num_benchmarks
+        #     will be selected
+        # where num_upper is chosen such that at num_lower = ratio * num_upper
+        if num_eligible <= args.num_lower:
             num_select = num_eligible
-        elif NUM_LOWER < num_eligible <= NUM_UPPER:
-            num_select = NUM_LOWER
+        elif num_eligible * args.ratio <= args.num_lower:
+            num_select = args.num_lower
         else:
-            num_select = int(PERCENT * num_eligible)
+            num_select = int(args.ratio * num_eligible)
 
         print("For {:15s} selected {}".format(logic, num_select))
         total_selected += num_select
@@ -578,6 +576,12 @@ def parse_args():
                     help="Filter out benchmarks based on csv")
     ap.add_argument('-o', '--out', dest='out',
                     help='Output file name to print selected benchmarks')
+    ap.add_argument('-r', '--ratio', type=float,
+                    help="Ratio of benchmarks to be included",
+                    required=True)
+    ap.add_argument('-m', '--min-per-logic', dest='num_lower', type=int,
+                    help="Minimum number of benchmarks per logic",
+                    required=True)
     ap.add_argument('--unsat', dest='unsat',
                     help="Filter for unsat core track")
     ap.add_argument('--sat', dest='sat',

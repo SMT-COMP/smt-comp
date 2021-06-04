@@ -6,6 +6,9 @@ OUT_INC="final/benchmark_selection_incremental"
 OUT_MV="final/benchmark_selection_model_validation"
 OUT_UC="final/benchmark_selection_unsat_core"
 
+RATIO=0.4
+NUM_LOWER=300
+
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 SELECT="$SCRIPTDIR/../../../tools/selection/selection.py"
 
@@ -31,13 +34,13 @@ SEED=332349782
 PYTHON=python3
 
 printf "MV TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_MV" --new-benchmarks "$NEW_MV_CSV" -s $SEED --print-stats --out "$OUT_MV" --prefix "/non-incremental/" --logic "QF_BV;QF_LIA;QF_LRA;QF_LIRA;QF_RDL;QF_IDL" --sat "$FILTER_MV_CSV"
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_MV" --new-benchmarks "$NEW_MV_CSV" -s $SEED --print-stats --out "$OUT_MV" --prefix "/non-incremental/" --logic "QF_BV;QF_LIA;QF_LRA;QF_LIRA;QF_RDL;QF_IDL" --sat "$FILTER_MV_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER
 
 printf "+++++++++++\n\nSQ TRACK\n\n"
-$PYTHON $SELECT --filter "$FILTER_SQ_CSV_2019" --filter "$FILTER_SQ_CSV_2018" --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/"
+$PYTHON $SELECT --filter "$FILTER_SQ_CSV_2019" --filter "$FILTER_SQ_CSV_2018" --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/" --ratio $RATIO --min-per-logic $NUM_LOWER
 
 printf "+++++++++++\n\nINC TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/"
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/" --ratio $RATIO --min-per-logic $NUM_LOWER
 
 printf "+++++++++++\n\nUC TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s $SEED --print-stats --out "$OUT_UC" --prefix "/non-incremental/" --unsat "$FILTER_UC_CSV"
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s $SEED --print-stats --out "$OUT_UC" --prefix "/non-incremental/" --unsat "$FILTER_UC_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER
