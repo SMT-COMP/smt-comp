@@ -35,7 +35,7 @@ fi
 </SpaceAttributes>
 EOF
 
-csvcut -c "$SOLVER_ID","Solver Name" solvers_divisions_final.csv | tail -n +2 | sed -E 's/(.*),(.*)/<Solver id="\1" name="\2"\/>/'
+csvcut -c "$SOLVER_ID","Solver Name" solvers_divisions_final.csv | tail -n +2 | grep -v ^-1 | sed -E 's/(.*),(.*)/<Solver id="\1" name="\2"\/>/'
 
 cat <<EOF
 </Space>
