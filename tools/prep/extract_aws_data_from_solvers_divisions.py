@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-from collections import OrderedDict
-import json
-
-import sys
 import os
-import re
 
 import extract_data_from_solvers_divisions as ed
 
