@@ -4,6 +4,14 @@ function get_abs_path {
   echo $(cd $(dirname $1); pwd)/$(basename $1)
 }
 
+function getLogics {
+    track=$1
+    $PYTHON ${GET_LOGICS} \
+        -d ../../new-divisions.json \
+        -t $1 \
+        ../../registration/solvers_divisions_final.csv
+}
+
 function preselect {
     mode=$1
     output=$2
@@ -62,6 +70,7 @@ SELECTION_PARALLEL="final/benchmark_selection_parallel.txt"
 MIN_BENCHMARKS=400
 
 SCRIPTDIR=`get_abs_path $(dirname "$0")`
+GET_LOGICS=${SCRIPTDIR}/../../../tools/prep/extract_aws_data_from_solvers_divisions.py
 SELECT_PRE="$SCRIPTDIR/../../../tools/selection/selection_additive.py"
 PICKNUM="${SCRIPTDIR}/aws_pick_instance_nums.py" 
 SELECT_FINAL="${SCRIPTDIR}/aws_select_final.py"
@@ -72,11 +81,8 @@ FILTER_CSV_2018="$SCRIPTDIR/../../../2018/csv/Main_Track.csv"
 FILTER_CSV_2019="$SCRIPTDIR/../../../2019/results/Single_Query_Track.csv"
 FILTER_CSV_2020="$SCRIPTDIR/../../../2020/results/Single_Query_Track.csv"
 
-CLOUD_LOGICS="UF;UFDT;ALIA;AUFLIA;UFLIA;UFIDL;AUFLIRA;UFLRA;UFDTLIA;UFDTLIRA;AUFDTLIA;AUFDTLIRA;AUFDTNIRA;UFDTNIA;UFDTNIRA;AUFNIA;AUFNIRA;UFNIA;LRA;LIA;NIA;NRA;BV;QF_ABV;QF_BV;QF_BVFP;QF_FP;QF_IDL;QF_LIA;QF_LIRA;QF_LRA;QF_NIA;QF_NRA;QF_UF;QF_UFNRA;UFBV;QF_RDL"
-PARALLEL_LOGICS="UF;UFDT;ALIA;AUFLIA;UFLIA;UFIDL;AUFLIRA;UFLRA;UFDTLIA;UFDTLIRA;AUFDTLIA;AUFDTLIRA;AUFDTNIRA;UFDTNIA;UFDTNIRA;AUFNIA;AUFNIRA;UFNIA;LRA;LIA;NIA;NRA;BV;QF_ABV;QF_BV;QF_BVFP;QF_FP;QF_IDL;QF_LIA;QF_LIRA;QF_LRA;QF_NIA;QF_NRA;QF_UF;QF_UFNRA;UFBV"
-
-RATIO=1.0
-NUM_LOWER=500
+CLOUD_LOGICS=$(getLogics cloud)
+PARALLEL_LOGICS=$(getLogics parallel)
 
 # Note that python2 and python3 disagree on random choice function.
 # Always use python3 to get reproducible results.
