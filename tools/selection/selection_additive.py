@@ -153,7 +153,7 @@ def parse_args():
                     help='The prefix to prepend to selected benchmark lines')
     ap.add_argument('--selection-mode', dest='selection_mode',
                     default='hard-only', help='Which type of benhmarks are included'\
-                    'Either hard-only or unsoved-only')
+                    'Either hard-only or unsolved-only')
     return ap.parse_args()
 
 def main():

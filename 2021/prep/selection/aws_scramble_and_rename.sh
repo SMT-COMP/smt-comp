@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SCRAMBLER=~/bin/scrambler
+SCRAMBLER=../../../../scrambler/scrambler
 
 if [ $# != 4 ]; then
     echo "Usage: ${0} <smt-lib-root> <selection> <output-dir> <seed>"

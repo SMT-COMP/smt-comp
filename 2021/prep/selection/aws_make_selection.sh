@@ -4,6 +4,21 @@ function get_abs_path {
   echo $(cd $(dirname $1); pwd)/$(basename $1)
 }
 
+function check_seed_ok {
+    seed_file=$1
+    if [ -e ${seed_file} ]; then
+        seed=$(cat ${seed_file})
+        [ -n "${seed}" ] && \
+            [ ${seed} -eq ${seed} ] 2>/dev/null && \
+            [ ${seed} -gt 0 ] && \
+            return 0
+    else
+       echo "Missing seed file in ${seed_file}";
+    fi
+    return 1
+}
+
+
 function getLogics {
     track=$1
     $PYTHON ${GET_LOGICS} \
@@ -60,6 +75,7 @@ function selectfinal {
         > ${final_selection}
 }
 
+COMPETITION_SEED="../../COMPETITION_SEED"
 OUT_CLOUD="final/benchmark_selection_cloud"
 SELECTION_NUMBERS_CLOUD="final/benchmark_selection_cloud_numbers.json"
 SELECTION_CLOUD="final/benchmark_selection_cloud.txt"
@@ -86,7 +102,12 @@ PARALLEL_LOGICS=$(getLogics parallel)
 
 # Note that python2 and python3 disagree on random choice function.
 # Always use python3 to get reproducible results.
-SEED=332349782
+if ! check_seed_ok ${COMPETITION_SEED}; then
+    echo "Invalid seed"
+    exit 1;
+fi
+
+SEED=$(cat ${COMPETITION_SEED})
 PYTHON=python3
 
 if [ $# != 2 ]; then
@@ -132,6 +153,8 @@ mv ${OUT_PARALLEL}-hard.sorted ${OUT_PARALLEL}-hard
 picknums ${OUT_PARALLEL}-hard-logics ${OUT_PARALLEL}-unsolved-logics ${SELECTION_NUMBERS_PARALLEL}
 
 selectfinal ${SELECTION_NUMBERS_PARALLEL} ${OUT_PARALLEL}-hard ${OUT_PARALLEL}-unsolved ${SELECTION_PARALLEL}
+
+echo "Scrambling benchmarks..."
 
 ${AWS_SCRAMBLER} ${smt_lib_root} \
     ${SELECTION_PARALLEL} \
