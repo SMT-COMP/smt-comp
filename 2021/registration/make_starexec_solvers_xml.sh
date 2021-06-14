@@ -5,12 +5,14 @@
 # Create a new space in starexec, move to that space, open Sub spaces,
 # choose "Upload Sub Spaces" and upload the solvers.zip file.
 
-if true; then  # set to false for final
+if false; then  # set to false for final
     SOLVER_ID="Preliminary Solver ID"
     SPACE_NAME="Preliminary Solvers - Linked"
+    INPUT_FILE="solvers_divisions_prelim.csv"
 else
     SOLVER_ID="Solver ID"
     SPACE_NAME="Final Solvers - Linked"
+    INPUT_FILE="solvers_divisions_final.csv"
 fi
 
 (
@@ -35,7 +37,7 @@ fi
 </SpaceAttributes>
 EOF
 
-csvcut -c "$SOLVER_ID","Solver Name" solvers_divisions_final.csv | tail -n +2 | grep -v ^-1 | sed -E 's/(.*),(.*)/<Solver id="\1" name="\2"\/>/'
+csvcut -c "$SOLVER_ID","Solver Name" $INPUT_FILE | tail -n +2 | grep -v ^-1 | sed -E 's/(.*),(.*)/<Solver id="\1" name="\2"\/>/'
 
 cat <<EOF
 </Space>
