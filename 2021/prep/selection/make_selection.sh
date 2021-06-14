@@ -1,6 +1,28 @@
 #! /bin/bash
 
+
 TESTING=0
+
+function get_abs_path {
+  echo $(cd $(dirname $1); pwd)/$(basename $1)
+}
+
+function check_seed_ok {
+    seed_file=$1
+    if [[ -e ${seed_file} ]]; then
+        seed=$(cat ${seed_file})
+        [ -n "${seed}" ] && \
+            [ ${seed} -eq ${seed} ] 2>/dev/null && \
+            [ ${seed} -gt 0 ] && \
+            return 0
+    else
+       echo "Missing seed file in ${seed_file}";
+    fi
+    return 1
+}
+
+COMPETITION_SEED=../../COMPETITION_SEED
+TESTING=1
 
 if [ $TESTING == 1 ]; then
     mkdir -p testing
@@ -18,7 +40,11 @@ if [ $TESTING == 1 ]; then
 else
     mkdir -p final
 
-    SEED=$(cat ../../COMPETITION_SEED)
+    if ! check_seed_ok ${COMPETITION_SEED}; then
+        echo "Invalid seed"
+        exit 1
+    fi
+    SEED=$(cat ${COMPETITION_SEED})
 
     OUT_SQ="final/benchmark_selection_single_query"
     OUT_INC="final/benchmark_selection_incremental"
@@ -31,7 +57,7 @@ fi
 
 echo "Seed: $SEED"
 
-SCRIPTDIR=`dirname $(readlink -f "$0")`
+SCRIPTDIR=`dirname $(get_abs_path "$0")`
 SELECT="$SCRIPTDIR/../../../tools/selection/selection.py"
 
 BENCHMARKS_SQ="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
