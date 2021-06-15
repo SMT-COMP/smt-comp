@@ -1,6 +1,6 @@
 #! /bin/bash
 
-TESTING=1
+TESTING=0
 
 if [ $TESTING == 1 ]; then
     mkdir -p testing
@@ -18,7 +18,7 @@ if [ $TESTING == 1 ]; then
 else
     mkdir -p final
 
-    SEED=xxxxx
+    SEED=$(cat ../../COMPETITION_SEED)
 
     OUT_SQ="final/benchmark_selection_single_query"
     OUT_INC="final/benchmark_selection_incremental"
@@ -28,6 +28,8 @@ else
     RATIO=0.5
     NUM_LOWER=300
 fi
+
+echo "Seed: $SEED"
 
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 SELECT="$SCRIPTDIR/../../../tools/selection/selection.py"
