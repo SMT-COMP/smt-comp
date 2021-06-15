@@ -1,7 +1,5 @@
 #!/bin/bash
 
-SELECTION=testing   # testing or final
-
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"

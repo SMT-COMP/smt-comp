@@ -1,8 +1,11 @@
-mkdir -p testing
+SELECTION=testing
+export SELECTION
 
-./make_spaces.sh --include-nc --mv testing/mv.xml --uc testing/uc.xml --inc testing/inc.xml --sq testing/sq.xml
+mkdir -p $SELECTION
 
-cd testing
+./make_spaces.sh --include-nc --mv $SELECTION/mv.xml --uc $SELECTION/uc.xml --inc $SELECTION/inc.xml --sq $SELECTION/sq.xml
+
+cd $SELECTION
 for i in sq inc mv uc; do
    tar czf $i.tar.gz $i.xml
 done
