@@ -20,7 +20,8 @@ The instance selection is done by running, in `2021/prep/selection`,
 
 where `<smt-lib-root>` is a path to the smt-lib benchmarks and
 `<competition-root>` is a path where the selected instances should be
-placed.
+placed.  Note that in 2021 the size of `<competition-root>` is roughly
+1GB.
 
 ### Selection Scripts
 
