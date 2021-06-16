@@ -76,16 +76,26 @@ function selectfinal {
 }
 
 COMPETITION_SEED="../../COMPETITION_SEED"
-OUT_CLOUD="final/benchmark_selection_cloud"
-SELECTION_NUMBERS_CLOUD="final/benchmark_selection_cloud_numbers.json"
-SELECTION_CLOUD="final/benchmark_selection_cloud.txt"
-OUT_PARALLEL="final/benchmark_selection_parallel"
-SELECTION_NUMBERS_PARALLEL="final/benchmark_selection_parallel_numbers.json"
-SELECTION_PARALLEL="final/benchmark_selection_parallel.txt"
+if ! check_seed_ok ${COMPETITION_SEED}; then
+    echo "Invalid seed"
+    exit 1;
+fi
+
+SEED=$(cat ${COMPETITION_SEED})
+
+echo "Seed: $SEED"
+
+SCRIPTDIR=`get_abs_path $(dirname "$0")`
+
+OUT_CLOUD="$(tempfile)_benchmark_selection_cloud"
+SELECTION_NUMBERS_CLOUD="$(tempfile)_benchmark_selection_cloud_numbers.json"
+SELECTION_CLOUD="${SCRIPTDIR}/final/benchmark_selection_cloud"
+OUT_PARALLEL="$(tempfile)_benchmark_selection_parallel"
+SELECTION_NUMBERS_PARALLEL="$(tempfile)_benchmark_selection_parallel_numbers.json"
+SELECTION_PARALLEL="${SCRIPTDIR}/final/benchmark_selection_parallel"
 
 MIN_BENCHMARKS=400
 
-SCRIPTDIR=`get_abs_path $(dirname "$0")`
 GET_LOGICS=${SCRIPTDIR}/../../../tools/prep/extract_aws_data_from_solvers_divisions.py
 SELECT_PRE="$SCRIPTDIR/../../../tools/selection/selection_additive.py"
 PICKNUM="${SCRIPTDIR}/aws_pick_instance_nums.py" 
@@ -102,12 +112,6 @@ PARALLEL_LOGICS=$(getLogics parallel)
 
 # Note that python2 and python3 disagree on random choice function.
 # Always use python3 to get reproducible results.
-if ! check_seed_ok ${COMPETITION_SEED}; then
-    echo "Invalid seed"
-    exit 1;
-fi
-
-SEED=$(cat ${COMPETITION_SEED})
 PYTHON=python3
 
 if [ $# != 2 ]; then
@@ -159,10 +163,17 @@ echo "Scrambling benchmarks..."
 ${AWS_SCRAMBLER} ${smt_lib_root} \
     ${SELECTION_PARALLEL} \
     ${competition_root}/parallel \
-    ${SEED} > final/parallel-map.csv
+    ${SEED} > ${SCRIPTDIR}/final/parallel-map.csv
 
 ${AWS_SCRAMBLER} ${smt_lib_root} \
     ${SELECTION_CLOUD} \
     ${competition_root}/cloud \
-    ${SEED} > final/cloud-map.csv
+    ${SEED} > ${SCRIPTDIR}/final/cloud-map.csv
+
+rm -rf ${OUT_CLOUD} ${SELECTION_NUMBERS_CLOUD} \
+    ${OUT_PARALLEL} ${SELECTION_NUMBERS_PARALLEL} \
+    ${OUT_CLOUD}-{hard,unsolved} \
+    ${OUT_PARALLEL}-{hard,unsolved} \
+    ${OUT_CLOUD}-{hard,unsolved}-logics \
+    ${OUT_PARALLEL}-{hard,unsolved}-logics
 

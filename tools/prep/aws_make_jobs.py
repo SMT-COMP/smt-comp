@@ -67,5 +67,5 @@ if __name__ == '__main__':
     for logic in logicToInstances:
         for solver in logicToSolvers[logic]:
             for instance in logicToInstances[logic]:
-                print("%s %s" % (solver, instance))
+                print("%s,%s" % (solver, instance))
 
