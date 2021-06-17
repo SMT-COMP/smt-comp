@@ -19,6 +19,8 @@ TRACK_SINGLE_QUERY_CHALLENGE_RAW = 'track_single_query_challenge'
 TRACK_INCREMENTAL_CHALLENGE_RAW = 'track_incremental_challenge'
 TRACK_UNSAT_CORE_RAW = 'track_unsat_core'
 TRACK_MODEL_VALIDATION_RAW = 'track_model_validation'
+TRACK_CLOUD_RAW = 'track_cloud'
+TRACK_PARALLEL_RAW = 'track_parallel'
 
 # Tracks
 COL_SINGLE_QUERY_TRACK = 'Single Query Track'
@@ -27,6 +29,8 @@ COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
 COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
+COL_CLOUD_TRACK = 'Cloud Track'
+COL_PARALLEL_TRACK = 'Parallel Track'
 
 track_raw_names_to_pretty_names = {
         TRACK_SINGLE_QUERY_RAW: COL_SINGLE_QUERY_TRACK,
@@ -35,7 +39,11 @@ track_raw_names_to_pretty_names = {
         TRACK_INCREMENTAL_CHALLENGE_RAW: COL_CHALLENGE_TRACK_INCREMENTAL,
         TRACK_UNSAT_CORE_RAW: COL_UNSAT_CORE_TRACK,
         TRACK_MODEL_VALIDATION_RAW: COL_MODEL_VALIDATION_TRACK,
+        TRACK_CLOUD_RAW: COL_CLOUD_TRACK,
+        TRACK_PARALLEL_RAW: COL_PARALLEL_TRACK,
         }
+
+logic2division = {}
 
 usage_str = """
 Produce the md files for the divisions directory on the smt-comp site that
@@ -46,8 +54,8 @@ shows the number of selected benchmarks.
 def read_divisions(fname):
     return json.load(open(fname))
 
-def fillLogic(logic_data, track, bm_files, noncomp_files):
-    print("Filling logic_data for track %s using benchmark files `%s'"\
+def fillDivision(division_data, track, bm_files, noncomp_files):
+    print("Filling division_data for track %s using benchmark files `%s'"\
             " and non-competitive division files `%s'" % \
             (track, " ".join(bm_files), " ".join(noncomp_files)))
 
@@ -58,52 +66,63 @@ def fillLogic(logic_data, track, bm_files, noncomp_files):
 
             if len(els) == 1:
                 continue # empty line
-
-            logic_data[(els[2])][track][0] += 1
+            division_data[logic2division[els[2]]][track][1][els[2]][0] += 1
 
     for noncomp_file in noncomp_files:
         noncomp_rows = open(noncomp_file).readlines()
-        for div in noncomp_rows:
-            if div[0] == '#':
-                comment = div.split()
-                if comment[1] in logic_data:
+        for logic in noncomp_rows:
+            if logic[0] == '#':
+                comment = logic.split()
+                if comment[1] in division_data:
                     # Comments where first word is a logic name comment
                     # on this track's logic
-                    logic_data[comment[1]][track][3].append(div[1:].strip())
+                    division_data[logic2division[comment[1]]][track][1][comment[1]][2].append(logic[1:].strip())
             else:
-                div = div.strip()
-                logic_data[div][track][2] = 'non-competitive'
+                logic = logic.strip()
+                division_data[logic2division(logic)][track][0] = 'non-competitive'
 
-    return logic_data
+    return division_data
 
-def tostring(year, logic_name, logic_el):
+def tostring(year, division_name, division_el):
     track_str_list = []
     comments = []
-    for track in logic_el:
-        tr_el = logic_el[track]
-        track_str_list.append(\
-                "- name: track_%s\n  n_insts: %d\n  n_excluded: %d\n" \
-                "  status: %s"
-                % (track, tr_el[0], tr_el[1], tr_el[2]))
-        for i in range(0, len(tr_el[3])):
-            comments.append(tr_el[3][i])
+    allLogics = []
+    for track in division_el:
+        tr_el = division_el[track]
+        trackStr = \
+                "- name: track_%s\n  status: %s\n" \
+                % (track, tr_el[0])
+        trackStr += "  - n_insts:";
+        for logic in tr_el[1]:
+          trackStr += "\n    - %s: %s" % (logic, tr_el[1][logic][0])
+          allLogics += [logic]
+          for i in range(0, len(tr_el[1][logic][2])):
+            comments.append(tr_el[1][logic][2][i])
+        trackStr += "\n  - n_excluded:";
+        for logic in tr_el[1]:
+          trackStr += "\n    - %s: %s" % (logic, tr_el[1][logic][1])
+        track_str_list.append(trackStr)
+    allLogics = set(allLogics)
+    allLogicsStr = ""
+    for logic in allLogics:
+      allLogicsStr += "\n- %s: %s" % (logic, SMTLIB_DESCR_TEMPLATE % logic)
     yaml_str = """---
 layout: division
 year: %d
 division: %s
-description: %s
+logics: %s
 tracks:
 %s
 ---
 %s
-""" % (year, logic_name, SMTLIB_DESCR_TEMPLATE % logic_name, \
+""" % (year, division_name, allLogicsStr, \
         "\n".join(track_str_list), "\n".join(comments))
     return yaml_str
 
-def printYaml(year, logic_name, logic_el, path):
+def printYaml(year, division_name, division_el, path):
 
-    p = os.path.join(path, "%s.md" % logic_name)
-    s = tostring(year, logic_name, logic_el)
+    p = os.path.join(path, "%s.md" % division_name)
+    s = tostring(year, division_name, division_el)
     open(p, 'w').write(s)
 
 if __name__ == '__main__':
@@ -163,22 +182,26 @@ if __name__ == '__main__':
     if not os.path.exists(args.output_dir):
         die("Path not found: {}".format(args.output_dir))
 
-    logic_data = {}
-    all_logics = []
+    division_data = {}
+    all_divisions = []
     division_info = read_divisions(args.divisions)
     tracks = list(map(lambda x: x.replace('track_', ''), division_info.keys()))
-
     for track in division_info:
-        all_logics.extend(division_info[track])
-    all_logics = set(all_logics)
-    for logic in all_logics:
-        logic_data[logic] = {}
-        for track in tracks:
-            logic_data[logic][track] = [0,0,'competitive', []]
+      trackName = track.replace('track_', '')
+      for division,logics in division_info[track].items():
+        all_divisions += [division]
+        if not division in division_data.keys():
+          division_data[division] = {}
+        division_data[division][trackName] = ["competitive", {}]
+        for logic in logics:
+          division_data[division][trackName][1][logic] = [0,0,[]]
+          logic2division[logic] = division
+
+    all_divisions = set(all_divisions)
 
     for tr in tracks:
         (bm_files, noncomp_files) = tracks_to_files[tr]
-        logic_data = fillLogic(logic_data, tr, bm_files, noncomp_files)
+        division_data = fillDivision(division_data, tr, bm_files, noncomp_files)
 
     if args.experimental:
         with open(args.experimental) as expfile:
@@ -189,8 +212,7 @@ if __name__ == '__main__':
                 drow = dict(zip(iter(header), iter(row)))
                 logic = drow['logic']
                 track = drow['track']
-                logic_data[logic][track][2] = 'experimental'
+                division_data[logic2division[logic]][track][0] = 'experimental'
 
-    for logic in all_logics:
-        printYaml(args.year, logic, logic_data[logic], args.output_dir)
-
+    for division in all_divisions:
+        printYaml(args.year, division, division_data[division], args.output_dir)

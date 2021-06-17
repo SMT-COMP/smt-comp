@@ -65,3 +65,10 @@ Follow these steps per track:
     ```
     $ ./selection.py -b benchmarks_all.txt -n benchmarks_new.txt --unsat asrts-statuses.csv -s <seed> -o <outfile>
     ```
+6. To prepare the division files for the website:
+
+   For exampe:
+
+   ```
+   $ python prepare_benchmark_ymls.py -d ../../2021/new-divisions.json -y 2021 -e ../../2021/experimental.csv ~/smt-comp/smt-comp.github.io/_divisions_2021 --single_query ~/smt-comp/smt-comp.github.io/2021/selected_benchmarks/benchmark_selection_single_query --incremental ~/smt-comp/smt-comp.github.io/2021/selected_benchmarks/benchmark_selection_incremental --unsat_core ~/smt-comp/smt-comp.github.io/2021/selected_benchmarks/benchmark_selection_unsat_core --model_validation ~/smt-comp/smt-comp.github.io/2021/selected_benchmarks/benchmark_selection_model_validation --cloud ~/smt-comp/smt-comp.github.io/2021/selected_benchmarks/benchmark_selection_cloud --parallel ~/smt-comp/smt-comp.github.io/2021/selected_benchmarks/benchmark_selection_parallel
+   ```
