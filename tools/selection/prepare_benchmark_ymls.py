@@ -63,11 +63,9 @@ def fillDivision(division_data, track, bm_files, noncomp_files):
         rows = open(bm_file).readlines()
         for row in rows:
             els = row.split('/')
-
             if len(els) == 1:
                 continue # empty line
-            division_data[logic2division[els[2]]][track][1][els[2]][0] += 1
-
+            division_data[logic2division[els[2]]][track][3][els[2]][0] += 1
     for noncomp_file in noncomp_files:
         noncomp_rows = open(noncomp_file).readlines()
         for logic in noncomp_rows:
@@ -76,11 +74,20 @@ def fillDivision(division_data, track, bm_files, noncomp_files):
                 if comment[1] in division_data:
                     # Comments where first word is a logic name comment
                     # on this track's logic
-                    division_data[logic2division[comment[1]]][track][1][comment[1]][2].append(logic[1:].strip())
+                    division_data[logic2division[comment[1]]][track][3][comment[1]][2].append(logic[1:].strip())
             else:
                 logic = logic.strip()
                 division_data[logic2division(logic)][track][0] = 'non-competitive'
 
+    for division in division_data:
+      for track in division_data[division]:
+        insts = 0
+        excluded = 0
+        for logic in division_data[division][track][3]:
+          insts += division_data[division][track][3][logic][0]
+          excluded += division_data[division][track][3][logic][1]
+        division_data[division][track][1] = insts
+        division_data[division][track][2] = excluded
     return division_data
 
 def tostring(year, division_name, division_el):
@@ -92,20 +99,31 @@ def tostring(year, division_name, division_el):
         trackStr = \
                 "- name: track_%s\n  status: %s\n" \
                 % (track, tr_el[0])
-        trackStr += "  - n_insts:";
-        for logic in tr_el[1]:
-          trackStr += "\n    - %s: %s" % (logic, tr_el[1][logic][0])
+        trackStr += "  n_insts: " + str(tr_el[1]);
+        trackStr += "\n  logic_insts:";
+        first = True
+        for logic in tr_el[3]:
+          trackStr += "\n  " + ("-" if first else " ")
+          first = False
+          trackStr += " %s: %s" % (logic, tr_el[3][logic][0])
           allLogics += [logic]
-          for i in range(0, len(tr_el[1][logic][2])):
-            comments.append(tr_el[1][logic][2][i])
-        trackStr += "\n  - n_excluded:";
-        for logic in tr_el[1]:
-          trackStr += "\n    - %s: %s" % (logic, tr_el[1][logic][1])
+          for i in range(0, len(tr_el[3][logic][2])):
+            comments.append(tr_el[3][logic][2][i])
+        trackStr += "\n  n_excluded: " + str(tr_el[2]);
+        first = True
+        trackStr += "\n  logic_excluded:";
+        for logic in tr_el[3]:
+          trackStr += "\n  " + ("-" if first else " ")
+          first = False
+          trackStr += " %s: %s" % (logic, tr_el[3][logic][1])
         track_str_list.append(trackStr)
     allLogics = set(allLogics)
     allLogicsStr = ""
+    first = True
     for logic in allLogics:
-      allLogicsStr += "\n- %s: %s" % (logic, SMTLIB_DESCR_TEMPLATE % logic)
+      allLogicsStr += "\n" + ("-" if first else " ")
+      first = False
+      allLogicsStr += " %s: %s" % (logic, SMTLIB_DESCR_TEMPLATE % logic)
     yaml_str = """---
 layout: division
 year: %d
@@ -192,9 +210,10 @@ if __name__ == '__main__':
         all_divisions += [division]
         if not division in division_data.keys():
           division_data[division] = {}
-        division_data[division][trackName] = ["competitive", {}]
+        # status, total insts, total excluded, insts/excluded per logic
+        division_data[division][trackName] = ["competitive", 0, 0, {}]
         for logic in logics:
-          division_data[division][trackName][1][logic] = [0,0,[]]
+          division_data[division][trackName][3][logic] = [0,0,[]]
           logic2division[logic] = division
 
     all_divisions = set(all_divisions)
