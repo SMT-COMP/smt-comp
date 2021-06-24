@@ -1,327 +1,327 @@
 {
     "track_single_query" : {
-	"QF_Equality" : [
-	    "QF_AX", "QF_DT", "QF_UF", "QF_UFDT"
-	],
-	"QF_Equality+LinearArith" : [
-	    "QF_ALIA", "QF_AUFLIA", "QF_UFDTLIRA",
-	    "QF_UFIDL", "QF_UFLIA", "QF_UFLRA"
-	],
-	"QF_Equality+NonLinearArith" : [
-	    "QF_ANIA", "QF_AUFNIA",
-	    "QF_UFNIA", "QF_UFNRA"
-	],
-	"QF_Equality+Bitvec" : [
-	    "QF_ABV", "QF_AUFBV", "QF_UFBV"
-	],
-	"QF_LinearIntArith" : [
-	    "QF_IDL", "QF_LIA", "QF_LIRA"
-	],
-	"QF_LinearRealArith" : [
-	    "QF_LRA", "QF_RDL"
-	],
-	"QF_Bitvec" : [
-	    "QF_BV"
-	],
-	"QF_FPArith" : [
-	    "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
-	    "QF_FP", "QF_FPLRA", "QF_UFFP", "QF_UFFPDTLIRA"
-	],
-	"QF_NonLinearIntArith" : [
-	    "QF_NIA", "QF_NIRA"
-	],
-	"QF_NonLinearRealArith" : [
-	    "QF_NRA"
-	],
-	"QF_Strings" : [
-	    "QF_S", "QF_SLIA", "QF_SNIA"
-	],
-	"Equality" : [
-	    "UF", "UFDT"
-	],
-	"Equality+LinearArith" : [
-	    "ALIA", "AUFDTLIA", "AUFDTLIRA", "AUFFPDTLIRA", "AUFLIA",
-	    "AUFLIRA", "UFDTLIA", "UFDTLIRA", "UFIDL", "UFLIA", "UFLRA"
-	],
-	"Equality+MachineArith" : [
-	    "ABV", "ABVFP", "ABVFPLRA", "AUFBV", "AUFBVDTLIA",
-	    "AUFBVDTNIA", "AUFBVFP",
-	    "UFBV", "UFBVFP", "UFBVLIA", "UFFPDTLIRA", "UFFPDTNIRA"
-	],
-	"Equality+NonLinearArith" : [
-	    "AUFDTNIRA", "AUFFPDTNIRA", "AUFNIA","AUFNIRA",
-	    "UFDTNIA", "UFDTNIRA", "UFNIA"
-	],
-	"Arith" : [
-	    "LIA", "LRA", "NIA", "NRA"
-	],
-	"Bitvec" : [
-	    "BV"
-	],
-	"FPArith" : [
-	    "BVFP", "BVFPLRA", "FP", "FPLRA"
-	]
+  "QF_Equality" : [
+      "QF_AX", "QF_DT", "QF_UF", "QF_UFDT"
+  ],
+  "QF_Equality+LinearArith" : [
+      "QF_ALIA", "QF_AUFLIA", "QF_UFDTLIRA",
+      "QF_UFIDL", "QF_UFLIA", "QF_UFLRA"
+  ],
+  "QF_Equality+NonLinearArith" : [
+      "QF_ANIA", "QF_AUFNIA",
+      "QF_UFNIA", "QF_UFNRA"
+  ],
+  "QF_Equality+Bitvec" : [
+      "QF_ABV", "QF_AUFBV", "QF_UFBV"
+  ],
+  "QF_LinearIntArith" : [
+      "QF_IDL", "QF_LIA", "QF_LIRA"
+  ],
+  "QF_LinearRealArith" : [
+      "QF_LRA", "QF_RDL"
+  ],
+  "QF_Bitvec" : [
+      "QF_BV"
+  ],
+  "QF_FPArith" : [
+      "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
+      "QF_FP", "QF_FPLRA", "QF_UFFP", "QF_UFFPDTLIRA"
+  ],
+  "QF_NonLinearIntArith" : [
+      "QF_NIA", "QF_NIRA"
+  ],
+  "QF_NonLinearRealArith" : [
+      "QF_NRA"
+  ],
+  "QF_Strings" : [
+      "QF_S", "QF_SLIA", "QF_SNIA"
+  ],
+  "Equality" : [
+      "UF", "UFDT"
+  ],
+  "Equality+LinearArith" : [
+      "ALIA", "AUFDTLIA", "AUFDTLIRA", "AUFLIA",
+      "AUFLIRA", "UFDTLIA", "UFDTLIRA", "UFIDL", "UFLIA", "UFLRA"
+  ],
+  "Equality+MachineArith" : [
+      "ABV", "ABVFP", "ABVFPLRA", "AUFBV", "AUFBVDTLIA",
+      "AUFBVDTNIA", "AUFBVFP", "AUFFPDTLIRA",
+      "UFBV", "UFBVFP", "UFBVLIA", "UFFPDTLIRA", "UFFPDTNIRA"
+  ],
+  "Equality+NonLinearArith" : [
+      "AUFDTNIRA", "AUFFPDTNIRA", "AUFNIA","AUFNIRA",
+      "UFDTNIA", "UFDTNIRA", "UFNIA"
+  ],
+  "Arith" : [
+      "LIA", "LRA", "NIA", "NRA"
+  ],
+  "Bitvec" : [
+      "BV"
+  ],
+  "FPArith" : [
+      "BVFP", "BVFPLRA", "FP", "FPLRA"
+  ]
     },
     "track_incremental" : {
-	"QF_Equality" : [
-	    "QF_UF"
-	],
-	"QF_Equality+LinearArith" : [
-	    "QF_ALIA", "QF_AUFLIA", "QF_UFLIA", "QF_UFLRA"
-	],
-	"QF_Equality+NonLinearArith" : [
-	    "QF_ANIA", "QF_UFNIA", "QF_UFNRA"
-	],
-	"QF_Equality+Bitvec" : [
-	    "QF_ABV", "QF_AUFBV", "QF_UFBV"
-	],
-	"QF_Equality+Bitvec+Arith" : [
-	    "QF_AUFBVLIA", "QF_AUFBVNIA", "QF_UFBVLIA"
-	],
-	"QF_LinearIntArith" : [
-	    "QF_LIA"
-	],
-	"QF_LinearRealArith" : [
-	    "QF_LRA"
-	],
-	"QF_Bitvec" : [
-	    "QF_BV"
-	],
-	"QF_FPArith" : [
-	    "QF_ABVFP", "QF_BVFP", "QF_FP", "QF_UFFP"
-	],
-	"QF_NonLinearIntArith" : [
-	    "QF_NIA"
-	],
-	"Equality" : [
-	    "UF"
-	],
-	"Equality+LinearArith" : [
-	    "ALIA", "UFLRA"
-	],
-	"Equality+MachineArith" : [
-	    "ABVFP"
-	],
-	"Equality+NonLinearArith" : [
-	    "ANIA", "AUFNIRA", "UFDTNIA", "UFNIA", "UFNRA"
-	],
-	"Arith" : [
-	    "LIA", "LRA"
-	],
-	"Bitvec" : [
-	    "BV"
-	],
-	"FPArith" : [
-	    "BVFP"
-	]
+  "QF_Equality" : [
+      "QF_UF"
+  ],
+  "QF_Equality+LinearArith" : [
+      "QF_ALIA", "QF_AUFLIA", "QF_UFLIA", "QF_UFLRA"
+  ],
+  "QF_Equality+NonLinearArith" : [
+      "QF_ANIA", "QF_UFNIA", "QF_UFNRA"
+  ],
+  "QF_Equality+Bitvec" : [
+      "QF_ABV", "QF_AUFBV", "QF_UFBV"
+  ],
+  "QF_Equality+Bitvec+Arith" : [
+      "QF_AUFBVLIA", "QF_AUFBVNIA", "QF_UFBVLIA"
+  ],
+  "QF_LinearIntArith" : [
+      "QF_LIA"
+  ],
+  "QF_LinearRealArith" : [
+      "QF_LRA"
+  ],
+  "QF_Bitvec" : [
+      "QF_BV"
+  ],
+  "QF_FPArith" : [
+      "QF_ABVFP", "QF_BVFP", "QF_FP", "QF_UFFP"
+  ],
+  "QF_NonLinearIntArith" : [
+      "QF_NIA"
+  ],
+  "Equality" : [
+      "UF"
+  ],
+  "Equality+LinearArith" : [
+      "ALIA", "UFLRA"
+  ],
+  "Equality+MachineArith" : [
+      "ABVFP"
+  ],
+  "Equality+NonLinearArith" : [
+      "ANIA", "AUFNIRA", "UFDTNIA", "UFNIA", "UFNRA"
+  ],
+  "Arith" : [
+      "LIA", "LRA"
+  ],
+  "Bitvec" : [
+      "BV"
+  ],
+  "FPArith" : [
+      "BVFP"
+  ]
     },
     "track_unsat_core" : {
-	"QF_Equality" : [
-	    "QF_AX", "QF_DT", "QF_UF", "QF_UFDT"
-	],
-	"QF_Equality+LinearArith" : [
-	    "QF_ALIA", "QF_AUFLIA", "QF_UFDTLIRA",
-	    "QF_UFIDL", "QF_UFLIA", "QF_UFLRA"
-	],
-	"QF_Equality+NonLinearArith" : [
-	    "QF_ANIA", "QF_AUFNIA",
-	    "QF_UFNIA", "QF_UFNRA"
-	],
-	"QF_Equality+Bitvec" : [
-	    "QF_ABV", "QF_AUFBV", "QF_UFBV"
-	],
-	"QF_LinearIntArith" : [
-	    "QF_IDL", "QF_LIA", "QF_LIRA"
-	],
-	"QF_LinearRealArith" : [
-	    "QF_LRA", "QF_RDL"
-	],
-	"QF_Bitvec" : [
-	    "QF_BV"
-	],
-	"QF_FPArith" : [
-	    "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
-	    "QF_FP", "QF_FPLRA", "QF_UFFP", "QF_UFFPDTLIRA"
-	],
-	"QF_NonLinearIntArith" : [
-	    "QF_NIA", "QF_NIRA"
-	],
-	"QF_NonLinearRealArith" : [
-	    "QF_NRA"
-	],
-	"QF_Strings" : [
-	    "QF_S", "QF_SLIA", "QF_SNIA"
-	],
-	"Equality" : [
-	    "UF", "UFDT"
-	],
-	"Equality+LinearArith" : [
-	    "ALIA", "AUFDTLIA", "AUFDTLIRA", "AUFFPDTLIRA", "AUFLIA",
-	    "AUFLIRA", "UFDTLIA", "UFDTLIRA", "UFIDL", "UFLIA", "UFLRA"
-	],
-	"Equality+MachineArith" : [
-	    "ABV", "ABVFP", "ABVFPLRA", "AUFBV", "AUFBVDTLIA",
-	    "AUFBVDTNIA", "AUFBVFP",
-	    "UFBV", "UFBVFP", "UFBVLIA", "UFFPDTLIRA", "UFFPDTNIRA"
-	],
-	"Equality+NonLinearArith" : [
-	    "AUFDTNIRA", "AUFFPDTNIRA", "AUFNIA","AUFNIRA",
-	    "UFDTNIA", "UFDTNIRA", "UFNIA"
-	],
-	"Arith" : [
-	    "LIA", "LRA", "NIA", "NRA"
-	],
-	"Bitvec" : [
-	    "BV"
-	],
-	"FPArith" : [
-	    "BVFP", "BVFPLRA", "FP", "FPLRA"
-	]
+  "QF_Equality" : [
+      "QF_AX", "QF_DT", "QF_UF", "QF_UFDT"
+  ],
+  "QF_Equality+LinearArith" : [
+      "QF_ALIA", "QF_AUFLIA", "QF_UFDTLIRA",
+      "QF_UFIDL", "QF_UFLIA", "QF_UFLRA"
+  ],
+  "QF_Equality+NonLinearArith" : [
+      "QF_ANIA", "QF_AUFNIA",
+      "QF_UFNIA", "QF_UFNRA"
+  ],
+  "QF_Equality+Bitvec" : [
+      "QF_ABV", "QF_AUFBV", "QF_UFBV"
+  ],
+  "QF_LinearIntArith" : [
+      "QF_IDL", "QF_LIA", "QF_LIRA"
+  ],
+  "QF_LinearRealArith" : [
+      "QF_LRA", "QF_RDL"
+  ],
+  "QF_Bitvec" : [
+      "QF_BV"
+  ],
+  "QF_FPArith" : [
+      "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
+      "QF_FP", "QF_FPLRA", "QF_UFFP", "QF_UFFPDTLIRA"
+  ],
+  "QF_NonLinearIntArith" : [
+      "QF_NIA", "QF_NIRA"
+  ],
+  "QF_NonLinearRealArith" : [
+      "QF_NRA"
+  ],
+  "QF_Strings" : [
+      "QF_S", "QF_SLIA", "QF_SNIA"
+  ],
+  "Equality" : [
+      "UF", "UFDT"
+  ],
+  "Equality+LinearArith" : [
+      "ALIA", "AUFDTLIA", "AUFDTLIRA", "AUFLIA",
+      "AUFLIRA", "UFDTLIA", "UFDTLIRA", "UFIDL", "UFLIA", "UFLRA"
+  ],
+  "Equality+MachineArith" : [
+      "ABV", "ABVFP", "ABVFPLRA", "AUFBV", "AUFBVDTLIA",
+      "AUFBVDTNIA", "AUFBVFP", "AUFFPDTLIRA",
+      "UFBV", "UFBVFP", "UFBVLIA", "UFFPDTLIRA", "UFFPDTNIRA"
+  ],
+  "Equality+NonLinearArith" : [
+      "AUFDTNIRA", "AUFFPDTNIRA", "AUFNIA","AUFNIRA",
+      "UFDTNIA", "UFDTNIRA", "UFNIA"
+  ],
+  "Arith" : [
+      "LIA", "LRA", "NIA", "NRA"
+  ],
+  "Bitvec" : [
+      "BV"
+  ],
+  "FPArith" : [
+      "BVFP", "BVFPLRA", "FP", "FPLRA"
+  ]
     },
     "track_model_validation" : {
-	"QF_Equality" : [
-	    "QF_UF"
-	],
-	"QF_Equality+LinearArith" : [
-	    "QF_UFIDL", "QF_UFLRA", "QF_UFLIA"
-	],
-	"QF_Equality+Bitvec" : [
-	    "QF_UFBV"
-	],
-	"QF_LinearIntArith" : [
-	    "QF_IDL", "QF_LIA", "QF_LIRA"
-	],
-	"QF_LinearRealArith" : [
-	    "QF_RDL","QF_LRA"
-	],
-	"QF_Bitvec" : [
-	    "QF_BV"
-	]
+  "QF_Equality" : [
+      "QF_UF"
+  ],
+  "QF_Equality+LinearArith" : [
+      "QF_UFIDL", "QF_UFLRA", "QF_UFLIA"
+  ],
+  "QF_Equality+Bitvec" : [
+      "QF_UFBV"
+  ],
+  "QF_LinearIntArith" : [
+      "QF_IDL", "QF_LIA", "QF_LIRA"
+  ],
+  "QF_LinearRealArith" : [
+      "QF_RDL","QF_LRA"
+  ],
+  "QF_Bitvec" : [
+      "QF_BV"
+  ]
     },
     "track_cloud" : {
-	"QF_Equality" : [
-	    "QF_AX", "QF_DT", "QF_UF", "QF_UFDT"
-	],
-	"QF_Equality+LinearArith" : [
-	    "QF_ALIA", "QF_AUFLIA", "QF_UFDTLIRA",
-	    "QF_UFIDL", "QF_UFLIA", "QF_UFLRA"
-	],
-	"QF_Equality+NonLinearArith" : [
-	    "QF_ANIA", "QF_AUFNIA",
-	    "QF_UFNIA", "QF_UFNRA"
-	],
-	"QF_Equality+Bitvec" : [
-	    "QF_ABV", "QF_AUFBV", "QF_UFBV"
-	],
-	"QF_LinearIntArith" : [
-	    "QF_IDL", "QF_LIA", "QF_LIRA"
-	],
-	"QF_LinearRealArith" : [
-	    "QF_LRA", "QF_RDL"
-	],
-	"QF_Bitvec" : [
-	    "QF_BV"
-	],
-	"QF_FPArith" : [
-	    "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
-	    "QF_FP", "QF_FPLRA", "QF_UFFP", "QF_UFFPDTLIRA"
-	],
-	"QF_NonLinearIntArith" : [
-	    "QF_NIA", "QF_NIRA"
-	],
-	"QF_NonLinearRealArith" : [
-	    "QF_NRA"
-	],
-	"QF_Strings" : [
-	    "QF_S", "QF_SLIA", "QF_SNIA"
-	],
-	"Equality" : [
-	    "UF", "UFDT"
-	],
-	"Equality+LinearArith" : [
-	    "ALIA", "AUFDTLIA", "AUFDTLIRA", "AUFFPDTLIRA", "AUFLIA",
-	    "AUFLIRA", "UFDTLIA", "UFDTLIRA", "UFIDL", "UFLIA", "UFLRA"
-	],
-	"Equality+MachineArith" : [
-	    "ABV", "ABVFP", "ABVFPLRA", "AUFBV", "AUFBVDTLIA",
-	    "AUFBVDTNIA", "AUFBVFP",
-	    "UFBV", "UFBVFP", "UFBVLIA", "UFFPDTLIRA", "UFFPDTNIRA"
-	],
-	"Equality+NonLinearArith" : [
-	    "AUFDTNIRA", "AUFFPDTNIRA", "AUFNIA","AUFNIRA",
-	    "UFDTNIA", "UFDTNIRA", "UFNIA"
-	],
-	"Arith" : [
-	    "LIA", "LRA", "NIA", "NRA"
-	],
-	"Bitvec" : [
-	    "BV"
-	],
-	"FPArith" : [
-	    "BVFP", "BVFPLRA", "FP", "FPLRA"
-	]
+  "QF_Equality" : [
+      "QF_AX", "QF_DT", "QF_UF", "QF_UFDT"
+  ],
+  "QF_Equality+LinearArith" : [
+      "QF_ALIA", "QF_AUFLIA", "QF_UFDTLIRA",
+      "QF_UFIDL", "QF_UFLIA", "QF_UFLRA"
+  ],
+  "QF_Equality+NonLinearArith" : [
+      "QF_ANIA", "QF_AUFNIA",
+      "QF_UFNIA", "QF_UFNRA"
+  ],
+  "QF_Equality+Bitvec" : [
+      "QF_ABV", "QF_AUFBV", "QF_UFBV"
+  ],
+  "QF_LinearIntArith" : [
+      "QF_IDL", "QF_LIA", "QF_LIRA"
+  ],
+  "QF_LinearRealArith" : [
+      "QF_LRA", "QF_RDL"
+  ],
+  "QF_Bitvec" : [
+      "QF_BV"
+  ],
+  "QF_FPArith" : [
+      "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
+      "QF_FP", "QF_FPLRA", "QF_UFFP", "QF_UFFPDTLIRA"
+  ],
+  "QF_NonLinearIntArith" : [
+      "QF_NIA", "QF_NIRA"
+  ],
+  "QF_NonLinearRealArith" : [
+      "QF_NRA"
+  ],
+  "QF_Strings" : [
+      "QF_S", "QF_SLIA", "QF_SNIA"
+  ],
+  "Equality" : [
+      "UF", "UFDT"
+  ],
+  "Equality+LinearArith" : [
+      "ALIA", "AUFDTLIA", "AUFDTLIRA", "AUFLIA",
+      "AUFLIRA", "UFDTLIA", "UFDTLIRA", "UFIDL", "UFLIA", "UFLRA"
+  ],
+  "Equality+MachineArith" : [
+      "ABV", "ABVFP", "ABVFPLRA", "AUFBV", "AUFBVDTLIA",
+      "AUFBVDTNIA", "AUFBVFP", "AUFFPDTLIRA",
+      "UFBV", "UFBVFP", "UFBVLIA", "UFFPDTLIRA", "UFFPDTNIRA"
+  ],
+  "Equality+NonLinearArith" : [
+      "AUFDTNIRA", "AUFFPDTNIRA", "AUFNIA","AUFNIRA",
+      "UFDTNIA", "UFDTNIRA", "UFNIA"
+  ],
+  "Arith" : [
+      "LIA", "LRA", "NIA", "NRA"
+  ],
+  "Bitvec" : [
+      "BV"
+  ],
+  "FPArith" : [
+      "BVFP", "BVFPLRA", "FP", "FPLRA"
+  ]
     },
     "track_parallel" : {
-	"QF_Equality" : [
-	    "QF_AX", "QF_DT", "QF_UF", "QF_UFDT"
-	],
-	"QF_Equality+LinearArith" : [
-	    "QF_ALIA", "QF_AUFLIA", "QF_UFDTLIRA",
-	    "QF_UFIDL", "QF_UFLIA", "QF_UFLRA"
-	],
-	"QF_Equality+NonLinearArith" : [
-	    "QF_ANIA", "QF_AUFNIA",
-	    "QF_UFNIA", "QF_UFNRA"
-	],
-	"QF_Equality+Bitvec" : [
-	    "QF_ABV", "QF_AUFBV", "QF_UFBV"
-	],
-	"QF_LinearIntArith" : [
-	    "QF_IDL", "QF_LIA", "QF_LIRA"
-	],
-	"QF_LinearRealArith" : [
-	    "QF_LRA", "QF_RDL"
-	],
-	"QF_Bitvec" : [
-	    "QF_BV"
-	],
-	"QF_FPArith" : [
-	    "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
-	    "QF_FP", "QF_FPLRA", "QF_UFFP", "QF_UFFPDTLIRA"
-	],
-	"QF_NonLinearIntArith" : [
-	    "QF_NIA", "QF_NIRA"
-	],
-	"QF_NonLinearRealArith" : [
-	    "QF_NRA"
-	],
-	"QF_Strings" : [
-	    "QF_S", "QF_SLIA", "QF_SNIA"
-	],
-	"Equality" : [
-	    "UF", "UFDT"
-	],
-	"Equality+LinearArith" : [
-	    "ALIA", "AUFDTLIA", "AUFDTLIRA", "AUFFPDTLIRA", "AUFLIA",
-	    "AUFLIRA", "UFDTLIA", "UFDTLIRA", "UFIDL", "UFLIA", "UFLRA"
-	],
-	"Equality+MachineArith" : [
-	    "ABV", "ABVFP", "ABVFPLRA", "AUFBV", "AUFBVDTLIA",
-	    "AUFBVDTNIA", "AUFBVFP",
-	    "UFBV", "UFBVFP", "UFBVLIA", "UFFPDTLIRA", "UFFPDTNIRA"
-	],
-	"Equality+NonLinearArith" : [
-	    "AUFDTNIRA", "AUFFPDTNIRA", "AUFNIA","AUFNIRA",
-	    "UFDTNIA", "UFDTNIRA", "UFNIA"
-	],
-	"Arith" : [
-	    "LIA", "LRA", "NIA", "NRA"
-	],
-	"Bitvec" : [
-	    "BV"
-	],
-	"FPArith" : [
-	    "BVFP", "BVFPLRA", "FP", "FPLRA"
-	]
+  "QF_Equality" : [
+      "QF_AX", "QF_DT", "QF_UF", "QF_UFDT"
+  ],
+  "QF_Equality+LinearArith" : [
+      "QF_ALIA", "QF_AUFLIA", "QF_UFDTLIRA",
+      "QF_UFIDL", "QF_UFLIA", "QF_UFLRA"
+  ],
+  "QF_Equality+NonLinearArith" : [
+      "QF_ANIA", "QF_AUFNIA",
+      "QF_UFNIA", "QF_UFNRA"
+  ],
+  "QF_Equality+Bitvec" : [
+      "QF_ABV", "QF_AUFBV", "QF_UFBV"
+  ],
+  "QF_LinearIntArith" : [
+      "QF_IDL", "QF_LIA", "QF_LIRA"
+  ],
+  "QF_LinearRealArith" : [
+      "QF_LRA", "QF_RDL"
+  ],
+  "QF_Bitvec" : [
+      "QF_BV"
+  ],
+  "QF_FPArith" : [
+      "QF_ABVFP", "QF_ABVFPLRA", "QF_AUFBVFP", "QF_BVFP", "QF_BVFPLRA",
+      "QF_FP", "QF_FPLRA", "QF_UFFP", "QF_UFFPDTLIRA"
+  ],
+  "QF_NonLinearIntArith" : [
+      "QF_NIA", "QF_NIRA"
+  ],
+  "QF_NonLinearRealArith" : [
+      "QF_NRA"
+  ],
+  "QF_Strings" : [
+      "QF_S", "QF_SLIA", "QF_SNIA"
+  ],
+  "Equality" : [
+      "UF", "UFDT"
+  ],
+  "Equality+LinearArith" : [
+      "ALIA", "AUFDTLIA", "AUFDTLIRA", "AUFLIA",
+      "AUFLIRA", "UFDTLIA", "UFDTLIRA", "UFIDL", "UFLIA", "UFLRA"
+  ],
+  "Equality+MachineArith" : [
+      "ABV", "ABVFP", "ABVFPLRA", "AUFBV", "AUFBVDTLIA",
+      "AUFBVDTNIA", "AUFBVFP", "AUFFPDTLIRA",
+      "UFBV", "UFBVFP", "UFBVLIA", "UFFPDTLIRA", "UFFPDTNIRA"
+  ],
+  "Equality+NonLinearArith" : [
+      "AUFDTNIRA", "AUFFPDTNIRA", "AUFNIA","AUFNIRA",
+      "UFDTNIA", "UFDTNIRA", "UFNIA"
+  ],
+  "Arith" : [
+      "LIA", "LRA", "NIA", "NRA"
+  ],
+  "Bitvec" : [
+      "BV"
+  ],
+  "FPArith" : [
+      "BVFP", "BVFPLRA", "FP", "FPLRA"
+  ]
     }
 }
