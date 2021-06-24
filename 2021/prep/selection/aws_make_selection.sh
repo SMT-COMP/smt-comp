@@ -35,7 +35,7 @@ function preselect {
         --justification "$FILTER_CSV_2020" \
         --justification "$FILTER_CSV_2019" \
         --justification "$FILTER_CSV_2018" \
-        --benchmarks "$BENCHMARKS" \
+        --benchmarks "$BENCHMARKS_WITHOUT_BLACKLISTED" \
         --print-stats \
         --out "${output}" \
         --prefix "/non-incremental/" \
@@ -87,11 +87,11 @@ echo "Seed: $SEED"
 
 SCRIPTDIR=`get_abs_path $(dirname "$0")`
 
-OUT_CLOUD="$(tempfile)_benchmark_selection_cloud"
-SELECTION_NUMBERS_CLOUD="$(tempfile)_benchmark_selection_cloud_numbers.json"
+OUT_CLOUD="$(mktemp)_benchmark_selection_cloud"
+SELECTION_NUMBERS_CLOUD="$(mktemp)_benchmark_selection_cloud_numbers.json"
 SELECTION_CLOUD="${SCRIPTDIR}/final/benchmark_selection_cloud"
-OUT_PARALLEL="$(tempfile)_benchmark_selection_parallel"
-SELECTION_NUMBERS_PARALLEL="$(tempfile)_benchmark_selection_parallel_numbers.json"
+OUT_PARALLEL="$(mktemp)_benchmark_selection_parallel"
+SELECTION_NUMBERS_PARALLEL="$(mktemp)_benchmark_selection_parallel_numbers.json"
 SELECTION_PARALLEL="${SCRIPTDIR}/final/benchmark_selection_parallel"
 
 MIN_BENCHMARKS=400
@@ -101,11 +101,15 @@ SELECT_PRE="$SCRIPTDIR/../../../tools/selection/selection_additive.py"
 PICKNUM="${SCRIPTDIR}/aws_pick_instance_nums.py" 
 SELECT_FINAL="${SCRIPTDIR}/aws_select_final.py"
 AWS_SCRAMBLER="${SCRIPTDIR}/aws_scramble_and_rename.sh"
+FILTER_BLACKLISTED="${SCRIPTDIR}/aws_filter_blocklisted.sh"
 
 BENCHMARKS="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
+BENCHMARKS_WITHOUT_BLACKLISTED="$(mktemp)_SMT-LIB_non_incremental_benchmarks_all_without_blocklisted.txt"
 FILTER_CSV_2018="$SCRIPTDIR/../../../2018/csv/Main_Track.csv"
 FILTER_CSV_2019="$SCRIPTDIR/../../../2019/results/Single_Query_Track.csv"
 FILTER_CSV_2020="$SCRIPTDIR/../../../2020/results/Single_Query_Track.csv"
+
+BLACKLIST="$SCRIPTDIR/../SMT-LIB_excluded.txt"
 
 CLOUD_LOGICS=$(getLogics cloud)
 PARALLEL_LOGICS=$(getLogics parallel)
@@ -123,6 +127,10 @@ smt_lib_root=$1
 competition_root=$2
 
 mkdir -p final
+
+echo "Filtering blocklisted benchmarks from non-incremental"
+
+${FILTER_BLACKLISTED} ${BLACKLIST} ${BENCHMARKS} > ${BENCHMARKS_WITHOUT_BLACKLISTED}
 
 printf "+++++++++++\n\nCLOUD TRACK\n\n"
 
@@ -175,5 +183,5 @@ rm -rf ${OUT_CLOUD} ${SELECTION_NUMBERS_CLOUD} \
     ${OUT_CLOUD}-{hard,unsolved} \
     ${OUT_PARALLEL}-{hard,unsolved} \
     ${OUT_CLOUD}-{hard,unsolved}-logics \
-    ${OUT_PARALLEL}-{hard,unsolved}-logics
-
+    ${OUT_PARALLEL}-{hard,unsolved}-logics \
+    ${BENCHMARKS_WITHOUT_BLACKLISTED}
