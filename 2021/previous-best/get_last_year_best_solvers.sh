@@ -13,7 +13,7 @@ INCREMENTAL_NUM_CHECKSATS_2020="../../2020/prep/SMT-LIB_incremental_benchmarks_n
 SOLVERS_DIVISIONS_2020="../../2020/registration/solvers_divisions_final.csv"
 SOLVERS_DIVISIONS_2021="../../2021/registration/solvers_divisions_final.csv"
 
-SOLVERS_DIVISIONS_SUGGESTIONS="solvers_divisions_suggestions.csv"
+SOLVERS_DIVISIONS_SUGGESTIONS="solvers_divisions_bestof_2020.csv"
 
 NEW_DIVISIONS="../../2021/new-divisions.json"
 
