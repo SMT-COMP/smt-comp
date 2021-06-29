@@ -9,6 +9,10 @@ if false; then  # set to false for final
     SOLVER_ID="Preliminary Solver ID"
     SPACE_NAME="Preliminary Solvers - Linked"
     INPUT_FILE="solvers_divisions_prelim.csv"
+elif true; then
+    SOLVER_ID="Solver ID"
+    SPACE_NAME="Non-competing Solvers - Linked"
+    INPUT_FILE="solvers_divisions_noncompeting.csv"
 else
     SOLVER_ID="Solver ID"
     SPACE_NAME="Final Solvers - Linked"

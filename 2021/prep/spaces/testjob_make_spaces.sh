@@ -1,5 +1,6 @@
+SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_final.csv"
 SELECTION=testing
-export SELECTION
+export SOLVERS_CSV SELECTION
 
 mkdir -p $SELECTION
 
