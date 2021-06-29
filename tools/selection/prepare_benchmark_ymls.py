@@ -94,37 +94,59 @@ def tostring(year, division_name, division_el):
     track_str_list = []
     comments = []
     allLogics = []
-    for track in division_el:
+    if year < 2021:
+      for track in division_el:
         tr_el = division_el[track]
-        trackStr = \
-                "- name: track_%s\n  status: %s\n" \
-                % (track, tr_el[0])
-        trackStr += "  n_insts: " + str(tr_el[1]);
-        trackStr += "\n  logic_insts:";
-        first = True
-        for logic in tr_el[3]:
-          trackStr += "\n  " + ("-" if first else " ")
-          first = False
-          trackStr += " %s: %s" % (logic, tr_el[3][logic][0])
-          allLogics += [logic]
-          for i in range(0, len(tr_el[3][logic][2])):
-            comments.append(tr_el[3][logic][2][i])
-        trackStr += "\n  n_excluded: " + str(tr_el[2]);
-        first = True
-        trackStr += "\n  logic_excluded:";
-        for logic in tr_el[3]:
-          trackStr += "\n  " + ("-" if first else " ")
-          first = False
-          trackStr += " %s: %s" % (logic, tr_el[3][logic][1])
-        track_str_list.append(trackStr)
-    allLogics = set(allLogics)
-    allLogicsStr = ""
-    first = True
-    for logic in allLogics:
-      allLogicsStr += "\n" + ("-" if first else " ")
-      first = False
-      allLogicsStr += " %s: %s" % (logic, SMTLIB_DESCR_TEMPLATE % logic)
-    yaml_str = """---
+        track_str_list.append(\
+                "- name: track_%s\n  n_insts: %d\n  n_excluded: %d\n" \
+                "  status: %s"
+                % (track, tr_el[1], tr_el[2], tr_el[0]))
+        for i in range(0, len(tr_el[3][division_name][2])):
+          comments.append(tr_el[3][division_name][2][i])
+      yaml_str = """---
+layout: division
+year: %d
+division: %s
+description: %s
+tracks:
+%s
+---
+%s
+""" % (year, division_name, SMTLIB_DESCR_TEMPLATE % division_name, \
+         "\n".join(track_str_list), "\n".join(comments))
+      return yaml_str
+    else:
+      for track in division_el:
+          tr_el = division_el[track]
+          trackStr = \
+                  "- name: track_%s\n  status: %s\n" \
+                  % (track, tr_el[0])
+          trackStr += "  n_insts: " + str(tr_el[1]);
+          trackStr += "\n  logic_insts:";
+          first = True
+          for logic in tr_el[3]:
+            trackStr += "\n  " + ("-" if first else " ")
+            first = False
+            trackStr += " %s: %s" % (logic, tr_el[3][logic][0])
+            allLogics += [logic]
+            for i in range(0, len(tr_el[3][logic][2])):
+              comments.append(tr_el[3][logic][2][i])
+          trackStr += "\n  n_excluded: " + str(tr_el[2]);
+          first = True
+          trackStr += "\n  logic_excluded:";
+          for logic in tr_el[3]:
+            trackStr += "\n  " + ("-" if first else " ")
+            first = False
+            trackStr += " %s: %s" % (logic, tr_el[3][logic][1])
+          track_str_list.append(trackStr)
+      allLogics = set(allLogics)
+      allLogicsStr = ""
+      first = True
+      for logic in allLogics:
+        allLogicsStr += "\n" + ("-" if first else " ")
+        first = False
+        allLogicsStr += " %s: %s" % (logic, SMTLIB_DESCR_TEMPLATE % logic)
+      yaml_str = """---
 layout: division
 year: %d
 division: %s
@@ -134,8 +156,8 @@ tracks:
 ---
 %s
 """ % (year, division_name, allLogicsStr, \
-        "\n".join(track_str_list), "\n".join(comments))
-    return yaml_str
+       "\n".join(track_str_list), "\n".join(comments))
+      return yaml_str
 
 def printYaml(year, division_name, division_el, path):
 
@@ -200,22 +222,40 @@ if __name__ == '__main__':
     if not os.path.exists(args.output_dir):
         die("Path not found: {}".format(args.output_dir))
 
+    # Dictionary from divisions to tracks to:
+    # - status (whether "competitive")
+    # - total number of instances
+    # - total number of excluded instances
+    # - dictionary from logics to
+    #   - number of instances
+    #   - number of excluded instances
+    #   - list of comments on why benchmarks excluded
     division_data = {}
     all_divisions = []
     division_info = read_divisions(args.divisions)
     tracks = list(map(lambda x: x.replace('track_', ''), division_info.keys()))
     for track in division_info:
       trackName = track.replace('track_', '')
-      for division,logics in division_info[track].items():
-        all_divisions += [division]
-        if not division in division_data.keys():
-          division_data[division] = {}
-        # status, total insts, total excluded, insts/excluded per logic
-        division_data[division][trackName] = ["competitive", 0, 0, {}]
-        for logic in logics:
-          division_data[division][trackName][3][logic] = [0,0,[]]
-          logic2division[logic] = division
-
+      if args.year >= 2021:
+        for division,logics in division_info[track].items():
+          all_divisions += [division]
+          if not division in division_data.keys():
+            division_data[division] = {}
+          # status, total insts, total excluded, insts/excluded per logic
+          division_data[division][trackName] = ["competitive", 0, 0, {}]
+          for logic in logics:
+            division_data[division][trackName][3][logic] = [0,0,[]]
+            logic2division[logic] = division
+      else:
+        # since before 2021 every logic was its own division, we set up things differently
+        for logic in division_info[track]:
+          all_divisions += [logic]
+          if not logic in division_data.keys():
+            division_data[logic] = {}
+          # status, total insts, total excluded, insts/excluded per logic
+          division_data[logic][trackName] = ["competitive", 0, 0, {}]
+          division_data[logic][trackName][3][logic] = [0,0,[]]
+          logic2division[logic] = logic
     all_divisions = set(all_divisions)
 
     for tr in tracks:
