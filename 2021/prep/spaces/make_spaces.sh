@@ -3,7 +3,6 @@
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"
-SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_final.csv"
 
 INCLUDE_NONCOMPETITIVE=""
 
