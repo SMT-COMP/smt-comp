@@ -67,7 +67,7 @@ Follow these steps per track:
     ```
 6. To prepare the division files for the website:
 
-   For exampe:
+   For example:
 
    ```
    $ python prepare_benchmark_ymls.py -d ../../2021/new-divisions.json -y 2021 -e ../../2021/experimental.csv <destinyDirectory> --single_query <pathToSQbenchmarkList> --incremental <pathToIncBenchmarkList> --unsat_core <pathToUCbenchmarkList> --model_validation <pathToMVbenchmarkList> --cloud <pathToCloudBenchmarkList> --parallel <pathToParBenchmarkList>
