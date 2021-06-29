@@ -77,7 +77,7 @@ def fillDivision(division_data, track, bm_files, noncomp_files):
                     division_data[logic2division[comment[1]]][track][3][comment[1]][2].append(logic[1:].strip())
             else:
                 logic = logic.strip()
-                division_data[logic2division(logic)][track][0] = 'non-competitive'
+                division_data[logic2division[logic]][track][0] = 'non-competitive'
 
     for division in division_data:
       for track in division_data[division]:
