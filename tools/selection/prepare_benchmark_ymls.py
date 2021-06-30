@@ -124,7 +124,7 @@ tracks:
           trackStr += "  n_insts: " + str(tr_el[1]);
           trackStr += "\n  logic_insts:";
           first = True
-          for logic in tr_el[3]:
+          for logic in sorted(tr_el[3]):
             trackStr += "\n  " + ("-" if first else " ")
             first = False
             trackStr += " %s: %s" % (logic, tr_el[3][logic][0])
@@ -142,7 +142,7 @@ tracks:
       allLogics = set(allLogics)
       allLogicsStr = ""
       first = True
-      for logic in allLogics:
+      for logic in sorted(allLogics):
         allLogicsStr += "\n" + ("-" if first else " ")
         first = False
         allLogicsStr += " %s: %s" % (logic, SMTLIB_DESCR_TEMPLATE % logic)
