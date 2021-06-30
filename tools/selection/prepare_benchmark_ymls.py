@@ -235,27 +235,23 @@ if __name__ == '__main__':
     division_info = read_divisions(args.divisions)
     tracks = list(map(lambda x: x.replace('track_', ''), division_info.keys()))
     for track in division_info:
-      trackName = track.replace('track_', '')
-      if args.year >= 2021:
-        for division,logics in division_info[track].items():
-          all_divisions += [division]
-          if not division in division_data.keys():
-            division_data[division] = {}
-          # status, total insts, total excluded, insts/excluded per logic
-          division_data[division][trackName] = ["competitive", 0, 0, {}]
-          for logic in logics:
-            division_data[division][trackName][3][logic] = [0,0,[]]
-            logic2division[logic] = division
-      else:
-        # since before 2021 every logic was its own division, we set up things differently
-        for logic in division_info[track]:
-          all_divisions += [logic]
-          if not logic in division_data.keys():
-            division_data[logic] = {}
-          # status, total insts, total excluded, insts/excluded per logic
-          division_data[logic][trackName] = ["competitive", 0, 0, {}]
-          division_data[logic][trackName][3][logic] = [0,0,[]]
-          logic2division[logic] = logic
+        trackName = track.replace('track_', '')
+        if args.year >= 2021:
+            division_logics = division_info[track]
+        else:
+            # before 2021 every logic was its own division
+            division_logics = { logic : [logic]
+                                for logic in division_info[track] }
+
+        for division,logics in division_logics.items():
+            all_divisions += [division]
+            if not division in division_data.keys():
+                division_data[division] = {}
+            # status, total insts, total excluded, insts/excluded per logic
+            division_data[division][trackName] = ["competitive", 0, 0, {}]
+            for logic in logics:
+                division_data[division][trackName][3][logic] = [0,0,[]]
+                logic2division[logic] = division
     all_divisions = set(all_divisions)
 
     for tr in tracks:
