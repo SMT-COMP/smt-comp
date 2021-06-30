@@ -217,7 +217,7 @@ def print_div_competitiveness(o_path, canonical):
                         (division,
                             track_raw_names_to_pretty_names[track], \
                             "by no solver" if len(set(part_set)) == 0 \
-                            else "only by " + (", ".join(set(part_set)))))
+                            else "only by " + (", ".join(sorted(set(part_set))))))
         ofd.close()
 
 def read_canon(f):
