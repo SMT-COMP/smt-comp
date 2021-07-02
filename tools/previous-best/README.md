@@ -16,5 +16,5 @@ The script only outputs the new lines, they are not automatically added
 to `solvers_divisions.csv`.
 
 See
-[`get_last_year_best_solvers.sh`](../2020/prep/submitted/get_last_year_best_solvers.sh)
+[`get_last_year_best_solvers.sh`](../../2021/previous-best/get_last_year_best_solvers.sh)
 on how to construct the input files.

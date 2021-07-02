@@ -3,6 +3,7 @@
 from argparse import ArgumentParser
 import csv
 import re
+import json
 
 WINNER_NAME_COL = 'name'
 WINNER_DIV_COL = 'division'
@@ -16,6 +17,13 @@ REG_UCDIVS_COL = "Unsat Core Track"
 REG_COMPETING_COL = "Competing"
 REG_SEED_COL = "Seed"
 REG_NAME_COL = "Solver Name"
+
+RAW_TRACK_NAMES = {
+    REG_SQDIVS_COL : "track_single_query",
+    REG_INDIVS_COL : "track_incremental",
+    REG_MVDIVS_COL : "track_model_validation",
+    REG_UCDIVS_COL : "track_unsat_core"
+}
 
 # The naming convention: entrants from previous years are prepended with
 # the year.
@@ -47,6 +55,12 @@ def parse_args():
             default="/dev/stdout",
             required=False,
             help="The output file")
+    parser.add_argument("-d", "--divisions",
+            action="store",
+            dest="divisions",
+            default=None,
+            required=False,
+            help="The json file mapping 2021 divisions to smtlib-logics")
 
     required = parser.add_argument_group("required arguments")
     required.add_argument("-s", "--single-query",
@@ -87,12 +101,58 @@ def parse_args():
             type=int,
             help="The old result year (for renaming entries)")
 
-
     g_args = parser.parse_args()
+
+# return a dictionary that maps
+# track -> logic -> D
+# where D is the set of logics in the track's division that contains
+# logic
+def constructLogicToDivisionLogicsMap(trackDivLogic):
+    logicToDivisionLogics = dict()
+    for track in trackDivLogic:
+        assert track not in logicToDivisionLogics
+        logicToDivisionLogics[track] = dict()
+        for division in trackDivLogic[track]:
+            for logic in trackDivLogic[track][division]:
+                assert logic not in logicToDivisionLogics[track]
+                logicToDivisionLogics[track][logic] = trackDivLogic[track][division]
+    return logicToDivisionLogics
+
+
+# Return a list of logics where this solver should be run as the
+# best-of solver.  We run in two modes, for backwards compatibility:
+# - If logicToDivisionLogics == None, then return logicList.
+# - If logicToDivisionLogics != None, then return
+#    \bigcup_{l \in logicList}
+#      logicToDivisionLogics[track][logic] \cap
+#      participated_logics
+#
+def getLogics(logicList, logicToDivisionLogics, track,
+        participated_logics):
+    if (not logicToDivisionLogics):
+        # No mapping from logic to division logics -> no need to expand
+        # set of logics for this solver
+        return logicList
+
+    track_raw = RAW_TRACK_NAMES[track]
+    divLogicsSet = set()
+    for logic in logicList:
+        if logic not in logicToDivisionLogics[track_raw]:
+            print("Logic %s does not exist in divisions" % logic)
+        else:
+            divLogicsSet.update(logicToDivisionLogics[track_raw][logic])
+
+    divLogicsSet.intersection_update(participated_logics)
+    return sorted(list(divLogicsSet))
 
 if __name__ == '__main__':
     global g_args
     parse_args()
+
+    logicToDivisionLogics = None
+    if g_args.divisions:
+        logicToDivisionLogics = \
+                constructLogicToDivisionLogicsMap(json.loads(open(g_args.divisions).read()))
 
     winner_files= [g_args.sq_winners, g_args.uc_winners, \
             g_args.in_winners, g_args.mv_winners]
@@ -130,14 +190,23 @@ if __name__ == '__main__':
             new_winner_row = []
             for col in new_header:
                 if col in row:
-                    if col == REG_SQDIVS_COL:
-                        new_winner_row.append(";".join(winners[name][0]))
-                    elif col == REG_UCDIVS_COL:
-                        new_winner_row.append(";".join(winners[name][1]))
-                    elif col == REG_INDIVS_COL:
-                        new_winner_row.append(";".join(winners[name][2]))
-                    elif col == REG_MVDIVS_COL:
-                        new_winner_row.append(";".join(winners[name][3]))
+                    if col in [REG_SQDIVS_COL, REG_UCDIVS_COL,
+                            REG_INDIVS_COL, REG_MVDIVS_COL]:
+                        if col == REG_SQDIVS_COL:
+                            winning_logics = winners[name][0]
+                        elif col == REG_UCDIVS_COL:
+                            winning_logics = winners[name][1]
+                        elif col == REG_INDIVS_COL:
+                            winning_logics = winners[name][2]
+                        elif col == REG_MVDIVS_COL:
+                            winning_logics = winners[name][3]
+                        participated_logics = row[col].split(";")
+                        new_winner_row.append(";".join(
+                            getLogics(winning_logics,\
+                                logicToDivisionLogics,\
+                                col,
+                                participated_logics)))
+
                     elif col == REG_COMPETING_COL:
                         new_winner_row.append("no")
                     elif col == REG_SEED_COL:
