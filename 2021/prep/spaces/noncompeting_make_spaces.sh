@@ -1,11 +1,11 @@
-SOLVERS_CSV="../../registration/solvers_divisions_noncompeting.csv"
+SOLVERS_DIVISIONS_NONCOMP="../../registration/solvers_divisions_noncompeting.csv"
 SELECTION=final
-export SOLVERS_CSV SELECTION
 DIR=noncompeting
+export SELECTION
 
 mkdir -p $DIR
 
-./make_spaces.sh --include-nc --mv $DIR/mv.xml --uc $DIR/uc.xml --inc $DIR/inc.xml --sq $DIR/sq.xml
+./make_spaces.sh --solvdiv $SOLVERS_DIVISIONS_NONCOMP --include-nc --mv $DIR/mv.xml --uc $DIR/uc.xml --inc $DIR/inc.xml --sq $DIR/sq.xml
 
 cd $DIR
 for i in sq inc mv uc; do
