@@ -1,6 +1,6 @@
 #! /bin/bash
 
-export LANG="C"
+export LANG=C.UTF-8
 
 function get_abs_path {
   echo $(cd $(dirname $1); pwd)/$(basename $1)
