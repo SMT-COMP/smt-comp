@@ -102,6 +102,7 @@ def log(string):
 
 # Split a benchmark string into benchmark, division and family.
 def split_benchmark_division_family(x, family_func):
+    assert len(x) == 2, "weird x: {0}".format(x)
     division, benchmark = x[0], x[1]
     # Check if division is a logic string.
     # Note: This assumes that space names are not in upper case.
