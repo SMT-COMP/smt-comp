@@ -3,7 +3,7 @@
 #SCRIPTDIR=`dirname $(greadlink -f "$0")`
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
-OUTPUT=../results/_results_2020
+OUTPUT=../../../smt-comp.github.io/_results_2020
 LANG=C
 
 PYTHON=python3

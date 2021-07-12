@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download Jobs from StarExec
-DOWNLOAD=0
+DOWNLOAD=1
 
 # Jobs in the order "competition best-of non-competing"
 Single_Query="47304 47543 47546"
@@ -9,7 +9,8 @@ Incremental="47350 47540 47689"
 Model_Validation="47305 47542 47727"
 Unsat_Core="47790 47815"
 
-for track in Single_Query Incremental Model_Validation Unsat_Core; do
+# for track in Single_Query Incremental Model_Validation Unsat_Core; do
+for track in Single_Query; do
     OUTPUT="${track}_Track.csv"
     rm -f $OUTPUT
     for id in ${!track}; do

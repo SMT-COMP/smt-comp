@@ -21,6 +21,7 @@ pandas.set_option('precision', 16)
 # Options parsing
 from argparse import ArgumentParser
 
+import json
 import os
 import sys
 import csv
@@ -622,6 +623,18 @@ def process_csv(csv,
                     skip_unknowns,
                     sequential)
         dfs.append(res)
+    if g_args.divisions_map:
+      # Read divisions from a JSON formatted file.
+      divisionInfo = json.load(open(g_args.divisions_map))
+      trackDivisions = divisionInfo[g_tracks[g_args.track]]
+      for division,logics in trackDivisions.items():
+        print(division)
+        print(logics)
+        print("----------")
+      print("wow")
+      assert False
+    else:
+      assert False
     if g_args.show_timestamps:
         log('time score: {}'.format(time.time() - start))
 
@@ -1894,6 +1907,12 @@ def parse_args():
                         type=str,
                         default="",
                         help="list the best competing solvers, per division, of given year, in a csv with year/division/name")
+
+    parser.add_argument("-D", "--divisions-map",
+                        metavar="json",
+                        default=None,
+                        help="Divisions per track. To be used when divisions != logics")
+
 
     required = parser.add_argument_group("required arguments")
     required.add_argument("-c", "--csv",
