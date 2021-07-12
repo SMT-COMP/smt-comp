@@ -13,17 +13,17 @@ for track in Single_Query Incremental Model_Validation Unsat_Core; do
     OUTPUT="${track}_Track.csv"
     rm -f $OUTPUT
     for id in ${!track}; do
-	if [ "$FORCE_DOWNLOAD" == "1" -o \! -d "Job${id}" ]; then
-	    curl -o Job${id}_info.zip "https://www.starexec.org/starexec/secure/download?type=job&id=${id}&returnids=true&getcompleted=false"
-	    unzip Job${id}_info.zip
-	fi
-	INPUT="Job${id}/Job${id}_info.csv"
+        if [ "$FORCE_DOWNLOAD" == "1" -o \! -d "Job${id}" ]; then
+            curl -o Job${id}_info.zip "https://www.starexec.org/starexec/secure/download?type=job&id=${id}&returnids=true&getcompleted=false"
+            unzip Job${id}_info.zip
+        fi
+        INPUT="Job${id}/Job${id}_info.csv"
         if [ -e $OUTPUT ]; then
-	    # sanity check: head must be equal
-	    diff <(head -1 $INPUT) <(head -1 $OUTPUT)
-	    tail -n +1 $INPUT >> $OUTPUT
-	else
-	    cat $INPUT > $OUTPUT
-	fi
+            # sanity check: head must be equal
+            diff <(head -1 $INPUT) <(head -1 $OUTPUT)
+            tail -n +1 $INPUT >> $OUTPUT
+        else
+            cat $INPUT > $OUTPUT
+        fi
     done
 done
