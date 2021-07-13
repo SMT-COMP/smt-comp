@@ -88,6 +88,8 @@ g_exts = { OPT_TRACK_SQ: EXT_SQ,
            OPT_TRACK_UC: EXT_UC,
            OPT_TRACK_MV: EXT_MV }
 
+allLogics = set()
+
 ###############################################################################
 # Helper functions
 ###############################################################################
@@ -536,6 +538,7 @@ def process_csv(csv,
                 skip_unknowns,
                 sequential):
     global g_args
+    global allLogics
     assert not filter_result or filter_result in [RESULT_SAT, RESULT_UNSAT]
     if g_args.log:
         log("Process {} with family: '{}', divisions: '{}', "\
@@ -612,6 +615,7 @@ def process_csv(csv,
     start = time.time() if g_args.show_timestamps else None
     # Compute the benchmark scores for each division
     dfs = []
+    dfsPerLogic = {}
     for division, division_data in data.groupby('division'):
         if g_args.log: log("Compute for {}".format(division))
         res = score(division,
@@ -623,18 +627,26 @@ def process_csv(csv,
                     skip_unknowns,
                     sequential)
         dfs.append(res)
+        if g_args.divisions_map:
+          dfsPerLogic[division] = res
     if g_args.divisions_map:
       # Read divisions from a JSON formatted file.
       divisionInfo = json.load(open(g_args.divisions_map))
       trackDivisions = divisionInfo[g_tracks[g_args.track]]
-      for division,logics in trackDivisions.items():
-        print(division)
-        print(logics)
-        print("----------")
-      print("wow")
-      assert False
-    else:
-      assert False
+      for division in trackDivisions:
+        divDfs = []
+        nBenchmarks = 0
+        logics = trackDivisions[division]
+        for logic in logics:
+          allLogics.add(logic)
+          if logic in dfsPerLogic.keys():
+            divDfs.append(dfsPerLogic[logic])
+            nBenchmarks += len(dfsPerLogic[logic].benchmark.unique())
+        if divDfs:
+          dataNew = pandas.concat(divDfs, ignore_index=True)
+          dataNew['division'] = division
+          dataNew['division_size'] = nBenchmarks
+          dfs.append(dataNew)
     if g_args.show_timestamps:
         log('time score: {}'.format(time.time() - start))
 
@@ -1015,7 +1027,9 @@ def biggest_lead_ranking(data, sequential):
             # Skip non-competitive divisions
             if not is_competitive_division(div_data.solver_id.unique()):
                 continue
-
+            # Skip logics if divisions != logics
+            if g_args.divisions_map and division in allLogics:
+              continue
             assert len(div_data) >= 2
             first = div_data[div_data['rank'] == 1]
             second = div_data[div_data['rank'] == 2]
@@ -1089,7 +1103,8 @@ def vbss(division_data, solver_id, sequential):
     data_vbs = data.sort_values(
                 by=sort_columns, ascending=sort_asc).groupby(
                         'benchmark', as_index=False).first()
-    assert len(data_vbs.benchmark.unique()) == len(division_data.benchmark.unique())
+    # note that since solvers don't necessarily run on all logics in a division, these numbers may differ
+    assert len(data_vbs.benchmark.unique()) == len(division_data.benchmark.unique()) or g_args.divisions_map
 
     if sequential:
         return (data_vbs.score_correct.sum(), data_vbs.cpu_time.sum())
@@ -1139,6 +1154,10 @@ def largest_contribution_ranking(data, time_limit, sequential):
         num_job_pairs_total = 0
         scores_top = []
         for division, div_data in data.groupby('division'):
+            # Skip logics if divisions != logics
+            if g_args.divisions_map and division in allLogics:
+              continue
+
             solvers_total = div_data.solver_id.unique()
 
             # Filter out unsound solvers.
