@@ -89,6 +89,7 @@ g_exts = { OPT_TRACK_SQ: EXT_SQ,
            OPT_TRACK_MV: EXT_MV }
 
 allLogics = set()
+divisionInfo = {}
 
 ###############################################################################
 # Helper functions
@@ -539,6 +540,7 @@ def process_csv(csv,
                 sequential):
     global g_args
     global allLogics
+    global divisionInfo
     assert not filter_result or filter_result in [RESULT_SAT, RESULT_UNSAT]
     if g_args.log:
         log("Process {} with family: '{}', divisions: '{}', "\
@@ -1307,6 +1309,7 @@ def md_write_file(division,
                   year,
                   path,
                   track,
+                  usedLogics,
                   time_limit):
     global g_tracks, g_exts
     # general info about the current division
@@ -1332,6 +1335,17 @@ def md_write_file(division,
                     g_tracks[track],
                     n_benchmarks,
                     time_limit)
+    # for each logic in division, see if there was any
+
+    # if division != logic and this is a true division, add logics
+    if g_args.divisions_map and not division in allLogics:
+      assert usedLogics
+      allLogicsStr = ""
+      for logic in sorted(usedLogics):
+        allLogicsStr += "\n- %s" % (logic)
+
+      str_div += "logics:%s\n" % allLogicsStr
+
     # winners
     str_winners = ["winner_par: {}".format(md_get_div_winner(data_par))]
     # division scores
@@ -1408,6 +1422,7 @@ def to_md_files(results_seq,
     # iterate over divisions in track
     # (results are zipped together for iteration)
     empty = pandas.DataFrame()
+
     for data_seq, data_par, data_sat, data_unsat, data_24s in zip(*results):
         # assert that results are complete and correctly zipped togeher, i.e.,
         # year and division of individual results must match
@@ -1425,6 +1440,13 @@ def to_md_files(results_seq,
         # track string
         track_str = ""
         ext_str = ".md"
+        usedLogics = []
+        if g_args.divisions_map and not division in allLogics:
+          tmpDf = results_seq.reset_index()
+          divLogics = divisionInfo[g_tracks[track]][division]
+          for logic in divLogics:
+            if len(tmpDf[tmpDf['division'] == logic] ) > 0:
+             usedLogics.append(logic)
         if track == OPT_TRACK_SQ:
             md_write_file(division,
                           n_benchmarks,
@@ -1432,6 +1454,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_INC:
             md_write_file(division,
@@ -1440,6 +1463,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_UC:
             md_write_file(division,
@@ -1448,6 +1472,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_MV:
             md_write_file(division,
@@ -1456,6 +1481,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_CHALL_SQ:
             md_write_file(division,
@@ -1464,6 +1490,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_CHALL_INC:
             md_write_file(division,
@@ -1472,6 +1499,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
 
 # Get score details for competition-wide biggest lead recognition .md file
