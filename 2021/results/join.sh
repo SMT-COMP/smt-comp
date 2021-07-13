@@ -21,7 +21,7 @@ for track in Single_Query Incremental Model_Validation Unsat_Core; do
         if [ -e $OUTPUT ]; then
             # sanity check: head must be equal
             diff <(head -1 $INPUT) <(head -1 $OUTPUT)
-            tail -n +1 $INPUT >> $OUTPUT
+            tail -n +2 $INPUT >> $OUTPUT
         else
             cat $INPUT > $OUTPUT
         fi
