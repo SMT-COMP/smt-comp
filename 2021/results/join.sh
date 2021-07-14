@@ -4,16 +4,19 @@
 FORCE_DOWNLOAD=0
 
 # Jobs in the order "competition best-of non-competing"
-Single_Query="47304 47543 47546"
-Incremental="47350 47540 47689"
-Model_Validation="47305 47542 47727"
-Unsat_Core="47790 47815 47866 47867"
+sq="47304 47543 47546 47966"
+inc="47350 47540 47689"
+mv="47305 47542 47727"
+uc="47790 47815 47866 47867 47916"
 
 COLORDER=../../tools/process-results/unify_column_order.py
 
-for track in Single_Query Incremental Model_Validation Unsat_Core; do
+TMPDIR=$(mktemp -d)
+trap "rm -rf ${TMPDIR}" EXIT
+
+for track in sq inc mv uc; do
     echo -n "$track:"
-    OUTPUT="${track}_Track.csv"
+    OUTPUT="raw-results-${track}.csv"
     rm -f $OUTPUT
     for id in ${!track}; do
         if [ "$FORCE_DOWNLOAD" == "1" -o \! -d "Job${id}" ]; then
@@ -23,7 +26,7 @@ for track in Single_Query Incremental Model_Validation Unsat_Core; do
         INPUT="Job${id}/Job${id}_info.csv"
         echo -n " Job${id}"
         if [ -e $OUTPUT ]; then
-            TMPFILE=$(mktemp --suffix=.csv)
+            TMPFILE=${TMPDIR}/job.csv
             $COLORDER -o $OUTPUT -a $INPUT > $TMPFILE
 
             # For rerun jobs, remove one `/` to make all benchmark
