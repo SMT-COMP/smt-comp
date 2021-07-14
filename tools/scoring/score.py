@@ -1284,6 +1284,9 @@ def md_get_div_score_details(df, track, str_score, n_benchmarks):
         if track != OPT_TRACK_UC and track != OPT_TRACK_MV:
             lines.append("  unsolved: {}".format(
                 row.unsolved))
+            if g_args.divisions_map:
+              lines.append("  abstained: {}".format(
+                n_benchmarks - (row.correct + row.unsolved)))
         lines.append("  timeout: {}".format(
             row.timeout))
         lines.append("  memout: {}".format(
