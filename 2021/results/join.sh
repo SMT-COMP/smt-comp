@@ -42,7 +42,7 @@ for track in sq inc mv uc; do
             rm $TMPFILE
         else
             # convert all files to same line ending
-            dos2unix -q -n $INPUT $OUTPUT
+            cat $INPUT > $OUTPUT
         fi
     done
     echo
