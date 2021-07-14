@@ -2,7 +2,7 @@
 
 SCORE="../../tools/scoring/score.py"
 BESTTOCSVS="../../tools/previous-best/best_solvers_to_csv.py"
-ORDER_COLUMNS="../../tools/previous-best/unify_column_order.py"
+ORDER_COLUMNS="../../tools/process-results/unify_column_order.py"
 
 SINGLE_QUERY_RESULTS_2020="../../2020/results/Single_Query_Track.csv"
 INCREMENTAL_RESULTS_2020="../../2020/results/Incremental_Track.csv"

@@ -2,7 +2,7 @@
 
 SCORE=../../tools/scoring/score.py
 JOINSCORE=../../tools/scoring/join_results.sh
-COLORDER=../previous-best/unify_column_order.py
+COLORDER=../../tools/process-results/unify_column_order.py
 SOLVERSDIVS=../registration/solvers_divisions_final.csv
 PATCH_CSV=../../tools/scoring/patch_csv.py
 
