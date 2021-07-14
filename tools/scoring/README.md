@@ -1,12 +1,8 @@
-Workflow for scoring
-====================
+Using score.py
+==============
 
-Follow these steps per track:
-
-1. To prepare the result files for the website:
-
-   For example:
+To generate markdowns as used in the website, for example:
 
    ```
-   $ ./score.py -c ../../2021/results/Single_Query_Track.csv -y 2021 -t 1200 -S ../../2021/registration/solvers_divisions_final.csv -T sq --gen-md ../../../smt-comp.github.io/_results_2021/
+   $ ./score.py -c ../../2021/results/Single_Query_Track.csv -y 2021 -t 1200 -S ../../2021/registration/solvers_divisions_final.csv -T sq --gen-md test
    ```
