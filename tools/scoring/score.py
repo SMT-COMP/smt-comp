@@ -21,6 +21,7 @@ pandas.set_option('precision', 16)
 # Options parsing
 from argparse import ArgumentParser
 
+import json
 import os
 import sys
 import csv
@@ -87,6 +88,9 @@ g_exts = { OPT_TRACK_SQ: EXT_SQ,
            OPT_TRACK_UC: EXT_UC,
            OPT_TRACK_MV: EXT_MV }
 
+allLogics = set()
+divisionInfo = {}
+
 ###############################################################################
 # Helper functions
 ###############################################################################
@@ -102,6 +106,7 @@ def log(string):
 
 # Split a benchmark string into benchmark, division and family.
 def split_benchmark_division_family(x, family_func):
+    assert len(x) == 2, "weird x: {0}".format(x)
     division, benchmark = x[0], x[1]
     # Check if division is a logic string.
     # Note: This assumes that space names are not in upper case.
@@ -534,6 +539,8 @@ def process_csv(csv,
                 skip_unknowns,
                 sequential):
     global g_args
+    global allLogics
+    global divisionInfo
     assert not filter_result or filter_result in [RESULT_SAT, RESULT_UNSAT]
     if g_args.log:
         log("Process {} with family: '{}', divisions: '{}', "\
@@ -610,6 +617,7 @@ def process_csv(csv,
     start = time.time() if g_args.show_timestamps else None
     # Compute the benchmark scores for each division
     dfs = []
+    dfsPerLogic = {}
     for division, division_data in data.groupby('division'):
         if g_args.log: log("Compute for {}".format(division))
         res = score(division,
@@ -621,6 +629,26 @@ def process_csv(csv,
                     skip_unknowns,
                     sequential)
         dfs.append(res)
+        if g_args.divisions_map:
+          dfsPerLogic[division] = res
+    if g_args.divisions_map:
+      # Read divisions from a JSON formatted file.
+      divisionInfo = json.load(open(g_args.divisions_map))
+      trackDivisions = divisionInfo[g_tracks[g_args.track]]
+      for division in trackDivisions:
+        divDfs = []
+        nBenchmarks = 0
+        logics = trackDivisions[division]
+        for logic in logics:
+          allLogics.add(logic)
+          if logic in dfsPerLogic.keys():
+            divDfs.append(dfsPerLogic[logic])
+            nBenchmarks += len(dfsPerLogic[logic].benchmark.unique())
+        if divDfs:
+          dataNew = pandas.concat(divDfs, ignore_index=True)
+          dataNew['division'] = division
+          dataNew['division_size'] = nBenchmarks
+          dfs.append(dataNew)
     if g_args.show_timestamps:
         log('time score: {}'.format(time.time() - start))
 
@@ -1001,7 +1029,9 @@ def biggest_lead_ranking(data, sequential):
             # Skip non-competitive divisions
             if not is_competitive_division(div_data.solver_id.unique()):
                 continue
-
+            # Skip logics if divisions != logics
+            if g_args.divisions_map and division in allLogics:
+              continue
             assert len(div_data) >= 2
             first = div_data[div_data['rank'] == 1]
             second = div_data[div_data['rank'] == 2]
@@ -1075,7 +1105,8 @@ def vbss(division_data, solver_id, sequential):
     data_vbs = data.sort_values(
                 by=sort_columns, ascending=sort_asc).groupby(
                         'benchmark', as_index=False).first()
-    assert len(data_vbs.benchmark.unique()) == len(division_data.benchmark.unique())
+    # note that since solvers don't necessarily run on all logics in a division, these numbers may differ
+    assert len(data_vbs.benchmark.unique()) == len(division_data.benchmark.unique()) or g_args.divisions_map
 
     if sequential:
         return (data_vbs.score_correct.sum(), data_vbs.cpu_time.sum())
@@ -1125,6 +1156,10 @@ def largest_contribution_ranking(data, time_limit, sequential):
         num_job_pairs_total = 0
         scores_top = []
         for division, div_data in data.groupby('division'):
+            # Skip logics if divisions != logics
+            if g_args.divisions_map and division in allLogics:
+              continue
+
             solvers_total = div_data.solver_id.unique()
 
             # Filter out unsound solvers.
@@ -1249,6 +1284,9 @@ def md_get_div_score_details(df, track, str_score, n_benchmarks):
         if track != OPT_TRACK_UC and track != OPT_TRACK_MV:
             lines.append("  unsolved: {}".format(
                 row.unsolved))
+            if g_args.divisions_map:
+              lines.append("  abstained: {}".format(
+                n_benchmarks - (row.correct + row.unsolved)))
         lines.append("  timeout: {}".format(
             row.timeout))
         lines.append("  memout: {}".format(
@@ -1274,6 +1312,7 @@ def md_write_file(division,
                   year,
                   path,
                   track,
+                  usedLogics,
                   time_limit):
     global g_tracks, g_exts
     # general info about the current division
@@ -1299,6 +1338,17 @@ def md_write_file(division,
                     g_tracks[track],
                     n_benchmarks,
                     time_limit)
+    # for each logic in division, see if there was any
+
+    # if division != logic and this is a true division, add logics
+    if g_args.divisions_map and not division in allLogics:
+      assert usedLogics
+      allLogicsStr = ""
+      for logic in sorted(usedLogics):
+        allLogicsStr += "\n- %s" % (logic)
+
+      str_div += "logics:%s\n" % allLogicsStr
+
     # winners
     str_winners = ["winner_par: {}".format(md_get_div_winner(data_par))]
     # division scores
@@ -1375,6 +1425,7 @@ def to_md_files(results_seq,
     # iterate over divisions in track
     # (results are zipped together for iteration)
     empty = pandas.DataFrame()
+
     for data_seq, data_par, data_sat, data_unsat, data_24s in zip(*results):
         # assert that results are complete and correctly zipped togeher, i.e.,
         # year and division of individual results must match
@@ -1392,6 +1443,13 @@ def to_md_files(results_seq,
         # track string
         track_str = ""
         ext_str = ".md"
+        usedLogics = []
+        if g_args.divisions_map and not division in allLogics:
+          tmpDf = results_seq.reset_index()
+          divLogics = divisionInfo[g_tracks[track]][division]
+          for logic in divLogics:
+            if len(tmpDf[tmpDf['division'] == logic] ) > 0:
+             usedLogics.append(logic)
         if track == OPT_TRACK_SQ:
             md_write_file(division,
                           n_benchmarks,
@@ -1399,6 +1457,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_INC:
             md_write_file(division,
@@ -1407,6 +1466,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_UC:
             md_write_file(division,
@@ -1415,6 +1475,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_MV:
             md_write_file(division,
@@ -1423,6 +1484,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_CHALL_SQ:
             md_write_file(division,
@@ -1431,6 +1493,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
         elif track == OPT_TRACK_CHALL_INC:
             md_write_file(division,
@@ -1439,6 +1502,7 @@ def to_md_files(results_seq,
                           year,
                           path,
                           track,
+                          usedLogics,
                           time)
 
 # Get score details for competition-wide biggest lead recognition .md file
@@ -1893,6 +1957,12 @@ def parse_args():
                         type=str,
                         default="",
                         help="list the best competing solvers, per division, of given year, in a csv with year/division/name")
+
+    parser.add_argument("-D", "--divisions-map",
+                        metavar="json",
+                        default=None,
+                        help="Divisions per track. To be used when divisions != logics")
+
 
     required = parser.add_argument_group("required arguments")
     required.add_argument("-c", "--csv",
