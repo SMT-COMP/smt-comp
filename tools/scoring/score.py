@@ -424,21 +424,35 @@ def score(division,
         data_new['unsolved'] = data_new.num_check_sat - data_new.correct
     # Set correct/error column for solved benchmarks.
     else:
-        # Filter job pairs based on given verdict. For the sat/unsat scoring
-        # only satisfiable/unsatisfiable instances are considered, i.e., if
-        # either the expected status is sat/unsat or a solver solves the
-        # instance.
         if filter_result:
-            expected = set([filter_result, RESULT_UNKNOWN])
+            if filter_result == RESULT_UNSAT:
+                negated_filter_result = RESULT_SAT
+            else:
+                negated_filter_result = RESULT_UNSAT
+            # Filter benchmarks based on given verdict.  A benchmark is
+            # marked as sat/unsat if its expected result is sat/unsat, or
+            # its expected result is unknown and at least one solver
+            # returned sat/unsat.
             data_with_result = \
                 data_new[(data_new.expected == filter_result)
                          | ((data_new.result == filter_result)
-                            & (data_new.expected.isin(expected)))]
+                            & (data_new.expected == RESULT_UNKNOWN))]
             benchmarks = set(data_with_result.benchmark.unique())
-            #data_new = data_new[data_new.benchmark.isin(benchmarks)]
-            data_new.loc[~data_new.benchmark.isin(benchmarks),
+            data_new.loc[(~data_new.benchmark.isin(benchmarks))
+                         & (data_new.result != filter_result),
                          ['cpu_time', 'wallclock_time', 'result']] = \
                             [0.0, 0.0, RESULT_UNKNOWN]
+            # After 2021, we count unsound results to the sat/unsat
+            # score depending on the solver's result, not the benchmark
+            # status. Before, it was the other way round.
+            if int(year) >= 2021:
+                data_new.loc[data_new.result == negated_filter_result,
+                             ['cpu_time', 'wallclock_time', 'result']] = \
+                                [0.0, 0.0, RESULT_UNKNOWN]
+            else:
+                data_new.loc[data_new.expected == negated_filter_result,
+                             ['cpu_time', 'wallclock_time', 'result']] = \
+                                [0.0, 0.0, RESULT_UNKNOWN]
 
         # Select benchmarks with results sat/unsat.
         solved = data_new[(data_new.result == RESULT_SAT)
@@ -496,6 +510,8 @@ def score(division,
 
         # Determine unsolved benchmarks.
         data_new.loc[data_new.correct == 0, 'unsolved'] = 1
+        if filter_result:
+            data_new.loc[~data_new.benchmark.isin(benchmarks), 'unsolved'] = 0
 
     # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
     # 'family_scores' dictionary (use_families == False).
