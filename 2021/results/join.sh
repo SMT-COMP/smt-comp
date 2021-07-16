@@ -14,7 +14,7 @@ COLORDER=../../tools/process-results/unify_column_order.py
 for track in Single_Query Incremental Model_Validation Unsat_Core; do
     echo -n "$track:"
     OUTPUT="${track}_Track.csv"
-    rm -f $OUTPUT
+    # rm -f $OUTPUT
     for id in ${!track}; do
         if [ "$FORCE_DOWNLOAD" == "1" -o \! -d "Job${id}" ]; then
             curl -o Job${id}_info.zip "https://www.starexec.org/starexec/secure/download?type=job&id=${id}&returnids=true&getcompleted=false"
