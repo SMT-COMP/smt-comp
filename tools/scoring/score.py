@@ -304,7 +304,7 @@ def group_and_rank_solvers(data, sequential):
           'unsolved': sum,
           'competitive': 'first',
           'division_size': 'first',
-          'num_check_sat': 'first',
+          'num_check_sat': sum,
           })
     else:
       data_grouped = data.groupby(['year', 'division', 'solver_id']).agg({
