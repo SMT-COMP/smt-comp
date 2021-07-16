@@ -289,21 +289,41 @@ def group_and_rank_solvers(data, sequential):
     global g_args
 
     # Group results
-    data_grouped = data.groupby(['year', 'division', 'solver_id']).agg({
-        'correct': sum,
-        'error': sum,
-        'correct_sat' : sum,
-        'correct_unsat' : sum,
-        'score_correct': sum,
-        'score_error': sum,
-        'score_cpu_time': sum,
-        'score_wallclock_time': sum,
-        'timeout' : sum,
-        'memout' : sum,
-        'unsolved': sum,
-        'competitive': 'first',
-        'division_size': 'first',
-        })
+    if 'num_check_sat' in data.columns:
+      data_grouped = data.groupby(['year', 'division', 'solver_id']).agg({
+          'correct': sum,
+          'error': sum,
+          'correct_sat' : sum,
+          'correct_unsat' : sum,
+          'score_correct': sum,
+          'score_error': sum,
+          'score_cpu_time': sum,
+          'score_wallclock_time': sum,
+          'timeout' : sum,
+          'memout' : sum,
+          'unsolved': sum,
+          'competitive': 'first',
+          'division_size': 'first',
+          'num_check_sat': sum,
+          })
+    else:
+      data_grouped = data.groupby(['year', 'division', 'solver_id']).agg({
+          'correct': sum,
+          'error': sum,
+          'correct_sat' : sum,
+          'correct_unsat' : sum,
+          'score_correct': sum,
+          'score_error': sum,
+          'score_cpu_time': sum,
+          'score_wallclock_time': sum,
+          'timeout' : sum,
+          'memout' : sum,
+          'unsolved': sum,
+          'competitive': 'first',
+          'division_size': 'first',
+          })
+
+
 
     # Convert solver index to column
     data_grouped.reset_index(level=2, inplace=True)
@@ -1285,8 +1305,12 @@ def md_get_div_score_details(df, track, str_score, n_benchmarks):
             lines.append("  unsolved: {}".format(
                 row.unsolved))
             if g_args.divisions_map:
-              lines.append("  abstained: {}".format(
-                n_benchmarks - (row.correct + row.unsolved)))
+              if track == OPT_TRACK_INC:
+                lines.append("  abstained: {}".format(
+                  row.num_check_sat - (row.correct + row.unsolved)))
+              else:
+                lines.append("  abstained: {}".format(
+                  n_benchmarks - (row.correct + row.unsolved)))
         lines.append("  timeout: {}".format(
             row.timeout))
         lines.append("  memout: {}".format(
