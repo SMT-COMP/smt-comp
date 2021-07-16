@@ -1,6 +1,5 @@
 #! /bin/bash
 
-#SCRIPTDIR=`dirname $(greadlink -f "$0")`
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 YEAR=2021
@@ -14,6 +13,8 @@ GEN_SQ=
 GEN_INC=
 GEN_UC=
 GEN_MV=
+GEN_CT=
+GEN_PT=
 
 while [ $# -gt 0 ]
 do
@@ -30,6 +31,8 @@ do
       echo "    --inc          Incremental track "
       echo "    --uc           Unsat Core track "
       echo "    --mv           Model Validation track "
+      echo "    --cloud        Cloud track "
+      echo "    --parallel     Parallel track "
       echo
       exit
       ;;
@@ -38,6 +41,8 @@ do
       GEN_INC=yes
       GEN_UC=yes
       GEN_MV=yes
+      GEN_CT=yes
+      GEN_PT=yes
       ;;
     --sq)
       GEN_SQ=yes
@@ -50,6 +55,12 @@ do
       ;;
     --mv)
       GEN_MV=yes
+      ;;
+    --cloud)
+      GEN_CT=yes
+      ;;
+    --parallel)
+      GEN_PT=yes
       ;;
     -*)
         echo "ERROR: invalid option '$1'"
@@ -73,3 +84,8 @@ $PYTHON $SCORE -y $YEAR --csv results-uc.csv  -t $TIME --gen-md $OUTPUT -T uc -S
 $PYTHON $SCORE -y $YEAR --csv results-mv.csv  -t $TIME \
     --gen-md $OUTPUT -T mv -S $SOLVERS_CSV -D ../new-divisions.json \
     --expdivs QF_Equality,QF_Equality+LinearArith,QF_Equality+Bitvec
+[[ -n $GEN_CT ]] && \
+$PYTHON $SCORE -y $YEAR --csv results-cloud.csv  -t $TIME --gen-md $OUTPUT -T ct -S $SOLVERS_CSV -D ../new-divisions.json
+[[ -n $GEN_PT ]] && \
+$PYTHON $SCORE -y $YEAR --csv results-parallel.csv  -t $TIME --gen-md $OUTPUT -T pt -S $SOLVERS_CSV -D ../new-divisions.json
+
