@@ -14,7 +14,7 @@ trap "rm -rf $TMPDIR" EXIT
 grep ^incremental $EXCLUDED | cut -d/ -f2- > excluded_incremental.txt
 grep ^non-incremental $EXCLUDED | cut -d/ -f2- > excluded_nonincremental.txt
 
-for i in inc mv sq uc; do
+for i in inc mv sq uc cloud parallel; do
     if [ "$i" == "inc" ]; then
         EXCLUDED=excluded_incremental.txt
         DECISION="-i $INC_DECISION"
