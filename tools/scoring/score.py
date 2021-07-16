@@ -1305,10 +1305,7 @@ def md_get_div_score_details(df, track, str_score, n_benchmarks):
             lines.append("  unsolved: {}".format(
                 row.unsolved))
             if g_args.divisions_map:
-              # proxy for whether we are in incremental
-              if 'num_check_sat' in df.columns:
-                print(row.num_check_sat)
-                # if 'wrong-answers' in df.columns:
+              if track == OPT_TRACK_INC:
                 lines.append("  abstained: {}".format(
                   row.num_check_sat - (row.correct + row.unsolved)))
               else:
