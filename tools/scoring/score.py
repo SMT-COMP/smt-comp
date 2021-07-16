@@ -428,6 +428,7 @@ def score(division,
             if filter_result == RESULT_UNSAT:
                 negated_filter_result = RESULT_SAT
             else:
+                assert filter_result == RESULT_SAT
                 negated_filter_result = RESULT_UNSAT
             # Filter benchmarks based on given verdict.  A benchmark is
             # marked as sat/unsat if its expected result is sat/unsat, or
