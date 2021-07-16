@@ -11,6 +11,9 @@ QF_BVFP/20170428-Liew-KLEE/imperial_synthetic_sqrt_klee.x86_64/query.20.smt2,sat
 QF_BVFP/20170428-Liew-KLEE/imperial_synthetic_sqrt_klee.x86_64/query.25.smt2,sat
 QF_BVFP/20170428-Liew-KLEE/imperial_synthetic_sqrt_klee.x86_64/query.35.smt2,sat
 QF_FP/griggio/fmcad12/mul_03_3_1.smt2,sat
+QF_FP/griggio/fmcad12/test_v5_r10_vr10_c1_s7608.smt2,unsat
+QF_FP/griggio/fmcad12/test_v7_r12_vr1_c1_s10576.smt2,unsat
+QF_FP/griggio/fmcad12/test_v7_r7_vr1_c1_s24449.smt2,unsat
 QF_LIA/2019-ezsmt/incrementalScheduling/064-incremental_scheduling-15092-0.smt2,unsat
 QF_LIA/2019-ezsmt/incrementalScheduling/170-incremental_scheduling-18108-0.smt2,unsat
 QF_LIA/2019-ezsmt/incrementalScheduling/241-incremental_scheduling-28320-0.smt2,unsat
