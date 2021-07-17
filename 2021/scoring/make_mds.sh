@@ -72,4 +72,4 @@ $PYTHON $SCORE -y $YEAR --csv results-uc.csv  -t $TIME --gen-md $OUTPUT -T uc -S
 [[ -n $GEN_MV ]] && \
 $PYTHON $SCORE -y $YEAR --csv results-mv.csv  -t $TIME \
     --gen-md $OUTPUT -T mv -S $SOLVERS_CSV -D ../new-divisions.json \
-    --expdivs QF_Equality,QF_Equality+LinearArith
+    --expdivs QF_Equality,QF_Equality+LinearArith,QF_Equality+Bitvec
