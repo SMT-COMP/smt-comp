@@ -89,11 +89,14 @@ echo "Seed: $SEED"
 
 SCRIPTDIR=`get_abs_path $(dirname "$0")`
 
-OUT_CLOUD="$(mktemp)_benchmark_selection_cloud"
-SELECTION_NUMBERS_CLOUD="$(mktemp)_benchmark_selection_cloud_numbers.json"
+TMPDIR=$(mktemp -d)
+trap "rm -rf ${TMPDIR}" EXIT
+
+OUT_CLOUD="${TMPDIR}/benchmark_selection_cloud"
+SELECTION_NUMBERS_CLOUD="${TMPDIR}/benchmark_selection_cloud_numbers.json"
 SELECTION_CLOUD="${SCRIPTDIR}/final/benchmark_selection_cloud"
-OUT_PARALLEL="$(mktemp)_benchmark_selection_parallel"
-SELECTION_NUMBERS_PARALLEL="$(mktemp)_benchmark_selection_parallel_numbers.json"
+OUT_PARALLEL="${TMPDIR}/benchmark_selection_parallel"
+SELECTION_NUMBERS_PARALLEL="${TMPDIR}/benchmark_selection_parallel_numbers.json"
 SELECTION_PARALLEL="${SCRIPTDIR}/final/benchmark_selection_parallel"
 
 MIN_BENCHMARKS=400
@@ -106,7 +109,7 @@ AWS_SCRAMBLER="${SCRIPTDIR}/aws_scramble_and_rename.sh"
 FILTER_BLACKLISTED="${SCRIPTDIR}/aws_filter_blocklisted.sh"
 
 BENCHMARKS="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
-BENCHMARKS_WITHOUT_BLACKLISTED="$(mktemp)_SMT-LIB_non_incremental_benchmarks_all_without_blocklisted.txt"
+BENCHMARKS_WITHOUT_BLACKLISTED="${TMPDIR}/SMT-LIB_non_incremental_benchmarks_all_without_blocklisted.txt"
 FILTER_CSV_2018="$SCRIPTDIR/../../../2018/csv/Main_Track.csv"
 FILTER_CSV_2019="$SCRIPTDIR/../../../2019/results/Single_Query_Track.csv"
 FILTER_CSV_2020="$SCRIPTDIR/../../../2020/results/Single_Query_Track.csv"
@@ -180,10 +183,3 @@ ${AWS_SCRAMBLER} ${smt_lib_root} \
     ${competition_root}/cloud \
     ${SEED} > ${SCRIPTDIR}/final/cloud-map.csv
 
-rm -rf ${OUT_CLOUD} ${SELECTION_NUMBERS_CLOUD} \
-    ${OUT_PARALLEL} ${SELECTION_NUMBERS_PARALLEL} \
-    ${OUT_CLOUD}-{hard,unsolved} \
-    ${OUT_PARALLEL}-{hard,unsolved} \
-    ${OUT_CLOUD}-{hard,unsolved}-logics \
-    ${OUT_PARALLEL}-{hard,unsolved}-logics \
-    ${BENCHMARKS_WITHOUT_BLACKLISTED}
