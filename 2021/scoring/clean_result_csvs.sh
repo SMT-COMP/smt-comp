@@ -27,6 +27,9 @@ for i in inc mv sq uc; do
     if [ "$i" == "uc" ]; then
         FILTER="| grep -v -e ',post-processor error,' -e 'run script error'"
     fi
+    if [ "$i" == "sq" ]; then
+        FILTER="| csvgrep -i -c 'solver id' -m 33746"
+    fi
 
     echo $PROCESS_CSV -x ${EXCLUDED} ${DECISION} $RESULT_DIR/raw-results-$i.csv
     eval $PROCESS_CSV -x ${EXCLUDED} ${DECISION} $RESULT_DIR/raw-results-$i.csv  $FILTER > results-$i.csv
