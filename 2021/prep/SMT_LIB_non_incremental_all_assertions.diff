@@ -1,0 +1,358 @@
+--- SMT-LIB_non_incremental_benchmarks_all_assertions.csv	2021-07-17 13:05:54.879840982 +0200
++++ /dev/fd/63	2021-07-17 15:06:50.958753944 +0200
+@@ -58186 +58186 @@
+-./QF_ABV/2019-Mann/ridecore-qf_abv-bug.smt2,118686,sat
++./QF_ABV/2019-Mann/ridecore-qf_abv-bug.smt2,0,
+@@ -58192,2 +58192,2 @@
+-./QF_ABV/2019-Wolf-fmbench/2018E/ponylink-slaveTXlen-sat-unrolled-mem.smt2,1609,sat
+-./QF_ABV/2019-Wolf-fmbench/2018E/ponylink-slaveTXlen-unsat-unrolled-mem.smt2,1616,unsat
++./QF_ABV/2019-Wolf-fmbench/2018E/ponylink-slaveTXlen-sat-unrolled-mem.smt2,0,
++./QF_ABV/2019-Wolf-fmbench/2018E/ponylink-slaveTXlen-unsat-unrolled-mem.smt2,0,
+@@ -93697 +93697 @@
+-./QF_BV/2019-Mann/ridecore-qf_bv-bug.smt2,229788,sat
++./QF_BV/2019-Mann/ridecore-qf_bv-bug.smt2,0,
+@@ -93703,2 +93703,2 @@
+-./QF_BV/2019-Wolf-fmbench/2018E/ponylink-slaveTXlen-sat-unrolled-nomem.smt2,1150,sat
+-./QF_BV/2019-Wolf-fmbench/2018E/ponylink-slaveTXlen-unsat-unrolled-nomem.smt2,1155,unsat
++./QF_BV/2019-Wolf-fmbench/2018E/ponylink-slaveTXlen-sat-unrolled-nomem.smt2,0,
++./QF_BV/2019-Wolf-fmbench/2018E/ponylink-slaveTXlen-unsat-unrolled-nomem.smt2,0,
+@@ -96230 +96230 @@
+-./QF_BV/Sage2/bench_10281.smt2,293,sat
++./QF_BV/Sage2/bench_10281.smt2,0,
+@@ -96265 +96265 @@
+-./QF_BV/Sage2/bench_10328.smt2,2596,unsat
++./QF_BV/Sage2/bench_10328.smt2,0,
+@@ -96466 +96466 @@
+-./QF_BV/Sage2/bench_10727.smt2,748,sat
++./QF_BV/Sage2/bench_10727.smt2,0,
+@@ -96725 +96725 @@
+-./QF_BV/Sage2/bench_11272.smt2,735,sat
++./QF_BV/Sage2/bench_11272.smt2,0,
+@@ -97356 +97356 @@
+-./QF_BV/Sage2/bench_12608.smt2,809,sat
++./QF_BV/Sage2/bench_12608.smt2,0,
+@@ -97646 +97646 @@
+-./QF_BV/Sage2/bench_13199.smt2,1675,unsat
++./QF_BV/Sage2/bench_13199.smt2,0,
+@@ -97685 +97685 @@
+-./QF_BV/Sage2/bench_13280.smt2,780,sat
++./QF_BV/Sage2/bench_13280.smt2,0,
+@@ -97844 +97844 @@
+-./QF_BV/Sage2/bench_13594.smt2,696,unsat
++./QF_BV/Sage2/bench_13594.smt2,0,
+@@ -98092 +98092 @@
+-./QF_BV/Sage2/bench_14106.smt2,715,sat
++./QF_BV/Sage2/bench_14106.smt2,0,
+@@ -98505 +98505 @@
+-./QF_BV/Sage2/bench_14918.smt2,805,sat
++./QF_BV/Sage2/bench_14918.smt2,0,
+@@ -98646 +98646 @@
+-./QF_BV/Sage2/bench_15246.smt2,176,sat
++./QF_BV/Sage2/bench_15246.smt2,0,
+@@ -98685 +98685 @@
+-./QF_BV/Sage2/bench_15315.smt2,290,sat
++./QF_BV/Sage2/bench_15315.smt2,0,
+@@ -99444 +99444 @@
+-./QF_BV/Sage2/bench_16895.smt2,843,sat
++./QF_BV/Sage2/bench_16895.smt2,0,
+@@ -99484 +99484 @@
+-./QF_BV/Sage2/bench_16962.smt2,725,sat
++./QF_BV/Sage2/bench_16962.smt2,0,
+@@ -99786 +99786 @@
+-./QF_BV/Sage2/bench_17570.smt2,735,sat
++./QF_BV/Sage2/bench_17570.smt2,0,
+@@ -99868 +99868 @@
+-./QF_BV/Sage2/bench_17768.smt2,749,sat
++./QF_BV/Sage2/bench_17768.smt2,0,
+@@ -101036 +101036 @@
+-./QF_BV/Sage2/bench_4054.smt2,291,sat
++./QF_BV/Sage2/bench_4054.smt2,0,
+@@ -101066 +101066 @@
+-./QF_BV/Sage2/bench_4127.smt2,856,sat
++./QF_BV/Sage2/bench_4127.smt2,0,
+@@ -101184 +101184 @@
+-./QF_BV/Sage2/bench_4400.smt2,300,sat
++./QF_BV/Sage2/bench_4400.smt2,0,
+@@ -101416 +101416 @@
+-./QF_BV/Sage2/bench_496.smt2,575,sat
++./QF_BV/Sage2/bench_496.smt2,0,
+@@ -101433 +101433 @@
+-./QF_BV/Sage2/bench_5001.smt2,844,sat
++./QF_BV/Sage2/bench_5001.smt2,0,
+@@ -101606 +101606 @@
+-./QF_BV/Sage2/bench_5378.smt2,734,sat
++./QF_BV/Sage2/bench_5378.smt2,0,
+@@ -101972 +101972 @@
+-./QF_BV/Sage2/bench_6209.smt2,848,sat
++./QF_BV/Sage2/bench_6209.smt2,0,
+@@ -102066 +102066 @@
+-./QF_BV/Sage2/bench_6414.smt2,289,sat
++./QF_BV/Sage2/bench_6414.smt2,0,
+@@ -102079 +102079 @@
+-./QF_BV/Sage2/bench_6453.smt2,297,sat
++./QF_BV/Sage2/bench_6453.smt2,0,
+@@ -102822 +102822 @@
+-./QF_BV/Sage2/bench_8075.smt2,303,sat
++./QF_BV/Sage2/bench_8075.smt2,0,
+@@ -102877 +102877 @@
+-./QF_BV/Sage2/bench_8182.smt2,301,sat
++./QF_BV/Sage2/bench_8182.smt2,0,
+@@ -103003 +103003 @@
+-./QF_BV/Sage2/bench_8458.smt2,1282,sat
++./QF_BV/Sage2/bench_8458.smt2,0,
+@@ -103239 +103239 @@
+-./QF_BV/Sage2/bench_899.smt2,502,sat
++./QF_BV/Sage2/bench_899.smt2,0,
+@@ -103324 +103324 @@
+-./QF_BV/Sage2/bench_9140.smt2,200,unsat
++./QF_BV/Sage2/bench_9140.smt2,0,
+@@ -103329 +103329 @@
+-./QF_BV/Sage2/bench_9150.smt2,785,sat
++./QF_BV/Sage2/bench_9150.smt2,0,
+@@ -103483 +103483 @@
+-./QF_BV/Sage2/bench_9501.smt2,1665,sat
++./QF_BV/Sage2/bench_9501.smt2,0,
+@@ -103591 +103591 @@
+-./QF_BV/Sage2/bench_9732.smt2,786,sat
++./QF_BV/Sage2/bench_9732.smt2,0,
+@@ -103634 +103634 @@
+-./QF_BV/Sage2/bench_9831.smt2,373,sat
++./QF_BV/Sage2/bench_9831.smt2,0,
+@@ -103785,13 +103785,13 @@
+-./QF_BV/asp/DisjunctiveScheduling/disjunctiveScheduling.in1.smt2,1,sat
+-./QF_BV/asp/DisjunctiveScheduling/disjunctiveScheduling.in7.smt2,1,sat
+-./QF_BV/asp/DisjunctiveScheduling/disjunctiveScheduling.in8.smt2,1,sat
+-./QF_BV/asp/DisjunctiveScheduling/disjunctiveScheduling.in9.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=10.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=11.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=12.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=13.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=15.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=5.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=7.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=8.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=9.smt2,1,sat
++./QF_BV/asp/DisjunctiveScheduling/disjunctiveScheduling.in1.smt2,0,
++./QF_BV/asp/DisjunctiveScheduling/disjunctiveScheduling.in7.smt2,0,
++./QF_BV/asp/DisjunctiveScheduling/disjunctiveScheduling.in8.smt2,0,
++./QF_BV/asp/DisjunctiveScheduling/disjunctiveScheduling.in9.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=10.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=11.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=12.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=13.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=15.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=5.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=7.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=8.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=10-height=10-colours=9.smt2,0,
+@@ -103808,10 +103808,10 @@
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=10.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=11.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=12.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=13.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=14.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=15.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=6.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=7.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=8.smt2,1,sat
+-./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=9.smt2,1,sat
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=10.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=11.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=12.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=13.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=14.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=15.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=6.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=7.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=8.smt2,0,
++./QF_BV/asp/EdgeMatching/edge-matching-width=9-height=9-colours=9.smt2,0,
+@@ -103969,32 +103969,32 @@
+-./QF_BV/asp/KnightTour/knightTour.in08.smt2,1,unknown
+-./QF_BV/asp/KnightTour/knightTour.in09.smt2,1,unknown
+-./QF_BV/asp/KnightTour/knightTour.in10.smt2,1,unknown
+-./QF_BV/asp/Labyrinth/laby_17_17_02.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_17_17_07.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_17_17_09.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_18_18_04.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_18_18_11.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_18_18_13.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_18_18_14.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_19_19_14.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_19_19_15.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_19_19_16.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_19_19_17.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_19_19_19.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_20_20_04.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_20_20_15.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_20_20_16.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_21_21_01.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_21_21_05.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_21_21_07.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_21_21_12.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_21_21_15.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_21_21_16.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_21_21_18.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_21_21_19.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_22_22_08.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_22_22_09.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_22_22_11.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_22_22_13.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_22_22_17.lp.smt2,1,sat
+-./QF_BV/asp/Labyrinth/laby_22_22_19.lp.smt2,1,sat
++./QF_BV/asp/KnightTour/knightTour.in08.smt2,0,
++./QF_BV/asp/KnightTour/knightTour.in09.smt2,0,
++./QF_BV/asp/KnightTour/knightTour.in10.smt2,0,
++./QF_BV/asp/Labyrinth/laby_17_17_02.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_17_17_07.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_17_17_09.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_18_18_04.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_18_18_11.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_18_18_13.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_18_18_14.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_19_19_14.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_19_19_15.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_19_19_16.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_19_19_17.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_19_19_19.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_20_20_04.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_20_20_15.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_20_20_16.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_21_21_01.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_21_21_05.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_21_21_07.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_21_21_12.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_21_21_15.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_21_21_16.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_21_21_18.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_21_21_19.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_22_22_08.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_22_22_09.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_22_22_11.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_22_22_13.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_22_22_17.lp.smt2,0,
++./QF_BV/asp/Labyrinth/laby_22_22_19.lp.smt2,0,
+@@ -104116 +104116 @@
+-./QF_BV/asp/Sudoku/sudoku.in10.smt2,1,sat
++./QF_BV/asp/Sudoku/sudoku.in10.smt2,0,
+@@ -104118,7 +104118,7 @@
+-./QF_BV/asp/Sudoku/sudoku.in3.smt2,1,sat
+-./QF_BV/asp/Sudoku/sudoku.in4.smt2,1,sat
+-./QF_BV/asp/Sudoku/sudoku.in5.smt2,1,sat
+-./QF_BV/asp/Sudoku/sudoku.in6.smt2,1,sat
+-./QF_BV/asp/Sudoku/sudoku.in7.smt2,1,sat
+-./QF_BV/asp/Sudoku/sudoku.in8.smt2,1,sat
+-./QF_BV/asp/Sudoku/sudoku.in9.smt2,1,sat
++./QF_BV/asp/Sudoku/sudoku.in3.smt2,0,
++./QF_BV/asp/Sudoku/sudoku.in4.smt2,0,
++./QF_BV/asp/Sudoku/sudoku.in5.smt2,0,
++./QF_BV/asp/Sudoku/sudoku.in6.smt2,0,
++./QF_BV/asp/Sudoku/sudoku.in7.smt2,0,
++./QF_BV/asp/Sudoku/sudoku.in8.smt2,0,
++./QF_BV/asp/Sudoku/sudoku.in9.smt2,0,
+@@ -104201,5 +104201,5 @@
+-./QF_BV/asp/WireRouting/wire.16.x.16.b.10.a.20_unsat.data.smt2,1,unsat
+-./QF_BV/asp/WireRouting/wire.16.x.16.b.10.a.25_unsat.data.smt2,1,unsat
+-./QF_BV/asp/WireRouting/wire.16.x.16.b.5.a.25_sat.data.smt2,1,sat
+-./QF_BV/asp/WireRouting/wire.16.x.16.b.5.a.30_sat.data.smt2,1,sat
+-./QF_BV/asp/WireRouting/wire.17.x.17.b.10.a.25_unsat.data.smt2,1,unsat
++./QF_BV/asp/WireRouting/wire.16.x.16.b.10.a.20_unsat.data.smt2,0,
++./QF_BV/asp/WireRouting/wire.16.x.16.b.10.a.25_unsat.data.smt2,0,
++./QF_BV/asp/WireRouting/wire.16.x.16.b.5.a.25_sat.data.smt2,0,
++./QF_BV/asp/WireRouting/wire.16.x.16.b.5.a.30_sat.data.smt2,0,
++./QF_BV/asp/WireRouting/wire.17.x.17.b.10.a.25_unsat.data.smt2,0,
+@@ -104521,34 +104521,34 @@
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_1_false.BV.c.cil.c.17.smt2,1184,sat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_1_false.BV.c.cil.c.21.smt2,1512,sat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_1_true.BV.c.cil.c.17.smt2,1184,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_1_true.BV.c.cil.c.21.smt2,1512,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_2_false.BV.c.cil.c.17.smt2,1184,sat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_2_false.BV.c.cil.c.21.smt2,1512,sat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_2_true.BV.c.cil.c.17.smt2,1184,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_2_true.BV.c.cil.c.21.smt2,1512,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_3_false.BV.c.cil.c.17.smt2,1182,sat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_3_false.BV.c.cil.c.21.smt2,1510,sat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_3_true.BV.c.cil.c.17.smt2,1185,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_clnt_3_true.BV.c.cil.c.21.smt2,1513,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_1_alt_true.BV.c.cil.c.17.smt2,1387,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_1_alt_true.BV.c.cil.c.21.smt2,1751,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_1_true.BV.c.cil.c.17.smt2,1386,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_1_true.BV.c.cil.c.21.smt2,1750,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_2_alt_true.BV.c.cil.c.17.smt2,1470,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_2_alt_true.BV.c.cil.c.21.smt2,1834,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_2_true.BV.c.cil.c.17.smt2,1470,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_2_true.BV.c.cil.c.21.smt2,1834,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_3_alt_true.BV.c.cil.c.17.smt2,1387,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_3_alt_true.BV.c.cil.c.21.smt2,1751,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_3_true.BV.c.cil.c.17.smt2,1387,unsat
+-./QF_BV/bmc-bv-svcomp14/s3_srvr_3_true.BV.c.cil.c.21.smt2,1751,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_1_true.c.cil.c.17.smt2,169,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_1_true.c.cil.c.21.smt2,201,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_2_true.c.cil.c.17.smt2,154,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_2_true.c.cil.c.21.smt2,186,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_3_true.c.cil.c.17.smt2,154,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_3_true.c.cil.c.21.smt2,186,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_4_true.c.cil.c.17.smt2,158,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_4_true.c.cil.c.21.smt2,190,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_5_true.c.cil.c.17.smt2,154,unsat
+-./QF_BV/bmc-bv-svcomp14/soft_float_5_true.c.cil.c.21.smt2,186,unsat
++./QF_BV/bmc-bv-svcomp14/s3_clnt_1_false.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_1_false.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_1_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_1_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_2_false.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_2_false.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_2_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_2_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_3_false.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_3_false.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_3_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_clnt_3_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_1_alt_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_1_alt_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_1_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_1_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_2_alt_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_2_alt_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_2_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_2_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_3_alt_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_3_alt_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_3_true.BV.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/s3_srvr_3_true.BV.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_1_true.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_1_true.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_2_true.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_2_true.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_3_true.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_3_true.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_4_true.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_4_true.c.cil.c.21.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_5_true.c.cil.c.17.smt2,0,
++./QF_BV/bmc-bv-svcomp14/soft_float_5_true.c.cil.c.21.smt2,0,
+@@ -106232,2 +106232,2 @@
+-./QF_BV/float/gaussian.c.125.smt2,1,sat
+-./QF_BV/float/gaussian.c.175.smt2,1,sat
++./QF_BV/float/gaussian.c.125.smt2,0,
++./QF_BV/float/gaussian.c.175.smt2,0,
+@@ -106290 +106290 @@
+-./QF_BV/float/sin.c.175.smt2,1,unknown
++./QF_BV/float/sin.c.175.smt2,0,
+@@ -106296 +106296 @@
+-./QF_BV/float/sin2.c.175.smt2,1,unknown
++./QF_BV/float/sin2.c.175.smt2,0,
+@@ -106717,3 +106717,3 @@
+-./QF_BV/mcm/184.smt2,120,unknown
+-./QF_BV/mcm/185.smt2,134,unknown
+-./QF_BV/mcm/186.smt2,134,unknown
++./QF_BV/mcm/184.smt2,0,
++./QF_BV/mcm/185.smt2,0,
++./QF_BV/mcm/186.smt2,0,
+@@ -135197 +135197 @@
+-./QF_BV/stp/testcase15.stp.smt2,1,sat
++./QF_BV/stp/testcase15.stp.smt2,0,
+@@ -135629 +135629 @@
+-./QF_BV/uclid/catchconv/catchconv-15803.smt2,152919,unsat
++./QF_BV/uclid/catchconv/catchconv-15803.smt2,0,
+@@ -136042 +136042 @@
+-./QF_BV/uclid/catchconv/mplayer-mp3-query-15803-snippet3.mp3.smt2,152919,unsat
++./QF_BV/uclid/catchconv/mplayer-mp3-query-15803-snippet3.mp3.smt2,0,
