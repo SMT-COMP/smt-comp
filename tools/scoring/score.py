@@ -41,6 +41,8 @@ TRACK_CHALL_SQ = "track_single_query_challenge"
 TRACK_CHALL_INC = "track_incremental_challenge"
 TRACK_UC = "track_unsat_core"
 TRACK_MV = "track_model_validation"
+TRACK_CLOUD = "track_cloud"
+TRACK_PARALLEL = "track_parallel"
 
 # Track options
 OPT_TRACK_SQ = "sq"
@@ -49,6 +51,8 @@ OPT_TRACK_CHALL_SQ = "chall_sq"
 OPT_TRACK_CHALL_INC = "chall_inc"
 OPT_TRACK_UC = "uc"
 OPT_TRACK_MV = "mv"
+OPT_TRACK_CLOUD = "ct"
+OPT_TRACK_PARALLEL = "pt"
 
 # Columns of solvers csv
 COL_SOLVER_ID = "Solver ID"
@@ -67,6 +71,8 @@ EXT_CHALL_SQ = "-challenge-non-incremental.md"
 EXT_CHALL_INC = "-challenge-incremental.md"
 EXT_UC = "-unsat-core.md"
 EXT_MV = "-model-validation.md"
+EXT_CLOUD = "-cloud.md"
+EXT_PARALLEL = "-parallel.md"
 
 g_args = None
 
@@ -79,14 +85,18 @@ g_tracks = { OPT_TRACK_SQ: TRACK_SQ,
              OPT_TRACK_CHALL_SQ: TRACK_CHALL_SQ,
              OPT_TRACK_CHALL_INC: TRACK_CHALL_INC,
              OPT_TRACK_UC: TRACK_UC,
-             OPT_TRACK_MV: TRACK_MV }
+             OPT_TRACK_MV: TRACK_MV,
+             OPT_TRACK_CLOUD: TRACK_CLOUD,
+             OPT_TRACK_PARALLEL: TRACK_PARALLEL }
 
 g_exts = { OPT_TRACK_SQ: EXT_SQ,
            OPT_TRACK_INC: EXT_INC,
            OPT_TRACK_CHALL_SQ: EXT_CHALL_SQ,
            OPT_TRACK_CHALL_INC: EXT_CHALL_INC,
            OPT_TRACK_UC: EXT_UC,
-           OPT_TRACK_MV: EXT_MV }
+           OPT_TRACK_MV: EXT_MV,
+           OPT_TRACK_CLOUD: EXT_CLOUD,
+           OPT_TRACK_PARALLEL: EXT_PARALLEL }
 
 allLogics = set()
 divisionInfo = {}
@@ -1294,6 +1304,8 @@ def md_get_div_winner(df):
 #                 - TRACK_CHALL_INC
 #                 - TRACK_UC
 #                 - TRACK_MV
+#                 - TRACK_CLOUD
+#                 - TRACK_PARALLEL
 # str_score   : A string identifiying the kind of score to be computed.
 # n_benchmarks: The number of benchmarks in this division.
 def md_get_div_score_details(df, track, str_score, n_benchmarks):
@@ -1307,11 +1319,13 @@ def md_get_div_score_details(df, track, str_score, n_benchmarks):
             row.score_error))
         lines.append("  correctScore: {}".format(
             row.score_correct))
-        lines.append("  CPUScore: {}".format(
-            round(row.score_cpu_time, 3)))
+        if track not in (OPT_TRACK_CLOUD, OPT_TRACK_PARALLEL):
+            lines.append("  CPUScore: {}".format(
+                round(row.score_cpu_time, 3)))
         lines.append("  WallScore: {}".format(
             round(row.score_wallclock_time, 3)))
-        if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+        if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ or \
+                track == OPT_TRACK_CLOUD or track == OPT_TRACK_PARALLEL:
             lines.append("  solved: {}".format(
                 row.correct))
             lines.append("  solved_sat: {}".format(
@@ -1369,7 +1383,7 @@ def md_write_file(division,
             "track: {}\n"\
             "n_benchmarks: {}\n"\
             "time_limit: {}\n"\
-            "mem_limit: 60\n"\
+            "mem_limit: {}\n"\
             .format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                     year,
                     year,
@@ -1378,7 +1392,9 @@ def md_write_file(division,
                     division,
                     g_tracks[track],
                     n_benchmarks,
-                    time_limit)
+                    time_limit,
+                    "60" if track != OPT_TRACK_CLOUD and track != OPT_TRACK_PARALLEL else "N/A"
+                    )
     # for each logic in division, see if there was any
 
     # if division != logic and this is a true division, add logics
@@ -1545,6 +1561,24 @@ def to_md_files(results_seq,
                           track,
                           usedLogics,
                           time)
+        elif track == OPT_TRACK_CLOUD:
+            md_write_file(division,
+                          n_benchmarks,
+                          empty, data_par, data_sat, data_unsat, data_24s,
+                          year,
+                          path,
+                          track,
+                          usedLogics,
+                          time)
+        elif track == OPT_TRACK_PARALLEL:
+            md_write_file(division,
+                          n_benchmarks,
+                          empty, data_par, data_sat, data_unsat, data_24s,
+                          year,
+                          path,
+                          track,
+                          usedLogics,
+                          time)
 
 # Get score details for competition-wide biggest lead recognition .md file
 # for a division and score.
@@ -1651,7 +1685,8 @@ def to_md_files_comp_biggest_lead(results_seq,
             "parallel:\n",
             md_comp_get_div_biggest_lead(bl_par.get(year, ''), expdivs)))
 
-        if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
+        if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC and \
+                track != OPT_TRACK_CLOUD and track != OPT_TRACK_PARALLEL:
             winner_seq_str = \
                     md_comp_get_nonexperimental_winner(bl_seq, \
                     year, expdivs)
@@ -1714,7 +1749,7 @@ def md_comp_get_div_largest_contribution(lc, expdivs = []):
                       ((div_lc['division'] in expdivs) and "true") or "false"))
     return "\n".join(str_lc)
 
-# Generate results .md file for competition-wide biggest lead contribution for
+# Generate results .md file for competition-wide largest contribution for
 # a track.
 #
 # results_seq  : The data set for the sequential score.
@@ -1777,7 +1812,8 @@ def to_md_files_comp_largest_contribution(results_seq,
                 md_comp_get_div_largest_contribution(\
                         lc_par.get(year, ''), expdivs)))
 
-        if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
+        if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC and \
+                track != OPT_TRACK_CLOUD and track != OPT_TRACK_PARALLEL:
 
             seq_winner_str = \
                     md_comp_get_nonexperimental_winner(lc_seq, \
@@ -1791,7 +1827,8 @@ def to_md_files_comp_largest_contribution(results_seq,
                     md_comp_get_div_largest_contribution(\
                     lc_seq.get(year, ''), expdivs)))
 
-        if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+        if track in (OPT_TRACK_SQ, OPT_TRACK_CHALL_SQ, OPT_TRACK_CLOUD,
+                OPT_TRACK_PARALLEL):
             winner_sat_str = \
                     md_comp_get_nonexperimental_winner(lc_sat, \
                     year, expdivs)
@@ -1838,10 +1875,12 @@ def to_md_files_comp_largest_contribution(results_seq,
 def to_md_files_comp_summary(year, path, track):
     global g_tracks, g_exts, g_args
     scores = []
-    if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC:
+    if track != OPT_TRACK_INC and track != OPT_TRACK_CHALL_INC and \
+            track != OPT_TRACK_CLOUD and track != OPT_TRACK_PARALLEL:
         scores.append("sequential")
     scores.append("parallel")
-    if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ:
+    if track == OPT_TRACK_SQ or track == OPT_TRACK_CHALL_SQ or \
+            track == OPT_TRACK_CLOUD or track == OPT_TRACK_PARALLEL:
         scores.append("sat")
         scores.append("unsat")
         scores.append("twentyfour")
@@ -2046,7 +2085,8 @@ def parse_args():
                         default=None,
                         choices=[OPT_TRACK_SQ, OPT_TRACK_INC, OPT_TRACK_UC,
                                  OPT_TRACK_MV, OPT_TRACK_CHALL_SQ,
-                                 OPT_TRACK_CHALL_INC],
+                                 OPT_TRACK_CHALL_INC, OPT_TRACK_CLOUD,
+                                 OPT_TRACK_PARALLEL],
                         help="A string identifying the competition track")
     gen_md.add_argument("--expdivs",
                         metavar="expdiv[,expdiv...]",
