@@ -1,0 +1,11 @@
+solver id,solver name
+10,cubeandconquer
+11,cvc5gg
+11,cvc5ggparallel
+12,par
+12,parallelpar
+13,portfolio
+14,stp
+33458,vampirecloud
+33458,vampireparallel
+15,stpcloudparallel
