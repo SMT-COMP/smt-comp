@@ -1,0 +1,67 @@
+* cvc5
+
+Arith (Seq, Par, Sat, 24s),
+Bitvec (All),
+Equality+LinearArith (All),
+Equality+MachineArith (All),
+Equality+NonLinearArith (Unsat),
+Equality (Unsat),
+FPArith (All),
+QF_Equality+LinearArith (Unsat),
+QF_Equality+NonLinearArith (All),
+QF_Equality (Seq, Par, Sat, Unsat),
+QF_FPArith (All),
+QF_LinearIntArith (Seq, Par, Sat, Unsat),
+QF_LinearRealArith (Unsat),
+QF_NonLinearIntArith (Seq, Par, Sat),
+QF_NonLinearRealArith (All),
+QF_Strings(All)
+
+* Yices2
+
+QF_Bitvec (Unsat),
+QF_Equality (24s),
+QF_LinearIntArith (24s),
+QF_LinearRealArith (Seq, Par, Sat, 24s),
+QF_NonLinearIntArith (Unsat, 24s)
+
+* Vampire
+
+Arith (Unsat),
+Equality+NonLinearArith (Seq, 24s),
+Equality (Seq, Par, Sat, 24s)
+
+* Bitwuzla
+
+QF_Bitvec (Seq, Par, Sat, 24s),
+QF_Equality+Bitvec (All),
+
+* SMTInterpol
+
+QF_Equality+LinearArith (Seq, Par, Sat, 24s),
+
+* iProver
+
+Equality+NonLinearArith (Par)
+
+* UltimateEliminator+MathSAT
+
+Equality+NonLinearArith (Sat)
+
+* Totals
+
+| Solver                     | Total |   % | Seq |   % |
+|----------------------------+-------+-----+-----+-----|
+| cvc5                       |    59 |  66 |  12 |  67 |
+| Yices2                     |     9 |  10 |   1 |   6 |
+| Bitwuzla                   |     9 |  10 |   2 |  11 |
+| Vampire                    |     7 |   8 |   2 |  11 |
+| SMTInterpol                |     4 |   4 |   1 |   6 |
+| UltimateEliminator+MathSAT |     1 |   1 |   0 |   0 |
+| iProver                    |     1 |   1 |   0 |   0 |
+|----------------------------+-------+-----+-----+-----|
+| Total                      |    90 | 100 |  18 | 100 |
+|----------------------------+-------+-----+-----+-----|
+#+TBLFM: $3=round($2/.9,0)::$5=round($4/.18,0)::@>$2=vsum(@2..@-1)::@>$4=vsum(@2..@-1)
+
+(+ (* 5 8) 4 1 1 1 4 4 1 3 )
