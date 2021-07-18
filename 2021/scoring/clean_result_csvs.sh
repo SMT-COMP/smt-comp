@@ -28,7 +28,12 @@ for i in inc mv sq uc; do
         FILTER="| grep -v -e ',post-processor error,' -e 'run script error'"
     fi
     if [ "$i" == "sq" ]; then
+        # Z3str4 - Final was retracted
         FILTER="| csvgrep -i -c 'solver id' -m 33746"
+    fi
+    if [ "$i" == "inc" ]; then
+        # QF_Equality+Bitvec+Arith is non-competitive
+        FILTER="| grep -v -E -e '/QF_A?UFBV[LN]IA/'"
     fi
 
     echo $PROCESS_CSV -x ${EXCLUDED} ${DECISION} $RESULT_DIR/raw-results-$i.csv
