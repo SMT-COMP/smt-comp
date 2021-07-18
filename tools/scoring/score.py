@@ -1401,9 +1401,13 @@ def md_write_file(division,
     if g_args.divisions_map and not division in allLogics:
       assert usedLogics
       allLogicsStr = ""
-      for logic in sorted(usedLogics):
-        allLogicsStr += "\n- %s" % (logic)
-
+      # sort by logic
+      usedlogics = sorted(usedLogics.items(), key = lambda x: x[0])
+      first = True
+      for logic, nBench in usedLogics.items():
+        allLogicsStr += "\n" + ("- " if first else "  ")
+        first = False
+        allLogicsStr += "%s: %s" % (logic, nBench)
       str_div += "logics:%s\n" % allLogicsStr
 
     # winners
@@ -1500,13 +1504,14 @@ def to_md_files(results_seq,
         # track string
         track_str = ""
         ext_str = ".md"
-        usedLogics = []
+        usedLogics = {}
         if g_args.divisions_map and not division in allLogics:
           tmpDf = results_seq.reset_index()
           divLogics = divisionInfo[g_tracks[track]][division]
           for logic in divLogics:
-            if len(tmpDf[tmpDf['division'] == logic] ) > 0:
-             usedLogics.append(logic)
+            logicDf = tmpDf[tmpDf['division'] == logic]
+            if len(logicDf) > 0:
+             usedLogics[logic] = logicDf['division_size'].iloc[0]
         if track == OPT_TRACK_SQ:
             md_write_file(division,
                           n_benchmarks,
