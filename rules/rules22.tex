@@ -30,6 +30,7 @@
 \newcommand{\challtrack}{Industry-Challenge Track\xspace}
 \newcommand{\paralleltrack}{Parallel Track\xspace}
 \newcommand{\cloudtrack}{Cloud Track\xspace}
+\newcommand{\prooftrack}{Proof Exhibition Track\xspace}
 
 \newcommand{\rationale}[1]{\hskip .5em{\textit{Rationale:} #1}\xspace}
 
@@ -144,7 +145,7 @@ previous
 competitions~(\cite{SMTCOMP-JAR,SMTCOMP-FMSD,BDOS08,SMTCOMP-2008,CDW14,SMTCOMP-2012,CSW15}).
 
 SMT-COMP~2022 is part of the SMT Workshop~2022
-(\url{http://smt-workshop.cs.uiowa.edu/2022/}) \hb{check},
+(\url{http://smt-workshop.cs.uiowa.edu/2022/}),
 which is affiliated with IJCAR~2022 (\url{https://easychair.org/smart-program/IJCAR2022/}).
 The SMT Workshop will include a block of time to present the results of the
 competition.
@@ -154,17 +155,20 @@ benchmarks and new or improved solvers to raise the level of
 competition and advance the state of the art in automated SMT problem
 solving.
 
-SMT-COMP 2022 will have five \hb{check} tracks: the \maintrack (before 2019: Main Track),
-the \inctrack (before 2019: Application Track), the \ucoretrack, and the
-\mvaltrack.  In addition there will be two experimental tracks sponsored
-by AWS: the \paralleltrack{} and the \cloudtrack{}.
+SMT-COMP 2022 will have seven tracks: the \maintrack (before 2019: Main Track),
+the \inctrack (before 2019: Application Track), the \ucoretrack, the \mvaltrack,
+the \paralleltrack{} and the \cloudtrack{} (both sponsered by Amazon Web
+Services), and an experimental \prooftrack{} focused on a qualitative evaluation
+of different proof formats, proof checkers and proof-producing solvers.
 %
 Within each track there are multiple divisions, where each division
 uses benchmarks from a specific group of SMT-LIB logics.
-We will recognize winners as measured by number of benchmarks solved
-(taking into account the weighting detailed in
-Section~\ref{sec:scoring}); we will also recognize solvers based on
-additional criteria.
+%
+We will recognize winners in all tracks but the \prooftrack{}.
+%
+They will be determined by the number of benchmarks solved (taking into account
+the weighting detailed in Section~\ref{sec:scoring}); we will also recognize
+solvers based on additional criteria.
 
 The rest of this document, revised from the previous
 version,\footnote{Earlier versions of this document include
@@ -176,208 +180,62 @@ version,\footnote{Earlier versions of this document include
 SMT-COMP~2022.
 %
 
-\hb{change more from here}
 As in previous years, we have revised the rules slightly.  Some rule
-changes in 2021 are designed to not overly punish solvers producing
-syntactically wrong output, by treating those outputs as unknown and
-not as unsoundness.  Moreover, we added more divisions to the model
-validation track.
+changes in 2022 are designed to improve how logics are organized into
+divisions. We have also added more divisions to the \mvaltrack and have defined a
+new \prooftrack.
 %
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
-  \item {\bf Divisions now may contain more than one logic.} Previously, every
-  division was comprised of a single logic. There are currently over 60 logics
-  in SMT-LIB, which makes a short summary of the results impossible.  On the
-  other hand the competition-wide scoring does a comparison between solvers that
-  cannot be sensibly compared as they support completely disjoint logics. To get
-  a better overview, this year divisions will combine related logics, thus
-  reducing the number of divisions and obtaining more manageable and meaningful
-  results.  Rather than logics, solvers will declare the divisions they
-  enter. They will be ranked by the number of benchmarks they solve across all
-  logics in the divisions entered.
-  \begin{itemize}
-    \item Quantifier-free divisions:
-    \begin{itemize}
-      \item QF\_Equality\\
-Logics: QF\_UF, QF\_AX, QF\_DT, QF\_UFDT
-\item QF\_Equality+LinearArith\\
-Logics: QF\_ALIA, QF\_AUFLIA, QF\_UFLIA, QF\_UFLRA, QF\_UFIDL
-\item QF\_Equality+NonLinearArith\\
-Logics: QF\_UFNRA, QF\_UFNIA, QF\_ANIA, QF\_AUFNIA
-\item QF\_Equality+Bitvec\\
-Logics: QF\_ABV, QF\_UFBV, QF\_AUFBV
-\item QF\_Equality+Bitvec+Arith\\
-Logics: QF\_AUFBVLIA, QF\_AUFBVNIA, QF\_UFBVLIA
-\item QF\_LinearIntArith\\
-Logics: QF\_LIA, QF\_LIRA, QF\_IDL
-\item QF\_LinearRealArith\\
-Logics: QF\_LRA, QF\_RDL
-\item QF\_Bitvec\\
-Logics: QF\_BV
-\item QF\_FPArith\\
-Logics: QF\_FP, QF\_UFFP, QF\_FPLRA, QF\_BVFP, QF\_ABVFP, QF\_AUFBVFP, QF\_BVFPLRA, QF\_ABVFPLRA
-\item QF\_NonLinearIntArith\\
-Logics: QF\_NIA, QF\_NIRA
-\item QF\_NonLinearRealArith\\
-Logics: QF\_NRA
-\item QF\_Strings\\
-Logics: QF\_S, QF\_SLIA, QF\_SNIA
+  \item {\bf Changes in divisions.} Last year we changed
+  divisions to be composed of one or more related logics.
+  %
+  This year we will keep this organization but we will separate logics into
+  divisions slightly differently: we will have a QF\_Datatypes division with the
+  logics QF\_DT, QF\_UFDT and the QF\_Equality division now only contains the
+  QF\_UF and QF\_AX logics.
 
-    \end{itemize}
-    \item Divisions with quantifiers:
-    \begin{itemize}
-      \item Equality\\
-Logics: UF, UFDT
-\item Equality+LinearArith\\
-Logics: \sloppy ALIA, AUFLIA, UFLIA, UFIDL, AUFLIRA, UFLRA, UFDTLIA, UFDTLIRA, AUFDTLIA, AUFDTLIRA
-\item Equality+MachineArith\\
-Logics: AUFFPDTLIRA, UFFPDTLIRA, UFFPDTNIRA, ABVFP, ABVFPLRA, AUFBV, AUFBVFP,
-AUFBVDTLIA, UFBV, UFBVFP, UFBVLIA
-\item Equality+NonLinearArith\\
-Logics: ANIA, AUFDTNIRA, UFDTNIA, UFDTNIRA, AUFNIA, AUFNIRA, UFNIA, UFNRA
-\item Arith\\
-Logics: LRA, LIA, NIA, NRA
-\item Bitvec\\
-Logics: BV
-\item FPArith\\
-Logics: BVFP, FP, BVFPLRA, FPLRA
-    \end{itemize}
-  \end{itemize}
+  \rationale{The feedback from the participants in last year's competition was
+    that datatypes were too dissimilar from QF\_UF and QF\_AX to be organized in
+    the same division.}
 
-  \rationale{We are aware that any partitioning of logics into divisions can be
-    disadvantageous to some solvers that support some but not all logics in the
-    division. We believe however that to a lesser extent this situation is already
-    common, thinking of different features among problems in the same logic. So in
-    our view the disadvantages are offset by the benefit of having a better
-    presentation of the results. Regardless, results per logic will still be
-    accessible within the results page of a given division, similarly to how one can
-    now see the different scores other than sequential for a given logic.
+  \item {\bf Logics can be non-competitive in competitive divisions.} Last year
+  we considered every logic within a division to competitive unless the division
+  as whole was non-competitive. This year if a logic is non-competitive within a
+  division (i.e., only one competitive solver enrolled in it), it will not be
+  ran.
 
-    The divisions above were defined according to the following rationale:
-
-    \begin{itemize}
-      \item Similar logics that do not standout by themselves were combined.
-      \item Integer and real, as well as bit-vector and floating-point,
-      arithmetics are separated
-      \begin{itemize}
-        \item Note that the ``Arith'' division goes against this. However, its
-        composing logics do not standout out by themselves as currently
-        represented in SMT-LIB.
-      \end{itemize}
-      \item Arrays and datatypes are handled in a similar enough way to UF to be combined with it.
-        \item Floating-point logics are combined since generally this is the dominating component for any logic contaning FP.
-    \end{itemize}
+  \rationale{We believe the previous setup could benefit too much a solver that
+    supports more logics that its competitor.
+    %
+    In particular there was a whose winner was defined by the benchmarks of a
+    non-competitive logic, which we believe is not ideal.
+    %
+    Note that the incentive for solvers to support more logics continues since
+    as soon as there is more than one solver supporting a logic it will be
+    competitive and the solver that does not support it will be disadvantaged.
   }
 
-  \item {\bf The option \akey{:print-success} is explicitly set to
-    true or false.}  Previous competitions set this option to
-    \akey{true} for the incremental track.  In addition, this
-    competition will set the option to \akey{false} for all other
-    tracks.
-    \rationale{According to the standard the default value of
-      \akey{:print-success} is true.  So a conforming solver would
-      unnecessarily print \akey{success} after each command that needs
-      to be stored and skipped by the post-processors.  Additionally,
-      solvers can use this option as indication whether incremental
-      checking is desired.}
-
-    We were asked to set the \akey{:incremental} option to true for
-    the incremental track.  However this is problematic, because it is
-    not a standard option and solvers may not support it.
-
-  \item {\bf Error result is for unsoundness, only.}
-    Previous competitions marked malformed output in the unsat core and
-    the model validation track as errors.  These errors basically disqualify
-    a solver that outputs a slightly malformed model.  This year the error
-    result is only given for unsat cores that are not unsatisfiable or models
-    that don't satisfy the formula. Of courses, answering sat in unsat
-    core track or unsat in model validation track is still considered an
-    error.
-    \rationale{An error result is very punishing and should be reserved
-      for problems that cannot be easily detected.  Giving a syntactically
-      wrong output, e.g. an error message, should just be considered as
-      not solving the task, not as providing an unsound result.}
-
-  \item {\bf The organizers may manually check unsound results.}
-    If solvers disagree on a result, the organizers reserve the right
-    to play the judge and determine which solver is unsound.  The unsound
-    solver is punished, the sound solver gets the point.
-    Previous competitions would take benchmark out of the scoring.
-    \rationale{Often, it can be decided which solver is unsound, even when
-      the benchmark has no status.  For example, when a solver was unsound in
-      other divisions and the authors submitted a fixed version, or because
-      a solver returning sat can be asked for a model.  In that case it would
-      be bad if solver that is known to be unsound
-      won the competition, just because the benchmarks it was unsound
-      on had no status.}
-
-  \item {\bf Punishment of unsound results is adapted to fix sat/unsat scores.}
-
-    Previously an unsound response for a benchmark did punish the
-    score corresponding to the benchmark status.  We fix it to count
-    errors to the score that correspond to the solver output, not the
-    benchmark status.
-    \rationale{If a solver returns \texttt{unsat} for a
-      satisfiable benchmark, all other \texttt{unsat} responses of the
-      solver are no longer trustworthy.  So it is the unsat score of
-      the solver that must be punished.  The \texttt{sat} responses
-      may still be trustworthy.  In the extreme case, a solver that
-      always return \texttt{unsat} would a high error score for the
-      unsat category under the new rules, and would get no points at
-      all for the sat category.}
-
-  \item {\bf Benchmark Selection.}
-      Apart from the \cloudtrack{} and the \paralleltrack{}, this year we
-        increase the percentage of the benchmarks that are run in the
-        competition back to 50 \%.
-    \rationale{We feel that increasing the number of benchmarks is
-    manageable and 50 \% is a more round number than 40 \%.  The
-    \cloudtrack{} and \paralleltrack{} need to be run on a more
-    restricted set because of the amount of parallel resources we
-    provide for the tracks.}
-
-  \item {\bf Stricter checks for output in single query track.}
-    It is now checked that the output in the single query track starts with
-    sat or unsat.  Error messages before such an output is no longer ignored
-    and are treated as an \texttt{unknown} result.
-    {\bf Note:} Solver authors should make sure not to print any debugging
-    output.  This includes debugging output on stderr, because the
-    post-processors cannot distinguish between stderr and stdout.
-
-  \rationale{A solver that does not support the full logic may
-    report errors and then continue ignoring the failed assertion.  This
-    way, it may be flagged as unsound under the old rules, even though it
-    clearly indicated the error.}
-
   \item {\bf \mvaltrack.}  \emergencystretch.5cm Last year's competition introduced the experimental
-  divisions QF\_IDL, QF\_RDL, QF\_LIA, QF\_LRA, QF\_LIRA in the model validation
-  track.  This year, the divisions containing these logics will no longer be
-  experimental.  In addition, we will add this year new experimental divisions
-  QF\_Equality (only with QF\_UF benchmarks), QF\_Equality+LinearArith (only with
+  divisions QF\_Equality (only with QF\_UF benchmarks), QF\_Equality+LinearArith (only with
   QF\_UFIDL, QF\_UFLIA, and QF\_UFLRA benchmarks), and QF\_Equality+Bitvec (only with
   QF\_UFBV benchmarks).
+  %
+  This year these divisions will no longer be experimental.
+  %
+  In addition, we add this year the new experimental division QF\_FPArith
+  (excluding the logics QF\_ABVFP, QF\_AUFBVFP, and QF\_ABVFPLRA).
 
-  \rationale{There were only small issues with last year's divisions, so there
-    is no reason to keep them experimental. For the new divisions, as before,
-    given the inconsistencies across different model producing solvers, we
-    proceed in an experimental fashion to push for model standardization. Since
-    both arrays and datatypes add further complications on top of uninterpreted
-    functions, we exclude benchmarks containing those.}
+  \rationale{Last year's divisions ran successfully, so there
+    is no reason to keep them experimental.
+    %
+    For the new divisions, as before, given the inconsistencies across different
+    model producing solvers, we proceed in an experimental fashion to push for
+    model standardization. We exclude logics containing arrays since their model
+    production adds further complications which we only intend to tackle in the
+    future.}
 
-  \item {\bf Model syntax in \mvaltrack.}  The syntax used in the
-    model validation track did not conform to the SMT-LIB standard.
-    The difference is that the syntax used previously included an
-    additional keyword \texttt{model} after the opening parenthesis in
-    the output.  This year we support both the SMT-LIB syntax and the
-    old syntax.  We urge solver writers to upgrade their solver to use
-    the new syntax.
-
-    We added new tracks for UF logics. According to the SMT-LIB standard,
-    model values of uninterpreted sorts should use the syntax
-    \texttt{(as @name Sort)}.
-    In particular the model validator needs to know the sort of the model
-    value.  Furthermore, it is implicitly assumed that model values
-    differ if they have different names.
+  \item {\bf \prooftrack.}  \todo{after we iron it out.}
 
 \end{itemize}
 
@@ -1024,6 +882,9 @@ estimation.
 This track will use a wall-clock time limit of 20 minutes per
 solver/benchmark pair.
 
+\subsection{\prooftrack}
+
+\todo{}
 
 \section{Benchmarks and Problem Divisions}
 
