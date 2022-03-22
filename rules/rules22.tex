@@ -494,16 +494,10 @@ file is a text file containing a sequence of SMT-LIB commands that
 satisfies the following \emph{requirements}:
 %
 \begin{itemize}
-  \item \bkey{(set-logic ...)}\\
-    A (single) \akey{set-logic} command is the \emph{first} command after
-    any \akey{set-option} commands.
-  \item \bkey{(set-info ...)}\\
-    A benchmark file may contain any number of \akey{set-info} commands.
   \item
     \bkey{(set-option ...)}
+    The input contains the following \akey{set-option} commands.
     \begin{enumerate}[label=(\alph*)]
-      \vspace{-1ex}
-    \item The Input may contain the following \akey{set-option} commands.
     \item In the \emph{\inctrack}, the \akey{:print-success} option
       must not be disabled.  The trace executor will send an initial
       \akey{(set-option :print-success true)} command to the solver.
@@ -514,7 +508,17 @@ satisfies the following \emph{requirements}:
     \item In the \emph{\ucoretrack}, a benchmark file contains a
       single \akey{(set-option :produce-unsat-cores true)} command as
       the second command.
+    \item In the \emph{\prooftrack}, a benchmark file contains a
+      single \akey{(set-option :produce-proofs true)} command as
+      the second command.
     \end{enumerate}
+  \item \bkey{(set-logic ...)}\\
+    A (single) \akey{set-logic} command is the \emph{first} command after
+    any \akey{set-option} commands.
+  \item \bkey{(set-info ...)}\\
+    A benchmark file may contain any number of \akey{set-info} commands.
+    During the competition all \akey{set-info} commands are removed from
+    the benchmark by the scrambler.
   \item \bkey{(declare-sort ...)}\\
     A benchmark file may contain any number of \akey{declare-sort} and
     \akey{define-sort} commands.  All sorts declared or defined with these
@@ -538,25 +542,29 @@ satisfies the following \emph{requirements}:
         used.
       \item In the \emph{\ucoretrack}, top-level assertions may be named.
     \end{enumerate}
-    \item
-      \bkey{(check-sat)}
-      \begin{enumerate}[label=(\alph*)]
-        \vspace{-1ex}
-        \item In \emph{all} tracks \emph{except} the \inctrack, there is
-          \emph{exactly one} \akey{check-sat} command.
-        \item In the \emph{\inctrack}, there are one or more
-        \akey{check-sat} commands.  There may also be zero or more
-        \akey{(push 1)} commands, and zero or more \akey{(pop 1)} commands,
-        consistent with the use of those commands in the SMT-LIB standard.
+  \item
+    \bkey{(check-sat)}
+    \begin{enumerate}[label=(\alph*)]
+      \vspace{-1ex}
+    \item In \emph{all} tracks \emph{except} the \inctrack, there is
+      \emph{exactly one} \akey{check-sat} command.
+    \item In the \emph{\inctrack}, there are one or more
+      \akey{check-sat} commands.  There may also be zero or more
+      \akey{(push 1)} commands, and zero or more \akey{(pop 1)} commands,
+      consistent with the use of those commands in the SMT-LIB standard.
     \end{enumerate}
-    \item \bkey{(get-unsat-core)}\\
-      In the \emph{\ucoretrack}, the \akey{check-sat} command (which is
-      always issued in an unsatisfiable context) is followed by a single
-      \akey{get-unsat-core} command.
-    \item \bkey{(get-model)}\\
-      In the \emph{\mvaltrack}, the \akey{check-sat} command (which is
-      always issued in a satisfiable context) is followed by a single
+  \item \bkey{(get-unsat-core)}\\
+    In the \emph{\ucoretrack}, the \akey{check-sat} command (which is
+    always issued in an unsatisfiable context) is followed by a single
+    \akey{get-unsat-core} command.
+  \item \bkey{(get-model)}\\
+    In the \emph{\mvaltrack}, the \akey{check-sat} command (which is
+    always issued in a satisfiable context) is followed by a single
     \akey{get-model} command.
+  \item \bkey{(get-proof)}\\
+    In the \emph{\prooftrack}, the \akey{check-sat} command (which is
+    always issued in an unsatisfiable context) is followed by a single
+    \akey{get-proof} command.
   \item \bkey{(exit)}\\
     It may \emph{optionally} contain an \akey{exit} command as its
     last command.  In the \emph{\inctrack}, this command must not be
