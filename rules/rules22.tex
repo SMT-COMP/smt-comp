@@ -732,8 +732,8 @@ unsatisfiable cores.  Performance of solvers will be measured by correctness
 and size of the unsatisfiable core they provide.
 
 \header{Benchmark Selection.}
-This track will run on a selection of non-incremental benchmarks with status
-\texttt{unsat} (as described on page~\pageref{benchmark-selection}), modified
+This track will run on a selection of non-incremental \emph{unsat} benchmarks
+(as described on page~\pageref{benchmark-selection}), modified
 to use named top-level assertions of the form \akey{(assert (! t :named f ))}.
 
 
@@ -796,7 +796,7 @@ This year all divisions with UF logics (with uninterpreted functions) are
 experimental divisions.
 %
 The track will run on a
-selection of non-incremental benchmarks with status \texttt{sat} from these
+selection of non-incremental \emph{sat} benchmarks from these
 logics (as described on page~\pageref{benchmark-selection}).
 %
 We exclude from the selection all benchmarks containing arrays or datatypes.
@@ -883,8 +883,57 @@ This track will use a wall-clock time limit of 20 minutes per
 solver/benchmark pair.
 
 \subsection{\prooftrack}
+\label{sec:exec:proof}
 
-\todo{}
+In the \prooftrack, teams can submit proof-producing solvers together
+with a proof checker for their proof format.  We will compile and
+present the results, as well as assemble a panel of non-organizer
+experts to do a qualitative assessment for each proof-producing
+solver, proof format, and proof checker.
+
+\header{Benchmark Selection.}
+This track will run on a selection of non-incremental \emph{unsat} benchmarks
+(as described on page~\pageref{benchmark-selection}).
+
+\header{Input/Output.}
+The SMT-LIB language provides a command \akey{(get-proof)}, which asks
+a solver to output the proof after a \akey{check-sat}
+command returns \texttt{unsat}.
+This proof must be an s-expression according to the SMT-LIB standard, but
+the format is not specified further.
+%
+Solvers must respond to each command in the benchmark script with the
+answers defined in the SMT-LIB format specification.  In particular,
+solvers that respond \texttt{unknown} to the \akey{check-sat} command
+must respond with an error to the following \akey{get-proof}
+command.
+
+The output of the solver is then fed to a proof checker, which also
+needs be provided by the solver authors.  The input to the proof
+checker is the whole output of the solver including the \texttt{unsat}
+reply to the \akey{check-sat} command.  The proof checker should
+output either \texttt{valid} or \texttt{invalid} to indicate that the
+proof was valid.  \todo{Further statistics?}
+
+
+\header{Result.}
+The result of a solver is considered \emph{erroneous} if (i) the
+response to the \akey{check-sat} command is \texttt{sat}, (ii) the
+proof checker returns \akey{invalid} to the given proof.  Because the
+\prooftrack is non-competitive and because there is no common
+definition of a valid proof, there will be no score computed for this
+track.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per solver/benchmark
+pair. This time limit includes the time for proof checking.
+
+\header{Post-Processor.}
+\todo{This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/process}}
+as a post-processor
+to validate and accumulate the results.}
+
 
 \section{Benchmarks and Problem Divisions}
 
@@ -912,11 +961,17 @@ use a subset of all \emph{incremental} benchmarks.
 % The \challtrack will use all incremental and non-incremental benchmarks
 % dedicated to this track by their submitters.
 %
-The \ucoretrack will use a selection of non-incremental benchmarks with status\todo{update}
-\texttt{unsat} and more than one top-level assertion, modified to use named
+The \ucoretrack will use a selection of non-incremental
+\emph{unsat} benchmarks
+and more than one top-level assertion, modified to use named
 top-level assertions.  The \mvaltrack will use a selection of non-incremental
 benchmarks with status \texttt{sat} from logics QF\_BV, QF\_IDL, QF\_RDL,
 QF\_LIA, QF\_LRA, QF\_LIRA, QF\_UF, QF\_UFBV, QF\_UFIDL, QF\_UFLIA, QF\_UFLRA.
+The \prooftrack will use a selection of non-incremental
+\emph{unsat} benchmarks.
+To determine whether a benchmark is sat or unsat, a combination of
+the benchmark's status and the result of the \maintrack{} will be used.
+
 
 \header{New benchmarks.}
 The deadline for submission of new benchmarks was {\bf March~15, 2021}
@@ -973,6 +1028,19 @@ the following selection process will be used.
   \end{itemize}
 
 \item \todo{excluding and including benchmarks based on statuses and runs}
+  For the \prooftrack and \ucoretrack, all benchmark with status
+  \texttt{sat} are removed.  We further remove benchmarks with status
+  \texttt{unknown} for which no solver reported them to be
+  \texttt{unsat}.
+  %
+  For the \mvaltrack,  all benchmark with status \texttt{unsat} are removed,
+  as well as benchmarks with status
+  \texttt{unknown} for which no solver reported them to be
+  \texttt{sat}.
+
+  In case of a dispute (some solver marks a benchmark as \texttt{sat}
+  and some other solver as \texttt{unsat}), the benchmark may be retained in
+  the selection.
 
 \item \emph{Cap the number of instances in a division.}
   The number of benchmarks in a division based on the size of the
