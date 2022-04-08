@@ -235,7 +235,27 @@ The principal changes from the previous competition rules are the following:
     production adds further complications which we only intend to tackle in the
     future.}
 
-  \item {\bf \prooftrack.}  \todo{after we iron it out.}
+  \item {\bf \prooftrack.}  This track will be introduced this year.
+  %
+  Teams can submit proof-producing solvers together with proof checkers for
+  their proof formats. The checker and format do not need to be from the same
+  team as the solver.
+  %
+  We will compile and present the results, as well as assemble a panel of
+  non-organizer experts to do a qualitative assessment for each proof-producing
+  solver, proof format, and proof checker.
+  %
+  The solver, proof format and checker should be described in a system
+  description (total of 4 pages rather than 2).
+
+  \rationale{Given the many competing visions on how SMT proofs or a proof
+    competition should look like, we decided to be less prescriptive and more
+    descriptive for how SMT-COMP will approach proofs.
+    %
+    We will host a ``proof exhibition'' rather than a ``proof competition''
+    track. The format would be with teams submitting both a proof-producing SMT
+    solver and a proof checker for its proofs.
+ }
 
 \end{itemize}
 
@@ -916,13 +936,17 @@ solvers that respond \texttt{unknown} to the \akey{check-sat} command
 must respond with an error to the following \akey{get-proof}
 command.
 
-The output of the solver is then fed to a proof checker, which also
-needs be provided by the solver authors.  The input to the proof
-checker is the whole output of the solver including the \texttt{unsat}
-reply to the \akey{check-sat} command.  The proof checker should
-output either \texttt{valid} or \texttt{invalid} to indicate that the
-proof was valid.  \todo{Further statistics?}
-
+The output of the solver is then fed to a proof checker, which also needs to be
+provided by the solver authors (but it does not need to authored by them).
+%
+The input to the proof checker is the whole output of the solver including the
+\texttt{unsat} reply to the \akey{check-sat} command.
+%
+The proof checker's output should start with a line containing either
+\texttt{valid} or \texttt{invalid} to indicate that the proof was valid.
+%
+The rest of the output can be arbitrary (for example the proof checker may print
+out statistics).
 
 \header{Result.}
 The result of a solver is considered \emph{erroneous} if (i) the
@@ -982,8 +1006,7 @@ the benchmark's status and the result of the \maintrack{} will be used.
 
 
 \header{New benchmarks.}
-The deadline for submission of new benchmarks was {\bf March~15, 2021}
-\hb{update when we have date}.
+The deadline for submission of new benchmarks was {\bf March~15, 2021}.
 %
 The organizers, in collaboration with the SMT-LIB maintainers, will be
 checking and curating these until {\bf June~18, 2022}.
@@ -1035,15 +1058,15 @@ the following selection process will be used.
     \item \emph{\ucoretrack.} All benchmarks with only a single assertion.
   \end{itemize}
 
-\item \todo{excluding and including benchmarks based on statuses and runs}
-  For the \prooftrack and \ucoretrack, all benchmark with status
+\item
+  For the \prooftrack and \ucoretrack, all benchmarks with status
   \texttt{sat} are removed.  We further remove benchmarks with status
-  \texttt{unknown} for which no solver reported them to be
+  \texttt{unknown} for which no sound solver reported them to be
   \texttt{unsat}.
   %
-  For the \mvaltrack,  all benchmark with status \texttt{unsat} are removed,
+  For the \mvaltrack,  all benchmarks with status \texttt{unsat} are removed,
   as well as benchmarks with status
-  \texttt{unknown} for which no solver reported them to be
+  \texttt{unknown} for which no sound solver reported them to be
   \texttt{sat}.
 
   In case of a dispute (some solver marks a benchmark as \texttt{sat}
@@ -1514,7 +1537,7 @@ is providing essential StarExec support.
 \header{Disclosure.}
 %
 Haniel Barbosa is part of the developing teams of the SMT solvers
-cvc5~\cite{cvc4-smtcomp18} \hb{update reference} and veriT~\cite{verit}.
+cvc5~\cite{cvc5} and veriT~\cite{verit}.
 %
 Fran\c{c}ois is part of the developing team of the SMT solver COLIBRI~\cite{colibri}.
 %
