@@ -923,45 +923,77 @@ solver, proof format, and proof checker.
 This track will run on a selection of non-incremental \emph{unsat} benchmarks
 (as described on page~\pageref{benchmark-selection}).
 
-\header{Input/Output.}
-The SMT-LIB language provides a command \akey{(get-proof)}, which asks
-a solver to output the proof after a \akey{check-sat}
-command returns \texttt{unsat}.
-This proof must be an s-expression according to the SMT-LIB standard, but
-the format is not specified further.
-%
-Solvers must respond to each command in the benchmark script with the
-answers defined in the SMT-LIB format specification.  In particular,
-solvers that respond \texttt{unknown} to the \akey{check-sat} command
-must respond with an error to the following \akey{get-proof}
-command.
+\header{Input/Output Solver.}
+For the \prooftrack, solver authors should provide two new scripts
+with their solver.  The first script
+\texttt{starexec\_solver\_default} takes the name of the benchmark file as
+single argument and should run the solver on the benchmark.
+As describe in Section~\ref{sec:logistics}, the benchmark
+contains the commands \akey{(check-sat)} and \akey{(get-proof)}.
+The solver must output the answers to both of these commands to stdout.
+Output to stderr is ignored by the toolchain.
 
-The output of the solver is then fed to a proof checker, which also needs to be
-provided by the solver authors (but it does not need to authored by them).
-%
-The input to the proof checker is the whole output of the solver including the
-\texttt{unsat} reply to the \akey{check-sat} command.
-%
-The proof checker's output should start with a line containing either
-\texttt{valid} or \texttt{invalid} to indicate that the proof was valid.
-%
-The rest of the output can be arbitrary (for example the proof checker may print
-out statistics).
+Solvers must respond to each command in the benchmark script with the
+answers defined in the SMT-LIB format specification.  If the solver
+outputs a proof, this proof must be an s-expression according to the
+SMT-LIB standard, but the format is not specified further.  Solvers
+that respond \texttt{unknown} to the \akey{check-sat} command should
+respond with an error to the following \akey{get-proof} command.  Note
+that the SMT-LIB conformant error result should be output to stdout.
+
+\header{Input/Output Checker.}
+The second script \texttt{starexec\_checker\_default} takes as input
+the benchmark file name as first argument and the proof output of the
+solver script as second argument.  Note that this proof output will
+usually start with the \akey{unsat} result of the \akey{(check-sat)}
+command, which the checker must either parse or skip.
+
+The checker should check the provided proof and provide the result to
+stdout.  Result printed to stderr is ignored.  The first line of the
+proof checker should be one of \akey{valid}, \akey{invalid},
+\akey{holey}, \akey{sat}, \akey{unknown}.  The answer \akey{valid}
+must only be given, if the checker made sure using the proof that the
+benchmark is unsat.  A checker that returns \akey{valid} to a
+satisfiable benchmark is deemed to be unsound.  The answer
+\akey{invalid} should be returned if the proof is errorneous or
+otherwise malformed.  If the proof is correct but skips some proof
+steps or if side-conditions for a rule are not checked by the proof
+checker, the answer should be \akey{holey}.  The answer \akey{sat}
+should be given if the solver claimed that the benchmark is
+satisfiable and \akey{unknown} should be given, if the solver answered
+\akey{unknown} or if it did not give a proof or gave an error result.
+
+After this firsts line, the proof checker can give arbitrary key/value
+pairs of the form \akey{key=value} after the results.  These will be
+collected in the final result table and can include information about
+the number of proof steps, the number of nodes in the proof, the number
+of holes, the number of different proof rules, etc.
 
 \header{Result.}
 The result of a solver is considered \emph{erroneous} if (i) the
-response to the \akey{check-sat} command is \texttt{sat}, (ii) the
-proof checker returns \akey{invalid} to the given proof.  Because the
-\prooftrack is non-competitive and because there is no common
-definition of a valid proof, there will be no score computed for this
-track.
+response to the \akey{check-sat} command is \texttt{sat} and the
+benchmark is unsat, (ii) the proof checker returns \akey{invalid} to
+the given proof.  Because the \prooftrack is non-competitive and
+because there is no common definition of a valid proof, there will be
+no score computed for this track.
+
+A proof checker is considered unsound if it returns \akey{valid} for
+an invalid proof or for a proof containing unchecked steps.  In
+particular, if a proof checker can be tricked to return \akey{valid}
+for a satisfiable benchmark, it is unsound.  Thus, a proof checker
+must also check that the formula that was proved corresponds to the
+benchmark given.  Soundness of the proof checker is a central
+criterion by which the participants will be judged.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
 pair. This time limit includes the time for proof checking.
 
-\header{Post-Processor.}
-This track will use
+\header{Wrapper and Post-Processor.}
+
+Solvers in this track will be wrapped in the competition to include the script
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/starexec_run_default}}, which calls the solver and checker script.
+The track will use
 {\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/process}}
 as a post-processor
 to validate and accumulate the results.
