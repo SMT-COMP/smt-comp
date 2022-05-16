@@ -924,11 +924,11 @@ This track will run on a selection of non-incremental \emph{unsat} benchmarks
 (as described on page~\pageref{benchmark-selection}).
 
 \header{Input/Output Solver.}
-For the \prooftrack, solver authors should provide two new scripts
+For the \prooftrack, solver authors should provide two scripts
 with their solver.  The first script
 \texttt{starexec\_solver\_default} takes the name of the benchmark file as
 single argument and should run the solver on the benchmark.
-As describe in Section~\ref{sec:logistics}, the benchmark
+As described in Section~\ref{sec:logistics}, the benchmark
 contains the commands \akey{(check-sat)} and \akey{(get-proof)}.
 The solver must output the answers to both of these commands to stdout.
 Output to stderr is ignored by the toolchain.
@@ -945,41 +945,41 @@ that the SMT-LIB conformant error result should be output to stdout.
 The second script \texttt{starexec\_checker\_default} takes as input
 the benchmark file name as first argument and the proof output of the
 solver script as second argument.  Note that this proof output will
-usually start with the \akey{unsat} result of the \akey{(check-sat)}
+usually start with the \texttt{unsat} result of the \akey{(check-sat)}
 command, which the checker must either parse or skip.
 
 The checker should check the provided proof and provide the result to
 stdout.  Result printed to stderr is ignored.  The first line of the
-proof checker should be one of \akey{valid}, \akey{invalid},
-\akey{holey}, \akey{sat}, \akey{unknown}.  The answer \akey{valid}
+proof checker should be one of \texttt{valid}, \texttt{invalid},
+\texttt{holey}, \texttt{sat}, \texttt{unknown}.  The answer \texttt{valid}
 must only be given, if the checker made sure using the proof that the
-benchmark is unsat.  A checker that returns \akey{valid} to a
+benchmark is unsat.  A checker that returns \texttt{valid} to a
 satisfiable benchmark is deemed to be unsound.  The answer
-\akey{invalid} should be returned if the proof is errorneous or
+\texttt{invalid} should be returned if the proof is errorneous or
 otherwise malformed.  If the proof is correct but skips some proof
 steps or if side-conditions for a rule are not checked by the proof
-checker, the answer should be \akey{holey}.  The answer \akey{sat}
+checker, the answer should be \texttt{holey}.  The answer \texttt{sat}
 should be given if the solver claimed that the benchmark is
-satisfiable and \akey{unknown} should be given, if the solver answered
-\akey{unknown} or if it did not give a proof or gave an error result.
+satisfiable and \texttt{unknown} should be given, if the solver answered
+\texttt{unknown} or if it did not give a proof or gave an error result.
 
-After this firsts line, the proof checker can give arbitrary key/value
-pairs of the form \akey{key=value} after the results.  These will be
-collected in the final result table and can include information about
-the number of proof steps, the number of nodes in the proof, the number
-of holes, the number of different proof rules, etc.
+After this firsts line, the proof checker can give arbitrary
+\texttt{key=value} pairs after the results.  These will
+be collected in the final result table and can include information
+about the number of proof steps, the number of nodes in the proof, the
+number of holes, the number of different proof rules, etc.
 
 \header{Result.}
 The result of a solver is considered \emph{erroneous} if (i) the
 response to the \akey{check-sat} command is \texttt{sat} and the
-benchmark is unsat, (ii) the proof checker returns \akey{invalid} to
+benchmark is unsat, (ii) the proof checker returns \texttt{invalid} to
 the given proof.  Because the \prooftrack is non-competitive and
 because there is no common definition of a valid proof, there will be
 no score computed for this track.
 
-A proof checker is considered unsound if it returns \akey{valid} for
+A proof checker is considered unsound if it returns \texttt{valid} for
 an invalid proof or for a proof containing unchecked steps.  In
-particular, if a proof checker can be tricked to return \akey{valid}
+particular, if a proof checker can be tricked to return \texttt{valid}
 for a satisfiable benchmark, it is unsound.  Thus, a proof checker
 must also check that the formula that was proved corresponds to the
 benchmark given.  Soundness of the proof checker is a central
@@ -990,7 +990,6 @@ This track will use a wall-clock time limit of 20 minutes per solver/benchmark
 pair. This time limit includes the time for proof checking.
 
 \header{Wrapper and Post-Processor.}
-
 Solvers in this track will be wrapped in the competition to include the script
 {\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/starexec_run_default}}, which calls the solver and checker script.
 The track will use
