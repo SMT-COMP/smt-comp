@@ -996,12 +996,11 @@ the given proof.
 Since the \prooftrack is non-competitive and we are not fixing a definition of a
 valid proof, there will be no score computed for this track.
 
-A proof checker is considered unsound if it returns \texttt{valid} for
-an invalid proof or for a proof containing unchecked steps.  In
-particular, if a proof checker can be tricked to return \texttt{valid}
-for a satisfiable benchmark, it is unsound.  Thus, a proof checker
-must also check that the formula that was proved corresponds to the
-benchmark given.  Soundness of the proof checker is a central
+A proof checker is unsound if it returns \texttt{valid} for an (invalid) proof
+of a satisfiable benchmark.
+%
+Thus, a proof checker must also check that the formula that was proved
+corresponds to the benchmark given.  Soundness of the proof checker is a central
 criterion by which the participants will be judged.
 
 \header{Time Limit.}
