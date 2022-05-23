@@ -930,7 +930,7 @@ with their solver.  The first script,
 a single argument and run the solver on the benchmark.
 %
 As described in Section~\ref{sec:logistics}, the benchmark
-will contains the commands \akey{(check-sat)} and \akey{(get-proof)}.
+will contain the commands \akey{(check-sat)} and \akey{(get-proof)}.
 %
 The solver must output the answers to both of these commands to stdout.
 Output to stderr is ignored by the toolchain.
@@ -945,7 +945,7 @@ respond with an error to the following \akey{get-proof} command.  Note that the
 SMT-LIB conformant error result should be output to stdout.
 
 \header{Input/Output Checker.}
-The second script, \texttt{starexec\_checker\_default}, takes as input
+The second script, \texttt{starexec\_checker\_default}, should take
 the benchmark file name as first argument and the stdout output of the
 solver script as second argument.  Note that this output will
 usually start with the \texttt{unsat} result of the \akey{(check-sat)}
@@ -954,12 +954,12 @@ command, which the checker must either parse or skip.
 The checker should check the proof within the output and provide the result to
 stdout.
 %
-A result printed to stderr is ignored.
+Output printed to stderr is ignored.
 %
 The first line of the proof checker result should be either \texttt{valid},
 \texttt{invalid}, \texttt{holey}, \texttt{sat}, or \texttt{unknown}.
 %
-The answer \texttt{valid} must only be given when the checker certifies the
+The answer \texttt{valid} must only be given when the checker certifies that the
 given proof justifies the unsatisfiability of the given benchmark.
 %
 A checker that returns \texttt{valid} to a satisfiable benchmark is deemed to be
@@ -973,9 +973,9 @@ i.e., steps that are not checked for correctness, the answer should be
 \texttt{holey}.
 %
 The answer \texttt{sat} should be given if the solver claimed that the benchmark
-is satisfiable, and \texttt{unknown} should be given if the solver answered
-\texttt{unknown}, if it answered \texttt{unsat} but did not give a proof, or if
-the solver gave an error result.
+is satisfiable, and \texttt{unknown} should be given if (1) the solver answered
+\texttt{unknown}, (2) it answered \texttt{unsat} but did not give a proof, or 
+(3) if the solver gave an error result.
 
 After the first line, the proof checker can provide arbitrary
 \texttt{key=value} pairs.
@@ -987,7 +987,7 @@ the number of holes, the number of different proof rules, etc.
 \header{Result.}
 %
 The result of a solver is considered \emph{erroneous} if (i) the
-response to the \akey{check-sat} command is \texttt{sat} (as the
+proof checker returns \texttt{sat} (as the
 benchmark is necessarily unsatisfiable), or
 %
 (ii) the proof checker returns \texttt{invalid} to
