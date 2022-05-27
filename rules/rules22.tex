@@ -869,8 +869,7 @@ The model validator tool will output
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
 pair. The time limit for checking the satisfying assignment is yet to be
-determined, but is anticipated to be around 5 minutes of wall-clock time per
-solver.
+determined, but is anticipated to be around 15 minutes of wall-clock time.
 
 \header{Post-Processor.}
 This track will use
@@ -926,7 +925,7 @@ This track will run on a selection of non-incremental \emph{unsat} benchmarks
 \header{Input/Output Solver.}
 For the \prooftrack, solver authors should provide two scripts
 with their solver.  The first script,
-\texttt{starexec\_solver\_default}, should take the name of the benchmark file as
+\texttt{smtcomp\_solver}, should take the name of the benchmark file as
 a single argument and run the solver on the benchmark.
 %
 As described in Section~\ref{sec:logistics}, the benchmark
@@ -945,7 +944,7 @@ respond with an error to the following \akey{get-proof} command.  Note that the
 SMT-LIB conformant error result should be output to stdout.
 
 \header{Input/Output Checker.}
-The second script, \texttt{starexec\_checker\_default}, should take
+The second script, \texttt{smtcomp\_checker}, should take
 the benchmark file name as first argument and the stdout output of the
 solver script as second argument.  Note that this output will
 usually start with the \texttt{unsat} result of the \akey{(check-sat)}
@@ -1009,7 +1008,7 @@ pair. This time limit includes the time for proof checking.
 
 \header{Wrapper and Post-Processor.}
 Solvers in this track will be wrapped in the competition to include the script
-{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/starexec_run_default}}, which calls the solver and checker script.
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/starexec_run_proof}}, which calls the solver and checker script.
 The track will use
 {\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/process}}
 as a post-processor
