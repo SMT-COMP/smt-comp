@@ -43,7 +43,7 @@ NEW_SQ_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_new.txt"
 FILTER_SQ_CSV_2018="$BASEDIR/2018/csv/Main_Track.csv"
 FILTER_SQ_CSV_2019="$BASEDIR/2019/results/Single_Query_Track.csv"
 FILTER_SQ_CSV_2020="$BASEDIR/2020/results/Single_Query_Track.csv"
-FILTER_SQ_CSV_2021="$BASEDIR/2021/results/Single_Query_Track.csv"
+FILTER_SQ_CSV_2021="$BASEDIR/2021/scoring/results-sq.csv"
 FILTER_SQ="--filter $FILTER_SQ_CSV_2021 --filter $FILTER_SQ_CSV_2020 --filter $FILTER_SQ_CSV_2019 --filter $FILTER_SQ_CSV_2018"
 
 BENCHMARKS_INC="$SCRIPTDIR/../SMT-LIB_incremental_benchmarks_all.txt"

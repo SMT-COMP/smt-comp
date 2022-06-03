@@ -9,6 +9,16 @@ The selection is saved in the corresponding testing or final
 subdirectory.  There is one text file for each track, each containing
 a list of selected benchmarks.
 
+The selection depends on the competition results of the previous
+years.  So you need to extract/build them:
+
+```
+(cd ../../2018/csv; tar -xvJf Main_Track.tar.xz)
+(cd ../../2019/results; tar -xvJf Single_Query_Track.csv.tar.xz)
+(cd ../../2020/results; tar -xvJf results.tar.xz)
+(cd ../../2021/results; tar -xvJf raw-results.tar.xz; cd ../scoring; ./clean_results.csvs.sh)
+```
+
 ## Adapting the script
 
 The single query track rules state that benchmarks that were solved
