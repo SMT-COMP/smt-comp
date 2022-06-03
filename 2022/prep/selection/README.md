@@ -13,10 +13,10 @@ The selection depends on the competition results of the previous
 years.  So you need to extract/build them:
 
 ```
-(cd ../../2018/csv; tar -xvJf Main_Track.tar.xz)
-(cd ../../2019/results; tar -xvJf Single_Query_Track.csv.tar.xz)
-(cd ../../2020/results; tar -xvJf results.tar.xz)
-(cd ../../2021/results; tar -xvJf raw-results.tar.xz; cd ../scoring; ./clean_results.csvs.sh)
+(cd ../../../2018/csv; tar -xvJf Main_Track.tar.xz)
+(cd ../../../2019/results; tar -xvJf Single_Query_Track.csv.tar.xz)
+(cd ../../../2020/results; tar -xvJf results.tar.xz)
+(cd ../../../2021/results; tar -xvJf raw-results.tar.xz; cd ../prep; tar -xvJf SMT-LIB_excluded.tar.xz; cd ../scoring; ./clean_result_csvs.sh)
 ```
 
 ## Adapting the script
