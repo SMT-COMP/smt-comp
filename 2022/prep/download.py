@@ -10,9 +10,16 @@ def clone_group(name,dir):
     """clone the group named name in directory dir"""
     group = gl.groups.get(name)
     projects = group.projects.list(all=True)
-    os.mkdir(dir)
+    os.makedirs(dir,exist_ok=True)
+    n=0
     for project in projects:
-        subprocess.run(["git", "clone", "--depth=1", project.http_url_to_repo], cwd=dir)
+        n=n+1
+        print(project.name,str(n)+"/"+str(len(projects)))
+        path=os.path.join(dir,project.path)
+        if os.path.exists(path):
+            subprocess.run(["git", "-C", path, "pull", "--depth=1"])
+        else:
+            subprocess.run(["git", "clone", "--depth=1", project.http_url_to_repo, path])
 
 
 clone_group("SMT-LIB-benchmarks","non-incremental")
