@@ -15,7 +15,14 @@ def clone_group(name,dir):
     for project in projects:
         n=n+1
         print(project.name,str(n)+"/"+str(len(projects)))
-        path=os.path.join(dir,project.path)
+        if project.name in ["QF_BV_legacy","Sage2_legacy"]:
+            print(project.name,"skipped")
+            continue
+        oldpath=os.path.join(dir,project.path)
+        path=os.path.join(dir,project.name)
+        if oldpath != path and os.path.exists(oldpath):
+            print("rename",oldpath,"to",path)
+            os.rename(oldpath,path)
         if os.path.exists(path):
             subprocess.run(["git", "-C", path, "pull", "--depth=1"])
         else:
