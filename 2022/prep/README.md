@@ -17,11 +17,15 @@ Download SMT-LIB repositories.  Make three subdirectories:
 The points 1. and 2. are automated with `./download.py` which requires `gitlab`
 API `pip install --upgrade python-gitlab` (version 3.5.0 works).
 
-You also need to checkout the scrambler repository in the same directory as the
+You also need to checkout the scrambler repository alongside the
 smt-comp repository and build the scrambler with `make`.
-https://github.com/SMT-COMP/scrambler.git
 
-Then run `./find_benchmarks.sh` on this directory. 
+```
+git clone https://github.com/SMT-COMP/scrambler.git ../../../scrambler
+make -C ../../../scrambler
+```
+
+Then run `./find_benchmarks.sh` in the directory of this README.
 
 ## Downloading the space XML files from starexec.
 
