@@ -249,6 +249,7 @@ def write_csv_2022(fname):
             "Config ID Incremental",
             "Config ID Model Validation",
             "Config ID Unsat Core",
+            "Config ID Proof Exhibition",
             "Solver Name",
             "Solver homepage",
             "System description URL",
@@ -272,7 +273,7 @@ def write_csv_2022(fname):
             "Seed",
             ]) + "\n")
         for submission in g_submissions:
-            outfile.write("{},-1,,,,,\"{}\",\"{}\",\"{}\",\"{}\",{},"
+            outfile.write("{},-1,,,,,,\"{}\",\"{}\",\"{}\",\"{}\",{},"
                           .format(
                 re.sub(r',',';', submission['solver_id']),
                 submission['solver_name'],
