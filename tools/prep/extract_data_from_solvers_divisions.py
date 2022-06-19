@@ -36,6 +36,7 @@ COL_SINGLE_QUERY_TRACK = 'Single Query Track'
 COL_INCREMENTAL_TRACK = 'Incremental Track'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
+COL_PROOF_EXHIBITION_TRACK = 'Proof Exhibition Track'
 COL_CLOUD_TRACK = 'Cloud Track'
 COL_PARALLEL_TRACK = 'Parallel Track'
 
@@ -44,6 +45,7 @@ track_raw_names_to_pretty_names = {
         TRACK_INCREMENTAL_RAW: COL_INCREMENTAL_TRACK,
         TRACK_UNSAT_CORE_RAW: COL_UNSAT_CORE_TRACK,
         TRACK_MODEL_VALIDATION_RAW: COL_MODEL_VALIDATION_TRACK,
+        TRACK_PROOF_EXHIBITION_RAW: COL_PROOF_EXHIBITION_TRACK,
         TRACK_CLOUD_RAW: COL_CLOUD_TRACK,
         TRACK_PARALLEL_RAW: COL_PARALLEL_TRACK
         }
@@ -103,17 +105,15 @@ def read_csv(fname):
             for (subm_key, md_key, div_key) in g_properties:
                 submission[subm_key] = drow[div_key]
 
-            submission[TRACK_SINGLE_QUERY_RAW] = drow[COL_SINGLE_QUERY_TRACK].split(';')
-            submission[TRACK_INCREMENTAL_RAW] = drow[COL_INCREMENTAL_TRACK].split(';')
-            submission[TRACK_UNSAT_CORE_RAW] = drow[COL_UNSAT_CORE_TRACK].split(';')
-            submission[TRACK_MODEL_VALIDATION_RAW] = drow[COL_MODEL_VALIDATION_TRACK].split(';')
-            submission[TRACK_CLOUD_RAW] = drow[COL_CLOUD_TRACK].split(';') if COL_CLOUD_TRACK in drow else []
-            submission[TRACK_PARALLEL_RAW] = drow[COL_PARALLEL_TRACK].split(';') if COL_PARALLEL_TRACK in drow else []
+            for key in track_raw_names_to_pretty_names.keys():
+                pretty_name = track_raw_names_to_pretty_names[key]
+                submission[key] = drow[pretty_name].split(';') if pretty_name in drow else []
 
             if not submission[TRACK_SINGLE_QUERY_RAW] and \
                not submission[TRACK_INCREMENTAL_RAW] and \
                not submission[TRACK_UNSAT_CORE_RAW] and \
                not submission[TRACK_MODEL_VALIDATION_RAW] and\
+               not submission[TRACK_PROOF_EXHIBITION_RAW] and\
                not submission[TRACK_CLOUD_RAW] and\
                not submission[TRACK_PARALLEL_RAW]:
                 die('Configuration "{}" '\

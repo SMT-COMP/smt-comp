@@ -12,5 +12,5 @@ DIVISIONS="../new-divisions.json"
 
 mkdir -p ../../../smt-comp.github.io/_participants_$YEAR
 
-../../tools/prep/extract_data_from_solvers_divisions.py -d $LOGICS solvers_divisions_final.csv ../../../smt-comp.github.io/_participants_$YEAR $YEAR
+../../tools/prep/extract_data_from_solvers_divisions.py -d $LOGICS solvers_divisions.csv ../../../smt-comp.github.io/_participants_$YEAR $YEAR
 ../../tools/prep/make_participants_md.py -d $DIVISIONS -y $YEAR -n "$NYSE_DATE;$NYSE_VALUE" ../../../smt-comp.github.io/$YEAR/
