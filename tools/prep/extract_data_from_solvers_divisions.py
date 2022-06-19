@@ -20,6 +20,7 @@ TRACK_UNSAT_CORE_RAW = 'track_unsat_core'
 TRACK_MODEL_VALIDATION_RAW = 'track_model_validation'
 TRACK_CLOUD_RAW = 'track_cloud'
 TRACK_PARALLEL_RAW = 'track_parallel'
+TRACK_PROOF_EXHIBITION_RAW = 'track_proof_exhibition'
 
 COL_PRELIMINARY_SOLVER_ID = 'Preliminary Solver ID'
 COL_SOLVER_ID = 'Solver ID'
