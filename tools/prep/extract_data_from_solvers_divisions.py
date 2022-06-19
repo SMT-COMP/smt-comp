@@ -60,7 +60,6 @@ COL_SYS_DESCR_URL = 'System description URL'
 COL_SYS_DESCR_NAME = 'System description name'
 
 g_properties = [
-            ['username', 'contact', COL_CONTACT],
             ['solver_name', 'name', COL_SOLVER_NAME],
             ['solver_id', 'preliminaryID', COL_PRELIMINARY_SOLVER_ID],
             ['final_id', 'finalID', COL_SOLVER_ID],
