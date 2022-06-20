@@ -260,11 +260,15 @@ def write_csv_2022(fname):
             "Model Validation Regex",
             "Unsat Core Regex",
             "Proof Exhibition Regex",
+            "Cloud Regex",
+            "Parallel Regex",
             "Single Query Track",
             "Incremental Track",
             "Model Validation Track",
             "Unsat Core Track",
             "Proof Exhibition Track",
+            "Cloud Track",
+            "Parallel Track",
             "Variant Of",
             "Wrapper Tool",
             "Derived Tool",
@@ -285,13 +289,17 @@ def write_csv_2022(fname):
                           TRACK_INCREMENTAL_REGEX,
                           TRACK_MODEL_VALIDATION_REGEX,
                           TRACK_UNSAT_CORE_REGEX,
-                          TRACK_PROOF_EXHIBITION_REGEX]:
+                          TRACK_PROOF_EXHIBITION_REGEX,
+                          TRACK_CLOUD_REGEX,
+                          TRACK_PARALLEL_REGEX]:
                 outfile.write(f'"{submission[track]}",')
             for track in [TRACK_SINGLE_QUERY_RAW,
                           TRACK_INCREMENTAL_RAW,
                           TRACK_MODEL_VALIDATION_RAW,
                           TRACK_UNSAT_CORE_RAW,
-                          TRACK_PROOF_EXHIBITION_RAW]:
+                          TRACK_PROOF_EXHIBITION_RAW,
+                          TRACK_CLOUD_RAW,
+                          TRACK_PARALLEL_RAW]:
                 outfile.write(";".join(submission[track]))
                 outfile.write(",")
             outfile.write(
