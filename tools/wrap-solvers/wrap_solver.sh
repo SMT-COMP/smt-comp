@@ -134,7 +134,7 @@ wrap_solver()
   rm -rf "${NEW_SOLVER_DIR}"
   cp -a "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
   echo "${NEW_SOLVER_DIR}/bin/starexec_run_default"
-  test -e "${NEW_SOLVER_DIR}/bin/smtcomp_run_incremental" || mv "${NEW_SOLVER_DIR}/bin/starexec_run_"* "${NEW_SOLVER_DIR}/bin/smtcomp_run_incremental"
+  test -e "${NEW_SOLVER_DIR}/bin/smtcomp_run_incremental" || cp -a "${NEW_SOLVER_DIR}/bin/starexec_run_"* "${NEW_SOLVER_DIR}/bin/smtcomp_run_incremental"
   res=$?
   cp -a ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
   if [ $res -ne 0 ]
