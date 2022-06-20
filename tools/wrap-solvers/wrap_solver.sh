@@ -2,7 +2,6 @@
 
 # ./wrap_solver.sh <wrapped name> <wrapper directory> <solver id> <space id>
 
-
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 #source "$SCRIPTDIR/login.sh"
 
@@ -133,11 +132,11 @@ wrap_solver()
   SOLVER_DIR=$1
   NEW_SOLVER_DIR=$2
   rm -rf "${NEW_SOLVER_DIR}"
-  cp -r "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
+  cp -a "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
   echo "${NEW_SOLVER_DIR}/bin/starexec_run_default"
-  mv "${NEW_SOLVER_DIR}/bin/starexec_run_"* "${NEW_SOLVER_DIR}/bin/original_starexec_run_default"
+  test -e "${NEW_SOLVER_DIR}/bin/smtcomp_run_incremental" || mv "${NEW_SOLVER_DIR}/bin/starexec_run_"* "${NEW_SOLVER_DIR}/bin/smtcomp_run_incremental"
   res=$?
-  cp -r ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
+  cp -a ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
   if [ $res -ne 0 ]
   then
       echo "ERROR: no default config"
