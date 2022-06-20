@@ -15,7 +15,7 @@ if [ $TESTING == 1 ]; then
     OUT_UC="testing/benchmark_selection_unsat_core"
     OUT_PE="testing/benchmark_selection_proof_exhibition"
 
-    RATIO=0.01
+    RATIO=0.001
     NUM_LOWER=5
 else
     mkdir -p final

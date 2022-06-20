@@ -4,7 +4,7 @@ YEAR=2022
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"
-SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_final.csv"
+SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_prelim.csv"
 
 INCLUDE_NONCOMPETITIVE=""
 
@@ -23,7 +23,7 @@ if [ $# -eq 0 ]; then
     set -- -h
 fi
 
-TESTING=0
+TESTING=1
 EXTRA=""
 while [ $# -gt 0 ]
 do
@@ -116,11 +116,11 @@ MEMLIMIT="60.0"
 SELECTION="$SCRIPTDIR/../selection/$KIND/benchmark_selection_${!TRACK}"
 PRE=${!PRETR}
 POST=${!POSTTR}
-OUTFILE=$KIND/${!TRACK}
+OUTFILE=${!TRACK}
 JOBNAME="SMT-COMP $YEAR $(echo ${!TRACK} | tr '_' ' ') $KIND"
 if [ -n "$EXTRA" ]; then
     JOBNAME="$JOBNAME $EXTRA"
-    OUTFILE=$KIND/${!TRACK}_${EXTRA}
+    OUTFILE=${!TRACK}_${EXTRA}
 fi
 if [ "$TRACK" = "INC" ]; then
     IN_SPACE=$IN_SPACE_INC
@@ -131,6 +131,6 @@ fi
 python3 $SCRIPTDIR/../../../tools/prep/prepare_job_xml.py \
 	-t ${!TRACK} --name "$JOBNAME" --queue $QUEUE --pre $PRE --post $POST \
 	--wall $TIMEOUT --seed $SEED --memlimit $MEMLIMIT \
-	-s $SELECTION $IN_SPACE $SOLVERS_CSV $OUTFILE.xml
+	-s $SELECTION $IN_SPACE $SOLVERS_CSV $KIND/$OUTFILE.xml
 
-zip $OUTFILE.zip $OUTFILE.xml
+(cd $KIND; zip $OUTFILE.zip $OUTFILE.xml)
