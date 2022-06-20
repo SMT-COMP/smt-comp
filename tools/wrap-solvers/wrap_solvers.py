@@ -4,6 +4,7 @@ from argparse import ArgumentParser
 import csv
 import subprocess
 import os
+import re
 
 COL_SOLVER_ID = 'Solver ID'
 COL_PRELIM_SOLVER_ID = 'Preliminary Solver ID'
@@ -17,6 +18,20 @@ COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
 def die(msg):
     print("error: {}".format(msg))
     sys.exit(1)
+
+
+def find_solver_id(solverid, track):
+    solverid = f";{solverid};"
+    regextrack = re.compile(f';(\d+)\({track}\);')
+    m = re.search(regextrack, solverid)
+    if m is not None:
+        return m.group(1)
+    regex = r';(\d+);'
+    m = re.search(regex, solverid)
+    if m is not None:
+        return m.group(1)
+    die(f"cannot find solver id for {track}: {solverid}")
+
 
 if __name__ == '__main__':
     parser = ArgumentParser(
@@ -79,8 +94,6 @@ if __name__ == '__main__':
             unsat_core_track = drow[COL_UNSAT_CORE_TRACK]
             model_validation_track = drow[COL_MODEL_VALIDATION_TRACK]
 
-            print(solver_name)
-
             add_args = []
             if args.download_only:
                 add_args.append("-d")
@@ -97,27 +110,31 @@ if __name__ == '__main__':
 
             script_args = [os.path.dirname(os.path.abspath(__file__)) + '/wrap_solver.sh']
             if args.space_id and single_query_track:
-                print('wrapping for single query track')
+                print(f'wrapping {solver_name} for single query track')
                 script_args.extend(add_args)
-                script_args.extend(['wrapped-sq', 'wrapper_sq', solver_id, args.space_id, "solvers"])
+                solver_id_sq = find_solver_id(solver_id, 'sq')
+                script_args.extend(['wrapped-sq', 'wrapper_sq', solver_id_sq, args.space_id, "solvers"])
                 p = subprocess.Popen(script_args)
                 p.communicate()
             if args.space_id_mv and model_validation_track:
-                print('wrapping for model validation track')
+                print(f'wrapping {solver_name} for model validation track')
                 script_args.extend(add_args)
-                script_args.extend(['wrapped-mv', 'wrapper_sq', solver_id, args.space_id_mv, "solvers-mv"])
+                solver_id_mv = find_solver_id(solver_id, 'mv')
+                script_args.extend(['wrapped-mv', 'wrapper_sq', solver_id_mv, args.space_id_mv, "solvers-mv"])
                 p = subprocess.Popen(script_args)
                 p.communicate()
             if args.space_id_uc and unsat_core_track:
-                print('wrapping for unsat core track')
+                print(f'wrapping {solver_name} for unsat core track')
                 script_args.extend(add_args)
-                script_args.extend(['wrapped-uc', 'wrapper_sq', solver_id, args.space_id_uc, "solvers-uc"])
+                solver_id_uc = find_solver_id(solver_id, 'uc')
+                script_args.extend(['wrapped-uc', 'wrapper_sq', solver_id_uc, args.space_id_uc, "solvers-uc"])
                 p = subprocess.Popen(script_args)
                 p.communicate()
             if args.space_id_inc and incremental_track:
-                print('wrapping for incremental track')
+                print(f'wrapping {solver_name} for incremental track')
                 script_args.extend(add_args)
-                script_args.extend(['wrapped-inc', 'wrapper_inc', solver_id, args.space_id_inc, "solvers-inc"])
+                solver_id_inc = find_solver_id(solver_id, 'inc')
+                script_args.extend(['wrapped-inc', 'wrapper_inc', solver_id_inc, args.space_id_inc, "solvers-inc"])
                 p = subprocess.Popen(script_args)
                 p.communicate()
 
