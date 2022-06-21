@@ -2,7 +2,7 @@
 
 import gitlab
 import subprocess
-import os
+import os,sys
 
 gl = gitlab.Gitlab('https://clc-gitlab.cs.uiowa.edu:2443')
 
@@ -28,6 +28,10 @@ def clone_group(name,dir):
         else:
             subprocess.run(["git", "clone", "--depth=1", project.http_url_to_repo, path])
 
+if len(sys.argv)<2:
+    print("download.py <DIR>")
+    exit(1)
 
-clone_group("SMT-LIB-benchmarks","non-incremental")
-clone_group("SMT-LIB-benchmarks-inc","incremental")
+dst=sys.argv[1]
+clone_group("SMT-LIB-benchmarks",os.path.join(dst,"non-incremental"))
+clone_group("SMT-LIB-benchmarks-inc",os.path.join(dst,"incremental"))
