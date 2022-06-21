@@ -2,7 +2,9 @@
 
 ## Generate a list of benchmarks and spaces
 
-Download SMT-LIB repositories.  Make three subdirectories:
+Download SMT-LIB repositories (git-lfs is needed) in a directory of your choice,
+200Go free is needed. This directory will be referenced as `$SMTLIB_DIR`, and is
+composed of three subdirectories:
 
 1. `non-incremental` where you checkout the repositories from
     https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/
@@ -14,8 +16,9 @@ Download SMT-LIB repositories.  Make three subdirectories:
    I worked around by filtering new benchmarks by family names,
    see `./find_new_benchmarks.sh`
 
-The points 1. and 2. are automated with `./download.py` which requires `gitlab`
-API `pip install --upgrade python-gitlab` (version 3.5.0 works).
+The points 1. and 2. are automated with `./download.py $SMTLIB_DIR`
+which requires `gitlab` API `pip install --upgrade python-gitlab` (version 3.5.0
+works).
 
 You also need to checkout the scrambler repository alongside the
 smt-comp repository and build the scrambler with `make`.
@@ -25,7 +28,7 @@ git clone https://github.com/SMT-COMP/scrambler.git ../../../scrambler
 make -C ../../../scrambler
 ```
 
-Then run `./find_benchmarks.sh` in the directory of this README.
+Then run `./find_benchmarks.sh $SMTLIB_DIR` in the directory of this README.
 
 ## Downloading the space XML files from starexec.
 
