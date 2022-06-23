@@ -328,11 +328,13 @@ the StarExec user guide,
 %
 For participation in SMT-COMP, a solver must be uploaded to StarExec
 and made publicly available, or communicated separately to the
-organisers for the \cloudtrack{} and \paralleltrack{}.  StarExec supports solver configurations;
-for clarity, \emph{each submitted solver must have one configuration
-  only}.  Moreover, the organizers must be informed of the solver's
-presence \emph{and the tracks and divisions which it enters} via the
-web form at
+organisers for the \cloudtrack{} and \paralleltrack{}.  StarExec
+supports solver configurations.  You can have at most one configuration
+for each track (named after the track) and a default configuration used
+for tracks without a track-specific configuration.
+Moreover, the organizers must be informed of the solver's presence
+\emph{and the tracks and divisions which it enters} via the web form
+at
 \begin{center}
   \url{https://forms.gle/ewNQdFJbmQ12GxpX8}
 \end{center}
@@ -701,7 +703,10 @@ which serves the following purposes:
 \end{itemize}
 
 \header{Input and output.}
-Participating solvers will be connected to a trace executor, which
+Participating solvers should include a script
+\texttt{smtcomp\_run\_incremental} (if this is not present the script
+for the default configuration will be used). This script will be called
+without arguments and will be connected to a trace executor, which
 will incrementally send commands to the standard input channel of the
 solver and read responses from both the standard output channel of the
 solver.  The commands will be taken from an SMT-LIB benchmark script
@@ -721,7 +726,8 @@ Solvers must not write anything to the standard error channel.
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
 pair.
 
-\header{Trace Executor.} This track will use the trace executor
+\header{Trace Executor.} This track will use the trace executor from
+{\url{https://github.com/SMT-COMP/trace-executor}}
 to execute a solver on an incremental benchmark file.
 
 \header{Post-Processor.}
