@@ -97,12 +97,14 @@ if [ "$TESTING" = "1" ]; then
     POST_SQ=692
     POST_INC=691
     POST_UC=727
-    POST_MV=672
+    POST_MV=742
     POST_PE=741
+    QUEUE=1   # all.q
 else
     SEED=`cat $SCRIPTDIR/../../COMPETITION_SEED`
     TIMEOUT="1200"    # 20 minutes
     KIND=final
+    QUEUE=169969 # smtcomp.q
 fi
 
 mkdir -p $KIND
@@ -110,7 +112,6 @@ mkdir -p $KIND
 PRETR=PRE_${TRACK}
 POSTTR=POST_${TRACK}
 
-QUEUE=1   # FIXME: smtcomp.q
 MEMLIMIT="60.0"
 
 SELECTION="$SCRIPTDIR/../selection/$KIND/benchmark_selection_${!TRACK}"
@@ -131,6 +132,7 @@ fi
 python3 $SCRIPTDIR/../../../tools/prep/prepare_job_xml.py \
 	-t ${!TRACK} --name "$JOBNAME" --queue $QUEUE --pre $PRE --post $POST \
 	--wall $TIMEOUT --seed $SEED --memlimit $MEMLIMIT \
-	-s $SELECTION $IN_SPACE $SOLVERS_CSV $KIND/$OUTFILE.xml
+	-s $SELECTION $IN_SPACE $SOLVERS_CSV $KIND/$OUTFILE.xml \
+	$INCLUDE_NONCOMPETITIVE
 
 (cd $KIND; zip $OUTFILE.zip $OUTFILE.xml)
