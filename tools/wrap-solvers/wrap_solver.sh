@@ -5,7 +5,7 @@
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 #source "$SCRIPTDIR/login.sh"
 
-if [ $# -eq 5 ]
+if [ $# -eq 4 ]
 then
   WRAP=yes
   DOWNLOAD=yes
@@ -24,7 +24,7 @@ while [ $# -gt 0 ]
 do
   case $1 in
     -h|--help)
-      echo -n "usage: $(basename $0) [<option>] <wrapped name> <wrapper directory> <solver id> <space id> <solver-dir>"
+      echo -n "usage: $(basename $0) [<option>] <wrapped name> <wrapper script> <solver id> <space id> <solver-dir>"
       echo ""
       echo "Download, wrap and upload solver from and to StarExec."
       echo "If no options are given, all actions are performed."
@@ -67,11 +67,10 @@ done
 [ $WRAP == "yes" ] && ZIP=yes
 
 WRAPPED_NAME=$1
-WRAPPER_DIR=$2
+WRAPPER_SCRIPT=$2
 SOLVER_ID=$3
-SPACE_ID=$4
-SOLVER_DIR=$5
-WRAPPED_SOLVER_DIR=$5-wrapped
+SOLVER_DIR=$4
+WRAPPED_SOLVER_DIR=$4-wrapped
 
 upload_solver()
 {
@@ -109,6 +108,7 @@ download_solver()
 
   ID=$1
   OUT=$2
+  test -s download/${ID}.zip || curl -o download/${ID}.zip 'https://www.starexec.org/starexec/secure/download?type=solver&id='${ID}
 #  COMMAND="getsolver id=${ID} out=${OUT}"
 #  java -jar ${SCRIPTDIR}/StarexecCommand.jar <<EOF
 #login u=${USERNAME} p=${PASSWORD}
@@ -131,17 +131,10 @@ wrap_solver()
   echo ">> wrap solver"
   SOLVER_DIR=$1
   NEW_SOLVER_DIR=$2
+  
   rm -rf "${NEW_SOLVER_DIR}"
-  cp -a "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
-  echo "${NEW_SOLVER_DIR}/bin/starexec_run_default"
-  test -e "${NEW_SOLVER_DIR}/bin/smtcomp_run_incremental" || cp -a "${NEW_SOLVER_DIR}/bin/starexec_run_"* "${NEW_SOLVER_DIR}/bin/smtcomp_run_incremental"
-  res=$?
-  cp -a ${WRAPPER_DIR}/* "${NEW_SOLVER_DIR}/bin"
-  if [ $res -ne 0 ]
-  then
-      echo "ERROR: no default config"
-      exit 1
-  fi
+  cp -a "${SOLVER_DIR}" "${NEW_SOLVER_DIR}"
+  ${WRAPPER_SCRIPT} "${NEW_SOLVER_DIR}"
 }
 
 zip_solver()
@@ -178,7 +171,7 @@ fi
 NEW_SOLVER_DIR="${WRAPPED_SOLVER_DIR}/${NAME}-${WRAPPED_NAME}"
 
 [ $WRAP == "yes" ] && \
-  wrap_solver "${SOLVER_DIR}" "${NEW_SOLVER_DIR}"
+  wrap_solver "${SOLVER_DIR}/${NAME}" "${NEW_SOLVER_DIR}"
 
 [ $ZIP == "yes" ] && \
   zip_solver "${NEW_SOLVER_DIR}"
