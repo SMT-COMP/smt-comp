@@ -99,7 +99,7 @@ if [ "$TESTING" = "1" ]; then
     POST_UC=727
     POST_MV=742
     POST_PE=741
-    QUEUE=1   # all.q
+    QUEUE=169969   # all.q
 else
     SEED=`cat $SCRIPTDIR/../../COMPETITION_SEED`
     TIMEOUT="1200"    # 20 minutes

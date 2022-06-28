@@ -7,9 +7,17 @@
 
 if true; then  # set to false for final
     SOLVER_ID="Preliminary Solver ID"
+  if false; then
     SPACE_NAME="Preliminary Solvers - Linked"
     INPUT_FILE="solvers_divisions_prelim.csv"
-elif true; then
+  elif false; then
+    SPACE_NAME="Preliminary Solvers Updated - Linked"
+    INPUT_FILE="solvers_divisions_prelim2.csv"
+  else
+    SPACE_NAME="Preliminary Solvers Prooftrack - Linked"
+    INPUT_FILE="solvers_divisions_prelimproof.csv"
+  fi
+elif false; then
     SOLVER_ID="Solver ID"
     SPACE_NAME="Non-competing Solvers - Linked"
     INPUT_FILE="solvers_divisions_noncompeting.csv"
