@@ -10,10 +10,11 @@ done
 
 ./make_job.sh --test-run --pe --extra 2 --solvers ../../registration/solvers_divisions_prelimproof.csv
 
-for track in sq mv; do
+for track in sq mv inc; do
     ./make_job.sh --test-run --$track --extra 3 --solvers ../../registration/solvers_divisions_prelim3.csv --include-nc
 done
 
+./make_job.sh --test-run --inc --extra preprocessorfix --solvers ../../registration/solvers_divisions_incrementalfix.csv
 #for track in sq inc uc mv pe; do
 #    ./make_job.sh --$track
 #done
