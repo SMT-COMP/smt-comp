@@ -13,9 +13,12 @@ if true; then  # set to false for final
   elif false; then
     SPACE_NAME="Preliminary Solvers Updated - Linked"
     INPUT_FILE="solvers_divisions_prelim2.csv"
-  else
+  elif false; then
     SPACE_NAME="Preliminary Solvers Prooftrack - Linked"
     INPUT_FILE="solvers_divisions_prelimproof.csv"
+  else
+    SPACE_NAME="Preliminary Solvers Run3 - Linked"
+    INPUT_FILE="solvers_divisions_prelim3.csv"
   fi
 elif false; then
     SOLVER_ID="Solver ID"

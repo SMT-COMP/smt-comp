@@ -4,7 +4,7 @@ YEAR=2022
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"
-SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_prelim.csv"
+SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_final.csv"
 
 INCLUDE_NONCOMPETITIVE=""
 
@@ -23,7 +23,7 @@ if [ $# -eq 0 ]; then
     set -- -h
 fi
 
-TESTING=1
+TESTING=0
 EXTRA=""
 while [ $# -gt 0 ]
 do

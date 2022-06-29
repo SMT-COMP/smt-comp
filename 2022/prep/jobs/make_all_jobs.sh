@@ -1,6 +1,20 @@
 #!/bin/bash
 
 for track in sq inc uc mv pe; do
-    ./make_job.sh --$track
+    ./make_job.sh --$track --test-run --solvers ../../registration/solvers_divisions_prelim.csv
 done
+
+for track in sq inc mv uc; do
+    ./make_job.sh --test-run --$track --extra 2 --solvers ../../registration/solvers_divisions_prelim2.csv --include-nc
+done
+
+./make_job.sh --test-run --pe --extra 2 --solvers ../../registration/solvers_divisions_prelimproof.csv
+
+for track in sq mv; do
+    ./make_job.sh --test-run --$track --extra 3 --solvers ../../registration/solvers_divisions_prelim3.csv --include-nc
+done
+
+#for track in sq inc uc mv pe; do
+#    ./make_job.sh --$track
+#done
 
