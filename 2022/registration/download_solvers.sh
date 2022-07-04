@@ -6,7 +6,7 @@
 # choose "Upload Sub Spaces" and upload the solvers.zip file.
 
 INPUT_FILE="solvers_divisions.csv"
-SOLVER_ID="Preliminary Solver ID"
+SOLVER_ID="Solver ID"
 
 mkdir -p download
 csvcut -c "$SOLVER_ID","Solver Name" $INPUT_FILE | tail -n +2 | perl -ne '/(.*),(.*)/ and $id=$1 and $name=$2; while ($id =~ s/(\d+)(\([^)]*\))?//) { print "$1\n" }' | sort -u | while read ID; do 

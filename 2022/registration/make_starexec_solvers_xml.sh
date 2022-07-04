@@ -5,7 +5,7 @@
 # Create a new space in starexec, move to that space, open Sub spaces,
 # choose "Upload Sub Spaces" and upload the solvers.zip file.
 
-if true; then  # set to false for final
+if false; then  # set to false for final
     SOLVER_ID="Preliminary Solver ID"
   if false; then
     SPACE_NAME="Preliminary Solvers - Linked"
