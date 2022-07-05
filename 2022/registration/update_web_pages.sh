@@ -6,7 +6,7 @@
 
 YEAR=2022
 NYSE_DATE=2022-07-05
-NYSE_VALUE=""  # NYSE opening value, e.g., 12345.6789
+NYSE_VALUE="14636.7563"  # NYSE opening value, e.g., 12345.6789
 LOGICS="../divisions.json"
 DIVISIONS="../new-divisions.json"
 
