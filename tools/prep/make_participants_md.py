@@ -30,22 +30,21 @@ def get_division_str(divisions_indexed_by_tracks):
 
 def get_new_division_str(logics_by_divisions_indexed_by_tracks):
     divisions = {}
-    logics = {}
     for track in logics_by_divisions_indexed_by_tracks:
         for d in logics_by_divisions_indexed_by_tracks[track]:
             if d not in divisions:
                 divisions[d] = []
-                logics[d] = set()
             divisions[d].append(track)
-            logics[d].update(logics_by_divisions_indexed_by_tracks[track][d])
 
     division_fields = []
     for d in sorted(divisions):
-        sub_division_fields = "- name: {}\n  logics:\n{}\n  tracks:\n{}".format(
-            d,
-            "\n".join(map(lambda x: f"  - {x}", sorted(logics[d]))),
-            "\n".join(map(lambda x: f"  - {x}", divisions[d])))
+        sub_division_fields = "- name: {}\n  tracks:".format(d)
         division_fields.append(sub_division_fields)
+        for track in divisions[d]:
+            division_fields.append("  - name: {}".format(track))
+            division_fields.append("    logics:")
+            for logic in logics_by_divisions_indexed_by_tracks[track][d]:
+                division_fields.append("    - {}".format(logic))
     division_fields_str = "\n".join(division_fields)
     return division_fields_str
 
