@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TESTING=1
+TESTING=0
 YEAR=2022
 
 if [ $TESTING == 1 ]; then

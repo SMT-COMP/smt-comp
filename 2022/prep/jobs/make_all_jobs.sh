@@ -15,7 +15,7 @@ for track in sq mv inc; do
 done
 
 ./make_job.sh --test-run --inc --extra preprocessorfix --solvers ../../registration/solvers_divisions_incrementalfix.csv
-#for track in sq inc uc mv pe; do
-#    ./make_job.sh --$track
-#done
+for track in sq inc; do    # TODO: mv uc pe
+    ./make_job.sh --$track
+done
 

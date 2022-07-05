@@ -104,6 +104,10 @@ else
     SEED=`cat $SCRIPTDIR/../../COMPETITION_SEED`
     TIMEOUT="1200"    # 20 minutes
     KIND=final
+    PRE_SQ=750
+    PRE_INC=749
+    POST_SQ=692
+    POST_INC=691
     QUEUE=169969 # smtcomp.q
 fi
 
