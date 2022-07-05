@@ -19,6 +19,7 @@ TRACK_SINGLE_QUERY_CHALLENGE_RAW = 'track_single_query_challenge'
 TRACK_INCREMENTAL_CHALLENGE_RAW = 'track_incremental_challenge'
 TRACK_UNSAT_CORE_RAW = 'track_unsat_core'
 TRACK_MODEL_VALIDATION_RAW = 'track_model_validation'
+TRACK_PROOF_EXHIBITION_RAW = 'track_proof_exhibition'
 TRACK_CLOUD_RAW = 'track_cloud'
 TRACK_PARALLEL_RAW = 'track_parallel'
 
@@ -29,6 +30,7 @@ COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
 COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
 COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
 COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
+COL_PROOF_EXHIBITION_TRACK = 'Proof Exhibition Track'
 COL_CLOUD_TRACK = 'Cloud Track'
 COL_PARALLEL_TRACK = 'Parallel Track'
 
@@ -39,6 +41,7 @@ track_raw_names_to_pretty_names = {
         TRACK_INCREMENTAL_CHALLENGE_RAW: COL_CHALLENGE_TRACK_INCREMENTAL,
         TRACK_UNSAT_CORE_RAW: COL_UNSAT_CORE_TRACK,
         TRACK_MODEL_VALIDATION_RAW: COL_MODEL_VALIDATION_TRACK,
+        TRACK_PROOF_EXHIBITION_RAW: COL_PROOF_EXHIBITION_TRACK,
         TRACK_CLOUD_RAW: COL_CLOUD_TRACK,
         TRACK_PARALLEL_RAW: COL_PARALLEL_TRACK,
         }
