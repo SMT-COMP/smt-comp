@@ -35,7 +35,7 @@ Then run `./find_benchmarks.sh $SMTLIB_DIR` in the directory of this README.
 Go to the space for the current SMT-LIB release on Starexec.  For each
 of the two subspaces choose `download space xml`.  Don't include benchmarks
 attributes.  Extract the xml files from the downloaded zip file and put
-them into this directory as `incremental.xml` and 
+them into this directory as `incremental.xml` and
 `non-incremental.xml`.
 
 ## Creating divisions.
@@ -43,6 +43,25 @@ them into this directory as `incremental.xml` and
 To ensure the logics match those of SMT-LIB, we now create the division
 files from the list of benchmarks.  The script `./create_divisions.sh`
 does this.  You need to supply a regex for every division to match the
-logics in this division.  The script will check that the logics are 
+logics in this division.  The script will check that the logics are
 partitioned into the divisions and report any logic that is missing or
 that was assigned to two divisions.
+
+## Retrieve SQ statuses for unknown non-incremental benchmarks
+
+One should:
+1 - Download the job information from the finished StarExec job.
+
+2 - Run the scoring script on it as if to compute the final results for SQ, but
+    with the --solved-benchs option, which will output a CSV with a list of
+    solved unknown benchmarks and the results produced
+
+3 - Run `merge_benchmarks_with_sq_statuses.py $PATH_CSV_SQ_STATUSES`, which will
+    supplement `SMT-LIB_non_incremental_benchmarks_all_assertions.csv` with the
+    SQ statuses and generate
+    `SMT-LIB_non_incremental_benchmarks_all_assertions_sqSolved.csv`
+
+The resulting CSV will have two new columns: `sqSatRes` and `sqUnsatRes`. For
+each benchmark the former (resp. the latter) has the number of solvers who said
+"sat" (resp. unsat) for it. No distinction about solvers being sound or not is
+made for that computation.
