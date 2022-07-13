@@ -16,7 +16,7 @@ import pandas
 
 # We need higher precisions for some of the reduction scores of the unsat-core
 # track.
-pandas.set_option('precision', 16)
+pandas.set_option('display.precision', 16)
 
 # Options parsing
 from argparse import ArgumentParser
