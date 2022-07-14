@@ -64,6 +64,12 @@ COL_SOLVER_ID_INC_2019 = "Wrapped Solver ID Incremental"
 COL_SOLVER_ID_UC_2019 = "Wrapped Solver ID Unsat Core"
 COL_SOLVER_ID_MV_2019 = "Wrapped Solver ID Model Validation"
 
+COL_CONFIG_ID_SQ = "Config ID Single Query"
+COL_CONFIG_ID_MV = "Config ID Model Validation"
+COL_CONFIG_ID_UC = "Config ID Unsat Core"
+COL_CONFIG_ID_INC = "Config ID Incremental"
+COL_CONFIG_ID_PE = "Config ID Proof Exhibition"
+
 # Extensions of results .md files
 EXT_SQ = "-single-query.md"
 EXT_INC = "-incremental.md"
@@ -211,9 +217,9 @@ def remove_disagreements(data):
     return data
 
 # Return true if the solver with given id is competitive.
-def is_competitive_solver(solver_id):
+def is_competitive_solver(solver_config_id):
     global g_competitive
-    return g_competitive[solver_id]
+    return g_competitive[solver_config_id]
 
 # Return solver name of solver with given solver id.
 def get_solver_name(solver_id):
@@ -263,7 +269,7 @@ def map_solver_id(row, column):
     if column not in row:
         return
     solver_id_str = row[column]
-    solver_id = int(solver_id_str) if solver_id_str else None
+    solver_id = int(solver_id_str) if solver_id_str.isnumeric() else None
     if solver_id:
         g_competitive[solver_id] = row[COL_COMPETING] == 'yes'
         g_solver_names[solver_id] = row[COL_SOLVER_NAME]
@@ -281,6 +287,11 @@ def read_solvers_csv():
         map_solver_id(row, COL_SOLVER_ID_INC_2019)
         map_solver_id(row, COL_SOLVER_ID_UC_2019)
         map_solver_id(row, COL_SOLVER_ID_MV_2019)
+        map_solver_id(row, COL_CONFIG_ID_SQ)
+        map_solver_id(row, COL_CONFIG_ID_INC)
+        map_solver_id(row, COL_CONFIG_ID_UC)
+        map_solver_id(row, COL_CONFIG_ID_MV)
+        map_solver_id(row, COL_CONFIG_ID_PE)
 
 
 ###############################################################################
@@ -403,6 +414,8 @@ def score(division,
     data_new = data[['division', 'benchmark', 'family', 'solver', 'solver_id',
                      'cpu_time', 'wallclock_time', 'status', 'result',
                      'expected']].copy()
+    if int(year) >= 2022:
+        data_new['solver_id'] = data['configuration_id']
     data_new['year'] = year
     data_new['correct'] = 0       # Number of correctly solved benchmarks
     data_new['error'] = 0         # Number of wrong results
