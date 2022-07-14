@@ -51,17 +51,17 @@ NEW_INC_CSV="$SCRIPTDIR/../SMT-LIB_incremental_benchmarks_new.txt"
 
 BENCHMARKS_UC="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
 NEW_UC_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_new.txt"
-FILTER_UC_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all_assertions.csv"
+FILTER_UC_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all_assertions_sqSolved.csv"
 
 BENCHMARKS_PE="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
 NEW_PE_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_new.txt"
-FILTER_PE_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all_assertions.csv"
+FILTER_PE_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all_assertions_sqSolved.csv"
 
 # jq -r '.track_model_validation|join(";")' < divisions.json
 MV_LOGICS="QF_BV;QF_BVFP;QF_BVFPLRA;QF_FP;QF_FPLRA;QF_IDL;QF_LIA;QF_LIRA;QF_LRA;QF_RDL;QF_UF;QF_UFBV;QF_UFFP;QF_UFIDL;QF_UFLIA;QF_UFLRA"
 BENCHMARKS_MV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
 NEW_MV_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_new.txt"
-FILTER_MV_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all_assertions.csv"
+FILTER_MV_CSV="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all_assertions_sqSolved.csv"
 
 # Note that python2 and python3 disagree on random choice function.
 # Always use python3 to get reproducible results.

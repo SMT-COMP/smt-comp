@@ -25,6 +25,8 @@ COL_STATUS = 'status'
 COL_RESULT = 'result'
 COL_EXPECTED = 'expected'
 COL_ASSERTS = 'number of asserts'
+COL_SQ_SAT_RES = 'sqSatRes'
+COL_SQ_UNSAT_RES = 'sqUnsatRes'
 
 #==============================================================================
 LOGICS = set([
@@ -167,14 +169,13 @@ def read_benchmarks(file_name):
 
 def read_data_status_asrts(file_name):
     # Map logics to a dict mapping solvers to
-    # {(benchmark, family): (status, num_asserts)}
+    # {(benchmark, family): (status, num_asserts, sqSatRes,sqUnsatRes)}
     data = {}
     with open(file_name, 'r') as file:
         reader = csv.reader(file)
         header = next(reader)
         for row in reader:
             drow = dict(zip(iter(header), iter(row)))
-
             # Read data
             benchmark = drow[COL_BENCHMARK].strip()
             benchmark = get_benchmark_name(benchmark)
@@ -189,8 +190,9 @@ def read_data_status_asrts(file_name):
             assert(benchmark not in data[logic][family])
 
             data[logic][family][benchmark] = (drow[COL_STATUS],
-                    int(drow[COL_ASSERTS]))
-
+                                              int(drow[COL_ASSERTS]),
+                                              int(drow[COL_SQ_SAT_RES]),
+                                              int(drow[COL_SQ_UNSAT_RES]))
     return data
 
 def read_data_results(file_name):
@@ -310,7 +312,8 @@ def sanity_check_status(unsat_data, selected_benchmarks,
         (logic, family, benchmark) = split_benchmark_to_logic_family(benchmark)
         n_asrts_logic = unsat_data.get(logic, {})
         n_asrts_family = n_asrts_logic.get(family, {})
-        (status, n_asrts) = n_asrts_family.get(benchmark, ('unknown', 0))
+        (status, n_asrts, sqSatRes, sqUnsatRes) = \
+          n_asrts_family.get(benchmark, ('unknown', 0, 0, 0))
         if not is_eligible(status, n_asrts):
             print(benchmark, status, n_asrts)
             assert False
@@ -320,8 +323,8 @@ def sanity_check_status(unsat_data, selected_benchmarks,
 
         n_asrts_logic = unsat_data.get(logic, {})
         n_asrts_family = n_asrts_logic.get(family, {})
-        (status, n_asrts) = n_asrts_family.get(benchmark, ('unknown', 0))
-
+        (status, n_asrts, sqSatRes, sqUnsatRes) = \
+          n_asrts_family.get(benchmark, ('unknown', 0, 0, 0))
         if is_eligible(status, n_asrts):
             print(benchmark)
             assert False
@@ -369,31 +372,39 @@ def filter_asserts_status(asrts_data, all_benchmarks, num_all_benchmarks,
         stats, unsat):
     num_removed_per_logic = {}
     removed_benchmarks = []
+    solvedUnknownBenchmarks = {}
 
     for logic, families in sorted(asrts_data.items()):
         num_removed_per_logic[logic] = 0
+        solvedUnknownBenchmarks[logic] = []
 
         if (logic not in all_benchmarks):
             print(logic)
             assert(False)
         for family, benchmarks in families.items():
             assert(family in all_benchmarks[logic])
-            for benchmark, (status, num_asrts) in benchmarks.items():
+            for benchmark, \
+                (status, num_asrts, sqSatRes, sqUnsatRes) in benchmarks.items():
                 if unsat:
                     if num_asrts < NUM_ASSERTS or status != 'unsat':
                         all_benchmarks[logic][family].remove(benchmark)
                         removed_benchmarks.append(benchmark)
                         num_removed_per_logic[logic] += 1
+                    if status == 'unknown' and sqUnsatRes > 0 \
+                       and num_asrts >= NUM_ASSERTS:
+                      solvedUnknownBenchmarks[logic].append(benchmark)
                 else:
                     if status != 'sat':
                         all_benchmarks[logic][family].remove(benchmark)
                         removed_benchmarks.append(benchmark)
                         num_removed_per_logic[logic] += 1
+                    if status == 'unknown' and sqSatRes > 0:
+                      solvedUnknownBenchmarks[logic].append(benchmark)
 
     if stats:
         print_stats(num_removed_per_logic, num_all_benchmarks)
 
-    return (removed_benchmarks, all_benchmarks, num_removed_per_logic)
+    return (removed_benchmarks, solvedUnknownBenchmarks, all_benchmarks, num_removed_per_logic)
 
 # main_filter_standard: Remove benchmarks on the standard tracks based
 # on multiple years' results.
@@ -431,25 +442,32 @@ def main_filter_standard(filter_csvs, all_benchmarks,
 #                       assertions
 #  stats              - A boolean flag to print statistics
 # Output:
-#  removed_benchmarks - a list containing the benchmarks removed by the filtering
-#  all_benchmarks     - a map containing benchmarks not removed by the filtering
+
+#  removed_benchmarks      - a list containing the benchmarks removed by the
+#                            filtering
+#  solvedUnknownBenchmarks - a map from logics to unknown benchmarks solved in
+#                            SQ
+#  all_benchmarks          - a map containing benchmarks not removed by the
+#                            filtering
 def main_filter_unsat(all_benchmarks, num_all_benchmarks, asrts_data, stats):
 
     print("Filtering for Unsat Core based on assert counts and statuses")
-    (removed_benchmarks, all_benchmarks, num_removed_per_logic) = \
+    (removed_benchmarks, solvedUnknownBenchmarks, \
+     all_benchmarks, num_removed_per_logic) = \
         filter_asserts_status(asrts_data, all_benchmarks, num_all_benchmarks,
                 stats, True)
 
-    return (removed_benchmarks, all_benchmarks)
+    return (removed_benchmarks, solvedUnknownBenchmarks, all_benchmarks)
 
 def main_filter_sat(all_benchmarks, num_all_benchmarks, asrts_data, stats):
 
     print("Filtering for Model Validation based on statuses")
-    (removed_benchmarks, all_benchmarks, num_removed_per_logic) = \
+    (removed_benchmarks, solvedUnknownBenchmarks, \
+     all_benchmarks, num_removed_per_logic) = \
         filter_asserts_status(asrts_data, all_benchmarks, num_all_benchmarks,
                 stats, False)
 
-    return (removed_benchmarks, all_benchmarks)
+    return (removed_benchmarks, solvedUnknownBenchmarks, all_benchmarks)
 
 def print_stats(num_removed_per_logic, num_all_benchmarks):
 
@@ -537,14 +555,14 @@ def main():
         data = {}
         unsat_data = read_data_status_asrts(args.unsat)
 
-        (removed_benchmarks, all_benchmarks) = \
+        (removed_benchmarks, solvedUnknownBenchmarks, all_benchmarks) = \
                 main_filter_unsat(all_benchmarks,
                         num_all_benchmarks, unsat_data,
                         args.print_stats)
     elif (args.sat):
         data = {}
         sat_data = read_data_status_asrts(args.sat)
-        (removed_benchmarks, all_benchmarks) = \
+        (removed_benchmarks, solvedUnknownBenchmarks, all_benchmarks) = \
                 main_filter_sat(all_benchmarks,
                         num_all_benchmarks, sat_data,
                         args.print_stats)
@@ -622,13 +640,32 @@ def main():
     if (args.unsat):
         sanity_check_status(unsat_data, selected_benchmarks,
                 removed_benchmarks, True)
+        # add solved unknown benchmarks from eligible logics
+        eligibleSolvedUnknown = \
+          sum([benchs for l, benchs in solvedUnknownBenchmarks.items() \
+               if not filter_logics or l in filter_logics], [])
+        print("\tSQ solved unknown: {}".format(len(eligibleSolvedUnknown)))
+        selected_benchmarks.extend(eligibleSolvedUnknown)
+        selected_benchmarks = sorted(selected_benchmarks)
     elif (args.filter_csv):
         sanity_check_standard(data_list, selected_benchmarks, removed_benchmarks)
     elif (args.sat):
         sanity_check_status(sat_data, selected_benchmarks,
                 removed_benchmarks, False)
+        eligibleSolvedUnknown = \
+          sum([benchs for l, benchs in solvedUnknownBenchmarks.items() \
+               if not filter_logics or l in filter_logics], [])
+        print("\tSQ solved unknown: {}".format(len(eligibleSolvedUnknown)))
+        selected_benchmarks.extend(eligibleSolvedUnknown)
+        selected_benchmarks = sorted(selected_benchmarks)
 
 
+    if total_selected < len(selected_benchmarks):
+      for l, benchs in solvedUnknownBenchmarks.items():
+        if filter_logics and l not in filter_logics or len(benchs) == 0:
+          continue
+        print("\t\tFor {:15s} selected {}".format(l, len(benchs)))
+      print("Total selected with SQ solved unknown: {}".format(len(selected_benchmarks)))
     # Print selected benchmarks
     if args.out:
         with open(args.out, 'w') as outfile:
