@@ -22,6 +22,10 @@ for file in $(cat ${selection}); do
     ofile=/non-incremental/${logic}/$(printf "smt-comp-%03d.smt2" ${i})
     dstfilesysname=${outputdir}/${ofile}
     echo "${file},${ofile}"
-    ${SCRAMBLER} -seed ${seed} < ${srcfilesysname} > ${dstfilesysname}
+    if [ -z ${DONT_SCRAMBLE+x} ]; then
+       ${SCRAMBLER} -seed ${seed} < ${srcfilesysname} > ${dstfilesysname}
+    else
+       ln ${srcfilesysname} ${dstfilesysname}
+    fi
     i=$(($i+1))
 done

@@ -29,6 +29,16 @@ function getLogics {
         ../../registration/solvers_divisions_final.csv
 }
 
+function createPairFile {
+    track=$1
+    $PYTHON ${CREATE_PAIR_FILE} \
+         -t ${track} \
+        ${SCRIPTDIR}/final/${track}-map.csv \
+        ../../registration/solvers_divisions_final.csv \
+        > ${competition_root}/${track}-pairs.csv
+}
+
+
 function preselect {
     mode=$1
     output=$2
@@ -56,10 +66,14 @@ function picknums {
     hard_logics=$1
     unsolved_logics=$2
     numbers=$3
+    track=$4
     ${PICKNUM} \
         ${hard_logics} \
         ${unsolved_logics} \
         ${MIN_BENCHMARKS} \
+        -d ../../new-divisions.json \
+        -t ${track} \
+        --seed ${SEED} \
         > ${numbers}
 }
 
@@ -89,8 +103,13 @@ echo "Seed: $SEED"
 
 SCRIPTDIR=`get_abs_path $(dirname "$0")`
 
-TMPDIR=$(mktemp -d)
-trap "rm -rf ${TMPDIR}" EXIT
+TMPDIR=$(mktemp -d --tmpdir "aws_make_selection.tmp.XXX")
+
+if [ -z ${KEEP_INTERMEDIARY_FILES+x} ]; then
+    trap "rm -rf ${TMPDIR}" EXIT
+else
+    echo "Intermediary files are in $TMPDIR"
+fi
 
 OUT_CLOUD="${TMPDIR}/benchmark_selection_cloud"
 SELECTION_NUMBERS_CLOUD="${TMPDIR}/benchmark_selection_cloud_numbers.json"
@@ -107,6 +126,7 @@ PICKNUM="${SCRIPTDIR}/aws_pick_instance_nums.py"
 SELECT_FINAL="${SCRIPTDIR}/aws_select_final.py"
 AWS_SCRAMBLER="${SCRIPTDIR}/aws_scramble_and_rename.sh"
 FILTER_BLACKLISTED="${SCRIPTDIR}/aws_filter_blocklisted.sh"
+CREATE_PAIR_FILE=${SCRIPTDIR}/../../../tools/prep/aws_create_pair_files.py
 
 BENCHMARKS="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
 BENCHMARKS_WITHOUT_BLACKLISTED="${TMPDIR}/SMT-LIB_non_incremental_benchmarks_all_without_blocklisted.txt"
@@ -131,6 +151,7 @@ fi
 smt_lib_root=$1
 competition_root=$2
 
+rm -rf ${competition_root}
 mkdir -p final
 
 echo "Filtering blocklisted benchmarks from non-incremental"
@@ -150,7 +171,7 @@ mv ${OUT_CLOUD}-hard.sorted ${OUT_CLOUD}-hard
 genlogics ${OUT_CLOUD}-unsolved
 genlogics ${OUT_CLOUD}-hard
 
-picknums ${OUT_CLOUD}-hard-logics ${OUT_CLOUD}-unsolved-logics ${SELECTION_NUMBERS_CLOUD}
+picknums ${OUT_CLOUD}-hard-logics ${OUT_CLOUD}-unsolved-logics ${SELECTION_NUMBERS_CLOUD} cloud
 
 selectfinal ${SELECTION_NUMBERS_CLOUD} ${OUT_CLOUD}-hard ${OUT_CLOUD}-unsolved ${SELECTION_CLOUD}
 
@@ -167,7 +188,7 @@ mv ${OUT_PARALLEL}-unsolved.sorted ${OUT_PARALLEL}-unsolved
 sort ${OUT_PARALLEL}-hard > ${OUT_PARALLEL}-hard.sorted
 mv ${OUT_PARALLEL}-hard.sorted ${OUT_PARALLEL}-hard
 
-picknums ${OUT_PARALLEL}-hard-logics ${OUT_PARALLEL}-unsolved-logics ${SELECTION_NUMBERS_PARALLEL}
+picknums ${OUT_PARALLEL}-hard-logics ${OUT_PARALLEL}-unsolved-logics ${SELECTION_NUMBERS_PARALLEL} parallel
 
 selectfinal ${SELECTION_NUMBERS_PARALLEL} ${OUT_PARALLEL}-hard ${OUT_PARALLEL}-unsolved ${SELECTION_PARALLEL}
 
@@ -183,3 +204,7 @@ ${AWS_SCRAMBLER} ${smt_lib_root} \
     ${competition_root}/cloud \
     ${SEED} > ${SCRIPTDIR}/final/cloud-map.csv
 
+echo "Creating pair files"
+
+createPairFile parallel
+createPairFile cloud
