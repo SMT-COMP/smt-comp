@@ -13,7 +13,7 @@ import sys
 # Set time limit for interesting benchmarks. The default here is 1 second.
 TIME_LIMIT = 1
 # Set the minimum for number of asserts in unsat core track
-NUM_ASSERTS = 2
+NUM_ASSERTS = 0
 
 #==============================================================================
 
@@ -487,8 +487,9 @@ def print_stats(num_removed_per_logic, num_all_benchmarks):
 
 
 def main():
-
+    global NUM_ASSERTS
     args = parse_args()
+    NUM_ASSERTS = args.n_asserts
 
     if (args.filter_csv and args.unsat) or \
           (args.filter_csv and args.sat) or \
@@ -698,6 +699,8 @@ def parse_args():
                     required=True)
     ap.add_argument('--unsat', dest='unsat',
                     help="Filter for unsat core track")
+    ap.add_argument('--n-asserts', dest='n_asserts', default=2, type=int,
+                    help="Minimum number of asserts for unsat benchmarks")
     ap.add_argument('--sat', dest='sat',
                     help="Filter for model-validation track")
     ap.add_argument('--print-stats', dest="print_stats",

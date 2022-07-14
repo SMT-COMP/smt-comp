@@ -80,4 +80,4 @@ printf "+++++++++++\n\nUC TRACK\n\n"
 $PYTHON $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s $SEED --print-stats --out "$OUT_UC" --prefix "/non-incremental/" --unsat "$FILTER_UC_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER
 
 printf "+++++++++++\n\nPE TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_PE" --new-benchmarks "$NEW_PE_CSV" -s $SEED --print-stats --out "$OUT_PE" --prefix "/non-incremental/" --unsat "$FILTER_PE_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_PE" --new-benchmarks "$NEW_PE_CSV" -s $SEED --print-stats --out "$OUT_PE" --prefix "/non-incremental/" --unsat "$FILTER_PE_CSV" --n-asserts 0 --ratio $RATIO --min-per-logic $NUM_LOWER
