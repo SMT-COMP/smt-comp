@@ -92,12 +92,12 @@ if [ "$TESTING" = "1" ]; then
     PRE_SQ=708
     PRE_INC=749
     PRE_UC=711
-    PRE_MV=710
+    PRE_MV=751
     PRE_PE=729
     POST_SQ=692
     POST_INC=691
     POST_UC=727
-    POST_MV=742
+    POST_MV=756
     POST_PE=741
     QUEUE=169969   # all.q
 else
@@ -106,8 +106,13 @@ else
     KIND=final
     PRE_SQ=750
     PRE_INC=749
+    PRE_MV=751
+    PRE_UC=752
+    PRE_PE=753
     POST_SQ=692
     POST_INC=691
+    POST_MV=756
+    POST_PE=741
     QUEUE=169969 # smtcomp.q
 fi
 
