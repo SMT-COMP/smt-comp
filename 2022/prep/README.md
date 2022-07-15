@@ -54,8 +54,11 @@ One should:
 
 2 - Run the scoring script on it as if to compute the final results for SQ, but
     with the --solved-benchs option, which will output a CSV with a list of
-    solved unknown benchmarks and the results produced
+    solved unknown benchmarks and the results produced. For example:
 
+```
+/path/to/tools/scoring/score.py --solved-benchs -c /path/to/SomeJob_info.csv -y 2022 -t 1200 -S /path/to/registration/solvers_divisions_final.csv -T sq -D /path/to/new-divisions.json
+```
 3 - Run `merge_benchmarks_with_sq_statuses.py $PATH_CSV_SQ_STATUSES`, which will
     supplement `SMT-LIB_non_incremental_benchmarks_all_assertions.csv` with the
     SQ statuses and generate

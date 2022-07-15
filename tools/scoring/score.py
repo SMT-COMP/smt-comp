@@ -670,7 +670,29 @@ def process_csv(csv,
         data = data[(data.division.isin(set(divisions)))]
 
     start = time.time() if g_args.show_timestamps else None
-    data = remove_disagreements(data)
+    # Get solved unknown benchamrks
+    if g_args.solved_benchs:
+        # Consider only solved unknown benchmarks
+        solved_unknown = data[(data.expected == RESULT_UNKNOWN)
+                            & ((data.result == RESULT_SAT)
+                               | (data.result == RESULT_UNSAT))]
+
+        # aggregate per division/benchmark the results in "sat;unsat"
+        # or vice versa or just one (without ;)
+        #
+        # Note that this triggers an exoteric pandas warning, but it's a valid assignment
+        solved_unknown["result"] = \
+            solved_unknown[["division", "benchmark", "result"]].groupby(
+                ["division", "benchmark"])["result"].transform(
+                    lambda x: ";".join(x))
+
+        solved_unknown = solved_unknown[["division", "benchmark", "result"]].drop_duplicates()
+        # join division and benchamrk name
+        solved_unknown["benchmark"] = "./" + \
+            solved_unknown['division'].astype(str) + "/" + solved_unknown['benchmark']
+        return solved_unknown
+    else:
+      data = remove_disagreements(data)
     if g_args.show_timestamps:
         log('time disagreements: {}'.format(time.time() - start))
 
@@ -2056,6 +2078,11 @@ def parse_args():
                         default="",
                         help="list the best competing solvers, per division, of given year, in a csv with year/division/name")
 
+    parser.add_argument("--solved-benchs",
+                        default=False,
+                        action="store_true",
+                        help="list of solved unknown benchmarks for which solvers say sat/unsat, in a csv with year name")
+
     parser.add_argument("-D", "--divisions-map",
                         metavar="json",
                         default=None,
@@ -2188,6 +2215,11 @@ def main():
                              g_args.use_families,
                              g_args.skip_unknowns,
                              g_args.sequential)
+            if g_args.solved_benchs:
+              df[["benchmark", "result"]].to_csv(
+                path_or_buf = "solvedUnknowns" + str(year) + ".csv",
+                columns = ["benchmark","result"], index=False)
+              continue
             data.append(df)
             grouped = group_and_rank_solvers(df, g_args.sequential)
             grouped['name'] = grouped.solver_id.map(get_solver_name)
@@ -2212,7 +2244,8 @@ def main():
                       .to_csv(path_or_buf = g_args.bestof, \
                               columns = ["division", "name","solver_id"], \
                               index = False)
-
+        if g_args.solved_benchs:
+          return
         result = pandas.concat(data, ignore_index = True)
 
 if __name__ == "__main__":
