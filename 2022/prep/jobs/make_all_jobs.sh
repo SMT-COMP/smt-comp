@@ -1,5 +1,6 @@
 #!/bin/bash
 
+if false; then  # test jobs
 for track in sq inc uc mv pe; do
     ./make_job.sh --$track --test-run --solvers ../../registration/solvers_divisions_prelim.csv
 done
@@ -15,7 +16,9 @@ for track in sq mv inc; do
 done
 
 ./make_job.sh --test-run --inc --extra preprocessorfix --solvers ../../registration/solvers_divisions_incrementalfix.csv
-for track in sq inc mv pe; do    # TODO: uc
+fi
+
+for track in sq inc mv uc pe; do
     ./make_job.sh --$track
 done
 
