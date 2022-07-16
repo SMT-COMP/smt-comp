@@ -28,58 +28,58 @@ EXTRA=""
 while [ $# -gt 0 ]
 do
     case $1 in
-	-h|--help)
-	    echo -n "usage: $(basename $0) [<option>]"
-	    echo
-	    echo "Generate a StarExec Competition Job."
-	    echo
-	    echo "  options:"
-	    echo "    -h, --help    Print this message and exit"
-	    echo "    --include-nc  Run also non-competitive divisions"
-	    echo "    --test-run    Create a Job for the test run"
-	    echo "    --sq          Single Query track"
-	    echo "    --inc         Incremental track"
-	    echo "    --uc          Unsat Core track"
-	    echo "    --mv          Model Validation track"
-	    echo "    --pe          Proof Exhibition track"
-	    echo "    --solvers <file> An optional alternative solvers csv file"
-	    echo "    --extra <id>  Some id to distinguish job"
-	    echo
-	    exit
-	    ;;
-	--test-run)
-	    TESTING=1
-	    ;;
-	--sq)
-	    TRACK=SQ
-	    ;;
-	--inc)
-	    TRACK=INC
-	    ;;
-	--uc)
-	    TRACK=UC
-	    ;;
-	--mv)
-	    TRACK=MV
-	    ;;
-	--pe)
-	    TRACK=PE
-	    ;;
-	--solvers)
-	    shift
-	    SOLVERS_CSV=$1
-	    ;;
-	--include-nc)
-	    INCLUDE_NONCOMPETITIVE="--include-non-competitive"
-	    ;;
-	--extra)
-	    shift
-	    EXTRA=$1
-	    ;;
-	*)
+  -h|--help)
+      echo -n "usage: $(basename $0) [<option>]"
+      echo
+      echo "Generate a StarExec Competition Job."
+      echo
+      echo "  options:"
+      echo "    -h, --help    Print this message and exit"
+      echo "    --include-nc  Run also non-competitive divisions"
+      echo "    --test-run    Create a Job for the test run"
+      echo "    --sq          Single Query track"
+      echo "    --inc         Incremental track"
+      echo "    --uc          Unsat Core track"
+      echo "    --mv          Model Validation track"
+      echo "    --pe          Proof Exhibition track"
+      echo "    --solvers <file> An optional alternative solvers csv file"
+      echo "    --extra <id>  Some id to distinguish job"
+      echo
+      exit
+      ;;
+  --test-run)
+      TESTING=1
+      ;;
+  --sq)
+      TRACK=SQ
+      ;;
+  --inc)
+      TRACK=INC
+      ;;
+  --uc)
+      TRACK=UC
+      ;;
+  --mv)
+      TRACK=MV
+      ;;
+  --pe)
+      TRACK=PE
+      ;;
+  --solvers)
+      shift
+      SOLVERS_CSV=$1
+      ;;
+  --include-nc)
+      INCLUDE_NONCOMPETITIVE="--include-non-competitive"
+      ;;
+  --extra)
+      shift
+      EXTRA=$1
+      ;;
+  *)
             echo "ERROR: invalid option '$1'"
             exit 1
-	    ;;
+      ;;
     esac
     shift
 done
@@ -114,7 +114,8 @@ else
     POST_MV=756
     POST_UC=757
     POST_PE=741
-    QUEUE=169969 # smtcomp.q
+    # QUEUE=169969 # smtcomp.q
+    QUEUE=181493 # new.q
 fi
 
 mkdir -p $KIND
@@ -140,9 +141,9 @@ else
 fi
 
 python3 $SCRIPTDIR/../../../tools/prep/prepare_job_xml.py \
-	-t ${!TRACK} --name "$JOBNAME" --queue $QUEUE --pre $PRE --post $POST \
-	--wall $TIMEOUT --seed $SEED --memlimit $MEMLIMIT \
-	-s $SELECTION $IN_SPACE $SOLVERS_CSV $KIND/$OUTFILE.xml \
-	$INCLUDE_NONCOMPETITIVE
+  -t ${!TRACK} --name "$JOBNAME" --queue $QUEUE --pre $PRE --post $POST \
+  --wall $TIMEOUT --seed $SEED --memlimit $MEMLIMIT \
+  -s $SELECTION $IN_SPACE $SOLVERS_CSV $KIND/$OUTFILE.xml \
+  $INCLUDE_NONCOMPETITIVE
 
 (cd $KIND; zip $OUTFILE.zip $OUTFILE.xml)
