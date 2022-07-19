@@ -269,7 +269,7 @@ def map_solver_id(row, column):
     if column not in row:
         return
     solver_id_str = row[column]
-    solver_id = int(solver_id_str) if solver_id_str.isnumeric() else None
+    solver_id = int(solver_id_str) if isinstance(solver_id_str, int) or solver_id_str.isnumeric() else None
     if solver_id:
         g_competitive[solver_id] = row[COL_COMPETING] == 'yes'
         g_solver_names[solver_id] = row[COL_SOLVER_NAME]
@@ -2223,12 +2223,6 @@ def main():
             data.append(df)
             grouped = group_and_rank_solvers(df, g_args.sequential)
             grouped['name'] = grouped.solver_id.map(get_solver_name)
-            bl = biggest_lead_ranking(df, g_args.sequential)
-            lc = largest_contribution_ranking(df, time_limit, g_args.sequential)
-            print(grouped)
-            print(bl)
-            print(lc)
-
             if (g_args.bestof != ""):
               # get winner *including non-competitive*
               winners = grouped[\
@@ -2238,12 +2232,22 @@ def main():
                         ]
               winners = winners.reset_index()\
                 .drop_duplicates(["year", "division"], keep="first")
-
+              if g_args.divisions_map:
+                # only keep actual divisions
+                divisionInfo = json.load(open(g_args.divisions_map))
+                trackDivisions = list(divisionInfo[g_tracks[g_args.track]].keys())
+                winners = winners.drop(winners[~winners.division.isin(trackDivisions)].index)
 
               winners[["year", "division", "name","solver_id"]]\
                       .to_csv(path_or_buf = g_args.bestof, \
                               columns = ["division", "name","solver_id"], \
                               index = False)
+            else:
+              bl = biggest_lead_ranking(df, g_args.sequential)
+              lc = largest_contribution_ranking(df, time_limit, g_args.sequential)
+              print(grouped)
+              print(bl)
+              print(lc)
         if g_args.solved_benchs:
           return
         result = pandas.concat(data, ignore_index = True)
