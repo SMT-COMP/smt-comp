@@ -22,3 +22,6 @@ for track in sq inc mv uc pe; do
     ./make_job.sh --$track
 done
 
+
+IDS=$(csvcut -c "Config ID Single Query" ../../registration/solvers_divisions_noncompeting.csv | tail +2 | tr '\n' , | sed s/,$//)
+PREPARE_JOB_ARGS="--solvers $IDS" ./make_job.sh --sq --extra noncompeting --solvers ../../registration/solvers_divisions_all.csv

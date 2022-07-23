@@ -7,6 +7,7 @@ PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"
 SOLVERS_CSV="$SCRIPTDIR/../../registration/solvers_divisions_final.csv"
 
 INCLUDE_NONCOMPETITIVE=""
+PREPARE_JOB_ARGS=${PREPARE_JOB_ARGS:-}
 
 ### Input space xml files
 IN_SPACE_NON_INC="../non-incremental.xml"
@@ -144,6 +145,6 @@ python3 $SCRIPTDIR/../../../tools/prep/prepare_job_xml.py \
   -t ${!TRACK} --name "$JOBNAME" --queue $QUEUE --pre $PRE --post $POST \
   --wall $TIMEOUT --seed $SEED --memlimit $MEMLIMIT \
   -s $SELECTION $IN_SPACE $SOLVERS_CSV $KIND/$OUTFILE.xml \
-  $INCLUDE_NONCOMPETITIVE
+  $PREPARE_JOB_ARGS $INCLUDE_NONCOMPETITIVE
 
 (cd $KIND; zip $OUTFILE.zip $OUTFILE.xml)

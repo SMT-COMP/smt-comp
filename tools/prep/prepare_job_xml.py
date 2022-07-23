@@ -223,9 +223,9 @@ def build_job():
                         included_solvers = g_args.solvers
                         excluded_solvers = g_args.excluded_solvers
                         if included_solvers:
-                            solvers = [ id for id in solvers if id in included_solvers ]
+                            solvers = [ id for id in solvers if id[0] in included_solvers ]
                         if excluded_solvers:
-                            solvers = [ id for id in solvers if id not in excluded_solvers ]
+                            solvers = [ id for id in solvers if id[0] not in excluded_solvers ]
                         add_job_pairs(job, g_args.track, subspace, solvers)
                     else:
                         print("Removing division {} without enough competitive solvers".format(division))
