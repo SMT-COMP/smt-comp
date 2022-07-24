@@ -115,8 +115,8 @@ else
     POST_MV=756
     POST_UC=757
     POST_PE=741
-    # QUEUE=169969 # smtcomp.q
-    QUEUE=181493 # new.q
+    QUEUE=169969 # smtcomp.q
+    # QUEUE=181493 # new.q
 fi
 
 mkdir -p $KIND
