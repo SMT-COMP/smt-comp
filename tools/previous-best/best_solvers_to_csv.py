@@ -60,7 +60,7 @@ def parse_args():
             dest="divisions",
             default=None,
             required=False,
-            help="The json file mapping 2021 divisions to smtlib-logics")
+            help="The json file mapping divisions to smtlib-logics")
 
     required = parser.add_argument_group("required arguments")
     required.add_argument("-s", "--single-query",
@@ -151,8 +151,11 @@ if __name__ == '__main__':
 
     logicToDivisionLogics = None
     if g_args.divisions:
+      if g_args.old_year < 2021:
         logicToDivisionLogics = \
                 constructLogicToDivisionLogicsMap(json.loads(open(g_args.divisions).read()))
+      else:
+        logicToDivisionLogics = json.loads(open(g_args.divisions).read())
 
     winner_files= [g_args.sq_winners, g_args.uc_winners, \
             g_args.in_winners, g_args.mv_winners]
@@ -216,6 +219,16 @@ if __name__ == '__main__':
                             g_args.old_year))
                     else:
                         new_winner_row.append(quoteIfHasComma(row[col]))
+                # account for column name change in 2022. Note that this will
+                # put in the respective columns the wrapped solver IDs. The
+                # configuration IDs one will need to retrieve manually
+                elif g_args.old_year == 2021 and col.startswith("Config ID"):
+                  track = col.split("Config ID ")[1]
+                  findCol = "Wrapped Solver ID " + track
+                  if findCol in row.keys():
+                    new_winner_row.append(row[findCol])
+                  else:
+                    new_winner_row.append("")
                 else:
                     new_winner_row.append('')
 
