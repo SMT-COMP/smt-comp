@@ -311,7 +311,7 @@ def group_and_rank_solvers(data, sequential):
 
     # Group results
     if 'num_check_sat' in data.columns:
-      data_grouped = data.groupby(['year', 'division', 'solver_id']).agg({
+      data_grouped = data.groupby(['year', 'division', 'solver_id', 'configuration_id']).agg({
           'correct': sum,
           'error': sum,
           'correct_sat' : sum,
@@ -328,7 +328,7 @@ def group_and_rank_solvers(data, sequential):
           'num_check_sat': sum,
           })
     else:
-      data_grouped = data.groupby(['year', 'division', 'solver_id']).agg({
+      data_grouped = data.groupby(['year', 'division', 'solver_id', 'configuration_id']).agg({
           'correct': sum,
           'error': sum,
           'correct_sat' : sum,
@@ -426,6 +426,7 @@ def score(division,
     data_new['timeout'] = 0
     data_new['memout'] = 0
     data_new['unsolved'] = 0
+    data_new['configuration_id'] = data['configuration_id']
 
     # Set the column that is used to determine if a benchmark was solved
     # within the time limit.
@@ -2238,9 +2239,9 @@ def main():
                 trackDivisions = list(divisionInfo[g_tracks[g_args.track]].keys())
                 winners = winners.drop(winners[~winners.division.isin(trackDivisions)].index)
 
-              winners[["year", "division", "name","solver_id"]]\
+              winners[["year", "division", "name","solver_id", "configuration_id"]]\
                       .to_csv(path_or_buf = g_args.bestof, \
-                              columns = ["division", "name","solver_id"], \
+                              columns = ["division", "name","solver_id", "configuration_id"], \
                               index = False)
             else:
               bl = biggest_lead_ranking(df, g_args.sequential)

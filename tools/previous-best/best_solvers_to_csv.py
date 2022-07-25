@@ -7,6 +7,7 @@ import json
 
 WINNER_NAME_COL = 'name'
 WINNER_DIV_COL = 'division'
+WINNER_CONFIG_COL = 'configuration_id'
 
 REG_NAME_COL = 'Solver Name'
 
@@ -17,6 +18,14 @@ REG_UCDIVS_COL = "Unsat Core Track"
 REG_COMPETING_COL = "Competing"
 REG_SEED_COL = "Seed"
 REG_NAME_COL = "Solver Name"
+
+trackreg2index = {"Single Query Track" : 0,
+                  "Unsat Core Track" : 1,
+                  "Incremental Track" : 2,
+                  "Model Validation Track" : 3
+                  }
+
+track2index = {"Single Query" : 0, "Unsat Core" : 1, "Incremental" : 2, "Model Validation" : 3}
 
 RAW_TRACK_NAMES = {
     REG_SQDIVS_COL : "track_single_query",
@@ -169,11 +178,12 @@ if __name__ == '__main__':
             for row in reader:
                 name = row[WINNER_NAME_COL]
                 div = row[WINNER_DIV_COL]
+                config = row[WINNER_CONFIG_COL]
                 if name not in winners:
                     winners[name] = \
                             [[] for k in range(0, len(winner_files))]
                 assert(i < len(winners[name]))
-                winners[name][i].append(div)
+                winners[name][i].append([div, config])
 
     new_header = None
     with open(g_args.new_registration) as new_registration:
@@ -195,18 +205,12 @@ if __name__ == '__main__':
                 if col in row:
                     if col in [REG_SQDIVS_COL, REG_UCDIVS_COL,
                             REG_INDIVS_COL, REG_MVDIVS_COL]:
-                        if col == REG_SQDIVS_COL:
-                            winning_logics = winners[name][0]
-                        elif col == REG_UCDIVS_COL:
-                            winning_logics = winners[name][1]
-                        elif col == REG_INDIVS_COL:
-                            winning_logics = winners[name][2]
-                        elif col == REG_MVDIVS_COL:
-                            winning_logics = winners[name][3]
+                        index = trackreg2index[col]
+                        winning_logics = [l[0] for l in winners[name][index]] if len(winners[name][index]) else []
                         participated_logics = row[col].split(";")
                         new_winner_row.append(";".join(
-                            getLogics(winning_logics,\
-                                logicToDivisionLogics,\
+                            getLogics(winning_logics,
+                                logicToDivisionLogics,
                                 col,
                                 participated_logics)))
 
@@ -224,9 +228,14 @@ if __name__ == '__main__':
                 # configuration IDs one will need to retrieve manually
                 elif g_args.old_year == 2021 and col.startswith("Config ID"):
                   track = col.split("Config ID ")[1]
-                  findCol = "Wrapped Solver ID " + track
-                  if findCol in row.keys():
-                    new_winner_row.append(row[findCol])
+                  # index = track2index[track]
+                  # findCol = "Wrapped Solver ID " + track
+                  # if findCol in row.keys():
+                  #   new_winner_row.append(row[findCol])
+                  # else:
+                  #   new_winner_row.append("")
+                  if track in track2index.keys() and len(winners[name][track2index[track]]) > 0:
+                    new_winner_row.append(winners[name][track2index[track]][0][1])
                   else:
                     new_winner_row.append("")
                 else:

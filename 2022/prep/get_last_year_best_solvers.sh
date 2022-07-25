@@ -14,7 +14,7 @@ INCREMENTAL_NUM_CHECKSATS_2021="../../2021/prep/SMT-LIB_incremental_benchmarks_n
 SOLVERS_DIVISIONS_2021="../../2021/registration/solvers_divisions_final.csv"
 SOLVERS_DIVISIONS_2022="../../2022/registration/solvers_divisions_final.csv"
 
-SOLVERS_DIVISIONS_SUGGESTIONS="solvers_divisions_bestof_2021.csv"
+SOLVERS_DIVISIONS_SUGGESTIONS="../registration/solvers_divisions_bestof_2021.csv"
 
 NEW_DIVISIONS="../../2021/new-divisions.json"
 
@@ -47,16 +47,16 @@ function getBest {
 }
 
 bestof_sq=bestof_sq.csv;
-# getBest sq 1200 ${bestof_sq} ${SINGLE_QUERY_RESULTS_2021}
+getBest sq 1200 ${bestof_sq} ${SINGLE_QUERY_RESULTS_2021}
 
 bestof_in=bestof_inc.csv;
-# getBest inc 1200 ${bestof_in} ${INCREMENTAL_RESULTS_2021} ${INCREMENTAL_NUM_CHECKSATS_2021}
+getBest inc 1200 ${bestof_in} ${INCREMENTAL_RESULTS_2021} ${INCREMENTAL_NUM_CHECKSATS_2021}
 
 bestof_uc=bestof_uc.csv;
-# getBest uc 1200 ${bestof_uc} ${UNSAT_CORE_RESULTS_2021}
+getBest uc 1200 ${bestof_uc} ${UNSAT_CORE_RESULTS_2021}
 
 bestof_mv=bestof_mv.csv;
-# getBest mv 1200 ${bestof_mv} ${MODEL_VALIDATION_RESULTS_2021}
+getBest mv 1200 ${bestof_mv} ${MODEL_VALIDATION_RESULTS_2021}
 
 ${BESTTOCSVS} \
     -s ${bestof_sq} \
@@ -70,4 +70,4 @@ ${BESTTOCSVS} \
     -d ${NEW_DIVISIONS}
 
 echo "Suggestions written to ${SOLVERS_DIVISIONS_SUGGESTIONS}."
-echo "Check and add them to ${SOLVERS_DIVISIONS_2021}."
+echo "Check and add them to ${SOLVERS_DIVISIONS_2022}."
