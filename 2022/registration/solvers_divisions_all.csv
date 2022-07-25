@@ -53,4 +53,4 @@ Preliminary Solver ID,Solver ID,Config ID Single Query,Config ID Incremental,Con
 23391,23672,331799,,,,,2019-Par4,,Par4.pdf,Par4,no,,,,,,,,BV;QF_IDL;QF_LIA;QF_LIRA;QF_NIA;QF_NRA,,,,,,,,"AProVE (smt-comp 2018), Boolector (smt-comp 2018), COLIBRI (smt-comp 2018), CVC4 (smt-comp 2018), SMTInterpol (smt-comp 2018), SMTRAT (smt-comp 2018), veriT (smt-comp 2018), Yices (smt-comp 2018), Z3 (smt-comp 2018)",,tjark.weber@it.uu.se,Tjark Weber,
 23470,23470,,332822,,,,2019-Z3,,,,no,,,,,,,,,BV,,,,,,,,,,,
 23417,23733,,332808,,,,2019-CVC4-inc,http://cvc4.cs.stanford.edu,cvc4.pdf,CVC4 at the SMT Competition 2019,no,,,,,,,,,BVFP,,,,,,"CVC4, 23420",,,noetzli@cs.stanford.edu,"Clark Barrett, Haniel Barbosa, Martin Brain, Tim King, Makai Mann, Aina Niemetz, Andres Nötzli, Alex Ozdemir, Mathias Preiner, Andrew Reynolds, Cesare Tinelli, Yoni Zohar",
-,19993,,301833,,,,2018-MathSAT (incremental),,,,no,,,,,,,,,QF_LRA,,,,,,,,,,,
+,19993,,301833,,,,2018-MathSAT-incremental,,,,no,,,,,,,,,QF_LRA,,,,,,,,,,,
