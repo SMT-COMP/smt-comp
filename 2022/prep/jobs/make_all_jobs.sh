@@ -46,3 +46,5 @@ PREPARE_JOB_ARGS="--solvers $IDS" ./make_job.sh --inc --extra noncompeting --sol
 
 IDS=$(csvcut -c "Config ID Unsat Core" ../../registration/solvers_divisions_noncompeting.csv | tail +2 | tr '\n' , | sed s/,$//)
 PREPARE_JOB_ARGS="--solvers $IDS" ./make_job.sh --uc --extra noncompeting --solvers ../../registration/solvers_divisions_all.csv
+
+PREPARE_JOB_ARGS="--solvers 671399" ./make_job.sh --sq --extra noncompeting2 --solvers ../../registration/solvers_divisions_all.csv
