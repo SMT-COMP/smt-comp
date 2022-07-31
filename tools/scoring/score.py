@@ -347,7 +347,7 @@ def group_and_rank_solvers(data, sequential):
 
 
     # Convert solver index to column
-    data_grouped.reset_index(level=2, inplace=True)
+    data_grouped.reset_index(level=['solver_id', 'configuration_id'], inplace=True)
 
     # Sort solvers by sort_columns and sort_asc within a division
     sort_columns = ['score_error', 'score_correct']

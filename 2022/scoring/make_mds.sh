@@ -4,7 +4,7 @@ SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 YEAR=2022
 SCORE="$SCRIPTDIR/../../tools/scoring/score.py"
-SOLVERS_CSV="$SCRIPTDIR/../registration/solvers_divisions_final.csv"
+SOLVERS_CSV="$SCRIPTDIR/../registration/solvers_divisions_all.csv"
 OUTPUT="$SCRIPTDIR/../../../smt-comp.github.io/_results_$YEAR"
 TIME=1200
 INC_NUM_CHECK_SAT="$SCRIPTDIR/../prep/SMT-LIB_incremental_benchmarks_num_check_sat.csv"
