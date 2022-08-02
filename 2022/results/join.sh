@@ -15,7 +15,7 @@ COLORDER=../../tools/process-results/unify_column_order.py
 TMPDIR=$(mktemp -d)
 trap "rm -rf ${TMPDIR}" EXIT
 
-for track in sq inc mv uc; do
+for track in sq inc mv uc pe; do
     echo -n "$track:"
     OUTPUT="raw-results-${track}.csv"
     rm -f $OUTPUT

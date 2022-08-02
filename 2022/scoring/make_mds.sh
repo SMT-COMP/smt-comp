@@ -13,6 +13,7 @@ GEN_SQ=
 GEN_INC=
 GEN_UC=
 GEN_MV=
+GEN_PE=
 GEN_CT=
 GEN_PT=
 
@@ -31,6 +32,7 @@ do
       echo "    --inc          Incremental track "
       echo "    --uc           Unsat Core track "
       echo "    --mv           Model Validation track "
+      echo "    --pe           Proof Exhibition track "
       echo "    --cloud        Cloud track "
       echo "    --parallel     Parallel track "
       echo
@@ -41,6 +43,7 @@ do
       GEN_INC=yes
       GEN_UC=yes
       GEN_MV=yes
+      GEN_PE=yes
       GEN_CT=yes
       GEN_PT=yes
       ;;
@@ -55,6 +58,9 @@ do
       ;;
     --mv)
       GEN_MV=yes
+      ;;
+    --pe)
+      GEN_PE=yes
       ;;
     --cloud)
       GEN_CT=yes
@@ -74,6 +80,8 @@ done
 
 mkdir -p $OUTPUT
 
+PE_DIVISIONS=$(jq -r '.track_proof_exhibition | keys[]' <  ../new-divisions.json  | tr '\n' , | sed s/,$//)
+
 [[ -n $GEN_SQ ]] && \
 $PYTHON $SCORE -y $YEAR --csv results-sq.csv  -t $TIME --gen-md $OUTPUT -T sq -S $SOLVERS_CSV -D ../new-divisions.json
 [[ -n $GEN_INC ]] && \
@@ -84,6 +92,10 @@ $PYTHON $SCORE -y $YEAR --csv results-uc.csv  -t $TIME --gen-md $OUTPUT -T uc -S
 $PYTHON $SCORE -y $YEAR --csv results-mv.csv  -t $TIME \
     --gen-md $OUTPUT -T mv -S $SOLVERS_CSV -D ../new-divisions.json \
     --expdivs QF_FPArith
+[[ -n $GEN_PE ]] && \
+$PYTHON $SCORE -y $YEAR --csv results-pe.csv  -t $TIME \
+    --gen-md $OUTPUT -T pe -S $SOLVERS_CSV -D ../new-divisions.json \
+    --expdivs $PE_DIVISIONS 
 [[ -n $GEN_CT ]] && \
 $PYTHON $SCORE -y $YEAR --csv results-cloud.csv  -t $TIME --gen-md $OUTPUT -T ct -S $SOLVERS_CSV -D ../new-divisions.json
 [[ -n $GEN_PT ]] && \

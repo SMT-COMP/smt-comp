@@ -41,6 +41,7 @@ TRACK_CHALL_SQ = "track_single_query_challenge"
 TRACK_CHALL_INC = "track_incremental_challenge"
 TRACK_UC = "track_unsat_core"
 TRACK_MV = "track_model_validation"
+TRACK_PE = "track_proof_exhibition"
 TRACK_CLOUD = "track_cloud"
 TRACK_PARALLEL = "track_parallel"
 
@@ -51,6 +52,7 @@ OPT_TRACK_CHALL_SQ = "chall_sq"
 OPT_TRACK_CHALL_INC = "chall_inc"
 OPT_TRACK_UC = "uc"
 OPT_TRACK_MV = "mv"
+OPT_TRACK_PE = "pe"
 OPT_TRACK_CLOUD = "ct"
 OPT_TRACK_PARALLEL = "pt"
 
@@ -77,6 +79,7 @@ EXT_CHALL_SQ = "-challenge-non-incremental.md"
 EXT_CHALL_INC = "-challenge-incremental.md"
 EXT_UC = "-unsat-core.md"
 EXT_MV = "-model-validation.md"
+EXT_PE = "-proof-exhibition.md"
 EXT_CLOUD = "-cloud.md"
 EXT_PARALLEL = "-parallel.md"
 
@@ -92,6 +95,7 @@ g_tracks = { OPT_TRACK_SQ: TRACK_SQ,
              OPT_TRACK_CHALL_INC: TRACK_CHALL_INC,
              OPT_TRACK_UC: TRACK_UC,
              OPT_TRACK_MV: TRACK_MV,
+             OPT_TRACK_PE: TRACK_PE,
              OPT_TRACK_CLOUD: TRACK_CLOUD,
              OPT_TRACK_PARALLEL: TRACK_PARALLEL }
 
@@ -101,6 +105,7 @@ g_exts = { OPT_TRACK_SQ: EXT_SQ,
            OPT_TRACK_CHALL_INC: EXT_CHALL_INC,
            OPT_TRACK_UC: EXT_UC,
            OPT_TRACK_MV: EXT_MV,
+           OPT_TRACK_PE: EXT_PE,
            OPT_TRACK_CLOUD: EXT_CLOUD,
            OPT_TRACK_PARALLEL: EXT_PARALLEL }
 
@@ -458,6 +463,10 @@ def score(division,
         data_new['model_validator_status'] = data['model_validator_status']
         data_new['model_validator_error'] = data['model_validator_error']
         data_new['model_validator_exception'] = data['model_validator_exception']
+    # Column 'reason' only exists in proof exhibition track.
+    proof_exhibition = 'reason' in data.columns
+    if proof_exhibition:
+        data_new['reason'] = data['reason']
 
     # Note: For incremental tracks we have to consider all benchmarks (also
     #       the ones that run into resource limits).
@@ -539,6 +548,9 @@ def score(division,
                                              | (incomplete_model == False))]
             data_new.loc[solved_valid.index, 'correct'] = 1
             data_new.loc[solved_invalid.index, 'error'] = 1
+        elif proof_exhibition:
+            data_new.loc[data_new.reason == 'valid', 'correct'] = 1
+            data_new.loc[data_new.reason == 'invalid', 'error'] = 1
         else:
             data_new.loc[solved.index, 'correct'] = 1
 
@@ -1584,6 +1596,15 @@ def to_md_files(results_seq,
                           track,
                           usedLogics,
                           time)
+        elif track == OPT_TRACK_PE:
+            md_write_file(division,
+                          n_benchmarks,
+                          data_seq, data_par, empty, empty, empty,
+                          year,
+                          path,
+                          track,
+                          usedLogics,
+                          time)
         elif track == OPT_TRACK_CHALL_SQ:
             md_write_file(division,
                           n_benchmarks,
@@ -2130,7 +2151,7 @@ def parse_args():
     gen_md.add_argument("-T", "--track",
                         default=None,
                         choices=[OPT_TRACK_SQ, OPT_TRACK_INC, OPT_TRACK_UC,
-                                 OPT_TRACK_MV, OPT_TRACK_CHALL_SQ,
+                                 OPT_TRACK_MV, OPT_TRACK_PE, OPT_TRACK_CHALL_SQ,
                                  OPT_TRACK_CHALL_INC, OPT_TRACK_CLOUD,
                                  OPT_TRACK_PARALLEL],
                         help="A string identifying the competition track")
