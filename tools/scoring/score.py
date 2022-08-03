@@ -551,6 +551,7 @@ def score(division,
         elif proof_exhibition:
             data_new.loc[data_new.reason == 'valid', 'correct'] = 1
             data_new.loc[data_new.reason == 'invalid', 'error'] = 1
+            data_new.loc[data_new.result == 'sat', 'error'] = 1
         else:
             data_new.loc[solved.index, 'correct'] = 1
 
