@@ -88,6 +88,7 @@ g_args = None
 g_competitive = {}
 g_solver_names = {}
 g_solver_variants = {}
+g_logic_to_division = {}
 
 g_tracks = { OPT_TRACK_SQ: TRACK_SQ,
              OPT_TRACK_INC: TRACK_INC,
@@ -148,6 +149,17 @@ def get_family_top(benchmark):
 def get_family_bot(benchmark):
     return benchmark.rsplit('/', 1)[0]
 
+def read_logic_to_division():
+   global g_logic_to_division, divisionInfo
+   # Read divisions from a JSON formatted file.
+   divisionInfo = json.load(open(g_args.divisions_map))
+   trackDivisions = divisionInfo[g_tracks[g_args.track]]
+   for division in trackDivisions:
+     logics = trackDivisions[division]
+     for logic in logics:
+         assert logic not in g_logic_to_division,"logic in multiple division"
+         g_logic_to_division[logic] = division
+
 # Add columns for division and family.
 # Also does some tidying of benchmark column for specific years of the
 # competition. Edit this function if you want to edit how families are added.
@@ -159,6 +171,7 @@ def add_division_family_info(data, family_definition):
     # as benchmark family.
     # The rules have always specified 'top' but the scoring scripts for many
     # years actually implemented 'bot'. The scripts allow you to choose.
+    global g_logic_to_division
     fam_func = None
     if family_definition == 'top':
         fam_func = get_family_top
@@ -170,7 +183,8 @@ def add_division_family_info(data, family_definition):
     split = data['benchmark'].str.split('/', n=1)
     split = split.map(lambda x: split_benchmark_division_family(x, fam_func))
     data['benchmark'] = split.str[0]
-    data['division'] = split.str[1]
+    data['logic'] = split.str[1]
+    data['division'] = split.str[1].map(g_logic_to_division)
     data['family'] = split.str[2]
     return data
 
@@ -222,6 +236,14 @@ def parse_args():
 
     parser = ArgumentParser()
 
+    parser.add_argument("-T", "--track",
+                        default=OPT_TRACK_SQ,
+                        choices=[OPT_TRACK_SQ, OPT_TRACK_INC, OPT_TRACK_UC,
+                                 OPT_TRACK_MV, OPT_TRACK_PE, OPT_TRACK_CHALL_SQ,
+                                 OPT_TRACK_CHALL_INC, OPT_TRACK_CLOUD,
+                                 OPT_TRACK_PARALLEL],
+                        help="A string identifying the competition track")
+
     required = parser.add_argument_group("required arguments")
     required.add_argument("-c", "--csv",
                         metavar="path",
@@ -238,6 +260,11 @@ def parse_args():
                           required=True,
                           help="csv output aggregated by logic")
 
+    required.add_argument("-D", "--divisions-map",
+                        metavar="json",
+                          required=True,
+                        default=None,
+                        help="Divisions per track.")
     g_args = parser.parse_args()
 
 # Main function.
@@ -249,6 +276,7 @@ def main():
 
     parse_args()
     read_solvers_csv()
+    read_logic_to_division()
 
     data = pandas.read_csv(g_args.csv, keep_default_na=False)
 
@@ -278,7 +306,7 @@ def main():
     data.drop(columns=["pair_id","benchmark","benchmark_id","solver","configuration","configuration_id","status","memory_usage"],inplace=True)
     # ["pair_id","solver_id","cpu_time","wallclock_time","memory_usage","result","expected","division","family"]
 
-    data=data.groupby(by=["solver_id","division","family","result"],as_index=False).sum()
+    data=data.groupby(by=["solver_id","division","logic","result"],as_index=False).sum()
     data['solver'] = data.solver_id.map(get_solver_name)
     data.drop(columns=["solver_id"],inplace=True)
 
