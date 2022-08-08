@@ -550,8 +550,8 @@ def score(division,
             data_new.loc[solved_invalid.index, 'error'] = 1
         elif proof_exhibition:
             data_new.loc[data_new.reason == 'valid', 'correct'] = 1
-            data_new.loc[data_new.reason == 'invalid', 'error'] = 1
-            data_new.loc[data_new.result == 'sat', 'error'] = 1
+            data_new.loc[data_new.reason == 'invalid', 'unsolved'] = 1
+            data_new.loc[data_new.result == 'sat', 'unsolved'] = 1
         else:
             data_new.loc[solved.index, 'correct'] = 1
 
@@ -2024,27 +2024,30 @@ def gen_results_md_files(csv, time_limit, year, path, path_comp):
                 path,
                 g_args.track,
                 time_limit)
-    to_md_files_comp_biggest_lead(results_seq,
-                                  results_par,
-                                  results_sat,
-                                  results_unsat,
-                                  results_24s,
-                                  path_comp,
-                                  time_limit,
-                                  g_args.track,
-                                  g_args.experimental_divisions)
-    to_md_files_comp_largest_contribution(results_seq,
-                                          results_par,
-                                          results_sat,
-                                          results_unsat,
-                                          results_24s,
-                                          path_comp,
-                                          time_limit,
-                                          g_args.track,
-                                          g_args.experimental_divisions)
-    to_md_files_comp_summary(year,
-                             path_comp,
-                             g_args.track)
+    # At the moment we do not compute global rankings or ranked summaries for
+    # proof exhibition track, since we do not evaluate performance there
+    if g_args.track != "pe":
+      to_md_files_comp_biggest_lead(results_seq,
+                                    results_par,
+                                    results_sat,
+                                    results_unsat,
+                                    results_24s,
+                                    path_comp,
+                                    time_limit,
+                                    g_args.track,
+                                    g_args.experimental_divisions)
+      to_md_files_comp_largest_contribution(results_seq,
+                                            results_par,
+                                            results_sat,
+                                            results_unsat,
+                                            results_24s,
+                                            path_comp,
+                                            time_limit,
+                                            g_args.track,
+                                            g_args.experimental_divisions)
+      to_md_files_comp_summary(year,
+                               path_comp,
+                               g_args.track)
 
 
 ###############################################################################
