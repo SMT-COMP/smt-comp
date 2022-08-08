@@ -2244,9 +2244,9 @@ def main():
                 columns = ["benchmark","result"], index=False)
               continue
             data.append(df)
-            grouped = group_and_rank_solvers(df, g_args.sequential)
-            grouped['name'] = grouped.solver_id.map(get_solver_name)
             if (g_args.bestof != ""):
+              grouped = group_and_rank_solvers(df, g_args.sequential)
+              grouped['name'] = grouped.solver_id.map(get_solver_name)
               # get winner *including non-competitive*
               winners = grouped[\
                           (grouped["rank"] == 1) &\
