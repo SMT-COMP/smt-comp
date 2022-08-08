@@ -1665,6 +1665,8 @@ def md_comp_get_div_biggest_lead(bl, expdivs = []):
 # Get the name of the highest-scoring solver from competition-wide
 # recognitions data, ignoring the experimental divisions scores.  If
 # there is no winner, return the special name \"-\"
+# Note that divisions are ordered by correctness ranking and the winner of the
+# first division is thus the winner overall.
 # comp_data: The data for a competition-wide recognition. Maps 'year' to a list
 #            of tuples with the actual recognition data.
 # year: The year of interest
