@@ -82,22 +82,22 @@ mkdir -p $OUTPUT
 
 PE_DIVISIONS=$(jq -r '.track_proof_exhibition | keys[]' <  ../new-divisions.json  | tr '\n' , | sed s/,$//)
 
-[[ -n $GEN_SQ ]] && \
+[[ -n $GEN_SQ ]] && echo SQ && \
 $PYTHON $SCORE -y $YEAR --csv results-sq.csv  -t $TIME --gen-md $OUTPUT -T sq -S $SOLVERS_CSV -D ../new-divisions.json
-[[ -n $GEN_INC ]] && \
+[[ -n $GEN_INC ]] && echo INC && \
 $PYTHON $SCORE -y $YEAR --csv results-inc.csv -t $TIME --gen-md $OUTPUT -T inc -S $SOLVERS_CSV -i $INC_NUM_CHECK_SAT -D ../new-divisions.json
-[[ -n $GEN_UC ]] && \
+[[ -n $GEN_UC ]] && echo UC && \
 $PYTHON $SCORE -y $YEAR --csv results-uc.csv  -t $TIME --gen-md $OUTPUT -T uc -S $SOLVERS_CSV -D ../new-divisions.json
-[[ -n $GEN_MV ]] && \
+[[ -n $GEN_MV ]] && echo MV && \
 $PYTHON $SCORE -y $YEAR --csv results-mv.csv  -t $TIME \
     --gen-md $OUTPUT -T mv -S $SOLVERS_CSV -D ../new-divisions.json \
     --expdivs QF_FPArith
-[[ -n $GEN_PE ]] && \
+[[ -n $GEN_PE ]] && echo PE && \
 $PYTHON $SCORE -y $YEAR --csv results-pe.csv  -t $TIME \
     --gen-md $OUTPUT -T pe -S $SOLVERS_CSV -D ../new-divisions.json \
-    --expdivs $PE_DIVISIONS 
-[[ -n $GEN_CT ]] && \
+    --expdivs $PE_DIVISIONS
+[[ -n $GEN_CT ]] && echo CT && \
 $PYTHON $SCORE -y $YEAR --csv results-cloud.csv  -t $TIME --gen-md $OUTPUT -T ct -S $SOLVERS_CSV -D ../new-divisions.json
-[[ -n $GEN_PT ]] && \
+[[ -n $GEN_PT ]] && echo PT &&\
 $PYTHON $SCORE -y $YEAR --csv results-parallel.csv  -t $TIME --gen-md $OUTPUT -T pt -S $SOLVERS_CSV -D ../new-divisions.json
 
