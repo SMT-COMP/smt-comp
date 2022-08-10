@@ -39,26 +39,31 @@ columns = [ "benchmark", "millisecond", "result" ]
 vampire = {
       "solver_id": "39081",
       "configuration_id": "659685",
+    "name": "Vampire"
 }
 
 smtscq = {
-      "solver_id": "smtscq",
-      "configuration_id": "smtscq",
+      "solver_id": "1",
+      "configuration_id": "1",
+    "name": "SMTSCQ"
 }
 
 smtscqf = {
-      "solver_id": "smtscqf",
-      "configuration_id": "smtscqf",
+      "solver_id": "2",
+      "configuration_id": "2",
+    "name": "SMTSCQF"
 }
 
 smtsp = {
-      "solver_id": "smtsp",
-      "configuration_id": "smtsp",
+      "solver_id": "3",
+      "configuration_id": "3",
+    "name": "SMTSP"
 }
 
 cvc5 = {
-      "solver_id": "cvc5-cloud",
-      "configuration_id": "cvc5-cloud",
+      "solver_id": "4",
+      "configuration_id": "4",
+    "name": "CVC5"
 }
 
 
@@ -111,8 +116,9 @@ def main():
            def map_row(r):
                r["cpu time"] = r["millisecond"] / 1000.
                r["wallclock time"] = r["cpu time"]
-               r["solver_id"] = file["solver"]["solver_id"]
-               r["configuration_id"] = file["solver"]["configuration_id"]
+               r["solver"] = file["solver"]["name"]
+               r["solver id"] = file["solver"]["solver_id"]
+               r["configuration id"] = file["solver"]["configuration_id"]
                benchmark = r["benchmark"]
                r["benchmark"] = r["benchmark"].removeprefix("/home/mww/satcomp/benchmarks/smtcomp/cloud/")
                benchmark_competition_name   = benchmark.removeprefix("/home/mww/satcomp/benchmarks/smtcomp/cloud")
@@ -127,6 +133,7 @@ def main():
                # print("### step 2 ###\n",benchmark_smtlib_name)
                # print("### expected ###\n",expected)
                r["expected"] = expected.loc[benchmark_smtlib_name]["status"]
+               r["status"] = "complete"
                return r
            datas.append(data.apply(map_row,axis=1))
            # for r in data.iloc:
