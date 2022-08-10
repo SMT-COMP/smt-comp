@@ -585,8 +585,10 @@ def main():
     data.drop(columns=["benchmark","solver","configuration_id","status","competitive","score_error","score_cpu_time","score_wallclock_time","year","correct","error","correct_sat","correct_unsat","division_size","timeout","memout","unsolved","score_correct"],inplace=True)
     # ["pair_id","solver_id","cpu_time","wallclock_time","memory_usage","result","expected","division","family"]
 
-    data=data.groupby(by=["solver_id","division","logic","result"],as_index=False).sum()
-    data['solver'] = data.solver_id.map(get_solver_name)
+    data['time']=data["cpu_time"].apply(lambda x: "<=24s" if x <= 24. else ">=24s")
+
+    data=data.groupby(by=["solver_id","division","logic","result","time"],as_index=False).sum()
+    data['solver']  = data.solver_id.map(get_solver_name)
     data.drop(columns=["solver_id"],inplace=True)
 
     with open(g_args.out, "w") as outfile:
