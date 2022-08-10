@@ -1,627 +1,627 @@
 benchmark,millisecond,result,cpu time,wallclock time,solver,solver id,configuration id,expected,status
-non-incremental/UF/smt-comp-108.smt2,830148, sat,830.148,830.148,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-121.smt2,242, sat,0.242,0.242,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-127.smt2,152178, sat,152.178,152.178,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-132.smt2,161133, sat,161.133,161.133,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-133.smt2,237304, sat,237.304,237.304,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-134.smt2,237880, sat,237.88,237.88,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-135.smt2,142974, sat,142.974,142.974,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-004.smt2,1148310, unsat,1148.31,1148.31,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-020.smt2,147796, unsat,147.796,147.796,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-029.smt2,26187, unsat,26.187,26.187,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-024.smt2,585734, unsat,585.734,585.734,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-032.smt2,6202, unsat,6.202,6.202,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-033.smt2,7384, unsat,7.384,7.384,Vampire,39081,659685,unsat,complete
-non-incremental/AUFLIA/smt-comp-022.smt2,682656, unsat,682.656,682.656,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-025.smt2,763710, unsat,763.71,763.71,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-023.smt2,970513, unsat,970.513,970.513,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-037.smt2,4774, unsat,4.774,4.774,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-038.smt2,4991, unsat,4.991,4.991,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-040.smt2,4915, unsat,4.915,4.915,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-041.smt2,19208, unsat,19.208,19.208,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-039.smt2,505923, unsat,505.923,505.923,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-043.smt2,30596, unsat,30.596,30.596,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-045.smt2,5082, unsat,5.082,5.082,Vampire,39081,659685,unsat,complete
-non-incremental/NRA/smt-comp-047.smt2,2608, unsat,2.608,2.608,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-106.smt2,27639, unsat,27.639,27.639,Vampire,39081,659685,unsat,complete
-non-incremental/UF/smt-comp-107.smt2,92164, unsat,92.164,92.164,Vampire,39081,659685,unsat,complete
-non-incremental/UF/smt-comp-109.smt2,377155, unsat,377.155,377.155,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-112.smt2,18866, unsat,18.866,18.866,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-116.smt2,25397, unsat,25.397,25.397,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-118.smt2,37190, unsat,37.19,37.19,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-119.smt2,1737, unsat,1.737,1.737,Vampire,39081,659685,unsat,complete
-non-incremental/UF/smt-comp-120.smt2,1591, unsat,1.591,1.591,Vampire,39081,659685,unsat,complete
-non-incremental/UF/smt-comp-122.smt2,2141, unsat,2.141,2.141,Vampire,39081,659685,unsat,complete
-non-incremental/UF/smt-comp-123.smt2,1601, unsat,1.601,1.601,Vampire,39081,659685,unsat,complete
-non-incremental/UF/smt-comp-124.smt2,466, unsat,0.466,0.466,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-125.smt2,208, unsat,0.208,0.208,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-126.smt2,229526, unsat,229.526,229.526,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-128.smt2,699, unsat,0.699,0.699,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-130.smt2,820146, unsat,820.146,820.146,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-138.smt2,4090, unsat,4.09,4.09,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-139.smt2,2712, unsat,2.712,2.712,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-141.smt2,8307, unsat,8.307,8.307,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-143.smt2,9921, unsat,9.921,9.921,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-145.smt2,393, unsat,0.393,0.393,Vampire,39081,659685,unsat,complete
-non-incremental/UFLIA/smt-comp-154.smt2,114093, unsat,114.093,114.093,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-160.smt2,1540, unsat,1.54,1.54,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-161.smt2,3613, unsat,3.613,3.613,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-162.smt2,1203, unsat,1.203,1.203,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-217.smt2,42894, unsat,42.894,42.894,Vampire,39081,659685,unsat,complete
-non-incremental/AUFNIRA/smt-comp-222.smt2,524402, unsat,524.402,524.402,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-237.smt2,10709, unsat,10.709,10.709,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-239.smt2,4050, unsat,4.05,4.05,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-240.smt2,7313, unsat,7.313,7.313,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-247.smt2,928, unsat,0.928,0.928,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-253.smt2,2026, unsat,2.026,2.026,Vampire,39081,659685,unsat,complete
-non-incremental/UFDT/smt-comp-337.smt2,17513, unsat,17.513,17.513,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-398.smt2,1430, unsat,1.43,1.43,Vampire,39081,659685,unsat,complete
-non-incremental/AUFDTLIRA/smt-comp-000.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-001.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-002.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-003.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-005.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-006.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-007.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-008.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-009.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-010.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-011.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-012.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-013.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-014.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-015.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-016.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTNIRA/smt-comp-017.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-018.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-019.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-021.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-026.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-027.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,sat,complete
-non-incremental/LRA/smt-comp-028.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-030.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-031.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-034.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-035.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-036.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-042.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-044.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-046.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-110.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-111.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-113.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-114.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-115.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-117.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-129.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-131.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-137.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-136.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-140.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-142.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-144.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIA/smt-comp-146.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-147.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-148.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-149.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTNIRA/smt-comp-150.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-155.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTNIRA/smt-comp-151.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-159.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTNIRA/smt-comp-152.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-156.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-153.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/UFLIA/smt-comp-157.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/UFLIA/smt-comp-158.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/UFNIA/smt-comp-163.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-164.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-165.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-166.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-167.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-168.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-169.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-170.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-171.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-172.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-173.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-174.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-175.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-176.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-177.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-178.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-179.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-180.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-181.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-182.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-183.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-184.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-185.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-186.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFDTLIRA/smt-comp-187.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-188.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-189.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-190.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-191.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIA/smt-comp-192.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIRA/smt-comp-193.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIRA/smt-comp-194.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIRA/smt-comp-195.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIRA/smt-comp-196.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIRA/smt-comp-197.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIRA/smt-comp-198.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFLIRA/smt-comp-199.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-200.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-201.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-202.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-203.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-204.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-205.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-206.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-207.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-208.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-209.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-210.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-211.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-212.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-216.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-213.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-214.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-215.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-218.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-219.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-220.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-221.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-223.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-224.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-225.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-226.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-227.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-228.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-229.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-230.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-231.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-232.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/AUFNIRA/smt-comp-233.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-234.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-235.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-236.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-238.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-241.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-242.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-243.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-244.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-245.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-246.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-248.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-249.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/LRA/smt-comp-250.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-251.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/LRA/smt-comp-252.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
-non-incremental/UF/smt-comp-309.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-310.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-311.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-312.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-313.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-314.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-315.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-316.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-317.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-318.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-319.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-320.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-321.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-322.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-323.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-324.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-325.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-326.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-327.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UF/smt-comp-328.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-329.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-330.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-331.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-332.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-333.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-334.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-335.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-336.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-338.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-339.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-340.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-341.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-342.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-343.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-344.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-345.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-346.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDT/smt-comp-347.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIA/smt-comp-348.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIA/smt-comp-349.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIA/smt-comp-350.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIA/smt-comp-351.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIA/smt-comp-352.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIA/smt-comp-353.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-354.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-355.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-356.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-357.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-358.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-359.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-360.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-361.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-362.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-363.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-364.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-365.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-366.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-367.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-368.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-369.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-370.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-371.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-372.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTLIRA/smt-comp-373.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTNIRA/smt-comp-374.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFDTNIRA/smt-comp-375.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-376.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-377.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-378.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-379.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-380.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-381.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-382.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-383.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFLIA/smt-comp-384.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-385.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-386.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-387.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-388.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-389.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-390.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-391.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-392.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-393.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-394.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-395.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-396.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-397.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/UFNIA/smt-comp-399.smt2,1200000, timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
-non-incremental/QF_IDL/smt-comp-049.smt2,5808, sat,5.808,5.808,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-071.smt2,7090, sat,7.09,7.09,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-086.smt2,5000, sat,5.0,5.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LIA/smt-comp-080.smt2,13552, sat,13.552,13.552,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-090.smt2,8421, sat,8.421,8.421,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LIA/smt-comp-091.smt2,3607, sat,3.607,3.607,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-085.smt2,23728, sat,23.728,23.728,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-081.smt2,37987, sat,37.987,37.987,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-082.smt2,37535, sat,37.535,37.535,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LIA/smt-comp-083.smt2,75967, sat,75.967,75.967,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-084.smt2,118106, sat,118.106,118.106,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LIA/smt-comp-092.smt2,221297, sat,221.297,221.297,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LRA/smt-comp-096.smt2,572133, sat,572.133,572.133,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-290.smt2,9132, sat,9.132,9.132,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LIA/smt-comp-291.smt2,128935, sat,128.935,128.935,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LIA/smt-comp-289.smt2,437652, sat,437.652,437.652,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LIA/smt-comp-297.smt2,219134, sat,219.134,219.134,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LRA/smt-comp-303.smt2,1623, sat,1.623,1.623,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LRA/smt-comp-305.smt2,1429, sat,1.429,1.429,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LRA/smt-comp-300.smt2,980771, sat,980.771,980.771,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LRA/smt-comp-095.smt2,15448, unsat,15.448,15.448,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LRA/smt-comp-097.smt2,14605, unsat,14.605,14.605,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LRA/smt-comp-098.smt2,26250, unsat,26.25,26.25,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LRA/smt-comp-099.smt2,39154, unsat,39.154,39.154,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LRA/smt-comp-101.smt2,44588, unsat,44.588,44.588,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LRA/smt-comp-102.smt2,136106, unsat,136.106,136.106,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LRA/smt-comp-100.smt2,154557, unsat,154.557,154.557,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LRA/smt-comp-093.smt2,233959, unsat,233.959,233.959,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LRA/smt-comp-094.smt2,461838, unsat,461.838,461.838,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LRA/smt-comp-301.smt2,65320, unsat,65.32,65.32,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LRA/smt-comp-302.smt2,34756, unsat,34.756,34.756,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-048.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-050.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-051.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-052.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-053.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-054.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-055.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-056.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-057.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-058.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-059.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-060.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-061.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-062.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-063.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-064.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-065.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-066.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-067.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-068.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-069.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-070.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-072.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-073.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-074.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-075.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-076.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-077.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-078.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-079.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-087.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_RDL/smt-comp-103.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_RDL/smt-comp-104.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-254.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-255.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-256.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-257.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-258.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-259.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-260.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-261.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-263.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-262.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-264.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-265.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-266.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-267.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-268.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-269.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-270.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-271.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-272.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-273.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-274.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-275.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_IDL/smt-comp-276.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-277.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-278.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-279.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-280.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-281.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-282.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_IDL/smt-comp-283.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-284.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LIA/smt-comp-285.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-286.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-287.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-288.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LIA/smt-comp-292.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-293.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LIA/smt-comp-294.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-295.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LIA/smt-comp-296.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LRA/smt-comp-298.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LRA/smt-comp-299.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LRA/smt-comp-304.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_LRA/smt-comp-306.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
-non-incremental/QF_RDL/smt-comp-307.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_RDL/smt-comp-308.smt2,1200000, timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
-non-incremental/QF_LIA/smt-comp-088.smt2,79712, error,79.712,79.712,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_LIA/smt-comp-089.smt2,82101, error,82.101,82.101,SMTSCQ,1,1,unsat,complete
-non-incremental/QF_UFLRA/smt-comp-105.smt2,241017, error,241.017,241.017,SMTSCQ,1,1,sat,complete
-non-incremental/QF_IDL/smt-comp-049.smt2,8490, sat,8.49,8.49,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-071.smt2,5235, sat,5.235,5.235,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-080.smt2,14008, sat,14.008,14.008,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-081.smt2,14601, sat,14.601,14.601,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-086.smt2,10265, sat,10.265,10.265,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LIA/smt-comp-090.smt2,2249, sat,2.249,2.249,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LIA/smt-comp-091.smt2,2282, sat,2.282,2.282,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-085.smt2,44776, sat,44.776,44.776,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-083.smt2,57001, sat,57.001,57.001,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-082.smt2,70906, sat,70.906,70.906,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LIA/smt-comp-084.smt2,225424, sat,225.424,225.424,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LRA/smt-comp-096.smt2,566721, sat,566.721,566.721,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-092.smt2,1006607, sat,1006.607,1006.607,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LIA/smt-comp-290.smt2,72567, sat,72.567,72.567,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LIA/smt-comp-291.smt2,54796, sat,54.796,54.796,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LRA/smt-comp-303.smt2,1569, sat,1.569,1.569,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LRA/smt-comp-305.smt2,1400, sat,1.4,1.4,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-297.smt2,724337, sat,724.337,724.337,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LRA/smt-comp-094.smt2,21272, unsat,21.272,21.272,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-095.smt2,17581, unsat,17.581,17.581,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-097.smt2,14541, unsat,14.541,14.541,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-098.smt2,12307, unsat,12.307,12.307,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LRA/smt-comp-099.smt2,30530, unsat,30.53,30.53,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-093.smt2,102392, unsat,102.392,102.392,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-101.smt2,56122, unsat,56.122,56.122,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-100.smt2,102711, unsat,102.711,102.711,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LRA/smt-comp-102.smt2,66363, unsat,66.363,66.363,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LIA/smt-comp-285.smt2,33148, unsat,33.148,33.148,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-286.smt2,40925, unsat,40.925,40.925,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-287.smt2,33287, unsat,33.287,33.287,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-288.smt2,83948, unsat,83.948,83.948,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-299.smt2,21890, unsat,21.89,21.89,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LRA/smt-comp-301.smt2,84016, unsat,84.016,84.016,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LRA/smt-comp-302.smt2,30002, unsat,30.002,30.002,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-306.smt2,11673, unsat,11.673,11.673,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LRA/smt-comp-298.smt2,411752, unsat,411.752,411.752,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-048.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-050.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-051.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-052.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-053.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-054.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-055.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-056.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-057.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-058.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-059.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-060.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-061.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-062.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-063.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-064.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-065.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-066.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-067.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-068.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-069.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-070.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-072.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-073.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-074.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-075.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-076.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-077.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-078.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-079.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-087.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_RDL/smt-comp-103.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_RDL/smt-comp-104.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-254.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-255.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-256.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-257.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-258.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-259.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-260.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-261.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-262.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-263.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-264.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-265.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-266.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-267.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-268.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-269.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-270.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-271.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-272.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-273.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-274.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-275.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_IDL/smt-comp-276.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-277.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-278.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-279.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-280.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-281.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-282.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_IDL/smt-comp-283.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-284.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LIA/smt-comp-289.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LIA/smt-comp-292.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-293.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LIA/smt-comp-294.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-295.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LRA/smt-comp-300.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_LIA/smt-comp-296.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LRA/smt-comp-304.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
-non-incremental/QF_RDL/smt-comp-307.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_RDL/smt-comp-308.smt2,1200000, timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
-non-incremental/QF_LIA/smt-comp-088.smt2,78462, error,78.462,78.462,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_LIA/smt-comp-089.smt2,90171, error,90.171,90.171,SMTSCQF,2,2,unsat,complete
-non-incremental/QF_UFLRA/smt-comp-105.smt2,223495, error,223.495,223.495,SMTSCQF,2,2,sat,complete
-non-incremental/QF_IDL/smt-comp-049.smt2,4268, sat,4.268,4.268,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-071.smt2,8105, sat,8.105,8.105,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-082.smt2,3038, sat,3.038,3.038,SMTSP,3,3,unknown,complete
-non-incremental/QF_LIA/smt-comp-086.smt2,13159, sat,13.159,13.159,SMTSP,3,3,unknown,complete
-non-incremental/QF_LIA/smt-comp-080.smt2,17919, sat,17.919,17.919,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-081.smt2,16980, sat,16.98,16.98,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-090.smt2,1461, sat,1.461,1.461,SMTSP,3,3,unknown,complete
-non-incremental/QF_LIA/smt-comp-083.smt2,22926, sat,22.926,22.926,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-085.smt2,21482, sat,21.482,21.482,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-091.smt2,3367, sat,3.367,3.367,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-084.smt2,268804, sat,268.804,268.804,SMTSP,3,3,unknown,complete
-non-incremental/QF_LIA/smt-comp-092.smt2,389000, sat,389.0,389.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_LRA/smt-comp-096.smt2,480073, sat,480.073,480.073,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-290.smt2,6083, sat,6.083,6.083,SMTSP,3,3,unknown,complete
-non-incremental/QF_LIA/smt-comp-291.smt2,124616, sat,124.616,124.616,SMTSP,3,3,unknown,complete
-non-incremental/QF_LIA/smt-comp-297.smt2,270384, sat,270.384,270.384,SMTSP,3,3,unknown,complete
-non-incremental/QF_LRA/smt-comp-303.smt2,1580, sat,1.58,1.58,SMTSP,3,3,sat,complete
-non-incremental/QF_LRA/smt-comp-305.smt2,1407, sat,1.407,1.407,SMTSP,3,3,sat,complete
-non-incremental/QF_LRA/smt-comp-300.smt2,861165, sat,861.165,861.165,SMTSP,3,3,sat,complete
-non-incremental/QF_LRA/smt-comp-095.smt2,17452, unsat,17.452,17.452,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-097.smt2,18854, unsat,18.854,18.854,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-098.smt2,19704, unsat,19.704,19.704,SMTSP,3,3,unknown,complete
-non-incremental/QF_LRA/smt-comp-099.smt2,20572, unsat,20.572,20.572,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-101.smt2,62597, unsat,62.597,62.597,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-100.smt2,80296, unsat,80.296,80.296,SMTSP,3,3,unknown,complete
-non-incremental/QF_LRA/smt-comp-102.smt2,86803, unsat,86.803,86.803,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-093.smt2,168950, unsat,168.95,168.95,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-094.smt2,184447, unsat,184.447,184.447,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-302.smt2,45000, unsat,45.0,45.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-301.smt2,115493, unsat,115.493,115.493,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-048.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-050.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-051.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-052.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-053.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-054.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-055.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-056.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-057.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-058.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-059.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-060.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-061.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-062.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-063.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-064.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-065.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-066.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-067.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-068.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-069.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-070.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-072.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-073.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-074.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-075.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-076.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-077.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-078.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-079.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-087.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_RDL/smt-comp-103.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_RDL/smt-comp-104.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-254.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-255.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-256.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-257.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-258.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-259.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-260.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-261.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-262.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-263.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-264.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-265.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-266.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-267.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-268.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-269.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-270.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-271.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-272.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-273.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-274.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-275.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_IDL/smt-comp-276.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-277.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-278.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-279.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-280.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-281.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-282.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_IDL/smt-comp-283.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_IDL/smt-comp-284.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_LIA/smt-comp-285.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-286.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-287.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-288.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_LIA/smt-comp-289.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_LIA/smt-comp-292.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-293.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_LIA/smt-comp-294.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-295.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_LIA/smt-comp-296.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_LRA/smt-comp-298.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_LRA/smt-comp-299.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_LRA/smt-comp-304.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_LRA/smt-comp-306.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
-non-incremental/QF_RDL/smt-comp-307.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
-non-incremental/QF_RDL/smt-comp-308.smt2,1200000, timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
-non-incremental/QF_LIA/smt-comp-088.smt2,82451, error,82.451,82.451,SMTSP,3,3,unsat,complete
-non-incremental/QF_LIA/smt-comp-089.smt2,82474, error,82.474,82.474,SMTSP,3,3,unsat,complete
-non-incremental/QF_UFLRA/smt-comp-105.smt2,174317, error,174.317,174.317,SMTSP,3,3,sat,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/coinductive_stream/x2015_09_10_17_23_52_583_1171142.smt_in.smt2,830148,sat,830.148,830.148,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/QEpres/smtlib.1255382.smt2,242,sat,0.242,0.242,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/abstract_completeness/x2015_09_10_17_00_18_465_1086439.smt_in.smt2,152178,sat,152.178,152.178,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_02_56_841_1867297.smt_in.smt2,161133,sat,161.133,161.133,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_03_30_786_1913566.smt_in.smt2,237304,sat,237.304,237.304,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_15_40_300_2744817.smt_in.smt2,237880,sat,237.88,237.88,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_stream/x2015_09_10_17_24_06_393_1183277.smt_in.smt2,142974,sat,142.974,142.974,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/O416-002__type_contracts__communications.ads_10_13_invariant_check___00.smt2,1148310,unsat,1148.31,1148.31,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt5985719906973356009.smt2,147796,unsat,147.796,147.796,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir2/formula_194.smt2,26187,unsat,26.187,26.187,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.662227.smt2,585734,unsat,585.734,585.734,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_003.smt2,6202,unsat,6.202,6.202,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_016.smt2,7384,unsat,7.384,7.384,Vampire,39081,659685,unsat,complete
+./AUFLIA/20170829-Rodin/smt8372919591541689974.smt2,682656,unsat,682.656,682.656,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.633492.smt2,763710,unsat,763.71,763.71,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.659901.smt2,970513,unsat,970.513,970.513,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_094.smt2,4774,unsat,4.774,4.774,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_126.smt2,4991,unsat,4.991,4.991,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_188.smt2,4915,unsat,4.915,4.915,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_199.smt2,19208,unsat,19.208,19.208,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_187.smt2,505923,unsat,505.923,505.923,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_260.smt2,30596,unsat,30.596,30.596,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_279.smt2,5082,unsat,5.082,5.082,Vampire,39081,659685,unsat,complete
+./NRA/keymaera/vsl.proof-node2228.smt2,2608,unsat,2.608,2.608,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/coinductive_list/x2015_09_10_17_00_24_219_1671686.smt_in.smt2,27639,unsat,27.639,27.639,Vampire,39081,659685,unsat,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/coinductive_list/x2015_09_10_17_12_24_337_2627584.smt_in.smt2,92164,unsat,92.164,92.164,Vampire,39081,659685,unsat,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/coinductive_stream/x2015_09_10_17_24_42_853_1213491.smt_in.smt2,377155,unsat,377.155,377.155,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/distro/rbt_impl/x2015_09_10_16_59_32_871_1920351.smt_in.smt2,18866,unsat,18.866,18.866,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/Fundamental_Theorem_Algebra/uf.1184362.smt2,25397,unsat,25.397,25.397,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/Fundamental_Theorem_Algebra/uf.585894.smt2,37190,unsat,37.19,37.19,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/Fundamental_Theorem_Algebra/uf.979170.smt2,1737,unsat,1.737,1.737,Vampire,39081,659685,unsat,complete
+./UF/sledgehammer/Hoare/uf.1181627.smt2,1591,unsat,1.591,1.591,Vampire,39081,659685,unsat,complete
+./UF/sledgehammer/QEpres/uf.586326.smt2,2141,unsat,2.141,2.141,Vampire,39081,659685,unsat,complete
+./UF/sledgehammer/QEpres/uf.587273.smt2,1601,unsat,1.601,1.601,Vampire,39081,659685,unsat,complete
+./UF/sledgehammer/QEpres/uf.783239.smt2,466,unsat,0.466,0.466,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/TwoSquares/uf.697085.smt2,208,unsat,0.208,0.208,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/TwoSquares/uf.726341.smt2,229526,unsat,229.526,229.526,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_16_49_23_744_1080549.smt_in.smt2,699,unsat,0.699,0.699,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_16_52_11_405_1222139.smt_in.smt2,820146,unsat,820.146,820.146,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/distro/gram_lang/x2015_09_10_16_54_44_062_1492492.smt_in.smt2,4090,unsat,4.09,4.09,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/distro/parallel/x2015_09_10_16_56_35_383_1000552.smt_in.smt2,2712,unsat,2.712,2.712,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/distro/stream/x2015_09_10_16_46_43_734_981227.smt_in.smt2,8307,unsat,8.307,8.307,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/gandl/cotree/x2015_09_10_16_50_22_492_1049055.smt_in.smt2,9921,unsat,9.921,9.921,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/rec-fun-ijcar2016/wo/isa_nun_bench_v4_noenc/nunchaku2592304.nun.smt2,393,unsat,0.393,0.393,Vampire,39081,659685,unsat,complete
+./UFLIA/sledgehammer/Fundamental_Theorem_Algebra/smtlib.1403899.smt2,114093,unsat,114.093,114.093,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/QEpres/smtlib.609438.smt2,1540,unsat,1.54,1.54,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/QEpres/smtlib.752772.smt2,3613,unsat,3.613,3.613,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/QEpres/smtlib.876524.smt2,1203,unsat,1.203,1.203,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.761507.smt2,42894,unsat,42.894,42.894,Vampire,39081,659685,unsat,complete
+./AUFNIRA/FFT/z3.831856.smt2,524402,unsat,524.402,524.402,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir2/formula_194.smt2,10709,unsat,10.709,10.709,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_016.smt2,4050,unsat,4.05,4.05,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_018.smt2,7313,unsat,7.313,7.313,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_197.smt2,928,unsat,0.928,0.928,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_278.smt2,2026,unsat,2.026,2.026,Vampire,39081,659685,unsat,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/huffman/x2015_09_10_16_47_13_685_1037711.smt_in.smt2,17513,unsat,17.513,17.513,Vampire,39081,659685,unknown,complete
+./UFNIA/sledgehammer/TwoSquares/z3.804435.smt2,1430,unsat,1.43,1.43,Vampire,39081,659685,unsat,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/L503-012__aggregate__r.adb_51_22_index_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/M830-004__checks__do_checks.adb_149_57_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/M830-004__checks__do_checks.adb_74_17_range_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/N217-028__update_checks__ar.adb_137_39_range_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/O512-022__vscomp2014_partition_rte__partition_refinement.adb_31_78_range_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/Q328-034__mut_discr__input.adb_265_7_dead_code___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/Q613-001__flow_task_depends__tasking.adb_24_25_range_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/riposte__array_aggregates__array_aggregates.adb_273_22_assert___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/NA29-017__prove_all__sorting.adb_134_13_loop_invariant_preserv46___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/NA29-017__prove_all__sorting.adb_153_10_assert___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/O512-022__prefix_sum__prefixsum.adb_49_15_unreachable_branch___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/O512-022__prefix_sum__prefixsum.ads_54_8_unreachable_branch___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/O512-022__prefix_sum__prefixsum_expanded.adb_92_10_unreachable_branch___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/O512-022__prefix_sum__prefixsum_expanded.ads_67_8_unreachable_branch___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/O512-022__prefix_sum__prefixsum_general.adb_59_20_unreachable_branch___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/O512-022__prefix_sum__prefixsum_general.adb_61_16_unreachable_branch___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTNIRA/20200306-Kanig/spark2014bench/O512-022__prefix_sum__prefixsum_general.ads_18_17_unreachable_branch___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt1783163497306728397.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt2838391651139478790.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt6664083169973822731.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.694291.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir1/formula_232.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,sat,complete
+./LRA/2010-Monniaux-QE/mjollnir2/formula_165.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir3/formula_096.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir5/formula_056.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_026.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_087.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_088.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_248.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_274.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_292.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/huffman/x2015_09_10_16_47_58_433_1084188.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/distro/gram_lang/x2015_09_10_16_48_26_576_1126948.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/gandl/stern_brocot_tree/x2015_09_10_16_50_52_040_1031388.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/Arrow_Order/smtlib.623106.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/Arrow_Order/uf.793473.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/Fundamental_Theorem_Algebra/uf.1198781.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_16_51_59_804_1212757.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_01_44_819_1772474.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/tllist/x2015_09_10_16_59_11_365_1257713.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/llist2/x2015_09_10_16_52_03_112_1141897.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/distro/parallel/x2015_09_10_16_56_46_335_1012860.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/distro/stream_processor/x2015_09_10_16_46_02_272_1013913.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/rec-fun-ijcar2016/wo-wdf/isa_nun_bench_v4_enc/nunchaku2561571.nun.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIA/20172804-Barrett/induction-vmcai2015/hipspec/sg/nichomachus-goal9.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/M304-011__flow_contract_checking__test.adb_70_14_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/MA28-033__flow_null_calls_ineffective__review_test.adb_23_17_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/O901-014__formal_vectors__aida-containers-formal_vectors.adb_73_68_hnco-test2.ads_8_4_precondition___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTNIRA/20200306-Kanig/spark2014bench/O512-022__fibonacci__fib.adb_116_22_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/Fundamental_Theorem_Algebra/smtlib.1410750.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTNIRA/20200306-Kanig/spark2014bench/O813-018__fixed_points__integer_fixed.adb_65_25_assert___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/QEpres/smtlib.1129748.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTNIRA/20200306-Kanig/spark2014bench/P201-069__simulink__simulink_functions.adb_236_52_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/Fundamental_Theorem_Algebra/smtlib.1496558.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/boogie/PeerFields_PeerFields.Assign4.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./UFLIA/sledgehammer/Fundamental_Theorem_Algebra/smtlib.967849.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./UFLIA/sledgehammer/Hoare/smtlib.1011006.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./UFNIA/2019-Preiner/combined/f2_rw289.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/combined/t3_rw1215.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/combined/t3_rw1298.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/combined/t3_rw429.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw1048.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw135.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/partial/t3_rw1300.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/partial/t3_rw135.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/partial/t3_rw1574.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/partial/t3_rw578.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Zohar-alive/combined/combined_AndOrXor:716_values_0.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Zohar-alive/partial/partial_AndOrXor:363_values_0.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Zohar-ic/full/int_check_eq_bvor_rtl.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/sledgehammer/QEpres/z3.740020.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/sledgehammer/QEpres/z3.785070.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/sledgehammer/TwoSquares/z3.615666.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/K330-014__loop_entry__for_loops.adb_42_28_dead_code___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/K519-031__subarray__subar.ads_22_18_inconsistent_pre___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/KB10-018__cursor_location__cursor_location.adb_31_18_dead_code___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/M611-052__discr__list.adb_16_10_precondition___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/N424-011__flow_error_placement__longest_common_prefix.adb_9_20_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/O429-003__aliasing__alias.adb_24_27_index_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/O512-022__demo_not_fixed_yet__asm_stack.adb_39_29_range_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/P229-022__flow_unused_with_exceptions__fileio.ads_21_14_postcondition___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFDTLIRA/20200306-Kanig/spark2014bench/Q424-003__if_expression__string_utilities.adb_47_33_range_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt4281117349896858326.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt4872824558193494219.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt5851452708137205459.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt8881361926789708538.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIA/20170829-Rodin/smt8934297468716494833.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIRA/FFT/smtlib.618857.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIRA/FFT/smtlib.757001.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIRA/FFT/smtlib.782559.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIRA/FFT/smtlib.790915.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIRA/FFT/smtlib.923360.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIRA/nasa/fol_simplify/thruster_inuse_0001.fof.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFLIRA/nasa/vc_normalize_subst/cl5_nebula_norm_0028.fof.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.633611.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.653587.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.657075.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.785903.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.788836.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.817734.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.823496.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.825782.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.845302.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.864863.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.865953.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/smtlib.933524.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.672518.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.744873.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.675244.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.699441.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.711639.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.762578.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.763578.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.801381.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.820023.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.852276.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.853412.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.857109.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.859684.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.877339.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.909956.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.912508.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.914698.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.942623.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.943708.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./AUFNIRA/FFT/z3.955746.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir1/formula_205.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir1/formula_221.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir2/formula_084.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir2/formula_201.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_033.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_042.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_063.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_069.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_083.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_159.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_225.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_231.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_239.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_248.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./LRA/2010-Monniaux-QE/mjollnir6/formula_275.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unsat,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/abstract_completeness/x2015_09_10_16_59_48_329_1055507.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/bindag/x2015_09_10_16_53_00_327_1027623.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/coinductive_list/x2015_09_10_16_57_14_410_1489966.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/coinductive_list/x2015_09_10_16_59_27_952_1613239.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/coinductive_list/x2015_09_10_17_08_04_077_2289255.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/hamming_stream/x2015_09_10_16_48_17_999_1101477.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/afp/huffman/x2015_09_10_16_48_37_393_1126291.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/distro/parallel/x2015_09_10_16_57_08_326_1041289.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/distro/stream/x2015_09_10_16_49_07_683_1145236.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/20170428-Barrett/cdt-cade2015/nada/gandl/stern_brocot_tree/x2015_09_10_16_51_51_040_1076427.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/Fundamental_Theorem_Algebra/uf.1374124.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/Fundamental_Theorem_Algebra/uf.747807.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/QEpres/uf.1126024.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/QEpres/uf.579338.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/QEpres/uf.989612.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/StrongNorm/uf.694392.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/StrongNorm/uf.722272.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/TypeSafe/smtlib.1059150.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/TypeSafe/smtlib.1475891.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UF/sledgehammer/TypeSafe/uf.793278.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_16_50_04_094_1114230.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_16_54_13_574_1334546.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_05_13_610_2052745.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_06_34_218_2165376.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_06_56_714_2196928.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_07_03_503_2206415.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/coinductive_list/x2015_09_10_17_15_18_340_2733352.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/hamming_stream/x2015_09_10_16_50_11_844_1172008.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/huffman/x2015_09_10_16_47_45_106_1071337.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/lmirror/x2015_09_10_16_47_49_705_1078936.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/sorted_list_operations/x2015_09_10_16_48_14_243_1100480.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/afp/tllist/x2015_09_10_17_00_58_384_1387951.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/distro/gram_lang/x2015_09_10_16_47_57_624_1097209.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/distro/rbt_impl/x2015_09_10_16_49_46_785_982607.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/cdt-cade2015/data/distro/rbt_impl/x2015_09_10_16_54_22_858_1426095.smt_in.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/rec-fun-ijcar2016/wo-wdf/isa_nun_bench_v4_enc/nunchaku2341631.nun.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/rec-fun-ijcar2016/wo/isa_nun_bench_v4_noenc/nunchaku1826208.nun.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDT/20170428-Barrett/rec-fun-ijcar2016/wo/isa_nun_bench_v4_noenc/nunchaku2545253.nun.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIA/20172804-Barrett/induction-vmcai2015/clam/goal14.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIA/20172804-Barrett/induction-vmcai2015/clam/goal5.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIA/20172804-Barrett/induction-vmcai2015/clam/sg/goal-sg23.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIA/20172804-Barrett/induction-vmcai2015/clam/sg/goal-sg6.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIA/20172804-Barrett/induction-vmcai2015/isaplanner/goal76.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIA/20172804-Barrett/induction-vmcai2015/leon/heap-goal1.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/L323-005__recursive__p.ads_3_15_postcondition___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/M123-033__expr_fun__private_p.adb_45_28_assert___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/M123-033__expr_fun__reorder_q.adb_12_28_assert___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/M220-043__ghost__semantics.adb_9_29_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/N502-020__ipstack_useless__cascade.adb_7_18_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/NB18-039__default_formal_vectors__bounded.adb_10_7_precondition___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/O128-029__ghost_state__account.adb_14_22_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/O403-015__record_equality__record_equality.adb_47_22_assert___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/O409-016__array_aggr__array_aggr.adb_33_10_range_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/O512-022__fibonacci__fib.adb_28_33_loop_invariant_init___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/OA26-021__counterexample__counterex.adb_7_19_assert___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/P715-019__flow_subprogram_termination__a-cofuse.ads_136_8_formal_cont.ads_26_4_inconsistent_post___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/P715-019__flow_subprogram_termination__a-cofuse.ads_183_8_formal_cont.ads_26_4_inconsistent_post___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/P715-019__flow_subprogram_termination__a-cofuse.ads_279_16_formal_cont.ads_26_4_inconsistent_pre___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/PB23-052__local_protected_type__p.adb_5_34_range_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/Q327-014__no_pre__dispatch.ads_23_41_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/R122-026__protected__pack.adb_16_26_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/R725-034__proof_warning__contradictions.ads_58_18_inconsistent_pre___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/RM_MS__nesting_refinement__nesting_refinement_14.adb_19_17_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTLIRA/20200306-Kanig/spark2014bench/SA23-039__goto__test_goto.adb_17_29_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTNIRA/20200306-Kanig/spark2014bench/M219-040__flow_IFA_error_messages__test.adb_80_17_overflow_check___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFDTNIRA/20200306-Kanig/spark2014bench/O512-022__fibonacci__fib.adb_81_33_loop_invariant_init___00.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/boogie/AssignToNonInvariantField_T.Mc0.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/FFT/smtlib.650773.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/Fundamental_Theorem_Algebra/smtlib.1179183.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/Hoare/smtlib.1012696.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/StrongNorm/smtlib.583225.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/StrongNorm/smtlib.807104.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/StrongNorm/smtlib.817910.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/sledgehammer/TypeSafe/smtlib.919121.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFLIA/tokeneer/configdata/writefile-40.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/combined/t3_rw351.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw1397.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw1415.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw1527.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw275.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw514.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw52.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw579.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/full/t3_rw715.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/partial/t3_rw1373.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/2019-Preiner/partial/t3_rw1415.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/sledgehammer/Fundamental_Theorem_Algebra/z3.1073786.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/sledgehammer/Fundamental_Theorem_Algebra/z3.966051.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./UFNIA/sledgehammer/TwoSquares/z3.898105.smt2,1200000,timeout,1200.0,1200.0,Vampire,39081,659685,unknown,complete
+./QF_IDL/asp/ConnectedDominatingSet/rand_80_500_1235848939_0_k=9_sat.gph.smt2,5808,sat,5.808,5.808,SMTSCQ,1,1,unknown,complete
+./QF_IDL/fuzzy-matrix/Zantema_z064.srs_slice-6_constraint-209485.smt2,7090,sat,7.09,7.09,SMTSCQ,1,1,sat,complete
+./QF_LIA/arctic-matrix/constraint-506600.smt2,5000,sat,5.0,5.0,SMTSCQ,1,1,unknown,complete
+./QF_LIA/arctic-matrix/constraint-1000539.smt2,13552,sat,13.552,13.552,SMTSCQ,1,1,sat,complete
+./QF_LIA/tropical-matrix/constraint-255468.smt2,8421,sat,8.421,8.421,SMTSCQ,1,1,unknown,complete
+./QF_LIA/tropical-matrix/constraint-278378.smt2,3607,sat,3.607,3.607,SMTSCQ,1,1,sat,complete
+./QF_LIA/arctic-matrix/constraint-2069156.smt2,23728,sat,23.728,23.728,SMTSCQ,1,1,sat,complete
+./QF_LIA/arctic-matrix/constraint-1060546.smt2,37987,sat,37.987,37.987,SMTSCQ,1,1,sat,complete
+./QF_LIA/arctic-matrix/constraint-1551672.smt2,37535,sat,37.535,37.535,SMTSCQ,1,1,unknown,complete
+./QF_LIA/arctic-matrix/constraint-1633815.smt2,75967,sat,75.967,75.967,SMTSCQ,1,1,sat,complete
+./QF_LIA/arctic-matrix/constraint-1686226.smt2,118106,sat,118.106,118.106,SMTSCQ,1,1,unknown,complete
+./QF_LIA/tropical-matrix/constraint-740637.smt2,221297,sat,221.297,221.297,SMTSCQ,1,1,unknown,complete
+./QF_LRA/LassoRanker/CooperatingT2/brp_withassume.t2.c_Iteration8_Loop_7-phaseTemplate.smt2,572133,sat,572.133,572.133,SMTSCQ,1,1,sat,complete
+./QF_LIA/arctic-matrix/constraint-777746.smt2,9132,sat,9.132,9.132,SMTSCQ,1,1,unknown,complete
+./QF_LIA/arctic-matrix/constraint-873799.smt2,128935,sat,128.935,128.935,SMTSCQ,1,1,unknown,complete
+./QF_LIA/arctic-matrix/constraint-1729671.smt2,437652,sat,437.652,437.652,SMTSCQ,1,1,unknown,complete
+./QF_LIA/tropical-matrix/constraint-735583.smt2,219134,sat,219.134,219.134,SMTSCQ,1,1,unknown,complete
+./QF_LRA/latendresse/ecoliFBAyicesTest-15875-16.smt2,1623,sat,1.623,1.623,SMTSCQ,1,1,sat,complete
+./QF_LRA/latendresse/shewanella-compact2b.smt2,1429,sat,1.429,1.429,SMTSCQ,1,1,sat,complete
+./QF_LRA/LassoRanker/CooperatingT2/firewire.t2.c_Iteration1_Lasso_7-phaseTemplate.smt2,980771,sat,980.771,980.771,SMTSCQ,1,1,sat,complete
+./QF_LRA/LassoRanker/CooperatingT2/afagp-fail.t2.c_Iteration1_Lasso_4-pieceTemplate.smt2,15448,unsat,15.448,15.448,SMTSCQ,1,1,unsat,complete
+./QF_LRA/LassoRanker/CooperatingT2/janne_complex.t2.c_Iteration3_Lasso_4-pieceTemplate.smt2,14605,unsat,14.605,14.605,SMTSCQ,1,1,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/BradleyMannaSipma-2005ICALP-Fig1_true-termination.c_Iteration1_Lasso_4-pieceTemplate.smt2,26250,unsat,26.25,26.25,SMTSCQ,1,1,unknown,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_6-phaseTemplate.smt2,39154,unsat,39.154,39.154,SMTSCQ,1,1,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/NoriSharma-2013FSE-Fig8_true-termination.c_Iteration1_Lasso_7-phaseTemplate.smt2,44588,unsat,44.588,44.588,SMTSCQ,1,1,unsat,complete
+./QF_LRA/miplib/pp08a-5000.smt2,136106,unsat,136.106,136.106,SMTSCQ,1,1,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_7-phaseTemplate.smt2,154557,unsat,154.557,154.557,SMTSCQ,1,1,unknown,complete
+./QF_LRA/2017-Heizmann-UltimateInvariantSynthesis/_functions1.i_3_5_2.bpl_11.smt2,233959,unsat,233.959,233.959,SMTSCQ,1,1,unsat,complete
+./QF_LRA/2017-Heizmann-UltimateInvariantSynthesis/_standard_running.i_4_2_2.bpl_7.smt2,461838,unsat,461.838,461.838,SMTSCQ,1,1,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_7-phaseTemplate.smt2,65320,unsat,65.32,65.32,SMTSCQ,1,1,unknown,complete
+./QF_LRA/LassoRanker/Ultimate/OpposedDisjuncts.bpl_Iteration1_Lasso_4-pieceTemplate.smt2,34756,unsat,34.756,34.756,SMTSCQ,1,1,unsat,complete
+./QF_IDL/asp/ConnectedDominatingSet/rand_150_500_1235354638_0_k=15_unsat.gph.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=145-density=0.1-instance=10.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/asp/GraphPartitioning/rand_25_300_1235843609_0_k=3_v=8_e=15_unsat.gph.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/asp/KnightTour/knightTour.in03.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/KnightTour/knightTour.in04.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/Labyrinth/laby_18_18_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_14.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_19.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_20_20_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_20_20_16.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_21_21_12.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_22_22_17.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_13.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_19.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_150_600_1159731678_8.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_10.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_7.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_9.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/WireRouting/wire.14.x.14.b.8.a.30_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/asp/WireRouting/wire.15.x.15.b.10.a.10_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/asp/WireRouting/wire.15.x.15.b.10.a.20_sat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/WireRouting/wire.17.x.17.b.10.a.25_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/fuzzy-matrix/relative_zr10.srs_slice-5_constraint-295501.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/job_shop/jobshop20-2-10-10-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/mathsat/fischer/FISCHER14-14-ninc.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/qlock/qlock-4-10-34.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/qlock/qlock-4-10-38.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/qlock/qlock-4-10-39.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen18-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen41-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-2-111.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_RDL/scheduling/yn3_828.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_RDL/scheduling/yn4_1000.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=130-density=0.1-instance=5.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=145-density=0.1-instance=10.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=150-density=0.1-instance=3.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/asp/KnightTour/knightTour.in07.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/Labyrinth/laby_17_17_09.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_18_18_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_16.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_21_21_18.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_2.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/Labyrinth/laby_22_22_17.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_3.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_7.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_150_600_1159731678_5.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_9.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/asp/WireRouting/wire.17.x.17.b.10.a.25_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/bcnscheduling/bcnscheduling141.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/fuzzy-matrix/Marche_turing_mult.srs_slice-8_constraint-726108.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/job_shop/jobshop36-2-18-18-2-4-9.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/job_shop/jobshop38-2-19-19-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/job_shop/jobshop44-2-22-22-2-4-9.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/job_shop/jobshop46-2-23-23-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/job_shop/jobshop60-2-30-30-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen32-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen36-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen63-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen69-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen72-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen73-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen75-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen79-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen93-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage12.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage15.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage3.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_LIA/CIRC/multiplier/MULTIPLIER_11.msat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_LIA/fft/Sz256_6616.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_LIA/pb2010/normalized-j12026_5-unsat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_LIA/pb2010/normalized-j12033_3-sat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_LIA/pb2010/normalized-j12036_4-sat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_LIA/pb2010/normalized-j12052_5-unsat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_LRA/LassoRanker/CooperatingT2/ex11.t2.c_Iteration1_Lasso_3-pieceTemplate.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_LRA/LassoRanker/CooperatingT2/ex11.t2.c_Iteration1_Lasso_4-pieceTemplate.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_LRA/latendresse/ecoliMILPglycerolYices3-50000.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_LRA/miplib/fixnet-5000.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,sat,complete
+./QF_RDL/scheduling/yn3_828.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unsat,complete
+./QF_RDL/scheduling/yn3_860.smt2,1200000,timeout,1200.0,1200.0,SMTSCQ,1,1,unknown,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-2-112.smt2,79712,error,79.712,79.712,SMTSCQ,1,1,unsat,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-3-112.smt2,82101,error,82.101,82.101,SMTSCQ,1,1,unsat,complete
+./QF_UFLRA/cpachecker-bmc-svcomp14/cpachecker-bmc.rekcba_ctm_true-unreach-call.1.c.smt2,241017,error,241.017,241.017,SMTSCQ,1,1,sat,complete
+./QF_IDL/asp/ConnectedDominatingSet/rand_80_500_1235848939_0_k=9_sat.gph.smt2,8490,sat,8.49,8.49,SMTSCQF,2,2,unknown,complete
+./QF_IDL/fuzzy-matrix/Zantema_z064.srs_slice-6_constraint-209485.smt2,5235,sat,5.235,5.235,SMTSCQF,2,2,sat,complete
+./QF_LIA/arctic-matrix/constraint-1000539.smt2,14008,sat,14.008,14.008,SMTSCQF,2,2,sat,complete
+./QF_LIA/arctic-matrix/constraint-1060546.smt2,14601,sat,14.601,14.601,SMTSCQF,2,2,sat,complete
+./QF_LIA/arctic-matrix/constraint-506600.smt2,10265,sat,10.265,10.265,SMTSCQF,2,2,unknown,complete
+./QF_LIA/tropical-matrix/constraint-255468.smt2,2249,sat,2.249,2.249,SMTSCQF,2,2,unknown,complete
+./QF_LIA/tropical-matrix/constraint-278378.smt2,2282,sat,2.282,2.282,SMTSCQF,2,2,sat,complete
+./QF_LIA/arctic-matrix/constraint-2069156.smt2,44776,sat,44.776,44.776,SMTSCQF,2,2,sat,complete
+./QF_LIA/arctic-matrix/constraint-1633815.smt2,57001,sat,57.001,57.001,SMTSCQF,2,2,sat,complete
+./QF_LIA/arctic-matrix/constraint-1551672.smt2,70906,sat,70.906,70.906,SMTSCQF,2,2,unknown,complete
+./QF_LIA/arctic-matrix/constraint-1686226.smt2,225424,sat,225.424,225.424,SMTSCQF,2,2,unknown,complete
+./QF_LRA/LassoRanker/CooperatingT2/brp_withassume.t2.c_Iteration8_Loop_7-phaseTemplate.smt2,566721,sat,566.721,566.721,SMTSCQF,2,2,sat,complete
+./QF_LIA/tropical-matrix/constraint-740637.smt2,1006607,sat,1006.607,1006.607,SMTSCQF,2,2,unknown,complete
+./QF_LIA/arctic-matrix/constraint-777746.smt2,72567,sat,72.567,72.567,SMTSCQF,2,2,unknown,complete
+./QF_LIA/arctic-matrix/constraint-873799.smt2,54796,sat,54.796,54.796,SMTSCQF,2,2,unknown,complete
+./QF_LRA/latendresse/ecoliFBAyicesTest-15875-16.smt2,1569,sat,1.569,1.569,SMTSCQF,2,2,sat,complete
+./QF_LRA/latendresse/shewanella-compact2b.smt2,1400,sat,1.4,1.4,SMTSCQF,2,2,sat,complete
+./QF_LIA/tropical-matrix/constraint-735583.smt2,724337,sat,724.337,724.337,SMTSCQF,2,2,unknown,complete
+./QF_LRA/2017-Heizmann-UltimateInvariantSynthesis/_standard_running.i_4_2_2.bpl_7.smt2,21272,unsat,21.272,21.272,SMTSCQF,2,2,unsat,complete
+./QF_LRA/LassoRanker/CooperatingT2/afagp-fail.t2.c_Iteration1_Lasso_4-pieceTemplate.smt2,17581,unsat,17.581,17.581,SMTSCQF,2,2,unsat,complete
+./QF_LRA/LassoRanker/CooperatingT2/janne_complex.t2.c_Iteration3_Lasso_4-pieceTemplate.smt2,14541,unsat,14.541,14.541,SMTSCQF,2,2,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/BradleyMannaSipma-2005ICALP-Fig1_true-termination.c_Iteration1_Lasso_4-pieceTemplate.smt2,12307,unsat,12.307,12.307,SMTSCQF,2,2,unknown,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_6-phaseTemplate.smt2,30530,unsat,30.53,30.53,SMTSCQF,2,2,unsat,complete
+./QF_LRA/2017-Heizmann-UltimateInvariantSynthesis/_functions1.i_3_5_2.bpl_11.smt2,102392,unsat,102.392,102.392,SMTSCQF,2,2,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/NoriSharma-2013FSE-Fig8_true-termination.c_Iteration1_Lasso_7-phaseTemplate.smt2,56122,unsat,56.122,56.122,SMTSCQF,2,2,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_7-phaseTemplate.smt2,102711,unsat,102.711,102.711,SMTSCQF,2,2,unknown,complete
+./QF_LRA/miplib/pp08a-5000.smt2,66363,unsat,66.363,66.363,SMTSCQF,2,2,unsat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage12.smt2,33148,unsat,33.148,33.148,SMTSCQF,2,2,sat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage15.smt2,40925,unsat,40.925,40.925,SMTSCQF,2,2,sat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage3.smt2,33287,unsat,33.287,33.287,SMTSCQF,2,2,sat,complete
+./QF_LIA/CIRC/multiplier/MULTIPLIER_11.msat.smt2,83948,unsat,83.948,83.948,SMTSCQF,2,2,unsat,complete
+./QF_LRA/LassoRanker/CooperatingT2/ex11.t2.c_Iteration1_Lasso_4-pieceTemplate.smt2,21890,unsat,21.89,21.89,SMTSCQF,2,2,unknown,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_7-phaseTemplate.smt2,84016,unsat,84.016,84.016,SMTSCQF,2,2,unknown,complete
+./QF_LRA/LassoRanker/Ultimate/OpposedDisjuncts.bpl_Iteration1_Lasso_4-pieceTemplate.smt2,30002,unsat,30.002,30.002,SMTSCQF,2,2,unsat,complete
+./QF_LRA/miplib/fixnet-5000.smt2,11673,unsat,11.673,11.673,SMTSCQF,2,2,sat,complete
+./QF_LRA/LassoRanker/CooperatingT2/ex11.t2.c_Iteration1_Lasso_3-pieceTemplate.smt2,411752,unsat,411.752,411.752,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/ConnectedDominatingSet/rand_150_500_1235354638_0_k=15_unsat.gph.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=145-density=0.1-instance=10.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/asp/GraphPartitioning/rand_25_300_1235843609_0_k=3_v=8_e=15_unsat.gph.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/asp/KnightTour/knightTour.in03.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/KnightTour/knightTour.in04.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/Labyrinth/laby_18_18_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_14.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_19.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_20_20_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_20_20_16.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_21_21_12.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_22_22_17.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_13.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_19.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_150_600_1159731678_8.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_10.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_7.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_9.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/WireRouting/wire.14.x.14.b.8.a.30_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/asp/WireRouting/wire.15.x.15.b.10.a.10_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/asp/WireRouting/wire.15.x.15.b.10.a.20_sat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/WireRouting/wire.17.x.17.b.10.a.25_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/fuzzy-matrix/relative_zr10.srs_slice-5_constraint-295501.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/job_shop/jobshop20-2-10-10-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/mathsat/fischer/FISCHER14-14-ninc.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/qlock/qlock-4-10-34.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/qlock/qlock-4-10-38.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/qlock/qlock-4-10-39.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen18-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen41-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-2-111.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_RDL/scheduling/yn3_828.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_RDL/scheduling/yn4_1000.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=130-density=0.1-instance=5.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=145-density=0.1-instance=10.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=150-density=0.1-instance=3.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/asp/KnightTour/knightTour.in07.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/Labyrinth/laby_17_17_09.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_18_18_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_16.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_21_21_18.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/Labyrinth/laby_22_22_17.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_2.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_3.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_7.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_150_600_1159731678_5.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_9.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/asp/WireRouting/wire.17.x.17.b.10.a.25_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/bcnscheduling/bcnscheduling141.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/fuzzy-matrix/Marche_turing_mult.srs_slice-8_constraint-726108.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/job_shop/jobshop36-2-18-18-2-4-9.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/job_shop/jobshop38-2-19-19-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/job_shop/jobshop44-2-22-22-2-4-9.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/job_shop/jobshop46-2-23-23-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/job_shop/jobshop60-2-30-30-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen32-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen36-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen63-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen69-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen72-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen73-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen75-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen79-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen93-1.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_LIA/arctic-matrix/constraint-1729671.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_LIA/fft/Sz256_6616.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_LIA/pb2010/normalized-j12026_5-unsat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_LIA/pb2010/normalized-j12033_3-sat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_LIA/pb2010/normalized-j12036_4-sat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_LRA/LassoRanker/CooperatingT2/firewire.t2.c_Iteration1_Lasso_7-phaseTemplate.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_LIA/pb2010/normalized-j12052_5-unsat.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_LRA/latendresse/ecoliMILPglycerolYices3-50000.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,sat,complete
+./QF_RDL/scheduling/yn3_828.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unsat,complete
+./QF_RDL/scheduling/yn3_860.smt2,1200000,timeout,1200.0,1200.0,SMTSCQF,2,2,unknown,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-2-112.smt2,78462,error,78.462,78.462,SMTSCQF,2,2,unsat,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-3-112.smt2,90171,error,90.171,90.171,SMTSCQF,2,2,unsat,complete
+./QF_UFLRA/cpachecker-bmc-svcomp14/cpachecker-bmc.rekcba_ctm_true-unreach-call.1.c.smt2,223495,error,223.495,223.495,SMTSCQF,2,2,sat,complete
+./QF_IDL/asp/ConnectedDominatingSet/rand_80_500_1235848939_0_k=9_sat.gph.smt2,4268,sat,4.268,4.268,SMTSP,3,3,unknown,complete
+./QF_IDL/fuzzy-matrix/Zantema_z064.srs_slice-6_constraint-209485.smt2,8105,sat,8.105,8.105,SMTSP,3,3,sat,complete
+./QF_LIA/arctic-matrix/constraint-1551672.smt2,3038,sat,3.038,3.038,SMTSP,3,3,unknown,complete
+./QF_LIA/arctic-matrix/constraint-506600.smt2,13159,sat,13.159,13.159,SMTSP,3,3,unknown,complete
+./QF_LIA/arctic-matrix/constraint-1000539.smt2,17919,sat,17.919,17.919,SMTSP,3,3,sat,complete
+./QF_LIA/arctic-matrix/constraint-1060546.smt2,16980,sat,16.98,16.98,SMTSP,3,3,sat,complete
+./QF_LIA/tropical-matrix/constraint-255468.smt2,1461,sat,1.461,1.461,SMTSP,3,3,unknown,complete
+./QF_LIA/arctic-matrix/constraint-1633815.smt2,22926,sat,22.926,22.926,SMTSP,3,3,sat,complete
+./QF_LIA/arctic-matrix/constraint-2069156.smt2,21482,sat,21.482,21.482,SMTSP,3,3,sat,complete
+./QF_LIA/tropical-matrix/constraint-278378.smt2,3367,sat,3.367,3.367,SMTSP,3,3,sat,complete
+./QF_LIA/arctic-matrix/constraint-1686226.smt2,268804,sat,268.804,268.804,SMTSP,3,3,unknown,complete
+./QF_LIA/tropical-matrix/constraint-740637.smt2,389000,sat,389.0,389.0,SMTSP,3,3,unknown,complete
+./QF_LRA/LassoRanker/CooperatingT2/brp_withassume.t2.c_Iteration8_Loop_7-phaseTemplate.smt2,480073,sat,480.073,480.073,SMTSP,3,3,sat,complete
+./QF_LIA/arctic-matrix/constraint-777746.smt2,6083,sat,6.083,6.083,SMTSP,3,3,unknown,complete
+./QF_LIA/arctic-matrix/constraint-873799.smt2,124616,sat,124.616,124.616,SMTSP,3,3,unknown,complete
+./QF_LIA/tropical-matrix/constraint-735583.smt2,270384,sat,270.384,270.384,SMTSP,3,3,unknown,complete
+./QF_LRA/latendresse/ecoliFBAyicesTest-15875-16.smt2,1580,sat,1.58,1.58,SMTSP,3,3,sat,complete
+./QF_LRA/latendresse/shewanella-compact2b.smt2,1407,sat,1.407,1.407,SMTSP,3,3,sat,complete
+./QF_LRA/LassoRanker/CooperatingT2/firewire.t2.c_Iteration1_Lasso_7-phaseTemplate.smt2,861165,sat,861.165,861.165,SMTSP,3,3,sat,complete
+./QF_LRA/LassoRanker/CooperatingT2/afagp-fail.t2.c_Iteration1_Lasso_4-pieceTemplate.smt2,17452,unsat,17.452,17.452,SMTSP,3,3,unsat,complete
+./QF_LRA/LassoRanker/CooperatingT2/janne_complex.t2.c_Iteration3_Lasso_4-pieceTemplate.smt2,18854,unsat,18.854,18.854,SMTSP,3,3,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/BradleyMannaSipma-2005ICALP-Fig1_true-termination.c_Iteration1_Lasso_4-pieceTemplate.smt2,19704,unsat,19.704,19.704,SMTSP,3,3,unknown,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_6-phaseTemplate.smt2,20572,unsat,20.572,20.572,SMTSP,3,3,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/NoriSharma-2013FSE-Fig8_true-termination.c_Iteration1_Lasso_7-phaseTemplate.smt2,62597,unsat,62.597,62.597,SMTSP,3,3,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_7-phaseTemplate.smt2,80296,unsat,80.296,80.296,SMTSP,3,3,unknown,complete
+./QF_LRA/miplib/pp08a-5000.smt2,86803,unsat,86.803,86.803,SMTSP,3,3,unsat,complete
+./QF_LRA/2017-Heizmann-UltimateInvariantSynthesis/_functions1.i_3_5_2.bpl_11.smt2,168950,unsat,168.95,168.95,SMTSP,3,3,unsat,complete
+./QF_LRA/2017-Heizmann-UltimateInvariantSynthesis/_standard_running.i_4_2_2.bpl_7.smt2,184447,unsat,184.447,184.447,SMTSP,3,3,unsat,complete
+./QF_LRA/LassoRanker/Ultimate/OpposedDisjuncts.bpl_Iteration1_Lasso_4-pieceTemplate.smt2,45000,unsat,45.0,45.0,SMTSP,3,3,unsat,complete
+./QF_LRA/LassoRanker/SV-COMP/LeeJonesBen-Amram-2001POPL-Ex5_true-termination.c_Iteration2_Lasso_7-phaseTemplate.smt2,115493,unsat,115.493,115.493,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/ConnectedDominatingSet/rand_150_500_1235354638_0_k=15_unsat.gph.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=145-density=0.1-instance=10.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/asp/GraphPartitioning/rand_25_300_1235843609_0_k=3_v=8_e=15_unsat.gph.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/asp/KnightTour/knightTour.in03.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/KnightTour/knightTour.in04.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/Labyrinth/laby_18_18_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_14.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_19.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_20_20_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_20_20_16.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_21_21_12.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_22_22_17.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_13.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_19.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_150_600_1159731678_8.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_10.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_7.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_9.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/WireRouting/wire.14.x.14.b.8.a.30_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/asp/WireRouting/wire.15.x.15.b.10.a.10_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/asp/WireRouting/wire.15.x.15.b.10.a.20_sat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/WireRouting/wire.17.x.17.b.10.a.25_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/fuzzy-matrix/relative_zr10.srs_slice-5_constraint-295501.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/job_shop/jobshop20-2-10-10-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/mathsat/fischer/FISCHER14-14-ninc.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/qlock/qlock-4-10-34.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/qlock/qlock-4-10-38.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/qlock/qlock-4-10-39.base.cvc.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen18-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen41-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-2-111.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_RDL/scheduling/yn3_828.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_RDL/scheduling/yn4_1000.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=130-density=0.1-instance=5.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=145-density=0.1-instance=10.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/asp/GraphColouring/graph-colouring-nodes=150-density=0.1-instance=3.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/asp/KnightTour/knightTour.in07.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/Labyrinth/laby_17_17_09.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_18_18_04.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_19_19_16.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_21_21_18.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/Labyrinth/laby_22_22_17.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_2.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_3.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_100_400_1159666138_7.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_150_600_1159731678_5.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/WeightBoundedDominatingSet/rand_200_800_1159728969_9.lp.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/asp/WireRouting/wire.17.x.17.b.10.a.25_unsat.data.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/bcnscheduling/bcnscheduling141.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/fuzzy-matrix/Marche_turing_mult.srs_slice-8_constraint-726108.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/job_shop/jobshop36-2-18-18-2-4-9.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/job_shop/jobshop38-2-19-19-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/job_shop/jobshop44-2-22-22-2-4-9.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/job_shop/jobshop46-2-23-23-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/job_shop/jobshop60-2-30-30-4-4-11.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen32-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen36-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen63-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen69-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen72-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen73-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen75-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen79-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_IDL/queens_bench/toroidal_bench/toroidal_queen93-1.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage12.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage15.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_LIA/20180326-Bromberger/unbd-sage/unbd100v110c/unbd-sage3.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_LIA/CIRC/multiplier/MULTIPLIER_11.msat.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_LIA/arctic-matrix/constraint-1729671.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_LIA/fft/Sz256_6616.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_LIA/pb2010/normalized-j12026_5-unsat.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_LIA/pb2010/normalized-j12033_3-sat.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_LIA/pb2010/normalized-j12036_4-sat.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_LIA/pb2010/normalized-j12052_5-unsat.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_LRA/LassoRanker/CooperatingT2/ex11.t2.c_Iteration1_Lasso_3-pieceTemplate.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_LRA/LassoRanker/CooperatingT2/ex11.t2.c_Iteration1_Lasso_4-pieceTemplate.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_LRA/latendresse/ecoliMILPglycerolYices3-50000.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_LRA/miplib/fixnet-5000.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,sat,complete
+./QF_RDL/scheduling/yn3_828.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unsat,complete
+./QF_RDL/scheduling/yn3_860.smt2,1200000,timeout,1200.0,1200.0,SMTSP,3,3,unknown,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-2-112.smt2,82451,error,82.451,82.451,SMTSP,3,3,unsat,complete
+./QF_LIA/nec-smt/large/getoption_directories/prp-3-112.smt2,82474,error,82.474,82.474,SMTSP,3,3,unsat,complete
+./QF_UFLRA/cpachecker-bmc-svcomp14/cpachecker-bmc.rekcba_ctm_true-unreach-call.1.c.smt2,174317,error,174.317,174.317,SMTSP,3,3,sat,complete
