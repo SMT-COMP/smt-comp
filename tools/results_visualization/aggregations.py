@@ -191,7 +191,7 @@ def add_division_family_info(data, family_definition):
 # Return true if the solver with given id is competitive.
 def is_competitive_solver(solver_config_id):
     global g_competitive
-    return g_competitive[solver_config_id]
+    return g_competitive[solver_config_id] == 'yes'
 
 # Return solver name of solver with given solver id.
 def get_solver_name(solver_id):
@@ -207,7 +207,7 @@ def map_solver_id(row, column):
     solver_id_str = row[column]
     solver_id = int(solver_id_str) if isinstance(solver_id_str, int) or solver_id_str.isnumeric() else None
     if solver_id:
-        g_competitive[solver_id] = row[COL_COMPETING] == 'yes'
+        g_competitive[solver_id] = row[COL_COMPETING]
         g_solver_names[solver_id] = row[COL_SOLVER_NAME]
         g_solver_variants[solver_id] = row[COL_VARIANT_OF_ID] \
                 if row[COL_VARIANT_OF_ID] else row[COL_SOLVER_NAME]
@@ -347,7 +347,7 @@ def score(
           use_families,
           skip_unknowns,
           sequential):
-    global g_args
+    global g_args, g_competitive
     assert not filter_result or filter_result in [RESULT_SAT, RESULT_UNSAT]
 
     if g_args.log: log("Score for {} in {}".format(year, "ALL"))
@@ -370,7 +370,7 @@ def score(
     data_new['correct_sat'] = 0   # Number of correctly solved sat benchmarks
     data_new['correct_unsat'] = 0 # Number of correctly solved unsat benchmarks
     data_new['division_size'] = num_benchmarks
-    data_new['competitive'] = data_new.solver_id.map(is_competitive_solver)
+    data_new['competitive'] = data_new.solver_id.map(lambda x: g_competitive[x])
     data_new['timeout'] = 0
     data_new['memout'] = 0
     data_new['unsolved'] = 0
@@ -582,11 +582,13 @@ def main():
 
     data["nb"] = 1
 
-    data.drop(columns=["benchmark","solver","configuration_id","status","competitive","score_error","score_cpu_time","score_wallclock_time","year","correct","error","correct_sat","correct_unsat","division_size","timeout","memout","unsolved","score_correct"],inplace=True)
+    data.drop(columns=["benchmark","solver","configuration_id","status","score_error","score_cpu_time","score_wallclock_time","year","correct","error","correct_sat","correct_unsat","division_size","timeout","memout","unsolved","score_correct"],inplace=True)
     # ["pair_id","solver_id","cpu_time","wallclock_time","memory_usage","result","expected","division","family"]
 
-    data=data.groupby(by=["solver_id","division","logic","result"],as_index=False).sum()
-    data['solver'] = data.solver_id.map(get_solver_name)
+    data['time']=data["cpu_time"].apply(lambda x: "<=24s" if x <= 24. else ">=24s")
+
+    data=data.groupby(by=["solver_id","division","logic","result","time","competitive"],as_index=False).sum()
+    data['solver']  = data.solver_id.map(get_solver_name)
     data.drop(columns=["solver_id"],inplace=True)
 
     with open(g_args.out, "w") as outfile:

@@ -116,16 +116,17 @@ def main():
            def map_row(r):
                r["cpu time"] = r["millisecond"] / 1000.
                r["wallclock time"] = r["cpu time"]
+               r["result"] = r["result"].strip()
                r["solver"] = file["solver"]["name"]
                r["solver id"] = file["solver"]["solver_id"]
                r["configuration id"] = file["solver"]["configuration_id"]
                benchmark = r["benchmark"]
-               r["benchmark"] = r["benchmark"].removeprefix("/home/mww/satcomp/benchmarks/smtcomp/cloud/")
                benchmark_competition_name   = benchmark.removeprefix("/home/mww/satcomp/benchmarks/smtcomp/cloud")
                # print(benchmark_competition_name)
                # print(cloud_map.to_string())
                # print(cloud_map.loc[benchmark_competition_name[0]]["smtlib name"])
                benchmark_smtlib_name = cloud_map.loc[benchmark_competition_name]["smtlib name"].replace("/non-incremental/","./")
+               r["benchmark"] = benchmark_smtlib_name
                # print("### data ###\n",data)
                # print("### initial ###\n",benchmark)
                # print("### step 1 ###\n",benchmark_competition_name)
