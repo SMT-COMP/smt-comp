@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%   SMT-COMP 2021 - Presentation on SMT-Workshop
+%   SMT-COMP 2022 - Presentation on SMT-Workshop
 %                   virtual conference in "Los Angeles"
 %
 %   1 hour
@@ -60,7 +60,7 @@
 \def\emph#1{\textcolor{MYblue}{#1}}
 
 %%% Titel, Autor und Datum des Vortrags:
-\title{SMT-COMP 2021\\
+\title{SMT-COMP 2022\\
 17th International Satisfiability Modulo Theory Competition}
 \author{\emph{Haniel Barbosa} \and Jochen Hoenicke \and Fran\c{c}ois Bobot}
 \date{Aug 11, 2022}
@@ -304,7 +304,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{SMT-COMP Tracks (traditional)}
-  \emph{Single Query Track}
+  \emph{Single Query (SQ) Track}
   \begin{itemize}
   \item Determine satisfiability of one problem
   \item Solver answers sat/unsat/unknown
@@ -360,7 +360,12 @@
   \item No predefined format or checker
   \item No ranking
   \item Qualitative assessment
-  \end{itemize}
+\end{itemize}
+
+\medskip
+\pause
+  \emph{This year} the sat/unsat results from sound solvers in SQ were used to
+  include benchmarks on the MV, UC and PE tracks.
 
 \end{frame}
 
@@ -470,6 +475,14 @@
   \vspace*{-1pt}%
   \noindent\makebox[\textwidth]{%
     \includegraphics[height=\paperheight]{slide-smtinterpol.pdf}}
+\end{frame}
+}
+
+{
+\begin{frame}
+  \vspace*{-1pt}%
+  \noindent\makebox[\textwidth]{%
+    \includegraphics[height=\paperheight]{slide-smtrat.pdf}}
 \end{frame}
 }
 
@@ -627,9 +640,13 @@
   \pause
   \emph{Unsat Core}
   \begin{itemize}
-  \item \emph{Bitwuzla}: {\small QF\_Bitvec, QF\_Equality+Bitvec, QF\_FPArith}
-  \item \emph{cvc5}: \begin{minipage}{.8\textwidth}\raggedright \tiny Arith, Bitvec, Equality, Equality+LinearArith, Equality+MachineArith, Equality+NonLinearArith, FPArith, QF\_Equality, QF\_Equality+NonLinearArith, QF\_LinearIntrArith, QF\_NonLinearIntArith, QF\_NonLinearRealArith \end{minipage}
-  \item \emph{Yices2}: {\small QF\_Equality+LinearArith, QF\_LinearRealArith}
+\item \emph{cvc5}: Arith, Bitvec, Equality+LinearArith, Equality+MachineArith,Equality+NonLinearArith,Equality(Seq), QF\_Datatypes
+\item \emph{Vampire}: Equality(Par)
+\item \emph{Bitwuzla}: QF\_EqualityBitvec, QF\_FPArith
+\item \emph{Yices2}: QF\_Bitvec, QF\_Equality+LinearArith, QF\_Equality, QF\_LinearIntArith, QF\_LinearRealArith
+\item \emph{SMTInterpol}: QF\_Equality+NonLinearArith
+\item \emph{UltimateEliminator+MathSAT}: FPArith
+
   \end{itemize}
 
 \end{frame}
@@ -639,8 +656,8 @@
   \begin{itemize}
 \item \emph{cvc5}: Arith, Bitvec, Equality+LinearArith,EqualityNonLinearArith,Equality
 \item \emph{UltimateEliminator+MathSAT}: Equality+MachineArith
-\item \emph{Bitwuzla}: FPArith, QF\_Bitvec, QF\_FPArith
-\item \emph{Yices2}: QF\_Equality+Bitvec, QF\_Equality, QF\_LinearIntArith
+\item \emph{Bitwuzla}: FPArith, QF\_FPArith
+\item \emph{Yices2}: QF\_Bitvec, QF\_Equality+Bitvec, QF\_Equality, QF\_LinearIntArith
 \item \emph{SMTInterpol}: QF\_Equality+LinearArith, QF\_Equality+NonLinearArith, QF\_NonLinearIntArith
 \item \emph{OpenSMT}: QF\_LinearRealArith
   \end{itemize}
@@ -725,7 +742,7 @@
 \begin{frame}{Checking Disagreements}
 
   \begin{itemize}
-  \item  instances of 391\,363 have no status
+  \item  111\,451 instances of 391\,363 have no status
 
   \vitem Only 18 benchmarks with disagreements (AUFDTLIA, QF\_NIA)
 
@@ -739,6 +756,11 @@
   yices-ismt
   \begin{itemize}
     \item Down from 10 last year
+    \pause
+    {\tiny (but note that this may be because of our issue with ignoring most of the
+    new benchmarks in the selection)}
+
+
   \end{itemize}
   \end{itemize}
 \end{frame}
@@ -780,7 +802,7 @@
 \end{frame}
 
 \begin{frame}{SMT-COMP organizing committee}
-  Three people organize the SMT-COMP.  In 2021:
+  Three people organize the SMT-COMP.  In 2022:
   \begin{itemize}
   \item Haniel Barbosa
   \item Jochen Hoenicke
