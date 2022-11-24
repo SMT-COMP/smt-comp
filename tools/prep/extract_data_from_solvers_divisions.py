@@ -24,6 +24,7 @@ TRACK_PROOF_EXHIBITION_RAW = 'track_proof_exhibition'
 
 COL_PRELIMINARY_SOLVER_ID = 'Preliminary Solver ID'
 COL_SOLVER_ID = 'Solver ID'
+COL_CONFIG_ID_SQ = 'Config ID Single Query'
 COL_SOLVER_NAME = 'Solver Name'
 
 COL_CONTACT = 'Contact'
@@ -65,6 +66,8 @@ g_properties = [
             ['solver_name', 'name', COL_SOLVER_NAME],
             ['solver_id', 'preliminaryID', COL_PRELIMINARY_SOLVER_ID],
             ['final_id', 'finalID', COL_SOLVER_ID],
+            ['solver_id', 'preliminaryID', COL_PRELIMINARY_SOLVER_ID],
+            ['config_id_sq', 'configID_sq', COL_CONFIG_ID_SQ],
             ['contributors', 'team', COL_CONTRIBUTORS],
             ['variant_of', 'variantOf', COL_VARIANT_OF],
             ['wrapper_tool', 'wrapperTool', COL_WRAPPER_TOOL],

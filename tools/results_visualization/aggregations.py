@@ -359,7 +359,7 @@ def score(
     family_scores = get_family_scores(data) if use_families else {}
 
     # Create new dataframe with relevant columns and populate new columns
-    data_new = data[['division', 'logic', 'benchmark', 'family', 'solver', 'solver_id',
+    data_new = data[['division', 'logic', 'benchmark_id', 'benchmark', 'family', 'solver', 'solver_id',
                      'cpu_time', 'wallclock_time', 'status', 'result',
                      'expected']].copy()
     if int(year) >= 2022:
@@ -582,17 +582,32 @@ def main():
 
     data["nb"] = 1
 
-    data.drop(columns=["benchmark","solver","configuration_id","status","score_error","score_cpu_time","score_wallclock_time","year","correct","error","correct_sat","correct_unsat","division_size","timeout","memout","unsolved","score_correct"],inplace=True)
+    data.drop(columns=["benchmark","solver","configuration_id","status","score_error","score_cpu_time","score_wallclock_time","year","correct","error","correct_sat","correct_unsat","division_size","timeout","memout","unsolved","score_correct","family"],inplace=True)
     # ["pair_id","solver_id","cpu_time","wallclock_time","memory_usage","result","expected","division","family"]
 
     data['time']=data["cpu_time"].apply(lambda x: "<=24s" if x <= 24. else ">=24s")
 
-    data=data.groupby(by=["solver_id","division","logic","result","time","competitive"],as_index=False).sum()
-    data['solver']  = data.solver_id.map(get_solver_name)
-    data.drop(columns=["solver_id"],inplace=True)
 
     with open(g_args.out, "w") as outfile:
-        data.to_csv(path_or_buf=outfile, sep=',',index=False)
+        data_gen = data.drop(columns=["benchmark_id"])
+        data_gen=data_gen.groupby(by=["solver_id","division","logic","result","time","competitive"],as_index=False).sum()
+        data_gen['solver']  = data_gen.solver_id.map(get_solver_name)
+        data_gen.drop(columns=["solver_id"],inplace=True)
+        data_gen.to_csv(path_or_buf=outfile, sep=',',index=False)
+
+    data.sort_values("benchmark_id",inplace=True)
+    with open(os.path.join(os.path.dirname(g_args.out),"results/benchmarks.csv"), "w") as outfile:
+        data_gen=data.drop(columns=["result","time","solver_id","result","competitive","nb","cpu_time","wallclock_time"])
+        data_gen=data_gen.groupby(by=["benchmark_id","division","logic"],as_index=False).first()
+        data_gen.to_csv(path_or_buf=outfile, sep=',',index=False)
+
+    data.drop(columns=["division","logic","expected","time","competitive","nb"],inplace=True)
+    for solver_id in data['solver_id'].unique():
+        data_filter=data.loc[data['solver_id'] == solver_id].copy()
+        data_filter.drop(columns=["solver_id"],inplace=True)
+
+        with open(os.path.join(os.path.dirname(g_args.out),"results/solver_"+str(solver_id)+"_"+os.path.basename(g_args.out)), "w") as outfile:
+            data_filter.to_csv(path_or_buf=outfile, sep=',',index=False)
 
     #TODO: remove disagreementor not
 
