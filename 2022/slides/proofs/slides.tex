@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   SMT-COMP 2022 - Presentation on SMT-Workshop
+%                   virtual conference in "Los Angeles"
+%
+%   1 hour
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[table]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes,shapes.callouts,automata,trees}
+\usetikzlibrary{decorations.pathmorphing,external,fit}
+\usetikzlibrary{calc}
+\usetikzlibrary{backgrounds} %used for the CEGAR figure
+\usepackage{amssymb}
+\usepackage{clrscode}
+\usepackage{pifont}
+\usepackage{pdfpages}
+\geometry{papersize={16cm,9cm}}
+%\tikzexternalize
+
+\colorlet{MYred}{red!70!black}
+\definecolor{MYgreen}{rgb}{.1,.5,0}
+\definecolor{MYblue}{rgb}{0,.42,.714}
+\colorlet{MYgray}{white!95!MYblue}
+\colorlet{MYorange}{orange!80!black}
+\definecolor{gold}{rgb}{.8,.6,0}
+\colorlet{silver}{white!55!black}
+\colorlet{bronze}{brown!70!black}
+\def\tick{\ding{52}}
+\def\cross{\ding{54}}
+
+%%%%%%%%%%%%%%%%%%%%
+%%% Beamer stuff %%%
+%%%%%%%%%%%%%%%%%%%%
+\usetheme{default}
+\useinnertheme{rounded}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamertemplate{footline}{\quad\hfill\footnotesize\insertframenumber\strut\kern1em\vskip2pt}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
+\usefonttheme[onlymath]{serif} % Nicer formulas
+\setbeamercolor{block body}{bg=black!10}
+\setbeamercolor{block title}{bg=black!20}
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\def\emph#1{\textcolor{MYblue}{#1}}
+
+%%% Titel, Autor und Datum des Vortrags:
+\title{SMT-COMP 2022\\
+17th International Satisfiability Modulo Theory Competition}
+\author{\emph{Haniel Barbosa} \and Jochen Hoenicke \and Fran\c{c}ois Bobot}
+\date{Aug 11, 2022}
+
+%% Institut
+\institute{
+  Universidade Federal de Minas Gerais, Brazil \and
+  Albert-Ludwigs-Universit\"at Freiburg, Germany \and
+  CEA List, France
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MACROS
+
+% database symbol (from stackexchange)
+
+\makeatletter
+\tikzset{
+    database/.style={
+        path picture={
+            \draw (0, 1.5*\database@segmentheight) circle [x radius=\database@radius,y radius=\database@aspectratio*\database@radius];
+            \draw (-\database@radius, 0.5*\database@segmentheight) arc [start angle=180,end angle=360,x radius=\database@radius, y radius=\database@aspectratio*\database@radius];
+            \draw (-\database@radius,-0.5*\database@segmentheight) arc [start angle=180,end angle=360,x radius=\database@radius, y radius=\database@aspectratio*\database@radius];
+            \draw (-\database@radius,1.5*\database@segmentheight) -- ++(0,-3*\database@segmentheight) arc [start angle=180,end angle=360,x radius=\database@radius, y radius=\database@aspectratio*\database@radius] -- ++(0,3*\database@segmentheight);
+        },
+        minimum width=2*\database@radius + \pgflinewidth,
+        minimum height=3*\database@segmentheight + 2*\database@aspectratio*\database@radius + \pgflinewidth,
+    },
+    database segment height/.store in=\database@segmentheight,
+    database radius/.store in=\database@radius,
+    database aspect ratio/.store in=\database@aspectratio,
+    database segment height=0.1cm,
+    database radius=0.25cm,
+    database aspect ratio=0.35,
+}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand\vitem{\vfill\item}
+
+\begin{document}
+
+
+\begin{frame}
+  \frametitle{SMT Proofs}
+
+  \begin{itemize}
+    \item In first meeting we discussed:
+    \begin{itemize}
+      \item Detailed vs coarse proofs (for scalability)
+      \begin{itemize}
+        \item Similarly, to dump proofs as solving goes rather than store and
+        emit in the end
+      \end{itemize}
+
+      \item Logical framework or predefined proof calculus
+
+      \item Proof structure and BNF for a proof format
+
+    \end{itemize}
+    \item In the second meeting we mostly discussed the last point
+    \begin{itemize}
+      \item Tentative consensus towards using SMT-LIB 3.0
+      \item Same language for proofs and (regular) terms? Could help to separate syntactically.
+      \item Expectation of proof as sequence of steps towards proving something
+      \begin{itemize}
+        \item $(c_1 \dots c_n\ p)$ as the response to get proof, with $c_i$ as
+        preamble, $p$ the proof
+        \item A proof could be $(\mathrm{someRule} :\mathrm{conclusion}\ t :\mathrm{premises}\ (\mathrm{list}\
+        p_1 \dots p_n\ p) :\mathrm{args}\ (\mathrm{list}\ t_1\dots t_n))$
+        \item Proof can be flattened (so not just a big proof term) by naming
+        proofs in the preamble
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,t,fragile]
+  \frametitle{SMT Proofs}
+
+  Two suggestions by Andrew Reynolds for defining a rule via SMT-LIB 3.0. One
+  with simple types:
+
+\begin{verbatim}
+(declare-type Proof ())
+...
+(declare-const proof.res (-> Proof Proof Bool Proof))
+\end{verbatim}
+
+Another with more structured types:
+
+\begin{verbatim}
+(declare-type Proof (Bool))
+...
+(declare-const proof.eq_symm
+  (-> (! Type :var T :implicit)
+      (! T :var x :implicit)
+      (! T :var y :implicit)
+      (Proof (= x y))
+      (Proof (= y x))))
+\end{verbatim}
+
+    \medskip
+
+    so that for example the proof \verb|(proof.eq_symm P)| proves \verb|(= y x)| when \verb|P| proves \verb|(= x y)|.
+
+
+
+
+\end{frame}
+
+
+\end{document}
