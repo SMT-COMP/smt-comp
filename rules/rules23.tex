@@ -1,0 +1,1616 @@
+\documentclass[12pt]{article}
+
+\usepackage{color}
+\usepackage{times}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage{enumitem}
+
+\usepackage{draftwatermark}
+%\usepackage{showframe}   % debug
+
+\hyphenation{data-types}
+
+\newcommand{\akey}[1]{\textbf{#1}\xspace}
+\newcommand{\bkey}[1]{\textbf{{#1}}\xspace}
+
+\newcommand{\rem}[1]{\textcolor{red}{[#1]}}
+\newcommand{\todo}[1]{\rem{TODO #1}}
+\newcommand{\an}[1]{\rem{#1 -- aina}}
+\newcommand{\ah}[1]{\rem{#1 -- antti}}
+\newcommand{\hb}[1]{\rem{#1 -- haniel}}
+\newcommand{\lh}[1]{\rem{#1 -- liana}}
+\newcommand{\gr}[1]{\rem{#1 -- giles}}
+
+\newcommand{\maintrack}{Single Query Track\xspace}
+\newcommand{\inctrack}{Incremental Track\xspace}
+\newcommand{\ucoretrack}{Unsat-Core Track\xspace}
+\newcommand{\mvaltrack}{Model-Validation Track\xspace}
+\newcommand{\challtrack}{Industry-Challenge Track\xspace}
+\newcommand{\paralleltrack}{Parallel Track\xspace}
+\newcommand{\cloudtrack}{Cloud Track\xspace}
+\newcommand{\prooftrack}{Proof Exhibition Track\xspace}
+
+\newcommand{\rationale}[1]{\hskip .5em{\textit{Rationale:} #1}\xspace}
+
+\let\OLDthebibliography\thebibliography
+\renewcommand\thebibliography[1]{
+  \OLDthebibliography{#1}
+  \setlength{\parskip}{2pt}
+  \setlength{\itemsep}{1.5pt plus 0.3ex}
+}
+
+\urlstyle{same}
+% add chars ~,-,*,'," to break line at for long URLs
+\makeatletter
+\g@addto@macro{\UrlBreaks}{\UrlOrds}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\date{\small This version revised \the\year-\the\month-\the\day}
+
+\title{18th International Satisfiability Modulo Theories Competition
+  (SMT-COMP 2023): Rules and Procedures}
+
+% [morgan] do our own layout of authors; the four-author layout spacing
+% was screwed up...
+\def\doauthor#1{{%
+  \hsize.5\hsize \advance\hsize by-1cm %
+  \def\\{\hss\egroup\hbox to\hsize\bgroup\strut\hss}%
+  \vbox{\hbox to\hsize\bgroup\strut\hss#1\hss\egroup}}}%
+
+\def\header#1{\medskip\noindent\textbf{#1}}
+
+\author{%
+Fran\c{c}ois Bobot\\
+CEA List \\
+France \\
+{\small\href{mailto:Francois.BOBOT@cea.fr}{\texttt{https://github.com/bobot}}} \\
+\and
+Martin Bromberger\\
+TODO\\
+Germany\\
+{\small\href{mailto:TODO}{\texttt{TODO}}}\\
+\and
+Jochen Hoenicke\\
+Certora\\
+Germany\\
+{\small\href{mailto:jochen@certora.com}{\texttt{jochen@certora.com}}}
+}
+
+\maketitle
+
+\noindent Comments on this document should be emailed to the SMT-COMP
+mailing list (see below) or, if necessary, directly to the organizers.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Communication}
+
+Interested parties should subscribe to the SMT-COMP mailing list.
+Important late-breaking news and any necessary clarifications and
+edits to these rules will be announced there, and it is the primary
+way that such announcements will be communicated.
+
+\begin{itemize}
+\item SMT-COMP mailing list:
+  \href{mailto:smt-comp@cs.nyu.edu}{\textrm{smt-comp@cs.nyu.edu}}
+\item Sign-up site for the mailing list:
+  \url{http://cs.nyu.edu/mailman/listinfo/smt-comp}
+\end{itemize}
+
+\noindent Additional material will be made available at the
+competition web site, \url{http://www.smtcomp.org}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+
+\section{Important Dates}
+\label{sec:important}
+
+\begin{description}
+\item[Mar~??] Deadline for new benchmark contributions.
+\item[May~??] Final versions of competition tools (e.g., benchmark
+  scrambler) are made available.  Benchmark libraries are frozen.
+\item[June~??] Deadline for first versions of solvers (for all tracks),
+  including information about which tracks and divisions are being
+  entered, and magic numbers for benchmark scrambling.
+\item[July~?] Deadline for final versions of solvers, including
+  system descriptions.
+\item[July~?] Opening value of NYSE Composite Index used to compute
+  random seed for competition tools.
+\item[August~??] SMT Workshop; end of competition, presentation of
+  results.
+\end{description}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+The annual Satisfiability Modulo Theories Competition~(SMT-COMP) is
+held to spur advances in SMT solver implementations on benchmark
+formulas of practical interest.  Public competitions are a well-known
+means of stimulating advancement in software tools.  For example, in
+automated reasoning, the CASC and SAT competitions for first-order and
+propositional reasoning tools, respectively, have spurred significant
+innovation in their fields~\cite{leberre+03,PSS02}.  More information
+on the history and motivation for SMT-COMP can be found at the
+competition web site, \url{http://www.smtcomp.org}, and in reports on
+previous
+competitions~(\cite{SMTCOMP-JAR,SMTCOMP-FMSD,BDOS08,SMTCOMP-2008,CDW14,SMTCOMP-2012,CSW15}).
+
+SMT-COMP~2022 is part of the SMT Workshop~2022
+(\url{http://smt-workshop.cs.uiowa.edu/2022/}),
+which is affiliated with IJCAR~2022 (\url{https://easychair.org/smart-program/IJCAR2022/}).
+The SMT Workshop will include a block of time to present the results of the
+competition.
+%
+Accordingly, researchers are highly encouraged to submit both new
+benchmarks and new or improved solvers to raise the level of
+competition and advance the state of the art in automated SMT problem
+solving.
+
+SMT-COMP 2022 will have seven tracks: the \maintrack (before 2019: Main Track),
+the \inctrack (before 2019: Application Track), the \ucoretrack, the \mvaltrack,
+the \paralleltrack{} and the \cloudtrack{} (both sponsered by Amazon Web
+Services), and an experimental \prooftrack{} focused on a qualitative evaluation
+of different proof formats, proof checkers and proof-producing solvers.
+%
+Within each track there are multiple divisions, where each division
+uses benchmarks from a specific group of SMT-LIB logics.
+%
+We will recognize winners in all tracks but the \prooftrack{}.
+%
+They will be determined by the number of benchmarks solved (taking into account
+the weighting detailed in Section~\ref{sec:scoring}); we will also recognize
+solvers based on additional criteria.
+
+The rest of this document, revised from the previous
+version,\footnote{Earlier versions of this document include
+  contributions from Clark Barrett, Roberto Bruttomesso, David Cok,
+  Sylvain Conchon, David D{\'e}harbe, Morgan Deters, Alberto Griggio,
+  Liana Hadarean,
+  Matthias Heizmann, Antti Hyvarinen, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
+  and Tjark Weber.}  describes the rules and competition procedures for
+SMT-COMP~2022.
+%
+
+As in previous years, we have revised the rules slightly.  Some rule
+changes in 2022 are designed to improve how logics are organized into
+divisions. We have also added more divisions to the \mvaltrack and have defined a
+new \prooftrack.
+%
+The principal changes from the previous competition rules are the following:
+\begin{itemize}
+  \item {\bf Changes in divisions.} Last year we changed
+  divisions to be composed of one or more related logics.
+  %
+  This year we will keep this organization but we will separate logics into
+  divisions slightly differently: we will have a QF\_Datatypes division with the
+  logics QF\_DT, QF\_UFDT and the QF\_Equality division now only contains the
+  QF\_UF and QF\_AX logics.
+
+  \rationale{The feedback from the participants in last year's competition was
+    that datatypes were too dissimilar from QF\_UF and QF\_AX to be organized in
+    the same division.}
+
+  \item {\bf Logics can be non-competitive in competitive divisions.} Last year
+  we considered every logic within a division to competitive unless the division
+  as whole was non-competitive. This year if a logic is non-competitive within a
+  division (i.e., only one competitive solver enrolled in it), it will not be
+  ran.
+
+  \rationale{We believe the previous setup could benefit too much a solver that
+    supports more logics that its competitor.
+    %
+    In particular there was a whose winner was defined by the benchmarks of a
+    non-competitive logic, which we believe is not ideal.
+    %
+    Note that the incentive for solvers to support more logics continues since
+    as soon as there is more than one solver supporting a logic it will be
+    competitive and the solver that does not support it will be disadvantaged.
+  }
+
+  \item {\bf \mvaltrack.}  \emergencystretch.5cm Last year's competition introduced the experimental
+  divisions QF\_Equality (only with QF\_UF benchmarks), QF\_Equality+LinearArith (only with
+  QF\_UFIDL, QF\_UFLIA, and QF\_UFLRA benchmarks), and QF\_Equality+Bitvec (only with
+  QF\_UFBV benchmarks).
+  %
+  This year these divisions will no longer be experimental.
+  %
+  In addition, we add this year the new experimental division QF\_FPArith
+  (excluding the logics QF\_ABVFP, QF\_AUFBVFP, and QF\_ABVFPLRA).
+
+  \rationale{Last year's divisions ran successfully, so there
+    is no reason to keep them experimental.
+    %
+    For the new divisions, as before, given the inconsistencies across different
+    model producing solvers, we proceed in an experimental fashion to push for
+    model standardization. We exclude logics containing arrays since their model
+    production adds further complications which we only intend to tackle in the
+    future.}
+
+  \item {\bf \prooftrack.}  This track will be introduced this year.
+  %
+  Teams can submit proof-producing solvers together with proof checkers for
+  their proof formats. The checker and format do not need to be from the same
+  team as the solver.
+  %
+  We will compile and present the results, as well as assemble a panel of
+  non-organizer experts to do a qualitative assessment for each proof-producing
+  solver, proof format, and proof checker.
+  %
+  The solver, proof format and checker should be described in a system
+  description (total of 4 pages rather than 2).
+
+  \rationale{Given the many competing visions on how SMT proofs or a proof
+    competition should look like, we decided to be less prescriptive and more
+    descriptive for how SMT-COMP will approach proofs.
+    %
+    We will host a ``proof exhibition'' rather than a ``proof competition''
+    track. The format would be with teams submitting both a proof-producing SMT
+    solver and a proof checker for its proofs.
+ }
+
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Entrants}
+\label{sec:entrants}
+
+\header{SMT Solver.}
+%
+A Satisfiability Modulo Theories (SMT) solver that can enter SMT-COMP is a tool that can determine the
+(un)satisfia\-bility of benchmarks from the SMT-LIB benchmark library
+(\url{https://smtlib.cs.uiowa.edu/benchmarks.shtml}).
+
+\header{Portfolio Solver.}
+%
+A \emph{portfolio solver} is a solver using a combination of two or
+more sub-solvers, developed by different groups of authors, on the
+same component or abstraction of the input problem.  For example, a
+solver using one subsolver to solve the ground abstraction of a
+quantified problem is allowed, while a solver using two or more
+subsolvers from different groups of authors is not.
+Portfolio solver are in general \textbf{allowed only in the
+\paralleltrack{} and \cloudtrack{}}.
+If you are unsure if your tool is a portfolio solver according to this
+definition and you feel that it should be allowed contact the
+organizers of the SMT-COMP for clarification.
+
+\header{Wrapper Tool.}
+%
+A \emph{wrapper tool} is defined as any solver that calls one or more other SMT
+solvers (the \emph{wrapped solvers}). Its system description \textbf{must}
+explicitly acknowledge and state the \textbf{exact} version of any solvers that
+it wraps.  It \emph{should} further make clear technical innovations by which
+the wrapper tool expects to improve on the wrapped solvers.
+
+\header{Derived Tool.}
+%
+A \emph{derived tool} is defined as any solver that is \emph{based on and
+extends} another SMT solver (the \emph{base solver}) from a different
+group of authors.  Its system description
+\textbf{must} explicitly acknowledge
+the solver it is based on and extends.  It \emph{should} further make clear
+technical innovations by which the derived tool expects to improve on the
+original solver.  A derived tool should follow the \emph{naming convention}
+{[name of base solver]-[my solver name]}.
+
+\header{SMT Solver Submission.}
+%
+An entrant to SMT-COMP is a solver submitted by its authors using
+the StarExec (\url{http://www.starexec.org}) service, or, for
+\paralleltrack{} and \cloudtrack{}, otherwise communicated to the
+organisers.
+
+
+\header{Solver execution.}
+%
+The StarExec execution
+service enables members of the SMT research community to run solvers
+on jobs consisting of benchmarks from the SMT-LIB benchmark library.
+Jobs are run on a shared computer cluster.  The execution service is
+provided free of charge, but requires registration to create a
+login account.  Registered users may then upload solvers to
+run, or may run public solvers already uploaded to the service.
+Information about how to configure and upload a solver is contained in
+the StarExec user guide,
+\url{https://wiki.uiowa.edu/display/stardev/User+Guide}.
+
+\header{Participation in the Competition.}
+%
+For participation in SMT-COMP, a solver must be uploaded to StarExec
+and made publicly available, or communicated separately to the
+organisers for the \cloudtrack{} and \paralleltrack{}.  StarExec
+supports solver configurations.  You can have at most one configuration
+for each track (named after the track) and a default configuration used
+for tracks without a track-specific configuration.
+Moreover, the organizers must be informed of the solver's presence
+\emph{and the tracks and divisions which it enters} via the web form
+at
+\begin{center}
+  \url{https://forms.gle/ewNQdFJbmQ12GxpX8}
+\end{center}
+For each track the submission must specify the logics which are
+supported by the solver.  The solver will enter all divisions where it
+supports at least one logic.  A submission \textbf{must} also include a
+link to the \emph{system description} (see below) and a \emph{32-bit
+  unsigned integer}.  These integer numbers, collected from all
+submissions, are used to seed competition tools.
+
+\header{System description.}
+%
+As part of the submission, SMT-COMP entrants are \textbf{required} to provide a
+short (1-2 pages, excluding references; plus 2 pages for proof format and proof
+checker if the entrant is for the proof exhibition track) description of the system, which \textbf{must} explicitly
+acknowledge any solver it wraps or is based on in case of a \emph{wrapper} or
+\emph{derived} tool (see above).
+In case of a \emph{wrapper} tool, it \textbf{must} also explicitly state
+the exact version of each wrapped solver.
+A system description \emph{should} further include the following information
+(unless there is a good reason otherwise):
+\begin{itemize}[itemsep=0ex]
+  \item a list of all authors of the system and their present institutional
+    affiliations,
+  \item the basic SMT solving approach employed,
+  \item details of any non-standard algorithmic techniques as well as
+    references to relevant literature (by the authors or others),
+  \item in case of a \emph{wrapper} or \emph{derived tool}: details of
+    technical innovations by which a wrapper or derived tool expects to improve
+    on the wrapped solvers or base solver
+  \item appropriate acknowledgment of tools other than SMT solvers called by
+    the system (e.g., SAT solvers) that are not written by the authors of the
+    submitted solver, and
+  \item a link to a website for the submitted tool.
+  \item for participants of the \prooftrack{} a short description
+    of their proof format of up to two extra pages.
+\end{itemize}
+System descriptions \textbf{must} be submitted \textbf{until the final solver
+deadline}, and will be made publicly available on the competition website.
+Organizers will check that they contain sufficient information
+and may withdraw a system if its description is not sufficiently updated upon
+request
+
+\header{Multiple versions.}
+%
+The intent of the organizers is to promote as wide a comparison among
+solvers and solver options as possible.  However, to keep the number of
+solver submissions low, each team should only provide multiple solvers
+if they are  substantially different.  A justification must be provided
+for the difference.  We strongly encourage the teams to keep the number
+of solvers per team per category at at most two. By allowing
+up to two submissions we want to encourage the development of new,
+experimental techniques via an ``alternative solver'' while keeping
+the competition manageable.
+
+\header{Other solvers.}
+%
+The organizers reserve the right to include other solvers of interest
+(such as entrants in previous SMT competitions) in the competition,
+e.g., for comparison purposes.
+
+%\header{Attendance.}
+%
+%Submitters of an SMT-COMP entrant are not required (but encouraged) to be
+%physically present at the competition or the SMT Workshop to participate or
+%win.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Deadlines}
+
+SMT-COMP entrants must be submitted via StarExec (solvers), or
+communicated separately to the organisers for the \paralleltrack{} and
+\cloudtrack{}, \emph{and}
+the above web form (accompanying information) until the end of
+{\bf June~18, 2022} anywhere on earth.
+After this date \emph{no new entrants} will be accepted.
+However, updates to existing entrants on StarExec or \paralleltrack{}
+and \cloudtrack{}
+will be accepted until the end of {\bf July~2, 2022} anywhere on earth.
+
+We strongly encourage participants to use this grace period
+\emph{only} for the purpose of fixing any bugs that may be discovered,
+and not for adding new features, as there may be no opportunity to do
+extensive testing using StarExec or other means after the initial deadline.
+
+The solver versions that are present on StarExec or communicated
+otherwise to the organisers for \paralleltrack{} and \cloudtrack{} at the conclusion of
+the grace period will be the ones used for the competition.  Versions
+submitted after this time will not be used.  The organizers reserve
+the right to start the competition itself at any time after the open
+of the New York Stock Exchange on the day after the final solver
+deadline.
+
+These deadlines and procedures apply equally to all tracks of the
+competition.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Execution of Solvers}
+
+Solvers will be publicly evaluated in all tracks and divisions into
+which they have been entered.
+%
+A solver enters a division in a track if it supports at least one
+logic in this division.
+%
+A solver not supporting all logics in a division will not be run on
+the benchmarks from the unsupported logics and will be scored as if it
+returned the result \texttt{unknown} within zero time.
+%
+All results of the competition will be made public. Solvers will be
+made publicly available after the competition and it is a minimum
+license requirement that (i) solvers can be distributed in this way,
+and (ii) all submitted solvers may be freely used for academic
+evaluation purposes.
+
+%\an{intro of the section maybe, we should add there that solvers will be archived on the website and so on. Interestingly, we replied to the reviewer in the report that the solvers are publicly available in the StarExec space when asked about reproducibility, but in the past it was never defined under which terms.}
+
+
+\subsection{Logistics}
+\label{sec:logistics}
+
+\header{Dates of Competition.}
+%
+The bulk of the computation will take place during the weeks leading
+up to SMT 2022.  Intermediate results will be regularly posted to the
+SMT-COMP website as the competition runs.
+%
+The organizers reserve the right to prioritize certain competition
+tracks or divisions to ensure their timely completion, and in
+exceptional circumstances to complete divisions after the SMT
+Workshop.
+
+
+\header{Competition Website.}
+The competition website (\url{www.smtcomp.org}) will be used as the main form
+of communication for the competition. The website will be used to post updates,
+link to these rules and other relevant information (e.g. the benchmarks), and
+to announce the results. We also use the website to archive previous
+competitions. Starting from 2019 we will include the submitted solvers in this
+archive to allow reproduction of the competition results in the future.
+%
+
+\header{Tools.} \label{tools}
+The competition uses a number of tools/scripts to run the competition. In the
+following, we briefly describe these tools. Unless stated otherwise, these
+tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
+\begin{itemize}
+  \item \textbf{Benchmark Selection.} We use a script to implement the
+    benchmark selection policy described on page~\pageref{benchmark-selection}.
+    It takes a seed for the random benchmark selection. The same seed is used
+    for all tools requiring randomisation.
+  \item \textbf{Scrambler.} This tool is used to scramble benchmarks during the
+    competition to ensure that tools do not rely on syntactic features to
+    identify benchmarks. The scrambler can be found at
+    \url{https://github.com/SMT-COMP/scrambler}.
+  \item \textbf{Trace Executor.} This tool is used in the \inctrack to emulate
+    an on-line interaction between an SMT solver and a client application and
+    is available at \url{https://github.com/SMT-COMP/trace-executor}
+  \item \textbf{Post-Processors.} These are used by StarExec to translate the
+    output of tools to the format required for scoring. All post-processors (per
+    track) are available at \url{https://github.com/SMT-COMP/postprocessors}.
+  \item \textbf{Scoring.} We use a script to implement the scoring computation
+    described on in Section~\ref{sec:scoring}. It also includes the scoring
+    computations used in previous competitions (since 2015).
+\end{itemize}
+
+\header{Input.}
+%
+In the \emph{\inctrack}, the \emph{trace executor} will send commands from an
+(incremental) benchmark file to the standard input channel of the solver.  In
+\emph{all other tracks}, a participating solver must read a \emph{single}
+benchmark file, whose filename is presented as the first command-line argument
+of the solver.
+
+Benchmark files are in the concrete syntax of the SMT-LIB format
+version~2.6, though with a \emph{restricted} set of commands.  A benchmark
+file is a text file containing a sequence of SMT-LIB commands that
+satisfies the following \emph{requirements}:
+%
+\begin{itemize}
+  \item
+    \bkey{(set-option ...)}
+    The input contains the following \akey{set-option} commands.
+    \begin{enumerate}[label=(\alph*)]
+    \item In the \emph{\inctrack}, the \akey{:print-success} option
+      must not be disabled.  The trace executor will send an initial
+      \akey{(set-option :print-success true)} command to the solver.
+    \item In all other tracks, the scrambler will add an initial
+      \akey{(set-option :print-success false)} command to the solver.
+    \item In the \emph{\mvaltrack}, a benchmark file contains a single
+      \akey{(set-option :produce-models true)} command as the second command.
+    \item In the \emph{\ucoretrack}, a benchmark file contains a
+      single \akey{(set-option :produce-unsat-cores true)} command as
+      the second command.
+    \item In the \emph{\prooftrack}, a benchmark file contains a
+      single \akey{(set-option :produce-proofs true)} command as
+      the second command.
+    \end{enumerate}
+  \item \bkey{(set-logic ...)}\\
+    A (single) \akey{set-logic} command is the \emph{first} command after
+    any \akey{set-option} commands.
+  \item \bkey{(set-info ...)}\\
+    A benchmark file may contain any number of \akey{set-info} commands.
+    During the competition all \akey{set-info} commands are removed from
+    the benchmark by the scrambler.
+  \item \bkey{(declare-sort ...)}\\
+    A benchmark file may contain any number of \akey{declare-sort} and
+    \akey{define-sort} commands.  All sorts declared or defined with these
+    commands must have zero arity.
+  \item \bkey{(declare-fun ...)} and \bkey{(define-fun ...)}\\
+    A benchmark file may contain any number of \akey{declare-fun} and
+    \akey{define-fun} commands.
+  \item \bkey{(declare-datatype ...)} and \bkey{(declare-datatypes ...)}\\
+    If the logic features algebraic datatypes, the benchmark file may
+    contain any number of \akey{declare-datatype(s)} commands.
+  \item \bkey{(assert ...)}\\
+    A benchmark file may contain any number of \akey{assert} commands.  All
+    formulas in the file belong in the declared logic, with any free symbols
+    declared in the file.
+  \item
+    \bkey{:named}
+    \begin{enumerate}[label=(\alph*)]
+      \vspace{-1ex}
+      \item In \emph{all} tracks \emph{except} the \ucoretrack,  named
+        terms (i.e., terms with the \akey{:named} attribute) are \emph{not}
+        used.
+      \item In the \emph{\ucoretrack}, top-level assertions may be named.
+    \end{enumerate}
+  \item
+    \bkey{(check-sat)}
+    \begin{enumerate}[label=(\alph*)]
+      \vspace{-1ex}
+    \item In \emph{all} tracks \emph{except} the \inctrack, there is
+      \emph{exactly one} \akey{check-sat} command.
+    \item In the \emph{\inctrack}, there are one or more
+      \akey{check-sat} commands.  There may also be zero or more
+      \akey{(push 1)} commands, and zero or more \akey{(pop 1)} commands,
+      consistent with the use of those commands in the SMT-LIB standard.
+    \end{enumerate}
+  \item \bkey{(get-unsat-core)}\\
+    In the \emph{\ucoretrack}, the \akey{check-sat} command (which is
+    always issued in an unsatisfiable context) is followed by a single
+    \akey{get-unsat-core} command.
+  \item \bkey{(get-model)}\\
+    In the \emph{\mvaltrack}, the \akey{check-sat} command (which is
+    always issued in a satisfiable context) is followed by a single
+    \akey{get-model} command.
+  \item \bkey{(get-proof)}\\
+    In the \emph{\prooftrack}, the \akey{check-sat} command (which is
+    always issued in an unsatisfiable context) is followed by a single
+    \akey{get-proof} command.
+  \item \bkey{(exit)}\\
+    It may \emph{optionally} contain an \akey{exit} command as its
+    last command.  In the \emph{\inctrack}, this command must not be
+    omitted.
+  \item \textbf{No other commands} besides the ones just mentioned may be used.
+\end{itemize}
+%
+The SMT-LIB format specification is available from the ``Standard''
+section of the SMT-LIB website~\cite{SMT-LIB}.  Solvers will be given
+formulas only from the divisions into which they have been entered.
+
+\header{Output.}
+%
+In all tracks except the \inctrack, any \texttt{success} outputs will be
+ignored\footnote{SMT-LIB~2.6 requires solvers to produce a \texttt{success}
+  answer after each \akey{set-logic}, \akey{declare-sort}, \akey{declare-fun}
+  and \akey{assert} command (among others), unless the option
+  \akey{:print-success} is set to false.  Ignoring the \texttt{success} outputs
+  allows for submitting fully SMT-LIB~2.6 compliant solvers without the need for
+  a wrapper script, while still allowing entrants of previous competitions to
+  run without changes.}.  Solvers that exit before the time limit without
+reporting a result (e.g., due to exhausting memory or crashing) \emph{and} do
+not produce output that includes \texttt{sat}, \texttt{unsat}, \texttt{unknown}
+or other track specific output as specified in the individual track sections
+e.g. unsat cores or models, will be considered to have aborted.  Note that there
+is no distinction between output and error channel and tools should not write
+any message to the error channel because it could be misinterpreted as a wrong
+result.
+
+\header{Time and Memory Limits.}
+%
+Each SMT-COMP solver will be executed on a dedicated processor of a
+competition machine, for each given benchmark, up to a fixed
+wall-clock time limit~$T$. The individual track descriptions on
+pages~\pageref{sec:exec:single}-\pageref{sec:exec:model} specify
+the time limit for each track. Each processor has 4 cores.  Detailed
+machine specifications are available on the competition web site.
+
+The StarExec service also limits the memory consumption of the solver
+processes.  We expect the memory limit per solver/benchmark pair to be
+on the order of 60\,GB.  The values of both the time limit and the
+memory limit are available to a solver process through environment
+variables.  See the StarExec user guide for more information.
+
+The limits for \paralleltrack{} and \cloudtrack{} are available at
+\url{https://smt-comp.github.io/2022/parallel-and-cloud-tracks.html}.
+
+\header{Persistent State.}
+%
+Solvers may create and write to files and directories during the
+course of an execution, but they must not read such files back during
+later executions.  Each solver is executed with a temporary directory
+as its current working directory.  Any generated files should be
+produced there (and not, say, in the system's \texttt{/tmp}
+directory).  The StarExec system sets a limit on the amount of disk
+storage permitted---typically 20\,GB.  See the StarExec user guide for
+more information.  The temporary directory is deleted after the job is
+complete.  Solvers must not attempt to communicate with other
+machines, e.g., over the network.
+
+
+\subsection{\maintrack (Previously: Main Track)}
+\label{sec:exec:single}
+
+The \maintrack track will consist of selected non-incremental benchmarks in
+each of the competitive divisions.  Each benchmark will be presented to
+the solver as its first command-line argument.  The solver is then expected to
+report on its standard output channel whether the formula is satisfiable
+(\texttt{sat}) or unsatisfiable (\texttt{unsat}).  A solver may also report
+\texttt{unknown} to indicate that it cannot determine satisfiability of the
+formula.
+
+\header{Benchmark Selection.} See page~\pageref{benchmark-selection}.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per solver/benchmark
+pair.
+
+\header{Post-Processor.}
+This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/single-query-track/process}}
+as a post-processor
+to validate and accumulate the results.
+
+\subsection{Incremental Track (Previously: Application Track)}
+\label{sec:exec:app}
+
+The incremental track evaluates SMT solvers when interacting with an
+external verification framework, e.g., a model checker. This
+interaction, ideally, happens by means of an online communication
+between the framework and the solver: the framework repeatedly sends
+queries to the SMT solver, which in turn answers either \texttt{sat}
+or \texttt{unsat}.  In this interaction an SMT solver is required to
+accept queries incrementally via its \emph{standard input channel}.
+
+In order to facilitate the evaluation of solvers in this track, we will set up
+a ``simulation'' of the aforementioned interaction.  Each benchmark represents
+a realistic communication trace, containing multiple \akey{check-sat} commands
+(possibly with corresponding \akey{push 1} and \akey{pop 1} commands). It is
+parsed by a (publicly available) \emph{trace executor},
+which serves the following purposes:
+
+\begin{itemize}
+  \item simulating online interaction by sending single queries to the SMT
+    solver (through stdin),
+  \item preventing ``look-ahead'' behaviors of SMT solvers,
+  \item recording time and answers for each command,
+  \item guaranteeing a fair execution for all solvers by abstracting
+  from any possible crash, misbehavior, etc.\ that might happen in the
+  verification framework.
+\end{itemize}
+
+\header{Input and output.}
+Participating solvers should include a script
+\texttt{smtcomp\_run\_incremental} (if this is not present the script
+for the default configuration will be used). This script will be called
+without arguments and will be connected to a trace executor, which
+will incrementally send commands to the standard input channel of the
+solver and read responses from both the standard output channel of the
+solver.  The commands will be taken from an SMT-LIB benchmark script
+that satisfies the requirements for incremental track scripts given in
+Section~\ref{sec:logistics}.
+%
+Solvers must respond to each command sent by the trace executor with
+the answers defined in the SMT-LIB format specification, that is, with
+an answer of \texttt{sat}, \texttt{unsat}, or \texttt{unknown} for
+\akey{check-sat} commands, and with a \texttt{success} answer for
+other commands.
+Solvers must not write anything to the standard error channel.
+
+\header{Benchmark Selection.} See page~\pageref{benchmark-selection}.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per solver/benchmark
+pair.
+
+\header{Trace Executor.} This track will use the trace executor from
+{\url{https://github.com/SMT-COMP/trace-executor}}
+to execute a solver on an incremental benchmark file.
+
+\header{Post-Processor.}
+This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/incremental-track/process}}
+as a post-processor
+to validate and accumulate the results.
+
+% \subsection{\challtrack}
+% \label{sec:exec:industry-challenge}
+
+% The \challtrack will include both non-incremental and incremental benchmarks.
+% It will follow the same rules as the \maintrack and \inctrack, respectively,
+% with two exceptions: benchmark selection and the time limit.
+
+% \header{Benchmark Selection.}\todo{fixme}
+% This track will run on challenging industrial benchmarks provided by the
+% community. This year, the \challtrack will include the complete set of provided
+% benchmarks dedicated to this track, which consist of both incremental and
+% single query benchmarks in the logics \todo{QF\_BV, QF\_ABV and QF\_AUFBV}. The
+% complete list of benchmarks along with instructions on how to access them will
+% be provided on the SMT-COMP website as soon as the benchmark library is
+% released.
+
+% \header{Time Limit.}
+% This track will use a wall-clock time limit of 12 hours per solver/benchmark
+% pair.
+
+% \header{Post-Processor.}
+% This track will use the post-processors from the \maintrack (for
+% non-incremen\-tal benchmarks) and the \inctrack (for incremental benchmarks)
+% to accumulate the results.
+
+\subsection{\ucoretrack}
+\label{sec:exec:unsat-core}
+
+The \ucoretrack will evaluate the capability of solvers to generate
+unsatisfiable cores.  Performance of solvers will be measured by correctness
+and size of the unsatisfiable core they provide.
+
+\header{Benchmark Selection.}
+This track will run on a selection of non-incremental \emph{unsat} benchmarks
+(as described on page~\pageref{benchmark-selection}), modified
+to use named top-level assertions of the form \akey{(assert (! t :named f ))}.
+
+
+\header{Input/Output.}
+The SMT-LIB language provides a command \akey{(get-unsat-core)}, which asks
+a solver to identify an unsatisfiable core after a \akey{check-sat}
+command returns \texttt{unsat}.
+This unsat core must consist of a list of all named top-level
+assertions in the format prescribed by the SMT-LIB standard.
+%
+Solvers must respond to each command in the benchmark script with the
+answers defined in the SMT-LIB format specification.  In particular,
+solvers that respond \texttt{unknown} to the \akey{check-sat} command
+must respond with an error to the following \akey{get-unsat-core}
+command.
+
+\header{Result.}
+The result of a solver is considered \emph{erroneous} if (i) the
+response to the \akey{check-sat} command is \texttt{sat}, (ii) the
+returned unsatisfiable core is not, in fact, unsatisfiable.
+%
+If the solver replies \texttt{unsat} to \akey{check-sat} but gives no
+response to \akey{get-unsat-core}, this is considered as no reduction, i.e.,
+as if the solver would have returned the entire benchmark as an unsat
+core.
+
+\header{Validation.}
+The organizers will use a selection of SMT solvers (the \emph{validation
+solvers}) that participate in the \maintrack of this competition in order to
+validate if a given unsat core is indeed unsatisfiable.  For each division, the
+organizers will use only solvers that have been sound (i.e., they did not
+produce any erroneous result) in the \maintrack for this division.  The
+unsatisfiability of an unsat core is refuted if the number of validation
+solvers whose result is \texttt{sat} exceeds the number of checking solvers
+whose result is \texttt{unsat}.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per solver/benchmark
+pair. The time limit for checking unsatisfiable cores is yet to be determined,
+but is anticipated to be around 5 minutes of wall-clock time per solver.
+
+\header{Post-Processor.}
+This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/unsat-core-track/process}}
+as a post-processor
+to validate and accumulate the results.
+
+\subsection{\mvaltrack}
+\label{sec:exec:model}
+The \mvaltrack will evaluate the capability of solvers to produce models for
+satisfiable problems.  Performance of solvers will be measured by correctness
+and well-formedness of the model they provide.
+
+\header{Benchmark Selection.}  This track has the divisions QF\_Bitvec,
+QF\_LinearIntArith, QF\_LinearReal\-Arith, QF\_Equality (only with QF\_UF
+benchmarks), QF\_Equality+LinearArith (only with QF\_UFIDL, QF\_UFLIA, and
+QF\_UFLRA benchmarks), and QF\_Equality+Bitvec (only with QF\_UFBV benchmarks).
+%
+This year all divisions with UF logics (with uninterpreted functions) are
+experimental divisions.
+%
+The track will run on a
+selection of non-incremental \emph{sat} benchmarks from these
+logics (as described on page~\pageref{benchmark-selection}).
+%
+We exclude from the selection all benchmarks containing arrays or datatypes.
+
+\header{Input/Output.}
+The SMT-LIB language provides a command \akey{(get-model)} to request a
+satisfying model after a \akey{check-sat} command returns \texttt{sat}.  This
+model must consist of definitions specifying all and only the current
+user-declared function symbols, in the format prescribed by the SMT-LIB
+standard.
+
+\header{Result.}
+The result of a solver is considered erroneous if the response to the
+\akey{check-sat} command is \texttt{unsat}, if the returned model is not
+well-formed (e.g. does not provide a definition for all the user-declared
+function symbols), or if the returned model does not satisfy the benchmark.
+
+\header{Validation.}
+In order to check that the model satisfies the benchmark, the organizers will
+use the model validating tool available at
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/model-validation-track}}.
+It expects as model input a file with the answer to the \akey{check-sat}
+command followed by the solver response to the \akey{get-model} command.
+The model validator tool will output
+\begin{enumerate}
+  \item VALID\hskip .5em for a \texttt{sat} solver response
+        followed by a full satisfying model;
+  \item INVALID\hskip .5em for
+    \begin{itemize}[noitemsep,topsep=0pt]
+      \item an \texttt{unsat} solver response to \akey{check-sat} or
+      \item models that do not satisfy the input problem.
+    \end{itemize}
+  \item UNKNOWN\hskip .5em for
+    \begin{itemize}[noitemsep,topsep=0pt]
+      \item no solver output (no response to either both commands or
+        \akey{get-model}),
+      \item an \texttt{unknown} response to \akey{check-sat}, or
+      \item malformed models, e.g., partial models.
+    \end{itemize}
+\end{enumerate}
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per solver/benchmark
+pair. The time limit for checking the satisfying assignment is yet to be
+determined, but is anticipated to be around 15 minutes of wall-clock time.
+
+\header{Post-Processor.}
+This track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/model-validation-track/process}}
+as a post-processor
+to validate and accumulate the results.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{\paralleltrack{}}
+The \paralleltrack{} will evaluate the capability of solvers to
+determine the satisfiability of problems in a shared-memory parallel
+computing environment.  The track will be experimental.
+
+\header{Benchmark Selection.}
+We will select non-incremental benchmarks from the smt-lib divisions
+based on the participating solvers.  In total 400 instances will be
+chosen such that their run times are sufficiently high based on our
+estimation.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per
+solver/benchmark pair.
+
+\subsection{\cloudtrack{}}
+The \cloudtrack{} will evaluate the capability of solvers to determine
+the satisfiability of problems in a distributed computing environment.
+The track will be experimental.
+
+\header{Benchmark Selection.}
+We will select non-incremental benchmarks from the smt-lib divisions
+based on the participating solvers.  In total 400 instances will be
+chosen such that their run times are sufficiently high based on our
+estimation.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per
+solver/benchmark pair.
+
+\subsection{\prooftrack}
+\label{sec:exec:proof}
+
+In the \prooftrack, teams can submit a proof-producing solver together with a
+proof checker for its proof format.  We will compile and present the results, as
+well as assemble a panel of experts (not necessarily organizers) to do a
+qualitative assessment for each proof-producing solver, proof format, and proof
+checker.
+
+\header{Benchmark Selection.}
+This track will run on a selection of non-incremental \emph{unsat} benchmarks
+(as described on page~\pageref{benchmark-selection}).
+
+\header{Input/Output Solver.}
+For the \prooftrack, solver authors should provide two scripts
+with their solver.  The first script,
+\texttt{smtcomp\_solver}, should take the name of the benchmark file as
+a single argument and run the solver on the benchmark.
+%
+As described in Section~\ref{sec:logistics}, the benchmark
+will contain the commands \akey{(check-sat)} and \akey{(get-proof)}.
+%
+The solver must output the answers to both of these commands to stdout.
+Output to stderr is ignored by the toolchain.
+
+Solvers must respond to each command in the benchmark script with the
+answers defined in the SMT-LIB format specification.  If the solver
+outputs a proof, this proof must be an s-expression according to the
+SMT-LIB standard, but otherwise the format is not specified.
+%
+Solvers that respond \texttt{unknown} to the \akey{check-sat} command should
+respond with an error to the following \akey{get-proof} command.  Note that the
+SMT-LIB conformant error result should be output to stdout.
+
+\header{Input/Output Checker.}
+The second script, \texttt{smtcomp\_checker}, should take
+the benchmark file name as first argument and the stdout output of the
+solver script as second argument.  Note that this output will
+usually start with the \texttt{unsat} result of the \akey{(check-sat)}
+command, which the checker must either parse or skip.
+
+The checker should check the proof within the output and provide the result to
+stdout.
+%
+Output printed to stderr is ignored.
+%
+The first line of the proof checker result should be either \texttt{valid},
+\texttt{invalid}, \texttt{holey}, \texttt{sat}, or \texttt{unknown}.
+%
+The answer \texttt{valid} must only be given when the checker certifies that the
+given proof justifies the unsatisfiability of the given benchmark.
+%
+A checker that returns \texttt{valid} to a satisfiable benchmark is deemed to be
+unsound.
+%
+The answer \texttt{invalid} should be returned if the proof is errorneous or
+otherwise malformed.
+%
+If the proof checker determines that the proof is valid but it contains holes,
+i.e., steps that are not checked for correctness, the answer should be
+\texttt{holey}.
+%
+The answer \texttt{sat} should be given if the solver claimed that the benchmark
+is satisfiable, and \texttt{unknown} should be given if (1) the solver answered
+\texttt{unknown}, (2) it answered \texttt{unsat} but did not give a proof, or
+(3) if the solver gave an error result.
+
+After the first line, the proof checker can provide arbitrary
+\texttt{key=value} pairs.
+%
+These will be collected in the final result table and can include for example
+information about the number of proof steps, the number of nodes in the proof,
+the number of holes, the number of different proof rules, etc.
+
+\header{Result.}
+%
+The result of a solver is considered \emph{erroneous} if (i) the
+proof checker returns \texttt{sat} (as the
+benchmark is necessarily unsatisfiable), or
+%
+(ii) the proof checker returns \texttt{invalid} to
+the given proof.
+%
+Since the \prooftrack is non-competitive and we are not fixing a definition of a
+valid proof, there will be no score computed for this track.
+
+A proof checker is unsound if it returns \texttt{valid} for an (invalid) proof
+of a satisfiable benchmark.
+%
+Thus, a proof checker must also check that the formula that was proved
+corresponds to the benchmark given.  Soundness of the proof checker is a central
+criterion by which the participants will be judged.
+
+\header{Time Limit.}
+This track will use a wall-clock time limit of 20 minutes per solver/benchmark
+pair. This time limit includes the time for proof checking.
+
+\header{Wrapper and Post-Processor.}
+Solvers in this track will be wrapped in the competition to include the script
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/starexec_run_proof}}, which calls the solver and checker script.
+The track will use
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/process}}
+as a post-processor
+to validate and accumulate the results.
+
+
+\section{Benchmarks and Problem Divisions}
+
+\header{Divisions.}
+%
+Within each track there are multiple divisions, and each division selects
+benchmarks from a specific group of SMT-LIB logics in the SMT-LIB benchmark
+library.
+
+\header{Competitive Divisions.}
+A division in a track is competitive if at least two substantially
+different solvers (i.e., solvers from two different teams) were
+submitted.  Although the organizers may enter other solvers for
+comparison purposes, only solvers that are explicitly submitted by
+their authors determine whether a division is competitive, and are
+eligible to be designated as winners.
+We will \textbf{not} run \emph{non-competitive} divisions.
+
+\header{Benchmark sources.}
+Benchmarks for each division will be drawn from the SMT-LIB benchmark
+library.  The \maintrack, \paralleltrack{} and \cloudtrack{} will use a
+subset of all \emph{non-incremental} benchmarks and the \inctrack will
+use a subset of all \emph{incremental} benchmarks.
+%
+% The \challtrack will use all incremental and non-incremental benchmarks
+% dedicated to this track by their submitters.
+%
+The \ucoretrack will use a selection of non-incremental
+\emph{unsat} benchmarks
+and more than one top-level assertion, modified to use named
+top-level assertions.  The \mvaltrack will use a selection of non-incremental
+benchmarks with status \texttt{sat} from logics QF\_BV, QF\_IDL, QF\_RDL,
+QF\_LIA, QF\_LRA, QF\_LIRA, QF\_UF, QF\_UFBV, QF\_UFIDL, QF\_UFLIA, QF\_UFLRA.
+The \prooftrack will use a selection of non-incremental
+\emph{unsat} benchmarks.
+To determine whether a benchmark is sat or unsat, a combination of
+the benchmark's status and the result of the \maintrack{} will be used.
+
+
+\header{New benchmarks.}
+The deadline for submission of new benchmarks was {\bf March~15, 2022}.
+%
+The organizers, in collaboration with the SMT-LIB maintainers, will be
+checking and curating these until {\bf June~18, 2022}.
+
+The SMT-LIB
+maintainers intend to make a new release of the benchmark library
+publicly available on or close to this date.
+
+\header{Benchmark demographics.}
+%
+The set of all SMT-LIB benchmarks in the logics of a given division can be
+naturally partitioned to sets containing benchmarks that are similar from the
+user community perspective.
+%
+Such benchmarks could all come from the same
+application domain, be generated by the same tool, or have some other
+obvious common identity.
+%
+The organizers try to identify a meaningful partitioning based on the
+directory hierarchy in SMT-LIB.  In many cases the hierarchy consists of
+the top-level directories each corresponding to a submitter, who has
+further imposed a hierarchy on the benchmarks.
+%
+The organizers believe that the submitters have the best information on the
+common identity of their benchmarks and therefore partition each logic in a
+division based on the bottom-level directory imposed by each submitter.  These
+partitions are referred to as \emph{families}.
+
+\header{Benchmark selection.} \label{benchmark-selection}
+The competition will use a large subset of SMT-LIB benchmarks, with some
+guarantees on including new benchmarks.  In \textbf{all} tracks
+\textbf{except} the \paralleltrack and \cloudtrack
+the following selection process will be used.
+\begin{enumerate}
+\item \emph{Remove inappropriate benchmarks.} The
+  organizers may remove benchmarks that are deemed inappropriate or
+  uninteresting for competition, or cut the size of certain benchmark
+  families to avoid their over-representation.  SMT-COMP attempts to
+  give preference to benchmarks that are ``real-world,'' in the sense
+  of coming from or having some intended application outside SMT.
+\item \emph{Remove easy / uninteresting benchmarks.}
+  For the following tracks, all benchmarks that can be
+  considered as easy or uninteresting based on the following criteria
+  will be removed.
+  \begin{itemize}
+    \item \emph{\maintrack.} All benchmarks that were solved by all
+      solvers (including non-competitive solvers) in less than one second in
+          the corresponding track in 2018--2022.
+    \item \emph{\ucoretrack.} All benchmarks with only a single assertion.
+  \end{itemize}
+
+\item
+  For the \prooftrack and \ucoretrack, all benchmarks with status
+  \texttt{sat} are removed.  We further remove benchmarks with status
+  \texttt{unknown} for which no sound solver reported them to be
+  \texttt{unsat}.
+  %
+  For the \mvaltrack,  all benchmarks with status \texttt{unsat} are removed,
+  as well as benchmarks with status
+  \texttt{unknown} for which no sound solver reported them to be
+  \texttt{sat}.
+
+  In case of a dispute (some solver marks a benchmark as \texttt{sat}
+  and some other solver as \texttt{unsat}), the benchmark may be retained in
+  the selection.
+
+\item \emph{Cap the number of instances in a division.}
+  The number of benchmarks in a division based on the size of the
+  corresponding logics in SMT-LIB will be limited as follows.
+  Let $n$ be the number of benchmarks in an SMT-LIB logic, then
+  \begin{enumerate}
+  \vspace{-1ex}
+    \item \label{bench-sel-300} if $n \le 300$, all instances will be selected;
+  \item \label{bench-sel-600} if $300 < n \leq 600$, a subset of 300 instances
+    from the logic will be selected;
+  \item \label{bench-sel-more} and if $n > 600$,
+      50\% of the benchmarks of the logic will be selected.
+  \end{enumerate}
+\end{enumerate}
+%
+The selection process in cases \ref{bench-sel-600} and \ref{bench-sel-more}
+above will guarantee the inclusion of new benchmarks by first picking randomly
+one benchmark from each new benchmark family.  The rest of the benchmarks will
+be chosen randomly from the remaining benchmarks using a uniform distribution.
+%
+The benchmark selection script will be publicly available at
+\url{https://github.com/SMT-COMP/smt-comp/tree/master/tools} and
+will use the same random seed as the rest of the competition.  The set of
+benchmarks selected for the competition will be published when the competition
+begins.
+
+\header{Heats.}
+%
+Since the organizers at this point are unsure how long the set of
+benchmarks may take (which will depend also on the number of solvers
+submitted), the competition may be run in \emph{heats}.  For each
+track and division, the selected benchmarks may be randomly divided
+into a number of (possibly unequal-sized) heats.  Heats will be run in
+order.  If the organizers determine that there is adequate time, all
+heats will be used for the competition.  Otherwise, incomplete heats
+will be ignored.
+
+\header{Benchmark scrambling.}
+%
+Benchmarks will be slightly scrambled before the competition, using a simple
+benchmark scrambler available at \url{https://github.com/SMT-COMP/scrambler}.
+The benchmark scrambler will be made publicly available before the competition.
+%
+Naturally, solvers must not rely on previously determined identifying
+syntactic characteristics of competition benchmarks in testing
+satisfiability.  Violation of this rule is considered cheating.
+
+\header{Pseudo-random numbers.}
+%
+Pseudo-random numbers used, e.g., for the creation of heats or the
+scrambling of benchmarks, will be generated using the standard C
+library function \texttt{random()}, seeded (using \texttt{srandom()})
+with the sum, modulo $2^{30}$, of the integer numbers provided in the
+system descriptions (see Section~\ref{sec:entrants}) by all SMT-COMP
+entrants other than the organizers'.  Additionally, the integer part
+of one hundred times the opening value of the New York Stock Exchange
+Composite Index on
+the first day the exchange is open on or after the date specified in
+the timeline (Section~\ref{sec:important}) will be added to the other
+seeding values. This helps provide transparency, by guaranteeing that
+the organizers cannot manipulate the seed in favor of or against any
+particular submitted solver.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Scoring}
+\label{sec:scoring}
+
+\subsection{Benchmark scoring}
+\label{sec:benchmark-scoring}
+
+The \textbf{parallel benchmark score} of a solver is a quadruple $\langle
+e, n, w, c\rangle$, with
+\begin{itemize}[noitemsep]
+  \vspace{-1ex}
+  \item \makebox[5em][l]{$e \in \{0, 1\}$}
+    number of erroneous results (usually~$e = 0$)
+  \item \makebox[5em][l]{$0 \leq n \leq N$}
+    number of correct results (resp.~\emph{reduction} for the \ucoretrack)
+  \item \makebox[5em][l]{$w \in [0,T]$}
+    wall-clock time in seconds (real-valued)
+  \item \makebox[5em][l]{$c \in [0, mT]$}
+    CPU time in seconds (real-valued)
+\end{itemize}
+
+\header{Error Score ($\mathbf{e}$).}
+For the \maintrack, \inctrack, \paralleltrack, and \cloudtrack
+$e$ is the number of returned
+statuses that disagree with the given expected status (as described above,
+disagreements on benchmarks with unknown status lead to the benchmark being
+disregarded). For the \ucoretrack, $e$ includes, in addition, the number of
+returned unsat cores that are not, in fact, unsatisfiable (as
+validated by a selection of other solvers selected by organizers).  For the
+\mvaltrack, $e$ includes, in addition, the number of returned models that are
+not full satisfiable models.
+
+\header{Correctly Solved Score ($\mathbf{n}$).}
+For the \maintrack, \inctrack, \mvaltrack, \paralleltrack, and
+\cloudtrack,
+$N$ is defined as the number of \akey{check-sat} commands, and
+$n$ is defined as the number of correct results.
+For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
+and $n$ is defined as the \emph{reduction}, i.e., the difference between $N$
+and the size of the unsat core.
+
+\header{Wall-Clock Time Score ($\mathbf{w}$).}
+The (real-valued) wall-clock time in seconds, until time limit $T$ or the
+solver process terminates.
+
+\header{CPU Time Score ($\mathbf{c}$).}
+The (real-valued) CPU time in seconds, measured across all $m$ cores
+until time limit $mT$ is reached or the solver process
+terminates.
+
+\subsubsection{Sequential Benchmark Score}
+\label{sec:sequential}
+
+The parallel score as defined above favors parallel solvers, which may utilize
+all available processor cores.  To evaluate sequential performance, we derive a
+\textbf{sequential score} by imposing a \emph{virtual} CPU time limit equal to
+the wall-clock time limit~$T$.  A solver result is taken into consideration for
+the sequential score only if the solver process terminates \emph{within} this
+CPU time limit.  More specifically, for a given parallel performance $\langle
+e, n, w, c\rangle$, the corresponding sequential performance is defined
+as~$\langle e_S, n_S, c_S\rangle$, where
+\begin{itemize}
+\item $e_S = 0$ and $n_S = 0$ if $c > T$, and $e_S = e$ and $n_S = n$
+  otherwise,
+\item $c_S = \min\ \{c, T\}$.\footnote{Under this
+  measure, a solver should not benefit from using multiple processor
+  cores.  Conceptually, the sequential performance should be (nearly)
+  unchanged if the solver was run on a single-core processor, up to a
+  time limit of~$T$.}
+\end{itemize}
+
+\subsubsection{\maintrack, \paralleltrack, and \cloudtrack}
+  For the \maintrack, \paralleltrack, and \cloudtrack the error score
+  $e$ and the correctly solved score $n$ are defined as
+  \begin{itemize}
+  \item $e=0$ and $n=0$ if the solver
+    \begin{itemize}[noitemsep,nolistsep]
+      \item aborts without a response, or
+      \item  the result of the \akey{check-sat} command is \texttt{unknown},
+    \end{itemize}
+  \item $e=0$ and $n=1$ if the result of the \akey{check-sat} command is
+      \texttt{sat} or \texttt{unsat} and either
+    \begin{itemize}[noitemsep,nolistsep]
+      \item agrees with the benchmark status,
+      \item or the benchmark status
+        is unknown,\footnote{If the benchmark status is unknown, we thus treat
+        the solver's answer as correct.  Disagreements between different
+        solvers on benchmarks with unknown status are governed in
+        Section~\ref{sec:division-scoring}.}
+    \end{itemize}
+  \item $e=1$ and $n=0$ if the result of the \akey{check-sat} command is
+    incorrect.
+  \end{itemize}
+%
+Note that a (correct or incorrect) response is taken into
+consideration even when the solver process terminates abnormally, or
+does not terminate within the time limit.  Solvers should take care
+not to accidentally produce output that contains \texttt{sat} or
+\texttt{unsat}.
+
+\subsubsection{\inctrack}
+%
+An application benchmark may contain multiple \akey{check-sat}
+commands.  Solvers may partially solve the benchmark before timing
+out.  The benchmark is run by the trace executor, measuring the total
+time (summed over all individual commands) taken by the solver to
+respond to commands.\footnote{Times measured by StarExec may include
+  time spent in the trace executor.  We expect that this time will
+  likely be insignificant compared to time spent in the solver, and
+  nearly constant across solvers.}  Most time will likely be spent in
+response to \akey{check-sat} commands, but \akey{assert}, \akey{push}
+or \akey{pop} commands might also entail a reasonable amount of
+processing.  For the \inctrack, we have
+\begin{itemize}
+\item $e=1$ and $n=0$ if the solver returns an incorrect result for any
+  \akey{check-sat} command within the time limit,
+\item otherwise, $e=0$ and $n$ is the number of correct results for
+  \akey{check-sat} commands returned by the solver before the time
+  limit is reached.
+\end{itemize}
+
+\subsubsection{\ucoretrack}
+  For the \ucoretrack, the error score $e$ and the correctly solved score $n$
+  are defined as
+  \begin{itemize}
+  \item $e=0$ and $n=0$ if the solver
+    \begin{itemize}[noitemsep,nolistsep]
+      \item aborts without a response to \akey{check-sat}, or
+      \item the result of the \akey{check-sat} command is \texttt{unknown},
+      \item the result of the \akey{get-unsat-core} command is not wellformed.
+    \end{itemize}
+  \item $e=1$ and  $n=0$ if the result is erroneous according to
+    Section~\ref{sec:exec:unsat-core},
+  \item otherwise, $e=0$ and $n$ is the \emph{reduction} in the number of
+    formulas, i.e., $n = N$ minus the number of formula names in the
+    reported unsatisfiable core.
+  \end{itemize}
+
+\subsubsection{\mvaltrack}
+  For the \mvaltrack, the error score $e$ and the correctly solved score $n$
+  are defined as
+  \begin{itemize}
+  \item $e=0$ and $n=0$ if the result is UNKNOWN according to the output of
+    the model validating tool described in Section~\ref{sec:exec:model},
+  \item $e=1$ and $n=0$ if the result is INVALID according to the output of
+    the model validating tool described in Section~\ref{sec:exec:model},
+  \item otherwise, $e=0$ and $n=1$.
+  \end{itemize}
+
+\subsection{Division scoring}
+\label{sec:division-scoring}
+
+For each track and division, we compute a division score based on the parallel
+performance of a solver (the \emph{parallel division score}).  For the
+\maintrack, \ucoretrack and \mvaltrack we also compute a division
+score based on the sequential performance of a solver (the \emph{sequential
+division score}).  Additionally, for the \maintrack, we further determine three
+additional scores based on parallel performance: The \emph{24-second score}
+will reward solving performance within a time limit of 24 seconds (wall clock
+time), the \emph{sat score} will reward (parallel) performance on satisfiable
+instances, and the \emph{unsat score} will reward (parallel) performance on
+unsatisfiable instances.
+%
+Finally, in divisions composed by more than one logic, all the above scores will
+be presented not only for the overall division but also for each logic composing
+the division.
+
+\header{Sound Solver.}
+A solver is \emph{sound} on benchmarks with \emph{known status} for a division
+if its parallel performance (Section~\ref{sec:benchmark-scoring}) is of the
+form $\langle 0, n, w, c\rangle$ for each benchmark in the division, i.e., if
+it did not produce any erroneous results.
+
+\header{Disagreeing Solvers.}
+Two solvers \emph{disagree} on a benchmark if one of them reported \texttt{sat}
+and the other reported \texttt{unsat}.
+
+\header{Removal of Disagreements.}
+Before division scores are computed for the \maintrack{},
+benchmarks with \emph{unknown status} are removed from the competition results
+if two (or more) solvers that are sound on benchmarks with known status
+disagree on their result.
+%
+Only the remaining benchmarks are used in the following computation of division
+scores (but the organizers \emph{will report disagreements} for informational
+purposes).
+
+\subsubsection{Parallel Score}
+
+The parallel score for a division is computed for \emph{all} tracks.  It is
+defined for a participating solver in a division with $M$ benchmarks as the sum
+of all the individual parallel benchmark scores:
+$$\sum_{b\in M} \langle e_b , n_b , w_b, c_b\rangle$$.
+
+\noindent
+A parallel division score $\langle e, n, w, c\rangle$ is better than a parallel
+division score $\langle e', n', w', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
+> n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w
+= w'$ and $c < c'$).  That is, fewer errors takes precedence over more correct
+solutions, which takes precedence over less wall-clock time taken, which takes
+precedence over less CPU time taken.
+
+\subsubsection{Sequential Score}
+
+The sequential score for a division is computed for \emph{all} tracks
+\emph{except} the \inctrack, \paralleltrack, and \cloudtrack.
+\footnote{Since incremental track benchmarks may be partially
+solved, defining a useful sequential performance for the incremental track
+would require information not provided by the parallel performance, e.g.,
+detailed timing information for each result.  Due to the nature of
+\paralleltrack and \cloudtrack we will not consider the sequential
+scores}.  It is defined for a
+participating solver in a division with $M$ benchmarks as the sum of all the
+individual sequential benchmark scores:
+$$\sum_{b\in M} \langle e_b^s, n_b^s, w_b^s, c_b^s\rangle$$.
+
+\noindent
+A sequential division score $\langle e^s, n^s, c^s\rangle$ is better than a
+sequential division score $\langle e^{s'}, n^{s'}, c^{s'}\rangle$ iff
+$e^s < e^{s'}$ or ($e^s = e^{s'}$ and $n^s > n^{s'}$) or ($e^s = e^{s'}$ and
+$n_S = n^{s'}$ and $c^s < c^{s'}$).
+That is, fewer errors takes precedence over more correct solutions,
+which takes precedence over less CPU time taken.
+
+We will not make any comparisons between parallel and sequential performances,
+as these are intended to measure fundamentally different performance
+characteristics.
+
+\subsubsection{24-Seconds Score (\maintrack)}
+
+The 24-seconds score for a division is computed for the \maintrack as the
+parallel division score with a wall-clock time limit $T$ of 24 seconds.
+
+\subsubsection{Sat Score (\maintrack)}
+
+The sat score for a division is computed for the \maintrack as the
+parallel division score when only satisfiable instances are considered.
+
+\subsubsection{Unsat Score (\maintrack)}
+The unsat score for a division is computed for the \maintrack as the
+parallel division score when only unsatisfiable instances are considered.
+
+
+\subsection{Competition-Wide Recognitions}
+
+In 2014 the SMT competition introduced a competition-wide scoring to allow it to award medals in the FLoC Olympic Games and has been awarded each year since. This scoring purposefully emphasized the breadth of solver participation by summing up a score for each (competitive) division a solver competed in. Whilst this rationale is reasonable, we observed that this score had become dictated by the number of divisions being entered by a solver.
+
+This score has been replaced the competition-wide score with two \emph{rankings} that select one solver per division and then rank those solvers. The rationale here is to take the focus away from the number of divisions entered and focus on measures that make sense to use to compare different divisions.
+
+\subsubsection{Biggest Lead Ranking}
+
+This ranking aims to select the solver that \emph{won by the most} in some competitive division. The winners of each division are ranked by the distance between them and the next competitive solver in that division.
+
+Let $n_i^D$ be the correctness score of the $i$th solver (for a given scoring
+system e.g. number of correct results or reduction) in division $D$.
+The \emph{correctness rank} of division $D$ is given as
+\[
+\frac{n_1^D+1}{n_2^D+1}
+\]
+Let $c_i^D$ be the CPU time score of the $i$th solver in division $D$.
+The \emph{CPU time rank} of division $D$ is given as
+\vspace{-1ex}
+\[
+\frac{c_2^D+1}{c_1^D+1}
+\]
+Let $w_i^D$ be the wall-clock time score of the $i$th solver in division $D$.
+The \emph{wall-clock time rank} of division $D$ is given as
+\vspace{-1ex}
+\[
+\frac{w_2^D+1}{w_1^D+1}
+\]
+The \emph{biggest lead winner} is the winner of the division with the highest
+(largest) correctness rank. In case of a tie, the winner is determined as the
+solver with the higher corresponding CPU (resp. wall-clock) time rank for
+sequential (resp. parallel) scoring.
+This can be computed per scoring system.
+
+\subsubsection{Largest Contribution Ranking}
+
+This ranking aims to select the solver that \emph{uniquely contributed} the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solver's contribution to the \emph{virtual best solver} for a division.
+
+Let $\langle e^s, n^s, w^s, c^s \rangle$ be the parallel division score
+for solver $s$ (for a given scoring system, i.e., $n$ is either number of correct
+results or reduction).
+If the division error score $e^s > 0$, then solver $s$ is considered unsound
+and excluded from the ranking.
+If the number of sound competitive solvers~$S$ in a division $D$ is $|S| \leq 2$,
+the division is excluded from the ranking.
+
+Let $\langle e_b^s, n_b^s, w_b^s, c_b^s \rangle$ be the parallel benchmark
+score for benchmark $b$ and solver $s$ (for a given scoring system).
+The virtual best solver \emph{correctness score} for a division $D$ with
+competitive sound solvers $S$ is given as
+\[
+\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
+\]
+where the maximum of an empty set is 0 (i.e., no contribution if a benchmark
+is unsolved).
+
+The virtual best solver \emph{CPU time score} $\mathit{vbss}_c$ and
+the virtual best solver \emph{wall-clock time score} $\mathit{vbss}_w$ for a
+division $D$ with competitive sound solvers $S$ is given as
+\[
+\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
+\]
+\[
+\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
+\]
+where the minimum of an empty set is 1200 seconds
+(no solver was able to solve the benchmark).
+
+In other words, for the single query track,
+$\mathit{vbss}_c(D,S)$  and $\mathit{vbss}_w(D,S)$ is the
+smallest amount of CPU time and wall-clock time taken to solve all benchmarks
+solved in division $D$ using all sound competitive solvers in $S$.
+
+Let $S$ be the set of competitive solvers competing in division $D$.
+The \emph{correctness rank} $\mathit{vbss}_n$, the \emph{CPU time rank}
+$\mathit{vbss}_c$ and the \emph{wall-clock time rank} $\mathit{vbss}_w$
+of solver $s \in S$ in division $D$ are then defined as
+\[
+1- \frac{\mathit{vbss}_n(D,S-s) }{ \mathit{vbss}_n (D,S)}
+\hspace{3em}
+1- \frac{\mathit{vbss}_c(D,S) }{ \mathit{vbss}_c(D,S-s)}
+\hspace{3em}
+1- \frac{\mathit{vbss}_w(D,S) }{ \mathit{vbss}_w(D,S-s)}
+\]
+i.e., the difference in virtual best solver score when removing $s$ from the
+computation.
+
+These ranks will be numbers between 0 and 1 with 0 indicating that $s$ made no
+impact on the \emph{vbss} and 1 indicating that $s$ is the only solver that
+solved anything in the division.
+%
+The ranks for a division $D$ in a given track will be normalized by multiplying
+with $\frac{n_D}{N}$, where $n_D$ corresponds to the number of competitive
+solver/benchmark pairs in division $D$ and $N$ being the overall number of
+competitive solver/benchmark pairs of this track.
+
+The \emph{largest contribution winner} is the solver across all divisions with
+the highest (largest) normalized correctness rank. Again, this can be computed
+per scoring system. In case of a tie, the winner is determined as the solver
+with the higher corresponding normalized CPU (resp. wall-clock) time rank for
+sequential (resp. parallel) scoring.
+
+\subsection{Other Recognitions}
+
+The organizers will also recognize the following contributions:
+%
+\begin{itemize}
+\item \emph{New entrants}. All new entrants (to be interpreted by the organisers, but broadly a significantly new tool that has not competed in the competition before) that beat an existing solver in some division will be awarded special commendations.
+\item \emph{Benchmarks}. Contributors of new benchmarks used in the competition will receive a special mention.
+\end{itemize}
+%
+These recognitions will be announced at the SMT workshop and published on the competition website.
+The organizers reserve the right to recognize other outstanding
+contributions that become apparent in the competition results.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Judging}
+
+The organizers reserve the right, with careful deliberation, to remove
+a benchmark from the competition results if it is determined that the
+benchmark is faulty (e.g., syntactically invalid in a way that affects
+some solvers but not others); and to clarify ambiguities in these
+rules that are discovered in the course of the competition.  Authors
+of solver entrants may appeal to the organizers to request such
+decisions.  Organizers that are affiliated with solver entrants will
+be recused from these decisions.  The organizers' decisions are final.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Acknowledgments}
+
+SMT-COMP 2022 is organized under the direction of the SMT Steering
+Committee. The organizing team is
+%
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item \href{https://github.com/bobot}{Fran\c{c}ois Bobot}~-- CEA List, France (chair)
+\item \href{TODO}{Martin Bromberger}~-- TODO
+\item \href{https://jochen-hoenicke.de/}{Jochen Hoenicke}~-- Certora, Germany
+\end{itemize}
+%
+The competition chairs are responsible for policy and procedure decisions,
+such as these rules, with input from the co-organizers.
+
+Many others have contributed benchmarks, effort, and feedback.  Clark Barrett,
+Pascal Fontaine, Aina Niemetz and Mathias Preiner are maintaining the SMT-LIB
+benchmark library.
+The competition uses the
+\href{https://www.starexec.org/}{StarExec} service, which is hosted at
+the \href{http://www.cs.uiowa.edu/}{University of Iowa}.  Aaron Stump
+is providing essential StarExec support.
+
+\header{Disclosure.}
+Fran\c{c}ois is part of the developing team of the SMT solver COLIBRI~\cite{colibri}.
+%
+Martin TODO
+%
+Jochen is part of the developing team of the SMT solver
+SMTInterpol~\cite{smtinterpol}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+%% Local Variables:
+%% mode: latex
+%% mode: flyspell
+%% ispell-local-dictionary: "american"
+%% LocalWords: arity Heizmann logics Reger satisfiability SMT StarExec Tjark
+%% End:
