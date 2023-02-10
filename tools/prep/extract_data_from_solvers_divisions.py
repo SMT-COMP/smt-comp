@@ -40,6 +40,8 @@ COL_PROOF_EXHIBITION_TRACK = 'Proof Exhibition Track'
 COL_CLOUD_TRACK = 'Cloud Track'
 COL_PARALLEL_TRACK = 'Parallel Track'
 
+COL_CONFIG_ID_SQ = 'Config ID Single Query'
+
 track_raw_names_to_pretty_names = {
         TRACK_SINGLE_QUERY_RAW: COL_SINGLE_QUERY_TRACK,
         TRACK_INCREMENTAL_RAW: COL_INCREMENTAL_TRACK,
@@ -73,6 +75,14 @@ g_properties = [
             ['system_description_url', 'sysDescrUrl', COL_SYS_DESCR_URL],
             ['system_description_name', 'sysDescrName', COL_SYS_DESCR_NAME]
         ]
+
+
+# update g_properties to include year-specific fields
+def add_properties(year):
+    global g_properties, COL_CONFIG_ID_SQ
+    if int(year) >= 2022:
+        g_properties.insert(3, ['config_id_sq', 'configID_sq', COL_CONFIG_ID_SQ])
+
 
 # Print error message and exit.
 def die(msg):
@@ -276,6 +286,7 @@ if __name__ == '__main__':
     if not os.path.exists(args.md_path):
         die("Path not found: {}".format(args.md_path))
 
+    add_properties(args.year)
     g_logics_all,g_logics_to_tracks = read_divisions(args.divisions)
     read_csv(args.solver_divisions)
 
