@@ -188,75 +188,51 @@ new \prooftrack.
 %
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
-  \item {\bf Changes in divisions.} Last year we changed
-  divisions to be composed of one or more related logics.
-  %
-  This year we will keep this organization but we will separate logics into
-  divisions slightly differently: we will have a QF\_Datatypes division with the
-  logics QF\_DT, QF\_UFDT and the QF\_Equality division now only contains the
-  QF\_UF and QF\_AX logics.
+  \item {\bf System description must be submitted with preliminary
+      solver.} \todo{what}
+%
+  \rationale{\todo{reason}}
 
-  \rationale{The feedback from the participants in last year's competition was
-    that datatypes were too dissimilar from QF\_UF and QF\_AX to be organized in
-    the same division.}
-
-  \item {\bf Logics can be non-competitive in competitive divisions.} Last year
-  we considered every logic within a division to competitive unless the division
-  as whole was non-competitive. This year if a logic is non-competitive within a
-  division (i.e., only one competitive solver enrolled in it), it will not be
-  ran.
-
-  \rationale{We believe the previous setup could benefit too much a solver that
-    supports more logics that its competitor.
-    %
-    In particular there was a whose winner was defined by the benchmarks of a
-    non-competitive logic, which we believe is not ideal.
-    %
-    Note that the incentive for solvers to support more logics continues since
-    as soon as there is more than one solver supporting a logic it will be
-    competitive and the solver that does not support it will be disadvantaged.
-  }
-
-  \item {\bf \mvaltrack.}  \emergencystretch.5cm Last year's competition introduced the experimental
-  divisions QF\_Equality (only with QF\_UF benchmarks), QF\_Equality+LinearArith (only with
-  QF\_UFIDL, QF\_UFLIA, and QF\_UFLRA benchmarks), and QF\_Equality+Bitvec (only with
-  QF\_UFBV benchmarks).
+  \item {\bf \mvaltrack.}  \emergencystretch.5cm Last year's
+    competition introduced the experimental divisions QF\_FPArith
+    (excluding the logics QF\_ABVFP, QF\_AUFBVFP, and QF\_ABVFPLRA).
   %
   This year these divisions will no longer be experimental.
   %
-  In addition, we add this year the new experimental division QF\_FPArith
-  (excluding the logics QF\_ABVFP, QF\_AUFBVFP, and QF\_ABVFPLRA).
-
+  In addition, we add this year the new experimental division for
+  non-linear arithmetic and for datatypes.  These include the divisions
+  QF\_NonLinearIntArith, QF\_NonLinearRealArith,
+  QF\_Equality+NonLinearArithm,
+  and QF\_Datatypes
+  (excluding all logics involving Arrays).  \todo{root-obj,
+    partially defined functions}
+%
   \rationale{Last year's divisions ran successfully, so there
     is no reason to keep them experimental.
     %
     For the new divisions, as before, given the inconsistencies across different
     model producing solvers, we proceed in an experimental fashion to push for
-    model standardization. We exclude logics containing arrays since their model
-    production adds further complications which we only intend to tackle in the
-    future.}
+    model standardization. We exclude logics containing arrays since
+    there is no standardized way of expressing array model values and
+    we do not want to add too many new logics.}
 
-  \item {\bf \prooftrack.}  This track will be introduced this year.
-  %
-  Teams can submit proof-producing solvers together with proof checkers for
-  their proof formats. The checker and format do not need to be from the same
-  team as the solver.
-  %
-  We will compile and present the results, as well as assemble a panel of
-  non-organizer experts to do a qualitative assessment for each proof-producing
-  solver, proof format, and proof checker.
-  %
-  The solver, proof format and checker should be described in a system
-  description (total of 4 pages rather than 2).
+\item {\bf \prooftrack.}
+  Last year we added this as experimental track. We will continue with
+  this track in more or less the same format.  We will reduce the
+  number of benchmarks, though.
+%  
+  \rationale{We received several submissions that showed that there is
+    interest in a proof track.  
 
-  \rationale{Given the many competing visions on how SMT proofs or a proof
-    competition should look like, we decided to be less prescriptive and more
-    descriptive for how SMT-COMP will approach proofs.
-    %
-    We will host a ``proof exhibition'' rather than a ``proof competition''
-    track. The format would be with teams submitting both a proof-producing SMT
-    solver and a proof checker for its proofs.
- }
+    We are still far away from a common proof format, so changing the
+    track to a competition track or making it non-experimental is not
+    feasible at this time.
+
+    The number of benchmarks and the size of the produced proofs
+    turned out to be a major stress to the StarExec infrastructure,
+    while not giving only little insight.  Therefore, we will reduce
+    the number of benchmarks in this track.
+  }
 
 \end{itemize}
 
@@ -992,6 +968,16 @@ After the first line, the proof checker can provide arbitrary
 These will be collected in the final result table and can include for example
 information about the number of proof steps, the number of nodes in the proof,
 the number of holes, the number of different proof rules, etc.
+Each proof checker can define its own key/value pairs, but we suggest
+to implement the following:
+\begin{itemize}
+\item \texttt{holes} -- number of unchecked axioms or rewrite rules (that
+  can introduce unsoundness),
+\item \texttt{axioms} -- number of checked axioms or rewrite rules,
+\item \texttt{steps} -- number of proof steps (in some proof-specific
+  granularity),
+\item \texttt{assertions} -- number of asserted formulas used in the proof.
+\end{itemize}
 
 \header{Result.}
 %
@@ -1012,13 +998,41 @@ Thus, a proof checker must also check that the formula that was proved
 corresponds to the benchmark given.  Soundness of the proof checker is a central
 criterion by which the participants will be judged.
 
+\header{Evaluation Criteria.}
+%
+Since different proof formats are not easily comparable we will not do
+any scoring by counting solved benchmarks.  Instead we will evaluate
+both solvers and proof checkers using different criteria:
+\begin{itemize}
+\item \emph{soundness}: does the proof checker only accept correct
+  proofs?  In particular, does it check that the proof proves the formula
+  in the benchmark, and does it warn about unchecked rewrite rules?
+\item \emph{trust-base}: how big is the trusted code and how much is
+  shared between proof checker and solver?
+\item \emph{proof overhead}: what is the performance of the solver and
+  the proof checker compared to running the solver without proof
+  production?
+\item \emph{granularity}: what is the granularity of the proof?
+\item \emph{readability}: is the proof easy to digest for a human?
+\item \emph{extractability}: is the proof suitable for automatic
+  processing?  Are there some implicit rewrites that one has to be
+  aware of?
+\item \emph{stability}: Is the proof checker specific to the current
+  version of the solver and needs to be updated with each solver
+  release, or is the proof checker fixed (except when adding new
+  theories)?
+\end{itemize}
+
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
 pair. This time limit includes the time for proof checking.
 
 \header{Wrapper and Post-Processor.}
 Solvers in this track will be wrapped in the competition to include the script
-{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/starexec_run_proof}}, which calls the solver and checker script.
+{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/starexec_run_proof}},
+which calls the solver and checker script.
+Participants are encouraged to wrap their solvers themselves to test
+their submission.
 The track will use
 {\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/process}}
 as a post-processor
@@ -1135,6 +1149,7 @@ the following selection process will be used.
   The number of benchmarks in a division based on the size of the
   corresponding logics in SMT-LIB will be limited as follows.
   Let $n$ be the number of benchmarks in an SMT-LIB logic, then
+  the number of chosen benchmarks is $min(n, max(300, 50n/100))$:
   \begin{enumerate}
   \vspace{-1ex}
     \item \label{bench-sel-300} if $n \le 300$, all instances will be selected;
@@ -1142,7 +1157,9 @@ the following selection process will be used.
     from the logic will be selected;
   \item \label{bench-sel-more} and if $n > 600$,
       50\% of the benchmarks of the logic will be selected.
-  \end{enumerate}
+    \end{enumerate}
+    For the \prooftrack, we will only run $min(n, max(150,
+    25n/100)))$ benchmarks.
 \end{enumerate}
 %
 The selection process in cases \ref{bench-sel-600} and \ref{bench-sel-more}
