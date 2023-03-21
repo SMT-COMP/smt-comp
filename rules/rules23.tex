@@ -192,6 +192,17 @@ The principal changes from the previous competition rules are the following:
       solver.} \todo{what}
 %
   \rationale{\todo{reason}}
+  
+  \item {\bf System descriptions.}  \emergencystretch.5cm Some formulations 
+  in the requirements for the system descriptions have been updated from 
+  \emph{should} to \textbf{must} to make it clearer that these requirements 
+  are mandatory and not just recommended/optional.
+%
+  \rationale{We did this to ensure that derived tools are more easily recognizable and 
+  that it is always clear in which way wrapper tools and derived tools improve 
+  on the original solvers. 
+  Our changes follow the key words for use in RFCs to indicate requirement levels 
+  as proposed by \url{https://www.ietf.org/rfc/rfc2119.txt}.}
 
   \item {\bf \mvaltrack.}  \emergencystretch.5cm Last year's
     competition introduced the experimental divisions QF\_FPArith
@@ -266,7 +277,7 @@ organizers of the SMT-COMP for clarification.
 A \emph{wrapper tool} is defined as any solver that calls one or more other SMT
 solvers (the \emph{wrapped solvers}). Its system description \textbf{must}
 explicitly acknowledge and state the \textbf{exact} version of any solvers that
-it wraps.  It \emph{should} further make clear technical innovations by which
+it wraps.  It \textbf{must} further make clear technical innovations by which
 the wrapper tool expects to improve on the wrapped solvers.
 
 \header{Derived Tool.}
@@ -275,9 +286,9 @@ A \emph{derived tool} is defined as any solver that is \emph{based on and
 extends} another SMT solver (the \emph{base solver}) from a different
 group of authors.  Its system description
 \textbf{must} explicitly acknowledge
-the solver it is based on and extends.  It \emph{should} further make clear
+the solver it is based on and extends.  It \textbf{must} further make clear
 technical innovations by which the derived tool expects to improve on the
-original solver.  A derived tool should follow the \emph{naming convention}
+original solver.  A derived tool \textbf{must} follow the \emph{naming convention}
 {[name of base solver]-[my solver name]}.
 
 \header{SMT Solver Submission.}
@@ -331,23 +342,26 @@ acknowledge any solver it wraps or is based on in case of a \emph{wrapper} or
 \emph{derived} tool (see above).
 In case of a \emph{wrapper} tool, it \textbf{must} also explicitly state
 the exact version of each wrapped solver.
-A system description \emph{should} further include the following information
-(unless there is a good reason otherwise):
+A system description \textbf{must} further include the following information:
 \begin{itemize}[itemsep=0ex]
-  \item a list of all authors of the system and their present institutional
+  \item a list of all (current) authors of the system and their present institutional
     affiliations,
   \item the basic SMT solving approach employed,
-  \item details of any non-standard algorithmic techniques as well as
-    references to relevant literature (by the authors or others),
   \item in case of a \emph{wrapper} or \emph{derived tool}: details of
     technical innovations by which a wrapper or derived tool expects to improve
-    on the wrapped solvers or base solver
+    on the wrapped solvers or base solver,
   \item appropriate acknowledgment of tools other than SMT solvers called by
     the system (e.g., SAT solvers) that are not written by the authors of the
     submitted solver, and
-  \item a link to a website for the submitted tool.
   \item for participants of the \prooftrack{} a short description
     of their proof format of up to two extra pages.
+\end{itemize}
+A system description \emph{should} further include the following information
+(unless there is a good reason otherwise):
+\begin{itemize}[itemsep=0ex]
+  \item details of any non-standard algorithmic techniques as well as
+    references to relevant literature (by the authors or others), and
+  \item a link to a website for the submitted tool.
 \end{itemize}
 System descriptions \textbf{must} be submitted \textbf{until the final solver
 deadline}, and will be made publicly available on the competition website.
