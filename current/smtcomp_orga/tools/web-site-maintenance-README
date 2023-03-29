@@ -1,0 +1,85 @@
+This text file documents the public web pages of the SMT-COMP web
+site. Particularly it describes changes needed when creating a new set
+of web pages for a new year.
+
+Top-level organization
+======================
+
+The top-level (in smtcomp-web) holds a directory for each year and a
+set of utility files. The utility files are images and css files;
+these do not change from year to year.
+
+The files in a subdirectory for a given year are not changed after
+that year's competition is complete. Rather, a new copy of the files
+is created and appropriate edits are performed.
+
+To create the web pages for a new year
+======================================
+
+1) Create the subdirectory for that year.
+
+2) Change the link in smtcomp-web/index.html so that the new year is
+   the default.
+
+3) Copy some of the files from the previous year. Start with
+   index.shtml, comment out links to material not (yet) available, and
+   copy the remaining included/linked files as needed.
+
+4) Edit the files as detailed below.
+
+5) Upload any new or modified files to the public web site. This
+   should be done using the tools/toSF script.
+
+6) Commit all changes to the SVN repository.
+
+It is a good idea to check the new web pages for broken links using a
+tool such as https://validator.w3.org/checklink
+
+Description of necessary changes
+================================
+
+acknowledgments.shtml (minor edits) - change date, organizers, and any
+  other competition details that are changing
+
+benchmarks.shtml (major edits) - update in accordance with the latest
+  SMT-LIB benchmark release
+
+call-for-comments.txt - edit as appropriate for the new call
+
+docs.shtml - no year-dependent changes; new papers should be added as
+  they are published
+
+index.shtml (major edits) - update the date and the organizers; the
+  page also includes news and other progress, so is likely updated
+  frequently throughout the time leading up to the competition (and
+  shortly after)
+
+introduction.shtml - no year-dependent changes
+
+navbar.html (minor edits) - some links may need to be commented out
+  until the corresponding material becomes available
+
+participants.shtml (major edits) - update to the new list of
+  participants when it becomes available (i.e., after the first solver
+  submission deadline)
+
+previous.shtml (minor edits) - add the previous year to the list of
+  previous year links
+
+rulesXX.pdf - update as appropriate; change at least date, organizers,
+  and any other competition details that are changing. See the rules/
+  folder for the LaTeX source file(s).
+
+smt-comp-postlude.shtml - no year-dependent changes
+
+smt-comp-prelude.shtml (minor edits) - update authors as appropriate
+
+smt-style.css (minor edits) - change certain colors (pick your
+  favorite color scheme); compare smt-style.css files from previous
+  years to see exactly where changes are needed
+
+specs.shtml - no year-dependent changes; check with the operator of
+  the competition hardware and update if necessary
+
+tools.shtml - no year-dependent changes; add entries as new
+  competition tools (or new versions of tools) are announced

@@ -6,7 +6,9 @@ rules       - contains LaTeX sources for the competition rules
 
 smtcomp-web - contains all of the public web pages
 
-tools       - contains some development tools
+current     - the directory of the current year, the directories are copied at the end of one year to its own directory.
+
+tools       - contains some *old* development tools, used before 2023. Now they are included in the directory of each year
 
 [YEAR]      - contains files specific to that year that are not published
               on the web site; e.g., source files for the competition

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+./smtlib2_trace_executor --continue-after-unknown ./smtcomp_run_incremental "$1"

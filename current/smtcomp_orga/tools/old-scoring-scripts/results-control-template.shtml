@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<meta http-equiv="pragma" content="no-cache" />
+
+<head>
+
+<style type="text/css">
+body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; }
+iframe { border: none; }
+</style>
+<script type="text/javascript">
+var Dash = {
+    nextIndex: 0,
+
+    dashboards: [
+        {url: "results-ALIA.shtml?v=DDD", time: 2},
+        {url: "results-AUFLIA.shtml?v=DDD", time: 2},
+        {url: "results-AUFLIRA.shtml?v=DDD", time: 2},
+        {url: "results-AUFNIRA.shtml?v=DDD", time: 2},
+        {url: "results-BV.shtml?v=DDD", time: 2},
+        {url: "results-LIA.shtml?v=DDD", time: 2},
+        {url: "results-LRA.shtml?v=DDD", time: 2},
+        {url: "results-NIA.shtml?v=DDD", time: 2},
+        {url: "results-NRA.shtml?v=DDD", time: 2},
+        {url: "results-QF_ABV.shtml?v=DDD", time: 2},
+        {url: "results-QF_ALIA.shtml?v=DDD", time: 2},
+        {url: "results-QF_ANIA.shtml?v=DDD", time: 2},
+        {url: "results-QF_AUFBV.shtml?v=DDD", time: 2},
+        {url: "results-QF_AUFLIA.shtml?v=DDD", time: 2},
+        {url: "results-QF_AUFNIA.shtml?v=DDD", time: 2},
+        {url: "results-QF_AX.shtml?v=DDD", time: 2},
+        {url: "results-QF_BV.shtml?v=DDD", time: 2},
+        {url: "results-QF_BVFP.shtml?v=DDD", time: 2},
+        {url: "results-QF_FP.shtml?v=DDD", time: 2},
+        {url: "results-QF_IDL.shtml?v=DDD", time: 2},
+        {url: "results-QF_LIA.shtml?v=DDD", time: 2},
+        {url: "results-QF_LIRA.shtml?v=DDD", time: 2},
+        {url: "results-QF_LRA.shtml?v=DDD", time: 2},
+        {url: "results-QF_NIA.shtml?v=DDD", time: 2},
+        {url: "results-QF_NIRA.shtml?v=DDD", time: 2},
+        {url: "results-QF_NRA.shtml?v=DDD", time: 2},
+        {url: "results-QF_RDL.shtml?v=DDD", time: 2},
+        {url: "results-QF_UF.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFBV.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFIDL.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFLIA.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFLRA.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFNIA.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFNRA.shtml?v=DDD", time: 2},
+        {url: "results-UF.shtml?v=DDD", time: 2},
+        {url: "results-UFBV.shtml?v=DDD", time: 2},
+        {url: "results-UFIDL.shtml?v=DDD", time: 2},
+        {url: "results-UFLIA.shtml?v=DDD", time: 2},
+        {url: "results-UFLRA.shtml?v=DDD", time: 2},
+        {url: "results-UFNIA.shtml?v=DDD", time: 2},
+        {url: "results-ALIA-app.shtml?v=DDD", time: 2},
+        {url: "results-ANIA-app.shtml?v=DDD", time: 2},
+        {url: "results-LIA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_ALIA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_ANIA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_AUFLIA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_BV-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_LIA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_LRA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_NIA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFLIA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFLRA-app.shtml?v=DDD", time: 2},
+        {url: "results-QF_UFNIA-app.shtml?v=DDD", time: 2},
+        {url: "results-UFLRA-app.shtml?v=DDD", time: 2},
+        {url: "results-AUFBVDTLIA.shmtl?v=DDD", time: 2}, 
+        {url: "results-AUFDTLIA.shmtl?v=DDD", time: 2}, 
+        {url: "results-QF_DT.shmtl?v=DDD", time: 2}, 
+        {url: "results-UFDT.shmtl?v=DDD", time: 2}, 
+        {url: "results-UFDTLIA.shmtl?v=DDD", time: 2}, 
+    ],
+
+    display: function()
+    {
+        var dashboard = Dash.dashboards[Dash.nextIndex];
+        frames["displayArea"].location.href = dashboard.url;
+        Dash.nextIndex = (Dash.nextIndex + 1) % Dash.dashboards.length;
+        setTimeout(Dash.display, dashboard.time * 1000);
+    }
+};
+
+window.onload = Dash.display;
+</script>
+</head>
+
+<body>
+<iframe name="displayArea" width="100%" height="100%"></iframe>
+</body>
+
+</html>

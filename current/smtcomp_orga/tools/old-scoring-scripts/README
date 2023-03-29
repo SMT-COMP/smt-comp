@@ -1,0 +1,33 @@
+
+These scripts were originally (?) written by Sylvain Conchon (Sylvain.Conchon@lri.fr) and updated (a little) by Giles Reger to fit with the 2017 rules.
+
+The following is a brief description of what needs to be done to prepare for the competition, this is organised by track.
+
+Main track results:
+ - These are computed by competition.ml
+ - This picks up csv files from a directory named jobs and expects each csv file to have an appropriate header and each division to be in its own file (see split.py)
+ - To make this just run make i.e. it is the default
+ - all_divisions should be updated to reflect the actual divisions
+ - non_competing_division should be updated to reflect the non-competing divisions
+ - in scoring.ml, solver_short_names needs updating with all solver names, there is also a function non_competitive_solver here to update
+ - results_toc.shtml and results-control-template.shtml need to be updated to reflect any changes in divisions
+
+Other track results:
+ - These are computed by compute_X_hmtl.ml
+ - They pick up csv files from a directory named jobs-X and expect
+ - They are made by running make X
+ - ucore and app compute scores, exp is an experimental division
+ - These were created by hacking something from competition.ml so there are many similarities
+ - one needs to update the following functions with new info:
+  > solver_short_names
+  > test_filter (with non-competing solvers)
+  > divs
+  > all_divisions
+
+
+Misc:
+ - If the header changes then one needs to update col_names, split_csv_line, and csv_line in scoring.ml
+ - The split.py script splits a csv file containing many divisions into one csv file per division
+ - fetchJob.sh and fetchJobs.sh are scripts wrapping StarexecCommand.jar to get jobs from StarExec
+ - rmTimeout.sh removes lines from csv files in one directory that contain a timeout and saves the results in a second directory. This is useful if only timed out jobs are rerun.
+ - up.sh builds all results and uploads them to the website
