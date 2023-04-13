@@ -250,6 +250,14 @@ The principal changes from the previous competition rules are the following:
     the number of benchmarks in this track.
   }
 
+\item {\bf Wrapper Script for \prooftrack.}
+   The wrapper script is changed to remove very large proofs and
+   to cut very large error/debug output.
+%
+   \rationale{Last Year, the \prooftrack produced 800~GB of output, most
+   of that stemming from a few benchmark/solver pairs. These cannot be
+   removed without losing the whole proof track job.   It also makes
+   downloading and sharing the result much harder.}
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -969,7 +977,7 @@ given proof justifies the unsatisfiability of the given benchmark.
 A checker that returns \texttt{valid} to a satisfiable benchmark is deemed to be
 unsound.
 %
-The answer \texttt{invalid} should be returned if the proof is errorneous or
+The answer \texttt{invalid} should be returned if the proof is erroneous or
 otherwise malformed.
 %
 If the proof checker determines that the proof is valid but it contains holes,
