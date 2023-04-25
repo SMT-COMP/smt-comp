@@ -14,11 +14,9 @@ composed of three subdirectories:
     https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks-tmp/pending-2022
    to `pending-2022`. This year, this repository seems to be empty, though.
    I worked around by filtering new benchmarks by family names,
-   see `./find_new_benchmarks.sh`
+   see `find_new_benchmarks.sh`
 
-The points 1. and 2. are automated with `./download.py $SMTLIB_DIR`
-which requires `gitlab` API `pip install --upgrade python-gitlab` (version 3.5.0
-works).
+The points 1. and 2. are automated with `smtcomp-orga-download $SMTLIB_DIR`.
 
 You also need to checkout the scrambler repository alongside the
 smt-comp repository and build the scrambler with `make`.
@@ -28,7 +26,7 @@ git clone https://github.com/SMT-COMP/scrambler.git ../../../scrambler
 make -C ../../../scrambler
 ```
 
-Then run `./find_benchmarks.sh $SMTLIB_DIR` in the directory of this README.
+Then run `find_benchmarks.sh $SMTLIB_DIR` in the directory of this README.
 
 ## Downloading the space XML files from starexec.
 
@@ -41,7 +39,7 @@ them into this directory as `incremental.xml` and
 ## Creating divisions.
 
 To ensure the logics match those of SMT-LIB, we now create the division
-files from the list of benchmarks.  The script `./create_divisions.sh`
+files from the list of benchmarks.  The command `create_divisions.sh`
 does this.  You need to supply a regex for every division to match the
 logics in this division.  The script will check that the logics are
 partitioned into the divisions and report any logic that is missing or
@@ -57,9 +55,9 @@ One should:
     solved unknown benchmarks and the results produced. For example:
 
 ```
-/path/to/tools/scoring/score.py --solved-benchs -c /path/to/SomeJob_info.csv -y 2022 -t 1200 -S /path/to/registration/solvers_divisions_final.csv -T sq -D /path/to/new-divisions.json
+smtcomp-orga-score --solved-benchs -c /path/to/SomeJob_info.csv -y 2022 -t 1200 -S /path/to/registration/solvers_divisions_final.csv -T sq -D /path/to/new-divisions.json
 ```
-3 - Run `merge_benchmarks_with_sq_statuses.py $PATH_CSV_SQ_STATUSES`, which will
+3 - Run `smtcomp-orga-merge_benchmarks_with_sq_statuses $PATH_CSV_SQ_STATUSES`, which will
     supplement `SMT-LIB_non_incremental_benchmarks_all_assertions.csv` with the
     SQ statuses and generate
     `SMT-LIB_non_incremental_benchmarks_all_assertions_sqSolved.csv`

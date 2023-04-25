@@ -1,0 +1,18 @@
+[project]
+name = "smtcomp_orga"
+version = "0.0.1"
+dependencies = [
+    "requests",
+    'importlib-metadata; python_version<"3.8"',
+    'python-gitlab == 3.5.0',
+    'pandas',
+]
+
+[project.scripts]
+smtcomp-orga-download = "smtcomp_orga.prep.download:run"
+smtcomp-orga-merge_benchmarks_with_sq_statuses = "smtcomp_orga.prep.merge_benchmarks_with_sq_statuses:run"
+smtcomp-orga-score = "smtcomp_orga.scoring.score:main"
+
+[tool.setuptools]
+script-files = ["src/smtcomp_orga/prep/find_benchmarks.sh",
+                "src/smtcomp_orga/prep/create-divisions.sh"]
