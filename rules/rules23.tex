@@ -216,12 +216,10 @@ The principal changes from the previous competition rules are the following:
   This year these divisions will no longer be experimental.
   %
   In addition, we add this year the new experimental division for
-  non-linear arithmetic and for datatypes.  These include the divisions
+  arrays, non-linear arithmetic and for datatypes.  These include the divisions
   QF\_NonLinearIntArith, QF\_NonLinearRealArith,
   QF\_Equality+NonLinearArithm,
-  and QF\_Datatypes
-  (excluding all logics involving Arrays).  \todo{root-obj,
-    partially defined functions}
+  and QF\_Datatypes.
 %
   \rationale{Last year's divisions ran successfully, so there
     is no reason to keep them experimental.
@@ -346,9 +344,9 @@ for each track (named after the track) and a default configuration used
 for tracks without a track-specific configuration.
 Moreover, the organizers must be informed of the solver's presence
 \emph{and the tracks and divisions which it enters} via the web form
-at \todo{Needs to be updated!}
+at
 \begin{center}
-  \url{https://forms.gle/ewNQdFJbmQ12GxpX8}
+  \url{https://forms.gle/xhUDQaTynbS3mccE7}
 \end{center}
 For each track the submission must specify the logics which are
 supported by the solver.  The solver will enter all divisions where it
@@ -840,12 +838,13 @@ satisfiable problems.  Performance of solvers will be measured by correctness
 and well-formedness of the model they provide.
 
 \header{Benchmark Selection.}  This track has the divisions QF\_Bitvec,
-QF\_LinearIntArith, QF\_LinearReal\-Arith, QF\_Equality (only with QF\_UF
-benchmarks), QF\_Equality+LinearArith (only with QF\_UFIDL, QF\_UFLIA, and
-QF\_UFLRA benchmarks), and QF\_Equality+Bitvec (only with QF\_UFBV benchmarks).
+QF\_DataTypes, QF\_Equality,
+QF\_Equality+Bitvec,
+QF\_Equality+(Non)LinearArith,  
+QF\_(Non)LinearIntArith, and QF\_(Non)\-LinearRealArith.
 %
-This year all divisions with UF logics (with uninterpreted functions) are
-experimental divisions.
+This year all divisions with non-linear arithmetic, arrays, and data
+types are experimental divisions.
 %
 The track will run on a
 selection of non-incremental \emph{sat} benchmarks from these
@@ -889,6 +888,11 @@ The model validator tool will output
       \item malformed models, e.g., partial models.
     \end{itemize}
 \end{enumerate}
+
+The new experimental divisions require additional syntax to represent
+their models.  We propose the new syntax on the SMT-COMP website
+{\url{https://smt-comp.github.io/2023/model.html}}.
+
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
