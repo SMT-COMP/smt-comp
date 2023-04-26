@@ -258,6 +258,17 @@ The principal changes from the previous competition rules are the following:
    of that stemming from a few benchmark/solver pairs. These cannot be
    removed without losing the whole proof track job.   It also makes
    downloading and sharing the result much harder.}
+   
+\item {\bf Scoring.}  \emergencystretch.5cm We adjusted the wall-clock and 
+CPU time scores so only the benchmarks that are correctly solved within the 
+time limit $T$ are counted.
+%
+  \rationale{We noticed that in the previous scoring unintended results 
+  did occur because timeouts were scored worse than aborts and could 
+  overshadow the times of correctly solved problems. For instance, 
+  solver A that never aborts could lose to solver B that frequently aborts 
+  although A solved exactly the same problems B could solve and A was always 
+  faster on the solved problems than B.}
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1249,14 +1260,18 @@ The \textbf{parallel benchmark score} of a solver is a quadruple $\langle
 e, n, w, c\rangle$, with
 \begin{itemize}[noitemsep]
   \vspace{-1ex}
-  \item \makebox[5em][l]{$e \in \{0, 1\}$}
+  \item \makebox[6em][l]{$e \in \{0, 1\}$}
     number of erroneous results (usually~$e = 0$)
-  \item \makebox[5em][l]{$0 \leq n \leq N$}
+  \item \makebox[6em][l]{$0 \leq n \leq N$}
     number of correct results (resp.~\emph{reduction} for the \ucoretrack)
-  \item \makebox[5em][l]{$w \in [0,T]$}
-    wall-clock time in seconds (real-valued)
-  \item \makebox[5em][l]{$c \in [0, mT]$}
-    CPU time in seconds (real-valued)
+  \item \makebox[6em][l]{$\it{aw} \in [0,T]$}
+    actual wall-clock time in seconds (real-valued)
+  \item \makebox[6em][l]{$w \in [0,T]$}
+    wall-clock time score in seconds (real-valued)
+  \item \makebox[6em][l]{$\it{ac} \in [0, mT]$}
+    actual CPU time in seconds (real-valued)
+  \item \makebox[6em][l]{$c \in [0, mT]$}
+    CPU time score in seconds (real-valued)
 \end{itemize}
 
 \header{Error Score ($\mathbf{e}$).}
@@ -1279,14 +1294,36 @@ For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
 and $n$ is defined as the \emph{reduction}, i.e., the difference between $N$
 and the size of the unsat core.
 
-\header{Wall-Clock Time Score ($\mathbf{w}$).}
-The (real-valued) wall-clock time in seconds, until time limit $T$ or the
+\header{Actual Wall-Clock Time ($\mathbf{aw}$).}
+The actual (real-valued) wall-clock time in seconds, until time limit $T$ or the
 solver process terminates.
 
-\header{CPU Time Score ($\mathbf{c}$).}
+\header{Wall-Clock Time Score ($\mathbf{w}$).}
+For the \maintrack, \ucoretrack, \mvaltrack, \paralleltrack, and
+\cloudtrack, the wall-clock time score $w$ is the same as 
+the actual (real-valued) wall-clock time $\it{aw}$, 
+except that it is zero if the benchmark was not correctly solved within the time limit $T$, i.e., 
+$w = 0$ if $e = 1$, the process did not terminate within the time limit $T$, or 
+it did return unknown or an unknown result.
+For the \inctrack, the wall-clock time score $w$ 
+is the (real-valued) wall-clock time in seconds until the process returned the last correct result for a \akey{check-sat} command within the time limit;
+this means especially that $w = 0$ is zero if no (correct) result was returned for the first \akey{check-sat} command within the time limit.
+
+\header{Actual CPU Time ($\mathbf{ac}$).}
 The (real-valued) CPU time in seconds, measured across all $m$ cores
 until time limit $mT$ is reached or the solver process
 terminates.
+
+\header{CPU Time Score ($\mathbf{c}$).}
+For the \maintrack, \ucoretrack, \mvaltrack, \paralleltrack, and
+\cloudtrack, the CPU time score $c$ is the same as 
+the actual (real-valued) CPU time $\it{ac}$, 
+except that it is zero if the benchmark was not correctly solved within the time limit $mT$, i.e., 
+$c = 0$ if $e = 1$, the process did not terminate within the time limit $mT$, or 
+it did return unknown or an unknown result.
+For the \inctrack, the CPU time score $c$ 
+is the (real-valued) CPU time in seconds until the process returned the last correct result for a \akey{check-sat} command within the time limit;
+this means especially that $c = 0$ is zero if no (correct) result was returned for the first \akey{check-sat} command within the time limit.
 
 \subsubsection{Sequential Benchmark Score}
 \label{sec:sequential}
@@ -1297,12 +1334,12 @@ all available processor cores.  To evaluate sequential performance, we derive a
 the wall-clock time limit~$T$.  A solver result is taken into consideration for
 the sequential score only if the solver process terminates \emph{within} this
 CPU time limit.  More specifically, for a given parallel performance $\langle
-e, n, w, c\rangle$, the corresponding sequential performance is defined
+e, n, \it{aw}, w, \it{ac}, c\rangle$, the corresponding sequential performance is defined
 as~$\langle e_S, n_S, c_S\rangle$, where
 \begin{itemize}
-\item $e_S = 0$ and $n_S = 0$ if $c > T$, and $e_S = e$ and $n_S = n$
-  otherwise,
-\item $c_S = \min\ \{c, T\}$.\footnote{Under this
+\item $e_S = 0$, $n_S = 0$, and $c_S = 0$ if $c > T$;
+\item $e_S = e$, $n_S = n$, and $c_S = c$
+  otherwise.\footnote{Under this
   measure, a solver should not benefit from using multiple processor
   cores.  Conceptually, the sequential performance should be (nearly)
   unchanged if the solver was run on a single-core processor, up to a
@@ -1408,7 +1445,7 @@ the division.
 \header{Sound Solver.}
 A solver is \emph{sound} on benchmarks with \emph{known status} for a division
 if its parallel performance (Section~\ref{sec:benchmark-scoring}) is of the
-form $\langle 0, n, w, c\rangle$ for each benchmark in the division, i.e., if
+form $\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each benchmark in the division, i.e., if
 it did not produce any erroneous results.
 
 \header{Disagreeing Solvers.}
@@ -1430,11 +1467,12 @@ purposes).
 The parallel score for a division is computed for \emph{all} tracks.  It is
 defined for a participating solver in a division with $M$ benchmarks as the sum
 of all the individual parallel benchmark scores:
-$$\sum_{b\in M} \langle e_b , n_b , w_b, c_b\rangle$$.
+$$\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle$$.
 
 \noindent
-A parallel division score $\langle e, n, w, c\rangle$ is better than a parallel
-division score $\langle e', n', w', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
+A parallel division score $\langle
+e, n, \it{aw}, w, \it{ac}, c\rangle$ is better than a parallel
+division score\newline $\langle e', n', \it{aw}', w', \it{ac}', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
 > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w
 = w'$ and $c < c'$).  That is, fewer errors takes precedence over more correct
 solutions, which takes precedence over less wall-clock time taken, which takes
@@ -1452,7 +1490,7 @@ detailed timing information for each result.  Due to the nature of
 scores}.  It is defined for a
 participating solver in a division with $M$ benchmarks as the sum of all the
 individual sequential benchmark scores:
-$$\sum_{b\in M} \langle e_b^s, n_b^s, w_b^s, c_b^s\rangle$$.
+$$\sum_{b\in M} \langle e_b^s, n_b^s, \it{aw}_b^s, w_b^s, \it{ac}_b^s, c_b^s\rangle$$.
 
 \noindent
 A sequential division score $\langle e^s, n^s, c^s\rangle$ is better than a
@@ -1519,7 +1557,7 @@ This can be computed per scoring system.
 
 This ranking aims to select the solver that \emph{uniquely contributed} the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solver's contribution to the \emph{virtual best solver} for a division.
 
-Let $\langle e^s, n^s, w^s, c^s \rangle$ be the parallel division score
+Let $\langle e^s, n^s, \it{aw}^s, w^s, \it{ac}^s, c^s \rangle$ be the parallel division score
 for solver $s$ (for a given scoring system, i.e., $n$ is either number of correct
 results or reduction).
 If the division error score $e^s > 0$, then solver $s$ is considered unsound
@@ -1527,7 +1565,7 @@ and excluded from the ranking.
 If the number of sound competitive solvers~$S$ in a division $D$ is $|S| \leq 2$,
 the division is excluded from the ranking.
 
-Let $\langle e_b^s, n_b^s, w_b^s, c_b^s \rangle$ be the parallel benchmark
+Let $\langle e_b^s, n_b^s, \it{aw}_b^s, w_b^s, \it{ac}_b^s, c_b^s \rangle$ be the parallel benchmark
 score for benchmark $b$ and solver $s$ (for a given scoring system).
 The virtual best solver \emph{correctness score} for a division $D$ with
 competitive sound solvers $S$ is given as
