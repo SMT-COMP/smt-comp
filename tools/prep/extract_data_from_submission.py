@@ -33,6 +33,11 @@ class ColumnNames:
         self.colnames_base(year)
         if year >= 2022:
             self.colnames_2022()
+        if year >= 2023:
+            self.colnames_2023()
+
+    def colnames_2023(self):
+         self.SYSDESCR = 'System description URL (note that the system description is already part of the submission of the  preliminary solvers).'
 
     def colnames_2022(self):
         self.STAREXEC_SOLVERID = 'StarExec ID of your preliminary solver.    If you have different solver ids for several track, please provide them as "12345,12346(uc),12347(inc)".  The tracks are single-query (sq), unsat-core (uc), incremental (inc), model-validation (mv), proof-exhibition (pe).'
