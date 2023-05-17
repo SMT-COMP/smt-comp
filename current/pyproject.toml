@@ -15,4 +15,7 @@ smtcomp-orga-score = "smtcomp_orga.scoring.score:main"
 
 [tool.setuptools]
 script-files = ["src/smtcomp_orga/prep/find_benchmarks.sh",
-                "src/smtcomp_orga/prep/create-divisions.sh"]
+                "src/smtcomp_orga/prep/create-divisions.sh",
+                "src/smtcomp_orga/selection/make_statuses_and_asserts.sh",
+                "src/smtcomp_orga/scoring/make_num_check_sat.sh"
+                ]
