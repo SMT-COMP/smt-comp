@@ -507,10 +507,13 @@ def main():
                         args.sat))
         sys.exit(1)
 
-    if args.filter_csv == None:
+    if args.filter_csv is None:
         filter_csv = []
     else:
         filter_csv = args.filter_csv
+
+    if args.year is None:
+        args.year = 2022
 
     # Set up RNG
     random.seed(args.seed)
@@ -629,8 +632,16 @@ def main():
         # Pick at least one benchmark from each new family.
         new_families = new_benchmarks.get(logic, {})
         for family, benchmarks in new_families.items():
-            benchmark = random.choice(sorted(benchmarks))
-            assert (args.unsat or args.sat) or benchmark in eligible_benchmarks
+            if args.year >= 2023:
+                # Force choosing an eligible benchmark from each new family
+                eligible = { benchmark for benchmark in benchmarks
+                                       if benchmark in eligible_benchmarks }
+                if len(eligible) > 0:
+                    benchmark = random.choice(sorted(eligible))
+                else:
+                    benchmark = None
+            else:
+                benchmark = random.choice(sorted(benchmarks))
             if benchmark in eligible_benchmarks:
                 eligible_benchmarks.remove(benchmark)
                 selected.add(benchmark)
@@ -704,6 +715,9 @@ def parse_args():
     ap.add_argument('-m', '--min-per-logic', dest='num_lower', type=int,
                     help="Minimum number of benchmarks per logic",
                     required=True)
+    ap.add_argument('-y', '--year', type=int,
+                    help="Year of the competition (default <= 2022)",
+                    required=False)
     ap.add_argument('--unsat', dest='unsat',
                     help="Filter for unsat core track")
     ap.add_argument('--n-asserts', dest='n_asserts', default=2, type=int,
