@@ -1,6 +1,6 @@
 #!/bin/bash
 
-YEAR=2022
+YEAR=2023
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
 PREPARE="$SCRIPTDIR/../../../tools/prep/prepare_space_xml.py"
