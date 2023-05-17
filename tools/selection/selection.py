@@ -89,9 +89,12 @@ LOGICS = set([
   'QF_SNIA',
   'QF_UF',
   'QF_UFBV',
+  'QF_UFBVDT',
   'QF_UFBVLIA',
   'QF_UFDT',
+  'QF_UFDTLIA',
   'QF_UFDTLIRA',
+  'QF_UFDTNIA',
   'QF_UFFP',
   'QF_UFFPDTLIRA',
   'QF_UFFPDTNIRA',
@@ -102,6 +105,7 @@ LOGICS = set([
   'QF_UFNRA',
   'UF',
   'UFBV',
+  'UFBVDT',
   'UFBVFP',
   'UFBVLIA',
   'UFDT',
@@ -188,11 +192,13 @@ def read_data_status_asrts(file_name):
                 data[logic][family] = {}
 
             assert(benchmark not in data[logic][family])
+            num_sat_results = int(drow[COL_SQ_SAT_RES]) if (COL_SQ_SAT_RES in drow) else 0
+            num_unsat_results = int(drow[COL_SQ_UNSAT_RES]) if (COL_SQ_SAT_RES in drow) else 0
 
             data[logic][family][benchmark] = (drow[COL_STATUS],
                                               int(drow[COL_ASSERTS]),
-                                              int(drow[COL_SQ_SAT_RES]),
-                                              int(drow[COL_SQ_UNSAT_RES]))
+                                              num_sat_results,
+                                              num_unsat_results)
     return data
 
 def read_data_results(file_name):
@@ -552,6 +558,7 @@ def main():
         (removed_bencharks, all_benchmarks) = \
             main_filter_standard(data_list, all_benchmarks,
                     num_all_benchmarks, args.print_stats)
+        solvedUnknownBenchmarks = {}
     elif (args.unsat):
         data = {}
         unsat_data = read_data_status_asrts(args.unsat)
@@ -605,7 +612,6 @@ def main():
             num_select = int(args.ratio * num_eligible)
 
         print("For {:15s} selected {}".format(logic, num_select))
-        total_selected += num_select
 
         if args.print_eligible:
             for benchmark in eligible_benchmarks:
@@ -635,6 +641,7 @@ def main():
             eligible_benchmarks.remove(benchmark)
             selected.add(benchmark)
 
+        total_selected += len(selected)
         selected_benchmarks.extend(sorted(selected))
 
     print("Total selected: {}".format(total_selected))
