@@ -3,7 +3,7 @@
 mkdir -p logics
 
 TRACKS="single_query incremental unsat_core model_validation proof_exhibition cloud parallel"
-MVREGEX="QF_(UF)?(BV)?(FP)?(L[IR]*A|[IR]DL)?"
+MVREGEX="QF_(AX?)?(UF)?(BV)?(FP)?(DT)?([NL][IR]*A|[IR]DL)?"
 
 cat SMT-LIB_incremental_benchmarks_all.txt | cut -d/ -f2 | uniq > logics/track_incremental
 cat SMT-LIB_non_incremental_benchmarks_all.txt | cut -d/ -f2 | uniq > logics/track_single_query
