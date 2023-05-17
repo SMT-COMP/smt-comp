@@ -52,7 +52,8 @@ FILTER_SQ_CSV_2018="$BASEDIR/2018/csv/Main_Track.csv"
 FILTER_SQ_CSV_2019="$BASEDIR/2019/results/Single_Query_Track.csv"
 FILTER_SQ_CSV_2020="$BASEDIR/2020/results/Single_Query_Track.csv"
 FILTER_SQ_CSV_2021="$BASEDIR/2021/scoring/results-sq.csv"
-FILTER_SQ="--filter $FILTER_SQ_CSV_2021 --filter $FILTER_SQ_CSV_2020 --filter $FILTER_SQ_CSV_2019 --filter $FILTER_SQ_CSV_2018"
+FILTER_SQ_CSV_2022="$BASEDIR/2022/scoring/results-sq.csv"
+FILTER_SQ="--filter $FILTER_SQ_CSV_2022 --filter $FILTER_SQ_CSV_2021 --filter $FILTER_SQ_CSV_2020 --filter $FILTER_SQ_CSV_2019 --filter $FILTER_SQ_CSV_2018"
 
 BENCHMARKS_INC="$SCRIPTDIR/../SMT-LIB_incremental_benchmarks_all.txt"
 NEW_INC_CSV="$SCRIPTDIR/../SMT-LIB_incremental_benchmarks_new.txt"
@@ -76,16 +77,16 @@ FILTER_MV_CSV="$FILTER_NONINC"
 PYTHON=python3
 
 printf "MV TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_MV" --new-benchmarks "$NEW_MV_CSV" -s $SEED --print-stats --out "$OUT_MV" --prefix "/non-incremental/" --logic "$MV_LOGICS" --sat "$FILTER_MV_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_MV" --new-benchmarks "$NEW_MV_CSV" -s $SEED --print-stats --out "$OUT_MV" --prefix "/non-incremental/" --logic "$MV_LOGICS" --sat "$FILTER_MV_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER --year $YEAR
 
 printf "+++++++++++\n\nSQ TRACK\n\n"
-$PYTHON $SELECT $FILTER_SQ --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/" --ratio $RATIO --min-per-logic $NUM_LOWER
+$PYTHON $SELECT $FILTER_SQ --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/" --ratio $RATIO --min-per-logic $NUM_LOWER --year $YEAR
 
 printf "+++++++++++\n\nINC TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/" --ratio $RATIO --min-per-logic $NUM_LOWER
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/" --ratio $RATIO --min-per-logic $NUM_LOWER --year $YEAR
 
 printf "+++++++++++\n\nUC TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s $SEED --print-stats --out "$OUT_UC" --prefix "/non-incremental/" --unsat "$FILTER_UC_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s $SEED --print-stats --out "$OUT_UC" --prefix "/non-incremental/" --unsat "$FILTER_UC_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER --year $YEAR
 
 printf "+++++++++++\n\nPE TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_PE" --new-benchmarks "$NEW_PE_CSV" -s $SEED --print-stats --out "$OUT_PE" --prefix "/non-incremental/" --unsat "$FILTER_PE_CSV" --n-asserts 0 --ratio $PE_RATIO --min-per-logic $PE_NUM_LOWER
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_PE" --new-benchmarks "$NEW_PE_CSV" -s $SEED --print-stats --out "$OUT_PE" --prefix "/non-incremental/" --unsat "$FILTER_PE_CSV" --n-asserts 0 --ratio $PE_RATIO --min-per-logic $PE_NUM_LOWER --year $YEAR
