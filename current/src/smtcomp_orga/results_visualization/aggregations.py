@@ -45,32 +45,7 @@ TRACK_PE = "track_proof_exhibition"
 TRACK_CLOUD = "track_cloud"
 TRACK_PARALLEL = "track_parallel"
 
-# Track options
-OPT_TRACK_SQ = "sq"
-OPT_TRACK_INC = "inc"
-OPT_TRACK_CHALL_SQ = "chall_sq"
-OPT_TRACK_CHALL_INC = "chall_inc"
-OPT_TRACK_UC = "uc"
-OPT_TRACK_MV = "mv"
-OPT_TRACK_PE = "pe"
-OPT_TRACK_CLOUD = "ct"
-OPT_TRACK_PARALLEL = "pt"
-
-# Columns of solvers csv
-COL_SOLVER_ID = "Solver ID"
-COL_SOLVER_NAME = "Solver Name"
-COL_VARIANT_OF_ID = "Variant Of"
-COL_COMPETING = "Competing"
-COL_SOLVER_ID_SQ_2019 = "Wrapped Solver ID Single Query"
-COL_SOLVER_ID_INC_2019 = "Wrapped Solver ID Incremental"
-COL_SOLVER_ID_UC_2019 = "Wrapped Solver ID Unsat Core"
-COL_SOLVER_ID_MV_2019 = "Wrapped Solver ID Model Validation"
-
-COL_CONFIG_ID_SQ = "Config ID Single Query"
-COL_CONFIG_ID_MV = "Config ID Model Validation"
-COL_CONFIG_ID_UC = "Config ID Unsat Core"
-COL_CONFIG_ID_INC = "Config ID Incremental"
-COL_CONFIG_ID_PE = "Config ID Proof Exhibition"
+from smtcomp_orga.prep.solver_csv import *
 
 # Extensions of results .md files
 EXT_SQ = "-single-query.md"

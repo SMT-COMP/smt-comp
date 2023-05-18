@@ -10,8 +10,8 @@ import json
 
 g_submissions = None
 
-from extract_data_from_solvers_divisions import g_logics_all as g_logics_all
-from extract_data_from_solvers_divisions import (
+from smtcomp_orga.prep.extract_data_from_solvers_divisions import g_logics_all as g_logics_all
+from smtcomp_orga.prep.extract_data_from_solvers_divisions import (
     TRACK_SINGLE_QUERY_RAW,
     TRACK_INCREMENTAL_RAW,
     TRACK_UNSAT_CORE_RAW,
@@ -33,6 +33,11 @@ class ColumnNames:
         self.colnames_base(year)
         if year >= 2022:
             self.colnames_2022()
+        if year >= 2023:
+            self.colnames_2023()
+
+    def colnames_2023(self):
+         self.SYSDESCR = 'System description URL (note that the system description is already part of the submission of the  preliminary solvers).'
 
     def colnames_2022(self):
         self.STAREXEC_SOLVERID = 'StarExec ID of your preliminary solver.    If you have different solver ids for several track, please provide them as "12345,12346(uc),12347(inc)".  The tracks are single-query (sq), unsat-core (uc), incremental (inc), model-validation (mv), proof-exhibition (pe).'
@@ -125,7 +130,7 @@ def normalize_whitespace(drow):
 
 
 # Read csv with submissions data from Google Form.
-def read_csv(col, fname, year, division):
+def read_csv(col, fname, year, divisions):
     global g_submissions, g_logics_all
     with open(fname) as file:
         reader = csv.reader(file, delimiter=',')
@@ -314,7 +319,7 @@ def write_csv_2022(fname):
             outfile.write("\n")
 
 
-if __name__ == '__main__':
+def main():
     parser = ArgumentParser(
             usage="extract_data_from_submission "\
                   "<year> <submissions: csv> <outfile: csv>\n\n"
@@ -339,10 +344,15 @@ if __name__ == '__main__':
             divisions = json.load(file)
     else:
         divisions = None
-
+    
+    global col
     col = ColumnNames(args.year)
     read_csv(col, args.in_csv, args.year, divisions)
     if args.year >= 2022:
         write_csv_2022(args.out_csv)
     else:
-        write_csv(args.out_csv)
+        write_csv_2021(args.out_csv)
+
+
+if __name__ == '__main__':
+    main()

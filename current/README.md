@@ -2,11 +2,12 @@
 
 - [Table of contents](#table-of-contents)
 - [Installation](#installation)
+- [New year](#new-year)
 - [Preparing the SMT-COMP spaces](#preparing-the-smt-comp-spaces)
   - [Generate a list of benchmarks and spaces](#generate-a-list-of-benchmarks-and-spaces)
   - [Downloading the space XML files from starexec.](#downloading-the-space-xml-files-from-starexec)
   - [Creating divisions.](#creating-divisions)
-  - [Retrieve SQ statuses for unknown non-incremental benchmarks](#retrieve-sq-statuses-for-unknown-non-incremental-benchmarks)
+  - [\[LATER\] Retrieve SQ statuses for unknown non-incremental benchmarks](#later-retrieve-sq-statuses-for-unknown-non-incremental-benchmarks)
 - [Registration](#registration)
 
 
@@ -18,6 +19,15 @@ Compilation:
  * `pip3 install --editable .`
 
  Adding new command in `pyproject.toml`
+
+# New year
+
+* copy current to year n-1
+* remove current/data
+* Fix the dates
+* commit
+
+
 
 # Preparing the SMT-COMP spaces
 
@@ -37,11 +47,6 @@ composed of three subdirectories:
     https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks/
 2. `incremental` where you checkout the repositories from
     https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks-inc/
-3. checkout the repository
-    https://clc-gitlab.cs.uiowa.edu:2443/SMT-LIB-benchmarks-tmp/pending-2022
-   to `pending-2022`. This year, this repository seems to be empty, though.
-   I worked around by filtering new benchmarks by family names,
-   see `find_new_benchmarks.sh`
 
 The points 1. and 2. are automated with `smtcomp-orga-download $SMTLIB_DIR`.
 
@@ -55,26 +60,29 @@ make -C ../../scrambler
 
 The scrambler binary is supposed to be in $SCRAMBLER
 
-Then run `find_benchmarks.sh $SMTLIB_DIR $SCRAMBLER` in the directory of this README.
+* Then run `find_benchmarks.sh $SMTLIB_DIR $SCRAMBLER data/prep/` in the directory of this README.
+* Then run `find_new_benchmarks.sh data/prep/`
+
 
 ## Downloading the space XML files from starexec.
 
 Go to the space for the current SMT-LIB release on Starexec.  For each
 of the two subspaces choose `download space xml`.  Don't include benchmarks
-attributes.  Extract the xml files from the downloaded zip file and put
-them into this directory as `incremental.xml` and
+attributes. Extract the xml files from the downloaded zip file and put
+them into the directory `data/prep` as `incremental.xml` and
 `non-incremental.xml`.
 
 ## Creating divisions.
 
-To ensure the logics match those of SMT-LIB, we now create the division
-files from the list of benchmarks.  The command `create_divisions.sh`
-does this.  You need to supply a regex for every division to match the
-logics in this division.  The script will check that the logics are
-partitioned into the divisions and report any logic that is missing or
-that was assigned to two divisions.
+To ensure the logics match those of SMT-LIB, we now create the division files
+from the list of benchmarks.  The command `create-divisions.sh data/prep` does
+this.  You need to supply a regex for every division to match the logics in this
+division.  The script will check that the logics are partitioned into the
+divisions and report any logic that is missing or that was assigned to two
+divisions. The files `data/divisions.json` and `data/new_divisions.json` are
+created by the script.
 
-## Retrieve SQ statuses for unknown non-incremental benchmarks
+## [LATER] Retrieve SQ statuses for unknown non-incremental benchmarks
 
 One should:
 1 - Download the job information from the finished StarExec job.
@@ -104,11 +112,13 @@ Steps to produce this directory:
 
 1. Download the google form results, and put it as `data/registration/SMT-COMP_System_Registation.csv`
 2. Edits manually to fix wrong entries.
-3. run `../../tools/prep/extract_data_from_submission.py -d ../divisions.json 2022 "SMT-COMP_System_Registration.csv" solvers_divisions.csv`
+3. run `smtcomp-orga-extract_data_from_submission -d data/divisions.json 2023 "data/registration/SMT-COMP System Registration.csv" data/registration/solvers_divisions.csv`
 4. fix problems, check availability of solvers, contact solver authors.
-5. run `./make_starexec_solvers_xml.sh`
-6. upload solvers.zip to starexec, check for problems.
-7. checkout github pages to correct directory, create empty `_participants_2021`
-8. run `./update_web_pages.sh`
-9. check for problems.
-10. publish.
+5. move resulting solvers_divisions.csv to solvers_divisions_all.csv
+6. during preliminary copy solvers_divisions_all.csv to solvers_divisions_prelim.csv
+7. run `make_starexec_solvers_xml.sh data/registration/`
+8. upload solvers.zip to starexec, check for problems.
+9. checkout github pages to correct directory, create empty `_participants_2023`
+10. run `./update_web_pages.sh`
+11. check for problems.
+12. publish.

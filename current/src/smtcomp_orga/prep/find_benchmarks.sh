@@ -1,10 +1,12 @@
-#!/bin/bash -u
+#!/bin/bash -eu
 
 SCRAMBLER=$2
 OUTDIR=${3-.}
 YEAR=2023
 LANG=C  # fix sorting
 export LANG
+
+mkdir -p $OUTDIR
 
 if [ "$#" == 0 -o \! -d "$1" ]; then
   echo "USAGE: find_benchmarks.sh <path-to-smtlib> <path-to-scrambler> [<outdir>]"

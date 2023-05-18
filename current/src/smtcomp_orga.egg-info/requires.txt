@@ -1,0 +1,7 @@
+requests
+python-gitlab==3.5.0
+pandas
+beautifulsoup4
+
+[:python_version < "3.8"]
+importlib-metadata

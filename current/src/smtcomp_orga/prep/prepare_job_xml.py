@@ -20,24 +20,7 @@ TRACK_UNSAT_CORE = 'track_unsat_core'
 TRACK_MODEL_VALIDATION = 'track_model_validation'
 TRACK_PROOF_EXHIBITION = 'track_proof_exhibition'
 
-# Solver ID columns
-COL_SOLVER_ID_PRELIM = 'Preliminary Solver ID'
-COL_SOLVER_ID = 'Solver ID'
-COL_CONFIG_ID_SQ = 'Config ID Single Query'
-COL_CONFIG_ID_INC = 'Config ID Incremental'
-COL_CONFIG_ID_MV = 'Config ID Model Validation'
-COL_CONFIG_ID_UC = 'Config ID Unsat Core'
-COL_CONFIG_ID_PE = 'Config ID Proof Exhibition'
-# Track Columns
-COL_SINGLE_QUERY_TRACK = 'Single Query Track'
-COL_INCREMENTAL_TRACK = 'Incremental Track'
-COL_CHALLENGE_TRACK_SINGLE_QUERY = 'Challenge Track (single query)'
-COL_CHALLENGE_TRACK_INCREMENTAL = 'Challenge Track (incremental)'
-COL_MODEL_VALIDATION_TRACK = 'Model Validation Track'
-COL_UNSAT_CORE_TRACK = 'Unsat Core Track'
-COL_PROOF_EXHIBITION_TRACK = 'Proof Exhibition Track'
-# Other Columns
-COL_IS_COMPETING = 'Competing'
+from smtcomp_orga.prep.solver_csv import *
 
 # Print error message and exit.
 def die(msg):

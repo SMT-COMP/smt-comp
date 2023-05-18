@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from argparse import ArgumentParser
-from extract_data_from_solvers_divisions import read_divisions
+from smtcomp_orga.prep.extract_data_from_solvers_divisions import read_divisions
 import json
 import sys
 import os
@@ -47,6 +47,31 @@ def get_new_division_str(logics_by_divisions_indexed_by_tracks):
                 division_fields.append("    - {}".format(logic))
     division_fields_str = "\n".join(division_fields)
     return division_fields_str
+
+def run(divisions,nyse_date,nyse_value,md_path,year):
+    ofile_name = "participants.md"
+    outfile = open(os.path.join(md_path, ofile_name), "w")
+    with open(divisions) as div_json:
+        divisions_all = json.load(div_json)
+    if int(year) >= 2021:
+        division_str = get_new_division_str(divisions_all)
+    else:
+        division_str = get_division_str(divisions_all)
+
+    md_str = "---\n"\
+             "layout: participants\n\n"\
+             "year: {}\n"\
+             "participants: participants_{}\n\n"\
+             "nyse:\n"\
+             "  date: {}\n"\
+             "  value: {}\n\n"\
+             "divisions:\n{}\n---".format(
+                 year,
+                 year,
+                 nyse_date,
+                 nyse_value,
+                 division_str)
+    outfile.write(md_str)
 
 if __name__ == '__main__':
     parser = ArgumentParser(

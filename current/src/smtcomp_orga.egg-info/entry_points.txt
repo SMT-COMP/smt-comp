@@ -1,0 +1,7 @@
+[console_scripts]
+smtcomp-orga-download = smtcomp_orga.prep.download:run
+smtcomp-orga-extract_data_from_submission = smtcomp_orga.prep.extract_data_from_submission:main
+smtcomp-orga-merge_benchmarks_with_sq_statuses = smtcomp_orga.prep.merge_benchmarks_with_sq_statuses:run
+smtcomp-orga-participants_update_web_pages = smtcomp_orga.prep.participants_update_web_pages:main
+smtcomp-orga-recover_config_id_from_starexec = smtcomp_orga.prep.recover_config_id_from_starexec:main
+smtcomp-orga-score = smtcomp_orga.scoring.score:main

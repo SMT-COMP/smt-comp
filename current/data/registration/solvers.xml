@@ -1,0 +1,53 @@
+<ns0:Spaces xmlns:ns0="https://www.starexec.org/starexec/public/batchSpaceSchema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.starexec.org/starexec/public/batchSpaceSchema.xsd batchSpaceSchema.xsd">
+<Space id="123456" name="Preliminary Solvers - Linked">
+<SpaceAttributes>
+<description value="no description" />
+<sticky-leaders value="true" />
+<inherit-users value="true" />
+<locked value="false" />
+<add-benchmark-perm value="false" />
+<add-job-perm value="false" />
+<add-solver-perm value="false" />
+<add-space-perm value="false" />
+<add-user-perm value="false" />
+<rem-benchmark-perm value="false" />
+<rem-job-perm value="false" />
+<rem-solver-perm value="false" />
+<rem-space-perm value="false" />
+<rem-user-perm value="false" />
+</SpaceAttributes>
+<Solver id="41324" name="z3++_2022"/>
+<Solver id="44384" name="COLIBRI"/>
+<Solver id="44408" name="Z3++_2023(sq)"/>
+<Solver id="44409" name="Z3++_2023(mv)"/>
+<Solver id="44411" name="SMT-RAT-MCSAT 23.05"/>
+<Solver id="44420" name="OSTRICH"/>
+<Solver id="44467" name="ismt(mv)"/>
+<Solver id="44468" name="ismt(sq)"/>
+<Solver id="44469" name="NRA-LS"/>
+<Solver id="44471" name="Z3-Owl"/>
+<Solver id="44472" name="SMTInterpol"/>
+<Solver id="44483" name="Bitwuzla"/>
+<Solver id="44484" name="Vampire"/>
+<Solver id="44479" name="Yices2"/>
+<Solver id="44480" name="Yices2(inc)"/>
+<Solver id="44481" name="Yices2(mv)"/>
+<Solver id="39111" name="YicesQS"/>
+<Solver id="41385" name="STP"/>
+<Solver id="44489" name="UltimateEliminator+MathSAT"/>
+<Solver id="36885" name="Q3B-pBDD"/>
+<Solver id="39062" name="Q3B"/>
+<Solver id="44407" name="Z3-Noodler"/>
+<Solver id="44516" name="cvc5"/>
+<Solver id="44517" name="cvc5(inc)"/>
+<Solver id="44515" name="cvc5-lfsc"/>
+<Solver id="44518" name="OpenSMT"/>
+<Solver id="44531" name="OpenSMT(inc)"/>
+<Solver id="44515" name="cvc5"/>
+<Solver id="44519" name="Yaga"/>
+<Solver id="44485" name="Z3strAlpha"/>
+<Solver id="44520" name="Z3AlphaSMT"/>
+<Solver id="44524" name="iProver"/>
+<Solver id="44525" name="UltimateIntBlastingWrapper+SMTInterpol"/>
+</Space>
+</ns0:Spaces>

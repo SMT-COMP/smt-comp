@@ -242,6 +242,22 @@ def read_canon(f):
 
     return canonical
 
+
+def run(divisions,solver_divisions,md_path,year):
+    if not os.path.exists(solver_divisions):
+        die("File not found: {}".format(solver_divisions))
+    if not os.path.exists(md_path):
+        die("Path not found: {}".format(md_path))
+
+    global g_logics_all,g_logics_to_tracks
+    g_logics_all,g_logics_to_tracks = read_divisions(divisions)
+    read_csv(solver_divisions)
+
+    write_mds(year, md_path)
+
+    print("Seeds (sum mod 2^30): {}".format(g_sum_seed % (2**30)))
+    
+
 if __name__ == '__main__':
     parser = ArgumentParser(
             description = "Extract csv data from solvers_divisions_final.csv "\

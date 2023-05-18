@@ -1,0 +1,76 @@
+"Timestamp","Username","Name of Solver","Solver homepage","System description URL (note that the system description is already part of the submission of the  preliminary solvers).","Title of the system description","StarExec ID of your preliminary solver.    If you have different solver ids for several track, please provide them as ""12345,12346(uc),12347(inc)"".  The tracks are single-query (sq), unsat-core (uc), incremental (inc), model-validation (mv), proof-exhibition (pe).","If this solver is a VARIANT of another submission, e.g. an experimental version, provide the name and the StarExec ID of the main solver, otherwise leave blank.","If this solver is a WRAPPER TOOL (i.e., it includes and calls one or more other SMT solvers, see Section 4 of the competition rules at https://smt-comp.github.io/2023/rules.pdf), list ALL wrapped solvers and their exact version here, otherwise leave blank.","If this solver is a DERIVED TOOL (i.e., any solver that is based on or extends another SMT solver, see Section 4 of the competition rules at https://smt-comp.github.io/2023/rules.pdf), provide the name of the original tool here. A derived tool should follow the naming convention [name-of-base-solver]-[my-solver-name].","For the Single-Query Track, give a regular expression for the supported logics.","For the Incremental Track, give a regular expression for the supported logics.","For the Unsat-Core Track, give a regular expression for the supported logics.","For the Model-Validation Track, give a regular expression for the supported logics.","For the Proof-Exhibition Track, give a regular expression for the supported logics.","For the Parallel Track, give a regular expression for the supported logics.  (You need to register for the parallel track separately)","For the Cloud Track, give a regular expression for the supported logics.  (You need to register for the cloud track separately)","Please list all contributors that you wish to be acknowledged here","Seed"
+"2023/05/04 7:46:57 am EEST","","z3++_2022","https://z3-plus-plus.github.io/","https://github.com/z3-plus-plus/z3-plus-plus.github.io/blob/main/Z3%2B%2B_at_SMT_COMP_2022.pdf","Z3++ at SMT-COMP 2022","41324","","","z3-4-8-15","^(QF_IDL|QF_LIA|QF_NRA|QF_NIA)$ ","-","-","^(QF_IDL|QF_LIA)$ ","-","-","-","Shaowei Cai, Bohan Li, Jinkun Lin, Zhonghan Wang, Bohua Zhan, Xindi Zhang, Mengyu Zhao","1"
+"2023/05/10 11:51:27 am EEST","","COLIBRI","http://colibri.frama-c.com","https://drive.google.com/uc?export=download&id=1FZtsbl5hSVegkfPUuHC5vs7IDgFwsn8Z","COLIBRI: SMT solving with CP","44384","","","","^((QF_)(AX?)?(UF)?(BV)?(FP)(DT)?S?([LN][IR]*A|[IR]DL)?)$","-","-","-","-","-","-","Bruno Marre, François Bobot, Zakaria Chihani","413"
+"2023/05/11 6:35:37 am EEST","","Z3++_2023","https://z3-plus-plus.github.io/","https://github.com/z3-plus-plus/z3-plus-plus.github.io/blob/main/z3%2B%2B_at_smt_comp_2023.pdf","Z3++ at SMT-COMP 2023","44408(sq),44409(mv)","","","Z3-4-8-15"," ^(QF_IDL|QF_LIA|QF_NIA|QF_NRA)$ ","-","-"," ^(QF_IDL|QF_LIA|QF_NIA|QF_NRA)$ ","-","-","-","Shaowei Cai, Bohan Li, Bohua Zhan, Xindi Zhang, and Mengyu Zhao","1"
+"2023/05/11 6:16:24 pm EEST","","SMT-RAT-MCSAT 23.05","https://ths-rwth.github.io/smtrat/","https://raw.githubusercontent.com/ths-rwth/smtrat/master/doc/smtcomp-description/smtcomp-2023.pdf","SMT-RAT 23.05","44411","","","","QF_NRA","-","-","QF_NRA","-","-","-","Jasper Nalbach, Valentin Promies, Erika Ábrahám, Philip Kroll","48738"
+"2023/05/12 12:55:44 pm EEST","","OSTRICH","https://github.com/uuverifiers/ostrich","https://philipp.ruemmer.org/ostrich-2023.pdf","OSTRICH Version 1.3","44420","","","OSTRICH is based on the SMT solver Princess (version 2023-05-27)","^(QF_S|QF_SLIA|QF_SNIA)$","-","-","-","-","-","-","Taolue Chen
+Riccardo De Masellis
+Alejandro Flores-Lamas
+Matthew Hague
+Zhilei Han
+Denghang Hu
+Shuanglong Kan
+Anthony W. Lin
+Oliver Markgraf
+Philipp Rümmer
+Amanda Stjerna
+Zhilin Wu","67223"
+"2023/05/12 3:46:02 pm EEST","","ismt","https://github.com/MRVAPOR/Yices-ismt","https://github.com/MRVAPOR/Yices-ismt-description","ISMT for SMT-COMP 2023","44467(mv),44468(sq)","","Yices2 2.6.2 for 44468(sq)","","^(QF_NIA)$","-","-","^(QF_NIA)$","-","-","-","Fuqi Jia, Rui Han, Minghao Liu, Cunjing Ge, Pei Huang, Feifei Ma, Jian Zhang.","20230512"
+"2023/05/12 5:41:54 pm EEST","","NRA-LS","https://github.com/minghao-liu/NRA-LS","https://github.com/minghao-liu/NRA-LS/blob/main/system_description_2023.pdf","NRA-LS at the SMT Competition 2023","44469","","cvc5-1.0.5","","^(QF_NRA)$","-","-","^(QF_NRA)$","-","-","-","Minghao Liu, Kunhang Lv, Fuqi Jia, Rui Han, Yu Zhang, Pei Huang, Feifei Ma, Jian Zhang","99"
+"2023/05/12 6:03:31 pm EEST","","Z3-Owl","https://github.com/z3-owl/z3-owl.github.io","https://github.com/z3-owl/z3-owl.github.io/blob/main/Z3owl_SMT_COMP_2023.pdf","Z3-Owl at SMT-COMP 2023","44471","","","Z3(version 4.8.11)","^(QF_BV|QF_UFBV|QF_ABV|QF_AUFBV|QF_FP|QF_BVFP)$","-","-","-","-","^QF_BV$","-","Xinkai Ma,Jiahui Sun, Siyuan Zhu, Peisen Yao, Rui Chang, Yongwang
+Zhao, Wensheng Tang, and Charles Zhang","8"
+"2023/05/12 7:37:14 pm EEST","","SMTInterpol","https://ultimate.informatik.uni-freiburg.de/smtinterpol","https://ultimate.informatik.uni-freiburg.de/smtinterpol/sysdesc2023.pdf","SMTInterpol with resolution proofs","44472","","","","^((QF_)?(AX?)?(UF)?(DT)?([IR]DL|L[IR]*A)|QF_(A|UF)+N[IR]*A)$","^((QF_)?(AX?)?(UF)?(DT)?([IR]DL|[NL][IR]*A))$","^((QF_)?(AX?)?(UF)?(DT)?([IR]DL|L[IR]*A)|QF_(A|UF)+N[IR]*A)$","^((QF_)(AX?)?(UF)?(DT)?([IR]DL|L[IR]*A))$","^((QF_)?(AX?)?(UF)?(DT)?([IR]DL|L[IR]*A)|QF_(A|UF)+N[IR]*A)$","-","-","Jürgen Christ, Daniel Dietsch, Leonard Fichtner, Joanna Greulich, Matthias Heizmann, Jochen Hoenicke, Moritz Mohr, Alexander Nutz, Markus Pomrehn, Pascal Raiola, Tanja Schindler","3021856368"
+"2023/05/13 12:36:30 am EEST","preiner@cs.stanford.edu","Bitwuzla","https://bitwuzla.github.io/","https://bitwuzla.github.io/data/smtcomp2023/paper.pdf","Bitwuzla at the SMT-COMP 2023","44483","","","","^((QF_)?(A)?(UF)?(BV)?(FP)?(FPLRA)?)$","^((QF_)?(A)?(UF)?(BV)?(FP)?(FPLRA)?)$","^((QF_)?(A)?(UF)?(BV)?(FP)?(FPLRA)?)$","^((QF_)?(A)?(UF)?(BV)?(FP)?(FPLRA)?)$","-","-","-","Aina Niemetz, Mathias Preiner","42"
+"2023/05/13 1:46:39 am EEST","giles.reger@manchester.ac.uk","Vampire","https://vprover.github.io/","https://vprover.github.io/reports/smtcomp2023.pdf","Vampire 4.8-SMT System Description","44484","","Z3 4.9.1","","^(AX?)?(UF)?(DT)?([LN]I?R?A)?([IR]DL)?$","-","^(AX?)?(UF)?(DT)?([LN]I?R?A)?([IR]DL)?$","-","^(AX?)?(UF)?(DT)?([LN]I?R?A)?([IR]DL)?$","^(AX?)?(UF)?(DT)?([LN]I?R?A)?([IR]DL)?$","^(AX?)?(UF)?(DT)?([LN]I?R?A)?([IR]DL)?$","Giles Reger, Martin Suda, Andrei Voronkov, Laura Kovacs, Ahmed Bhayat, Bernhard Gleiss, Marton Hajdu, Petra Hozzova, Jakob Rath, Michael Rawson, Johannes Schoisswohl","6586"
+"2023/05/13 2:31:17 am EEST","ahmed.irfan@sri.com","Yices2","https://yices.csl.sri.com","https://ahmed-irfan.github.io/sys-desc/yices2-smtcomp-2023.pdf","Yices 2 in SMT-COMP 2023","44479, 44480(inc), 44481(mv)","","","","^((QF_){1}(AX?)?(UF)?(BV)?([LN][IR]*A|[IR]DL)?|UF)$","^((QF_){1}(AX?)?(UF)?(BV)?([LN][IR]*A|[IR]DL)?|UF)$","^((QF_){1}(AX?)?(UF)?(BV)?([L][IR]*A|[IR]DL)?|UF)$","^((QF_){1}(AX?)?(UF)?(BV)?([LN][IR]*A|[IR]DL)?|UF)$","^$","^$","^$","Bruno Dutertre, Aman Goel, St ́ephane Graham-Lengrand, Ahmed Irfan, Dejan Jovanovi ́c, Ian A. Mason","0"
+"2023/05/13 2:31:35 am EEST","stephane.graham-lengrand@csl.sri.com","YicesQS","https://github.com/disteph/yicesQS","http://www.csl.sri.com/users/sgl/Work/Reports/2023-yicesQS.pdf","YicesQS 2023, an extension of Yices for quantified satisfiability","39111","","","Yices2","^(LRA|NRA|LIA|NIA|BV)$","-","-","-","-","-","-","Stephane Graham-Lengrand","0"
+"2023/05/13 10:47:14 am EEST","trev_abroad@yahoo.com","STP","https://stp.github.io/","https://github.com/stp/docs/tree/master/smt2023-descr/descr.pdf","STP 2023","41385","","","","QF_BV","QF_BV","-","QF_BV","-","-","-","Various","16"
+"2023/05/13 2:50:34 pm EEST","heizmann@informatik.uni-freiburg.de","UltimateEliminator+MathSAT","https://www.ultimate-pa.org/?ui=tool&tool=eliminator","https://www.informatik.uni-freiburg.de/~heizmann/tmp/2023UltimateEliminator.pdf","Ultimate Eliminator at SMT-COMP 2023","https://www.starexec.org/starexec/secure/details/solver.jsp?id=44489","","MathSAT-5.6.9","","^((AX?)?(UF)?(BV)?(FP)?S?([LN][IR]*A|[IR]DL)?)$","^((AX?)?(UF)?(BV)?(FP)?S?([LN][IR]*A|[IR]DL)?)$","^((AX?)?(UF)?(BV)?(FP)?S?([LN][IR]*A|[IR]DL)?)$","^$","^$","^$","^$","TBA","0"
+"2023/05/13 8:03:20 pm EEST","469088@mail.muni.cz","Q3B-pBDD","https://www.fi.muni.cz/~xpavlik5/Q3B-pBDD/","https://www.fi.muni.cz/~xpavlik5/Q3B-pBDD/SMTCOMP23_description.pdf","Q3B-pBDD in SMT Competition 2023","36885","Q3B","","","BV","-","-","-","-","-","-","Matěj Pavlík (469088@mail.muni.cz)
+Martin Jonáš (359542@mail.muni.cz)
+Jan Strejček (xstrejc@fi.muni.cz)","78549"
+"2023/05/13 8:52:41 pm EEST","martin.jonas@mail.muni.cz","Q3B","https://github.com/martinjonas/q3b","https://www.fi.muni.cz/~xjonas/q3b_smtcomp23.pdf","Q3B in SMT Competition 2023","39062","","","","^BV$","^BV$","-","-","-","-","-","Martin Jonáš, Jan Strejček, Jakub Szymsza","2353490582350"
+"2023/05/13 9:35:38 pm EEST","holik@fit.vutbr.cz","Z3-Noodler","https://github.com/VeriFIT/z3-noodler","http://www.fit.vutbr.cz/~holik/pub/z3-noodler_sysdecr_2023.pdf","Z3-Noodler, System description for SMT-comp 2023","44407","","","Z3","QF_S|QF_SLIA","-","-","-","-","-","-","Vojťech Havlena, Juraj Síč, David Chocholatý, Ondřej Lengál, Lukáš Holík, Yu-Fang Chen","6590"
+"2023/05/14 12:13:35 am EEST","hansjoerg-schurr@uiowa.edu","cvc5","https://cvc5.github.io","https://homepage.cs.uiowa.edu/~hschrr/cvc5.pdf","cvc5 at the SMT Competition 2023","44516,44517(inc)","","","","^.*$","^.*$","^.*$","^.*$","^.*$","-","-","Leni Aniva
+Haniel Barbosa
+Clark Barrett
+Martin Brain
+Vinícius Camillo
+Gereon Kremer
+Hanna Lachnitt
+Abdalrhman Mohamed
+Mudathir Mohamed
+Aina Niemetz
+Andres Nötzli
+Alex Ozdemir
+Mathias Preiner
+Andrew Reynolds
+Ying Sheng
+Cesare Tinelli
+Amalee Wilson
+Yoni Zohar","1965"
+"2023/05/14 12:19:05 am EEST","hans-joerg@schurr.at","cvc5-lfsc","https://cvc5.github.io/","https://homepage.cs.uiowa.edu/~hschrr/cvc5.pdf","cvc5 at the SMT Competition 2023","44515","44516","","","-","-","-","-","^.*$","-","-","Leni Aniva
+Haniel Barbosa
+Clark Barrett
+Martin Brain
+Vinícius Camillo
+Gereon Kremer
+Hanna Lachnitt
+Abdalrhman Mohamed
+Mudathir Mohamed
+Aina Niemetz
+Andres Nötzli
+Alex Ozdemir
+Mathias Preiner
+Andrew Reynolds
+Ying Sheng
+Cesare Tinelli
+Amalee Wilson
+Yoni Zohar","52240"
+"2023/05/14 12:37:50 am EEST","martin.blicha@gmail.com","OpenSMT","https://github.com/usi-verification-and-security/opensmt","https://github.com/usi-verification-and-security/opensmt-doc/blob/master/abstract-2023.pdf","The OpenSMT Solver in SMT-COMP 2023","44518,44531(inc)","","","","^QF_(AX|LRA|LIA|UF|UFLRA|UFLIA|RDL|IDL|UFIDL|ALIA|AUFLIA)$","^QF_(AX|LRA|LIA|UF|UFLRA|UFLIA|RDL|IDL|UFIDL|ALIA|AUFLIA)$","-","^QF_(LRA|LIA|UF|UFLRA|UFLIA|RDL|IDL|UFIDL)$","-","-","-","Martin Blicha, Konstantin I. Britikov, Antti E. J. Hyvärinen, Rodrigo Otoni, Natasha Sharygina","9471002"
+"2023/05/14 12:42:17 am EEST","hansjoerg-schurr@uiowa.edu","cvc5","https://cvc5.github.io/","https://homepage.cs.uiowa.edu/~hschrr/cvc5.pdf","cvc5 at the SMT Competition 2023","44515","44516","","","-","-","-","-","^.*$","-","-","Leni Aniva, Haniel Barbosa, Clark Barrett, Martin Brain, Vinícius Camillo, Gereon Kremer, Hanna Lachnitt, Abdalrhman Mohamed, Mudathir Mohamed, Aina Niemetz, Andres Nötzli, Alex Ozdemir, Mathias Preiner, Andrew Reynolds, Ying Sheng, Cesare Tinelli, Amalee Wilson, Yoni Zohar","52240"
+"2023/05/14 1:56:32 am EEST","blicha@d3s.mff.cuni.cz","Yaga","https://TBD","https://drive.google.com/file/d/1TXjjcMCOnuKDu47fZ11zdecE0pVRftCy/view?usp=sharing","The Yaga SMT Solver in SMT-COMP 2023","44519","","","","^QF_LRA$","-","-","^QF_LRA$","-","-","-","Drahomír Hanák, Martin Blicha, Jan Kofroň","3621199"
+"2023/05/14 5:44:37 am EEST","z52lu@uwaterloo.ca","Z3strAlpha","https://z3string.github.io/","https://www.dropbox.com/s/2v9cy5mhxp401w2/Z3strAlpha_description.pdf?dl=0","Z3strAlpha_description.pdf","44485","","","Z3","^(QF_S|QF_SLIA)$ ","-","-","-","-","-","-","Zhengyang Lu, Stefan Siemer, Piyush Jha, Florin Manea, and Vijay Ganesh∗","33"
+"2023/05/14 5:57:50 am EEST","z52lu@uwaterloo.ca","Z3AlphaSMT","https://github.com/JohnLyu2/AlphaSMT","https://www.dropbox.com/s/tqqpr3e9jy2j0v0/Z3AlphaSMT_description.pdf?dl=0","Z3AlphaSMT_description.pdf","44520","","","Z3","^(QF_NIA|QF_NRA)$ ","-","-","-","-","-","-","Zhengyang Lu, Piyush Jha, and Vijay Ganesh","31"
+"2023/05/14 1:50:32 pm EEST","konstantin.korovin@manchester.ac.uk","iProver","https://gitlab.com/korovin/iprover","http://www.cs.man.ac.uk/~korovink/my_pub/iprover-smt-comp-2023.pdf","iProver v3.8 (SMT-COMP-2023)","44524","","Z3 v4.11.2, MiniSAT v2.0, Vampire v4.7 ","","^((AX?)?(UF)?(DT)?([LN][IR]*A|[IR]DL)?)$","-","-","-","-","^((AX?)?(UF)?(DT)?([LN][IR]*A|[IR]DL)?)$","-","Konstantin Korovin, Andre Duarte, Edvard K. Holden","191937"
+"2023/05/14 2:58:15 pm EEST","heizmann@informatik.uni-freiburg.de","UltimateIntBlastingWrapper+SMTInterpol","https://ultimate-pa.org/","https://www.informatik.uni-freiburg.de/~heizmann/tmp/2023UltimateIntBlastingWrapper.pdf","Ultimate IntBlastingWrapper","44525","","SMTInterpol 2.5-1252-g82eb3a0","","^((QF_)(AX?)?(UF)?(BV)(DT)?S?([L][IR]*A|[IR]DL)?)$","^((QF_)(AX?)?(UF)?(BV)(DT)?S?([L][IR]*A|[IR]DL)?)$","^((QF_)(AX?)?(UF)?(BV)(DT)?S?([L][IR]*A|[IR]DL)?)$","^$","^$","^$","^$","Max Barth, Matthias Heizmann","4294967296"

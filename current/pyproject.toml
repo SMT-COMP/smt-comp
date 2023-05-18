@@ -6,16 +6,21 @@ dependencies = [
     'importlib-metadata; python_version<"3.8"',
     'python-gitlab == 3.5.0',
     'pandas',
+    'beautifulsoup4'
 ]
 
 [project.scripts]
 smtcomp-orga-download = "smtcomp_orga.prep.download:run"
 smtcomp-orga-merge_benchmarks_with_sq_statuses = "smtcomp_orga.prep.merge_benchmarks_with_sq_statuses:run"
 smtcomp-orga-score = "smtcomp_orga.scoring.score:main"
+smtcomp-orga-extract_data_from_submission = "smtcomp_orga.prep.extract_data_from_submission:main"
+smtcomp-orga-participants_update_web_pages = "smtcomp_orga.prep.participants_update_web_pages:main"
+smtcomp-orga-recover_config_id_from_starexec = "smtcomp_orga.prep.recover_config_id_from_starexec:main"
 
 [tool.setuptools]
 script-files = ["src/smtcomp_orga/prep/find_benchmarks.sh",
                 "src/smtcomp_orga/prep/create-divisions.sh",
                 "src/smtcomp_orga/selection/make_statuses_and_asserts.sh",
-                "src/smtcomp_orga/scoring/make_num_check_sat.sh"
+                "src/smtcomp_orga/scoring/make_num_check_sat.sh",
+                "src/smtcomp_orga/prep/make_starexec_solvers_xml.sh"
                 ]
