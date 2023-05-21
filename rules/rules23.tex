@@ -213,9 +213,9 @@ The principal changes from the previous competition rules are the following:
     competition introduced the experimental divisions QF\_FPArith
     (excluding the logics QF\_ABVFP, QF\_AUFBVFP, and QF\_ABVFPLRA).
   %
-  This year these divisions will no longer be experimental.
+  This year these divisions will be officially counted and no longer be experimental.
   %
-  In addition, we add this year the new experimental division for
+  In addition, we add this year new experimental divisions for
   arrays, non-linear arithmetic and for datatypes.  These include the divisions
   QF\_NonLinearIntArith, QF\_NonLinearRealArith,
   QF\_Equality+NonLinearArithm,
@@ -226,9 +226,7 @@ The principal changes from the previous competition rules are the following:
     %
     For the new divisions, as before, given the inconsistencies across different
     model producing solvers, we proceed in an experimental fashion to push for
-    model standardization. We exclude logics containing arrays since
-    there is no standardized way of expressing array model values and
-    we do not want to add too many new logics.}
+    model standardization.}
 
 \item {\bf \prooftrack.}
   Last year we added this as experimental track. We will continue with
@@ -297,7 +295,14 @@ organizers of the SMT-COMP for clarification.
 \header{Wrapper Tool.}
 %
 A \emph{wrapper tool} is defined as any solver that calls one or more other SMT
-solvers (the \emph{wrapped solvers}). Its system description \textbf{must}
+solvers (the \emph{wrapped solvers}) from a different
+group of authors to solve distinct subtasks. 
+Examples of such subtasks are preprocessing steps or solving a subproblem that belongs to a strict sublogic of the input logic.
+For example, a solver using one subsolver to solve the ground abstraction of a
+quantified problem would be a wrapper tool.
+However, a wrapper tool solving a benchmark of logic A is not allowed to call an SMT solver 
+to solve a problem for logic A; even if the problem is just a subproblem.
+The system description of a wrapper tool \textbf{must}
 explicitly acknowledge and state the \textbf{exact} version of any solvers that
 it wraps.  It \textbf{must} further make clear technical innovations by which
 the wrapper tool expects to improve on the wrapped solvers.
@@ -306,7 +311,15 @@ the wrapper tool expects to improve on the wrapped solvers.
 %
 A \emph{derived tool} is defined as any solver that is \emph{based on and
 extends} another SMT solver (the \emph{base solver}) from a different
-group of authors.  Its system description
+group of authors.  
+In contrast to a wrapper tool, 
+a derived tool solving a benchmark of logic A is allowed to call an SMT solver 
+to solve a problem for logic A.
+However, it is not allowed to call more than one different SMT solver to solve a problem over the input logic.
+Examples of derived tools are tools that change the strategy selection for the base solver,
+tools that add new preprocessing steps on top of the base solver,
+tools that add new heuristics or incomplete procedures to a base solver.
+The system description of a derived tool
 \textbf{must} explicitly acknowledge
 the solver it is based on and extends.  It \textbf{must} further make clear
 technical innovations by which the derived tool expects to improve on the
@@ -849,8 +862,6 @@ are experimental divisions.
 The track will run on a
 selection of non-incremental \emph{sat} benchmarks from these
 logics (as described on page~\pageref{benchmark-selection}).
-%
-We exclude from the selection all benchmarks containing arrays or datatypes.
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-model)} to request a
