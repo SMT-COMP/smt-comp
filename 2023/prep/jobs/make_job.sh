@@ -98,7 +98,7 @@ if [ "$TESTING" = "1" ]; then
     POST_SQ=768
     POST_INC=765
     POST_UC=769
-    POST_MV=771
+    POST_MV=772
     POST_PE=767
     QUEUE=1   # smtcomp.q
 else
@@ -113,7 +113,7 @@ else
     POST_SQ=768
     POST_INC=765
     POST_UC=769
-    POST_MV=771
+    POST_MV=772
     POST_PE=767
     QUEUE=1 # smtcomp.q
     # QUEUE=181493 # new.q
