@@ -1,11 +1,15 @@
 #!/bin/bash
 
-if true; then  # test jobs
+if false; then  # test jobs
 for track in sq inc uc mv pe; do
     ./make_job.sh --$track --test-run --solvers ../../registration/solvers_divisions_prelim.csv
 done
 
 else
+
+./make_job.sh --sq --solvers ../../registration/solvers_divisions_all.csv
+
+exit
 
 IDS=$(csvcut -c "Config ID Single Query" ../../registration/solvers_divisions_noncompeting.csv | tail +2 | tr '\n' , | sed s/,$//)
 PREPARE_JOB_ARGS="--solvers $IDS" ./make_job.sh --sq --extra noncompeting --solvers ../../registration/solvers_divisions_all.csv
