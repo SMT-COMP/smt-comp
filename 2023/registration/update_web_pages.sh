@@ -6,7 +6,7 @@
 
 YEAR=2023
 NYSE_DATE=2023-05-30
-NYSE_VALUE=""  # NYSE opening value, e.g., 12345.6789
+NYSE_VALUE="15078.6900"  # NYSE opening value, e.g., 12345.6789
 LOGICS="../divisions.json"
 DIVISIONS="../new-divisions.json"
 
