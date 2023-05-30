@@ -1,6 +1,7 @@
 #!/bin/bash
 
-TESTING=1
+TESTING=0
+SQONLY=1
 YEAR=2023
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
@@ -76,11 +77,12 @@ FILTER_MV_CSV="$FILTER_NONINC"
 # Always use python3 to get reproducible results.
 PYTHON=python3
 
-printf "MV TRACK\n\n"
-$PYTHON $SELECT --benchmarks "$BENCHMARKS_MV" --new-benchmarks "$NEW_MV_CSV" -s $SEED --print-stats --out "$OUT_MV" --prefix "/non-incremental/" --logic "$MV_LOGICS" --sat "$FILTER_MV_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER --year $YEAR
-
 printf "+++++++++++\n\nSQ TRACK\n\n"
 $PYTHON $SELECT $FILTER_SQ --benchmarks "$BENCHMARKS_SQ" --new-benchmarks "$NEW_SQ_CSV" -s $SEED --print-stats --out "$OUT_SQ" --prefix "/non-incremental/" --ratio $RATIO --min-per-logic $NUM_LOWER --year $YEAR
+
+if [ "$SQONLY" != "1" ]; then
+printf "+++++++++++\n\nMV TRACK\n\n"
+$PYTHON $SELECT --benchmarks "$BENCHMARKS_MV" --new-benchmarks "$NEW_MV_CSV" -s $SEED --print-stats --out "$OUT_MV" --prefix "/non-incremental/" --logic "$MV_LOGICS" --sat "$FILTER_MV_CSV" --ratio $RATIO --min-per-logic $NUM_LOWER --year $YEAR
 
 printf "+++++++++++\n\nINC TRACK\n\n"
 $PYTHON $SELECT --benchmarks "$BENCHMARKS_INC" --new-benchmarks "$NEW_INC_CSV" -s $SEED --print-stats --out "$OUT_INC" --prefix "/incremental/" --ratio $RATIO --min-per-logic $NUM_LOWER --year $YEAR
@@ -90,3 +92,4 @@ $PYTHON $SELECT --benchmarks "$BENCHMARKS_UC" --new-benchmarks "$NEW_UC_CSV" -s 
 
 printf "+++++++++++\n\nPE TRACK\n\n"
 $PYTHON $SELECT --benchmarks "$BENCHMARKS_PE" --new-benchmarks "$NEW_PE_CSV" -s $SEED --print-stats --out "$OUT_PE" --prefix "/non-incremental/" --unsat "$FILTER_PE_CSV" --n-asserts 0 --ratio $PE_RATIO --min-per-logic $PE_NUM_LOWER --year $YEAR
+fi
