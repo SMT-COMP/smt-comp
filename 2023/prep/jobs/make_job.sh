@@ -115,7 +115,7 @@ else
     POST_UC=769
     POST_MV=773
     POST_PE=767
-    QUEUE=1 # smtcomp.q
+    QUEUE=190157 # smtcomp.q
     # QUEUE=181493 # new.q
 fi
 
