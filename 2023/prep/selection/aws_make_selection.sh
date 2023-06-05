@@ -1,4 +1,4 @@
-#! /bin/bash -eux
+#! /bin/bash -eu
 
 export LANG=C.UTF-8
 

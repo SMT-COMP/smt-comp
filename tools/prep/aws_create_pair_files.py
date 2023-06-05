@@ -11,8 +11,9 @@ def process(logics,fname):
         reader = csv.reader(file, delimiter=',')
         writer = csv.writer(stdout, delimiter=',')
         header = next(reader)
-        writer.writerow(["solver","input file"])
+        writer.writerow(["solver","input file","original name"])
         for row in reader:
+            original_name = row[0]
             competition_name = row[1]
             logic = re.search('^/[^/]*/([^/]*)/.*$', competition_name, re.IGNORECASE)
             if logic:
@@ -21,7 +22,7 @@ def process(logics,fname):
                 exit("error in", competition_name)
             if logic in logics:
                 for solver in logics[logic]:
-                    writer.writerow([solver,competition_name])
+                    writer.writerow([solver,competition_name,original_name])
             else:
                 exit("error logic",logic,"without solvers")
             stdout.flush()

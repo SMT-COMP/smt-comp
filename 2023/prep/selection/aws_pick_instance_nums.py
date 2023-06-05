@@ -85,6 +85,7 @@ if __name__ == '__main__':
         p.picked = 0
 
     if args.oldway:
+        sys.stderr.write("Old way pre-2021 of picking instances\n")
         quota = minBenchmarks
         while quota > 0:
             # Compute the number of instances to assign on this round
@@ -106,6 +107,7 @@ if __name__ == '__main__':
             for l in exhaustedLogics:
                 logics.remove(l)
     else:
+        sys.stderr.write("New way post 2022 of picking instances\n")
         pickable_all=[]
         for division in tracks[track]:
             pickable=[]
