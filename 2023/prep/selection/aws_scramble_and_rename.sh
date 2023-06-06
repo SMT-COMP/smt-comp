@@ -14,6 +14,15 @@ seed=$4
 
 i=0
 
+TMPQUEUE=$(mktemp "aws_scramble_parallelXXXXX.list")
+
+if [ -z ${KEEP_INTERMEDIARY_FILES+x} ]; then
+    trap "rm -rf ${TMPQUEUE}" EXIT
+else
+    >&2 echo "Intermediary file is $TMPQUEUE"
+fi
+
+
 echo "smtlib name,competition name"
 for file in $(cat ${selection}); do
     srcfilesysname=${smtlib_root}/${file}
@@ -23,9 +32,13 @@ for file in $(cat ${selection}); do
     dstfilesysname=${outputdir}/${ofile}
     echo "${file},${ofile}"
     if [ -z ${DONT_SCRAMBLE+x} ]; then
-       ${SCRAMBLER} -seed ${seed} < ${srcfilesysname} > ${dstfilesysname}
+       echo "${SCRAMBLER} -seed ${seed} < ${srcfilesysname} > ${dstfilesysname}" >> $TMPQUEUE
     else
        ln ${srcfilesysname} ${dstfilesysname}
     fi
     i=$(($i+1))
 done
+
+if [ -z ${DONT_SCRAMBLE+x} ]; then
+    cat $TMPQUEUE | parallel
+fi

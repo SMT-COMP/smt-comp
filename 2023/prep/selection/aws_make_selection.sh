@@ -44,9 +44,9 @@ function preselect {
     output=$2
     logics=$3
     $PYTHON $SELECT_PRE \
+        --justification "$FILTER_CSV_2022" \
+        --justification "$FILTER_CSV_2021" \
         --justification "$FILTER_CSV_2020" \
-        --justification "$FILTER_CSV_2019" \
-        --justification "$FILTER_CSV_2018" \
         --benchmarks "$BENCHMARKS_WITHOUT_BLACKLISTED" \
         --print-stats \
         --out "${output}" \
@@ -130,9 +130,10 @@ CREATE_PAIR_FILE=${SCRIPTDIR}/../../../tools/prep/aws_create_pair_files.py
 
 BENCHMARKS="$SCRIPTDIR/../SMT-LIB_non_incremental_benchmarks_all.txt"
 BENCHMARKS_WITHOUT_BLACKLISTED="${TMPDIR}/SMT-LIB_non_incremental_benchmarks_all_without_blocklisted.txt"
-FILTER_CSV_2018="$SCRIPTDIR/../../../2018/csv/Main_Track.csv"
-FILTER_CSV_2019="$SCRIPTDIR/../../../2019/results/Single_Query_Track.csv"
 FILTER_CSV_2020="$SCRIPTDIR/../../../2020/results/Single_Query_Track.csv"
+FILTER_CSV_2021="$SCRIPTDIR/../../../2021/scoring/results-sq.csv"
+FILTER_CSV_2022="$SCRIPTDIR/../../../2022/scoring/results-sq.csv"
+
 
 BLACKLIST="$SCRIPTDIR/../SMT-LIB_excluded.txt"
 
