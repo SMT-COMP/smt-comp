@@ -8,6 +8,7 @@ done
 else
 
 ./make_job.sh --sq --solvers ../../registration/solvers_divisions_all.csv
+./make_job.sh --include-nc --extra missinglogics --sq --solvers ../../registration/solvers_divisions_smtinterpol_missinglogics.csv
 
 exit
 
