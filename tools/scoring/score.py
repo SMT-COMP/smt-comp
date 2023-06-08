@@ -689,7 +689,7 @@ def process_csv(csv,
         # Consider only solved unknown benchmarks
         solved_unknown = data[(data.expected == RESULT_UNKNOWN)
                             & ((data.result == RESULT_SAT)
-                               | (data.result == RESULT_UNSAT))]
+                               | (data.result == RESULT_UNSAT))].copy()
 
         # aggregate per division/benchmark the results in "sat;unsat"
         # or vice versa or just one (without ;)
