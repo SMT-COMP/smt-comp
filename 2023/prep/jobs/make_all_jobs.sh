@@ -10,6 +10,10 @@ else
 ./make_job.sh --sq --solvers ../../registration/solvers_divisions_all.csv
 ./make_job.sh --include-nc --extra missinglogics --sq --solvers ../../registration/solvers_divisions_smtinterpol_missinglogics.csv
 
+for track in inc uc mv pe; do
+    ./make_job.sh --$track --solvers ../../registration/solvers_divisions_all.csv
+done
+
 exit
 
 IDS=$(csvcut -c "Config ID Single Query" ../../registration/solvers_divisions_noncompeting.csv | tail +2 | tr '\n' , | sed s/,$//)

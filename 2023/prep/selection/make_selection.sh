@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TESTING=0
-SQONLY=1
+SQONLY=0
 YEAR=2023
 SCRIPTDIR=`dirname $(readlink -f "$0")`
 
