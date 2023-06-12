@@ -9,6 +9,7 @@ else
 
 ./make_job.sh --sq --solvers ../../registration/solvers_divisions_all.csv
 ./make_job.sh --include-nc --extra missinglogics --sq --solvers ../../registration/solvers_divisions_smtinterpol_missinglogics.csv
+./make_job.sh --include-nc --extra missinglogics2 --sq --solvers ../../registration/solvers_divisions_cvc5_missinglogics.csv
 
 for track in inc uc mv pe; do
     ./make_job.sh --$track --solvers ../../registration/solvers_divisions_all.csv
