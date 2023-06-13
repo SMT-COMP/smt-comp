@@ -43,6 +43,10 @@ def adjustName(name, old_year):
     else:
         return "%d-%s" % (old_year, name)
 
+def clearColumn(columnName):
+    return (columnName == REG_SEED_COL or columnName.count(" Regex") > 0
+            or columnName == "Proof Exhibition Track");
+
 # Return a quoted version of the string if it contains commas
 def quoteIfHasComma(entry):
     quotes = ['"', "'"]
@@ -216,7 +220,7 @@ if __name__ == '__main__':
 
                     elif col == REG_COMPETING_COL:
                         new_winner_row.append("no")
-                    elif col == REG_SEED_COL:
+                    elif clearColumn(col):
                         new_winner_row.append("")
                     elif col == REG_NAME_COL:
                         new_winner_row.append(adjustName(name, \
