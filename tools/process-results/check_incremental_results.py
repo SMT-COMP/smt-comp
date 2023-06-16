@@ -32,7 +32,7 @@ def main():
 
     # Regex for competition space where the job was run, expects this space's
     # name to start with 'Competition'
-    space_pattern = re.compile('.*\/(Competition.*?)\/.*')
+    space_pattern = re.compile('.*\/(Competition.*?|track.*?)\/.*')
 
     output_files = dict()
     for (path, dirs, files) in os.walk(args.outputs):
