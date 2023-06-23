@@ -454,9 +454,13 @@ def score(division,
     # Column 'wrong-answers' only exists in incremental tracks.
     incremental = 'wrong-answers' in data.columns
     assert not incremental or 'correct-answers' in data.columns
+    if int(year) >= 2023:
+        assert not incremental or 'solver-cpu-time' in data.columns
+        assert not incremental or 'solver-wall-time' in data.columns
+    
     unsat_core = 'reduction' in data.columns
     assert not unsat_core or 'result-is-erroneous' in data.columns
-
+    
     # Column 'model_validator_status' only exists in the model validation track.
     model_validation = 'model_validator_status' in data.columns
     if model_validation:
@@ -467,6 +471,17 @@ def score(division,
     proof_exhibition = 'reason' in data.columns
     if proof_exhibition:
         data_new['reason'] = data['reason']
+
+    # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
+    # 'family_scores' dictionary (use_families == False).
+    data_new['alpha_prime_b'] = \
+        data_new.family.map(lambda x: family_scores.get(x, 1))
+
+    if use_families:
+        data_new['score_modifier'] = \
+            data_new.alpha_prime_b * data_new.division_size
+    else:
+        data_new['score_modifier'] = 1
 
     # Note: For incremental tracks we have to consider all benchmarks (also
     #       the ones that run into resource limits).
@@ -523,6 +538,15 @@ def score(division,
         if unsat_core:
             data_new.loc[solved.index, 'correct'] = data['reduction']
             data_new.loc[solved.index, 'error'] = data['result-is-erroneous']
+
+            # Calculate time scores
+            if int(year) >= 2023:
+                data_new['score_cpu_time'] = 0.0
+                data_new['score_wallclock_time'] = 0.0
+                data_new.loc[solved.index,'score_cpu_time'] = \
+                    data_new.cpu_time * data_new.alpha_prime_b
+                data_new.loc[solved.index,'score_wallclock_time'] = \
+                    data_new.wallclock_time * data_new.alpha_prime_b
         # Note: The model validator reports INVALID if a solver crashes on an
         #       instance. Hence, only when a solver reports statisfiable, we
         #       check the status of the model validator.
@@ -548,10 +572,29 @@ def score(division,
                                              | (incomplete_model == False))]
             data_new.loc[solved_valid.index, 'correct'] = 1
             data_new.loc[solved_invalid.index, 'error'] = 1
+
+            # Calculate time scores
+            if int(year) >= 2023:
+                data_new['score_cpu_time'] = 0.0
+                data_new['score_wallclock_time'] = 0.0
+                data_new.loc[solved_valid.index,'score_cpu_time'] = \
+                    data_new.cpu_time * data_new.alpha_prime_b
+                data_new.loc[solved_valid.index,'score_wallclock_time'] = \
+                    data_new.wallclock_time * data_new.alpha_prime_b
         elif proof_exhibition:
             data_new.loc[data_new.reason == 'valid', 'correct'] = 1
             data_new.loc[data_new.reason == 'invalid', 'unsolved'] = 1
             data_new.loc[data_new.result == 'sat', 'unsolved'] = 1
+
+            # Calculate time scores
+            if int(year) >= 2023:
+                data_new['score_cpu_time'] = 0.0
+                data_new['score_wallclock_time'] = 0.0
+                data_new.loc[data_new.reason == 'valid','score_cpu_time'] = \
+                    data_new.cpu_time * data_new.alpha_prime_b
+                data_new.loc[data_new.reason == 'valid',\
+                             'score_wallclock_time'] = \
+                                 data_new.wallclock_time * data_new.alpha_prime_b
         else:
             data_new.loc[solved.index, 'correct'] = 1
 
@@ -566,28 +609,33 @@ def score(division,
             data_new.loc[solved_sat.index, 'correct_sat'] = 1
             data_new.loc[solved_unsat.index, 'correct_unsat'] = 1
 
+            # Calculate time scores
+            if int(year) >= 2023:
+                data_new['score_cpu_time'] = 0.0
+                data_new['score_wallclock_time'] = 0.0
+                data_new.loc[solved.index,'score_cpu_time'] = \
+                    data_new.cpu_time * data_new.alpha_prime_b
+                data_new.loc[solved.index,'score_wallclock_time'] = \
+                    data_new.wallclock_time * data_new.alpha_prime_b
+
         # Determine unsolved benchmarks.
         data_new.loc[data_new.correct == 0, 'unsolved'] = 1
         if filter_result:
             data_new.loc[~data_new.benchmark.isin(benchmarks), 'unsolved'] = 0
 
-    # Set alpha_prime_b for each benchmark, set to 1 if family is not in the
-    # 'family_scores' dictionary (use_families == False).
-    data_new['alpha_prime_b'] = \
-        data_new.family.map(lambda x: family_scores.get(x, 1))
-
-    if use_families:
-        data_new['score_modifier'] = \
-            data_new.alpha_prime_b * data_new.division_size
-    else:
-        data_new['score_modifier'] = 1
-
     # Compute scores
     data_new['score_correct'] = data_new.correct * data_new.score_modifier
     data_new['score_error'] = data_new.error * data_new.score_modifier
-    data_new['score_cpu_time'] = data_new.cpu_time * data_new.alpha_prime_b
-    data_new['score_wallclock_time'] = \
-        data_new.wallclock_time * data_new.alpha_prime_b
+    if int(year) < 2023:
+        data_new['score_cpu_time'] = data_new.cpu_time * data_new.alpha_prime_b
+        data_new['score_wallclock_time'] = \
+            data_new.wallclock_time * data_new.alpha_prime_b
+    else:
+        if incremental:
+            data_new['score_cpu_time'] = \
+                data['solver-cpu-time'] * data_new.alpha_prime_b
+            data_new['score_wallclock_time'] = \
+                data['solver-wall-time'] * data_new.alpha_prime_b
 
     # Delete temporary columns
     return data_new.drop(columns=['alpha_prime_b', 'score_modifier'])
