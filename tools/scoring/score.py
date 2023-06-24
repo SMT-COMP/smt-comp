@@ -632,12 +632,19 @@ def score(division,
             data_new.wallclock_time * data_new.alpha_prime_b
     else:
         if incremental:
+            
+            data_new['solver_cpu_time'] = data['solver-cpu-time']
+            data_new['solver_wall_time'] = data['solver-wall-time']
             data_new['score_cpu_time'] = 0.0
             data_new['score_wallclock_time'] = 0.0
-            data_new.loc[data_new.correct > 0, 'score_cpu_time'] = \
-                float(data['solver-cpu-time']) * data_new.alpha_prime_b
-            data_new.loc[data_new.correct > 0, 'score_wallclock_time'] = \
-                float(data['solver-wall-time']) * data_new.alpha_prime_b
+
+            solved = data_new[data_new.correct > 0]
+            
+            data_new.loc[solved.index, 'score_cpu_time'] = \
+                solved.solver_cpu_time.astype(float) * data_new.alpha_prime_b
+            data_new.loc[solved.index, 'score_wallclock_time'] = \
+                solved.solver_wall_time.astype(float) * data_new.alpha_prime_b
+            data_new.drop(columns=['solver_cpu_time','solver_wall_time'])
 
     # Delete temporary columns
     return data_new.drop(columns=['alpha_prime_b', 'score_modifier'])
