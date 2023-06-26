@@ -3,6 +3,7 @@
 \usepackage{wallpaper}
 \usepackage{ragged2e}
 \usepackage{ulem}
+\usepackage{etoolbox}
 \usepackage[object=pgfhan]{pgfornament}
 \usetikzlibrary{chains}
 \usetikzlibrary{calc}
@@ -105,106 +106,83 @@
 \newcommand{\fast}{\texttt{24}}
 \newcommand{\inc}{inc}
 \newcommand{\uc}{uc\textsuperscript}
-\newcommand{\mv}{mv}
+\newcommand{\mv}{mv\textsuperscript}
+\newcommand{\cloud}{cloud}
+\newcommand{\all}{{\footnotesize (\seq,\paral,\sat,\unsat,\fast,\inc,\uc\seq,\uc\paral,\mv)}}
+\newcommand{\withtrack}[2]{\textsc{#1}{{\footnotesize (#2)}}}
+
+\newcommand{\MakeOnePage}[4]{
+    {\centering
+    {
+    
+    \begin{minipage}{\textwidth}
+    \centering
+    
+    \begin{tikzpicture}
+      \node [circular drop shadow={shadow scale=1.05},
+             decorate, decoration=zigzag,
+             fill=blue!20,draw,thick,circle,text width=3.5cm,align=center,xshift=2cm]
+              {\large\textbf{SMT-COMP\\ 2023}};
+    \end{tikzpicture}
+    \end{minipage}
+    
+    \begin{myframe}
+    
+    \textcolor{red!10!black!90}
+    {\Huge #1}\\
+    
+    \textcolor{green!10!black!90}{
+    \large In honor of the results achieved in the SMT-competition}
+    
+    \medskip
+    \ifstrempty{#2}{}{
+    \textcolor{red!30!black!90}
+    {\textit{Certificate for overall performance}}
+    
+    
+    \textcolor{black}{\large #2}
+    
+     \medskip
+    }
+
+    \ifstrempty{#3}{}{
+    \textcolor{red!30!black!90} {\textit{Certificate for divisions}}
+    
+     \textcolor{black}{\large#3}
+    
+     \medskip
+    }
+
+    \ifstrempty{#4}{}{
+     \textcolor{red!30!black!90}  {\textit{Certificate for logic}}
+    
+     \textcolor{black}{\large #4}
+    }
+    \vspace{2mm}
+    
+    
+    \vspace{1cm}
+    
+    {\color{blue!40!black}
+    \scalebox{.7}{
+    \begin{tabular}{ccccc}
+    \cline{1-1} 
+    \cline{3-3}
+    \cline{5-5}
+    \\ \
+    Jochen Hoenicke  & &  Bobot François & & Martin Bromberger \\
+    Organizer & & Chair & & Organizer \\ 
+    \end{tabular}
+    }}
+    \end{myframe}
+    
+    }}
+
+}
 
 \begin{document}
 \TileWallPaper{4cm}{2cm}{tiling.png}
 
-{\centering
-{
-
-\begin{minipage}{\textwidth}
-\centering
-
-\begin{tikzpicture}
-  \node [circular drop shadow={shadow scale=1.05},
-         decorate, decoration=zigzag,
-         fill=blue!20,draw,thick,circle,text width=3.5cm,align=center,xshift=2cm]
-          {\large\textbf{SMT-COMP\\ 2023}};
-\end{tikzpicture}
-\end{minipage}
-
-\begin{myframe}
-
-\textcolor{red!10!black!90}
-{\Huge Solver Name}\\
-
-\textcolor{green!10!black!90}{
-\large In honor of the results achieved in the SMT-competition}
-
-\medskip
-
-\textcolor{red!30!black!90}
-{\textit{Certificate for overall performance}}
-
-\newcommand{\all}{{\footnotesize (\seq,\paral,\sat,\unsat,\fast,\inc,\uc\seq,\uc\paral,\mv)}}
-
-\textcolor{black}{\large
- \textsc{Largest Contribution}\all,
- \textsc{Biggest Lead}\all}
-
- \medskip
-\textcolor{red!30!black!90} {\textit{Certificate for divisions}}
-
- \textcolor{black}{\large
- \textsc{FParith}
-Bitvec\all,
- Equality+LinearArith~\all,
- Equality+MachineArith~\all,
- Equality+NonLinearArith~\all,
- Equality~\all,
- FPArith~\all,
- QF\_Bitvec~\all,
- QF\_Datatypes~\all,
- QF\_Equality+Bitvec+Arith~\all,
- QF\_Equality+Bitvec~\all,
- QF\_Equality+LinearArith~\all,
- QF\_Equality+NonLinearArith~\all,
- QF\_Equality~\all,
- QF\_FPArith~\all,
- QF\_LinearIntArith~\all,
- QF\_LinearRealArith~\all,
- QF\_NonLinearIntArith~\all,
- QF\_NonLinearRealArith~\all,
- QF\_Strings~\all
- }
-
- \medskip
- \textcolor{red!30!black!90}  {\textit{Certificate for logic}}
-
- \textcolor{black}{\large QF\_ABVFP\all
- }
-
-\vspace{2mm}
-
-
-\vspace{1cm}
-
-{\color{blue!40!black}
-\scalebox{.7}{
-\begin{tabular}{ccccc}
-\cline{1-1} 
-\cline{3-3}
-\cline{5-5}
-\\ \
-Jochen Hoenicke  & &  Bobot François & & Martin Bromberger \\
-Organizer & & Chair & & Organizer \\ 
-\end{tabular}
-}}
-\end{myframe}
-
-}}
-
-\newpage
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in mollis libero, eget sagittis lectus. Curabitur cursus diam nec elit tincidunt dapibus. Quisque elementum lorem eget felis pulvinar sodales. Donec quis ipsum quis nibh venenatis finibus. Suspendisse potenti. Aenean scelerisque rutrum felis ut gravida. Donec tortor ex, auctor condimentum lectus et, tincidunt porttitor nisl.
-
-Fusce eu nunc nisl. Integer mauris neque, egestas id malesuada ac, dignissim nec enim. Quisque vulputate elit justo, eget sodales libero maximus non. Vestibulum gravida vitae nunc blandit finibus. Donec sit amet nulla vitae justo vestibulum iaculis accumsan et sem. Praesent non dolor nec elit lobortis porttitor. Nunc a posuere elit. Mauris condimentum augue et vehicula malesuada.
-
-Nullam eros quam, vestibulum in consequat id, eleifend at dolor. Phasellus fringilla, ante eget ornare condimentum, risus magna semper augue, id venenatis odio risus nec eros. Duis sed ante lectus. Mauris non imperdiet enim, id maximus augue. Vestibulum tincidunt felis neque, eget mollis massa semper ac. In ultrices risus in urna mollis sodales. Curabitur eget consequat dui. Donec ornare convallis convallis. Donec laoreet aliquam laoreet. Maecenas sit amet nisl sagittis, consectetur magna eu, dignissim mi. Curabitur lobortis velit quis lectus condimentum, eget hendrerit nisl malesuada. Integer tincidunt, tellus eu egestas aliquam, sapien enim aliquam lacus, vel posuere nulla augue vitae odio. Vivamus porttitor nisi nec libero tristique, quis congue eros mattis.
-
-Fusce mi nisi, pretium eget metus tristique, mollis efficitur nulla. Vestibulum et interdum risus. Sed venenatis pretium ultrices. Cras odio sapien, interdum convallis maximus at, sagittis et leo. Aenean tincidunt, orci vestibulum interdum condimentum, nibh urna euismod risus, sit amet sodales nisl libero quis sapien. Donec euismod erat a pellentesque pulvinar. Aliquam a nulla massa. Quisque id elit sit amet nibh lacinia pulvinar eget sit amet orci. Etiam finibus mi eu consectetur sodales. Aenean sed nulla leo. Maecenas odio est, rutrum rutrum fringilla et, maximus vel tortor. Donec sit amet lorem magna. In suscipit pharetra justo quis tempor. Sed sit amet ipsum mi. Phasellus vel luctus nulla, quis ornare augue. Phasellus ut elit sit amet magna fermentum ullamcorper.
-
-Sed imperdiet sem neque, sed lacinia libero congue scelerisque. Curabitur sollicitudin orci ullamcorper sem consectetur dapibus. Mauris sit amet erat in enim imperdiet molestie vel lobortis leo. Pellentesque luctus efficitur quam, sit amet malesuada arcu faucibus condimentum. Fusce sapien dolor, blandit ac faucibus gravida, facilisis rutrum nulla. Nam vestibulum feugiat erat sit amet rhoncus. Vivamus egestas justo sit amet euismod tincidunt. Phasellus facilisis ornare volutpat. Cras dignissim in felis eget placerat.
+\input{input_for_certificates.tex}
 
 \end{document}
