@@ -1,4 +1,4 @@
-\documentclass[landscape,12pt]{article}
+\documentclass[a4paper,landscape,12pt]{article}
 \usepackage[svgnames]{xcolor}
 \usepackage{wallpaper}
 \usepackage{ragged2e}
@@ -39,14 +39,14 @@
 %     {\usebox{\fortyseven}};
 %     \foreach \i in {1,...,9} {\node[on chain]{\usebox{\fortyseven}};}
 %     \end{scope}
-\foreach \i in {0,...,5}
-   \node[anchor=north west,shift={($\i*(100bp,0)$)}] at (nw.north east)
+\foreach \i in {0,...,6}
+   \node[anchor=north west,shift={($\i*(100bp,0)-(50bp,0)$)}] at (nw.north east)
     {\usebox{\fortyseven}};
 \foreach \i in {0,...,3}
     \node[anchor=south east,shift={($\i*(0,-100bp)$)},rotate=90] at (ne.south east)
      {\usebox{\fortyseven}};
-\foreach \i in {0,...,5}
-     \node[anchor=south west,shift={($\i*(100bp,0)$)}] at (sw.south east)
+\foreach \i in {0,...,6}
+     \node[anchor=south west,shift={($\i*(100bp,0)-(50bp,0)$)}] at (sw.south east)
       {\usebox{\fortyseven}};
 \foreach \i in {0,...,3}
       \node[anchor=south west,shift={($\i*(0,-100bp)$)},rotate=-90] at (nw.south west)
@@ -144,7 +144,7 @@
  \textsc{Biggest Lead}\all}
 
  \medskip
-\textcolor{red!30!black!90} {\textit{Certificate for category}}
+\textcolor{red!30!black!90} {\textit{Certificate for divisions}}
 
  \textcolor{black}{\large
  \textsc{FParith}

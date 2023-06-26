@@ -26,9 +26,25 @@ for track in sq inc mv uc pe; do
         fi
         INPUT="Job${id}/Job${id}_info.csv"
         echo -n " Job${id}"
+
+        if [ "$track" == "mv" ]; then
+            TMPINPUT_FIXED=${TMPDIR}/input_fixed.csv
+            echo -n "(fix column)"
+            ./fix_starexec_custom_column.py $INPUT $TMPINPUT_FIXED
+            if [ -e ./fix-results-$id.csv.gz ]; then
+                TMPINPUT=${TMPDIR}/input_merged.csv
+                echo -n "(merge with fixed dolmen)"
+                ./merge_local_results_mv.py ./fix-results-$id.csv.gz $TMPINPUT_FIXED $TMPINPUT
+            else
+                TMPINPUT=$TMPINPUT_FIXED
+            fi
+        else
+            TMPINPUT=$INPUT
+        fi
+
         if [ -e $OUTPUT ]; then
             TMPFILE=${TMPDIR}/job.csv
-            $COLORDER -o $OUTPUT -a $INPUT > $TMPFILE
+            $COLORDER -o $OUTPUT -a $TMPINPUT > $TMPFILE
 
             # sanity check: head must be equal now
             diff <(head -1 $TMPFILE) <(head -1 $OUTPUT)
@@ -36,7 +52,7 @@ for track in sq inc mv uc pe; do
             rm $TMPFILE
         else
             # convert all files to same line ending
-            cat $INPUT > $OUTPUT
+            cat $TMPINPUT > $OUTPUT
         fi
     done
     echo
