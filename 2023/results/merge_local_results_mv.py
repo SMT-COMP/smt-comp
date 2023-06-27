@@ -29,6 +29,7 @@ def main():
             for row in reader:
                 key=(row["benchmark"],row["solver"],row["configuration"])
                 if not key in not_proved_locally:
+                    row["status"]="complete"
                     row["result"]="sat"
                     row["dolmenexit"]="0"
                     row["model_validator_error"]="-"
