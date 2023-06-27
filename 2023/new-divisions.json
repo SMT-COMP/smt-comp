@@ -325,14 +325,9 @@
       "QF_UFDT"
     ],
     "QF_Equality": [
-      "QF_AX",
       "QF_UF"
     ],
     "QF_Equality+LinearArith": [
-      "QF_ALIA",
-      "QF_AUFLIA",
-      "QF_UFDTLIA",
-      "QF_UFDTLIRA",
       "QF_UFIDL",
       "QF_UFLIA",
       "QF_UFLRA"
@@ -345,10 +340,19 @@
       "QF_UFNRA"
     ],
     "QF_Equality+Bitvec": [
+      "QF_UFBV"
+    ],
+    "QF_Datatypes+BitVec+LinArith": [
+      "QF_UFBVDT",
+      "QF_UFDTLIA",
+      "QF_UFDTLIRA"
+    ],
+    "QF_Array+Bitvec+LinArith": [
       "QF_ABV",
+      "QF_ALIA",
       "QF_AUFBV",
-      "QF_UFBV",
-      "QF_UFBVDT"
+      "QF_AUFLIA",
+      "QF_AX"
     ],
     "QF_LinearIntArith": [
       "QF_IDL",

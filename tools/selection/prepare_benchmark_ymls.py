@@ -68,7 +68,7 @@ def fillDivision(division_data, track, bm_files, noncomp_files):
             els = row.split('/')
             if len(els) == 1:
                 continue # empty line
-            division_data[logic2division[els[2]]][track][3][els[2]][0] += 1
+            division_data[logic2division[track][els[2]]][track][3][els[2]][0] += 1
     for noncomp_file in noncomp_files:
         noncomp_rows = open(noncomp_file).readlines()
         for logic in noncomp_rows:
@@ -77,10 +77,10 @@ def fillDivision(division_data, track, bm_files, noncomp_files):
                 if comment[1] in division_data:
                     # Comments where first word is a logic name comment
                     # on this track's logic
-                    division_data[logic2division[comment[1]]][track][3][comment[1]][2].append(logic[1:].strip())
+                    division_data[logic2division[track][comment[1]]][track][3][comment[1]][2].append(logic[1:].strip())
             else:
                 logic = logic.strip()
-                division_data[logic2division[logic]][track][0] = 'non-competitive'
+                division_data[logic2division[track][logic]][track][0] = 'non-competitive'
 
     for division in division_data:
       for track in division_data[division]:
@@ -246,6 +246,7 @@ if __name__ == '__main__':
             division_logics = { logic : [logic]
                                 for logic in division_info[track] }
 
+        logic2division[trackName] = {}
         for division,logics in division_logics.items():
             all_divisions += [division]
             if not division in division_data.keys():
@@ -254,7 +255,7 @@ if __name__ == '__main__':
             division_data[division][trackName] = ["competitive", 0, 0, {}]
             for logic in logics:
                 division_data[division][trackName][3][logic] = [0,0,[]]
-                logic2division[logic] = division
+                logic2division[trackName][logic] = division
     all_divisions = set(all_divisions)
 
     for tr in tracks:
@@ -268,9 +269,9 @@ if __name__ == '__main__':
 
             for row in reader:
                 drow = dict(zip(iter(header), iter(row)))
-                logic = drow['logic']
+                division = drow['division']
                 track = drow['track']
-                division_data[logic2division[logic]][track][0] = 'experimental'
+                division_data[division][track][0] = 'experimental'
 
     for division in all_divisions:
         printYaml(args.year, division, division_data[division], args.output_dir)

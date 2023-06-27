@@ -6,6 +6,7 @@ YEAR=2023
 SCORE="$SCRIPTDIR/../../tools/scoring/score.py"
 SOLVERS_CSV="$SCRIPTDIR/../registration/solvers_divisions_all.csv"
 OUTPUT="$SCRIPTDIR/../../../smt-comp.github.io/_results_$YEAR"
+EXPERIMENTAL="$SCRIPTDIR/../experimental.csv"
 TIME=1200
 INC_NUM_CHECK_SAT="$SCRIPTDIR/../prep/SMT-LIB_incremental_benchmarks_num_check_sat.csv"
 
@@ -88,10 +89,11 @@ $PYTHON $SCORE -y $YEAR --csv results-sq.csv  -t $TIME --gen-md $OUTPUT -T sq -S
 $PYTHON $SCORE -y $YEAR --csv results-inc.csv -t $TIME --gen-md $OUTPUT -T inc -S $SOLVERS_CSV -i $INC_NUM_CHECK_SAT -D ../new-divisions.json
 [[ -n $GEN_UC ]] && echo UC && \
 $PYTHON $SCORE -y $YEAR --csv results-uc.csv  -t $TIME --gen-md $OUTPUT -T uc -S $SOLVERS_CSV -D ../new-divisions.json
+MV_EXPDIVS=$(grep ^model_validation $EXPERIMENTAL | cut -d , -f2)
 [[ -n $GEN_MV ]] && echo MV && \
 $PYTHON $SCORE -y $YEAR --csv results-mv.csv  -t $TIME \
     --gen-md $OUTPUT -T mv -S $SOLVERS_CSV -D ../new-divisions.json \
-    --expdivs QF_FPArith
+    --expdivs $(echo $MV_EXPDIVS | tr ' ' ',')
 [[ -n $GEN_PE ]] && echo PE && \
 $PYTHON $SCORE -y $YEAR --csv results-pe.csv  -t $TIME \
     --gen-md $OUTPUT -T pe -S $SOLVERS_CSV -D ../new-divisions.json \
