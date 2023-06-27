@@ -342,17 +342,17 @@
     "QF_Equality+Bitvec": [
       "QF_UFBV"
     ],
-    "QF_Datatypes+BitVec+LinArith": [
-      "QF_UFBVDT",
+    "QF_ADT+BitVec": [
+      "QF_ABV",
+      "QF_AUFBV",
+      "QF_UFBVDT"
+    ],
+    "QF_ADT+LinArith": [
+      "QF_ALIA",
+      "QF_AUFLIA",
+      "QF_AX",
       "QF_UFDTLIA",
       "QF_UFDTLIRA"
-    ],
-    "QF_Array+Bitvec+LinArith": [
-      "QF_ABV",
-      "QF_ALIA",
-      "QF_AUFBV",
-      "QF_AUFLIA",
-      "QF_AX"
     ],
     "QF_LinearIntArith": [
       "QF_IDL",

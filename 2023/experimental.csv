@@ -1,6 +1,6 @@
 track,division
-model_validation,QF_Array+Bitvec+LinArith
-model_validation,QF_Datatypes+BitVec+LinArith
+model_validation,QF_ADT+BitVec
+model_validation,QF_ADT+LinArith
 model_validation,QF_Datatypes
 model_validation,QF_Equality+NonLinearArith
 model_validation,QF_FPArith

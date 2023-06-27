@@ -4,8 +4,8 @@ QF_Equality+LinearArith QF_(UF)(L[IR]*A|[IR]DL)
 QF_Equality+NonLinearArith QF_(A|UF|AUF)(DT)?(N[IR]*A)
 QF_Equality+Bitvec QF_UFBV
 QF_Equality+Bitvec+Arith QF_(A|UF|AUF)(DT)?BV(DT)?([NL][IR]*A)
-QF_Datatypes+BitVec+LinArith QF_(A|UF|AUF)(BVDT|DT(L[IR]*A))
-QF_Array+Bitvec+LinArith QF_(A|AUF)(X|BV|L[IR]*A)
+QF_ADT+BitVec QF_(A(UF)?BV(DT)?|(UF)?BVDT)
+QF_ADT+LinArith QF_(AX|((A|AUF)(DT)?|UFDT)(L[IR]*A))
 QF_LinearIntArith QF_(LIR?A|IDL)
 QF_LinearRealArith QF_(LRA|RDL)
 QF_Bitvec QF_BV
