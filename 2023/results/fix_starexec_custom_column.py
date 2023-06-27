@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/env python3
 
 ## Some cell are in column with header "foo=bar" and value "baz" which should
 ## be in column "foo" with value "barbaz"
