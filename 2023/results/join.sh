@@ -28,9 +28,11 @@ for track in sq inc mv uc pe; do
         echo -n " Job${id}"
 
         if [ "$track" == "mv" ]; then
+            TMPINPUT_NOQUOTE=${TMPDIR}/input_noquote.csv
             TMPINPUT_FIXED=${TMPDIR}/input_fixed.csv
             echo -n "(fix column)"
-            ./fix_starexec_custom_column.py $INPUT $TMPINPUT_FIXED
+            tr -d '"' < $INPUT > $TMPINPUT_NOQUOTE
+            ./fix_starexec_custom_column.py $TMPINPUT_NOQUOTE $TMPINPUT_FIXED
             if [ -e ./fix-results-$id.csv.gz ]; then
                 TMPINPUT=${TMPDIR}/input_merged.csv
                 echo -n "(merge with fixed dolmen)"
