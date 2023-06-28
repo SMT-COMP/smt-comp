@@ -4,7 +4,7 @@
 FORCE_DOWNLOAD=0
 
 # Jobs in the order "competition best-of non-competing"
-sq="59410 59554 59586 59599"
+sq="59410 59554 59586 59599 59668"
 inc="59572 59598 59666"
 mv="59579 59619 59702"
 uc="59592 59620 59700"
