@@ -2,7 +2,7 @@
 
 #benchmark,solver,configuration,status,cpu time,wallclock time,memory usage,result,expected
 
-cat raw-results-sq.csv | cut -d, -f 1,8 | grep -v -e starexec-unknown -e '--' | sort |uniq | cut -d, -f1 |uniq -c |grep -v ' 1 '  | cut -c 9- > disagreeing-sq.txt
+cat raw-results-sq.csv | csvcut -c benchmark,result | grep -v -e starexec-unknown -e '--' | sort |uniq | cut -d, -f1 |uniq -c |grep -v ' 1 '  | cut -c 9- > disagreeing-sq.txt
 
 COMMA=""
 PATTERN=""
@@ -11,7 +11,7 @@ while read bench; do
     COMMA="|"
 done < disagreeing-sq.txt
 # remove the non informative result and select the problematic files
-cat raw-results-sq.csv | grep -v -e ",starexec-unknown," | grep -E "^($PATTERN)," | LANG=C sort -t, -k 1 | cut -d, -f 2,8
+cat raw-results-sq.csv | grep -v -e ",starexec-unknown," | grep -E ",($PATTERN)," | LANG=C sort -t, -k 1 | cut -d, -f2,4,12,13
 
 
 # Solver with answers different from the others
