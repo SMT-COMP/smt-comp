@@ -105,10 +105,11 @@
 \newcommand{\unsat}{$\bot$}
 \newcommand{\fast}{\texttt{24}}
 \newcommand{\inc}{inc}
-\newcommand{\uc}{uc\textsuperscript}
-\newcommand{\mv}{mv\textsuperscript}
+\newcommand{\uc}{uc}
+\newcommand{\mv}{mv}
 \newcommand{\cloud}{cloud}
-\newcommand{\all}{{\footnotesize (\seq,\paral,\sat,\unsat,\fast,\inc,\uc\seq,\uc\paral,\mv)}}
+\newcommand{\paralTrack}{parallel}
+%\newcommand{\all}{{\footnotesize (\seq,\paral,\sat,\unsat,\fast,\inc,\uc\seq,\uc\paral,\mv)}}
 \newcommand{\withtrack}[2]{\textsc{#1}{{\footnotesize (#2)}}}
 
 \newcommand{\MakeOnePage}[4]{
@@ -137,7 +138,7 @@
     \medskip
     \ifstrempty{#2}{}{
     \textcolor{red!30!black!90}
-    {\textit{Certificate for overall performance}}
+    {\textit{Solver won overall}}
     
     
     \textcolor{black}{\large #2}
@@ -146,7 +147,7 @@
     }
 
     \ifstrempty{#3}{}{
-    \textcolor{red!30!black!90} {\textit{Certificate for divisions}}
+    \textcolor{red!30!black!90} {\textit{Solver won division}}
     
      \textcolor{black}{\large#3}
     
@@ -154,8 +155,8 @@
     }
 
     \ifstrempty{#4}{}{
-     \textcolor{red!30!black!90}  {\textit{Certificate for logic}}
-    
+     \textcolor{red!30!black!90}  {\textit{Solver won logic (but not the corresponding division)}}
+     
      \textcolor{black}{\large #4}
     }
     \vspace{2mm}

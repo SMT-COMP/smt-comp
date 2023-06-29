@@ -1,0 +1,25 @@
+Solver Name,Members
+COLIBRI,3
+Z3++,5
+SMT-RAT-MCSAT, 4
+OSTRICH, 12
+ismt, 7
+yices-ismt,7
+cvc5-NRA-LS,8
+Z3-Owl,8
+SMTInterpol,11
+Bitwuzla,2
+Vampire,11
+Yices2,6
+YicesQS,1
+STP,2
+UltimateEliminator+MathSAT,2
+Q3B-pBDD,3
+Q3B,3
+Z3-Noodler,6
+cvc5,18
+OpenSMT,5
+Yaga,3
+z3-alpha,6
+iProver,3
+UltimateIntBlastingWrapper+SMTInterpol,2

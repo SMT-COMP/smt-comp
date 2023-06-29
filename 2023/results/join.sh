@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu
 
 # Download Jobs from StarExec even if they already exist
 FORCE_DOWNLOAD=0
@@ -24,6 +24,7 @@ for track in sq inc mv uc pe; do
             curl -o Job${id}_info.zip "https://www.starexec.org/starexec/secure/download?type=job&id=${id}&returnids=true&getcompleted=false"
             unzip Job${id}_info.zip
         fi
+        test -d "Job${id}"
         INPUT="Job${id}/Job${id}_info.csv"
         echo -n " Job${id}"
 
@@ -50,7 +51,7 @@ for track in sq inc mv uc pe; do
 
             # sanity check: head must be equal now
             diff <(head -1 $TMPFILE) <(head -1 $OUTPUT)
-            eval tail -n +2 $TMPFILE $FILTER >> $OUTPUT
+            eval tail -n +2 $TMPFILE >> $OUTPUT
             rm $TMPFILE
         else
             # convert all files to same line ending
