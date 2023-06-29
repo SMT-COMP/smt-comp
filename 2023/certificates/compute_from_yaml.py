@@ -80,15 +80,18 @@ class info:
         l=[]
         for (k,v) in sorted(self.divisions.items()):
             withtrack(l,k,v)
+        s_for_divisions=("s" if len(l)>=2 else "")
         divisions = ", ".join(l)
 
         l=[]
         for (k,v) in sorted(self.logics.items()):
             withtrack(l,k,v)
+        s_for_logics=("s" if len(l)>=2 else "")
         logics = ", ".join(l)
         
-        return "\\MakeOnePage{{{name}}}{{{overall}}}{{{divisions}}}{{{logics}}}"\
-            .format(name=name,overall=self.overall.latex(),divisions=divisions,logics=logics)
+        return "\\MakeOnePage{{{name}}}{{{overall}}}{{{divisions}}}{{{logics}}}{{{s_for_divisions}}}{{{s_for_logics}}}"\
+            .format(name=name,overall=self.overall.latex(),divisions=divisions,logics=logics,
+                    s_for_divisions=s_for_divisions,s_for_logics=s_for_logics)
     
     def isNotEmpty(self):
         return self.overall.isNotEmpty() \

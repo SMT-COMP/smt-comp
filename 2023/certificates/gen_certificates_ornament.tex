@@ -113,7 +113,7 @@
 %\newcommand{\all}{{\footnotesize (\seq,\paral,\sat,\unsat,\fast,\inc,\uc\seq,\uc\paral,\mv)}}
 \newcommand{\withtrack}[2]{\textsc{#1}{{\footnotesize (#2)}}}
 
-\newcommand{\MakeOnePage}[4]{
+\newcommand{\MakeOnePage}[6]{
     {\centering
     {
     
@@ -139,7 +139,7 @@
     \medskip
     \ifstrempty{#2}{}{
     \textcolor{red!30!black!90}
-    {\textit{Solver won overall}}
+    {\textit{Overall Winner}}
     
     
     \textcolor{black}{\large #2}
@@ -148,7 +148,7 @@
     }
 
     \ifstrempty{#3}{}{
-    \textcolor{red!30!black!90} {\textit{Solver won division}}
+    \textcolor{red!30!black!90} {\textit{Winner of the Division#5}}
     
      \textcolor{black}{\large#3}
     
@@ -156,7 +156,8 @@
     }
 
     \ifstrempty{#4}{}{
-     \textcolor{red!30!black!90}  {\textit{Solver won logic \ifstrempty{#3}{}{(but not the corresponding division)}}}
+     \textcolor{red!30!black!90}  {\textit{Winner of the Logic#6
+      \ifstrempty{#3}{}{(where it did not win the corresponding division)}}}
      
      \textcolor{black}{\large #4}
     }
