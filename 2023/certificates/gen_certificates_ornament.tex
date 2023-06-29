@@ -3,16 +3,17 @@
 \usepackage{wallpaper}
 \usepackage{ragged2e}
 \usepackage{ulem}
+\usepackage{graphicx}
 \usepackage{etoolbox}
 \usepackage[object=pgfhan]{pgfornament}
 \usetikzlibrary{chains}
 \usetikzlibrary{calc}
 \usetikzlibrary{decorations}
 \usetikzlibrary{decorations.text,decorations.markings}
-\usetikzlibrary {decorations.pathmorphing,shadows}
+\usetikzlibrary{decorations.pathmorphing,shadows}
 
 \usepackage{geometry}
-\geometry{hmargin=1in,vmargin=0.8in,headheight=10pt}
+\geometry{hmargin=1in,vmargin=0.8in,headheight=25pt}
 
 \usepackage{fancyhdr}
 \fancyhf{}
@@ -155,7 +156,7 @@
     }
 
     \ifstrempty{#4}{}{
-     \textcolor{red!30!black!90}  {\textit{Solver won logic (but not the corresponding division)}}
+     \textcolor{red!30!black!90}  {\textit{Solver won logic \ifstrempty{#3}{}{(but not the corresponding division)}}}
      
      \textcolor{black}{\large #4}
     }
@@ -165,8 +166,10 @@
     \vspace{1cm}
     
     {\color{blue!40!black}
-    \scalebox{.7}{
+%    \scalebox{.7}{
+    {\tiny
     \begin{tabular}{ccccc}
+        \includegraphics[scale=0.5]{signature-blank-crop-jochen.pdf} && && \includegraphics{MB-Signature.png} \\
     \cline{1-1} 
     \cline{3-3}
     \cline{5-5}

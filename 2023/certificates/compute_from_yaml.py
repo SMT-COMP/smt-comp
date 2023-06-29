@@ -78,12 +78,12 @@ class info:
     
     def latex(self,name):
         l=[]
-        for (k,v) in self.divisions.items():
+        for (k,v) in sorted(self.divisions.items()):
             withtrack(l,k,v)
         divisions = ", ".join(l)
 
         l=[]
-        for (k,v) in self.logics.items():
+        for (k,v) in sorted(self.logics.items()):
             withtrack(l,k,v)
         logics = ", ".join(l)
         
@@ -134,6 +134,11 @@ def select_division(division,logics):
         solver.divisions[division].update(track,True)
     return select
 
+def add_logic(logics,list,track):
+    for v,_ in list[0].items():
+        logics[v,track] = True
+    
+
 def parse_pretty_names(solvers,pretty_names):
     with open(pretty_names, newline='') as input:
         input = csv.DictReader(input)
@@ -141,23 +146,30 @@ def parse_pretty_names(solvers,pretty_names):
         for row in input:
             solvers[row["Solver Name"]].members = int(row["Members"])
 
-def remove_experimental_division(solvers,experimental_division):
+def parse_experimental_division(solvers,experimental_division):
+    res={}
     with open(experimental_division, newline='') as input:
-        input = list(csv.DictReader(input))
+        input = csv.DictReader(input)
         
-        for _,solver in solvers.items():
-            for row in input:
-                assert (row["track"] == "model_validation")
-                solver.divisions[row["division"]]["mv_par"] = None
-                solver.divisions[row["division"]]["mv_seq"] = None
+        for row in input:
+            res[(row["division"],"track_"+row["track"])] = True
+    return res
 
 def main(website_results,input_for_certificates,pretty_names,experimental_division):
     solvers=defaultdict(info)
     
     parse_pretty_names(solvers,pretty_names)
     solvers["-"].members = 0
+    
+    # Remove experimental division
+    experimental_divisions=parse_experimental_division(solvers,experimental_division)
+
+    existing_logics={}
+    delayed_logic=[] #we wait to know which logic are competitive
  
-    for result in os.listdir(website_results):
+    list_dir = list(os.listdir(website_results))
+    list_dir.sort()
+    for result in list_dir:
         file = os.path.join(website_results,result)
         if not os.path.isfile(file):
             break
@@ -177,13 +189,20 @@ def main(website_results,input_for_certificates,pretty_names,experimental_divisi
             
         else:          
             if "logics" in result:
-                update(solvers,select_division(result["division"],result["logics"]),result)
+                if not (result["division"],result["track"]) in experimental_divisions:
+                    update(solvers,select_division(result["division"],result["logics"]),result)
+                    add_logic(existing_logics,result["logics"],result["track"])
+                else:
+                    print("experimental division:", result["division"],result["track"])
             else:
-                update(solvers,(lambda x,k: x.logics[result["division"]].update(k,True)),result)
-    
-    # Remove experimental division
-    remove_experimental_division(solvers,experimental_division)
-    
+                delayed_logic.append(result)
+                
+    for result in delayed_logic:
+        if (result["division"],result["track"]) in existing_logics:
+            update(solvers,(lambda x,k: x.logics[result["division"]].update(k,True)),result)
+        else:    
+            print("experimental logic:", result["division"],result["track"])
+
     
     #print the result
     with open(input_for_certificates, 'w', newline='') as output:
