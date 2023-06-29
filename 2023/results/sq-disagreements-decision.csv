@@ -291,3 +291,11 @@ UFDTLIRA/20200306-Kanig/spark2014bench/K302-029__basic__pack.ads_7_48_postcondit
 UFDTLIRA/20200306-Kanig/spark2014bench/N317-015__mutual_recursive__no_inlining.ads_6_14_postcondition___00.smt2,sat
 UFDTLIRA/20200306-Kanig/spark2014bench/K324-014__hidden__qack.adb_12_19_postcondition___00.smt2,sat
 UFDTLIRA/20200306-Kanig/spark2014bench/O831-003__do333_mode_logic_qgen__ap_engaged_implies_modes_on.adb_64_22_assert___00.smt2,sat
+BV/20230321-UltimateAutomizerSvcomp2023/heapsort.i_0.smt2,unsat
+BV/20230321-UltimateAutomizerSvcomp2023/heapsort.i_3.smt2,unsat
+BV/20230321-UltimateAutomizerSvcomp2023/heapsort.i_8.smt2,unsat
+BV/20230321-UltimateAutomizerSvcomp2023/heapsort.i_9.smt2,unsat
+QF_ABV/egt/egt-0534.smt2,unsat
+QF_ABV/egt/egt-1474.smt2,unsat
+QF_FP/griggio/fmcad12/test_v7_r12_vr1_c1_s703.smt2,unsat
+QF_NRA/hycomp/ball_count_2d_plain.03.seq_lazy_lemmas_global_10.smt2,sat
