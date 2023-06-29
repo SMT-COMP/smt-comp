@@ -466,7 +466,8 @@ def score(division,
     if model_validation:
         data_new['model_validator_status'] = data['model_validator_status']
         data_new['model_validator_error'] = data['model_validator_error']
-        data_new['model_validator_exception'] = data['model_validator_exception']
+        if int(year) == 2020:
+            data_new['model_validator_exception'] = data['model_validator_exception']
     # Column 'reason' only exists in proof exhibition track.
     proof_exhibition = 'reason' in data.columns
     if proof_exhibition:
@@ -554,8 +555,8 @@ def score(division,
             solved = solved[solved.result == RESULT_SAT]
             solved_valid = solved[solved.model_validator_status == 'VALID']
 
-            if int(year) <= 2019:
-                solved_invalid = solved[solved.model_validator_status == 'INVALID']
+            if int(year) != 2020:
+                solved_invalid = data_new[data_new.model_validator_status == 'INVALID']
             else:
                 # Note: The model validator does not report a result, even if
                 #       the solver produces an invalid model or the solver
