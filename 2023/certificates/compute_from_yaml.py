@@ -212,10 +212,11 @@ def main(website_results,input_for_certificates,pretty_names,experimental_divisi
         for (key,value) in solvers.items():
             if value.isNotEmpty() and value.members != 0:
                 print("solver: ",key,"(",value.members,")")
-#                for i in range(1,value.members):
-                output.write(value.latex(key))
-                output.write("\n\\newpage\n")
-                output.flush()
+                if True:
+#                for i in range(0,value.members):
+                    output.write(value.latex(key))
+                    output.write("\n\\newpage\n")
+                    output.flush()
             else:
                 print("solver: ",key,"( no certificate )")
             

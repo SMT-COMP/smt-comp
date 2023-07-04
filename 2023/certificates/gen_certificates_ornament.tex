@@ -1,5 +1,6 @@
 \documentclass[a4paper,landscape,12pt]{article}
 \usepackage[svgnames]{xcolor}
+\usepackage{adjustbox}
 \usepackage{wallpaper}
 \usepackage{ragged2e}
 \usepackage{ulem}
@@ -19,14 +20,22 @@
 \fancyhf{}
 \renewcommand{\headrule}{}
 
-\fancyhead[L]{%
+\newpgfornamentfamily{pgfhan}
+\newbox{\fortyseven}
+\savebox{\fortyseven}{
+    \tikzset{every node/.append style={inner sep=0pt,color=MidnightBlue!50}}
+    \tikzset{pgfornamentstyle/.style={draw=green!20!black,
+    fill=orange,fill opacity=.5,thick}}% 
+\pgfornament[scale=0.50]{32}}
+
+\newbox{\myfancyhead}
+\AtBeginDocument{
+\savebox{\myfancyhead}{
 \newpgfornamentfamily{pgfhan}
 \begin{tikzpicture}[overlay,remember picture]
     \tikzset{every node/.append style={inner sep=0pt,color=MidnightBlue!50}}
     \tikzset{pgfornamentstyle/.style={draw=green!20!black,
     fill=orange,fill opacity=.5,thick}}%
-    \newbox{\fortyseven}
-\savebox{\fortyseven}{\pgfornament[scale=0.50]{32}}
     \node[anchor=north west,shift={(14.5pt,-14.5pt)}] at (current page.north west)
   (nw) {\pgfornament[scale=0.5]{12}};
     \node[anchor=north east,shift={(-14.5pt,-14.5pt)}] at (current page.north east)
@@ -45,13 +54,13 @@
    \node[anchor=north west,shift={($\i*(100bp,0)-(50bp,0)$)}] at (nw.north east)
     {\usebox{\fortyseven}};
 \foreach \i in {0,...,3}
-    \node[anchor=south east,shift={($\i*(0,-100bp)$)},rotate=90] at (ne.south east)
+    \node[anchor=south east,shift={($\i*(0,-100bp)+(0,25bp)$)},rotate=90] at (ne.south east)
      {\usebox{\fortyseven}};
 \foreach \i in {0,...,6}
      \node[anchor=south west,shift={($\i*(100bp,0)-(50bp,0)$)}] at (sw.south east)
       {\usebox{\fortyseven}};
 \foreach \i in {0,...,3}
-      \node[anchor=south west,shift={($\i*(0,-100bp)$)},rotate=-90] at (nw.south west)
+      \node[anchor=south west,shift={($\i*(0,-100bp)+(0,25bp)$)},rotate=-90] at (nw.south west)
        {\usebox{\fortyseven}};
    %         \foreach \i in {0,...,22}
 % \node[anchor=south west,rotate=-90,
@@ -70,7 +79,10 @@
 %     \node[anchor=center,shift={(25bp,-25bp)}] at (nw.south east)
 %     {\pgfornament[scale=0.5]{57}};
 \end{tikzpicture}
-}
+}}
+
+
+\fancyhead[L]{\usebox{\myfancyhead}}
 
 % \node[anchor=north west,shift={(14.5pt,-14.5pt)}] at (current page.north west)
 %   (nw) {\pgfornamenthan[scale=0.2]{25}};
@@ -170,7 +182,9 @@
 %    \scalebox{.7}{
     {\tiny
     \begin{tabular}{ccccc}
-        \includegraphics[scale=0.5]{signature-blank-crop-jochen.pdf} && && \includegraphics{MB-Signature.png} \\
+        \includegraphics[scale=0.5,trim=0pt 0.60cm 0pt 0pt]{signature-blank-crop-jochen.pdf} &&
+        \includegraphics[scale=0.25,trim=1.5cm 2.75cm 0pt 0pt]{signature_bobot.png} &&
+        \includegraphics[trim=0pt 0.10cm 0pt 0pt]{MB-Signature.png} \\
     \cline{1-1} 
     \cline{3-3}
     \cline{5-5}
@@ -186,6 +200,7 @@
 }
 
 \begin{document}
+
 \TileWallPaper{4cm}{2cm}{tiling.png}
 
 \input{input_for_certificates.tex}
