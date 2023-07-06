@@ -6,12 +6,8 @@ from typing import Any
 import frontmatter
 import os
 from collections import defaultdict
- 
 
-    
-track= {
-    "track_incremental": "\\inc",   
-}
+show_experimental=False
 
 class category(dict):
     def latex(self):
@@ -123,10 +119,10 @@ def update(solvers,select,yaml):
         select(solvers[yaml["winner_par"]],"mv_par")
         select(solvers[yaml["winner_seq"]],"mv_seq")
     
-    if yaml["track"] == "track_cloud":
+    if show_experimental and yaml["track"] == "track_cloud":
          select(solvers[yaml["winner_par"]],"cloud")
         
-    if yaml["track"] == "track_parallel":
+    if show_experimental and yaml["track"] == "track_parallel":
          select(solvers[yaml["winner_par"]],"parallel")
 
 
@@ -165,8 +161,10 @@ def main(website_results,input_for_certificates,pretty_names,experimental_divisi
     solvers["-"].members = 0
     
     # Remove experimental division
-    experimental_divisions=parse_experimental_division(solvers,experimental_division)
-    #experimental_divisions={}
+    if show_experimental:
+        experimental_divisions={}
+    else:
+        experimental_divisions=parse_experimental_division(solvers,experimental_division)
 
     existing_logics={}
     delayed_logic=[] #we wait to know which logic are competitive

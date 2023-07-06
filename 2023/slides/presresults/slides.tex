@@ -361,7 +361,7 @@ Certora, Israel
 
 \medskip
 \pause
-  \emph{This year} the sat/unsat results from sound solvers in SQ were used to
+  \emph{As last year} the sat/unsat results from sound solvers in SQ were used to
   include benchmarks on the MV, UC and PE tracks.
 
 \end{frame}
@@ -785,10 +785,18 @@ in the certificates
   \end{itemize}
   \end{frame}
 
-\begin{frame}{Plans for SMT-COMP 2023}
+\begin{frame}[fragile]
+  \frametitle{Plans for SMT-COMP 2023}
   \begin{itemize}
     \item "Revelations are found in clouds” --- Serge King
-    \item MV: Algebraic number non experimental
+    \item MV: Algebraic number $\implies$ non experimental
+\begin{verbatim}
+(root-of-with-ordering (coeffs p_0 p_1 ... p_n) i)
+
+(root-of-with-interval  (coeffs p_0 p_1 ... p_n) min max)
+(root-of-with-enclosure (coeffs p_0 p_1 ... p_n) min max)
+\end{verbatim}
+    Thanks for the solvers that implemented one of them!
     \item MV: partial function more discussion needed
     \item MV: array theory more discussion needed
   \end{itemize}
