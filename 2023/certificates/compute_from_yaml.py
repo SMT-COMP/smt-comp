@@ -165,8 +165,8 @@ def main(website_results,input_for_certificates,pretty_names,experimental_divisi
     solvers["-"].members = 0
     
     # Remove experimental division
-    #experimental_divisions=parse_experimental_division(solvers,experimental_division)
-    experimental_divisions={}
+    experimental_divisions=parse_experimental_division(solvers,experimental_division)
+    #experimental_divisions={}
 
     existing_logics={}
     delayed_logic=[] #we wait to know which logic are competitive
