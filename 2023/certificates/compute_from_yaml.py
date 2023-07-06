@@ -123,11 +123,11 @@ def update(solvers,select,yaml):
         select(solvers[yaml["winner_par"]],"mv_par")
         select(solvers[yaml["winner_seq"]],"mv_seq")
     
-    # if yaml["track"] == "track_cloud":
-    #     select(solvers[yaml["winner_par"]],"cloud")
+    if yaml["track"] == "track_cloud":
+         select(solvers[yaml["winner_par"]],"cloud")
         
-    # if yaml["track"] == "track_parallel":
-    #     select(solvers[yaml["winner_par"]],"parallel")
+    if yaml["track"] == "track_parallel":
+         select(solvers[yaml["winner_par"]],"parallel")
 
 
 def select_division(division,logics):
@@ -165,7 +165,8 @@ def main(website_results,input_for_certificates,pretty_names,experimental_divisi
     solvers["-"].members = 0
     
     # Remove experimental division
-    experimental_divisions=parse_experimental_division(solvers,experimental_division)
+    #experimental_divisions=parse_experimental_division(solvers,experimental_division)
+    experimental_divisions={}
 
     existing_logics={}
     delayed_logic=[] #we wait to know which logic are competitive
@@ -209,7 +210,7 @@ def main(website_results,input_for_certificates,pretty_names,experimental_divisi
     
     #print the result
     with open(input_for_certificates, 'w', newline='') as output:
-        for (key,value) in solvers.items():
+        for (key,value) in sorted(solvers.items(),key=lambda x: x[0].lower()):
             if value.isNotEmpty() and value.members != 0:
                 print("solver: ",key,"(",value.members,")")
                 if True:

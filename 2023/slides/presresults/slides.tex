@@ -20,6 +20,7 @@
 \usepackage{pdfpages}
 \geometry{papersize={16cm,9cm}}
 %\tikzexternalize
+\usepackage{multicol}
 
 \colorlet{MYred}{red!70!black}
 \definecolor{MYgreen}{rgb}{.1,.5,0}
@@ -423,17 +424,65 @@ Certora, Israel
 \end{frame}
 }
 
+\newcommand{\myvideopdf}[2]{
+\begin{frame}
+  \frametitle{#1}
+  \begin{center}
+    video: \texttt{#2}    
+  \end{center}
+\end{frame}
+}
 
+\myincludepdf{slides-bitwuzla.pdf}
+
+\myincludepdf{slides-colibri.pdf}
+
+\myvideopdf{cvc5-NRA-LS}{slides-cvc5-nra-ls.mp4}
+
+\myvideopdf{iProver}{slides-iProver.mp4}
+
+\myvideopdf{ismt, Yices-ismt}{slides-ismt.mp4}
+
+\myincludepdf{slides-ismt-ppt.pdf}
+
+\myincludepdf{slides-opensmt.pdf}
+
+\myvideopdf{Ostrich}{slides-Ostrich.mkv}
+
+\myincludepdf{slides-smtinterpol.pdf}
+
+\myincludepdf{slides-smtrat.pdf}
+
+\myvideopdf{UltimateEliminator+MathSAT}{slides-UltimateEliminator.mkv}
+
+\myincludepdf{slides-vampire.pdf}
+
+\myincludepdf{slides-yaga.pdf}
+
+\myincludepdf{slides-Yices-2023.pdf}
+
+\myincludepdf{slides-YicesQS-2023.pdf}
+
+%\myvideopdf{Z3-Z3++}{slides-z3-z3++.mp4}
+\begin{frame}
+  \frametitle{Z3-Z3++}
+
+  \begin{center}
+    \url{https://youtu.be/fBB0Wxxf9vA}
+  \end{center}
+\end{frame}
 
   \begin{frame}
     \frametitle{Other participants}
     \begin{itemize}
-      \item Q3B
-      \vitem SMT-RAT
-      \vitem SMTS
-      \vitem UltimateEliminatior+MathSAT
-      \vitem Vampire
-      \vitem Z3str4
+\item cvc5
+\vitem Q3B
+\vitem Q3B-pBDD
+\vitem STP
+\vitem UltimateIntBlastingWrapper+SMTInterpol
+\vitem z3-alpha
+\vitem Z3-Noodler
+\vitem Z3-Owl
     \end{itemize}
   \end{frame}
 
@@ -443,15 +492,13 @@ Certora, Israel
 
   Submitted by organisers
   \begin{itemize}
-  \item z3-4.8.17
-  \item MathSAT 5.6.8
-  \item Best solvers, per division, from previous years (23 Solvers)
+  \item Best solvers, per division, from previous years (27 Solvers)
   \end{itemize}
   \bigskip
 
   Submitted by participants
   \begin{itemize}
-  \item Fixed solvers (OpenSMT, STP, Yices-ismt, Z3++,smtinterpol)
+  \item Fixed solvers (OSTRICH, Z3-Owl, Bitwuzla, Yices2, Z3-Noodler, iProver)  
   \end{itemize}
 \end{frame}
 
@@ -471,7 +518,7 @@ Certora, Israel
   \item \emph{Unsat Core}: given if returned core is satisfiable.
   \item \emph{Model Validation}: given if given model evaluates formula to \emph{false}
   \end{itemize}
-  Error scores are draconian.
+  Error scores are \textbf{draconian}.
 \end{frame}
 
 \begin{frame}{Score and Ranking}
@@ -500,17 +547,35 @@ Certora, Israel
 
 \end{frame}
 
+\newcommand{\seq}{\texttt{;}}
+\newcommand{\paral}{\textbardbl}
+\newcommand{\sat}{$\top$}
+\newcommand{\unsat}{$\bot$}
+\newcommand{\fast}{\texttt{24}}
+\newcommand{\inc}{inc}
+\newcommand{\uc}{uc}
+\newcommand{\mv}{mv}
+\newcommand{\cloud}{cloud}
+\newcommand{\paralTrack}{parallel}
+
+\begin{frame}
+  \frametitle{Results}
+  \begin{center}
+    \begin{tabular}{|cl|cl|}
+  \hline
+  \sat & satisfiable & \unsat & unsatisfiable \\
+  \seq & sequential & \paral & parallel \\
+  \fast & less than 24s & \inc & incremental \\
+  \uc & unsat core & \mv & model validation \\
+  \hline
+\end{tabular}
+\end{center}
+\vfill
+Experimental track are added in the slides but are not present
+in the certificates
+\end{frame}
+
 {
-  \newcommand{\seq}{\texttt{;}}
-  \newcommand{\paral}{\textbardbl}
-  \newcommand{\sat}{$\top$}
-  \newcommand{\unsat}{$\bot$}
-  \newcommand{\fast}{\texttt{24}}
-  \newcommand{\inc}{inc}
-  \newcommand{\uc}{uc}
-  \newcommand{\mv}{mv}
-  \newcommand{\cloud}{cloud}
-  \newcommand{\paralTrack}{parallel}
   %\newcommand{\all}{{\footnotesize (\seq,\paral,\sat,\unsat,\fast,\inc,\uc\seq,\uc\paral,\mv)}}
   \newcommand{\withtrack}[2]{\textsc{#1}{{\footnotesize (#2)}}}
   
@@ -678,7 +743,7 @@ Certora, Israel
 \begin{frame}{Checking Disagreements}
 
   \begin{itemize}
-  \item  111\,451 instances of 391\,363 have no status
+  \item  50411 benchmarks of 227\,938 have no status
 
   \vitem 300 benchmarks with disagreements (ABV,
   BV,
@@ -694,36 +759,41 @@ Certora, Israel
   UFDT,
   UFDTLIRA)
 
-  \vitem We manually resolved the disagreements
-  \begin{itemize}
-    \item Authors confirmed solver unsoundness
-    \item Sound solvers agreed on result
-  \end{itemize}
+  \vitem We manually resolved the disagreements: authors confirmed solver
+  unsoundness
+  \vitem We had 10 solvers with soundness issues:
+  \begin{columns}
+    \column{0.45\textwidth}
+    \begin{itemize}
+      \item Bitwuzla (uc printing error)
+      \item iProver (\& Fixed)
+      \item OSTRICH
+      \item Q3B
+      \item UltimateEliminator+MathSAT
+    \end{itemize} 
+    \column{0.55\textwidth}
+    \begin{itemize}
+      \item UltimateIntBlastingWrapper+SMTInterpol
+      \item Vampire
+      \item Yices2 (\& Fixed)
+      \item Z3-Noodler (\& Fixed)
+      \item Z3-Owl (\& Fixed)
+    \end{itemize} 
+\end{columns}
 
-  \vitem We had only ??? solvers with soundness issues: 
+  \end{itemize}
+  \end{frame}
+
+\begin{frame}{Plans for SMT-COMP 2023}
+  \begin{itemize}
+    \item "Revelations are found in clouds” --- Serge King
+    \item MV: Algebraic number non experimental
+    \item MV: partial function more discussion needed
+    \item MV: array theory more discussion needed
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Plans for SMT-COMP 2022}
-  \begin{itemize}
-    \item Move to Dolmen as single model validator
-
-      \vitem Dolmen worked well in QF\_FP (minor issue with empty output, simple
-      to fix)
-      \vitem pysmt timed out in two cases (locally with more time one of them
-      succeeded)
-      \vitem pysmt could not understand the model in 9 cases
-      \vitem Dolmen is easy to extend to new theories
-      \vitem Easy to integrate with correct-by-construction code extracted from
-      Coq
-      \vitem Should be more efficient for handling function call
-
-  \end{itemize}
-
-
-\end{frame}
-
-\begin{frame}{Plans for SMT-COMP 2022}
+\begin{frame}{Plans for SMT-COMP 2023?}
   \begin{itemize}
     \item Proof \textit{validation} track
 
@@ -741,15 +811,14 @@ Certora, Israel
 \end{frame}
 
 \begin{frame}{SMT-COMP organizing committee}
-  Three people organize the SMT-COMP.  In 2022:
+  Three people organize the SMT-COMP.  In 2023:
   \begin{itemize}
-  \item Haniel Barbosa
+  \item Martin Bromberger
   \item Jochen Hoenicke
   \item Fran\c{c}ois Bobot
   \end{itemize}
 
-  Both Haniel and Jochen have been organizers for three-years. One of them
-  should be replaced.
+  Jochen have been organizer for four-years! He can rest happy.
   \bigskip
 
   We need a successor for next year's competition.
@@ -760,7 +829,7 @@ Certora, Israel
 \begin{frame}{Acknowledgements}
   \begin{itemize}
     \item \emph{Andrea Micheli}: pysmt
-    \item \emph{Guillaume Bury}: Model Validator
+    \item \emph{Guillaume Bury, FB.}: Model Validator
     \item \emph{Clark Barrett, Pascal Fontaine, Aina Niemetz, Mathias Preiner, Hans-Jörg Schurr}: SMT-LIB benchmarks
     \item \emph{Aaron Stump}: StarExec support
     \item \emph{Mike Whalen and team}: Cloud/Parallel Track
@@ -778,7 +847,7 @@ Certora, Israel
 \end{frame}
 
 \begin{frame}[shrink=0.95]{Benchmark contributors}
-  In 2022 \emph{new benchmarks} were contributed by:
+  In 2023 \emph{new benchmarks} were contributed by:
 
   \small
   \begin{itemize}
