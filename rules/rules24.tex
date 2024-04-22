@@ -55,8 +55,8 @@
 
 \date{\small This version revised \the\year-\the\month-\the\day}
 
-\title{18th International Satisfiability Modulo Theories Competition
-  (SMT-COMP 2023): Rules and Procedures}
+\title{19th International Satisfiability Modulo Theories Competition
+  (SMT-COMP 2024): Rules and Procedures}
 
 % [morgan] do our own layout of authors; the four-author layout spacing
 % was screwed up...
@@ -117,17 +117,17 @@ competition web site, \url{http://www.smtcomp.org}.
 \label{sec:important}
 
 \begin{description}
-\item[Mar~31] Deadline for new benchmark contributions.
-\item[April~29] Final versions of competition tools (e.g., benchmark
+\item[April~13] Deadline for new benchmark contributions.
+\item[May~11] Final versions of competition tools (e.g., benchmark
   scrambler) are made available.  Benchmark libraries are frozen.
-\item[May~13] Deadline for first versions of solvers (for all tracks),
+\item[May~27] Deadline for first versions of solvers (for all tracks),
   including information about which tracks and divisions are being
   entered, and magic numbers for benchmark scrambling.
-\item[May~27] Deadline for final versions of solvers, including
+\item[June~8] Deadline for final versions of solvers, including
   system descriptions.
-\item[May~30] Opening value of NYSE Composite Index used to compute
+\item[June~11] Opening value of NYSE Composite Index used to compute
   random seed for competition tools.
-\item[July~5-6] SMT Workshop; end of competition, presentation of
+\item[July~22-23] SMT Workshop; end of competition, presentation of
   results.
 \end{description}
 
@@ -147,9 +147,9 @@ competition web site, \url{http://www.smtcomp.org}, and in reports on
 previous
 competitions~(\cite{SMTCOMP-JAR,SMTCOMP-FMSD,BDOS08,SMTCOMP-2008,CDW14,SMTCOMP-2012,CSW15}).
 
-SMT-COMP~2023 is part of the SMT Workshop~2023
-(\url{http://smt-workshop.cs.uiowa.edu/2023/}),
-which is affiliated with CADE~29 (\url{https://easyconferences.eu/cade2023/}).
+SMT-COMP~2024 is part of the SMT Workshop~2024
+(\url{http://smt-workshop.cs.uiowa.edu/2024/}),
+which is affiliated with CAV~2024 (\url{https://i-cav.org/2024/}).
 The SMT Workshop will include a block of time to present the results of the
 competition.
 %
@@ -158,7 +158,7 @@ benchmarks and new or improved solvers to raise the level of
 competition and advance the state of the art in automated SMT problem
 solving.
 
-SMT-COMP 2023 will have seven tracks: the \maintrack (before 2019: Main Track),
+SMT-COMP 2024 will have seven tracks: the \maintrack (before 2019: Main Track),
 the \inctrack (before 2019: Application Track), the \ucoretrack, the \mvaltrack,
 the \paralleltrack{} and the \cloudtrack{} (both sponsered by Amazon Web
 Services), and an experimental \prooftrack{} focused on a qualitative evaluation
@@ -178,25 +178,49 @@ version,\footnote{Earlier versions of this document include
   contributions from Clark Barrett, Roberto Bruttomesso, David Cok,
   Sylvain Conchon, David D{\'e}harbe, Morgan Deters, Alberto Griggio,
   Liana Hadarean,
-  Matthias Heizmann, Antti Hyvarinen, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
+  Matthias Heizmann, Antti Hyvarinen, Jochen Hoenicke, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump,
   and Tjark Weber.}  describes the rules and competition procedures for
-SMT-COMP~2023.
+SMT-COMP~2024.
 %
 
-As in previous years, we have revised the rules slightly.  Some rule
-changes in 2023 are designed to improve how logics are organized into
-divisions. We have also added more divisions to the \mvaltrack and have defined a
-new \prooftrack.
+As in previous years, we have revised the rules slightly. Most changes are due to our move from StarExec to BenchExec.
 %
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
-  \item {\bf Submission process.}  \emergencystretch.5cm \todo{Details}.
+ 
+  \item {\bf Move from StarExec to BenchExec.}  \emergencystretch.5cm
+  The single query, incremental, unsat-core, model-validation and proof exhibition tracks 
+  will no longer run on the StarExec platform hosted by the University of Iowa.
+  Starting this year, we will run these tracks on the BenchExec cluster 
+  (\url{https://github.com/sosy-lab/benchexec}) owned by LMU's Software 
+  and Computational Systems Lab (SoSy-Lab \url{https://www.sosy-lab.org/}).
 %
-  \rationale{\todo{Details}}
+  \rationale{The StarExec cluster is in the process of being decommissioned. We picked 
+             BenchExec as the new platform because it is host to similar competitions 
+             and the experience collected there is a big help in our migration process.
+             Moreover, it is in academic hands, so less likely to change conditions on
+             short notice.}
   
-  \item {\bf Move from StarExec to BenchExec.}  \emergencystretch.5cm \todo{Details}
+  \item {\bf Submission process.}  \emergencystretch.5cm
+  We changed the submission process from a Google form to a push request to the 
+  SMT-COMP GitHub repository (\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}). 
+  Detailed instructions can be found in the README file there.
+  Moreover, participants are now required to upload their final solver versions as a Zenodo 
+  (\url{https://zenodo.org/}) submission that must contain a docker file that compiles the solver.
 %
-  \rationale{\todo{Details}}
+  \rationale{The change from Google form to GitHub push request makes it easier for us to 
+             automatically create scripts for BenchExec. The submission of the final solver 
+             versions to Zenodo makes it more likely that the competition results stay replicable.}
+  
+  \item {\bf Time limits.}  \emergencystretch.5cm
+  The time limits for the cloud and parallel tracks are reduced to 2 minutes per problem.
+%
+  \rationale{The analysis of last years results showed that most problems in these tracks are solved quickly or not at all.}
+  
+  \item {\bf Memory limits.}  \emergencystretch.5cm
+  The memory limits for the single query, incremental, unsat-core, model-validation and proof exhibition tracks are reduced to 30\,GB.
+%
+  \rationale{The reason are hardware limits of the new execution platform.}
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -274,18 +298,11 @@ measurement developed by LMU's Software and Computational Systems Lab (SoSy-Lab 
 The framework itself can be downloaded and used locally by anyone. 
 The competition itself will be executed on a BenchExec cluster owned by SoSy-Lab, 
 who are kind enough to support our competition with their computing power. 
-\todo{Is there a way for the users to run tests directly on the SoSy-Lab BenchExec cluster?}
-%
-%
-%service enables members of the SMT research community to run solvers
-%on jobs consisting of benchmarks from the SMT-LIB benchmark library.
-%Jobs are run on a shared computer cluster.  The execution service is
-%provided free of charge, but requires registration to create a
-%login account.  Registered users may then upload solvers to
-%run, or may run public solvers already uploaded to the service.
-%Information about how to configure and upload a solver is contained in
-%the StarExec user guide,
-%\url{https://wiki.uiowa.edu/display/stardev/User+Guide}.
+To be more precise, the competition will be run on the 168 apollon nodes of the 
+SoSy-Lab BenchExec cluster (for more details see \url{https://vcloud.sosy-lab.org/cpachecker/webclient/master/info}). 
+It is also possible to locally emulate and test the computing environment on 
+the competition machines using the following instructions: 
+\url{https://gitlab.com/sosy-lab/benchmarking/competition-scripts/#computing-environment-on-competition-machines}.
 
 \header{Participation in the Competition.}
 %
@@ -431,7 +448,7 @@ evaluation purposes.
 \header{Dates of Competition.}
 %
 The bulk of the computation will take place during the weeks leading
-up to SMT 2023.  Intermediate results will be regularly posted to the
+up to SMT 2024.  Intermediate results will be regularly posted to the
 SMT-COMP website as the competition runs.
 %
 The organizers reserve the right to prioritize certain competition
@@ -596,15 +613,14 @@ pages~\pageref{sec:exec:single}-\pageref{sec:exec:model} specify
 the time limit for each track. Each processor has 4 cores.  Detailed
 machine specifications are available on the competition web site.
 
-The StarExec service also limits the memory consumption of the solver
+The \executionservice also limits the memory consumption of the solver
 processes.  We expect the memory limit per solver/benchmark pair to be
-on the order of 60\,GB.  The values of both the time limit and the
+on the order of 30\,GB.  The values of both the time limit and the
 memory limit are available to a solver process through environment
-variables.  See the StarExec user guide for more information.
-\todo{What are the limits for BenchExec? Do we set limits ourselves?}
+variables.  See the user guide for the \executionservice for more information.
 
 The limits for \paralleltrack{} and \cloudtrack{} are available at
-\url{https://smt-comp.github.io/2023/parallel-and-cloud-tracks.html}.
+\url{https://smt-comp.github.io/2024/parallel-and-cloud-tracks.html}.
 
 \header{Persistent State.}
 %
@@ -613,11 +629,11 @@ course of an execution, but they must not read such files back during
 later executions.  Each solver is executed with a temporary directory
 as its current working directory.  Any generated files should be
 produced there (and not, say, in the system's \texttt{/tmp}
-directory).  The StarExec system sets a limit on the amount of disk
-storage permitted---typically 20\,GB.  See the StarExec user guide for
-more information.  The temporary directory is deleted after the job is
-complete.  Solvers must not attempt to communicate with other
-machines, e.g., over the network.
+directory).  The \executionservice sets a limit on the amount of disk
+storage permitted---typically 20\,GB.  See the user guide for the 
+\executionservice for more information.  The temporary directory is 
+deleted after the job is complete.  Solvers must not attempt to 
+communicate with other machines, e.g., over the network.
 \todo{What are the limits for BenchExec? Do we set limits ourselves?}
 
 
@@ -873,7 +889,7 @@ chosen such that their run times are sufficiently high based on our
 estimation.
 
 \header{Time Limit.}
-This track will use a wall-clock time limit of 20 minutes per
+This track will use a wall-clock time limit of 2 minutes per
 solver/benchmark pair.
 
 \subsection{\cloudtrack{}}
@@ -888,7 +904,7 @@ chosen such that their run times are sufficiently high based on our
 estimation.
 
 \header{Time Limit.}
-This track will use a wall-clock time limit of 20 minutes per
+This track will use a wall-clock time limit of 2 minutes per
 solver/benchmark pair.
 
 \subsection{\prooftrack}
@@ -1074,10 +1090,10 @@ the benchmark's status and the result of the \maintrack{} will be used.
 
 
 \header{New benchmarks.}
-The deadline for submission of new benchmarks was {\bf March~31, 2023}.
+The deadline for submission of new benchmarks was {\bf April~13, 2024}.
 %
 The organizers, in collaboration with the SMT-LIB maintainers, will be
-checking and curating these until {\bf May~13, 2023}.
+checking and curating these until {\bf May~11, 2024}.
 
 The SMT-LIB
 maintainers intend to make a new release of the benchmark library
@@ -1122,7 +1138,7 @@ the following selection process will be used.
   \begin{itemize}
     \item \emph{\maintrack.} All benchmarks that were solved by all
       solvers (including non-competitive solvers) in less than one second in
-          the corresponding track in 2018--2022.
+          the corresponding track in 2018--2023.
     \item \emph{\ucoretrack.} All benchmarks with only a single assertion.
   \end{itemize}
 
@@ -1610,7 +1626,7 @@ be recused from these decisions.  The organizers' decisions are final.
 
 \section{Acknowledgments}
 
-SMT-COMP 2023 is organized under the direction of the SMT Steering
+SMT-COMP 2024 is organized under the direction of the SMT Steering
 Committee. The organizing team is
 %
 \begin{itemize}
