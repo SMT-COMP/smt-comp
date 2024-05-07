@@ -218,7 +218,7 @@ The principal changes from the previous competition rules are the following:
   \item {\bf Memory limits.}  \emergencystretch.5cm
   The memory limits for the single query, incremental, unsat-core, and model-validation tracks are reduced to 30\,GB.
 %
-  \rationale{The reason are hardware limits of the new execution platform.}
+  \rationale{The reasons are hardware limits of the new execution platform.}
   
   \item {\bf Proof track.}  \emergencystretch.5cm
   The previously experimental evaluation proof track will be discontinued.
@@ -228,6 +228,16 @@ The principal changes from the previous competition rules are the following:
              an unmanageable amount of overhead on the competition organizers or the participants.
              Second, we have collected vast amounts of data in the last two years and thoroughly evaluating it takes time.
              Third, this year we would need to restrict the allowed proof size due to hardware limits of the new execution platform.}
+  
+  \item {\bf Tools.}  \emergencystretch.5cm
+    All the relevant scripts in \url{https://github.com/SMT-COMP/smt-comp} have been combined into one tool called \textbf{smtcomp}
+    that is available at 
+    \url{https://github.com/SMT-COMP/smt-comp.github.io}.
+%
+  \rationale{The reason for this new tool is that the sheer number of old scripts and their various locations 
+             caused a lot of confusion to many new and several longtime participants.
+             The tool also has better run time compared to some of the old scripts because it uses parallelization where possible.
+             Moreover, it provides a nicer UI compared to the old scripts.}
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -472,13 +482,22 @@ archive to allow reproduction of the competition results in the future.
 
 \header{Tools.} \label{tools}
 The competition uses a number of tools/scripts to run the competition. In the
-following, we briefly describe these tools. Unless stated otherwise, these
-tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
+following, we briefly describe these tools.
 \begin{itemize}
-  \item \textbf{Benchmark Selection.} We use a script to implement the
-    benchmark selection policy described on page~\pageref{benchmark-selection}.
-    It takes a seed for the random benchmark selection. The same seed is used
-    for all tools requiring randomisation.
+  \item \textbf{smtcomp.} This tool combines the functionality of most of the 
+    scripts used in previous years and more. It is available at 
+    \url{https://github.com/SMT-COMP/smt-comp.github.io}. Some of its functionalities include:
+    \begin{itemize}
+      \item \textbf{Benchmark Selection.} The tool has a command that executes the
+        benchmark selection policy described on page~\pageref{benchmark-selection}.
+        It takes a seed for the random benchmark selection. The same seed is used
+        for all tools requiring randomisation.
+      \item \textbf{Scoring.} The tool has a command that executes the scoring computation
+        described on in Section~\ref{sec:scoring}. It also includes the scoring
+        computations used in previous competitions (since 2015).
+    \end{itemize}
+    For a full list of the capabilities of the smtcomp tool and an explanation of all important commands
+    see \url{https://github.com/SMT-COMP/smt-comp.github.io/blob/master/README.md}
   \item \textbf{Scrambler.} This tool is used to scramble benchmarks during the
     competition to ensure that tools do not rely on syntactic features to
     identify benchmarks. The scrambler can be found at
@@ -489,9 +508,6 @@ tools are found at \url{https://github.com/SMT-COMP/smt-comp/tree/master/tools}.
   \item \textbf{Post-Processors.} These are used by the \executionservice to translate the
     output of tools to the format required for scoring. All post-processors (per
     track) are available at \url{https://github.com/SMT-COMP/postprocessors}.
-  \item \textbf{Scoring.} We use a script to implement the scoring computation
-    described on in Section~\ref{sec:scoring}. It also includes the scoring
-    computations used in previous competitions (since 2015).
 \end{itemize}
 
 \header{Input.}
