@@ -30,7 +30,6 @@
 \newcommand{\challtrack}{Industry-Challenge Track\xspace}
 \newcommand{\paralleltrack}{Parallel Track\xspace}
 \newcommand{\cloudtrack}{Cloud Track\xspace}
-\newcommand{\prooftrack}{Proof Exhibition Track\xspace}
 
 \newcommand{\executionservice}{execution service\xspace}
 
@@ -160,14 +159,13 @@ solving.
 
 SMT-COMP 2024 will have seven tracks: the \maintrack (before 2019: Main Track),
 the \inctrack (before 2019: Application Track), the \ucoretrack, the \mvaltrack,
-the \paralleltrack{} and the \cloudtrack{} (both sponsered by Amazon Web
-Services), and an experimental \prooftrack{} focused on a qualitative evaluation
-of different proof formats, proof checkers and proof-producing solvers.
+and the \paralleltrack{} and the \cloudtrack{} (both sponsered by Amazon Web
+Services).
 %
 Within each track there are multiple divisions, where each division
 uses benchmarks from a specific group of SMT-LIB logics.
 %
-We will recognize winners in all tracks but the \prooftrack{}.
+We will recognize winners in all tracks.
 %
 They will be determined by the number of benchmarks solved (taking into account
 the weighting detailed in Section~\ref{sec:scoring}); we will also recognize
@@ -189,8 +187,8 @@ The principal changes from the previous competition rules are the following:
 \begin{itemize}
  
   \item {\bf Move from StarExec to BenchExec.}  \emergencystretch.5cm
-  The single query, incremental, unsat-core, model-validation and proof exhibition tracks 
-  will no longer run on the StarExec platform hosted by the University of Iowa.
+  The single query, incremental, unsat-core, and model-validation will no longer 
+  run on the StarExec platform hosted by the University of Iowa.
   Starting this year, we will run these tracks on the BenchExec cluster 
   (\url{https://github.com/sosy-lab/benchexec}) owned by LMU's Software 
   and Computational Systems Lab (SoSy-Lab \url{https://www.sosy-lab.org/}).
@@ -218,9 +216,18 @@ The principal changes from the previous competition rules are the following:
   \rationale{The analysis of last years results showed that most problems in these tracks are solved quickly or not at all.}
   
   \item {\bf Memory limits.}  \emergencystretch.5cm
-  The memory limits for the single query, incremental, unsat-core, model-validation and proof exhibition tracks are reduced to 30\,GB.
+  The memory limits for the single query, incremental, unsat-core, and model-validation tracks are reduced to 30\,GB.
 %
   \rationale{The reason are hardware limits of the new execution platform.}
+  
+  \item {\bf Proof track.}  \emergencystretch.5cm
+  The previously experimental evaluation proof track will be discontinued.
+%
+  \rationale{There are three reasons that led to this decision. 
+             First, we were unable to find a way of turning the proof track into a competition that would not lead to 
+             an unmanageable amount of overhead on the competition organizers or the participants.
+             Second, we have collected vast amounts of data in the last two years and thoroughly evaluating it takes time.
+             Third, this year we would need to restrict the allowed proof size due to hardware limits of the new execution platform.}
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -331,8 +338,7 @@ submissions, are used to seed competition tools.
 \header{System description.}
 %
 As part of the submission, SMT-COMP entrants are \textbf{required} to provide a
-short (1-2 pages, excluding references; plus 2 pages for proof format and proof
-checker if the entrant is for the proof exhibition track) description of the system, which \textbf{must} explicitly
+short (1-2 pages, excluding references) description of the system, which \textbf{must} explicitly
 acknowledge any solver it wraps or is based on in case of a \emph{wrapper} or
 \emph{derived} tool (see above).
 In case of a \emph{wrapper} tool, it \textbf{must} also explicitly state
@@ -348,8 +354,6 @@ A system description \textbf{must} further include the following information:
   \item appropriate acknowledgment of tools other than SMT solvers called by
     the system (e.g., SAT solvers) that are not written by the authors of the
     submitted solver, and
-  \item for participants of the \prooftrack{} a short description
-    of their proof format of up to two extra pages.
 \end{itemize}
 A system description \emph{should} further include the following information
 (unless there is a good reason otherwise):
@@ -518,9 +522,6 @@ satisfies the following \emph{requirements}:
     \item In the \emph{\ucoretrack}, a benchmark file contains a
       single \akey{(set-option :produce-unsat-cores true)} command as
       the second command.
-    \item In the \emph{\prooftrack}, a benchmark file contains a
-      single \akey{(set-option :produce-proofs true)} command as
-      the second command.
     \end{enumerate}
   \item \bkey{(set-logic ...)}\\
     A (single) \akey{set-logic} command is the \emph{first} command after
@@ -571,10 +572,6 @@ satisfies the following \emph{requirements}:
     In the \emph{\mvaltrack}, the \akey{check-sat} command (which is
     always issued in a satisfiable context) is followed by a single
     \akey{get-model} command.
-  \item \bkey{(get-proof)}\\
-    In the \emph{\prooftrack}, the \akey{check-sat} command (which is
-    always issued in an unsatisfiable context) is followed by a single
-    \akey{get-proof} command.
   \item \bkey{(exit)}\\
     It may \emph{optionally} contain an \akey{exit} command as its
     last command.  In the \emph{\inctrack}, this command must not be
@@ -862,7 +859,7 @@ The model validator tool will output
 
 The new experimental divisions require additional syntax to represent
 their models.  We propose the new syntax on the SMT-COMP website
-{\url{https://smt-comp.github.io/2023/model.html}}.
+{\url{https://smt-comp.github.io/2024/model.html}}.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
@@ -907,150 +904,6 @@ estimation.
 This track will use a wall-clock time limit of 2 minutes per
 solver/benchmark pair.
 
-\subsection{\prooftrack}
-\label{sec:exec:proof}
-
-In the \prooftrack, teams can submit a proof-producing solver together with a
-proof checker for its proof format.  We will compile and present the results, as
-well as assemble a panel of experts (not necessarily organizers) to do a
-qualitative assessment for each proof-producing solver, proof format, and proof
-checker.
-
-\header{Benchmark Selection.}
-This track will run on a selection of non-incremental \emph{unsat} benchmarks
-(as described on page~\pageref{benchmark-selection}).
-
-\header{Input/Output Solver.}
-For the \prooftrack, solver authors should provide two scripts
-with their solver.  The first script,
-\texttt{smtcomp\_solver}, should take the name of the benchmark file as
-a single argument and run the solver on the benchmark.
-%
-As described in Section~\ref{sec:logistics}, the benchmark
-will contain the commands \akey{(check-sat)} and \akey{(get-proof)}.
-%
-The solver must output the answers to both of these commands to stdout.
-Output to stderr is ignored by the toolchain.
-
-Solvers must respond to each command in the benchmark script with the
-answers defined in the SMT-LIB format specification.  If the solver
-outputs a proof, this proof must be an s-expression according to the
-SMT-LIB standard, but otherwise the format is not specified.
-%
-Solvers that respond \texttt{unknown} to the \akey{check-sat} command should
-respond with an error to the following \akey{get-proof} command.  Note that the
-SMT-LIB conformant error result should be output to stdout.
-
-\header{Input/Output Checker.}
-The second script, \texttt{smtcomp\_checker}, should take
-the benchmark file name as first argument and the stdout output of the
-solver script as second argument.  Note that this output will
-usually start with the \texttt{unsat} result of the \akey{(check-sat)}
-command, which the checker must either parse or skip.
-
-The checker should check the proof within the output and provide the result to
-stdout.
-%
-Output printed to stderr is ignored.
-%
-The first line of the proof checker result should be either \texttt{valid},
-\texttt{invalid}, \texttt{holey}, \texttt{sat}, or \texttt{unknown}.
-%
-The answer \texttt{valid} must only be given when the checker certifies that the
-given proof justifies the unsatisfiability of the given benchmark.
-%
-A checker that returns \texttt{valid} to a satisfiable benchmark is deemed to be
-unsound.
-%
-The answer \texttt{invalid} should be returned if the proof is erroneous or
-otherwise malformed.
-%
-If the proof checker determines that the proof is valid but it contains holes,
-i.e., steps that are not checked for correctness, the answer should be
-\texttt{holey}.
-%
-The answer \texttt{sat} should be given if the solver claimed that the benchmark
-is satisfiable, and \texttt{unknown} should be given if (1) the solver answered
-\texttt{unknown}, (2) it answered \texttt{unsat} but did not give a proof, or
-(3) if the solver gave an error result.
-
-After the first line, the proof checker can provide arbitrary
-\texttt{key=value} pairs.
-%
-These will be collected in the final result table and can include for example
-information about the number of proof steps, the number of nodes in the proof,
-the number of holes, the number of different proof rules, etc.
-Each proof checker can define its own key/value pairs, but we suggest
-to implement the following:
-\begin{itemize}
-\item \texttt{holes} -- number of unchecked axioms or rewrite rules (that
-  can introduce unsoundness),
-\item \texttt{axioms} -- number of checked axioms or rewrite rules,
-\item \texttt{steps} -- number of proof steps (in some proof-specific
-  granularity),
-\item \texttt{assertions} -- number of asserted formulas used in the proof.
-\end{itemize}
-
-\header{Result.}
-%
-The result of a solver is considered \emph{erroneous} if (i) the
-proof checker returns \texttt{sat} (as the
-benchmark is necessarily unsatisfiable), or
-%
-(ii) the proof checker returns \texttt{invalid} to
-the given proof.
-%
-Since the \prooftrack is non-competitive and we are not fixing a definition of a
-valid proof, there will be no score computed for this track.
-
-A proof checker is unsound if it returns \texttt{valid} for an (invalid) proof
-of a satisfiable benchmark.
-%
-Thus, a proof checker must also check that the formula that was proved
-corresponds to the benchmark given.  Soundness of the proof checker is a central
-criterion by which the participants will be judged.
-
-\header{Evaluation Criteria.}
-%
-Since different proof formats are not easily comparable we will not do
-any scoring by counting solved benchmarks.  Instead we will evaluate
-both solvers and proof checkers using different criteria:
-\begin{itemize}
-\item \emph{soundness}: does the proof checker only accept correct
-  proofs?  In particular, does it check that the proof proves the formula
-  in the benchmark, and does it warn about unchecked rewrite rules?
-\item \emph{trust-base}: how big is the trusted code and how much is
-  shared between proof checker and solver?
-\item \emph{proof overhead}: what is the performance of the solver and
-  the proof checker compared to running the solver without proof
-  production?
-\item \emph{granularity}: what is the granularity of the proof?
-\item \emph{readability}: is the proof easy to digest for a human?
-\item \emph{extractability}: is the proof suitable for automatic
-  processing?  Are there some implicit rewrites that one has to be
-  aware of?
-\item \emph{stability}: Is the proof checker specific to the current
-  version of the solver and needs to be updated with each solver
-  release, or is the proof checker fixed (except when adding new
-  theories)?
-\end{itemize}
-
-\header{Time Limit.}
-This track will use a wall-clock time limit of 20 minutes per solver/benchmark
-pair. This time limit includes the time for proof checking.
-
-\header{Wrapper and Post-Processor.}
-Solvers in this track will be wrapped in the competition to include the script
-{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/starexec_run_proof}},
-which calls the solver and checker script.
-Participants are encouraged to wrap their solvers themselves to test
-their submission.
-The track will use
-{\url{https://github.com/SMT-COMP/postprocessors/tree/master/proof-track/process}}
-as a post-processor
-to validate and accumulate the results.
-\todo{We need a new link for the corresponding benchexec script.}
-
 \section{Benchmarks and Problem Divisions}
 
 \header{Divisions.}
@@ -1083,8 +936,6 @@ and more than one top-level assertion, modified to use named
 top-level assertions.  The \mvaltrack will use a selection of non-incremental
 benchmarks with status \texttt{sat} from logics QF\_BV, QF\_IDL, QF\_RDL,
 QF\_LIA, QF\_LRA, QF\_LIRA, QF\_UF, QF\_UFBV, QF\_UFIDL, QF\_UFLIA, QF\_UFLRA.
-The \prooftrack will use a selection of non-incremental
-\emph{unsat} benchmarks.
 To determine whether a benchmark is sat or unsat, a combination of
 the benchmark's status and the result of the \maintrack{} will be used.
 
@@ -1143,7 +994,7 @@ the following selection process will be used.
   \end{itemize}
 
 \item
-  For the \prooftrack and \ucoretrack, all benchmarks with status
+  For the \ucoretrack, all benchmarks with status
   \texttt{sat} are removed.  We further remove benchmarks with status
   \texttt{unknown} for which no sound solver reported them to be
   \texttt{unsat}.
@@ -1170,8 +1021,6 @@ the following selection process will be used.
   \item \label{bench-sel-more} and if $n > 600$,
       50\% of the benchmarks of the logic will be selected.
     \end{enumerate}
-    For the \prooftrack, we will only run $min(n, max(150,
-    25n/100)))$ benchmarks.
 \end{enumerate}
 %
 The selection process in cases \ref{bench-sel-600} and \ref{bench-sel-more}
