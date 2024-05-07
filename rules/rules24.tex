@@ -185,7 +185,7 @@ As in previous years, we have revised the rules slightly. Most changes are due t
 %
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
- 
+
   \item {\bf Move from StarExec to BenchExec.}  \emergencystretch.5cm
   The single query, incremental, unsat-core, and model-validation will no longer 
   run on the StarExec platform hosted by the University of Iowa.
@@ -193,28 +193,28 @@ The principal changes from the previous competition rules are the following:
   (\url{https://github.com/sosy-lab/benchexec}) owned by LMU's Software 
   and Computational Systems Lab (SoSy-Lab \url{https://www.sosy-lab.org/}).
 %
-  \rationale{The StarExec cluster is in the process of being decommissioned. We picked 
-             BenchExec as the new platform because it is host to similar competitions 
+  \rationale{The StarExec cluster is in the process of being decommissioned. We picked
+             BenchExec as the new platform because it is host to similar competitions
              and the experience collected there is a big help in our migration process.
              Moreover, it is in academic hands, so less likely to change conditions on
              short notice.}
-  
+
   \item {\bf Submission process.}  \emergencystretch.5cm
-  We changed the submission process from a Google form to a push request to the 
-  SMT-COMP GitHub repository (\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}). 
+  We changed the submission process from a Google form to a push request to the
+  SMT-COMP GitHub repository (\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}).
   Detailed instructions can be found in the README file there.
-  Moreover, participants are now required to upload their final solver versions as a Zenodo 
+  Moreover, participants are now required to upload their final solver versions as a Zenodo
   (\url{https://zenodo.org/}) submission that must contain a docker file that compiles the solver.
 %
-  \rationale{The change from Google form to GitHub push request makes it easier for us to 
-             automatically create scripts for BenchExec. The submission of the final solver 
+  \rationale{The change from Google form to GitHub push request makes it easier for us to
+             automatically create scripts for BenchExec. The submission of the final solver
              versions to Zenodo makes it more likely that the competition results stay replicable.}
-  
+
   \item {\bf Time limits.}  \emergencystretch.5cm
   The time limits for the cloud and parallel tracks are reduced to 2 minutes per problem.
 %
   \rationale{The analysis of last years results showed that most problems in these tracks are solved quickly or not at all.}
-  
+
   \item {\bf Memory limits.}  \emergencystretch.5cm
   The memory limits for the single query, incremental, unsat-core, and model-validation tracks are reduced to 30\,GB.
 %
@@ -259,11 +259,11 @@ organizers of the SMT-COMP for clarification.
 %
 A \emph{wrapper tool} is defined as any solver that calls one or more other SMT
 solvers (the \emph{wrapped solvers}) from a different
-group of authors to solve distinct subtasks. 
+group of authors to solve distinct subtasks.
 Examples of such subtasks are preprocessing steps or solving a subproblem that belongs to a strict sublogic of the input logic.
 For example, a solver using one subsolver to solve the ground abstraction of a
 quantified problem would be a wrapper tool.
-However, a wrapper tool solving a benchmark of logic A is not allowed to call an SMT solver 
+However, a wrapper tool solving a benchmark of logic A is not allowed to call an SMT solver
 to solve a problem for logic A; even if the problem is just a subproblem.
 The system description of a wrapper tool \textbf{must}
 explicitly acknowledge and state the \textbf{exact} version of any solvers that
@@ -274,9 +274,9 @@ the wrapper tool expects to improve on the wrapped solvers.
 %
 A \emph{derived tool} is defined as any solver that is \emph{based on and
 extends} another SMT solver (the \emph{base solver}) from a different
-group of authors.  
-In contrast to a wrapper tool, 
-a derived tool solving a benchmark of logic A is allowed to call an SMT solver 
+group of authors.
+In contrast to a wrapper tool,
+a derived tool solving a benchmark of logic A is allowed to call an SMT solver
 to solve a problem for logic A.
 However, it is not allowed to call more than one different SMT solver to solve a problem over the input logic.
 Examples of derived tools are tools that change the strategy selection for the base solver,
@@ -294,44 +294,44 @@ original solver.  A derived tool \textbf{must} follow the \emph{naming conventio
 An entrant to SMT-COMP is a solver submitted by its authors via
 a push request to the SMT-COMP GitHub repository (\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}), or, for
 \paralleltrack{} and \cloudtrack{}, otherwise communicated to the
-organisers. The final solver version needs to be uploaded as a Zenodo (https://zenodo.org/ <https://zenodo.org/>) submission 
+organisers. The final solver version needs to be uploaded as a Zenodo (https://zenodo.org/ <https://zenodo.org/>) submission
 that must contain a docker file that compiles the solver.
 
 
 \header{Solver execution.}
 %
-BenchExec (\url{https://github.com/sosy-lab/benchexec}) is a framework for reliable benchmarking and resource 
+BenchExec (\url{https://github.com/sosy-lab/benchexec}) is a framework for reliable benchmarking and resource
 measurement developed by LMU's Software and Computational Systems Lab (SoSy-Lab \url{https://www.sosy-lab.org/}).
-The framework itself can be downloaded and used locally by anyone. 
-The competition itself will be executed on a BenchExec cluster owned by SoSy-Lab, 
-who are kind enough to support our competition with their computing power. 
-To be more precise, the competition will be run on the 168 apollon nodes of the 
-SoSy-Lab BenchExec cluster (for more details see \url{https://vcloud.sosy-lab.org/cpachecker/webclient/master/info}). 
-It is also possible to locally emulate and test the computing environment on 
-the competition machines using the following instructions: 
+The framework itself can be downloaded and used locally by anyone.
+The competition itself will be executed on a BenchExec cluster owned by SoSy-Lab,
+who are kind enough to support our competition with their computing power.
+To be more precise, the competition will be run on the 168 apollon nodes of the
+SoSy-Lab BenchExec cluster (for more details see \url{https://vcloud.sosy-lab.org/cpachecker/webclient/master/info}).
+It is also possible to locally emulate and test the computing environment on
+the competition machines using the following instructions:
 \url{https://gitlab.com/sosy-lab/benchmarking/competition-scripts/#computing-environment-on-competition-machines}.
 
 \header{Participation in the Competition.}
 %
 For participation in SMT-COMP, the organizers must be informed of the solver's presence
-\emph{and the tracks and divisions which it enters} via a push request 
+\emph{and the tracks and divisions which it enters} via a push request
 to the SMT-COMP GitHub repository
 \begin{center}
   \url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}
 \end{center}
-The easiest way to create this push request is via the web-interface available under 
-the above URL. The actual solver must be submitted via a link to a publicly available 
+The easiest way to create this push request is via the web-interface available under
+the above URL. The actual solver must be submitted via a link to a publicly available
 docker file that compiles the solver. For the \cloudtrack{} and \paralleltrack{},
-it must be communicated separately to the organisers by email to 
-\href{mailto:aws-smtcomp-2024@googlegroups.com}{aws-smtcomp-2024@googlegroups.com}. 
-Note that independent of the tracks, the final solver version must be uploaded as a Zenodo 
+it must be communicated separately to the organisers by email to
+\href{mailto:aws-smtcomp-2024@googlegroups.com}{aws-smtcomp-2024@googlegroups.com}.
+Note that independent of the tracks, the final solver version must be uploaded as a Zenodo
 (https://zenodo.org/ <https://zenodo.org/>) submission.
 Moreover, for each track, the submission must specify the logics which are
 supported by the solver. The solver will enter all divisions where it
-supports at least one logic. It is possible to submit specific configurations 
-of command line  options per track/logic/division as well as a default configuration 
+supports at least one logic. It is possible to submit specific configurations
+of command line  options per track/logic/division as well as a default configuration
 of command line options for all tracks/logics/divisions without their own configuration.
-A submission \textbf{must} also include a link to the \emph{system description} (see below) 
+A submission \textbf{must} also include a link to the \emph{system description} (see below)
 and a \emph{32-bit unsigned integer}. These integer numbers, collected from all
 submissions, are used to seed competition tools.
 
@@ -397,7 +397,7 @@ e.g., for comparison purposes.
 \subsection*{Deadlines}
 
 SMT-COMP entrants must be submitted via a push request as explained above and,
-in the case of the \paralleltrack{} and \cloudtrack{}, 
+in the case of the \paralleltrack{} and \cloudtrack{},
 communicated separately to the organisers via email until the end of
 {\bf May~27, 2024} anywhere on earth.
 After this date \emph{no new entrants} will be accepted.
@@ -627,9 +627,9 @@ later executions.  Each solver is executed with a temporary directory
 as its current working directory.  Any generated files should be
 produced there (and not, say, in the system's \texttt{/tmp}
 directory).  The \executionservice sets a limit on the amount of disk
-storage permitted---typically 20\,GB.  See the user guide for the 
-\executionservice for more information.  The temporary directory is 
-deleted after the job is complete.  Solvers must not attempt to 
+storage permitted---typically 20\,GB.  See the user guide for the
+\executionservice for more information.  The temporary directory is
+deleted after the job is complete.  Solvers must not attempt to
 communicate with other machines, e.g., over the network.
 \todo{What are the limits for BenchExec? Do we set limits ourselves?}
 
@@ -810,10 +810,10 @@ and well-formedness of the model they provide.
 \header{Benchmark Selection.}  This track has the divisions QF\_Bitvec,
 QF\_DataTypes, QF\_Equality,
 QF\_Equality+Bitvec,
-QF\_Equality+(Non)LinearArith,  
+QF\_Equality+(Non)LinearArith,
 QF\_(Non)LinearIntArith, and QF\_(Non)\-LinearRealArith.
  %
-This year all divisions with non-linear arithmetic, arrays, and datatypes 
+This year all divisions with non-linear arithmetic, arrays, and datatypes
 are experimental divisions.
 %
 The track will run on a
@@ -1123,12 +1123,12 @@ solver process terminates.
 
 \header{Wall-Clock Time Score ($\mathbf{w}$).}
 For the \maintrack, \ucoretrack, \mvaltrack, \paralleltrack, and
-\cloudtrack, the wall-clock time score $w$ is the same as 
-the actual (real-valued) wall-clock time $\it{aw}$, 
-except that it is zero if the benchmark was not correctly solved within the time limit $T$, i.e., 
-$w = 0$ if $e = 1$, the process did not terminate within the time limit $T$, or 
+\cloudtrack, the wall-clock time score $w$ is the same as
+the actual (real-valued) wall-clock time $\it{aw}$,
+except that it is zero if the benchmark was not correctly solved within the time limit $T$, i.e.,
+$w = 0$ if $e = 1$, the process did not terminate within the time limit $T$, or
 it did return unknown or an unknown result.
-For the \inctrack, the wall-clock time score $w$ 
+For the \inctrack, the wall-clock time score $w$
 is the (real-valued) wall-clock time in seconds until the process returned the last time sat/unsat within the time limit;
 this means especially that $w = 0$ if the process never returned sat/unsat within the time limit.
 
@@ -1139,12 +1139,12 @@ terminates.
 
 \header{CPU Time Score ($\mathbf{c}$).}
 For the \maintrack, \ucoretrack, \mvaltrack, \paralleltrack, and
-\cloudtrack, the CPU time score $c$ is the same as 
-the actual (real-valued) CPU time $\it{ac}$, 
-except that it is zero if the benchmark was not correctly solved within the time limit $mT$, i.e., 
-$c = 0$ if $e = 1$, the process did not terminate within the time limit $mT$, or 
+\cloudtrack, the CPU time score $c$ is the same as
+the actual (real-valued) CPU time $\it{ac}$,
+except that it is zero if the benchmark was not correctly solved within the time limit $mT$, i.e.,
+$c = 0$ if $e = 1$, the process did not terminate within the time limit $mT$, or
 it did return unknown or an unknown result.
-For the \inctrack, the CPU time score $c$ 
+For the \inctrack, the CPU time score $c$
 is the (real-valued) CPU time in seconds until the process returned the last time sat/unsat within the time limit;
 this means especially that $c = 0$ if the process never returned sat/unsat within the time limit.
 
@@ -1491,9 +1491,9 @@ such as these rules, with input from the co-organizers.
 Many others have contributed benchmarks, effort, and feedback.  Clark Barrett,
 Pascal Fontaine, Aina Niemetz and Mathias Preiner are maintaining the SMT-LIB
 benchmark library.
-The competition uses a \href{https://github.com/sosy-lab/benchexec}{BenchExec} cluster 
-owned by LMU's Software and Computational Systems Lab (SoSy-Lab https://www.sosy-lab.org/ <https://www.sosy-lab.org/>), 
-who are kind enough to support our competition with their computing power. Dirk Beyer 
+The competition uses a \href{https://github.com/sosy-lab/benchexec}{BenchExec} cluster
+owned by LMU's Software and Computational Systems Lab (SoSy-Lab https://www.sosy-lab.org/ <https://www.sosy-lab.org/>),
+who are kind enough to support our competition with their computing power. Dirk Beyer
 is providing essential BenchExec support.
 
 \header{Disclosure.}
@@ -1502,7 +1502,7 @@ Fran\c{c}ois Bobot is part of the developing team of the SMT solver COLIBRI~\cit
 Martin Bromberger is part of the developing team of the SMT solver
 SPASS-SATT~\cite{spass-satt}.
 %
-Martin Jon\'{a}\v{s} is part of the developing team of \todo{Martin J. please fill this out}.
+Martin Jon\'{a}\v{s} is part of the developing team of the SMT solver Q3B~\cite{Q3B} and was a member of the developing team of the SMT solver MathSAT5~\cite{MathSAT5}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
