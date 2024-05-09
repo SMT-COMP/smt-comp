@@ -639,16 +639,12 @@ The limits for \paralleltrack{} and \cloudtrack{} are available at
 %
 Solvers may create and write to files and directories during the
 course of an execution, but they must not read such files back during
-later executions.  Each solver is executed with a temporary directory
-as its current working directory.  Any generated files should be
-produced there (and not, say, in the system's \texttt{/tmp}
-directory).  The \executionservice sets a limit on the amount of disk
-storage permitted---typically 20\,GB.  See the user guide for the
-\executionservice for more information.  The temporary directory is
-deleted after the job is complete.  Solvers must not attempt to
-communicate with other machines, e.g., over the network.
-\todo{What are the limits for BenchExec? Do we set limits ourselves?}
-
+later executions. This is ensured by BenchExec by executing each solver
+with the whole filesystem mounted as read-only with an overlay writeable
+layer that is mounted as a RAM disk. Any generated files will be therefore
+written to the RAM disk. The used storage is counted into the
+memory limit. The temporary overlay layer is deleted after the job is complete.
+Solvers must not attempt to communicate with other machines, e.g., over the network.
 
 \subsection{\maintrack (Previously: Main Track)}
 \label{sec:exec:single}
