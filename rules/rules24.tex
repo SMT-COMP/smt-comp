@@ -204,7 +204,7 @@ The principal changes from the previous competition rules are the following:
   SMT-COMP GitHub repository (\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}).
   Detailed instructions can be found in the README file there.
   Moreover, participants are now required to upload their final solver versions as a Zenodo
-  (\url{https://zenodo.org/}) submission that must contain a docker file that compiles the solver.
+  (\url{https://zenodo.org/}) submission.
 %
   \rationale{The change from Google form to GitHub push request makes it easier for us to
              automatically create scripts for BenchExec. The submission of the final solver
@@ -304,8 +304,7 @@ original solver.  A derived tool \textbf{must} follow the \emph{naming conventio
 An entrant to SMT-COMP is a solver submitted by its authors via
 a push request to the SMT-COMP GitHub repository (\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}), or, for
 \paralleltrack{} and \cloudtrack{}, otherwise communicated to the
-organisers. The final solver version needs to be uploaded as a Zenodo (https://zenodo.org/ <https://zenodo.org/>) submission
-that must contain a docker file that compiles the solver.
+organisers. The final solver version needs to be uploaded as a Zenodo (https://zenodo.org/ <https://zenodo.org/>) submission. The solver is an archive that contains the executable precompiled (statically linked is preferable). It will be executed on a computer that have the same installation than the docker image \texttt{docker image name}.
 
 
 \header{Solver execution.}
@@ -330,8 +329,7 @@ to the SMT-COMP GitHub repository
   \url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}
 \end{center}
 The easiest way to create this push request is via the web-interface available under
-the above URL. The actual solver must be submitted via a link to a publicly available
-docker file that compiles the solver. For the \cloudtrack{} and \paralleltrack{},
+the above URL. For the \cloudtrack{} and \paralleltrack{},
 it must be communicated separately to the organisers by email to
 \href{mailto:aws-smtcomp-2024@googlegroups.com}{aws-smtcomp-2024@googlegroups.com}.
 Note that independent of the tracks, the final solver version must be uploaded as a Zenodo
