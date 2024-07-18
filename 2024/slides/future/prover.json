@@ -1,0 +1,28 @@
+{
+    "name": "bub4",
+    "authors": ["you"],
+    "logics": {
+        "sq": ["UF"], 
+        "uc": "^QF_(LRA)?(UF)?$",
+        "mv": { "theories": ["QF","+-UF","+-BV","+-A"],
+                "except": ["QF_UFBVA"],
+                "logics" : ["QF_LRA"]
+             }
+    },
+    "versions": [
+        {
+            "name": "10/05/24",
+            "url": "http://...",
+            "sha256": "123434ac",
+            "competing": true,
+            "cmd": {
+                "mv": ["bub4","--model"]
+            }
+        },
+        {   "name": "fixed",
+            "url": "http://...",
+            "sha256": "123434ac",
+            "competing": false
+         }
+]
+}
