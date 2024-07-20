@@ -144,8 +144,8 @@ Masaryk University, Czechia
         \textbf{2005} & first competition \\
         \textbf{2013} & evaluation instead \\
         & of competition\\
-        \textbf{2014} & since then hosted\\
-        & by \emph{StarExec}\\
+        \textbf{2014} & since then until 2024\\
+        & hosted by \emph{StarExec}\\
         \textbf{2024} & since then hosted\\
         & by \emph{BenchExec} and the \emph{SoSy-Lab} 
       \end{tabular}
@@ -765,34 +765,35 @@ in the certificates
 \begin{frame}[fragile]
   \frametitle{Plans for SMT-COMP 2025?}
   \begin{itemize}
-    \item General: Documentation and streamlining
-    \item General: More CI support for submissions
-    \item Cloud/Parallel: Integrate them into the normal process
-    \item MV: Algebraic number $\implies$ non experimental
-\begin{verbatim}
-(root-of-with-ordering (coeffs p_0 p_1 ... p_n) i)
-
-(root-of-with-interval  (coeffs p_0 p_1 ... p_n) min max)
-(root-of-with-enclosure (coeffs p_0 p_1 ... p_n) min max)
-\end{verbatim}
-    Thanks for the solvers that implemented one of them!
-    \item MV: partial function more discussion needed
-    \item MV: array theory more discussion needed
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Plans for SMT-COMP 2025?}
-  \begin{itemize}
-    \item Proof \textit{validation} track
+    \item<1-> General: documentation and streamlining
+    \item<2-> General: more CI support for submissions
+    \item<3-> Cloud/Parallel: (re)gain more control
       \begin{itemize}
-        \item We have to analyze the data still (830gb)
-        \item Ideas to turn this into a competition are welcome
+        \item<4-> long term guarantee that the tracks will be held
+        \item<5-> more transparency
+        \item<6-> better communication
       \end{itemize}
-
+    \item<7-> Proof \textit{validation} track:
+      \begin{itemize}
+        \item<8-> we still have to analyze the data (830gb)
+        \item<9-> ideas to turn this into a competition are welcome
+      \end{itemize}
+    \item<10-> Derived tools: how to determine their contribution compared to the tools they are derived from
+      \begin{itemize}
+        \item<11-> esp. competition wide scoring, e.g., biggest contribution
+        \item<12-> potential solution: run the tools they are derived from non-competitively and disqualify from logics if there is not a sufficient amount of improvement
+      \end{itemize}
   \end{itemize}
-
-
 \end{frame}
+
+%\begin{frame}{Plans for SMT-COMP 2025?}
+%  \begin{itemize}
+%    
+%
+%  \end{itemize}
+%
+%
+%\end{frame}
 
 \begin{frame}{SMT-COMP organizing committee}
   Three people organize the SMT-COMP.  In 2024:
