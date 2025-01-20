@@ -118,7 +118,7 @@ competition web site, \url{http://www.smtcomp.org}.
 \section{Important Dates}
 \label{sec:important}
 
-\dd{Fill when dates are defined.}
+
 \begin{description}
 \item[April~12] Deadline for new benchmark contributions.
 \item[May~31] Final versions of competition tools (e.g., benchmark
@@ -187,7 +187,7 @@ SMT-COMP~2025.
 
 As in previous years, we have revised the rules slightly. Most changes are due to our move from StarExec to BenchExec.
 %
-The principal changes from the previous competition rules are the following:\dd{To be reviewed}
+The principal changes from the previous competition rules are the following:
 \begin{itemize}
 
   \item {\bf Derived tools.} \emergencystretch.5cm Submitters of a derived tool should
@@ -213,6 +213,7 @@ The principal changes from the previous competition rules are the following:\dd{
 \section{Entrants}
 \label{sec:entrants}
 
+
 \header{SMT Solver.}
 %
 A Satisfiability Modulo Theories (SMT) solver that can enter SMT-COMP is a tool that can determine the
@@ -222,27 +223,24 @@ A Satisfiability Modulo Theories (SMT) solver that can enter SMT-COMP is a tool 
 \header{Portfolio Solver.}
 %
 A \emph{portfolio solver} is a solver using a combination of two or
-more sub-solvers\dd{What is a sub-solver?}, developed by different groups of authors, on the
-same component \dd{What is a component?} or abstraction of the input problem.  For example, a
-solver using one subsolver to solve the ground abstraction of a
-quantified problem is allowed, while a solver using two or more
-subsolvers from different groups of authors is not\dd{These first two sentences seem contradictory...}.
-Portfolio solver are in general \textbf{allowed only in the
-\paralleltrack{} and \cloudtrack{}}.
-If you are unsure if your tool is a portfolio solver according to this
-definition and you feel that it should be allowed contact the
-organizers of the SMT-COMP for clarification.
+more SMT solvers on the same input problem. Portfolio solver are in
+general \textbf{not allowed}. If you are unsure if your tool is a portfolio
+solver according to this definition and you feel that it should be allowed
+contact the organizers of the SMT-COMP for clarification.
 
 \header{Wrapper Tool.}
 %
 A \emph{wrapper tool} is defined as any solver that calls one or more other SMT
-solvers (the \emph{wrapped solvers}) from a different
-group of authors to solve distinct subtasks.
-Examples of such subtasks are preprocessing steps or solving a subproblem that belongs to a strict sublogic of the input logic.
+solvers (the \emph{wrapped solvers}) to solve \emph{different} subtasks
+(in contrast to portfolio solvers that combine the result of several SMT
+solvers on the same task).
+Examples of such subtasks are preprocessing steps or solving a subproblem that
+belongs to a strict sublogic of the input logic.
 For example, a solver using one subsolver to solve the ground abstraction of a
 quantified problem would be a wrapper tool.
-However, a wrapper tool solving a benchmark of logic A is not allowed to call an SMT solver
-to solve a problem for logic A, even if the problem is just a subproblem.
+A wrapper tool solving a benchmark of logic A
+is \textbf{not allowed} to call an SMT solver to solve a problem for logic A,
+even if the problem is just a subproblem.
 The system description of a wrapper tool \textbf{must}
 explicitly acknowledge and state the \textbf{exact} version of any solvers that
 it wraps.  It \textbf{must} further make clear technical innovations by which
@@ -253,10 +251,9 @@ the wrapper tool expects to improve on the wrapped solvers.
 A \emph{derived tool} is defined as any solver that is \emph{based on and
 extends} another SMT solver (the \emph{base solver}) from a different
 group of authors.
-In contrast to a wrapper tool,
-a derived tool solving a benchmark of logic A is allowed to call an SMT solver
+In contrast to a wrapper tool, a derived tool solving a benchmark of logic A is allowed to call an SMT solver
 to solve a problem for logic A.
-However, it is not allowed to call more than one different SMT solver \dd{"more than one different" or "more than one"?} to solve a problem over the input logic.
+However, it is \textbf{not allowed} to call more than one SMT solver to solve a problem over the input logic.
 Examples of derived tools are tools that change the strategy selection for the base solver,
 tools that add new preprocessing steps on top of the base solver,
 tools that add new heuristics or incomplete procedures to a base solver.
@@ -274,9 +271,13 @@ same track and logics as their derived tool.
 An entrant to SMT-COMP is a solver submitted by its authors via
 a push request to the SMT-COMP GitHub repository (\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}), or, for
 \paralleltrack{} and \cloudtrack{}, otherwise communicated to the
-organisers\dd{To be updated}. The final solver version needs to be uploaded as a Zenodo (https://zenodo.org/ <https://zenodo.org/>) submission.
+organisers\dd{To be updated}. The final solver version needs to be uploaded as a Zenodo (\url{https://zenodo.org/}) submission.
 The solver is an archive that contains the executable precompiled (statically linked is preferable).
-It will be executed on a computer that have the same installation as the docker image \texttt{registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest}.
+It will be executed on a computer that have the same installation as the following docker image
+\begin{center}
+  \texttt{registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest}.
+\end{center}
+
 
 \header{Solver execution.}
 %
@@ -295,29 +296,18 @@ the competition machines using the following instructions:
 %
 For participation in SMT-COMP, the organizers must be informed of the solver's presence
 \emph{and the tracks and divisions which it enters}, by submitting a properly configured
-JSON file to the SMT-COMP GitHub repository
+JSON file to the SMT-COMP GitHub repository.
+
+All instructions for submissions are available at the following URL:
 \begin{center}
-  \url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}
+  \url{https://smt-comp.github.io/2025/solver_submission/}
 \end{center}
-The template for the JSON submission file is available under this URL, in the \texttt{template} directory.
-The JSON file shall be submitted through a pull request titled \texttt{submission: <identifier>},
-where \texttt{<identifier>} shall identify the submitted solver.
 
 \dd{change this probably} For the \cloudtrack{} and \paralleltrack{},
 it must be communicated separately to the organisers by email to
 \href{mailto:aws-smtcomp-2024@googlegroups.com}{aws-smtcomp-2024@googlegroups.com}.
 Note that independent of the tracks, the final solver version must be uploaded as a Zenodo
 (\url{https://zenodo.org/}) submission.
-
-\dd{Explain how to fill the JSON file here:}
-Moreover, for each track, the submission must specify the logics which are
-supported by the solver. The solver will enter all divisions where it
-supports at least one logic. It is possible to submit specific configurations
-of command line  options per track/logic/division as well as a default configuration
-of command line options for all tracks/logics/divisions without their own configuration.
-A submission \textbf{must} also include a link to the \emph{system description} (see below)
-and a \emph{32-bit unsigned integer}. These integer numbers, collected from all
-submissions, are used to seed competition tools.
 
 \header{System description.}
 %
@@ -346,11 +336,11 @@ A system description \emph{should} further include the following information
     references to relevant literature (by the authors or others), and
   \item a link to a website for the submitted tool.
 \end{itemize}
-System descriptions \textbf{must} be submitted \textbf{by the preliminary solver
-submission deadline}, and will be made publicly available on the competition website.
+System descriptions \textbf{must} be submitted \textbf{by the deadline for first versions
+of solvers}, and will be made publicly available on the competition website.
 Organizers will check that they contain sufficient information
 and may withdraw a system if its description is not sufficiently updated upon
-request. The updates must happen \textbf{by the final solver submission deadline}.
+request. The updates must happen \textbf{by the deadline for final versions of solvers}.
 
 \header{Multiple versions.}
 %
@@ -366,9 +356,8 @@ the competition manageable.
 
 \header{Other solvers.}
 %
-The organizers reserve the right to include other solvers of interest
-(such as entrants in previous SMT competitions) in the competition,
-e.g., for comparison purposes.
+The organizers reserve the right to include additional solvers of interest (such as participants in previous editions),
+in the competition, e.g., for comparison purposes.
 
 %\header{Attendance.}
 %
@@ -380,27 +369,26 @@ e.g., for comparison purposes.
 
 \subsection*{Deadlines}
 
-SMT-COMP entrants must be submitted via a push request as explained above and,
+SMT-COMP entrants must be submitted via a pull request as explained above and,
 in the case of the \paralleltrack{} and \cloudtrack{},
 communicated separately to the organisers via email until the end of
-{\bf May~27, 2024} anywhere on earth.
+{\bf May~27, 2024}\dd{Update according to new infrastructure.} anywhere on earth.
 After this date \emph{no new entrants} will be accepted.
-However, updates to existing entrants via push requests or,
+However, updates to existing entrants via push requests\dd{pull requests?} or,
 in the case of the \paralleltrack{} and \cloudtrack{}, via email,
 will be accepted until the end of {\bf June~8, 2024} anywhere on earth.
 
 We strongly encourage participants to use this grace period
-\emph{only} for the purpose of fixing any bugs that may be discovered,
-and not for adding new features, as there may be no opportunity to do
-extensive testing using the \executionservice or other means after the initial deadline.
+\emph{solely} to address any bugs that may be identified,
+rather than adding new features. This is because there may be limited opportunities for
+thorough testing using the \executionservice or other methods after the initial deadline.
 
 The last solver links pushed to the repository or communicated
 via email to the organisers for \paralleltrack{} and \cloudtrack{} at the conclusion of
 the grace period will be the ones used for the competition.  Versions
 submitted after this time will not be used.  The organizers reserve
-the right to start the competition itself at any time after the open
-of the New York Stock Exchange on the day after the final solver
-deadline.
+the right to start the competition itself at any time after the opening
+of the New York Stock Exchange on the day after the deadline for final versions of solvers.
 
 These deadlines and procedures apply equally to all tracks of the
 competition.
@@ -436,22 +424,22 @@ evaluation purposes.
 \header{Dates of Competition.}
 %
 The bulk of the computation will take place during the weeks leading
-up to SMT 2024.  Intermediate results will be regularly posted to the
+up to SMT 2025.  Intermediate results will be regularly posted to the
 SMT-COMP website as the competition runs.
 %
 The organizers reserve the right to prioritize certain competition
-tracks or divisions to ensure their timely completion, and in
-exceptional circumstances to complete divisions after the SMT
+tracks or divisions to ensure their timely completion, and, under
+exceptional circumstances, to complete divisions after the SMT
 Workshop.
 
 
 \header{Competition Website.}
 The competition website (\url{www.smtcomp.org}) will be used as the main form
 of communication for the competition. The website will be used to post updates,
-link to these rules and other relevant information (e.g. the benchmarks), and
-to announce the results. We also use the website to archive previous
-competitions. Starting from 2019 we will include the submitted solvers in this
-archive to allow reproduction of the competition results in the future.
+link to these rules and other relevant information (e.g., the benchmarks), and
+to announce the results. The website also archives previous
+competitions. Starting from 2019, the submitted solvers are included in the
+archive to allow future reproduction of the competition results.
 %
 
 \header{Tools.} \label{tools}
@@ -460,7 +448,7 @@ following, we briefly describe these tools.
 \begin{itemize}
   \item \textbf{smtcomp.} This tool combines the functionality of most of the
     scripts used in previous years and more. It is available at
-    \url{https://github.com/SMT-COMP/smt-comp.github.io}. Some of its functionalities include:
+    \url{https://github.com/SMT-COMP/smt-comp.github.io}. Some of its features are:
     \begin{itemize}
       \item \textbf{Benchmark Selection.} The tool has a command that executes the
         benchmark selection policy described on page~\pageref{benchmark-selection}.
@@ -468,9 +456,10 @@ following, we briefly describe these tools.
         for all tools requiring randomisation.
       \item \textbf{Scoring.} The tool has a command that executes the scoring computation
         described on in Section~\ref{sec:scoring}. It also includes the scoring
-        computations used in previous competitions (since 2015).
+        computations used in competitions since 2015.
     \end{itemize}
-    For a full list of the capabilities of the smtcomp tool and an explanation of all important commands
+    For a full list of the capabilities of the smtcomp tool and an explanation of the
+    main commands
     see \url{https://github.com/SMT-COMP/smt-comp.github.io/blob/master/README.md}
   \item \textbf{Scrambler.} This tool is used to scramble benchmarks during the
     competition to ensure that tools do not rely on syntactic features to
@@ -575,7 +564,7 @@ formulas only from the divisions into which they have been entered.
 
 \header{Output.}
 %
-In all tracks except the \inctrack, any \texttt{success} outputs will be
+In all tracks except the \inctrack, any \texttt{success} output will be
 ignored\footnote{SMT-LIB~2.6 requires solvers to produce a \texttt{success}
   answer after each \akey{set-logic}, \akey{declare-sort}, \akey{declare-fun}
   and \akey{assert} command (among others), unless the option
@@ -677,7 +666,7 @@ Participating solvers should include a script
 for the default configuration will be used). This script will be called
 without arguments and will be connected to a trace executor, which
 will incrementally send commands to the standard input channel of the
-solver and read responses from both the standard output channel of the
+solver and read responses from the standard output channel of the
 solver.  The commands will be taken from an SMT-LIB benchmark script
 that satisfies the requirements for incremental track scripts given in
 Section~\ref{sec:logistics}.
@@ -759,7 +748,7 @@ command.
 \header{Result.}
 The result of a solver is considered \emph{erroneous} if (i) the
 response to the \akey{check-sat} command is \texttt{sat}, (ii) the
-returned unsatisfiable core is not, in fact, unsatisfiable.
+returned unsatisfiable core is not unsatisfiable.
 %
 If the solver replies \texttt{unsat} to \akey{check-sat} but gives no
 response to \akey{get-unsat-core}, this is considered as no reduction, i.e.,
@@ -772,14 +761,15 @@ solvers}) that participate in the \maintrack of this competition in order to
 validate if a given unsat core is indeed unsatisfiable.  For each division, the
 organizers will use only solvers that have been sound (i.e., they did not
 produce any erroneous result) in the \maintrack for this division.  The
-unsatisfiability of an unsat core is refuted if the number of validation
-solvers whose result is \texttt{sat} exceeds the number of checking solvers
-whose result is \texttt{unsat}.
+unsatisfiability of an unsat core is validated if the number of checking solvers
+whose result is \texttt{unsat} is strictly greater than the number of validation
+solvers whose result is \texttt{sat}. In particular, if no checking solver
+produces \texttt{unsat}, the unsat core is not validated.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
 pair. The time limit for checking unsatisfiable cores is yet to be determined,
-but is anticipated to be around 5 minutes of wall-clock time per solver.
+but is anticipated to be around 5 minutes of wall-clock time per solver\dd{update if increased}.
 
 \header{Post-Processor.}
 This track will use
