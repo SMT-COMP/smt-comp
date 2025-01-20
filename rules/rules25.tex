@@ -120,13 +120,13 @@ competition web site, \url{http://www.smtcomp.org}.
 
 \dd{Fill when dates are defined.}
 \begin{description}
-\item[May~3] Deadline for new benchmark contributions.
+\item[April~12] Deadline for new benchmark contributions.
 \item[May~31] Final versions of competition tools (e.g., benchmark
   scrambler) are made available.  Benchmark libraries are frozen.
-\item[June~16] Deadline for first versions of solvers (for all tracks),
+\item[June~13] Deadline for first versions of solvers (for all tracks),
   including information about which tracks and divisions are being
   entered, and magic numbers for benchmark scrambling.
-\item[June~28] Deadline for final versions of solvers, including
+\item[June~27] Deadline for final versions of solvers, including
   system descriptions.
 \item[June~30] Opening value of NYSE Composite Index used to compute
   random seed for competition tools.
@@ -187,22 +187,24 @@ SMT-COMP~2025.
 
 As in previous years, we have revised the rules slightly. Most changes are due to our move from StarExec to BenchExec.
 %
-The principal changes from the previous competition rules are the following:
+The principal changes from the previous competition rules are the following:\dd{To be reviewed}
 \begin{itemize}
 
   \item {\bf Derived tools.} \emergencystretch.5cm Submitters of a derived tool should
-  also submit the corresponding base tool for the same track and logics.\dd{To be review}
+  also submit the corresponding base tool for the same track and logics.
 %
   \rationale{The presence of the base tool in the contest provides the best way to
   assess the improvements contributed by the derived tool techniques.}
 
-  \item {\bf Unsat cores.} \emergencystretch.5cm \dd{to be completed}
+  \item {\bf Time limits.} \emergencystretch.5cm The time limit to verify the unsat cores
+  is increased.
 %
-  \rationale{...}
+  \rationale{In the unsat-core track, points shall be awarded to a solver for all correct produced unsat cores.}
 
-  \item {\bf Time limits.} \em
-  Transcript written on rules25.log.
-  \rationale{...}
+  \item {\bf Unsat cores.} \emergencystretch.5cm No point is given for an unsat core such that no solver is capable to
+  verify it.
+%
+  \rationale{In the unsat-core track, points shall be awarded to a solver only for correct produced unsat cores.}
 
 \end{itemize}
 
@@ -210,8 +212,6 @@ The principal changes from the previous competition rules are the following:
 
 \section{Entrants}
 \label{sec:entrants}
-
-\dd{Proceed from here.}
 
 \header{SMT Solver.}
 %
@@ -222,11 +222,11 @@ A Satisfiability Modulo Theories (SMT) solver that can enter SMT-COMP is a tool 
 \header{Portfolio Solver.}
 %
 A \emph{portfolio solver} is a solver using a combination of two or
-more sub-solvers, developed by different groups of authors, on the
-same component or abstraction of the input problem.  For example, a
+more sub-solvers\dd{What is a sub-solver?}, developed by different groups of authors, on the
+same component \dd{What is a component?} or abstraction of the input problem.  For example, a
 solver using one subsolver to solve the ground abstraction of a
 quantified problem is allowed, while a solver using two or more
-subsolvers from different groups of authors is not.
+subsolvers from different groups of authors is not\dd{These first two sentences seem contradictory...}.
 Portfolio solver are in general \textbf{allowed only in the
 \paralleltrack{} and \cloudtrack{}}.
 If you are unsure if your tool is a portfolio solver according to this
@@ -256,7 +256,7 @@ group of authors.
 In contrast to a wrapper tool,
 a derived tool solving a benchmark of logic A is allowed to call an SMT solver
 to solve a problem for logic A.
-However, it is not allowed to call more than one different SMT solver to solve a problem over the input logic.
+However, it is not allowed to call more than one different SMT solver \dd{"more than one different" or "more than one"?} to solve a problem over the input logic.
 Examples of derived tools are tools that change the strategy selection for the base solver,
 tools that add new preprocessing steps on top of the base solver,
 tools that add new heuristics or incomplete procedures to a base solver.
@@ -266,23 +266,24 @@ the solver it is based on and extends.  It \textbf{must} further make clear
 technical innovations by which the derived tool expects to improve on the
 original solver.  A derived tool \textbf{must} follow the \emph{naming convention}
 {[name of base solver]-[my solver name]}.
+Submitters of a derived tool should also submit the corresponding base tool for the
+same track and logics as their derived tool.
 
 \header{SMT Solver Submission.}
 %
 An entrant to SMT-COMP is a solver submitted by its authors via
 a push request to the SMT-COMP GitHub repository (\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}), or, for
 \paralleltrack{} and \cloudtrack{}, otherwise communicated to the
-organisers. The final solver version needs to be uploaded as a Zenodo (https://zenodo.org/ <https://zenodo.org/>) submission.
+organisers\dd{To be updated}. The final solver version needs to be uploaded as a Zenodo (https://zenodo.org/ <https://zenodo.org/>) submission.
 The solver is an archive that contains the executable precompiled (statically linked is preferable).
-It will be executed on a computer that have the same installation than the docker image \texttt{registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest}.
-
+It will be executed on a computer that have the same installation as the docker image \texttt{registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest}.
 
 \header{Solver execution.}
 %
 BenchExec (\url{https://github.com/sosy-lab/benchexec}) is a framework for reliable benchmarking and resource
 measurement developed by LMU's Software and Computational Systems Lab (SoSy-Lab \url{https://www.sosy-lab.org/}).
-The framework itself can be downloaded and used locally by anyone.
-The competition itself will be executed on a BenchExec cluster owned by SoSy-Lab,
+The framework can be downloaded and used locally by anyone.
+The competition will be executed on a BenchExec cluster owned by SoSy-Lab,
 who are kind enough to support our competition with their computing power.
 To be more precise, the competition will be run on the 168 apollon nodes of the
 SoSy-Lab BenchExec cluster (for more details see \url{https://vcloud.sosy-lab.org/cpachecker/webclient/master/info}).
@@ -293,20 +294,22 @@ the competition machines using the following instructions:
 \header{Participation in the Competition.}
 %
 For participation in SMT-COMP, the organizers must be informed of the solver's presence
-\emph{and the tracks and divisions which it enters} via a push request
-to the SMT-COMP GitHub repository
+\emph{and the tracks and divisions which it enters}, by submitting a properly configured
+JSON file to the SMT-COMP GitHub repository
 \begin{center}
   \url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}
 \end{center}
-The easiest way to create this push request is via the web-interface available under
-the above URL.
+The template for the JSON submission file is available under this URL, in the \texttt{template} directory.
+The JSON file shall be submitted through a pull request titled \texttt{submission: <identifier>},
+where \texttt{<identifier>} shall identify the submitted solver.
 
 \dd{change this probably} For the \cloudtrack{} and \paralleltrack{},
 it must be communicated separately to the organisers by email to
 \href{mailto:aws-smtcomp-2024@googlegroups.com}{aws-smtcomp-2024@googlegroups.com}.
 Note that independent of the tracks, the final solver version must be uploaded as a Zenodo
-(https://zenodo.org/ <https://zenodo.org/>) submission.
+(\url{https://zenodo.org/}) submission.
 
+\dd{Explain how to fill the JSON file here:}
 Moreover, for each track, the submission must specify the logics which are
 supported by the solver. The solver will enter all divisions where it
 supports at least one logic. It is possible to submit specific configurations
