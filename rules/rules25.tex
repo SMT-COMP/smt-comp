@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{xspace}
 \usepackage{enumitem}
+\usepackage{amsmath}
 
 %\usepackage{draftwatermark}
 %\usepackage{showframe}   % debug
@@ -28,7 +29,6 @@
 \newcommand{\mvaltrack}{Model-Validation Track\xspace}
 \newcommand{\challtrack}{Industry-Challenge Track\xspace}
 \newcommand{\paralleltrack}{Parallel Track\xspace}
-\newcommand{\cloudtrack}{Cloud Track\xspace}
 
 \newcommand{\executionservice}{execution service\xspace}
 
@@ -594,8 +594,8 @@ on the order of 30\,GB.  The values of both the time limit and the
 memory limit are available to a solver process through environment
 variables.  See the user guide for the \executionservice for more information.
 
-The limits for \paralleltrack{} and \cloudtrack{} are available at
-\url{https://smt-comp.github.io/2024/parallel-and-cloud-tracks.html}.
+The limits for \paralleltrack{} are available at
+\url{https://smt-comp.github.io/2025/parallel-track.html}.
 
 \header{Persistent State.}
 %
@@ -931,9 +931,7 @@ partitions are referred to as \emph{families}.
 
 \header{Benchmark selection.} \label{benchmark-selection}
 The competition will use a large subset of SMT-LIB benchmarks, with some
-guarantees on including new benchmarks.  In \textbf{all} tracks
-\textbf{except} the \paralleltrack and \cloudtrack
-the following selection process will be used.
+guarantees on including new benchmarks, using the following selection process:
 \begin{enumerate}
 \item \emph{Remove inappropriate benchmarks.} The
   organizers may remove benchmarks that are deemed inappropriate or
@@ -1057,7 +1055,7 @@ e, n, w, c\rangle$, with
 \end{itemize}
 
 \header{Error Score ($\mathbf{e}$).}
-For the \maintrack, \inctrack, \paralleltrack, and \cloudtrack
+For the \maintrack, \inctrack and \paralleltrack,
 $e$ is the number of returned
 statuses that disagree with the given expected status (as described above,
 disagreements on benchmarks with unknown status lead to the benchmark being
@@ -1068,8 +1066,7 @@ validated by a selection of other solvers selected by organizers).  For the
 not full satisfiable models.
 
 \header{Correctly Solved Score ($\mathbf{n}$).}
-For the \maintrack, \inctrack, \mvaltrack, \paralleltrack, and
-\cloudtrack,
+For the \maintrack, \inctrack, \mvaltrack, and \paralleltrack,
 $N$ is defined as the number of \akey{check-sat} commands, and
 $n$ is defined as the number of correct results.
 For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
@@ -1081,9 +1078,9 @@ The actual (real-valued) wall-clock time in seconds, until time limit $T$ or the
 solver process terminates.
 
 \header{Wall-Clock Time Score ($\mathbf{w}$).}
-For the \maintrack, \ucoretrack, \mvaltrack, \paralleltrack, and
-\cloudtrack, the wall-clock time score $w$ is the same as
-the actual (real-valued) wall-clock time $\it{aw}$,
+For the \maintrack, \ucoretrack, \mvaltrack and \paralleltrack,
+the wall-clock time score $w$ is the same as
+the actual (real-valued) wall-clock time $\mathit{aw}$,
 except that it is zero if the benchmark was not correctly solved within the time limit $T$, i.e.,
 $w = 0$ if $e = 1$, the process did not terminate within the time limit $T$, or
 it did return unknown or an unknown result.
@@ -1097,9 +1094,9 @@ until time limit $mT$ is reached or the solver process
 terminates.
 
 \header{CPU Time Score ($\mathbf{c}$).}
-For the \maintrack, \ucoretrack, \mvaltrack, \paralleltrack, and
-\cloudtrack, the CPU time score $c$ is the same as
-the actual (real-valued) CPU time $\it{ac}$,
+For the \maintrack, \ucoretrack, \mvaltrack, and \paralleltrack,
+the CPU time score $c$ is the same as
+the actual (real-valued) CPU time $\mathit{ac}$,
 except that it is zero if the benchmark was not correctly solved within the time limit $mT$, i.e.,
 $c = 0$ if $e = 1$, the process did not terminate within the time limit $mT$, or
 it did return unknown or an unknown result.
@@ -1116,7 +1113,7 @@ all available processor cores.  To evaluate sequential performance, we derive a
 the wall-clock time limit~$T$.  A solver result is taken into consideration for
 the sequential score only if the solver process terminates \emph{within} this
 CPU time limit.  More specifically, for a given parallel performance $\langle
-e, n, \it{aw}, w, \it{ac}, c\rangle$, the corresponding sequential performance is defined
+e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined
 as~$\langle e_S, n_S, c_S\rangle$, where
 \begin{itemize}
 \item $e_S = 0$, $n_S = 0$, and $c_S = 0$ if $c > T$;
@@ -1128,8 +1125,8 @@ as~$\langle e_S, n_S, c_S\rangle$, where
   time limit of~$T$.}
 \end{itemize}
 
-\subsubsection{\maintrack, \paralleltrack, and \cloudtrack}
-  For the \maintrack, \paralleltrack, and \cloudtrack the error score
+\subsubsection{\maintrack and \paralleltrack}
+  For the \maintrack and \paralleltrack, the error score
   $e$ and the correctly solved score $n$ are defined as
   \begin{itemize}
   \item $e=0$ and $n=0$ if the solver
@@ -1253,8 +1250,9 @@ $$\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle$$.
 
 \noindent
 A parallel division score $\langle
-e, n, \it{aw}, w, \it{ac}, c\rangle$ is better than a parallel
-division score\newline $\langle e', n', \it{aw}', w', \it{ac}', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
+e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel
+division score\newline $\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$
+iff $e < e'$ or ($e = e'$ and $n
 > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w
 = w'$ and $c < c'$).  That is, fewer errors takes precedence over more correct
 solutions, which takes precedence over less wall-clock time taken, which takes
@@ -1263,16 +1261,16 @@ precedence over less CPU time taken.
 \subsubsection{Sequential Score}
 
 The sequential score for a division is computed for \emph{all} tracks
-\emph{except} the \inctrack, \paralleltrack, and \cloudtrack.
+\emph{except} the \inctrack and \paralleltrack.
 \footnote{Since incremental track benchmarks may be partially
 solved, defining a useful sequential performance for the incremental track
 would require information not provided by the parallel performance, e.g.,
 detailed timing information for each result.  Due to the nature of
-\paralleltrack and \cloudtrack we will not consider the sequential
+\paralleltrack, we will not consider the sequential
 scores}.  It is defined for a
 participating solver in a division with $M$ benchmarks as the sum of all the
 individual sequential benchmark scores:
-$$\sum_{b\in M} \langle e_b^s, n_b^s, \it{aw}_b^s, w_b^s, \it{ac}_b^s, c_b^s\rangle$$.
+$$\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle$$.
 
 \noindent
 A sequential division score $\langle e^s, n^s, c^s\rangle$ is better than a
@@ -1300,16 +1298,28 @@ parallel division score when only satisfiable instances are considered.
 The unsat score for a division is computed for the \maintrack as the
 parallel division score when only unsatisfiable instances are considered.
 
-
 \subsection{Competition-Wide Recognitions}
 
-In 2014 the SMT competition introduced a competition-wide scoring to allow it to award medals in the FLoC Olympic Games and has been awarded each year since. This scoring purposefully emphasized the breadth of solver participation by summing up a score for each (competitive) division a solver competed in. Whilst this rationale is reasonable, we observed that this score had become dictated by the number of divisions being entered by a solver.
+In 2014 the SMT competition introduced a competition-wide scoring to
+allow it to award medals in the FLoC Olympic Games and has been
+awarded each year since. This scoring purposefully emphasized the
+breadth of solver participation by summing up a score for each
+(competitive) division a solver competed in. Whilst this rationale is
+reasonable, we observed that this score had become dictated by the
+number of divisions being entered by a solver.
 
-This score has been replaced the competition-wide score with two \emph{rankings} that select one solver per division and then rank those solvers. The rationale here is to take the focus away from the number of divisions entered and focus on measures that make sense to use to compare different divisions.
+This score has been replaced the competition-wide score with two
+\emph{rankings} that select one solver per division and then rank
+those solvers. The rationale here is to take the focus away from the
+number of divisions entered and focus on measures that make sense to
+use to compare different divisions.
 
 \subsubsection{Biggest Lead Ranking}
 
-This ranking aims to select the solver that \emph{won by the most} in some competitive division. The winners of each division are ranked by the distance between them and the next competitive solver in that division.
+This ranking aims to select the solver that \emph{won by the most} in
+some competitive division. The winners of each division are ranked by
+the distance between them and the next competitive solver in that
+division.
 
 Let $n_i^D$ be the correctness score of the $i$th solver (for a given scoring
 system e.g. number of correct results or reduction) in division $D$.
@@ -1337,9 +1347,13 @@ This can be computed per scoring system.
 
 \subsubsection{Largest Contribution Ranking}
 
-This ranking aims to select the solver that \emph{uniquely contributed} the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solver's contribution to the \emph{virtual best solver} for a division.
+This ranking aims to select the solver that \emph{uniquely
+contributed} the most in some division, or to put another way, the
+solver that would be most missed. This is achieved by computing a
+solver's contribution to the \emph{virtual best solver} for a
+division.
 
-Let $\langle e^s, n^s, \it{aw}^s, w^s, \it{ac}^s, c^s \rangle$ be the parallel division score
+Let $\langle e^s, n^s, \mathit{aw}^s, w^s, \mathit{ac}^s, c^s \rangle$ be the parallel division score
 for solver $s$ (for a given scoring system, i.e., $n$ is either number of correct
 results or reduction).
 If the division error score $e^s > 0$, then solver $s$ is considered unsound
@@ -1347,12 +1361,12 @@ and excluded from the ranking.
 If the number of sound competitive solvers~$S$ in a division $D$ is $|S| \leq 2$,
 the division is excluded from the ranking.
 
-Let $\langle e_b^s, n_b^s, \it{aw}_b^s, w_b^s, \it{ac}_b^s, c_b^s \rangle$ be the parallel benchmark
+Let $\langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s \rangle$ be the parallel benchmark
 score for benchmark $b$ and solver $s$ (for a given scoring system).
 The virtual best solver \emph{correctness score} for a division $D$ with
 competitive sound solvers $S$ is given as
 \[
-\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
+\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}
 \]
 where the maximum of an empty set is 0 (i.e., no contribution if a benchmark
 is unsolved).
@@ -1361,10 +1375,10 @@ The virtual best solver \emph{CPU time score} $\mathit{vbss}_c$ and
 the virtual best solver \emph{wall-clock time score} $\mathit{vbss}_w$ for a
 division $D$ with competitive sound solvers $S$ is given as
 \[
-\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
+\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S \text{ and } n_b^s > 0 \}
 \]
 \[
-\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S ~\mathit{and}~ n_b^s > 0 \}
+\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S \text{ and } n_b^s > 0 \}
 \]
 where the minimum of an empty set is 1200 seconds
 (no solver was able to solve the benchmark).
@@ -1434,14 +1448,15 @@ be recused from these decisions.  The organizers' decisions are final.
 
 \section{Acknowledgments}
 
-SMT-COMP 2024 is organized under the direction of the SMT Steering
+SMT-COMP 2025 is organized under the direction of the SMT Steering
 Committee. The organizing team is
 %
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \item \href{https://github.com/bobot}{Fran\c{c}ois Bobot}~-- CEA List, France (chair)
-\item \href{https://www.mpi-inf.mpg.de/departments/automation-of-logic/people/martin-bromberger}{Martin Bromberger}~-- MPI-INF, Germany
-\item \href{https://jochen-hoenicke.de/}{Jochen Hoenicke}~-- Certora, Germany
+\item \href{https://daviddeharbe.github.io}{David D\'{e}harbe}~-- \href{https://clearsy.com}{CLEARSY}, France
+\item \href{https://www.muni.cz/en/people/359542-martin-jonas}{Martin Jon\'{a}\v{s}}~-- Masaryk University, Czechia (chair)
+\item \href{https://wintered.github.io/}{Dominik Winterer}~--ETH Zurich, Switzerland
 \end{itemize}
 %
 The competition chairs are responsible for policy and procedure decisions,
@@ -1451,15 +1466,14 @@ Many others have contributed benchmarks, effort, and feedback.  Clark Barrett,
 Pascal Fontaine, Aina Niemetz and Mathias Preiner are maintaining the SMT-LIB
 benchmark library.
 The competition uses a \href{https://github.com/sosy-lab/benchexec}{BenchExec} cluster
-owned by LMU's Software and Computational Systems Lab (SoSy-Lab https://www.sosy-lab.org/ <https://www.sosy-lab.org/>),
+owned by LMU's Software and Computational Systems Lab (SoSy-Lab \url{https://www.sosy-lab.org}),
 who are kind enough to support our competition with their computing power. Dirk Beyer
 is providing essential BenchExec support.
 
 \header{Disclosure.}
 Fran\c{c}ois Bobot is part of the developing team of the SMT solver COLIBRI~\cite{colibri}.
 %
-Martin Bromberger is part of the developing team of the SMT solver
-SPASS-SATT~\cite{spass-satt}.
+David D\'{e}harbe was part of the developing team of the SMT solver veriT~\cite{verit}.
 %
 Martin Jon\'{a}\v{s} is part of the developing team of the SMT solver Q3B~\cite{Q3B} and was a member of the developing team of the SMT solver MathSAT5~\cite{MathSAT5}.
 
