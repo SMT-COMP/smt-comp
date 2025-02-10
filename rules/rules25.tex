@@ -99,7 +99,7 @@ mailing list (see below) or, if necessary, directly to the organizers.
 Interested parties should subscribe to the SMT-COMP mailing list.
 Important late-breaking news and any necessary clarifications and
 edits to these rules will be announced there, and it is the primary
-way that such announcements will be communicated.
+way in which such announcements will be communicated.
 
 \begin{itemize}
 \item SMT-COMP mailing list:
@@ -144,7 +144,12 @@ formulas of practical interest.  Public competitions are a well-known
 means of stimulating advancement in software tools.  For example, in
 automated reasoning, the CASC and SAT competitions for first-order and
 propositional reasoning tools, respectively, have spurred significant
-innovation in their fields~\cite{leberre+03,PSS02}.  More information
+innovation in their fields~\cite{leberre+03,PSS02}.
+%
+Accordingly, researchers are highly encouraged to submit both new
+benchmarks and new or improved solvers to raise the level of
+competition and advance the state of the art in automated SMT problem
+solving. More information
 on the history and motivation for SMT-COMP can be found at the
 competition web site, \url{http://www.smtcomp.org}, and in reports on
 previous
@@ -155,11 +160,6 @@ SMT-COMP~2025 is part of the SMT Workshop~2025
 which is affiliated with SAT~2025 (\url{https://satisfiability.org/SAT25/}).
 The SMT Workshop will include a block of time to present the results of the
 competition.
-%
-Accordingly, researchers are highly encouraged to submit both new
-benchmarks and new or improved solvers to raise the level of
-competition and advance the state of the art in automated SMT problem
-solving.
 
 SMT-COMP 2025 will have the following tracks:
 \begin{enumerate}
@@ -195,7 +195,7 @@ As in previous years, we have revised the rules slightly. Most changes are due t
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
 
-  \item {\bf Derived tools.} \emergencystretch.5cm Submitters of a derived tool should
+  \item {\bf Derived tools.} \emergencystretch.5cm Submitters of a derived tool must
   also submit the corresponding base tool for the same track and logics.
 %
   \rationale{The presence of the base tool in the contest provides the best way to
@@ -275,11 +275,11 @@ same track and logics as their derived tool.
 %
 An entrant to SMT-COMP is a solver submitted by its authors via
 a pull request to the SMT-COMP GitHub repository
-\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}).
-The final solver version needs to be uploaded as a Zenodo (\url{https://zenodo.org/}) submission.
-In the case of derived tools, the Zenodo submission should include both the derived tool and the base tool.
-The solver is an archive that contains the executable precompiled (statically linked is preferable).
-It will be executed on a computer that have the same installation as the following docker image
+\url{https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions}.
+The final solver version needs to be uploaded to Zenodo (\url{https://zenodo.org/}).
+In the case of derived tools, the Zenodo submission must include both the derived tool and the base tool.
+The solver is an archive that contains the precompiled executable (statically linked is preferable).
+It will be executed on a computer that has the same installation as the following docker image
 \begin{center}
   \small
   \texttt{registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest}
@@ -302,7 +302,7 @@ the competition machines using the following instructions:
 \header{Participation in the Competition.}
 %
 For participation in SMT-COMP, the organizers must be informed of the solver's presence
-\emph{and the tracks and divisions which it enters}, by submitting a properly configured
+\emph{and the tracks and divisions which it enters}, by submitting a properly formatted
 JSON file to the SMT-COMP GitHub repository.
 
 All instructions for submissions are available at the following URL:
@@ -310,9 +310,9 @@ All instructions for submissions are available at the following URL:
   \url{https://smt-comp.github.io/2025/solver_submission/}
 \end{center}
 
-Note that independent of the tracks, the final solver version must be uploaded as a Zenodo
-(\url{https://zenodo.org/}) submission (together with the base solver in the case of a
-derived solver).
+Note that independent of the tracks, the final solver version must be uploaded
+to Zenodo (\url{https://zenodo.org/}), together with the base solver in the case of a
+derived solver.
 
 \header{System description.}
 %
@@ -329,10 +329,10 @@ A system description \textbf{must} further include the following information:
   \item the basic SMT solving approach employed,
   \item in case of a \emph{wrapper} or \emph{derived tool}: details of
     technical innovations by which a wrapper or derived tool expects to improve
-    on the wrapped solvers or base solver,
+    on the wrapped solvers or base solver, and
   \item appropriate acknowledgment of tools other than SMT solvers called by
     the system (e.g., SAT solvers) that are not written by the authors of the
-    submitted solver, and
+    submitted solver.
 \end{itemize}
 A system description \emph{should} further include the following information
 (unless there is a good reason otherwise):
@@ -375,10 +375,10 @@ in the competition, e.g., for comparison purposes.
 \subsection*{Deadlines}
 
 SMT-COMP entrants must be submitted via a pull request as explained above until the end of
-{\bf June~13, 2025} anywhere on earth.
+{\bf June~13, 2025} anywhere on Earth.
 After this date \emph{no new entrants} will be accepted.
-However, updates to existing entrants via pull requests or
-will be accepted until the end of {\bf June~27, 2024} anywhere on earth.
+However, updates to existing entrants via pull requests
+will be accepted until the end of {\bf June~27, 2025} anywhere on Earth.
 
 We strongly encourage participants to use this grace period
 \emph{solely} to address any bugs that may be identified,
@@ -410,7 +410,7 @@ the benchmarks from the unsupported logics and will be scored as if it
 returned the result \texttt{unknown} within zero time.
 %
 All results of the competition will be made public. Solvers will be
-made publicly available after the competition and it is a minimum
+made publicly available and it is a minimum
 license requirement that (i) solvers can be distributed in this way,
 and (ii) all submitted solvers may be freely used for academic
 evaluation purposes.
@@ -437,8 +437,7 @@ The competition website (\url{www.smtcomp.org}) will be used as the main form
 of communication for the competition. The website will be used to post updates,
 link to these rules and other relevant information (e.g., the benchmarks), and
 to announce the results. The website also archives previous
-competitions. Starting from 2019, the submitted solvers are included in the
-archive to allow future reproduction of the competition results.
+competitions.
 %
 
 \header{Tools.} \label{tools}
@@ -573,8 +572,8 @@ ignored\footnote{SMT-LIB~2.6 requires solvers to produce a \texttt{success}
   run without changes.}.  Solvers that exit before the time limit without
 reporting a result (e.g., due to exhausting memory or crashing) \emph{and} do
 not produce output that includes \texttt{sat}, \texttt{unsat}, \texttt{unknown}
-or other track specific output as specified in the individual track sections
-e.g. unsat cores or models, will be considered to have aborted.  Note that there
+or other track specific output as specified in the individual track sections,
+e.g., unsat cores or models, will be considered to have aborted.  Note that there
 is no distinction between output and error channel and tools should not write
 any message to the error channel because it could be misinterpreted as a wrong
 result.
@@ -590,9 +589,10 @@ machine specifications are available on the competition web site.
 
 The \executionservice also limits the memory consumption of the solver
 processes.  We expect the memory limit per solver/benchmark pair to be
-on the order of 30\,GB.  The values of both the time limit and the
-memory limit are available to a solver process through environment
-variables.  See the user guide for the \executionservice for more information.
+on the order of 30\,GB.
+% The values of both the time limit and the
+% memory limit are available to a solver process through environment
+% variables.  See the user guide for the \executionservice for more information.
 
 The limits for \paralleltrack{} are available at
 \url{https://smt-comp.github.io/2025/parallel-track.html}.
@@ -746,7 +746,7 @@ command.
 
 \header{Result.}
 The result of a solver is considered \emph{erroneous} if (i) the
-response to the \akey{check-sat} command is \texttt{sat}, (ii) the
+response to the \akey{check-sat} command is \texttt{sat} or (ii) the
 returned unsatisfiable core is not unsatisfiable.
 %
 If the solver replies \texttt{unsat} to \akey{check-sat} but gives no
@@ -766,8 +766,8 @@ solvers whose result is \texttt{sat}. In particular, if no checking solver
 produces \texttt{unsat}, the unsat core is not validated.
 
 \header{Time Limit.}  This track will use a wall-clock time limit of
-20 minutes per solver/benchmark pair. The time limit for checking
-unsatisfiable cores will be 20 minutes of wall-clock time per solver.
+20 minutes per solver/benchmark pair both for unsatisfiable core generation and
+for the subsequent validation.
 
 \header{Post-Processor.}
 This track will use
@@ -854,7 +854,7 @@ determine the satisfiability of problems in a shared-memory parallel
 computing environment.  The track will be experimental.
 
 \header{Benchmark Selection.}
-We will select non-incremental benchmarks from the smt-lib divisions
+We will select non-incremental benchmarks from the SMT-LIB divisions
 based on the participating solvers.  In total 400 instances will be
 chosen such that their run times are sufficiently high based on our
 estimation.
@@ -986,7 +986,7 @@ one benchmark from each new benchmark family.  The rest of the benchmarks will
 be chosen randomly from the remaining benchmarks using a uniform distribution.
 %
 The benchmark selection script will be publicly available at
-\url{https://github.com/SMT-COMP/smt-comp/tree/master/tools} and
+\url{https://github.com/SMT-COMP/smt-comp.github.io} and
 will use the same random seed as the rest of the competition.  The set of
 benchmarks selected for the competition will be published when the competition
 begins.
@@ -1018,7 +1018,7 @@ Pseudo-random numbers used, e.g., for the creation of heats or the
 scrambling of benchmarks, will be generated using the standard C
 library function \texttt{random()}, seeded (using \texttt{srandom()})
 with the sum, modulo $2^{30}$, of the integer numbers provided in the
-system descriptions (see Section~\ref{sec:entrants}) by all SMT-COMP
+system submissions (see Section~\ref{sec:entrants}) by all SMT-COMP
 entrants other than the organizers'.  Additionally, the integer part
 of one hundred times the opening value of the New York Stock Exchange
 Composite Index on
@@ -1246,7 +1246,7 @@ purposes).
 The parallel score for a division is computed for \emph{all} tracks.  It is
 defined for a participating solver in a division with $M$ benchmarks as the sum
 of all the individual parallel benchmark scores:
-$$\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle$$.
+$$\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
 
 \noindent
 A parallel division score $\langle
@@ -1270,7 +1270,7 @@ detailed timing information for each result.  Due to the nature of
 scores}.  It is defined for a
 participating solver in a division with $M$ benchmarks as the sum of all the
 individual sequential benchmark scores:
-$$\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle$$.
+$$\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle.$$
 
 \noindent
 A sequential division score $\langle e^s, n^s, c^s\rangle$ is better than a
@@ -1453,10 +1453,10 @@ Committee. The organizing team is
 %
 \begin{itemize}
 \setlength{\itemsep}{0pt}
-\item \href{https://github.com/bobot}{Fran\c{c}ois Bobot}~-- CEA List, France (chair)
+\item \href{https://github.com/bobot}{Fran\c{c}ois Bobot}~-- CEA List, France
 \item \href{https://daviddeharbe.github.io}{David D\'{e}harbe}~-- \href{https://clearsy.com}{CLEARSY}, France
 \item \href{https://www.muni.cz/en/people/359542-martin-jonas}{Martin Jon\'{a}\v{s}}~-- Masaryk University, Czechia (chair)
-\item \href{https://wintered.github.io/}{Dominik Winterer}~--ETH Zurich, Switzerland
+\item \href{https://wintered.github.io/}{Dominik Winterer}~-- ETH Zurich, Switzerland
 \end{itemize}
 %
 The competition chairs are responsible for policy and procedure decisions,
@@ -1467,8 +1467,8 @@ Pascal Fontaine, Aina Niemetz and Mathias Preiner are maintaining the SMT-LIB
 benchmark library.
 The competition uses a \href{https://github.com/sosy-lab/benchexec}{BenchExec} cluster
 owned by LMU's Software and Computational Systems Lab (SoSy-Lab \url{https://www.sosy-lab.org}),
-who are kind enough to support our competition with their computing power. Dirk Beyer
-is providing essential BenchExec support.
+who are kind enough to support our competition with their computing power. Dirk
+Beyer and Philipp Wendler are providing essential BenchExec support.
 
 \header{Disclosure.}
 Fran\c{c}ois Bobot is part of the developing team of the SMT solver COLIBRI~\cite{colibri}.
