@@ -205,7 +205,11 @@ The principal changes from the previous competition rules are the following:
   \item {\bf Unsat cores time limits.} \emergencystretch.5cm The time limit to verify the unsat cores
   is increased to the time taken to generate it.
 %
+<<<<<<< HEAD
   \rationale{It should ensure that solvers have the time to correctly assess the validity of the generated unsat-core.}
+=======
+  \rationale{In the unsat-core track, points shall be awarded to a solver for all correctly produced unsat cores.}
+>>>>>>> 3dffc50 ((1) parallel score tuple (2) clarify binary needs + minor)
 
   \item {\bf Unsat cores scoring.} \emergencystretch.5cm No point is given for an unsat core such that no solver is capable to
   verify it.
@@ -269,8 +273,8 @@ the solver it is based on and extends.  It \textbf{must} further make clear
 technical innovations by which the derived tool expects to improve on the
 original solver.  A derived tool \textbf{must} follow the \emph{naming convention}
 {[name of base solver]-[my solver name]}.
-Submitters of a derived tool should also submit the corresponding base tool for the
-same track and logics as their derived tool.
+Submitters of a derived tool should also submit the corresponding base tool's binary 
+for the same track and logics as their derived tool.
 
 \header{SMT Solver Submission.}
 %
@@ -282,8 +286,8 @@ In the case of derived tools, the Zenodo submission must include both the derive
 The solver is an archive that contains the precompiled executable (statically linked is preferable).
 It will be executed on a computer that has the same installation as the following docker image
 \begin{center}
-  \small
-  \texttt{registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest}
+  \footnotesize
+\texttt{\url{registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest}}
 \end{center}
 
 
@@ -1010,8 +1014,8 @@ particular submitted solver.
 \subsection{Benchmark scoring}
 \label{sec:benchmark-scoring}
 
-The \textbf{parallel benchmark score} of a solver is a quadruple $\langle
-e, n, w, c\rangle$, with
+The \textbf{parallel benchmark score} of a solver is a tuple $\langle
+e, n, \it{aw}, w, \it{ac},c\rangle$ with
 \begin{itemize}[noitemsep]
   \vspace{-1ex}
   \item \makebox[6em][l]{$e \in \{0, 1\}$}
@@ -1449,7 +1453,7 @@ Fran\c{c}ois Bobot is part of the developing team of the SMT solver COLIBRI~\cit
 %
 David D\'{e}harbe was part of the developing team of the SMT solver veriT~\cite{verit}.
 %
-Martin Jon\'{a}\v{s} is part of the developing team of the SMT solver Q3B~\cite{Q3B} and was a member of the developing team of the SMT solver MathSAT5~\cite{MathSAT5}.
+Martin Jon\'{a}\v{s} is part of the developing team of the SMT solver Q3B~\cite{Q3B} and was a member of the developing team of the SMT solver MathSAT5~\cite{MathSAT5}. Dominik Winterer has been conducting large-scale testing campaigns for discovering and preventing unsoundness issues in SMT solvers. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
