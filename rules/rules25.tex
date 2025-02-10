@@ -103,9 +103,9 @@ way in which such announcements will be communicated.
 
 \begin{itemize}
 \item SMT-COMP mailing list:
-  \href{mailto:smt-comp@cs.nyu.edu}{\textrm{smt-comp@cs.nyu.edu}}
+  \href{mailto:smt-comp@googlegroups.com}{\textrm{smt-comp@googlegroups.com}}
 \item Sign-up site for the mailing list:
-  \url{http://cs.nyu.edu/mailman/listinfo/smt-comp}
+  \url{https://groups.google.com/g/smt-comp}
 \end{itemize}
 
 \noindent Additional material will be made available at the
@@ -190,7 +190,8 @@ version,\footnote{Earlier versions of this document include
 SMT-COMP~2025.
 %
 
-As in previous years, we have revised the rules slightly. Most changes are due to our move from StarExec to BenchExec.
+As in previous years, we have revised the rules slightly.
+% Most changes are due to our move from StarExec to BenchExec.
 %
 The principal changes from the previous competition rules are the following:
 \begin{itemize}
@@ -201,15 +202,15 @@ The principal changes from the previous competition rules are the following:
   \rationale{The presence of the base tool in the contest provides the best way to
   assess the improvements contributed by the derived tool techniques.}
 
-  \item {\bf Time limits.} \emergencystretch.5cm The time limit to verify the unsat cores
-  is increased.
+  \item {\bf Unsat cores time limits.} \emergencystretch.5cm The time limit to verify the unsat cores
+  is increased to the time taken to generate it.
 %
-  \rationale{In the unsat-core track, points shall be awarded to a solver for all correct produced unsat cores.}
+  \rationale{It should ensure that solvers have the time to correctly assess the validity of the generated unsat-core.}
 
-  \item {\bf Unsat cores.} \emergencystretch.5cm No point is given for an unsat core such that no solver is capable to
+  \item {\bf Unsat cores scoring.} \emergencystretch.5cm No point is given for an unsat core such that no solver is capable to
   verify it.
 %
-  \rationale{In the unsat-core track, points shall be awarded to a solver only for correct produced unsat cores.}
+  \rationale{Points shall be awarded to a solver only for verifiably correctly produced unsat cores.}
 
 \end{itemize}
 
