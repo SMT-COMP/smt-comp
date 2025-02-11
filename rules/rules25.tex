@@ -202,15 +202,21 @@ The principal changes from the previous competition rules are the following:
   \rationale{The presence of the base tool in the contest, even non-competively, provides the best way to
   assess the improvements contributed by the derived tool techniques.}
 
+  \item {\bf Unsat cores scoring.} \emergencystretch.5cm No point is given for an unsat core such that no solver is capable to
+  verify it.
+%
+  \rationale{Points shall be awarded to a solver only for verifiably correctly produced unsat cores.}
+
   \item {\bf Unsat cores time limits.} \emergencystretch.5cm The time limit to verify the unsat cores
   is increased to the time taken to generate it.
 %
   \rationale{It should ensure that solvers have the time to correctly assess the validity of the generated unsat-core.}
 
-  \item {\bf Unsat cores scoring.} \emergencystretch.5cm No point is given for an unsat core such that no solver is capable to
-  verify it.
+\item {\bf Best overall ranking.} \emergencystretch.5cm We reintroduce the best
+  overall ranking that had been used until SMT-COMP 2018.
 %
-  \rationale{Points shall be awarded to a solver only for verifiably correctly produced unsat cores.}
+  \rationale{We want to showcase also universality of the submitted SMT solvers
+    beside their benefits in the individual divisions.}
 
 \end{itemize}
 
@@ -1274,19 +1280,61 @@ parallel division score when only unsatisfiable instances are considered.
 
 \subsection{Competition-Wide Recognitions}
 
-In 2014 the SMT competition introduced a competition-wide scoring to
-allow it to award medals in the FLoC Olympic Games and has been
-awarded each year since. This scoring purposefully emphasized the
-breadth of solver participation by summing up a score for each
-(competitive) division a solver competed in. Whilst this rationale is
-reasonable, we observed that this score had become dictated by the
-number of divisions being entered by a solver.
+Between 2014 and 2018, the SMT competition had used a competition-wide scoring
+that emphasized the breadth of solver participation by summing up a score for
+each (competitive) division a solver competed in. This was discontinued in 2019
+in favor of \emph{biggest lead} and \emph{largest contribution} rankings
+to avoid favoring solvers that entered into a large number of divisions. The two
+rankings have been used since.
 
-This score has been replaced the competition-wide score with two
-\emph{rankings} that select one solver per division and then rank
-those solvers. The rationale here is to take the focus away from the
-number of divisions entered and focus on measures that make sense to
-use to compare different divisions.
+For SMT-COMP 2025, we reintroduce the \emph{best overall ranking} besides the
+two rankings to showcase both the overall qualities of the solvers and also
+their strengths in individual divisions.
+
+\subsubsection{Best Overall Ranking}
+This ranking aims to select the solver that \emph{is most universal}, i.e.,
+solved the largest number of benchmarks after taking the division sizes into
+account.
+
+Let $\langle e^D, n^D, \mathit{aw}^D, w^D, \mathit{ac}^D, c^D \rangle$ be the
+parallel division score for the given solver in the division $D$ (for a given
+scoring system e.g. number of correct results or reduction). Let $N^D$ be total
+number of benchmarks in division $D$ that were used in the competition. The
+normalized correctness score $\mathit{nn}^D$ of the solver in the division $D$
+is defined as
+\[
+  \mathit{nn}^D =
+  \begin{cases}
+    \frac{n^D}{N^D}, &\text{if }e^D = 0, \\
+    -4, &\text{if }e^D > 0.
+  \end{cases}
+\]
+The \emph{overall score}\footnote{\emph{Rationale:} % This metric purposely
+  % emphasizes breadth of solver participation---a solver participating in many
+  % logics need not be the best in any one of them. The metric is quite simple and
+  % is independent of the performance of other solvers.
+  %
+  % The use of the square in the metric limits this somewhat---a solver still
+  % needs to do reasonably well compared to winners to be able to catch up by
+  % breadth of participation. The non-linear metric also gives added weight to
+  % completing close to all benchmarks in a division.
+  %
+  The constant penalty for errors reflects the fact that any error in a
+  particular division renders a solver untrustworthy for that division. The
+  value~$4$ balances the community's strong interest in reliable and thoroughly
+  tested solvers against the risk of stifling innovation: entering a possibly
+  buggy solver that can solve all benchmarks has a positive expected value if
+  the probability of a soundness bug is below $\frac{1}{1+4} = 20$\,\%.
+
+  The log scaling adjusts the scores for the wide variety of numbers of
+  benchmarks in different divisions. It seems a reasonable compromise between
+  linearly combining numbers of benchmarks, which would overweigh large
+  divisions, and simply summing the fraction of benchmarks solved, which would
+  overweigh small divisions.} of the solver is then sum of
+$\mathit{nn}^D \cdot \log_{10} N^D$ over all competitive divisions $D$ into
+which the solver has entered. The solvers are ranked based on the overall score
+and ties are resolved using the CPU time in sequential scoring and wall-clock
+time in parallel scoring.
 
 \subsubsection{Biggest Lead Ranking}
 
