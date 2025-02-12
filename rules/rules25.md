@@ -1,8 +1,21 @@
+<h1 style="text-align: center;">20th International Satisfiability Modulo Theories Competition (SMT-COMP 2025): Rules and Procedures</h1>
+
+**François Bobot**, CEA List, France https://github.com/bobot 
+
+**David Déharbe**, CLEARSY, France, david.deharbe@clearsy.com  
+
+**Martin Jonáš** Masaryk University, Czechia, martin.jonas@mail.muni.cz  
+
+**Dominik Winterer**, ETH Zürich, Switzerland, dominik.winterer@inf.ethz.ch  
+
+*This version revised 2025-2-12*
+
+
 Comments on this document should be emailed to the SMT-COMP mailing list (see below) or, if necessary, directly to the organizers.
 
-# Communication
+# 1 Communication
 
-Interested parties should subscribe to the SMT-COMP mailing list. Important late-breaking news and any necessary clarifications and edits to these rules will be announced there, and it is the primary way in which such announcements will be communicated.
+Interested parties should subscribe to the SMT-COMP mailing list. Important late-breaking ne ws and any necessary clarifications and edits to these rules will be announced there, and it is the primary way in which such announcements will be communicated.
 
 -   SMT-COMP mailing list: [[smt-comp@googlegroups.com]{.roman}](mailto:smt-comp@googlegroups.com)
 
@@ -10,7 +23,7 @@ Interested parties should subscribe to the SMT-COMP mailing list. Important late
 
 Additional material will be made available at the competition web site, <http://www.smtcomp.org>.
 
-# Important Dates {#sec:important}
+# 2 Important Dates
 
 April 12
 
@@ -18,7 +31,7 @@ April 12
 
 May 31
 
-:   Final versions of competition tools (e.g., benchmark scrambler) are made available. Benchmark libraries are frozen.
+:   Final versions of competition tools (e.g., benchmark scrambler) are made available. Benchmark libraries are frozen. 
 
 June 13
 
@@ -36,7 +49,7 @@ August 10-11
 
 :   SMT Workshop; end of competition, presentation of results.
 
-# Introduction
+# 3 Introduction
 
 The annual Satisfiability Modulo Theories Competition (SMT-COMP) is held to spur advances in SMT solver implementations on benchmark formulas of practical interest. Public competitions are a well-known means of stimulating advancement in software tools. For example, in automated reasoning, the CASC and SAT competitions for first-order and propositional reasoning tools, respectively, have spurred significant innovation in their fields [@leberre+03; @PSS02]. Accordingly, researchers are highly encouraged to submit both new benchmarks and new or improved solvers to raise the level of competition and advance the state of the art in automated SMT problem solving. More information on the history and motivation for SMT-COMP can be found at the competition web site, <http://www.smtcomp.org>, and in reports on previous competitions ([@SMTCOMP-JAR; @SMTCOMP-FMSD; @BDOS08; @SMTCOMP-2008; @CDW14; @SMTCOMP-2012; @CSW15]).
 
@@ -66,7 +79,7 @@ As in previous years, we have revised the rules slightly. The principal changes 
 
 -   **Unsat cores scoring.** No point is given for an unsat core such that no solver is capable to verify it. *Rationale:* Points shall be awarded to a solver only for verifiably correctly produced unsat cores.
 
-# Entrants {#sec:entrants}
+# 4 Entrants
 
 **SMT Solver.** A Satisfiability Modulo Theories (SMT) solver that can enter SMT-COMP is a tool that can determine the (un)satisfiability of benchmarks from the SMT-LIB benchmark library (<https://smtlib.cs.uiowa.edu/benchmarks.shtml>).
 
@@ -116,7 +129,7 @@ System descriptions **must** be submitted **by the deadline for first versions o
 
 **Other solvers.** The organizers reserve the right to include additional solvers of interest (such as participants in previous editions), in the competition, e.g., for comparison purposes.
 
-## Deadlines {#deadlines .unnumbered}
+## Deadlines
 
 SMT-COMP entrants must be submitted via a pull request as explained above until the end of **June 13, 2025** anywhere on Earth. After this date *no new entrants* will be accepted. However, updates to existing entrants via pull requests will be accepted until the end of **June 27, 2025** anywhere on Earth.
 
@@ -126,11 +139,11 @@ The last solver links pushed to the repository at the conclusion of the grace pe
 
 These deadlines and procedures apply equally to all tracks of the competition.
 
-# Execution of Solvers
+# 5 Execution of Solvers
 
 Solvers will be publicly evaluated in all tracks and divisions into which they have been entered. A solver enters a division in a track if it supports at least one logic in this division. A solver not supporting all logics in a division will not be run on the benchmarks from the unsupported logics and will be scored as if it returned the result `unknown` within zero time. All results of the competition will be made public. Solvers will be made publicly available and it is a minimum license requirement that (i) solvers can be distributed in this way, and (ii) all submitted solvers may be freely used for academic evaluation purposes.
 
-## Logistics {#sec:logistics}
+## 5.1 Logistics
 
 **Dates of Competition.** The bulk of the computation will take place during the weeks leading up to SMT 2025. Intermediate results will be regularly posted to the SMT-COMP website as the competition runs. The organizers reserve the right to prioritize certain competition tracks or divisions to ensure their timely completion, and, under exceptional circumstances, to complete divisions after the SMT Workshop.
 
@@ -219,7 +232,7 @@ The limits for Parallel Track are available at <https://smt-comp.github.io/2025/
 
 **Persistent State.** Solvers may create and write to files and directories during the course of an execution, but they must not read such files back during later executions. This is ensured by BenchExec by executing each solver with the whole filesystem mounted as read-only with an overlay writeable layer that is mounted as a RAM disk. Any generated files will be therefore written to the RAM disk. The used storage is counted into the memory limit. The temporary overlay layer is deleted after the job is complete. Solvers must not attempt to communicate with other machines, e.g., over the network.
 
-## Single Query Track {#sec:exec:single}
+## 5.2 Single Query Track
 
 The Single Query Track track will consist of selected non-incremental benchmarks in each of the competitive divisions. Each benchmark will be presented to the solver as its first command-line argument. The solver is then expected to report on its standard output channel whether the formula is satisfiable (`sat`) or unsatisfiable (`unsat`). A solver may also report `unknown` to indicate that it cannot determine satisfiability of the formula.
 
@@ -227,7 +240,7 @@ The Single Query Track track will consist of selected non-incremental benchmarks
 
 **Time Limit.** This track will use a wall-clock time limit of 20 minutes per solver/benchmark pair.
 
-## Incremental Track {#sec:exec:app}
+## 5.3 Incremental Track
 
 The incremental track evaluates SMT solvers when interacting with an external verification framework, e.g., a model checker. This interaction, ideally, happens by means of an online communication between the framework and the solver: the framework repeatedly sends queries to the SMT solver, which in turn answers either `sat` or `unsat`. In this interaction an SMT solver is required to accept queries incrementally via its *standard input channel*.
 
@@ -249,7 +262,7 @@ In order to facilitate the evaluation of solvers in this track, we will set up a
 
 **Trace Executor.** This track will use the trace executor from <https://github.com/SMT-COMP/trace-executor> to execute a solver on an incremental benchmark file.
 
-## Unsat-Core Track {#sec:exec:unsat-core}
+## 5.4 Unsat-Core Track
 
 The Unsat-Core Track will evaluate the capability of solvers to generate unsatisfiable cores. Performance of solvers will be measured by correctness and size of the unsatisfiable core they provide.
 
@@ -263,7 +276,7 @@ The Unsat-Core Track will evaluate the capability of solvers to generate unsatis
 
 **Time Limit.** This track will use a wall-clock time limit of 20 minutes per solver/benchmark pair both for unsatisfiable core generation and for the subsequent validation.
 
-## Model-Validation Track {#sec:exec:model}
+## 5.5 Model-Validation Track
 
 The Model-Validation Track will evaluate the capability of solvers to produce models for satisfiable problems. Performance of solvers will be measured by correctness and well-formedness of the model they provide.
 
@@ -295,7 +308,7 @@ The new experimental divisions require additional syntax to represent their mode
 
 **Time Limit.** This track will use a wall-clock time limit of 20 minutes per solver/benchmark pair. The time limit for checking the satisfying assignment is yet to be determined, but is anticipated to be around 15 minutes of wall-clock time.
 
-## Parallel Track
+## 5.6 Parallel Track
 
 The Parallel Track will evaluate the capability of solvers to determine the satisfiability of problems in a shared-memory parallel computing environment. The track will be experimental.
 
@@ -303,7 +316,7 @@ The Parallel Track will evaluate the capability of solvers to determine the sati
 
 **Time Limit.** This track will use a wall-clock time limit of 2 minutes per solver/benchmark pair.
 
-# Benchmarks and Problem Divisions
+# 6 Benchmarks and Problem Divisions
 
 **Divisions.** Within each track there are multiple divisions, and each division selects benchmarks from a specific group of SMT-LIB logics in the SMT-LIB benchmark library.
 
@@ -347,9 +360,9 @@ The selection process in cases [\[bench-sel-600\]](#bench-sel-600){reference-typ
 
 **Pseudo-random numbers.** Pseudo-random numbers used, e.g., for the creation of heats or the scrambling of benchmarks, will be generated using the standard C library function `random()`, seeded (using `srandom()`) with the sum, modulo $2^{30}$, of the integer numbers provided in the system submissions (see Section [4](#sec:entrants){reference-type="ref" reference="sec:entrants"}) by all SMT-COMP entrants other than the organizers'. Additionally, the integer part of one hundred times the opening value of the New York Stock Exchange Composite Index on the first day the exchange is open on or after the date specified in the timeline (Section [2](#sec:important){reference-type="ref" reference="sec:important"}) will be added to the other seeding values. This helps provide transparency, by guaranteeing that the organizers cannot manipulate the seed in favor of or against any particular submitted solver.
 
-# Scoring {#sec:scoring}
+# 7 Scoring
 
-## Benchmark scoring {#sec:benchmark-scoring}
+## 7.1 Benchmark scoring
 
 The **parallel benchmark score** of a solver is a tuple $\langle
 e, n, \it{aw}, w, \it{ac},c\rangle$ with
@@ -378,7 +391,7 @@ e, n, \it{aw}, w, \it{ac},c\rangle$ with
 
 **CPU Time Score ($\mathbf{c}$).** For the Single Query Track, Unsat-Core Track, Model-Validation Track, and Parallel Track, the CPU time score $c$ is the same as the actual (real-valued) CPU time $\mathit{ac}$, except that it is zero if the benchmark was not correctly solved within the time limit $mT$, i.e., $c = 0$ if $e = 1$, the process did not terminate within the time limit $mT$, or it did return unknown or an unknown result. For the Incremental Track, the CPU time score $c$ is the (real-valued) CPU time in seconds until the process returned the last time sat/unsat within the time limit; this means especially that $c = 0$ if the process never returned sat/unsat within the time limit.
 
-### Sequential Benchmark Score {#sec:sequential}
+### 7.1.1 Sequential Benchmark Score
 
 The parallel score as defined above favors parallel solvers, which may utilize all available processor cores. To evaluate sequential performance, we derive a **sequential score** by imposing a *virtual* CPU time limit equal to the wall-clock time limit $T$. A solver result is taken into consideration for the sequential score only if the solver process terminates *within* this CPU time limit. More specifically, for a given parallel performance $\langle
 e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined as $\langle e_S, n_S, c_S\rangle$, where
@@ -387,7 +400,7 @@ e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential perfo
 
 -   $e_S = e$, $n_S = n$, and $c_S = c$ otherwise.[^3]
 
-### Single Query Track and Parallel Track
+### 7.1.2 Single Query Track and Parallel Track
 
 For the Single Query Track and Parallel Track, the error score $e$ and the correctly solved score $n$ are defined as
 
@@ -407,7 +420,7 @@ For the Single Query Track and Parallel Track, the error score $e$ and the corre
 
 Note that a (correct or incorrect) response is taken into consideration even when the solver process terminates abnormally, or does not terminate within the time limit. Solvers should take care not to accidentally produce output that contains `sat` or `unsat`.
 
-### Incremental Track {#incremental-track}
+### 7.1.3 Incremental Track
 
 An application benchmark may contain multiple **check-sat** commands. Solvers may partially solve the benchmark before timing out. The benchmark is run by the trace executor, measuring the total time (summed over all individual commands) taken by the solver to respond to commands.[^5] Most time will likely be spent in response to **check-sat** commands, but **assert**, **push** or **pop** commands might also entail a reasonable amount of processing. For the Incremental Track, we have
 
@@ -415,7 +428,7 @@ An application benchmark may contain multiple **check-sat** commands. Solvers ma
 
 -   otherwise, $e=0$ and $n$ is the number of correct results for **check-sat** commands returned by the solver before the time limit is reached.
 
-### Unsat-Core Track {#unsat-core-track}
+### 7.1.4 Unsat-Core Track
 
 For the Unsat-Core Track, the error score $e$ and the correctly solved score $n$ are defined as
 
@@ -431,7 +444,7 @@ For the Unsat-Core Track, the error score $e$ and the correctly solved score $n$
 
 -   otherwise, $e=0$ and $n$ is the *reduction* in the number of formulas, i.e., $n = N$ minus the number of formula names in the reported unsatisfiable core.
 
-### Model-Validation Track {#model-validation-track}
+### 7.1.5 Model-Validation Track
 
 For the Model-Validation Track, the error score $e$ and the correctly solved score $n$ are defined as
 
@@ -441,7 +454,7 @@ For the Model-Validation Track, the error score $e$ and the correctly solved sco
 
 -   otherwise, $e=0$ and $n=1$.
 
-## Division scoring {#sec:division-scoring}
+## 7.2 Division scoring
 
 For each track and division, we compute a division score based on the parallel performance of a solver (the *parallel division score*). For the Single Query Track, Unsat-Core Track and Model-Validation Track we also compute a division score based on the sequential performance of a solver (the *sequential division score*). Additionally, for the Single Query Track, we further determine three additional scores based on parallel performance: The *24-second score* will reward solving performance within a time limit of 24 seconds (wall clock time), the *sat score* will reward (parallel) performance on satisfiable instances, and the *unsat score* will reward (parallel) performance on unsatisfiable instances. Finally, in divisions composed by more than one logic, all the above scores will be presented not only for the overall division but also for each logic composing the division.
 
@@ -451,7 +464,7 @@ For each track and division, we compute a division score based on the parallel p
 
 **Removal of Disagreements.** Before division scores are computed for the Single Query Track, benchmarks with *unknown status* are removed from the competition results if two (or more) solvers that are sound on benchmarks with known status disagree on their result. Only the remaining benchmarks are used in the following computation of division scores (but the organizers *will report disagreements* for informational purposes).
 
-### Parallel Score
+### 7.2.1 Parallel Score
 
 The parallel score for a division is computed for *all* tracks. It is defined for a participating solver in a division with $M$ benchmarks as the sum of all the individual parallel benchmark scores: $$\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
 
@@ -460,7 +473,7 @@ e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel division 
 > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w
 = w'$ and $c < c'$). That is, fewer errors takes precedence over more correct solutions, which takes precedence over less wall-clock time taken, which takes precedence over less CPU time taken.
 
-### Sequential Score
+### 7.2.2 Sequential Score
 
 The sequential score for a division is computed for *all* tracks *except* the Incremental Track and Parallel Track. [^6]. It is defined for a participating solver in a division with $M$ benchmarks as the sum of all the individual sequential benchmark scores: $$\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle.$$
 
@@ -468,31 +481,31 @@ A sequential division score $\langle e^s, n^s, c^s\rangle$ is better than a sequ
 
 We will not make any comparisons between parallel and sequential performances, as these are intended to measure fundamentally different performance characteristics.
 
-### 24-Seconds Score (Single Query Track)
+### 7.2.3 24-Seconds Score (Single Query Track)
 
 The 24-seconds score for a division is computed for the Single Query Track as the parallel division score with a wall-clock time limit $T$ of 24 seconds.
 
-### Sat Score (Single Query Track)
+### 7.2.4 Sat Score (Single Query Track)
 
 The sat score for a division is computed for the Single Query Track as the parallel division score when only satisfiable instances are considered.
 
-### Unsat Score (Single Query Track)
+### 7.2.5 Unsat Score (Single Query Track)
 
 The unsat score for a division is computed for the Single Query Track as the parallel division score when only unsatisfiable instances are considered.
 
-## Competition-Wide Recognitions
+## 7.3 Competition-Wide Recognitions
 
 In 2014 the SMT competition introduced a competition-wide scoring to allow it to award medals in the FLoC Olympic Games and has been awarded each year since. This scoring purposefully emphasized the breadth of solver participation by summing up a score for each (competitive) division a solver competed in. Whilst this rationale is reasonable, we observed that this score had become dictated by the number of divisions being entered by a solver.
 
 This score has been replaced the competition-wide score with two *rankings* that select one solver per division and then rank those solvers. The rationale here is to take the focus away from the number of divisions entered and focus on measures that make sense to use to compare different divisions.
 
-### Biggest Lead Ranking
+### 7.3.1 Biggest Lead Ranking
 
 This ranking aims to select the solver that *won by the most* in some competitive division. The winners of each division are ranked by the distance between them and the next competitive solver in that division.
 
 Let $n_i^D$ be the correctness score of the $i$th solver (for a given scoring system e.g. number of correct results or reduction) in division $D$. The *correctness rank* of division $D$ is given as $$\frac{n_1^D+1}{n_2^D+1}$$ Let $c_i^D$ be the CPU time score of the $i$th solver in division $D$. The *CPU time rank* of division $D$ is given as $$\frac{c_2^D+1}{c_1^D+1}$$ Let $w_i^D$ be the wall-clock time score of the $i$th solver in division $D$. The *wall-clock time rank* of division $D$ is given as $$\frac{w_2^D+1}{w_1^D+1}$$ The *biggest lead winner* is the winner of the division with the highest (largest) correctness rank. In case of a tie, the winner is determined as the solver with the higher corresponding CPU (resp. wall-clock) time rank for sequential (resp. parallel) scoring. This can be computed per scoring system.
 
-### Largest Contribution Ranking
+### 7.3.2 Largest Contribution Ranking
 
 This ranking aims to select the solver that *uniquely contributed* the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solver's contribution to the *virtual best solver* for a division.
 
@@ -514,7 +527,7 @@ These ranks will be numbers between 0 and 1 with 0 indicating that $s$ made no i
 
 The *largest contribution winner* is the solver across all divisions with the highest (largest) normalized correctness rank. Again, this can be computed per scoring system. In case of a tie, the winner is determined as the solver with the higher corresponding normalized CPU (resp. wall-clock) time rank for sequential (resp. parallel) scoring.
 
-## Other Recognitions
+## 7.4 Other Recognitions
 
 The organizers will also recognize the following contributions:
 
@@ -524,11 +537,11 @@ The organizers will also recognize the following contributions:
 
 These recognitions will be announced at the SMT workshop and published on the competition website. The organizers reserve the right to recognize other outstanding contributions that become apparent in the competition results.
 
-# Judging
+# 8 Judging
 
 The organizers reserve the right, with careful deliberation, to remove a benchmark from the competition results if it is determined that the benchmark is faulty (e.g., syntactically invalid in a way that affects some solvers but not others); and to clarify ambiguities in these rules that are discovered in the course of the competition. Authors of solver entrants may appeal to the organizers to request such decisions. Organizers that are affiliated with solver entrants will be recused from these decisions. The organizers' decisions are final.
 
-# Acknowledgments
+# 9 Acknowledgments
 
 SMT-COMP 2025 is organized under the direction of the SMT Steering Committee. The organizing team is
 
@@ -558,7 +571,5 @@ Many others have contributed benchmarks, effort, and feedback. Clark Barrett, Pa
 
 [^6]: Since incremental track benchmarks may be partially solved, defining a useful sequential performance for the incremental track would require information not provided by the parallel performance, e.g., detailed timing information for each result. Due to the nature of Parallel Track, we will not consider the sequential scores
 
-<!-- 
-$ pandoc -f latex -t markdown+hard_line_breaks -o rules25.md rules25.tex
--->
+<!-- pandoc -f latex -t markdown+hard_line_breaks -o rules25.md rules25.tex -->
 
