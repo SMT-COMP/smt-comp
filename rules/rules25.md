@@ -1,23 +1,22 @@
 <h1 style="text-align: center;">20th International Satisfiability Modulo Theories Competition (SMT-COMP 2025): Rules and Procedures</h1>
 
-**François Bobot**, CEA List, France https://github.com/bobot 
+**François Bobot**, CEA List, France, [https://github.com/bobot](https://github.com/bobot)  
 
-**David Déharbe**, CLEARSY, France, david.deharbe@clearsy.com  
+**David Déharbe**, CLEARSY, France, [david.deharbe@clearsy.com](mailto:david.deharbe@clearsy.com)  
 
-**Martin Jonáš** Masaryk University, Czechia, martin.jonas@mail.muni.cz  
+**Martin Jonáš**, Masaryk University, Czechia, [martin.jonas@mail.muni.cz](mailto:martin.jonas@mail.muni.cz)  
 
-**Dominik Winterer**, ETH Zürich, Switzerland, dominik.winterer@inf.ethz.ch  
+**Dominik Winterer**, ETH Zürich, Switzerland, [dominik.winterer@inf.ethz.ch](mailto:dominik.winterer@inf.ethz.ch)
 
 *This version revised 2025-2-12*
-
 
 Comments on this document should be emailed to the SMT-COMP mailing list (see below) or, if necessary, directly to the organizers.
 
 # 1 Communication
 
-Interested parties should subscribe to the SMT-COMP mailing list. Important late-breaking ne ws and any necessary clarifications and edits to these rules will be announced there, and it is the primary way in which such announcements will be communicated.
+Interested parties should subscribe to the SMT-COMP mailing list. Important late-breaking news and any necessary clarifications and edits to these rules will be announced there, and it is the primary way in which such announcements will be communicated.
 
--   SMT-COMP mailing list: [[smt-comp@googlegroups.com]{.roman}](mailto:smt-comp@googlegroups.com)
+-   SMT-COMP mailing list: [smt-comp@googlegroups.com](mailto:smt-comp@googlegroups.com)
 
 -   Sign-up site for the mailing list: <https://groups.google.com/g/smt-comp>
 
@@ -25,29 +24,17 @@ Additional material will be made available at the competition web site, <http://
 
 # 2 Important Dates
 
-April 12
+**April 12**: Deadline for new benchmark contributions.
 
-:   Deadline for new benchmark contributions.
+**May 31**: Final versions of competition tools (e.g., benchmark scrambler) are made available. Benchmark libraries are frozen. 
 
-May 31
+**June 13**: Deadline for first versions of solvers (for all tracks), including information about which tracks and divisions are being entered, and magic numbers for benchmark scrambling.
 
-:   Final versions of competition tools (e.g., benchmark scrambler) are made available. Benchmark libraries are frozen. 
+**June 27**: Deadline for final versions of solvers, including system descriptions.
 
-June 13
+**June 30**: Opening value of NYSE Composite Index used to compute random seed for competition tools.
 
-:   Deadline for first versions of solvers (for all tracks), including information about which tracks and divisions are being entered, and magic numbers for benchmark scrambling.
-
-June 27
-
-:   Deadline for final versions of solvers, including system descriptions.
-
-June 30
-
-:   Opening value of NYSE Composite Index used to compute random seed for competition tools.
-
-August 10-11
-
-:   SMT Workshop; end of competition, presentation of results.
+**August 10-11**: SMT Workshop; end of competition, presentation of results.
 
 # 3 Introduction
 
@@ -91,9 +78,7 @@ As in previous years, we have revised the rules slightly. The principal changes 
 
 **SMT Solver Submission.** An entrant to SMT-COMP is a solver submitted by its authors via a pull request to the SMT-COMP GitHub repository <https://github.com/SMT-COMP/smt-comp.github.io/tree/master/submissions>. The final solver version needs to be uploaded to Zenodo (<https://zenodo.org/>). In the case of derived tools, the Zenodo submission must include both the derived tool and the base tool. The solver is an archive that contains the precompiled executable (statically linked is preferable). It will be executed on a computer that has the same installation as the following docker image
 
-::: center
-[`registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest`](registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest){.uri}
-:::
+[`registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest`](registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest)
 
 **Solver execution.** BenchExec (<https://github.com/sosy-lab/benchexec>) is a framework for reliable benchmarking and resource measurement developed by LMU's Software and Computational Systems Lab (SoSy-Lab <https://www.sosy-lab.org/>). The framework can be downloaded and used locally by anyone. The competition will be executed on a BenchExec cluster owned by SoSy-Lab, who are kind enough to support our competition with their computing power. To be more precise, the competition will be run on the 168 apollon nodes of the SoSy-Lab BenchExec cluster (for more details see <https://vcloud.sosy-lab.org/cpachecker/webclient/master/info>) and on a 256-processor, 2TB RAM machine for the Parallel Track. It is also possible to locally emulate and test the computing environment on the competition machines using the following instructions: <https://gitlab.com/sosy-lab/benchmarking/competition-scripts/#computing-environment-on-competition-machines>.
 
@@ -468,6 +453,7 @@ For each track and division, we compute a division score based on the parallel p
 
 The parallel score for a division is computed for *all* tracks. It is defined for a participating solver in a division with $M$ benchmarks as the sum of all the individual parallel benchmark scores: $$\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
 
+
 A parallel division score $\langle
 e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel division score$\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
 > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w
@@ -559,6 +545,8 @@ Many others have contributed benchmarks, effort, and feedback. Clark Barrett, Pa
 
 **Disclosure.** François Bobot is part of the developing team of the SMT solver COLIBRI [@colibri]. David Déharbe was part of the developing team of the SMT solver veriT [@verit]. Martin Jonáš is part of the developing team of the SMT solver Q3B [@Q3B] and was a member of the developing team of the SMT solver MathSAT5 [@MathSAT5]. Dominik Winterer has been conducting large-scale testing campaigns for discovering and preventing unsoundness issues in SMT solvers.
 
+## References
+
 [^1]: Earlier versions of this document include contributions from Clark Barrett, Martin Bromberger, Roberto Bruttomesso, David Cok, Sylvain Conchon, David Déharbe, Morgan Deters, Alberto Griggio, Liana Hadarean, Matthias Heizmann, Antti Hyvarinen, Jochen Hoenicke, Aina Niemetz, Albert Oliveras, Giles Reger, Aaron Stump, and Tjark Weber.
 
 [^2]: SMT-LIB 2.6 requires solvers to produce a `success` answer after each **set-logic**, **declare-sort**, **declare-fun** and **assert** command (among others), unless the option **:print-success** is set to false. Ignoring the `success` outputs allows for submitting fully SMT-LIB 2.6 compliant solvers without the need for a wrapper script, while still allowing entrants of previous competitions to run without changes.
@@ -571,5 +559,8 @@ Many others have contributed benchmarks, effort, and feedback. Clark Barrett, Pa
 
 [^6]: Since incremental track benchmarks may be partially solved, defining a useful sequential performance for the incremental track would require information not provided by the parallel performance, e.g., detailed timing information for each result. Due to the nature of Parallel Track, we will not consider the sequential scores
 
-<!-- pandoc -f latex -t markdown+hard_line_breaks -o rules25.md rules25.tex -->
+<!-- 
+pandoc -f latex -t markdown+hard_line_breaks -o rules25.md rules25.tex -->
+
+
 
