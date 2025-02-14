@@ -1298,14 +1298,14 @@ account.
 
 Let $\langle e^D, n^D, \mathit{aw}^D, w^D, \mathit{ac}^D, c^D \rangle$ be the
 parallel division score for the given solver in the division $D$ (for a given
-scoring system e.g. number of correct results or reduction). Let $N^D$ be total
+scoring system, e.g., number of correct results or reduction). Let $N^D$ be total
 number of benchmarks in division $D$ that were used in the competition. The
 normalized correctness score $\mathit{nn}^D$ of the solver in the division $D$
 is defined as
 \[
   \mathit{nn}^D =
   \begin{cases}
-    \frac{n^D}{N^D}, &\text{if }e^D = 0, \\
+    \left( \frac{n^D}{N^D} \right) ^2, &\text{if }e^D = 0, \\
     -4, &\text{if }e^D > 0.
   \end{cases}
 \]
@@ -1314,11 +1314,12 @@ The \emph{overall score}\footnote{\emph{Rationale:} % This metric purposely
   % logics need not be the best in any one of them. The metric is quite simple and
   % is independent of the performance of other solvers.
   %
-  % The use of the square in the metric limits this somewhat---a solver still
-  % needs to do reasonably well compared to winners to be able to catch up by
-  % breadth of participation. The non-linear metric also gives added weight to
-  % completing close to all benchmarks in a division.
-  %
+  The goal of the square is to give some advantage to solvers
+  that complete close to all benchmarks in a division. Therefore, a
+  solver still needs to do reasonably well compared to winners to be
+  able to catch up purely by the breadth of participation, i.e., the
+  number of logics it supports.
+
   The constant penalty for errors reflects the fact that any error in a
   particular division renders a solver untrustworthy for that division. The
   value~$4$ balances the community's strong interest in reliable and thoroughly
