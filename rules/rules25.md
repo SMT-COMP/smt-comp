@@ -35,23 +35,17 @@ Additional material will be made available at the competition web site,
 
 # 2 Important Dates
 
-**April 12**: Deadline for new benchmark contributions.
+🚨 **April 12**: Deadline for new benchmark contributions.
+ 
+🚨 **May 31**: Final versions of competition tools (e.g., benchmark scrambler) are made available. Benchmark libraries are frozen.  
 
-**May 31**: Final versions of competition tools (e.g., benchmark
-scrambler) are made available. Benchmark libraries are frozen.
+🚨 **June 13**: Deadline for first versions of solvers (for all tracks), including information about which tracks and divisions are being entered, and magic numbers for benchmark scrambling.  
 
-**June 13**: Deadline for first versions of solvers (for all tracks),
-including information about which tracks and divisions are being
-entered, and magic numbers for benchmark scrambling.
+🚨 **June 27**: Deadline for final versions of solvers, including system descriptions.  
 
-**June 27**: Deadline for final versions of solvers, including system
-descriptions.
+🚨 **June 30**: Opening value of NYSE Composite Index used to compute random seed for competition tools.  
 
-**June 30**: Opening value of NYSE Composite Index used to compute
-random seed for competition tools.
-
-**August 10-11**: SMT Workshop; end of competition, presentation of
-results.
+🚨 **August 10-11**: SMT Workshop; end of competition, presentation of results.  
 
 # 3 Introduction
 
