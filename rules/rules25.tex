@@ -212,7 +212,7 @@ The principal changes from the previous competition rules are the following:
 %
   \rationale{It should ensure that solvers have the time to correctly assess the validity of the generated unsat-core.}
 
-\item {\bf Best overall ranking.} \emergencystretch.5cm We reintroduce the best
+\item {\bf Best overall ranking.} \emergencystretch.5cm We reintroduce with minor modifications the best
   overall ranking that had been used until SMT-COMP 2018.
 %
   \rationale{We want to showcase also universality of the submitted SMT solvers
@@ -1306,7 +1306,7 @@ is defined as
   \mathit{nn}^D =
   \begin{cases}
     \left( \frac{n^D}{N^D} \right) ^2, &\text{if }e^D = 0, \\
-    -4, &\text{if }e^D > 0.
+    -2, &\text{if }e^D > 0.
   \end{cases}
 \]
 The \emph{overall score}\footnote{\emph{Rationale:} % This metric purposely
@@ -1321,11 +1321,13 @@ The \emph{overall score}\footnote{\emph{Rationale:} % This metric purposely
   number of logics it supports.
 
   The constant penalty for errors reflects the fact that any error in a
-  particular division renders a solver untrustworthy for that division. The
-  value~$4$ balances the community's strong interest in reliable and thoroughly
-  tested solvers against the risk of stifling innovation: entering a possibly
-  buggy solver that can solve all benchmarks has a positive expected value if
-  the probability of a soundness bug is below $\frac{1}{1+4} = 20$\,\%.
+  particular division renders a solver untrustworthy for that division.
+  Moreover, the value~$2$ subtracts an equivalent of two other completely solved
+  divisions and balances the community's strong interest in reliable and
+  thoroughly tested solvers against the risk of stifling innovation. Entering a
+  possibly buggy solver that can solve all benchmarks has a positive expected
+  value if the probability of some soundness bug in each of the divisions is
+  below $\frac{1}{1+2} \approx 33$\,\%.
 
   The log scaling adjusts the scores for the wide variety of numbers of
   benchmarks in different divisions. It seems a reasonable compromise between
