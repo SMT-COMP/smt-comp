@@ -251,9 +251,9 @@ editions), in the competition, e.g., for comparison purposes.
 ## Deadlines
 
 SMT-COMP entrants must be submitted via a pull request as explained
-above until the end of **🚨 June 13, 2025** anywhere on Earth. After this
+above until the end of **🚨June 13, 2025** anywhere on Earth. After this
 date *no new entrants* will be accepted. However, updates to existing
-entrants via pull requests will be accepted until the end of **🚨 June 27,
+entrants via pull requests will be accepted until the end of **🚨June 27,
 2025** anywhere on Earth.
 
 We strongly encourage participants to use this grace period *solely* to
