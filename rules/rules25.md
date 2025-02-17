@@ -55,7 +55,7 @@ practical interest. Public competitions are a well-known means of
 stimulating advancement in software tools. For example, in automated
 reasoning, the CASC and SAT competitions for first-order and
 propositional reasoning tools, respectively, have spurred significant
-innovation in their fields [@leberre+03; @PSS02]. Accordingly,
+innovation in their fields [1]. Accordingly,
 researchers are highly encouraged to submit both new benchmarks and new
 or improved solvers to raise the level of competition and advance the
 state of the art in automated SMT problem solving. More information on
@@ -1239,7 +1239,9 @@ team of the SMT solver MathSAT5 [@MathSAT5]. Dominik Winterer has been
 conducting large-scale testing campaigns for discovering and preventing
 unsoundness issues in SMT solvers.
 
-## References {#references .unnumbered}
+## References
+[1] Le Berre, D., & Simon, L. (2003). *The Essentials of the SAT 2003 Competition*. In Sixth International Conference on Theory and Applications of Satisfiability Testing (Vol. 2919, pp. 452–467). Springer (LNCS).
+
 
 [^1]: Earlier versions of this document include contributions from Clark
     Barrett, Martin Bromberger, Roberto Bruttomesso, David Cok, Sylvain
