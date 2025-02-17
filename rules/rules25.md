@@ -251,9 +251,9 @@ editions), in the competition, e.g., for comparison purposes.
 ## Deadlines
 
 SMT-COMP entrants must be submitted via a pull request as explained
-above until the end of **June 13, 2025** anywhere on Earth. After this
+above until the end of **🚨 June 13, 2025** anywhere on Earth. After this
 date *no new entrants* will be accepted. However, updates to existing
-entrants via pull requests will be accepted until the end of **June 27,
+entrants via pull requests will be accepted until the end of **🚨 June 27,
 2025** anywhere on Earth.
 
 We strongly encourage participants to use this grace period *solely* to
@@ -672,8 +672,8 @@ combination of the benchmark's status and the result of the Single Query
 Track will be used.
 
 **New benchmarks.** The deadline for submission of new benchmarks is
-**April 12, 2025**. The organizers, in collaboration with the SMT-LIB
-maintainers, will be checking and curating these until **April 30,
+**🚨 April 12, 2025**. The organizers, in collaboration with the SMT-LIB
+maintainers, will be checking and curating these until **🚨 April 30,
 2025**.
 
 The SMT-LIB maintainers intend to make a new release of the benchmark
