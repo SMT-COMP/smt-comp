@@ -558,9 +558,3 @@ Many others have contributed benchmarks, effort, and feedback. Clark Barrett, Pa
 [^5]: Times measured by the execution service may include time spent in the trace executor. We expect that this time will likely be insignificant compared to time spent in the solver, and nearly constant across solvers.
 
 [^6]: Since incremental track benchmarks may be partially solved, defining a useful sequential performance for the incremental track would require information not provided by the parallel performance, e.g., detailed timing information for each result. Due to the nature of Parallel Track, we will not consider the sequential scores
-
-<!-- 
-pandoc -f latex -t markdown+hard_line_breaks -o rules25.md rules25.tex -->
-
-
-
