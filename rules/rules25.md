@@ -209,7 +209,7 @@ The SMT-LIB format specification is available from the "Standard" section of the
 
 **Output.** In all tracks except the Incremental Track, any `success` output will be ignored[^2]. Solvers that exit before the time limit without reporting a result (e.g., due to exhausting memory or crashing) *and* do not produce output that includes `sat`, `unsat`, `unknown` or other track specific output as specified in the individual track sections, e.g., unsat cores or models, will be considered to have aborted. Note that there is no distinction between output and error channel and tools should not write any message to the error channel because it could be misinterpreted as a wrong result.
 
-**Time and Memory Limits.** Each SMT-COMP solver will be executed on a dedicated processor of a competition machine, for each given benchmark, up to a fixed wall-clock time limit **$\color{purple}{T}\$**. The individual track descriptions on pages - specify the time limit for each track. Each processor has 4 cores. Detailed machine specifications are available on the competition web site.
+**Time and Memory Limits.** Each SMT-COMP solver will be executed on a dedicated processor of a competition machine, for each given benchmark, up to a fixed wall-clock time limit $\color{green}{T}\$. The individual track descriptions on pages - specify the time limit for each track. Each processor has 4 cores. Detailed machine specifications are available on the competition web site.
 
 The execution service also limits the memory consumption of the solver processes. We expect the memory limit per solver/benchmark pair to be on the order of 30 GB.
 
@@ -329,7 +329,7 @@ The SMT-LIB maintainers intend to make a new release of the benchmark library pu
 
     In case of a dispute (some solver marks a benchmark as `sat` and some other solver as `unsat`), the benchmark may be retained in the selection.
 
-4.  *Cap the number of instances in a division.* The number of benchmarks in a division based on the size of the corresponding logics in SMT-LIB will be limited as follows. Let **$\color{purple}{n}\$** be the number of benchmarks in an SMT-LIB logic, then the number of chosen benchmarks is $min(n, max(300, 50n/100))$:
+4.  *Cap the number of instances in a division.* The number of benchmarks in a division based on the size of the corresponding logics in SMT-LIB will be limited as follows. Let $\color{green}{n}\$ be the number of benchmarks in an SMT-LIB logic, then the number of chosen benchmarks is $min(n, max(300, 50n/100))$:
 
     1.  []{#bench-sel-300 label="bench-sel-300"} if $n \le 300$, all instances will be selected;
 
@@ -349,8 +349,8 @@ The selection process in cases [\[bench-sel-600\]](#bench-sel-600){reference-typ
 
 ## 7.1 Benchmark scoring
 
-The **parallel benchmark score** of a solver is a tuple **$\color{purple}\color{purple} \langle
-e, n, \it{aw}, w, \it{ac},c\rangle$** with
+The **parallel benchmark score** of  solver is a tuple $\color{green} \mathbf{\langle
+e, n, \it{aw}, w, \it{ac},c\rangle}$ with
 
 -   number of erroneous results (usually $e = 0$)
 
@@ -364,30 +364,30 @@ e, n, \it{aw}, w, \it{ac},c\rangle$** with
 
 -   CPU time score in seconds (real-valued)
 
-**Error Score ($\color{purple}\mathbf{e}$).** For the Single Query Track, Incremental Track and Parallel Track, \$color{purple}{e}\$ is the number of returned statuses that disagree with the given expected status (as described above, disagreements on benchmarks with unknown status lead to the benchmark being disregarded). For the Unsat-Core Track, \$color{purple}{e}\$ includes, in addition, the number of returned unsat cores that are not, in fact, unsatisfiable (as validated by a selection of other solvers selected by organizers). For the Model-Validation Track, \$color{purple}{e}\$ includes, in addition, the number of returned models that are not full satisfiable models.
+**Error Score ($\color{green}\mathbf{e}$).** For the Single Query Track, Incremental Track and Parallel Track, $\color{green}{e}\$ is the number of returned statuses that disagree with the given expected status (as described above, disagreements on benchmarks with unknown status lead to the benchmark being disregarded). For the Unsat-Core Track, $\color{green}{e}\$ includes, in addition, the number of returned unsat cores that are not, in fact, unsatisfiable (as validated by a selection of other solvers selected by organizers). For the Model-Validation Track, $\color{green}{e}\$ includes, in addition, the number of returned models that are not full satisfiable models.
 
-**Correctly Solved Score ($\color{purple}\mathbf{n}$).** For the Single Query Track, Incremental Track, Model-Validation Track, and Parallel Track, \$color{purple}{N}\$ is defined as the number of **check-sat** commands, and \$color{purple}{n}\$ is defined as the number of correct results. For the Unsat-Core Track, \$color{purple}{N}\$ is defined as the number of named top-level assertions, and \$color{purple}{n}\$ is defined as the *reduction*, i.e., the difference between \$color{purple}{N}\$ and the size of the unsat core.
+**Correctly Solved Score ($\color{green}\mathbf{n}$).** For the Single Query Track, Incremental Track, Model-Validation Track, and Parallel Track, $\color{green}{N}\$ is defined as the number of **check-sat** commands, and $\color{green}{n}\$ is defined as the number of correct results. For the Unsat-Core Track, $\color{green}{N}\$ is defined as the number of named top-level assertions, and $\color{green}{n}\$ is defined as the *reduction*, i.e., the difference between $\color{green}{N}\$ and the size of the unsat core.
 
-**Actual Wall-Clock Time ($\color{purple}\mathbf{aw}$).** The actual (real-valued) wall-clock time in seconds, until time limit \$color{purple}{T}\$ or the solver process terminates.
+**Actual Wall-Clock Time ($\color{green}\mathbf{aw}$).** The actual (real-valued) wall-clock time in seconds, until time limit $\color{green}{T}\$ or the solver process terminates.
 
-**Wall-Clock Time Score ($\color{purple}\mathbf{w}$).** For the Single Query Track, Unsat-Core Track, Model-Validation Track and Parallel Track, the wall-clock time score \$color{purple}{w}\$ is the same as the actual (real-valued) wall-clock time $\color{purple}\mathit{aw}$, except that it is zero if the benchmark was not correctly solved within the time limit \$color{purple}{T}\$, i.e., $w = 0$ if $e = 1$, the process did not terminate within the time limit \$color{purple}{T}\$, or it did return unknown or an unknown result. For the Incremental Track, the wall-clock time score \$color{purple}{w}\$ is the (real-valued) wall-clock time in seconds until the process returned the last time sat/unsat within the time limit; this means especially that $w = 0$ if the process never returned sat/unsat within the time limit.
+**Wall-Clock Time Score ($\color{green}\mathbf{w}$).** For the Single Query Track, Unsat-Core Track, Model-Validation Track and Parallel Track, the wall-clock time score $\color{green}{w}\$ is the same as the actual (real-valued) wall-clock time $\color{green}\mathit{aw}$, except that it is zero if the benchmark was not correctly solved within the time limit $\color{green}{T}\$, i.e., $w = 0$ if $e = 1$, the process did not terminate within the time limit $\color{green}{T}\$, or it did return unknown or an unknown result. For the Incremental Track, the wall-clock time score $\color{green}{w}\$ is the (real-valued) wall-clock time in seconds until the process returned the last time sat/unsat within the time limit; this means especially that $w = 0$ if the process never returned sat/unsat within the time limit.
 
-**Actual CPU Time ($\color{purple}\mathbf{ac}$).** The (real-valued) CPU time in seconds, measured across all \$color{purple}{m}\$ cores until time limit \$color{purple}{mT}\$ is reached or the solver process terminates.
+**Actual CPU Time ($\color{green}\mathbf{ac}$).** The (real-valued) CPU time in seconds, measured across all $\color{green}{m}\$ cores until time limit $\color{green}{mT}\$ is reached or the solver process terminates.
 
-**CPU Time Score ($\color{purple}\mathbf{c}$).** For the Single Query Track, Unsat-Core Track, Model-Validation Track, and Parallel Track, the CPU time score \$color{purple}{c}\$ is the same as the actual (real-valued) CPU time $\color{purple}\mathit{ac}$, except that it is zero if the benchmark was not correctly solved within the time limit \$color{purple}{mT}\$, i.e., $c = 0$ if $e = 1$, the process did not terminate within the time limit \$color{purple}{mT}\$, or it did return unknown or an unknown result. For the Incremental Track, the CPU time score \$color{purple}{c}\$ is the (real-valued) CPU time in seconds until the process returned the last time sat/unsat within the time limit; this means especially that $c = 0$ if the process never returned sat/unsat within the time limit.
+**CPU Time Score ($\color{green}\mathbf{c}$).** For the Single Query Track, Unsat-Core Track, Model-Validation Track, and Parallel Track, the CPU time score $\color{green}{c}\$ is the same as the actual (real-valued) CPU time $\color{green}\mathit{ac}$, except that it is zero if the benchmark was not correctly solved within the time limit $\color{green}{mT}\$, i.e., $c = 0$ if $e = 1$, the process did not terminate within the time limit $\color{green}{mT}\$, or it did return unknown or an unknown result. For the Incremental Track, the CPU time score $\color{green}{c}\$ is the (real-valued) CPU time in seconds until the process returned the last time sat/unsat within the time limit; this means especially that $c = 0$ if the process never returned sat/unsat within the time limit.
 
 ### 7.1.1 Sequential Benchmark Score
 
-The parallel score as defined above favors parallel solvers, which may utilize all available processor cores. To evaluate sequential performance, we derive a **sequential score** by imposing a *virtual* CPU time limit equal to the wall-clock time limit \$color{purple}{T}\$. A solver result is taken into consideration for the sequential score only if the solver process terminates *within* this CPU time limit. More specifically, for a given parallel performance $\color{purple}\langle
-e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined as $\color{purple}\langle e_S, n_S, c_S\rangle$, where
+The parallel score as defined above favors parallel solvers, which may utilize all available processor cores. To evaluate sequential performance, we derive a **sequential score** by imposing a *virtual* CPU time limit equal to the wall-clock time limit $\color{green}{T}\$. A solver result is taken into consideration for the sequential score only if the solver process terminates *within* this CPU time limit. More specifically, for a given parallel performance $\color{green}\langle
+e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined as $\color{green}\langle e_S, n_S, c_S\rangle$, where
 
--   $\color{purple}e_S = 0$, $n_S = 0$, and $c_S = 0$ if $c > T$;
+-   $\color{green}e_S = 0$, $n_S = 0$, and $c_S = 0$ if $c > T$;
 
--   $e_S = e$, $n_S = n$, and $c_S = c$ otherwise.[^3]
+-   $\color{green} e_S = e$, $n_S = n$, and $c_S = c$ otherwise.[^3]
 
 ### 7.1.2 Single Query Track and Parallel Track
 
-For the Single Query Track and Parallel Track, the error score \$color{purple}{e}\$ and the correctly solved score \$color{purple}{n}\$ are defined as
+For the Single Query Track and Parallel Track, the error score $\color{green}{e}\$ and the correctly solved score $\color{green}{n}\$ are defined as
 
 -   $e=0$ and $n=0$ if the solver
 
@@ -411,11 +411,11 @@ An application benchmark may contain multiple **check-sat** commands. Solvers ma
 
 -   $e=1$ and $n=0$ if the solver returns an incorrect result for any **check-sat** command within the time limit,
 
--   otherwise, $e=0$ and \$color{purple}{n}\$ is the number of correct results for **check-sat** commands returned by the solver before the time limit is reached.
+-   otherwise, $e=0$ and $\color{green}{n}\$ is the number of correct results for **check-sat** commands returned by the solver before the time limit is reached.
 
 ### 7.1.4 Unsat-Core Track
 
-For the Unsat-Core Track, the error score \$color{purple}{e}\$ and the correctly solved score \$color{purple}{n}\$ are defined as
+For the Unsat-Core Track, the error score $\color{green}{e}\$ and the correctly solved score $\color{green}{n}\$ are defined as
 
 -   $e=0$ and $n=0$ if the solver
 
@@ -427,11 +427,11 @@ For the Unsat-Core Track, the error score \$color{purple}{e}\$ and the correctly
 
 -   $e=1$ and $n=0$ if the result is erroneous according to Section [5.4](#sec:exec:unsat-core){reference-type="ref" reference="sec:exec:unsat-core"},
 
--   otherwise, $e=0$ and \$color{purple}{n}\$ is the *reduction* in the number of formulas, i.e., $n = N$ minus the number of formula names in the reported unsatisfiable core.
+-   otherwise, $e=0$ and $\color{green}{n}\$ is the *reduction* in the number of formulas, i.e., $n = N$ minus the number of formula names in the reported unsatisfiable core.
 
 ### 7.1.5 Model-Validation Track
 
-For the Model-Validation Track, the error score \$color{purple}{e}\$ and the correctly solved score \$color{purple}{n}\$ are defined as
+For the Model-Validation Track, the error score $\color{green}{e}\$ and the correctly solved score $\color{green}{n}\$ are defined as
 
 -   $e=0$ and $n=0$ if the result is UNKNOWN according to the output of the model validating tool described in Section [5.5](#sec:exec:model){reference-type="ref" reference="sec:exec:model"},
 
@@ -443,7 +443,7 @@ For the Model-Validation Track, the error score \$color{purple}{e}\$ and the cor
 
 For each track and division, we compute a division score based on the parallel performance of a solver (the *parallel division score*). For the Single Query Track, Unsat-Core Track and Model-Validation Track we also compute a division score based on the sequential performance of a solver (the *sequential division score*). Additionally, for the Single Query Track, we further determine three additional scores based on parallel performance: The *24-second score* will reward solving performance within a time limit of 24 seconds (wall clock time), the *sat score* will reward (parallel) performance on satisfiable instances, and the *unsat score* will reward (parallel) performance on unsatisfiable instances. Finally, in divisions composed by more than one logic, all the above scores will be presented not only for the overall division but also for each logic composing the division.
 
-**Sound Solver.** A solver is *sound* on benchmarks with *known status* for a division if its parallel performance (Section [7.1](#sec:benchmark-scoring){reference-type="ref" reference="sec:benchmark-scoring"}) is of the form $\color{purple}\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each benchmark in the division, i.e., if it did not produce any erroneous results.
+**Sound Solver.** A solver is *sound* on benchmarks with *known status* for a division if its parallel performance (Section [7.1](#sec:benchmark-scoring){reference-type="ref" reference="sec:benchmark-scoring"}) is of the form $\color{green}\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each benchmark in the division, i.e., if it did not produce any erroneous results.
 
 **Disagreeing Solvers.** Two solvers *disagree* on a benchmark if one of them reported `sat` and the other reported `unsat`.
 
@@ -451,25 +451,25 @@ For each track and division, we compute a division score based on the parallel p
 
 ### 7.2.1 Parallel Score
 
-The parallel score for a division is computed for *all* tracks. It is defined for a participating solver in a division with \$color{purple}{M}\$ benchmarks as the sum of all the individual parallel benchmark scores: $$\color{purple}\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
+The parallel score for a division is computed for *all* tracks. It is defined for a participating solver in a division with \$color{green}{M}\$ benchmarks as the sum of all the individual parallel benchmark scores: $$\color{green}\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
 
 
-A parallel division score $\color{purple}\langle
-e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel division score$\color{purple}\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
+A parallel division score $\color{green}\langle
+e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel division score$\color{green}\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n
 > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w
 = w'$ and $c < c'$). That is, fewer errors takes precedence over more correct solutions, which takes precedence over less wall-clock time taken, which takes precedence over less CPU time taken.
 
 ### 7.2.2 Sequential Score
 
-The sequential score for a division is computed for *all* tracks *except* the Incremental Track and Parallel Track. [^6]. It is defined for a participating solver in a division with \$color{purple}{M}\$ benchmarks as the sum of all the individual sequential benchmark scores: $$\color{purple}\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle.$$
+The sequential score for a division is computed for *all* tracks *except* the Incremental Track and Parallel Track. [^6]. It is defined for a participating solver in a division with $\color{green}{M}\$ benchmarks as the sum of all the individual sequential benchmark scores: $$\color{green}\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle.$$
 
-A sequential division score $\color{purple}\langle e^s, n^s, c^s\rangle$ is better than a sequential division score $\color{purple}\langle e^{s'}, n^{s'}, c^{s'}\rangle$ iff $e^s < e^{s'}$ or ($e^s = e^{s'}$ and $n^s > n^{s'}$) or ($e^s = e^{s'}$ and $n_S = n^{s'}$ and $c^s < c^{s'}$). That is, fewer errors takes precedence over more correct solutions, which takes precedence over less CPU time taken.
+A sequential division score $\color{green}\langle e^s, n^s, c^s\rangle$ is better than a sequential division score $\color{green}\langle e^{s'}, n^{s'}, c^{s'}\rangle$ iff $e^s < e^{s'}$ or ($e^s = e^{s'}$ and $n^s > n^{s'}$) or ($e^s = e^{s'}$ and $n_S = n^{s'}$ and $c^s < c^{s'}$). That is, fewer errors takes precedence over more correct solutions, which takes precedence over less CPU time taken.
 
 We will not make any comparisons between parallel and sequential performances, as these are intended to measure fundamentally different performance characteristics.
 
 ### 7.2.3 24-Seconds Score (Single Query Track)
 
-The 24-seconds score for a division is computed for the Single Query Track as the parallel division score with a wall-clock time limit \$color{purple}{T}\$ of 24 seconds.
+The 24-seconds score for a division is computed for the Single Query Track as the parallel division score with a wall-clock time limit $\color{green}{T}\$ of 24 seconds.
 
 ### 7.2.4 Sat Score (Single Query Track)
 
@@ -489,27 +489,27 @@ This score has been replaced the competition-wide score with two *rankings* that
 
 This ranking aims to select the solver that *won by the most* in some competitive division. The winners of each division are ranked by the distance between them and the next competitive solver in that division.
 
-Let $n_i^D$ be the correctness score of the \$color{purple}{i}\$th solver (for a given scoring system e.g. number of correct results or reduction) in division \$color{purple}{D}\$. The *correctness rank* of division \$color{purple}{D}\$ is given as $$\color{purple}\frac{n_1^D+1}{n_2^D+1}$$ Let $c_i^D$ be the CPU time score of the \$color{purple}{i}\$th solver in division \$color{purple}{D}\$. The *CPU time rank* of division \$color{purple}{D}\$ is given as $$\color{purple}\frac{c_2^D+1}{c_1^D+1}$$ Let $w_i^D$ be the wall-clock time score of the \$color{purple}{i}\$th solver in division \$color{purple}{D}\$. The *wall-clock time rank* of division \$color{purple}{D}\$ is given as $$\color{purple}\frac{w_2^D+1}{w_1^D+1}$$ The *biggest lead winner* is the winner of the division with the highest (largest) correctness rank. In case of a tie, the winner is determined as the solver with the higher corresponding CPU (resp. wall-clock) time rank for sequential (resp. parallel) scoring. This can be computed per scoring system.
+Let $n_i^D$ be the correctness score of the $\color{green}{i}\$th solver (for a given scoring system e.g. number of correct results or reduction) in division $\color{green}{D}\$. The *correctness rank* of division $\color{green}{D}\$ is given as $$\color{green}\frac{n_1^D+1}{n_2^D+1}$$ Let $c_i^D$ be the CPU time score of the $\color{green}{i}\$th solver in division $\color{green}{D}\$. The *CPU time rank* of division $\color{green}{D}\$ is given as $$\color{green}\frac{c_2^D+1}{c_1^D+1}$$ Let $w_i^D$ be the wall-clock time score of the $\color{green}{i}\$th solver in division $\color{green}{D}\$. The *wall-clock time rank* of division $\color{green}{D}\$ is given as $$\color{green}\frac{w_2^D+1}{w_1^D+1}$$ The *biggest lead winner* is the winner of the division with the highest (largest) correctness rank. In case of a tie, the winner is determined as the solver with the higher corresponding CPU (resp. wall-clock) time rank for sequential (resp. parallel) scoring. This can be computed per scoring system.
 
 ### 7.3.2 Largest Contribution Ranking
 
 This ranking aims to select the solver that *uniquely contributed* the most in some division, or to put another way, the solver that would be most missed. This is achieved by computing a solver's contribution to the *virtual best solver* for a division.
 
-Let $\color{purple}\langle e^s, n^s, \mathit{aw}^s, w^s, \mathit{ac}^s, c^s \rangle$ be the parallel division score for solver \$color{purple}{s}\$ (for a given scoring system, i.e., \$color{purple}{n}\$ is either number of correct results or reduction). If the division error score $e^s > 0$, then solver \$color{purple}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers \$color{purple}{S}\$ in a division \$color{purple}{D}\$ is $|S| \leq 2$, the division is excluded from the ranking.
+Let $\color{green}\langle e^s, n^s, \mathit{aw}^s, w^s, \mathit{ac}^s, c^s \rangle$ be the parallel division score for solver $\color{green}{s}\$ (for a given scoring system, i.e., $\color{green}{n}\$ is either number of correct results or reduction). If the division error score $e^s > 0$, then solver $\color{green}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers $\color{green}{S}\$ in a division $\color{green}{D}\$ is $|S| \leq 2$, the division is excluded from the ranking.
 
-Let $\color{purple}\langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s \rangle$ be the parallel benchmark score for benchmark \$color{purple}{b}\$ and solver \$color{purple}{s}\$ (for a given scoring system). The virtual best solver *correctness score* for a division \$color{purple}{D}\$ with competitive sound solvers \$color{purple}{S}\$ is given as $$\color{purple}\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$ where the maximum of an empty set is 0 (i.e., no contribution if a benchmark is unsolved).
+Let $\color{green}\langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s \rangle$ be the parallel benchmark score for benchmark $\color{green}{b}\$ and solver $\color{green}{s}\$ (for a given scoring system). The virtual best solver *correctness score* for a division $\color{green}{D}\$ with competitive sound solvers $\color{green}{S}\$ is given as $$\color{green}\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$ where the maximum of an empty set is 0 (i.e., no contribution if a benchmark is unsolved).
 
-The virtual best solver *CPU time score* $\color{purple}\mathit{vbss}_c$ and the virtual best solver *wall-clock time score* $\color{purple}\mathit{vbss}_w$ for a division \$color{purple}{D}\$ with competitive sound solvers \$color{purple}{S}\$ is given as $$\color{purple}\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$ $$\color{purple}\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$ where the minimum of an empty set is 1200 seconds (no solver was able to solve the benchmark).
+The virtual best solver *CPU time score* $\color{green}\mathit{vbss}_c$ and the virtual best solver *wall-clock time score* $\color{green}\mathit{vbss}_w$ for a division $\color{green}{D}\$ with competitive sound solvers $\color{green}{S}\$ is given as $$\color{green}\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$ $$\color{green}\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$ where the minimum of an empty set is 1200 seconds (no solver was able to solve the benchmark).
 
-In other words, for the single query track, $\color{purple}\mathit{vbss}_c(D,S)$ and $\color{purple}\mathit{vbss}_w(D,S)$ is the smallest amount of CPU time and wall-clock time taken to solve all benchmarks solved in division \$color{purple}{D}\$ using all sound competitive solvers in \$color{purple}{S}\$.
+In other words, for the single query track, $\color{green}\mathit{vbss}_c(D,S)$ and $\color{green}\mathit{vbss}_w(D,S)$ is the smallest amount of CPU time and wall-clock time taken to solve all benchmarks solved in division $\color{green}{D}\$ using all sound competitive solvers in $\color{green}{S}\$.
 
-Let \$color{purple}{S}\$ be the set of competitive solvers competing in division \$color{purple}{D}\$. The *correctness rank* $\color{purple}\mathit{vbss}_n$, the *CPU time rank* $\color{purple}\mathit{vbss}_c$ and the *wall-clock time rank* $\color{purple}\mathit{vbss}_w$ of solver $s \in S$ in division \$color{purple}{D}\$ are then defined as $$1- \frac{\mathit{vbss}_n(D,S-s) }{ \mathit{vbss}_n (D,S)}
+Let \$color{purple}{S}\$ be the set of competitive solvers competing in division $\color{green}{D}\$. The *correctness rank* $\color{green}\mathit{vbss}_n$, the *CPU time rank* $\color{green}\mathit{vbss}_c$ and the *wall-clock time rank* $\color{green}\mathit{vbss}_w$ of solver $s \in S$ in division $\color{green}{D}\$ are then defined as $$1- \frac{\mathit{vbss}_n(D,S-s) }{ \mathit{vbss}_n (D,S)}
 \hspace{3em}
 1- \frac{\mathit{vbss}_c(D,S) }{ \mathit{vbss}_c(D,S-s)}
 \hspace{3em}
-1- \frac{\mathit{vbss}_w(D,S) }{ \mathit{vbss}_w(D,S-s)}$$ i.e., the difference in virtual best solver score when removing \$color{purple}{s}\$ from the computation.
+1- \frac{\mathit{vbss}_w(D,S) }{ \mathit{vbss}_w(D,S-s)}$$ i.e., the difference in virtual best solver score when removing $\color{green}{s}\$ from the computation.
 
-These ranks will be numbers between 0 and 1 with 0 indicating that \$color{purple}{s}\$ made no impact on the *vbss* and 1 indicating that \$color{purple}{s}\$ is the only solver that solved anything in the division. The ranks for a division \$color{purple}{D}\$ in a given track will be normalized by multiplying with $\color{purple}\frac{n_D}{N}$, where $n_D$ corresponds to the number of competitive solver/benchmark pairs in division \$color{purple}{D}\$ and \$color{purple}{N}\$ being the overall number of competitive solver/benchmark pairs of this track.
+These ranks will be numbers between 0 and 1 with 0 indicating that $\color{green}{s}\$ made no impact on the *vbss* and 1 indicating that $\color{green}{s}\$ is the only solver that solved anything in the division. The ranks for a division $\color{green}{D}\$ in a given track will be normalized by multiplying with $\color{green}\frac{n_D}{N}$, where $n_D$ corresponds to the number of competitive solver/benchmark pairs in division $\color{green}{D}\$ and $\color{green}{N}\$ being the overall number of competitive solver/benchmark pairs of this track.
 
 The *largest contribution winner* is the solver across all divisions with the highest (largest) normalized correctness rank. Again, this can be computed per scoring system. In case of a tie, the winner is determined as the solver with the higher corresponding normalized CPU (resp. wall-clock) time rank for sequential (resp. parallel) scoring.
 
@@ -551,7 +551,7 @@ Many others have contributed benchmarks, effort, and feedback. Clark Barrett, Pa
 
 [^2]: SMT-LIB 2.6 requires solvers to produce a `success` answer after each **set-logic**, **declare-sort**, **declare-fun** and **assert** command (among others), unless the option **:print-success** is set to false. Ignoring the `success` outputs allows for submitting fully SMT-LIB 2.6 compliant solvers without the need for a wrapper script, while still allowing entrants of previous competitions to run without changes.
 
-[^3]: Under this measure, a solver should not benefit from using multiple processor cores. Conceptually, the sequential performance should be (nearly) unchanged if the solver was run on a single-core processor, up to a time limit of \$color{purple}{T}\$.
+[^3]: Under this measure, a solver should not benefit from using multiple processor cores. Conceptually, the sequential performance should be (nearly) unchanged if the solver was run on a single-core processor, up to a time limit of $\color{green}{T}$.
 
 [^4]: If the benchmark status is unknown, we thus treat the solver's answer as correct. Disagreements between different solvers on benchmarks with unknown status are governed in Section [7.2](#sec:division-scoring){reference-type="ref" reference="sec:division-scoring"}.
 
