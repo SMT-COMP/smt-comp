@@ -61,7 +61,7 @@ or improved solvers to raise the level of competition and advance the
 state of the art in automated SMT problem solving. More information on
 the history and motivation for SMT-COMP can be found at the competition
 web site, <http://www.smtcomp.org>, and in reports on previous
-competitions ([@SMTCOMP-JAR; @SMTCOMP-FMSD; @BDOS08; @SMTCOMP-2008; @CDW14; @SMTCOMP-2012; @CSW15]).
+competitions ([2, 3, 4, 5, 6, 7, 8]).
 
 SMT-COMP 2025 is part of the SMT Workshop 2025
 (<http://smt-workshop.cs.uiowa.edu/2025/>), which is affiliated with
@@ -295,13 +295,13 @@ divisions to ensure their timely completion, and, under exceptional
 circumstances, to complete divisions after the SMT Workshop.
 
 **Competition Website.** The competition website
-([www.smtcomp.org](www.smtcomp.org){.uri}) will be used as the main form
+([www.smtcomp.org](www.smtcomp.org)) will be used as the main form
 of communication for the competition. The website will be used to post
 updates, link to these rules and other relevant information (e.g., the
 benchmarks), and to announce the results. The website also archives
 previous competitions.
 
-**Tools.** []{#tools label="tools"} The competition uses a number of
+**Tools.** The competition uses a number of
 tools/scripts to run the competition. In the following, we briefly
 describe these tools.
 
@@ -424,7 +424,7 @@ satisfies the following *requirements*:
 -   **No other commands** besides the ones just mentioned may be used.
 
 The SMT-LIB format specification is available from the "Standard"
-section of the SMT-LIB website [@SMT-LIB]. Solvers will be given
+section of the [SMT-LIB website](\url{http://www.smtlib.org). Solvers will be given
 formulas only from the divisions into which they have been entered.
 
 **Output.** In all tracks except the Incremental Track, any `success`
@@ -1232,15 +1232,12 @@ competition with their computing power. Dirk Beyer and Philipp Wendler
 are providing essential BenchExec support.
 
 **Disclosure.** François Bobot is part of the developing team of the SMT
-solver COLIBRI [@colibri]. David Déharbe was part of the developing team
-of the SMT solver veriT [@verit]. Martin Jonáš is part of the developing
-team of the SMT solver Q3B [@Q3B] and was a member of the developing
-team of the SMT solver MathSAT5 [@MathSAT5]. Dominik Winterer has been
+solver [COLIBRI](https://colibri.frama-c.com/). David Déharbe was part of the developing team
+of the SMT solver [veriT](https://verit.loria.fr/). Martin Jonáš is part of the developing
+team of the SMT solver [Q3B](https://github.com/martinjonas/Q3B) and was a member of the developing
+team of the SMT solver [MathSAT5](https://mathsat.fbk.eu/). Dominik Winterer has been
 conducting large-scale testing campaigns for discovering and preventing
-unsoundness issues in SMT solvers.
-
-## References
-[1] Le Berre, D., & Simon, L. (2003). *The Essentials of the SAT 2003 Competition*. In Sixth International Conference on Theory and Applications of Satisfiability Testing (Vol. 2919, pp. 452–467). Springer (LNCS).
+unsoundness issues in SMT solvers [yinyang](https://github.com/testsmt/yinyang).
 
 
 [^1]: Earlier versions of this document include contributions from Clark
@@ -1278,3 +1275,21 @@ unsoundness issues in SMT solvers.
     would require information not provided by the parallel performance,
     e.g., detailed timing information for each result. Due to the nature
     of Parallel Track, we will not consider the sequential scores
+
+## References
+[1] Le Berre, D., & Simon, L. (2003). *The Essentials of the SAT 2003 Competition*. In Sixth International Conference on Theory and Applications of Satisfiability Testing (Vol. 2919, pp. 452–467). Springer (LNCS).
+
+[2] Clark Barrett, Morgan Deters, Albert Oliveras, and Aaron Stump. *Design and Results of the 4th Annual Satisfiability Modulo Theories Competition (SMT-COMP 2008)*. Technical Report TR2010-931, New York University, 2010.
+
+[3] Clark Barrett, Leonardo de Moura, and Aaron Stump. *Design and Results of the 2nd Annual Satisfiability Modulo Theories Competition (SMT-COMP 2006)*. Formal Methods in System Design, 31(3):221–239, 2007.
+
+[4] Clark Barrett, Morgan Deters, Albert Oliveras, and Aaron Stump. *Design and Results of the 3rd Annual Satisfiability Modulo Theories Competition (SMT-COMP 2007)*. International Journal on Artificial Intelligence Tools, 17(4):569–606, 2008.
+
+[5] Clark Barrett, Morgan Deters, Albert Oliveras, and Aaron Stump. *Design and Results of the 4th Annual Satisfiability Modulo Theories Competition (SMT-COMP 2008)*. Technical Report TR2010-931, New York University,
+
+[6] David R. Cok, David Déharbe, and Tjark Weber. *The 2014 SMT Competition*. Journal on Satisfiability, Boolean Modeling and Computation, 9:207–242, 2014. [URL](https://satassociation.org/jsat/index.php/jsat/article/view/122).
+
+[7] David R. Cok, Alberto Griggio, Roberto Bruttomesso, and Morgan Deters. *The 2012 SMT Competition*. Available online at [http://smtcomp.sourceforge.net/2012/reports/SMTCOMP2012.pdf](http://smtcomp.sourceforge.net/2012/reports/SMTCOMP2012.pdf).
+
+[8] David R. Cok, Aaron Stump, and Tjark Weber. *The 2013 Evaluation of SMT-COMP and SMT-LIB*. Journal of Automated Reasoning, 55(1):61–90, Springer Netherlands, 2015. [DOI](http://dx.doi.org/10.1007/s10817-015-9328-2).
+
