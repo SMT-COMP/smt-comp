@@ -55,7 +55,7 @@ practical interest. Public competitions are a well-known means of
 stimulating advancement in software tools. For example, in automated
 reasoning, the CASC and SAT competitions for first-order and
 propositional reasoning tools, respectively, have spurred significant
-innovation in their fields [1]. Accordingly,
+innovation in their fields [[1]](#references). Accordingly,
 researchers are highly encouraged to submit both new benchmarks and new
 or improved solvers to raise the level of competition and advance the
 state of the art in automated SMT problem solving. More information on
