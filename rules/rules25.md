@@ -61,7 +61,7 @@ or improved solvers to raise the level of competition and advance the
 state of the art in automated SMT problem solving. More information on
 the history and motivation for SMT-COMP can be found at the competition
 web site, <http://www.smtcomp.org>, and in reports on previous
-competitions ([2, 3, 4, 5, 6, 7, 8]).
+competitions ([2, 3, 4, 5, 6, 7, 8](#references)).
 
 SMT-COMP 2025 is part of the SMT Workshop 2025
 (<http://smt-workshop.cs.uiowa.edu/2025/>), which is affiliated with
