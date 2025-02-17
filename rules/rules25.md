@@ -209,7 +209,7 @@ The SMT-LIB format specification is available from the "Standard" section of the
 
 **Output.** In all tracks except the Incremental Track, any `success` output will be ignored[^2]. Solvers that exit before the time limit without reporting a result (e.g., due to exhausting memory or crashing) *and* do not produce output that includes `sat`, `unsat`, `unknown` or other track specific output as specified in the individual track sections, e.g., unsat cores or models, will be considered to have aborted. Note that there is no distinction between output and error channel and tools should not write any message to the error channel because it could be misinterpreted as a wrong result.
 
-**Time and Memory Limits.** Each SMT-COMP solver will be executed on a dedicated processor of a competition machine, for each given benchmark, up to a fixed wall-clock time limit \$color{purple}{T}\$. The individual track descriptions on pages - specify the time limit for each track. Each processor has 4 cores. Detailed machine specifications are available on the competition web site.
+**Time and Memory Limits.** Each SMT-COMP solver will be executed on a dedicated processor of a competition machine, for each given benchmark, up to a fixed wall-clock time limit **$\color{purple}{T}\$**. The individual track descriptions on pages - specify the time limit for each track. Each processor has 4 cores. Detailed machine specifications are available on the competition web site.
 
 The execution service also limits the memory consumption of the solver processes. We expect the memory limit per solver/benchmark pair to be on the order of 30 GB.
 
@@ -329,7 +329,7 @@ The SMT-LIB maintainers intend to make a new release of the benchmark library pu
 
     In case of a dispute (some solver marks a benchmark as `sat` and some other solver as `unsat`), the benchmark may be retained in the selection.
 
-4.  *Cap the number of instances in a division.* The number of benchmarks in a division based on the size of the corresponding logics in SMT-LIB will be limited as follows. Let \$color{purple}{n}\$ be the number of benchmarks in an SMT-LIB logic, then the number of chosen benchmarks is $min(n, max(300, 50n/100))$:
+4.  *Cap the number of instances in a division.* The number of benchmarks in a division based on the size of the corresponding logics in SMT-LIB will be limited as follows. Let **$\color{purple}{n}\$** be the number of benchmarks in an SMT-LIB logic, then the number of chosen benchmarks is $min(n, max(300, 50n/100))$:
 
     1.  []{#bench-sel-300 label="bench-sel-300"} if $n \le 300$, all instances will be selected;
 
@@ -349,8 +349,8 @@ The selection process in cases [\[bench-sel-600\]](#bench-sel-600){reference-typ
 
 ## 7.1 Benchmark scoring
 
-The **parallel benchmark score** of a solver is a tuple $\color{purple}\color{purple} \langle
-e, n, \it{aw}, w, \it{ac},c\rangle$ with
+The **parallel benchmark score** of a solver is a tuple **$\color{purple}\color{purple} \langle
+e, n, \it{aw}, w, \it{ac},c\rangle$** with
 
 -   number of erroneous results (usually $e = 0$)
 
