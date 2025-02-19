@@ -907,7 +907,7 @@ Track, we have
 For the Unsat-Core Track, the error score $\color{red}{e}$ and
 the correctly solved score $\color{red}{n}$ are defined as
 
--   $e=0$ and $n=0$ if the solver
+-   $\color{red}{e=0}$ and $\color{red}{n=0}$ if the solver
 
     -   aborts without a response to **check-sat**, or
 
@@ -915,11 +915,10 @@ the correctly solved score $\color{red}{n}$ are defined as
 
     -   the result of the **get-unsat-core** command is not wellformed.
 
--   $e=1$ and $n=0$ if the result is erroneous according to
-    Section [5.4](#sec:exec:unsat-core){reference-type="ref"
-    reference="sec:exec:unsat-core"},
+-   $\color{red}{e=1}$ and $\color{red}{n=0}$ if the result is erroneous according to
+    Section 5.4,
 
--   otherwise, $e=0$ and $\color{red}{n}$ is the *reduction*
+-   otherwise, $\color{red}{e=0}$ and $\color{red}{n}$ is the *reduction*
     in the number of formulas, i.e., $n = N$ minus the number of formula
     names in the reported unsatisfiable core.
 
@@ -929,10 +928,8 @@ For the Model-Validation Track, the error score
 $\color{red}{e}$ and the correctly solved score
 $\color{red}{n}$ are defined as
 
--   $e=0$ and $n=0$ if the result is UNKNOWN according to the output of
-    the model validating tool described in
-    Section [5.5](#sec:exec:model){reference-type="ref"
-    reference="sec:exec:model"},
+-   $\color{red}{e=0}$ and $\color{red}{n=0}$ if the result is UNKNOWN according to the output of the model validating tool described in
+    Section 5.5,
 
 -   $e=1$ and $n=0$ if the result is INVALID according to the output of
     the model validating tool described in
