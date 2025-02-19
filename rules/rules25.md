@@ -850,8 +850,10 @@ CPU time limit equal to the wall-clock time
 limit T. A solver result is taken into
 consideration for the sequential score only if the solver process
 terminates *within* this CPU time limit. More specifically, for a given
-parallel performance $\color{red}\langle e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined
-as $\color{red}\langle e_S, n_S, c_S \rangle$ where
+parallel performance $\color{red}\langle e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, 
+the corresponding sequential performance is defined
+as
+$\color{red} \langle e_S, n_S, c_S \rangle$ where
 
 -   $\color{red}{e_S = 0}$, $\color{red}{n_S = 0}$, and $\color{red}{c_S = 0}$ if $\color{red}{c > T}$;
 
@@ -1069,8 +1071,9 @@ be the parallel division score for solver $\color{red}{s}$
 (for a given scoring system, i.e., $\color{red}{n}$ is either
 number of correct results or reduction). If the division error score
 $\color{red}{e^s > 0}$, then solver
-$\color{red}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers $\color{red} S$
-in a division $\color{red}{D}$ is $\color{red} |S| \leq 2$, the division
+$\color{red}{s}\$ is considered unsound and excluded from the ranking. 
+If the number of sound competitive solvers $\color{red} S$
+in a division $\color{red} D$ is $\color{red} |S| \leq 2$, the division
 is excluded from the ranking.
 
 Let
