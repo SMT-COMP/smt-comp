@@ -432,7 +432,7 @@ because it could be misinterpreted as a wrong result.
 
 **Time and Memory Limits.** Each SMT-COMP solver will be executed on a
 dedicated processor of a competition machine, for each given benchmark,
-up to a fixed wall-clock time limit $\color{red} T$. The
+up to a fixed wall-clock time limit T. The
 individual track descriptions on pages - specify the time limit for each
 track. Each processor has 4 cores. Detailed machine specifications are
 available on the competition web site.
@@ -1081,7 +1081,7 @@ virtual best solver *correctness score* for a division
 $\color{red}{D}\$ with competitive sound solvers
 $\color{red} S$ is given as
 
-$$\mathit{vbss}_n(D,S) = sum_{b \in D}{max}$$
+vbss_n(D, S) = sum_{b ∈ D} max{ n_b^s | s ∈ S and n_b^s > 0 }
 
 where the maximum of an empty set is 0 (i.e., no contribution if a
 benchmark is unsolved).
@@ -1091,9 +1091,9 @@ and the virtual best solver *wall-clock time score*
 $\color{red}\mathit{vbss}_w$ for a division $\color{red}{D}$
 with competitive sound solvers $\color{red}{S}\$ is given as
 
-$$\color{red}\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
+vbss_c(D, S) = sum_{b ∈ D} min { c_b^s | s ∈ S and n_b^s > 0 }
 
-$$\color{red}\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
+vbss_w(D, S) = sum_{b ∈ D} min{ w_b^s | s ∈ S and n_b^s > 0 }
 
 where the minimum of an empty set is 1200 seconds (no solver was able to
 solve the benchmark).
