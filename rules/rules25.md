@@ -13,7 +13,6 @@
 **Dominik Winterer**, ETH Zürich, Switzerland,
 <dominik.winterer@inf.ethz.ch>
 
-*This version revised 2025-2-12*
 
 Comments on this document should be emailed to the SMT-COMP mailing list
 (see below) or, if necessary, directly to the organizers.
