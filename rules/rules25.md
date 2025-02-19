@@ -978,7 +978,7 @@ $$\color{red}\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\ra
 A parallel division score $\color{red}\langle
 e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel
 division
-score $\color{red}\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w = w'$ and $c < c'$). That is, fewer errors takes precedence over more correct solutions, which takes precedence over less wall-clock time taken, which takes precedence over less CPU time taken.
+score $\color{red}\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$ iff $\color{red} e < e'$ or ($\color{red} e = e'$ and $\color{red} n > n'$) or ($\color{red} e = e'$ and $\color{red} n = n'$ and $\color{red} w < w'$) or ($\color{red} e = e'$ and $\color{red} n = n'$ and $\color{red} w = w'$ and $\color{red} c < c'$). That is, fewer errors takes precedence over more correct solutions, which takes precedence over less wall-clock time taken, which takes precedence over less CPU time taken.
 
 ### 7.2.2 Sequential Score
 
@@ -986,13 +986,13 @@ The sequential score for a division is computed for *all* tracks
 *except* the Incremental Track and Parallel Track. [^6]. It is defined
 for a participating solver in a division with $\color{red}{M}$
 benchmarks as the sum of all the individual sequential benchmark scores:
+
 $$\color{red}\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle.$$
 
 A sequential division score $\color{red}\langle e^s, n^s, c^s\rangle$ is
 better than a sequential division score
-$\color{red}\langle e^{s'}, n^{s'}, c^{s'}\rangle$ iff $e^s < e^{s'}$ or
-($e^s = e^{s'}$ and $n^s > n^{s'}$) or ($e^s = e^{s'}$ and
-$n_S = n^{s'}$ and $c^s < c^{s'}$). That is, fewer errors takes
+$\color{red}\langle e^{s'}, n^{s'}, c^{s'}\rangle$ iff $\color{red} e^s < e^{s'}$ or ($\color{red} e^s = e^{s'}$ and $\color{red} n^s > n^{s'}$) or ($\color{red} e^s = e^{s'}$ and
+$\color{red} n_S = n^{s'}$ and $\color{red} c^s < c^{s'}$). That is, fewer errors takes
 precedence over more correct solutions, which takes precedence over less
 CPU time taken.
 
