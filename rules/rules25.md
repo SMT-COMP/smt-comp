@@ -847,11 +847,11 @@ The parallel score as defined above favors parallel solvers, which may
 utilize all available processor cores. To evaluate sequential
 performance, we derive a **sequential score** by imposing a *virtual*
 CPU time limit equal to the wall-clock time
-limit $\color{red}{T}$. A solver result is taken into
+limit $T$. A solver result is taken into
 consideration for the sequential score only if the solver process
 terminates *within* this CPU time limit. More specifically, for a given
 parallel performance $\color{red}\langle e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined
-as $\color{red}{\langle e_S, n_S, c_S \rangle}$, where
+as $\color{red} \langle e_S, n_S, c_S \rangle$, where
 
 -   $\color{red}{e_S = 0}$, $\color{red}{n_S = 0}$, and $\color{red}{c_S = 0}$ if $\color{red}{c > T}$;
 
@@ -929,7 +929,7 @@ $\color{red}{e}$ and the correctly solved score
 $\color{red}{n}$ are defined as
 
 -   $\color{red}{e=0}$ and $\color{red}{n=0}$ if the result is UNKNOWN according to the output of the model validating tool described in
-    Section 5.5,
+    the model validating tool described in
 
 -   $e=1$ and $n=0$ if the result is INVALID according to the output of
     the model validating tool described in
