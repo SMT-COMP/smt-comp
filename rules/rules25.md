@@ -137,7 +137,7 @@ changes from the previous competition rules are the following:
   *Rationale:* This should ensure that solvers have the time to correctly assess the validity of the generated unsat-core.
 
 - **Best overall ranking.** We reintroduce, with minor modifications, the best overall ranking that had been used until SMT-COMP 2018.  
-  *Rationale:* We want to showcase the universality of the submitted SMT solvers, alongside their performance in individual divisions.
+  *Rationale:* We want to showcase the universality of the submitted SMT solvers, besides their benefits in the individual divisions.
 
 - **Cloud and Parallel tracks.** Due to the lack of suitable infrastructure, the Cloud track is not taking place for SMT-COMP 2025.  
   The Parallel track will be executed on the same BenchExec-based infrastructure as the other tracks, but on machines with a higher number of CPU cores.  
@@ -1053,20 +1053,68 @@ the parallel division score when only unsatisfiable instances are
 considered.
 
 ## 7.3 Competition-Wide Recognitions
+Between 2014 and 2018, the SMT competition used a competition-wide scoring system
+that emphasized the breadth of solver participation by summing up a score for
+each (competitive) division a solver competed in. This was discontinued in 2019
+in favor of *biggest lead* and *largest contribution* rankings to avoid favoring
+solvers that entered a large number of divisions. These two rankings have been
+used since.
 
-In 2014 the SMT competition introduced a competition-wide scoring to
-allow it to award medals in the FLoC Olympic Games and has been awarded
-each year since. This scoring purposefully emphasized the breadth of
-solver participation by summing up a score for each (competitive)
-division a solver competed in. Whilst this rationale is reasonable, we
-observed that this score had become dictated by the number of divisions
-being entered by a solver.
+For SMT-COMP 2025, we reintroduce the *best overall ranking* alongside the other
+two rankings to showcase both the overall qualities of the solvers and their
+strengths in individual divisions.
 
-This score has been replaced the competition-wide score with two
-*rankings* that select one solver per division and then rank those
-solvers. The rationale here is to take the focus away from the number of
-divisions entered and focus on measures that make sense to use to
-compare different divisions.
+### Best Overall Ranking
+
+This ranking aims to select the solver that *is most universal*, i.e., the solver
+that solved the largest number of benchmarks, accounting for the division sizes.
+
+Let ⟨eᴰ, nᴰ, *aw*ᴰ, wᴰ, *ac*ᴰ, cᴰ⟩ be the parallel division score for a given solver
+in division D (for a given scoring system, e.g., number of correct results or reduction).
+Let Nᴰ be the total number of benchmarks in division D that were used in the competition.
+The **normalized correctness score** *nn*ᴰ of the solver in division D is defined as:
+
+\[
+\mathit{nn}^D =
+\begin{cases}
+\left( \frac{n^D}{N^D} \right)^2, & \text{if } e^D = 0, \\
+-2, & \text{if } e^D > 0.
+\end{cases}
+\]
+
+The **overall score** of the solver is the sum of:
+
+\[
+\mathit{nn}^D \cdot \log_{10}(N^D)
+\]
+
+over all competitive divisions D into which the solver has entered.
+
+Solvers are ranked based on the overall score. Ties are resolved using **CPU time**
+in **sequential scoring** and **wall-clock time** in **parallel scoring**.
+
+---
+
+#### *Rationale:*
+This metric intentionally emphasizes the breadth of solver participation—a solver
+participating in many logics need not be the best in any one of them.  
+The goal of the square in the formula is to favor solvers that complete close to
+all benchmarks in a division. A solver still needs to perform reasonably well compared
+to the division winners to benefit from broad participation.
+
+The **constant penalty for errors (-2)** reflects that any error in a division
+renders a solver untrustworthy for that division. The value of 2 is chosen to
+balance the community's interest in reliability with the risk of stifling innovation.
+Submitting a potentially buggy solver that solves all benchmarks can still be
+beneficial if the probability of an error is below approximately 33%.
+
+The **logarithmic scaling** adjusts for the wide variety in the number of benchmarks
+across divisions. It is a compromise between a **linear combination** (which would favor
+large divisions) and **simple fraction solved** (which would favor small divisions).
+
+
+
+
 
 ### 7.3.1 Biggest Lead Ranking
 
