@@ -151,7 +151,7 @@ solver. The system description of a derived tool **must** explicitly
 acknowledge the solver it is based on and extends. It **must** further
 make clear technical innovations by which the derived tool expects to
 improve on the original solver. A derived tool **must** follow the
-*naming convention* `\[name of base solver\]-\[my solver name\]`.
+*naming convention* `[name of base solver]-[my solver name]`.
 Submitters of a derived tool should also submit the corresponding base
 tool's binary for the same track and logics as their derived tool.
 
