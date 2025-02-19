@@ -439,9 +439,7 @@ available on the competition web site.
 
 The execution service also limits the memory consumption of the solver
 processes. We expect the memory limit per solver/benchmark pair to be on
-the order of 30 GB.
-
-The limits for Parallel Track are available at
+the order of 30 GB. The limits for Parallel Track are available at
 <https://smt-comp.github.io/2025/parallel-track.html>.
 
 **Persistent State.** Solvers may create and write to files and
@@ -722,11 +720,11 @@ using the following selection process:
     logic, then the number of chosen benchmarks is
     $min(n, max(300, 50n/100))$:
 
-    1.  if $n \le 300$, all instances will be selected;
+    1.  if $\color{red}{n \le 300}$, all instances will be selected;
 
-    2.  if $300 < n \leq 600$, a subset of 300 instances from the logic will be selected;
+    2.  if $\color{red}{300 < n \leq 600}$, a subset of 300 instances from the logic will be selected;
 
-    3.  and if $n > 600$, 50% of the benchmarks of the logic will be selected.
+    3.  and if $\color{red}{n > 600}$, 50% of the benchmarks of the logic will be selected.
 
 The selection process in cases above will guarantee the inclusion of new
 benchmarks by first picking randomly one benchmark from each new
@@ -774,8 +772,7 @@ submitted solver.
 ## 7.1 Benchmark scoring
 
 The **parallel benchmark score** of solver is a tuple
-$\color{red} \mathbf{\langle
-e, n, \it{aw}, w, \it{ac},c\rangle}$ with
+$\color{red} \mathbf{\langle e, n, \it{aw}, w, \it{ac},c\rangle}$ with
 
 -   number of erroneous results (usually e = 0)
 
