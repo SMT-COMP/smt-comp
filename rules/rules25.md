@@ -84,8 +84,7 @@ Within each track there are multiple divisions, where each division uses
 benchmarks from a specific group of SMT-LIB logics. We will recognize
 winners in all tracks. They will be determined by the number of
 benchmarks solved (taking into account the weighting detailed in
-Section [7](#sec:scoring){reference-type="ref"
-reference="sec:scoring"}); we will also recognize solvers based on
+(Section 7 Scoring)  we will also recognize solvers based on
 additional criteria.
 
 The rest of this document, revised from the previous version,[^1]
