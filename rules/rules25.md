@@ -1041,7 +1041,7 @@ This ranking aims to select the solver that *won by the most* in some
 competitive division. The winners of each division are ranked by the
 distance between them and the next competitive solver in that division.
 
-Let $\color{red}{n_i^D}$ be the correctness score of the $\color{red}{i}$ th solver (for a given scoring system e.g. number of correct results or reduction) in division $\color{red}{D}$. The *correctness
+Let $\color{red}{n_i^D}$ be the correctness score of the $\color{red}{i}$th solver (for a given scoring system e.g. number of correct results or reduction) in division $\color{red}{D}$. The *correctness
 rank* of division $\color{red}{D}$ is given as 
 $$\color{red}{\frac{n_1^D+1}{n_2^D+1}}$$ Let $\color{red}{c_i^D}$ be the CPU time score of the $\color{red}{i}$th solver in division $\color{red}{D}$. The *CPU time rank* of division $\color{red}{D}$ is given as
 $$\color{red}\frac{c_2^D+1}{c_1^D+1}$$ Let $w_i^D$ be the wall-clock
