@@ -1043,16 +1043,18 @@ distance between them and the next competitive solver in that division.
 
 Let $\color{red}{n_i^D}$ be the correctness score of the $\color{red}{i}$ th solver (for a given scoring system e.g. number of correct results or reduction) in division $\color{red}{D}$. The *correctness
 rank* of division $\color{red}{D}$ is given as 
-$$\color{red}{\frac{n_1^D+1}{n_2^D+1}}$$ Let $\color{red}{c_i^D}$ be the CPU time score of the $\color{red}{i}$ th solver in division $\color{red}{D}$. The *CPU time rank* of division $\color{red}{D}$ is given as
+
+$$\color{red}{\frac{n_1^D+1}{n_2^D+1}}$$ 
+
+Let $\color{red}{c_i^D}$ be the CPU time score of the $\color{red}{i}$ th solver in division $\color{red}{D}$. The *CPU time rank* of division $\color{red}{D}$ is given as
 $$\color{red}\frac{c_2^D+1}{c_1^D+1}$$ Let $w_i^D$ be the wall-clock
 time score of the $\color{red}{i}$ th solver in division
 $\color{red}{D}$. The *wall-clock time rank* of division
 $\color{red}{D}$ is given as
-$$\color{red}\frac{w_2^D+1}{w_1^D+1}$$ The *biggest lead winner* is the
-winner of the division with the highest (largest) correctness rank. In
-case of a tie, the winner is determined as the solver with the higher
-corresponding CPU (resp. wall-clock) time rank for sequential (resp.
-parallel) scoring. This can be computed per scoring system.
+
+$$\color{red}\frac{w_2^D+1}{w_1^D+1}$$ 
+
+The *biggest lead winner* is the winner of the division with the highest (largest) correctness rank. In case of a tie, the winner is determined as the solver with the higher corresponding CPU (resp. wall-clock) time rank for sequential (resp. parallel) scoring. This can be computed per scoring system.
 
 ### 7.3.2 Largest Contribution Ranking
 
