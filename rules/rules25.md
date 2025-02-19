@@ -13,9 +13,44 @@
 **Dominik Winterer**, ETH Zürich, Switzerland,
 <dominik.winterer@inf.ethz.ch>
 
-
 Comments on this document should be emailed to the SMT-COMP mailing list
 (see below) or, if necessary, directly to the organizers.
+
+## Table of Contents
+- [1 Communication](#1-communication)
+- [2 Important Dates](#2-important-dates)
+- [3 Introduction](#3-introduction)
+- [4 Entrants](#4-entrants)
+- [5 Execution of Solvers](#5-execution-of-solvers)
+  - [5.1 Logistics](#51-logistics)
+  - [5.2 Single Query Track](#52-single-query-track)
+  - [5.3 Incremental Track](#53-incremental-track)
+  - [5.4 Unsat-Core Track](#54-unsat-core-track)
+  - [5.5 Model-Validation Track](#55-model-validation-track)
+  - [5.6 Parallel Track](#56-parallel-track)
+- [6 Benchmarks and Problem Divisions](#6-benchmarks-and-problem-divisions)
+- [7 Scoring](#7-scoring)
+  - [7.1 Benchmark scoring](#71-benchmark-scoring)
+    - [7.1.1 Sequential Benchmark Score](#711-sequential-benchmark-score)
+    - [7.1.2 Single Query Track and Parallel Track](#712-single-query-track-and-parallel-track)
+    - [7.1.3 Incremental Track](#713-incremental-track)
+    - [7.1.4 Unsat-Core Track](#714-unsat-core-track)
+    - [7.1.5 Model-Validation Track](#715-model-validation-track)
+  - [7.2 Division scoring](#72-division-scoring)
+    - [7.2.1 Parallel Score](#721-parallel-score)
+    - [7.2.2 Sequential Score](#722-sequential-score)
+    - [7.2.3 24-Seconds Score (Single Query Track)](#723-24-seconds-score-single-query-track)
+    - [7.2.4 Sat Score (Single Query Track)](#724-sat-score-single-query-track)
+    - [7.2.5 Unsat Score (Single Query Track)](#725-unsat-score-single-query-track)
+  - [7.3 Competition-Wide Recognitions](#73-competition-wide-recognitions)
+    - [7.3.1 Biggest Lead Ranking](#731-biggest-lead-ranking)
+    - [7.3.2 Largest Contribution Ranking](#732-largest-contribution-ranking)
+  - [7.4 Other Recognitions](#74-other-recognitions)
+- [8 Judging](#8-judging)
+- [9 Acknowledgments](#9-acknowledgments)
+- [References](#references)
+
+
 
 # 1 Communication
 
