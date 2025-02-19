@@ -1260,8 +1260,7 @@ unsoundness issues in SMT solvers (see [yinyang](https://github.com/testsmt/yiny
 [^4]: If the benchmark status is unknown, we thus treat the solver's
     answer as correct. Disagreements between different solvers on
     benchmarks with unknown status are governed in
-    Section [7.2](#sec:division-scoring){reference-type="ref"
-    reference="sec:division-scoring"}.
+    [7.2 Division scoring](#72-division-scoring).
 
 [^5]: Times measured by the execution service may include time spent in
     the trace executor. We expect that this time will likely be
