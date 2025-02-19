@@ -819,19 +819,18 @@ $\color{red}{T}$ or the solver process terminates.
 **Wall-Clock Time Score ($\color{red}\mathbf{w}$).** For the Single
 Query Track, Unsat-Core Track, Model-Validation Track and Parallel
 Track, the wall-clock time score $\color{red}{w}$ is the same
-as the actual (real-valued) wall-clock time $\color{red}\mathit{aw}$,
+as the actual (real-valued) wall-clock time $\color{red}{\mathit{aw}}$,
 except that it is zero if the benchmark was not correctly solved within
-the time limit $\color{red}{T}$, i.e., $\color{red}{w = 0$ if $e = 1}$, the
-process did not terminate within the time limit
-$\color{red}{T}\$, or it did return unknown or an unknown
+the time limit $\color{red}{T}$, i.e., $\color{red}{w = 0}$ if $\color{red}{e = 1}$, the process did not terminate within the time limit
+$\color{red}{T}$, or it did return unknown or an unknown
 result. For the Incremental Track, the wall-clock time score
 $\color{red}{w}$ is the (real-valued) wall-clock time in
 seconds until the process returned the last time sat/unsat within the
 time limit; this means especially that $\color{red}{w = 0}$ if the process never returned sat/unsat within the time limit.
 
 **Actual CPU Time ($\color{red}\mathbf{ac}$).** The (real-valued) CPU
-time in seconds, measured across all \$`\color{red}{m}`{=tex}\$ cores
-until time limit \$`\color{red}{mT}`{=tex}\$ is reached or the solver
+time in seconds, measured across all $\color{red}{m}$ cores
+until time limit $\color{red}{mT}$ is reached or the solver
 process terminates.
 
 **CPU Time Score ($\color{red}\mathbf{c}$).** For the Single Query
