@@ -777,7 +777,7 @@ The **parallel benchmark score** of solver is a tuple
 $\color{red} \mathbf{\langle
 e, n, \it{aw}, w, \it{ac},c\rangle}$ with
 
--   number of erroneous results (usually $e = 0$)
+-   number of erroneous results (usually e = 0)
 
 -   number of correct results (resp. *reduction* for the Unsat-Core
     Track)
@@ -791,41 +791,41 @@ e, n, \it{aw}, w, \it{ac},c\rangle}$ with
 -   CPU time score in seconds (real-valued)
 
 **Error Score ($\color{red}\mathbf{e}$).** For the Single Query Track,
-Incremental Track and Parallel Track, \$`\color{red}{e}`{=tex}\$ is the
+Incremental Track and Parallel Track, $\color{red}{e}$ is the
 number of returned statuses that disagree with the given expected status
 (as described above, disagreements on benchmarks with unknown status
 lead to the benchmark being disregarded). For the Unsat-Core Track,
-\$`\color{red}{e}`{=tex}\$ includes, in addition, the number of returned
+$\color{red}{e}$ includes, in addition, the number of returned
 unsat cores that are not, in fact, unsatisfiable (as validated by a
 selection of other solvers selected by organizers). For the
-Model-Validation Track, \$`\color{red}{e}`{=tex}\$ includes, in
+Model-Validation Track, $\color{red}{e}$ includes, in
 addition, the number of returned models that are not full satisfiable
 models.
 
 **Correctly Solved Score ($\color{red}\mathbf{n}$).** For the Single
 Query Track, Incremental Track, Model-Validation Track, and Parallel
-Track, \$`\color{red}{N}`{=tex}\$ is defined as the number of
-**check-sat** commands, and \$`\color{red}{n}`{=tex}\$ is defined as the
+Track, $\color{red}{N}$ is defined as the number of
+**check-sat** commands, and $\color{red}{n}$ is defined as the
 number of correct results. For the Unsat-Core Track,
-\$`\color{red}{N}`{=tex}\$ is defined as the number of named top-level
-assertions, and \$`\color{red}{n}`{=tex}\$ is defined as the
-*reduction*, i.e., the difference between \$`\color{red}{N}`{=tex}\$ and
+$\color{red}{N}$ is defined as the number of named top-level
+assertions, and $\color{red}{n}$ is defined as the
+*reduction*, i.e., the difference between $\color{red}{N}$ and
 the size of the unsat core.
 
 **Actual Wall-Clock Time ($\color{red}\mathbf{aw}$).** The actual
 (real-valued) wall-clock time in seconds, until time limit
-\$`\color{red}{T}`{=tex}\$ or the solver process terminates.
+$\color{red}{T}$ or the solver process terminates.
 
 **Wall-Clock Time Score ($\color{red}\mathbf{w}$).** For the Single
 Query Track, Unsat-Core Track, Model-Validation Track and Parallel
-Track, the wall-clock time score \$`\color{red}{w}`{=tex}\$ is the same
+Track, the wall-clock time score $\color{red}{w}$ is the same
 as the actual (real-valued) wall-clock time $\color{red}\mathit{aw}$,
 except that it is zero if the benchmark was not correctly solved within
-the time limit \$`\color{red}{T}`{=tex}\$, i.e., $w = 0$ if $e = 1$, the
+the time limit $\color{red}{T}$, i.e., $w = 0$ if $e = 1$, the
 process did not terminate within the time limit
-\$`\color{red}{T}`{=tex}\$, or it did return unknown or an unknown
+$\color{red}{T}\$, or it did return unknown or an unknown
 result. For the Incremental Track, the wall-clock time score
-\$`\color{red}{w}`{=tex}\$ is the (real-valued) wall-clock time in
+$\color{red}{w}$ is the (real-valued) wall-clock time in
 seconds until the process returned the last time sat/unsat within the
 time limit; this means especially that $w = 0$ if the process never
 returned sat/unsat within the time limit.
