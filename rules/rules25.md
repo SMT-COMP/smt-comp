@@ -1066,9 +1066,9 @@ $\color{red}\langle e^s, n^s, \mathit{aw}^s, w^s, \mathit{ac}^s, c^s \rangle$
 be the parallel division score for solver $\color{red}{s}$
 (for a given scoring system, i.e., $\color{red}{n}$ is either
 number of correct results or reduction). If the division error score
-$e^s > 0$, then solver
-$\color{red}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers $\color{red}{S}\$
-in a division $\color{red}{D}$ is $|S| \leq 2$, the division
+$\color{red}{e^s > 0}$, then solver
+$\color{red}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers $\color{red}{S}$
+in a division $\color{red}{D}$ is $\color{red}{|S| \leq 2}$, the division
 is excluded from the ranking.
 
 Let
