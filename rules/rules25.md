@@ -835,13 +835,13 @@ process terminates.
 
 **CPU Time Score ($\color{red}\mathbf{c}$).** For the Single Query
 Track, Unsat-Core Track, Model-Validation Track, and Parallel Track, the
-CPU time score \$`\color{red}{c}`{=tex}\$ is the same as the actual
+CPU time score $\color{red}{c}$ is the same as the actual
 (real-valued) CPU time $\color{red}\mathit{ac}$, except that it is zero
 if the benchmark was not correctly solved within the time limit
-\$`\color{red}{mT}`{=tex}\$, i.e., $c = 0$ if $e = 1$, the process did
-not terminate within the time limit \$`\color{red}{mT}`{=tex}\$, or it
+$\color{red}{mT}$, i.e., $\color{red}{c = 0$ if $e = 1}$, the process did
+not terminate within the time limit $\color{red}{mT}$, or it
 did return unknown or an unknown result. For the Incremental Track, the
-CPU time score \$`\color{red}{c}`{=tex}\$ is the (real-valued) CPU time
+CPU time score $\color{red}{c}$ is the (real-valued) CPU time
 in seconds until the process returned the last time sat/unsat within the
 time limit; this means especially that $c = 0$ if the process never
 returned sat/unsat within the time limit.
@@ -852,7 +852,7 @@ The parallel score as defined above favors parallel solvers, which may
 utilize all available processor cores. To evaluate sequential
 performance, we derive a **sequential score** by imposing a *virtual*
 CPU time limit equal to the wall-clock time
-limit \$`\color{red}{T}`{=tex}\$. A solver result is taken into
+limit $\color{red}{T}$. A solver result is taken into
 consideration for the sequential score only if the solver process
 terminates *within* this CPU time limit. More specifically, for a given
 parallel performance $\color{red}\langle
@@ -867,8 +867,8 @@ as $\color{red}\langle e_S, n_S, c_S\rangle$, where
 ### 7.1.2 Single Query Track and Parallel Track
 
 For the Single Query Track and Parallel Track, the error score
-\$`\color{red}{e}`{=tex}\$ and the correctly solved score
-\$`\color{red}{n}`{=tex}\$ are defined as
+$\color{red}{e}$ and the correctly solved score
+$\color{red}{n}$ are defined as
 
 -   $e=0$ and $n=0$ if the solver
 
@@ -905,14 +905,14 @@ Track, we have
 -   $e=1$ and $n=0$ if the solver returns an incorrect result for any
     **check-sat** command within the time limit,
 
--   otherwise, $e=0$ and \$`\color{red}{n}`{=tex}\$ is the number of
+-   otherwise, $e=0$ and $\color{red}{n}$ is the number of
     correct results for **check-sat** commands returned by the solver
     before the time limit is reached.
 
 ### 7.1.4 Unsat-Core Track
 
-For the Unsat-Core Track, the error score \$`\color{red}{e}`{=tex}\$ and
-the correctly solved score \$`\color{red}{n}`{=tex}\$ are defined as
+For the Unsat-Core Track, the error score $\color{red}{e}$ and
+the correctly solved score $\color{red}{n}$ are defined as
 
 -   $e=0$ and $n=0$ if the solver
 
@@ -926,15 +926,15 @@ the correctly solved score \$`\color{red}{n}`{=tex}\$ are defined as
     Section [5.4](#sec:exec:unsat-core){reference-type="ref"
     reference="sec:exec:unsat-core"},
 
--   otherwise, $e=0$ and \$`\color{red}{n}`{=tex}\$ is the *reduction*
+-   otherwise, $e=0$ and $\color{red}{n}$ is the *reduction*
     in the number of formulas, i.e., $n = N$ minus the number of formula
     names in the reported unsatisfiable core.
 
 ### 7.1.5 Model-Validation Track
 
 For the Model-Validation Track, the error score
-\$`\color{red}{e}`{=tex}\$ and the correctly solved score
-\$`\color{red}{n}`{=tex}\$ are defined as
+$\color{red}{e}$ and the correctly solved score
+$\color{red}{n}$ are defined as
 
 -   $e=0$ and $n=0$ if the result is UNKNOWN according to the output of
     the model validating tool described in
@@ -1005,7 +1005,7 @@ taken, which takes precedence over less CPU time taken.
 
 The sequential score for a division is computed for *all* tracks
 *except* the Incremental Track and Parallel Track. [^6]. It is defined
-for a participating solver in a division with \$`\color{red}{M}`{=tex}\$
+for a participating solver in a division with $\color{red}{M}$
 benchmarks as the sum of all the individual sequential benchmark scores:
 $$\color{red}\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle.$$
 
