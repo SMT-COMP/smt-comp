@@ -1069,24 +1069,26 @@ strengths in individual divisions.
 This ranking aims to select the solver that *is most universal*, i.e., the solver
 that solved the largest number of benchmarks, accounting for the division sizes.
 
-Let ⟨eᴰ, nᴰ, *aw*ᴰ, wᴰ, *ac*ᴰ, cᴰ⟩ be the parallel division score for a given solver
+Let $\color{red} \langle e^D, n^D, \mathit{aw}^D, w^D, \mathit{ac}^D, c^D \rangle$
+be the parallel division score for a given solver
 in division D (for a given scoring system, e.g., number of correct results or reduction).
-Let Nᴰ be the total number of benchmarks in division D that were used in the competition.
+Let N be the total number of benchmarks in division D that were used in the competition.
 The **normalized correctness score** *nn*ᴰ of the solver in division D is defined as:
 
-\[
+$$
+\color{red}
 \mathit{nn}^D =
 \begin{cases}
 \left( \frac{n^D}{N^D} \right)^2, & \text{if } e^D = 0, \\
 -2, & \text{if } e^D > 0.
 \end{cases}
-\]
+$$
 
 The **overall score** of the solver is the sum of:
 
-\[
+$$\color{red}
 \mathit{nn}^D \cdot \log_{10}(N^D)
-\]
+$$
 
 over all competitive divisions D into which the solver has entered.
 
