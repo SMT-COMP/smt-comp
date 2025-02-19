@@ -1041,13 +1041,13 @@ This ranking aims to select the solver that *won by the most* in some
 competitive division. The winners of each division are ranked by the
 distance between them and the next competitive solver in that division.
 
-Let $\color{red}{n_i^D}$ be the correctness score of the $\color{red}{i}$th solver (for a given scoring system e.g. number of correct results or reduction) in division $\color{red}{D}$. The *correctness
+Let $\color{red}{n_i^D}$ be the correctness score of the $\color{red}{i}$ th solver (for a given scoring system e.g. number of correct results or reduction) in division $\color{red}{D}$. The *correctness
 rank* of division $\color{red}{D}$ is given as 
-$$\color{red}{\frac{n_1^D+1}{n_2^D+1}}$$ Let $\color{red}{c_i^D}$ be the CPU time score of the $\color{red}{i}$th solver in division $\color{red}{D}$. The *CPU time rank* of division $\color{red}{D}$ is given as
+$$\color{red}{\frac{n_1^D+1}{n_2^D+1}}$$ Let $\color{red}{c_i^D}$ be the CPU time score of the $\color{red}{i}$ th solver in division $\color{red}{D}$. The *CPU time rank* of division $\color{red}{D}$ is given as
 $$\color{red}\frac{c_2^D+1}{c_1^D+1}$$ Let $w_i^D$ be the wall-clock
-time score of the \$`\color{red}{i}`{=tex}\$th solver in division
-\$`\color{red}{D}`{=tex}\$. The *wall-clock time rank* of division
-\$`\color{red}{D}`{=tex}\$ is given as
+time score of the $\color{red}{i}$ th solver in division
+$\color{red}{D}$. The *wall-clock time rank* of division
+$\color{red}{D}$ is given as
 $$\color{red}\frac{w_2^D+1}{w_1^D+1}$$ The *biggest lead winner* is the
 winner of the division with the highest (largest) correctness rank. In
 case of a tie, the winner is determined as the solver with the higher
@@ -1063,29 +1063,29 @@ the *virtual best solver* for a division.
 
 Let
 $\color{red}\langle e^s, n^s, \mathit{aw}^s, w^s, \mathit{ac}^s, c^s \rangle$
-be the parallel division score for solver \$`\color{red}{s}`{=tex}\$
-(for a given scoring system, i.e., \$`\color{red}{n}`{=tex}\$ is either
+be the parallel division score for solver $\color{red}{s}$
+(for a given scoring system, i.e., $\color{red}{n}$ is either
 number of correct results or reduction). If the division error score
 $e^s > 0$, then solver
-$\color{red}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers $`\color{red}{S}`{=tex}\$
-in a division \$`\color{red}{D}`{=tex}\$ is $|S| \leq 2$, the division
+$\color{red}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers $\color{red}{S}\$
+in a division $\color{red}{D}$ is $|S| \leq 2$, the division
 is excluded from the ranking.
 
 Let
 $\color{red}\langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s \rangle$
-be the parallel benchmark score for benchmark \$`\color{red}{b}`{=tex}\$
-and solver \$`\color{red}{s}`{=tex}\$ (for a given scoring system). The
+be the parallel benchmark score for benchmark $\color{red}{b}$
+and solver $\color{red}{s}$ (for a given scoring system). The
 virtual best solver *correctness score* for a division
-\$`\color{red}{D}`{=tex}\$ with competitive sound solvers
-\$`\color{red}{S}`{=tex}\$ is given as
+$\color{red}{D}\$ with competitive sound solvers
+$\color{red}{S}$ is given as
 $$\color{red}\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
 where the maximum of an empty set is 0 (i.e., no contribution if a
 benchmark is unsolved).
 
 The virtual best solver *CPU time score* $\color{red}\mathit{vbss}_c$
 and the virtual best solver *wall-clock time score*
-$\color{red}\mathit{vbss}_w$ for a division \$`\color{red}{D}`{=tex}\$
-with competitive sound solvers \$`\color{red}{S}`{=tex}\$ is given as
+$\color{red}\mathit{vbss}_w$ for a division $\color{red}{D}$
+with competitive sound solvers $\color{red}{S}\$ is given as
 $$\color{red}\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
 $$\color{red}\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
 where the minimum of an empty set is 1200 seconds (no solver was able to
@@ -1094,31 +1094,31 @@ solve the benchmark).
 In other words, for the single query track,
 $\color{red}\mathit{vbss}_c(D,S)$ and $\color{red}\mathit{vbss}_w(D,S)$
 is the smallest amount of CPU time and wall-clock time taken to solve
-all benchmarks solved in division \$`\color{red}{D}`{=tex}\$ using all
-sound competitive solvers in \$`\color{red}{S}`{=tex}\$.
+all benchmarks solved in division $\color{red}{D}$ using all
+sound competitive solvers in $\color{red}{S}$.
 
-Let \$color{purple}{S}\$ be the set of competitive solvers competing in
-division \$`\color{red}{D}`{=tex}\$. The *correctness rank*
+Let $color{purple}{S}$ be the set of competitive solvers competing in
+division $\color{red}{D}$. The *correctness rank*
 $\color{red}\mathit{vbss}_n$, the *CPU time rank*
 $\color{red}\mathit{vbss}_c$ and the *wall-clock time rank*
 $\color{red}\mathit{vbss}_w$ of solver $s \in S$ in division
-\$`\color{red}{D}`{=tex}\$ are then defined as
+$\color{red}{D}$ are then defined as
 $$1- \frac{\mathit{vbss}_n(D,S-s) }{ \mathit{vbss}_n (D,S)}
 \hspace{3em}
 1- \frac{\mathit{vbss}_c(D,S) }{ \mathit{vbss}_c(D,S-s)}
 \hspace{3em}
 1- \frac{\mathit{vbss}_w(D,S) }{ \mathit{vbss}_w(D,S-s)}$$ i.e., the
 difference in virtual best solver score when removing
-\$`\color{red}{s}`{=tex}\$ from the computation.
+$\color{red}{s}$ from the computation.
 
 These ranks will be numbers between 0 and 1 with 0 indicating that
-\$`\color{red}{s}`{=tex}\$ made no impact on the *vbss* and 1 indicating
-that \$`\color{red}{s}`{=tex}\$ is the only solver that solved anything
-in the division. The ranks for a division \$`\color{red}{D}`{=tex}\$ in
+$\color{red}{s}$ made no impact on the *vbss* and 1 indicating
+that $\color{red}{s}$ is the only solver that solved anything
+in the division. The ranks for a division $\color{red}{D}$ in
 a given track will be normalized by multiplying with
 $\color{red}\frac{n_D}{N}$, where $n_D$ corresponds to the number of
 competitive solver/benchmark pairs in division
-\$`\color{red}{D}`{=tex}\$ and \$`\color{red}{N}`{=tex}\$ being the
+$\color{red}{D}$ and $\color{red}{N}\$ being the
 overall number of competitive solver/benchmark pairs of this track.
 
 The *largest contribution winner* is the solver across all divisions
