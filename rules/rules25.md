@@ -821,14 +821,13 @@ Query Track, Unsat-Core Track, Model-Validation Track and Parallel
 Track, the wall-clock time score $\color{red}{w}$ is the same
 as the actual (real-valued) wall-clock time $\color{red}\mathit{aw}$,
 except that it is zero if the benchmark was not correctly solved within
-the time limit $\color{red}{T}$, i.e., $w = 0$ if $e = 1$, the
+the time limit $\color{red}{T}$, i.e., $\color{red}{w = 0$ if $e = 1}$, the
 process did not terminate within the time limit
 $\color{red}{T}\$, or it did return unknown or an unknown
 result. For the Incremental Track, the wall-clock time score
 $\color{red}{w}$ is the (real-valued) wall-clock time in
 seconds until the process returned the last time sat/unsat within the
-time limit; this means especially that $w = 0$ if the process never
-returned sat/unsat within the time limit.
+time limit; this means especially that $\color{red}{w = 0}$ if the process never returned sat/unsat within the time limit.
 
 **Actual CPU Time ($\color{red}\mathbf{ac}$).** The (real-valued) CPU
 time in seconds, measured across all \$`\color{red}{m}`{=tex}\$ cores
