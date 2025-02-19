@@ -838,13 +838,11 @@ Track, Unsat-Core Track, Model-Validation Track, and Parallel Track, the
 CPU time score $\color{red}{c}$ is the same as the actual
 (real-valued) CPU time $\color{red}\mathit{ac}$, except that it is zero
 if the benchmark was not correctly solved within the time limit
-$\color{red}{mT}$, i.e., $\color{red}{c = 0$ if $e = 1}$, the process did
-not terminate within the time limit $\color{red}{mT}$, or it
+$\color{red}{mT}$, i.e., $\color{red}{c = 0}$ if $\color{red}{e = 1}$, the process did not terminate within the time limit $\color{red}{mT}$, or it
 did return unknown or an unknown result. For the Incremental Track, the
 CPU time score $\color{red}{c}$ is the (real-valued) CPU time
 in seconds until the process returned the last time sat/unsat within the
-time limit; this means especially that $c = 0$ if the process never
-returned sat/unsat within the time limit.
+time limit; this means especially that $\color{red}{c = 0}$ if the process never returned sat/unsat within the time limit.
 
 ### 7.1.1 Sequential Benchmark Score
 
@@ -855,14 +853,12 @@ CPU time limit equal to the wall-clock time
 limit $\color{red}{T}$. A solver result is taken into
 consideration for the sequential score only if the solver process
 terminates *within* this CPU time limit. More specifically, for a given
-parallel performance $\color{red}\langle
-e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding
-sequential performance is defined
+parallel performance $\color{red}\langle e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined
 as $\color{red}\langle e_S, n_S, c_S\rangle$, where
 
--   $\color{red}e_S = 0$, $n_S = 0$, and $c_S = 0$ if $c > T$;
+-   $\color{red}{e_S = 0$, $n_S = 0}$, and $\color{red}{c_S = 0}$ if $\color{red}{c > T}$;
 
--   $\color{red} e_S = e$, $n_S = n$, and $c_S = c$ otherwise.[^3]
+-   $\color{red}{e_S = e}$, $\color{red}{n_S = n}$, and $\color{red}{c_S = c}$ otherwise.[^3]
 
 ### 7.1.2 Single Query Track and Parallel Track
 
