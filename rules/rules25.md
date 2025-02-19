@@ -1068,8 +1068,8 @@ be the parallel division score for solver $\color{red}{s}$
 (for a given scoring system, i.e., $\color{red}{n}$ is either
 number of correct results or reduction). If the division error score
 $\color{red}{e^s > 0}$, then solver
-$\color{red}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers $\color{red}{S}$
-in a division $\color{red}{D}$ is $\color{red}{|S| \leq 2}$, the division
+$\color{red}{s}\$ is considered unsound and excluded from the ranking. If the number of sound competitive solvers $\color{red}S$
+in a division $\color{red}{D}$ is $\color{red} |S| \leq 2$, the division
 is excluded from the ranking.
 
 Let
@@ -1080,7 +1080,7 @@ virtual best solver *correctness score* for a division
 $\color{red}{D}\$ with competitive sound solvers
 $\color{red} S$ is given as
 
-$$\color{red}{\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}}$$
+$$\color{red}\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
 
 where the maximum of an empty set is 0 (i.e., no contribution if a
 benchmark is unsolved).
@@ -1090,9 +1090,9 @@ and the virtual best solver *wall-clock time score*
 $\color{red}\mathit{vbss}_w$ for a division $\color{red}{D}$
 with competitive sound solvers $\color{red}{S}\$ is given as
 
-$$\color{red}{\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S \text{ and } n_b^s > 0 \}}$$
+$$\color{red}\mathit{vbss}_c(D,S) = \sum_{b \in D} {\sf min}\{ c_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
 
-$$\color{red}{\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S \text{ and } n_b^s > 0 \}}$$
+$$\color{red}\mathit{vbss}_w(D,S) = \sum_{b \in D} {\sf min}\{ w_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
 
 where the minimum of an empty set is 1200 seconds (no solver was able to
 solve the benchmark).
