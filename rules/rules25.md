@@ -808,18 +808,13 @@ submitted solver.
 The **parallel benchmark score** of solver is a tuple
 $\color{red} \mathbf{\langle e, n, \it{aw}, w, \it{ac},c\rangle}$ with
 
--   number of erroneous results (usually e = 0)
+- $e = 0$ or $e = 1$: number of erroneous results (usually $e = 0$)).
+- $0 \leq n \leq N$: number of correct results (or *reduction* for the Unsat-Core Track).
+- $\mathit{aw} \in [0, T]$: actual wall-clock time in seconds (real-valued).
+- $w \in [0, T]$: wall-clock time score in seconds (real-valued).
+- $\mathit{ac} \in [0, mT]$: actual CPU time in seconds (real-valued).
+- $c \in [0, mT]$: CPU time score in seconds (real-valued).
 
--   number of correct results (resp. *reduction* for the Unsat-Core
-    Track)
-
--   actual wall-clock time in seconds (real-valued)
-
--   wall-clock time score in seconds (real-valued)
-
--   actual CPU time in seconds (real-valued)
-
--   CPU time score in seconds (real-valued)
 
 **Error Score ($\color{red}\mathbf{e}$).** For the Single Query Track,
 Incremental Track and Parallel Track, $\color{red}{e}$ is the
