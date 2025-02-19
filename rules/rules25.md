@@ -127,21 +127,23 @@ describes the rules and competition procedures for SMT-COMP 2025.
 As in previous years, we have revised the rules slightly. The principal
 changes from the previous competition rules are the following:
 
--   **Derived tools.** Submitters of a derived tool must also submit the
-    corresponding base tool for the same track and logics. *Rationale:*
-    The presence of the base tool in the contest, even non-competively,
-    provides the best way to assess the improvements contributed by the
-    derived tool techniques.
+- **Derived tools.** Submitters of a derived tool must also submit the corresponding base tool for the same track and logics.  
+  *Rationale:* The presence of the base tool in the contest, even non-competitively, provides the best way to assess the improvements contributed by the derived tool techniques.
 
--   **Unsat cores time limits.** The time limit to verify the unsat
-    cores is increased to the time taken to generate it. *Rationale:* It
-    should ensure that solvers have the time to correctly assess the
-    validity of the generated unsat-core.
+- **Unsat cores scoring.** No point is given for an unsat core such that no solver is capable of verifying it.  
+  *Rationale:* Points shall be awarded to a solver only for verifiably correctly produced unsat cores.
 
--   **Unsat cores scoring.** No point is given for an unsat core such
-    that no solver is capable to verify it. *Rationale:* Points shall be
-    awarded to a solver only for verifiably correctly produced unsat
-    cores.
+- **Unsat cores time limits.** The time limit to verify the unsat cores is increased to the time taken to generate it.  
+  *Rationale:* This should ensure that solvers have the time to correctly assess the validity of the generated unsat-core.
+
+- **Best overall ranking.** We reintroduce, with minor modifications, the best overall ranking that had been used until SMT-COMP 2018.  
+  *Rationale:* We want to showcase the universality of the submitted SMT solvers, alongside their performance in individual divisions.
+
+- **Cloud and Parallel tracks.** Due to the lack of suitable infrastructure, the Cloud track is not taking place for SMT-COMP 2025.  
+  The Parallel track will be executed on the same BenchExec-based infrastructure as the other tracks, but on machines with a higher number of CPU cores.  
+  As a result, there is no special submission process for the Parallel track, and submissions should follow the same process as the rest of the competition.
+📝
+
 
 # 4 Entrants
 
@@ -1072,7 +1074,7 @@ This ranking aims to select the solver that *won by the most* in some
 competitive division. The winners of each division are ranked by the
 distance between them and the next competitive solver in that division.
 
-Let $\color{red}{n_i^D}$ be the correctness score of the $\color{red}{i}$ th solver (for a given scoring system e.g. number of correct results or reduction) in division $\color{red}{D}$. The *correctness
+Let $\color{red}{n_i^D}$ be the correctness score of the $\color{red}{i}$ th solver (for a given scoring system, e.g., number of correct results or reduction) in division $\color{red}{D}$. The *correctness
 rank* of division $\color{red}{D}$ is given as 
 
 $$\color{red}{\frac{n_1^D+1}{n_2^D+1}}$$ 
