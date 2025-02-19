@@ -666,10 +666,7 @@ Track will be used.
 **New benchmarks.** The deadline for submission of new benchmarks is
 **🚨 April 12, 2025**. The organizers, in collaboration with the SMT-LIB
 maintainers, will be checking and curating these until **🚨 April 30,
-2025**.
-
-The SMT-LIB maintainers intend to make a new release of the benchmark
-library publicly available on or close to this date.
+2025**. The SMT-LIB maintainers intend to make a new release of the benchmark library publicly available on or close to this date.
 
 **Benchmark demographics.** The set of all SMT-LIB benchmarks in the
 logics of a given division can be naturally partitioned to sets
@@ -685,8 +682,7 @@ identity of their benchmarks and therefore partition each logic in a
 division based on the bottom-level directory imposed by each submitter.
 These partitions are referred to as *families*.
 
-**Benchmark selection.** []{#benchmark-selection
-label="benchmark-selection"} The competition will use a large subset of
+**Benchmark selection.**  The competition will use a large subset of
 SMT-LIB benchmarks, with some guarantees on including new benchmarks,
 using the following selection process:
 
@@ -722,24 +718,17 @@ using the following selection process:
 4.  *Cap the number of instances in a division.* The number of
     benchmarks in a division based on the size of the corresponding
     logics in SMT-LIB will be limited as follows. Let
-    \$`\color{red}{n}`{=tex}\$ be the number of benchmarks in an SMT-LIB
+    $\color{red}{n}$ be the number of benchmarks in an SMT-LIB
     logic, then the number of chosen benchmarks is
     $min(n, max(300, 50n/100))$:
 
-    1.  []{#bench-sel-300 label="bench-sel-300"} if $n \le 300$, all
-        instances will be selected;
+    1.  if $n \le 300$, all instances will be selected;
 
-    2.  []{#bench-sel-600 label="bench-sel-600"} if $300 < n \leq 600$,
-        a subset of 300 instances from the logic will be selected;
+    2.  if $300 < n \leq 600$, a subset of 300 instances from the logic will be selected;
 
-    3.  []{#bench-sel-more label="bench-sel-more"} and if $n > 600$, 50%
-        of the benchmarks of the logic will be selected.
+    3.  and if $n > 600$, 50% of the benchmarks of the logic will be selected.
 
-The selection process in cases
-[\[bench-sel-600\]](#bench-sel-600){reference-type="ref"
-reference="bench-sel-600"} and
-[\[bench-sel-more\]](#bench-sel-more){reference-type="ref"
-reference="bench-sel-more"} above will guarantee the inclusion of new
+The selection process in cases above will guarantee the inclusion of new
 benchmarks by first picking randomly one benchmark from each new
 benchmark family. The rest of the benchmarks will be chosen randomly
 from the remaining benchmarks using a uniform distribution. The
@@ -771,13 +760,11 @@ creation of heats or the scrambling of benchmarks, will be generated
 using the standard C library function `random()`, seeded (using
 `srandom()`) with the sum, modulo $2^{30}$, of the integer numbers
 provided in the system submissions (see
-Section [4](#sec:entrants){reference-type="ref"
-reference="sec:entrants"}) by all SMT-COMP entrants other than the
+Section 4) by all SMT-COMP entrants other than the
 organizers'. Additionally, the integer part of one hundred times the
 opening value of the New York Stock Exchange Composite Index on the
 first day the exchange is open on or after the date specified in the
-timeline (Section [2](#sec:important){reference-type="ref"
-reference="sec:important"}) will be added to the other seeding values.
+timeline (Section 2) will be added to the other seeding values.
 This helps provide transparency, by guaranteeing that the organizers
 cannot manipulate the seed in favor of or against any particular
 submitted solver.
