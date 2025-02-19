@@ -919,7 +919,7 @@ the correctly solved score $\color{red}{n}$ are defined as
     Section 5.4,
 
 -   otherwise, $\color{red}{e=0}$ and $\color{red}{n}$ is the *reduction*
-    in the number of formulas, i.e., $n = N$ minus the number of formula
+    in the number of formulas, i.e., $\color{red} n = N$ minus the number of formula
     names in the reported unsatisfiable core.
 
 ### 7.1.5 Model-Validation Track
@@ -931,12 +931,11 @@ $\color{red}{n}$ are defined as
 -   $\color{red}{e=0}$ and $\color{red}{n=0}$ if the result is UNKNOWN according to the output of the model validating tool described in
     the model validating tool described in
 
--   $e=1$ and $n=0$ if the result is INVALID according to the output of
+-   $\color{red} e=1$ and $\color{red} n=0$ if the result is INVALID according to the output of
     the model validating tool described in
-    Section [5.5](#sec:exec:model){reference-type="ref"
-    reference="sec:exec:model"},
+    Section 5.5,
 
--   otherwise, $e=0$ and $n=1$.
+-   otherwise, $\color{red} e=0$ and $\color{red} n=1$.
 
 ## 7.2 Division scoring
 
