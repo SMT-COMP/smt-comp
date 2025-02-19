@@ -863,20 +863,20 @@ For the Single Query Track and Parallel Track, the error score
 $\color{red}{e}$ and the correctly solved score
 $\color{red}{n}$ are defined as
 
--   $e=0$ and $n=0$ if the solver
+-   $\color{red} e=0$ and $\color{red} n=0$ if the solver
 
     -   aborts without a response, or
 
     -   the result of the **check-sat** command is `unknown`,
 
--   $e=0$ and $n=1$ if the result of the **check-sat** command is `sat`
+-   $\color{red} e=0$ and $\color{red} n=1$ if the result of the **check-sat** command is `sat`
     or `unsat` and either
 
     -   agrees with the benchmark status,
 
     -   or the benchmark status is unknown,[^4]
 
--   $e=1$ and $n=0$ if the result of the **check-sat** command is
+-   $\color{red} e=1$ and $\color{red} n=0$ if the result of the **check-sat** command is
     incorrect.
 
 Note that a (correct or incorrect) response is taken into consideration
@@ -895,10 +895,10 @@ commands.[^5] Most time will likely be spent in response to
 might also entail a reasonable amount of processing. For the Incremental
 Track, we have
 
--   $e=1$ and $n=0$ if the solver returns an incorrect result for any
+-   $\color{red} e=1$ and $\color{red} n=0$ if the solver returns an incorrect result for any
     **check-sat** command within the time limit,
 
--   otherwise, $e=0$ and $\color{red}{n}$ is the number of
+-   otherwise, $\color{red} e=0$ and $\color{red}{n}$ is the number of
     correct results for **check-sat** commands returned by the solver
     before the time limit is reached.
 
