@@ -61,7 +61,7 @@ or improved solvers to raise the level of competition and advance the
 state of the art in automated SMT problem solving. More information on
 the history and motivation for SMT-COMP can be found at the competition
 web site, <http://www.smtcomp.org>, and in reports on previous
-competitions ([2, 3, 4, 5, 6, 7, 8](#references)).
+competitions [[2, 3, 4, 5, 6, 7, 8]](#references).
 
 SMT-COMP 2025 is part of the SMT Workshop 2025
 (<http://smt-workshop.cs.uiowa.edu/2025/>), which is affiliated with
@@ -1237,7 +1237,7 @@ of the SMT solver [veriT](https://verit.loria.fr/). Martin Jonáš is part of th
 team of the SMT solver [Q3B](https://github.com/martinjonas/Q3B) and was a member of the developing
 team of the SMT solver [MathSAT5](https://mathsat.fbk.eu/). Dominik Winterer has been
 conducting large-scale testing campaigns for discovering and preventing
-unsoundness issues in SMT solvers [yinyang](https://github.com/testsmt/yinyang).
+unsoundness issues in SMT solvers (see [yinyang](https://github.com/testsmt/yinyang)).
 
 
 [^1]: Earlier versions of this document include contributions from Clark
@@ -1292,4 +1292,3 @@ unsoundness issues in SMT solvers [yinyang](https://github.com/testsmt/yinyang).
 [7] David R. Cok, Alberto Griggio, Roberto Bruttomesso, and Morgan Deters. *The 2012 SMT Competition*. Available online at [http://smtcomp.sourceforge.net/2012/reports/SMTCOMP2012.pdf](http://smtcomp.sourceforge.net/2012/reports/SMTCOMP2012.pdf).
 
 [8] David R. Cok, Aaron Stump, and Tjark Weber. *The 2013 Evaluation of SMT-COMP and SMT-LIB*. Journal of Automated Reasoning, 55(1):61–90, Springer Netherlands, 2015. [DOI](http://dx.doi.org/10.1007/s10817-015-9328-2).
-
