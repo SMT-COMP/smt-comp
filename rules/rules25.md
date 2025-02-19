@@ -1097,18 +1097,20 @@ is the smallest amount of CPU time and wall-clock time taken to solve
 all benchmarks solved in division $\color{red}{D}$ using all
 sound competitive solvers in $\color{red}{S}$.
 
-Let $color{purple}{S}$ be the set of competitive solvers competing in
+Let $\color{red}{S}$ be the set of competitive solvers competing in
 division $\color{red}{D}$. The *correctness rank*
 $\color{red}\mathit{vbss}_n$, the *CPU time rank*
 $\color{red}\mathit{vbss}_c$ and the *wall-clock time rank*
 $\color{red}\mathit{vbss}_w$ of solver $s \in S$ in division
 $\color{red}{D}$ are then defined as
-$$1- \frac{\mathit{vbss}_n(D,S-s) }{ \mathit{vbss}_n (D,S)}
+
+$$\color{red} 1- \frac{\mathit{vbss}_n(D,S-s) }{ \mathit{vbss}_n (D,S)}
 \hspace{3em}
 1- \frac{\mathit{vbss}_c(D,S) }{ \mathit{vbss}_c(D,S-s)}
 \hspace{3em}
-1- \frac{\mathit{vbss}_w(D,S) }{ \mathit{vbss}_w(D,S-s)}$$ i.e., the
-difference in virtual best solver score when removing
+1- \frac{\mathit{vbss}_w(D,S) }{ \mathit{vbss}_w(D,S-s)}$$ 
+
+i.e., the difference in virtual best solver score when removing
 $\color{red}{s}$ from the computation.
 
 These ranks will be numbers between 0 and 1 with 0 indicating that
