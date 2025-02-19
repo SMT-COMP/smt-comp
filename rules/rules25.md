@@ -185,9 +185,7 @@ competition machines using the following instructions:
 **Participation in the Competition.** For participation in SMT-COMP, the
 organizers must be informed of the solver's presence *and the tracks and
 divisions which it enters*, by submitting a properly formatted JSON file
-to the SMT-COMP GitHub repository.
-
-All instructions for submissions are available at the following URL:
+to the SMT-COMP GitHub repository. All instructions for submissions are available at the following URL:
 
 [`https://smt-comp.github.io/2025/solver_submission/`](https://smt-comp.github.io/2025/solver_submission/)
 
@@ -318,9 +316,7 @@ describe these tools.
         from the output of the solver).
 
     -   **Scoring.** The tool has a command that executes the scoring
-        computation described on in
-        Section [7](#sec:scoring){reference-type="ref"
-        reference="sec:scoring"}. It also includes the scoring
+        computation described on in Section 7. It also includes the scoring
         computations used in competitions since 2015.
 
     For a full list of the capabilities of the smtcomp tool and an
@@ -436,7 +432,7 @@ because it could be misinterpreted as a wrong result.
 
 **Time and Memory Limits.** Each SMT-COMP solver will be executed on a
 dedicated processor of a competition machine, for each given benchmark,
-up to a fixed wall-clock time limit \$`\color{red}{T}`{=tex}\$. The
+up to a fixed wall-clock time limit $\color{red}{T}$. The
 individual track descriptions on pages - specify the time limit for each
 track. Each processor has 4 cores. Detailed machine specifications are
 available on the competition web site.
@@ -468,7 +464,7 @@ formula is satisfiable (`sat`) or unsatisfiable (`unsat`). A solver may
 also report `unknown` to indicate that it cannot determine
 satisfiability of the formula.
 
-**Benchmark Selection.** See page .
+**Benchmark Selection.** See page Section 6 (Benchmarks and Problem Divsions).
 
 **Time Limit.** This track will use a wall-clock time limit of 20
 minutes per solver/benchmark pair.
@@ -509,8 +505,7 @@ incrementally send commands to the standard input channel of the solver
 and read responses from the standard output channel of the solver. The
 commands will be taken from an SMT-LIB benchmark script that satisfies
 the requirements for incremental track scripts given in
-Section [5.1](#sec:logistics){reference-type="ref"
-reference="sec:logistics"}. Solvers must respond to each command sent by
+Section 5.1. Solvers must respond to each command sent by
 the trace executor with the answers defined in the SMT-LIB format
 specification, that is, with an answer of `sat`, `unsat`, or `unknown`
 for **check-sat** commands, and with a `success` answer for other
