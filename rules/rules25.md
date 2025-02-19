@@ -851,9 +851,9 @@ limit $\color{red}{T}$. A solver result is taken into
 consideration for the sequential score only if the solver process
 terminates *within* this CPU time limit. More specifically, for a given
 parallel performance $\color{red}\langle e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined
-as $\color{red}{\langle e_S, n_S, c_S\rangle}$, where
+as $\color{red}{\langle e_S, n_S, c_S \rangle}$, where
 
--   $\color{red}{e_S = 0$, $n_S = 0}$, and $\color{red}{c_S = 0}$ if $\color{red}{c > T}$;
+-   $\color{red}{e_S = 0}$, $\color{red}{n_S = 0}$, and $\color{red}{c_S = 0}$ if $\color{red}{c > T}$;
 
 -   $\color{red}{e_S = e}$, $\color{red}{n_S = n}$, and $\color{red}{c_S = c}$ otherwise.[^3]
 
