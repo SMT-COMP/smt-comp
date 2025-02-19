@@ -432,7 +432,7 @@ because it could be misinterpreted as a wrong result.
 
 **Time and Memory Limits.** Each SMT-COMP solver will be executed on a
 dedicated processor of a competition machine, for each given benchmark,
-up to a fixed wall-clock time limit $\color{red}{T}$. The
+up to a fixed wall-clock time limit $\color{red} T$. The
 individual track descriptions on pages - specify the time limit for each
 track. Each processor has 4 cores. Detailed machine specifications are
 available on the competition web site.
@@ -847,11 +847,11 @@ The parallel score as defined above favors parallel solvers, which may
 utilize all available processor cores. To evaluate sequential
 performance, we derive a **sequential score** by imposing a *virtual*
 CPU time limit equal to the wall-clock time
-limit $T$. A solver result is taken into
+limit T. A solver result is taken into
 consideration for the sequential score only if the solver process
 terminates *within* this CPU time limit. More specifically, for a given
 parallel performance $\color{red}\langle e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined
-as $\color{red}{\langle e_S, n_S, c_S \rangle}$, where
+as $\color{red} \langle e_S, n_S, c_S \rangle$, where
 
 -   $\color{red}{e_S = 0}$, $\color{red}{n_S = 0}$, and $\color{red}{c_S = 0}$ if $\color{red}{c > T}$;
 
@@ -1080,7 +1080,7 @@ virtual best solver *correctness score* for a division
 $\color{red}{D}\$ with competitive sound solvers
 $\color{red} S$ is given as
 
-$$\color{red}\mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
+$$\color{red} \mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
 
 where the maximum of an empty set is 0 (i.e., no contribution if a
 benchmark is unsolved).
@@ -1217,7 +1217,7 @@ unsoundness issues in SMT solvers (see [yinyang](https://github.com/testsmt/yiny
 [^3]: Under this measure, a solver should not benefit from using
     multiple processor cores. Conceptually, the sequential performance
     should be (nearly) unchanged if the solver was run on a single-core
-    processor, up to a time limit of $\color{red}{T}$.
+    processor, up to a time limit of $T$.
 
 [^4]: If the benchmark status is unknown, we thus treat the solver's
     answer as correct. Disagreements between different solvers on
