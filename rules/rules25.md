@@ -151,7 +151,7 @@ solver. The system description of a derived tool **must** explicitly
 acknowledge the solver it is based on and extends. It **must** further
 make clear technical innovations by which the derived tool expects to
 improve on the original solver. A derived tool **must** follow the
-*naming convention* \[name of base solver\]-\[my solver name\].
+*naming convention* `\[name of base solver\]-\[my solver name\]`.
 Submitters of a derived tool should also submit the corresponding base
 tool's binary for the same track and logics as their derived tool.
 
@@ -163,7 +163,7 @@ The final solver version needs to be uploaded to Zenodo
 submission must include both the derived tool and the base tool. The
 solver is an archive that contains the precompiled executable
 (statically linked is preferable). It will be executed on a computer
-that has the same installation as the following docker image
+that has the same installation as the following docker image:
 
 [`registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest`](registry.gitlab.com/sosy-lab/benchmarking/competition-scripts/user:latest)
 
@@ -189,9 +189,7 @@ to the SMT-COMP GitHub repository.
 
 All instructions for submissions are available at the following URL:
 
-::: center
-<https://smt-comp.github.io/2025/solver_submission/>
-:::
+[`https://smt-comp.github.io/2025/solver_submission/`](https://smt-comp.github.io/2025/solver_submission/)
 
 Note that independent of the tracks, the final solver version must be
 uploaded to Zenodo (<https://zenodo.org/>), together with the base
