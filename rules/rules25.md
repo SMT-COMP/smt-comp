@@ -956,11 +956,7 @@ division but also for each logic composing the division.
 
 **Sound Solver.** A solver is *sound* on benchmarks with *known status*
 for a division if its parallel performance
-(Section [7.1](#sec:benchmark-scoring){reference-type="ref"
-reference="sec:benchmark-scoring"}) is of the form
-$\color{red}\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each
-benchmark in the division, i.e., if it did not produce any erroneous
-results.
+(Section 7.1) is of the form $\color{red}\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each benchmark in the division, i.e., if it did not produce any erroneous results.
 
 **Disagreeing Solvers.** Two solvers *disagree* on a benchmark if one of
 them reported `sat` and the other reported `unsat`.
@@ -983,13 +979,7 @@ $$\color{red}\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\ra
 A parallel division score $\color{red}\langle
 e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel
 division
-score$\color{red}\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$
-iff $e < e'$ or ($e = e'$ and $n
-> n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$
-and $w
-= w'$ and $c < c'$). That is, fewer errors takes precedence over more
-correct solutions, which takes precedence over less wall-clock time
-taken, which takes precedence over less CPU time taken.
+score $\color{red}\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$ iff $e < e'$ or ($e = e'$ and $n > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w = w'$ and $c < c'$). That is, fewer errors takes precedence over more correct solutions, which takes precedence over less wall-clock time taken, which takes precedence over less CPU time taken.
 
 ### 7.2.2 Sequential Score
 
