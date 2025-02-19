@@ -118,7 +118,7 @@ Within each track there are multiple divisions, where each division uses
 benchmarks from a specific group of SMT-LIB logics. We will recognize
 winners in all tracks. They will be determined by the number of
 benchmarks solved (taking into account the weighting detailed in
-(Section 7 Scoring)  we will also recognize solvers based on
+(see [7 Scoring](#7-scoring))  we will also recognize solvers based on
 additional criteria.
 
 The rest of this document, revised from the previous version,[^1]
@@ -350,7 +350,7 @@ describe these tools.
         from the output of the solver).
 
     -   **Scoring.** The tool has a command that executes the scoring
-        computation described on in Section 7. It also includes the scoring
+        computation described on in (see [7 Scoring](#7-scoring)). It also includes the scoring
         computations used in competitions since 2015.
 
     For a full list of the capabilities of the smtcomp tool and an
@@ -496,7 +496,7 @@ formula is satisfiable (`sat`) or unsatisfiable (`unsat`). A solver may
 also report `unknown` to indicate that it cannot determine
 satisfiability of the formula.
 
-**Benchmark Selection.** See page Section 6 (Benchmarks and Problem Divsions).
+**Benchmark Selection.** See [6 Benchmarks and Problem Divisions](#6-benchmarks-and-problem-divisions) (Benchmarks and Problem Divsions).
 
 **Time Limit.** This track will use a wall-clock time limit of 20
 minutes per solver/benchmark pair.
@@ -537,7 +537,7 @@ incrementally send commands to the standard input channel of the solver
 and read responses from the standard output channel of the solver. The
 commands will be taken from an SMT-LIB benchmark script that satisfies
 the requirements for incremental track scripts given in
-Section 5.1. Solvers must respond to each command sent by
+[5.1 Logistics](#51-logistics). Solvers must respond to each command sent by
 the trace executor with the answers defined in the SMT-LIB format
 specification, that is, with an answer of `sat`, `unsat`, or `unknown`
 for **check-sat** commands, and with a `success` answer for other
@@ -792,11 +792,11 @@ creation of heats or the scrambling of benchmarks, will be generated
 using the standard C library function `random()`, seeded (using
 `srandom()`) with the sum, modulo $2^{30}$, of the integer numbers
 provided in the system submissions (see
-Section 4) by all SMT-COMP entrants other than the
+[4 Entrants](#4-entrants)) by all SMT-COMP entrants other than the
 organizers'. Additionally, the integer part of one hundred times the
 opening value of the New York Stock Exchange Composite Index on the
 first day the exchange is open on or after the date specified in the
-timeline (Section 2) will be added to the other seeding values.
+timeline ([2 Important Dates](#2-important-dates)) will be added to the other seeding values.
 This helps provide transparency, by guaranteeing that the organizers
 cannot manipulate the seed in favor of or against any particular
 submitted solver.
@@ -952,7 +952,7 @@ the correctly solved score $\color{red}{n}$ are defined as
     -   the result of the **get-unsat-core** command is not wellformed.
 
 -   $\color{red}{e=1}$ and $\color{red}{n=0}$ if the result is erroneous according to
-    Section 5.4,
+    [5.4 Unsat-Core Track](#54-unsat-core-track),
 
 -   otherwise, $\color{red}{e=0}$ and $\color{red}{n}$ is the *reduction*
     in the number of formulas, i.e., $\color{red} n = N$ minus the number of formula
@@ -969,7 +969,7 @@ $\color{red}{n}$ are defined as
 
 -   $\color{red} e=1$ and $\color{red} n=0$ if the result is INVALID according to the output of
     the model validating tool described in
-    Section 5.5,
+    [5.5 Model-Validation Track](#55-model-validation-track),
 
 -   otherwise, $\color{red} e=0$ and $\color{red} n=1$.
 
@@ -991,7 +991,7 @@ division but also for each logic composing the division.
 
 **Sound Solver.** A solver is *sound* on benchmarks with *known status*
 for a division if its parallel performance
-(Section 7.1) is of the form $\color{red}\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each benchmark in the division, i.e., if it did not produce any erroneous results.
+([7.1 Benchmark scoring](#71-benchmark-scoring)) is of the form $\color{red}\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each benchmark in the division, i.e., if it did not produce any erroneous results.
 
 **Disagreeing Solvers.** Two solvers *disagree* on a benchmark if one of
 them reported `sat` and the other reported `unsat`.
