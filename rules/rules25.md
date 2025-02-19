@@ -973,7 +973,8 @@ purposes).
 The parallel score for a division is computed for *all* tracks. It is
 defined for a participating solver in a division with \$color{red}{M}\$
 benchmarks as the sum of all the individual parallel benchmark scores:
-$$\color{red}\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
+
+$$\color{red} \sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
 
 A parallel division score $\color{red}\langle
 e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel
@@ -1080,7 +1081,7 @@ virtual best solver *correctness score* for a division
 $\color{red}{D}\$ with competitive sound solvers
 $\color{red} S$ is given as
 
-$$\color{red} \mathit{vbss}_n(D,S) = \sum_{b \in D} {\sf max}\{ n_b^s \mid s \in S \text{ and } n_b^s > 0 \}$$
+$$\mathit{vbss}_n(D,S) = sum_{b \in D}{max}$$
 
 where the maximum of an empty set is 0 (i.e., no contribution if a
 benchmark is unsolved).
