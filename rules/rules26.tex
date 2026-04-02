@@ -277,8 +277,9 @@ the solver it is based on and extends.  It \textbf{must} further make clear
 technical innovations by which the derived tool expects to improve on the
 original solver.  A derived tool \textbf{must} follow the \emph{naming convention}
 {[name of base solver]-[my solver name]}.
-Submitters of a derived tool should also submit the corresponding base tool's binary 
-for the same track and logics as their derived tool.
+Submitters of a derived tool \textbf{must} submit their tool's binary \emph{and} source code
+({[name of base solver]-[my solver name]}.tar.gz) along with the corresponding base 
+tool's binary for the same track and logics as their derived tool.
 
 \header{SMT Solver Submission.}
 %
@@ -1213,6 +1214,10 @@ Only the remaining benchmarks are used in the following computation of division
 scores (but the organizers \emph{will report disagreements} for informational
 purposes).
 
+\header{Derived solver scoring} A derived solver $S^+$ can only win a division 
+iff it outperforms its base solver $S$ by at least $10\%$ on the PAR-2 score, i.e.,
+$\mathit{PAR-2}(S^+) > 1.10 * \mathit{PAR-2}(S)$.
+
 \subsubsection{Parallel Score}
 
 The parallel score for a division is computed for \emph{all} tracks.  It is
@@ -1279,7 +1284,7 @@ in favor of \emph{biggest lead} and \emph{largest contribution} rankings
 to avoid favoring solvers that entered into a large number of divisions. The two
 rankings have been used since.
 
-In SMT-COMP 2025, we reintroduced the \emph{best overall ranking} besides the
+For SMT-COMP 2025, we reintroduce the \emph{best overall ranking} besides the
 two rankings to showcase both the overall qualities of the solvers and also
 their strengths in individual divisions.
 
