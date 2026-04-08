@@ -115,18 +115,10 @@ competition web site, \url{http://www.smtcomp.org}.
 
 
 \begin{description}
-\item[April~12] Deadline for new benchmark contributions.
-\item[May~31] Final versions of competition tools (e.g., benchmark
-  scrambler) are made available.  Benchmark libraries are frozen.
-\item[June~13] Deadline for first versions of solvers (for all tracks),
-  including information about which tracks and divisions are being
-  entered, and magic numbers for benchmark scrambling.
-\item[June~27] Deadline for final versions of solvers, including
-  system descriptions.
-\item[June~30] Opening value of NYSE Composite Index used to compute
-  random seed for competition tools.
-\item[August~10-11] SMT Workshop; end of competition, presentation of
-  results.
+    \item[May~1] Final versions of competition tools (used by the organizers to run the participating solvers)
+    \item[May~27] Deadline for first versions of participating solvers (for all tracks), including preliminary system descriptions
+    \item[June~10] Deadline for final versions of participating solvers, including final system descriptions
+    \item[July~24--25] SMT Workshop (presentation of results)
 \end{description}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1214,12 +1206,9 @@ Only the remaining benchmarks are used in the following computation of division
 scores (but the organizers \emph{will report disagreements} for informational
 purposes).
 
-\subsection{Derived Solver Scoring} 
-A derived solver can win a logic, track, or division under the necessary 
-condition that it substantially outperforms its base solver. The necessary 
-condition is to achieve \emph{at least a $10\%$ improvement on the PAR-2 score 
-over its base solver}. Derived solvers are excluded from the best lead ranking, 
-largest contribution ranking, and best overall ranking.   
+%\header{Derived solver scoring} A derived solver $S^+$ can only win a division 
+%iff it outperforms its base solver $S$ by at least $10\%$ on the PAR-2 score, i.e.,
+%$\mathit{PAR2}(S^+) > 1.10 * \mathit{PAR2}(S)$.
 
 \subsubsection{Parallel Score}
 
@@ -1456,6 +1445,12 @@ These recognitions will be announced at the SMT workshop and published on the co
 The organizers reserve the right to recognize other outstanding
 contributions that become apparent in the competition results.
 
+\subsection{Derived Solver Scoring \& Recognitions} 
+A derived solver can only win a logic, track, or division under the necessary 
+condition that it substantially outperforms its base solver. This necessary 
+condition is to achieve \emph{at least a $10\%$ improvement on the PAR-2 score 
+over its base solver}. Derived solvers are excluded from the biggest lead, 
+largest contribution ranking, and best overall ranking. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
