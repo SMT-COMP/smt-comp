@@ -934,21 +934,26 @@ guarantees on including new benchmarks, using the following selection process:
   The number of benchmarks in a division based on the size of the
   corresponding logics in SMT-LIB will be limited as follows.
   Let $n$ be the number of benchmarks in an SMT-LIB logic, then
-  the number of chosen benchmarks is $min(n, max(300, 50n/100))$:
+  the benchmakrs will be chosen as follows: 
+  %the number of chosen benchmarks is $min(n, max(300, 50n/100))$:
   \begin{enumerate}
   \vspace{-1ex}
-    \item \label{bench-sel-300} if $n \le 300$, all instances will be selected;
-  \item \label{bench-sel-600} if $300 < n \leq 600$, a subset of 300 instances
+    \item \label{bench-sel-300} if $n \le 300$ then all instances will be selected;
+  \item \label{bench-sel-600} if $300 < n \leq 600$ then a subset of 300 instances
     from the logic will be selected;
-  \item \label{bench-sel-more} and if $n > 600$,
-      50\% of the benchmarks of the logic will be selected.
+  \item \label{bench-sel-600+1000-} if $600 < n \leq 1000$ then 
+      50\% of the benchmarks of the logic will be selected;
+  \item and \label{bench-sel-more} if $n > 1000$ then $500 + \frac{n - 1000}{10}$ 
+      of the benchmarks of the logic will be selected.
     \end{enumerate}
 \end{enumerate}
 %
-The selection process in cases \ref{bench-sel-600} and \ref{bench-sel-more}
+The selection process in cases \ref{bench-sel-600+1000-} and \ref{bench-sel-more}
 above will guarantee the inclusion of new benchmarks by first picking randomly
-one benchmark from each new benchmark family.  The rest of the benchmarks will
-be chosen randomly from the remaining benchmarks using a uniform distribution.
+one benchmark from each new benchmark family. Moreover, the case of 
+\ref{bench-sel-more} guarantees that the competition remains computable 
+in a reasonable amount of time. The rest of the benchmarks will be chosen 
+randomly from the remaining benchmarks using a uniform distribution.
 %
 The benchmark selection script will be publicly available at
 \url{https://github.com/SMT-COMP/smt-comp.github.io} and
