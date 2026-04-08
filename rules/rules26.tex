@@ -1214,9 +1214,12 @@ Only the remaining benchmarks are used in the following computation of division
 scores (but the organizers \emph{will report disagreements} for informational
 purposes).
 
-\header{Derived solver scoring} A derived solver $S^+$ can only win a division 
-iff it outperforms its base solver $S$ by at least $10\%$ on the PAR-2 score, i.e.,
-$\mathit{PAR-2}(S^+) > 1.10 * \mathit{PAR-2}(S)$.
+\subsection{Derived Solver Scoring} 
+A derived solver can win a logic, track, or division under the necessary 
+condition that it substantially outperforms its base solver. The necessary 
+condition achieve \emph{at least a $10\%$ improvement on the PAR-2 score 
+over its base solver}. Derived solvers are excluded from the best lead ranking, 
+largest contribution ranking, and best overall ranking.   
 
 \subsubsection{Parallel Score}
 
