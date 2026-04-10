@@ -221,10 +221,13 @@ SMT-COMP~2026 are the following:
 
 \item {\bf Benchmark selection.} \emergencystretch.5cm In accordance with
   discussions of the SMT community, we reduced the number of benchmarks to keep
-  SMT-COMP 2026 computable in a reasonable amount of time. \\
+  SMT-COMP 2026 computable in a reasonable amount of time. Moreover, 
+  the benchmarks will be drawn from the SMT-LIB repository of the preceding year 
+  rather than the current year.
+  \\
   \rationale{SMT-COMP
     2025 took 9.98 CPU years to execute, yielding little buffer for errors and
-    for checking the results between the solver submission deadline and the SMT
+  for checking the results between the solver submission deadline and the SMT
     workshop.}
 \end{itemize}
 
@@ -732,7 +735,8 @@ and size of the unsatisfiable core they provide.
 This track will run on a selection of non-incremental \emph{unsat} benchmarks
 (as described on page~\pageref{benchmark-selection}), modified
 to use named top-level assertions of the form \akey{(assert (! t :named f ))}.
-
+Since SMT-COMP 2026, the benchmarks will be drawn from the SMT-LIB repository of 
+the preceding year rather than the current year.
 
 \header{Input/Output.}
 The SMT-LIB language provides a command \akey{(get-unsat-core)}, which asks
