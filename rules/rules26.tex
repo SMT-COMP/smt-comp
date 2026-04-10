@@ -194,20 +194,36 @@ As in previous years, we have revised the rules slightly.
 The principal rule changes from the previous competition effective at 
 SMT-COMP~2026 are the following:
 \begin{itemize}
-  \item {\bf Derived solver submission.} \emergencystretch.5cm Submitters of a derived solver must
-  now also submit the source code of their solver 
-  \rationale{Derived solver submissions are much appreciated but should be open-sourced to be useful for the community.}  % 
-  \item {\bf Derived solver scoring \& recognition.} \emergencystretch.5cm A derived solver can only     
-  win a division, track, or logic if it outperforms its base solver significantly, i.e.,       
-  at least by a $10\%$ margin in PAR2 score. Moreover, derived solvers are excluded from competition-wide   
-  recognitions. 
-  \rationale{The new rule prevents that derived solvers that only marginally outperform their base solvers 
-  can win awards.}    
+\item {\bf Derived solver submission.} \emergencystretch.5cm Submitters of
+  derived solvers must now also submit the source code of their solver. \\
+  \rationale{Derived solver submissions are important for the community as they
+    can push the state of the art. These improvements can be used by the
+    community and the authors of the original solvers only if the derived
+    solvers are open source.} %
+
+\item {\bf Derived solver scoring \& recognition.} \emergencystretch.5cm A
+  derived solver can win a division, track, or logic only if it
+  significantly outperforms its base solver, i.e., only if it improves its PAR2
+  score by at least $10\,\%$.
+  Moreover, derived solvers are excluded from competition-wide recognitions. \\
+  % \rationale{The new rule prevents that derived solvers that only marginally
+  %   outperform their base solvers can win awards.}
+  \rationale{If the contribution of the derived solver is only marginal, the
+    success of the solver should be attributed to the base solver, not to the
+    changes made in the derived solver. Note that all derived solvers will be
+    executed and their results will still be published as usual. We believe that
+    seeing the effect of the additions on top of the base solver provides the
+    community with useful insights into the algorithms and their potential
+    improvements.}
   % 
-  \item {\bf Benchmark selection.} \emergencystretch.5cm  In accordance with discussions of the SMT community, we  
-   reduced the number of benchmarks to keep SMT-COMP 2026 computable in a reasonable amount of time.   
-  \rationale{SMT-COMP 2025 took 9.98 CPU years to execute, yielding little buffer for errors 
-  and for checking the results between the solver submission deadline and the SMT workshop.}
+
+\item {\bf Benchmark selection.} \emergencystretch.5cm In accordance with
+  discussions of the SMT community, we reduced the number of benchmarks to keep
+  SMT-COMP 2026 computable in a reasonable amount of time. \\
+  \rationale{SMT-COMP
+    2025 took 9.98 CPU years to execute, yielding little buffer for errors and
+    for checking the results between the solver submission deadline and the SMT
+    workshop.}
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
