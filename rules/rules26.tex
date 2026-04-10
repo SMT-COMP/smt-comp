@@ -195,7 +195,7 @@ The principal rule changes from the previous competition effective at
 SMT-COMP~2026 are the following:
 \begin{itemize}
 \item {\bf Derived solver submission.} \emergencystretch.5cm Submitters of
-  derived solvers must now also submit the source code of their solver. \\
+    derived solvers must now also submit the source code of their solver. \\[0.2cm]
   \rationale{Derived solver submissions are important for the community as they
     can push the state of the art. These improvements can be used by the
     community and the authors of the original solvers only if the derived
@@ -206,7 +206,7 @@ SMT-COMP~2026 are the following:
   significantly outperforms its base solver, i.e., only if it improves its PAR-2
   score by at least $10\,\%$. A derived solver can win a competition-wide 
   recognition under the condition that it significantly outperforms its base     
-  solver in at least one division.\\ 
+  solver in at least one division.\\[0.2cm]
   % 
   % \rationale{The new rule prevents that derived solvers that only marginally
   %   outperform their base solvers can win awards.}
@@ -224,7 +224,7 @@ SMT-COMP~2026 are the following:
   SMT-COMP 2026 computable in a reasonable amount of time. Moreover, 
   the benchmarks will be drawn from the SMT-LIB repository of the preceding year 
   rather than the current year.
-  \\
+  \\[0.2cm]
   \rationale{SMT-COMP
     2025 took 9.98 CPU years to execute, yielding little buffer for errors and
   for checking the results between the solver submission deadline and the SMT
@@ -1250,6 +1250,18 @@ iff $e < e'$ or ($e = e'$ and $n
 = w'$ and $c < c'$).  That is, fewer errors takes precedence over more correct
 solutions, which takes precedence over less wall-clock time taken, which takes
 precedence over less CPU time taken.
+
+
+\subsubsection{PAR-2 Score} 
+The PAR-2 score for a solver in a division is its parallel division score
+$\langle e, n, \mathit{aw}, w, \mathit{ac}, c \rangle$ where the individual
+benchmark score components $w_b$ and $c_b$ are penalized by a factor of 2 for
+unsolved benchmarks:
+
+$$w_b = \begin{cases} \mathit{aw}_b & \text{if } e_b = 0 \text{ and benchmark } 
+b \text{ is solved} \\ 2T & \text{otherwise} \end{cases}$$
+and analogously $c_b = \mathit{ac}_b$ if solved, $2mT$ otherwise.
+
 
 \subsubsection{Sequential Score}
 
