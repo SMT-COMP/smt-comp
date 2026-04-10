@@ -598,7 +598,7 @@ Solvers must not attempt to communicate with other machines, e.g., over the netw
 \label{sec:exec:single}
 
 The \maintrack track will consist of selected non-incremental benchmarks in
-each of the competitive divisions.  Each benchmark will be presented to
+each of the competitive logics. Each benchmark will be presented to
 the solver as its first command-line argument.  The solver is then expected to
 report on its standard output channel whether the formula is satisfiable
 (\texttt{sat}) or unsatisfiable (\texttt{unsat}).  A solver may also report
@@ -832,14 +832,13 @@ Within each track there are multiple divisions, and each division selects
 benchmarks from a specific group of SMT-LIB logics in the SMT-LIB benchmark
 library.
 
-\header{Competitive Divisions.}
-A division in a track is competitive if at least two substantially
-different solvers (i.e., solvers from two different teams) were
-submitted.  Although the organizers may enter other solvers for
-comparison purposes, only solvers that are explicitly submitted by
-their authors determine whether a division is competitive, and are
-eligible to be designated as winners.
-We will \textbf{not} run \emph{non-competitive} divisions.
+\header{Competitive Divisions and Logics.} A division or a logic is \emph{competitive}
+for the given track if at least two substantially different solvers (i.e.,
+solvers from two different teams) were submitted to it. Although the organizers
+may enter other solvers for comparison purposes, only solvers that are
+explicitly submitted by their authors determine whether divisions and logics are
+competitive, and are eligible to be designated as winners. We will \textbf{not}
+run \emph{non-competitive} divisions and logics.
 
 \header{Benchmark sources.}
 Benchmarks for each division will be drawn from the SMT-LIB benchmark
