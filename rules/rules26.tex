@@ -85,7 +85,7 @@ Switzerland\\
 \maketitle
 
 \noindent Comments on this document should be emailed to the SMT-COMP
-mailing list (see below) or, if necessary, directly to the organizers.
+mailing list or the Zulip channel (see below) or, if necessary, directly to the organizers.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -191,7 +191,7 @@ SMT-COMP~2026.
 As in previous years, we have revised the rules slightly.
 % Most changes are due to our move from StarExec to BenchExec.
 %
-The principal rule changes from the previous competition effective at 
+The principal rule changes from the previous competition effective at
 SMT-COMP~2026 are the following:
 \begin{itemize}
 \item {\bf Derived solver submission.} \emergencystretch.5cm Submitters of
@@ -204,10 +204,10 @@ SMT-COMP~2026 are the following:
 \item {\bf Derived solver scoring \& recognition.} \emergencystretch.5cm A
   derived solver can win a division, track, or logic only if it
   significantly outperforms its base solver, i.e., only if it improves its PAR-2
-  score by at least $10\,\%$. A derived solver can win a competition-wide 
-  recognition under the condition that it significantly outperforms its base     
+  score by at least $10\,\%$. A derived solver can win a competition-wide
+  recognition under the condition that it significantly outperforms its base
   solver in at least one division.\\[0.2cm]
-  % 
+  %
   % \rationale{The new rule prevents that derived solvers that only marginally
   %   outperform their base solvers can win awards.}
   \rationale{If the contribution of the derived solver is only marginal, the
@@ -217,18 +217,18 @@ SMT-COMP~2026 are the following:
     seeing the effect of the additions on top of the base solver provides the
     community with useful insights into the algorithms and their potential
     improvements.}
-  % 
+  %
 
 \item {\bf Benchmark selection.} \emergencystretch.5cm In accordance with
   discussions of the SMT community, we reduced the number of benchmarks to keep
-  SMT-COMP 2026 computable in a reasonable amount of time. Moreover, 
-  the benchmarks will be drawn from the SMT-LIB repository of the preceding year 
+  SMT-COMP 2026 computable in a reasonable amount of time. Moreover,
+  the benchmarks will be drawn from the SMT-LIB repository of the preceding year
   rather than the current year.
   \\[0.2cm]
   \rationale{SMT-COMP
     2025 took 9.98 CPU years to execute, yielding little buffer for errors and
   for checking the results between the solver submission deadline and the SMT
-    workshop. Drawing from the preceding year's benchmark set maintains fairness among 
+    workshop. Drawing from the preceding year's benchmark set maintains fairness among
     participants regarding exposure to benchmarks.}
 \end{itemize}
 
@@ -289,7 +289,7 @@ technical innovations by which the derived tool expects to improve on the
 original solver.  A derived tool \textbf{must} follow the \emph{naming convention}
 {[name of base solver]-[my solver name]}.
 Submitters of a derived tool \textbf{must} submit their tool's binary \emph{and} source code
-({[name of base solver]-[my solver name]}.tar.gz) along with the corresponding base 
+({[name of base solver]-[my solver name]}.tar.gz) along with the corresponding base
 tool's binary for the same track and logics as their derived tool.
 
 \header{SMT Solver Submission.}
@@ -315,7 +315,7 @@ The framework can be downloaded and used locally by anyone.
 The competition will be executed on a BenchExec cluster owned by SoSy-Lab,
 who are kind enough to support our competition with their computing power.
 To be more precise, the competition will be run on the 168 apollon nodes of the
-SoSy-Lab BenchExec cluster (for more details see \url{https://vcloud.sosy-lab.org/cpachecker/webclient/master/info}) and on a 256-processor, 2TB RAM machine for the Parallel Track.
+SoSy-Lab BenchExec cluster (for more details see \url{https://vcloud.sosy-lab.org/cpachecker/webclient/master/info}) and on a 128-processor, 1TB RAM machine for the Parallel Track.
 It is also possible to locally emulate and test the computing environment on
 the competition machines using the following instructions:
 \url{https://gitlab.com/sosy-lab/benchmarking/competition-scripts/#computing-environment-on-competition-machines}.
@@ -446,7 +446,7 @@ evaluation purposes.
 %
 The bulk of the computation will take place during the weeks leading
 up to SMT 2026.  Intermediate results will be regularly posted to the
-SMT-COMP website as the competition runs.
+SMT-COMP website and the Zulip channel as the competition runs.
 %
 The organizers reserve the right to prioritize certain competition
 tracks or divisions to ensure their timely completion, and, under
@@ -736,7 +736,7 @@ and size of the unsatisfiable core they provide.
 This track will run on a selection of non-incremental \emph{unsat} benchmarks
 (as described on page~\pageref{benchmark-selection}), modified
 to use named top-level assertions of the form \akey{(assert (! t :named f ))}.
-Since SMT-COMP 2026, the benchmarks will be drawn from the SMT-LIB repository of 
+Since SMT-COMP 2026, the benchmarks will be drawn from the SMT-LIB repository of
 the preceding year rather than the current year.
 
 \header{Input/Output.}
@@ -834,7 +834,7 @@ The model validator tool will output
 
 The new experimental divisions require additional syntax to represent
 their models.  We propose the new syntax on the SMT-COMP website
-{\url{https://smt-comp.github.io/2024/model.html}}.
+{\url{https://smt-comp.github.io/2026/model.html}}.
 
 \header{Time Limit.}
 This track will use a wall-clock time limit of 20 minutes per solver/benchmark
@@ -855,7 +855,7 @@ chosen such that their run times are sufficiently high based on our
 estimation.
 
 \header{Time Limit.}
-This track will use a wall-clock time limit of 2 minutes per
+This track will use a wall-clock time limit of 20 minutes per
 solver/benchmark pair.
 
 \section{Benchmarks and Problem Divisions}
@@ -960,18 +960,18 @@ guarantees on including new benchmarks, using the following selection process:
     \item \label{bench-sel-300} if $n \le 300$ then all instances will be selected;
   \item \label{bench-sel-600} if $300 < n \leq 600$ then a subset of 300 instances
     from the logic will be selected;
-  \item \label{bench-sel-600+1000-} if $600 < n \leq 1000$ then 
+  \item \label{bench-sel-600+1000-} if $600 < n \leq 1000$ then
       50\% of the benchmarks of the logic will be selected;
-  \item and \label{bench-sel-more} if $n > 1000$ then $500 + \frac{n - 1000}{10}$ 
+  \item and \label{bench-sel-more} if $n > 1000$ then $500 + \frac{n - 1000}{10}$
       of the benchmarks of the logic will be selected.
     \end{enumerate}
 \end{enumerate}
 %
 The selection process in cases \ref{bench-sel-600+1000-} and \ref{bench-sel-more}
 above will guarantee the inclusion of new benchmarks by first picking randomly
-one benchmark from each new benchmark family. Moreover, the case of 
-\ref{bench-sel-more} guarantees that the competition remains computable 
-in a reasonable amount of time. The rest of the benchmarks will be chosen 
+one benchmark from each new benchmark family. Moreover, the case of
+\ref{bench-sel-more} guarantees that the competition remains computable
+in a reasonable amount of time. The rest of the benchmarks will be chosen
 randomly from the remaining benchmarks using a uniform distribution.
 %
 The benchmark selection script will be publicly available at
@@ -1230,7 +1230,7 @@ Only the remaining benchmarks are used in the following computation of division
 scores (but the organizers \emph{will report disagreements} for informational
 purposes).
 
-%\header{Derived solver scoring} A derived solver $S^+$ can only win a division 
+%\header{Derived solver scoring} A derived solver $S^+$ can only win a division
 %iff it outperforms its base solver $S$ by at least $10\%$ on the PAR-2 score, i.e.,
 %$\mathit{PAR2}(S^+) > 1.10 * \mathit{PAR2}(S)$.
 
@@ -1252,13 +1252,13 @@ solutions, which takes precedence over less wall-clock time taken, which takes
 precedence over less CPU time taken.
 
 
-\subsubsection{PAR-2 Score} 
+\subsubsection{PAR-2 Score}
 The PAR-2 score for a solver in a division is its parallel division score
 $\langle e, n, \mathit{aw}, w, \mathit{ac}, c \rangle$ where the individual
 benchmark score components $w_b$ and $c_b$ are penalized by a factor of 2 for
 unsolved benchmarks:
 
-$$w_b = \begin{cases} \mathit{aw}_b & \text{if } e_b = 0 \text{ and benchmark } 
+$$w_b = \begin{cases} \mathit{aw}_b & \text{if } e_b = 0 \text{ and benchmark }
 b \text{ is solved} \\ 2T & \text{otherwise} \end{cases}$$
 and analogously $c_b = \mathit{ac}_b$ if solved, $2mT$ otherwise.
 
@@ -1481,13 +1481,13 @@ These recognitions will be announced at the SMT workshop and published on the co
 The organizers reserve the right to recognize other outstanding
 contributions that become apparent in the competition results.
 
-\subsection{Derived Solver Scoring \& Recognition} 
+\subsection{Derived Solver Scoring \& Recognition}
 A derived solver is eligible for winning a logic, track, or division only if it
 substantially outperforms its base solver in the given logic, track, or
 division, respectively. In particular, the derived solver is eligible for
 winning only if it achieves \emph{at least a $10\,\%$ improvement on the PAR-2
- score over its base solver}. Derived solvers can win the biggest lead, largest 
- contribution, and best overall ranking, if they achieve \emph{at least a $10\,\%$ 
+ score over its base solver}. Derived solvers can win the biggest lead, largest
+ contribution, and best overall ranking, if they achieve \emph{at least a $10\,\%$
  improvement on the PAR-2 score over its base solver in at least one division.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1521,7 +1521,7 @@ The competition chairs are responsible for policy and procedure decisions,
 such as these rules, with input from the co-organizers.
 
 Many others have contributed benchmarks, effort, and feedback.  Clark Barrett,
-Pascal Fontaine, Aina Niemetz and Mathias Preiner are maintaining the SMT-LIB
+Pascal Fontaine, Aina Niemetz, Mathias Preiner, and Hans-Jörg Schurr are maintaining the SMT-LIB
 benchmark library.
 The competition uses a \href{https://github.com/sosy-lab/benchexec}{BenchExec} cluster
 owned by LMU's Software and Computational Systems Lab (SoSy-Lab \url{https://www.sosy-lab.org}),
