@@ -1256,6 +1256,28 @@ iff $e < e'$ or ($e = e'$ and $n
 solutions, which takes precedence over less wall-clock time taken, which takes
 precedence over less CPU time taken.
 
+Additional \emph{presentation-only} metrics computed from
+$\sum_{b\in M} \langle e_b , q_b, n_b , \mathit{aw}_b, w_b, \mathit{ac}_b, c_b\rangle$
+are
+\begin{itemize}[noitemsep]
+  \vspace{-1ex}
+  \item \makebox[6em][l]{$w_{avg} \in [0,T]$}
+    average wall-clock time score in seconds (real-valued)
+  \item \makebox[6em][l]{$c_{avg} \in [0,mT]$}
+    average CPU time score in seconds (real-valued)
+\end{itemize}
+
+\header{Average Wall-Clock Time Score ($\mathbf{w_{avg}}$).}
+The Wall-Clock Time Score averaged among the correctly solved queries,
+that is,
+$w_{avg} = 0$ if $\sum_{b\in M} q_b = 0$,
+otherwise $w_{avg} = (\sum_{b\in M} w_b)/(\sum_{b\in M} q_b)$.
+
+\header{Average CPU Time Score ($\mathbf{c_{avg}}$).}
+The CPU Time Score averaged among the correctly solved queries,
+that is,
+$c_{avg} = 0$ if $\sum_{b\in M} q_b = 0$,
+otherwise $c_{avg} = (\sum_{b\in M} c_b)/(\sum_{b\in M} q_b)$.
 
 \subsubsection{PAR-2 Score}
 The PAR-2 score for a solver in a division is its parallel division score
