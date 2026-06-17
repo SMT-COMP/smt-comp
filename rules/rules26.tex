@@ -1026,18 +1026,20 @@ particular submitted solver.
 \label{sec:benchmark-scoring}
 
 The \textbf{parallel benchmark score} of a solver is a tuple $\langle
-e, n, \it{aw}, w, \it{ac},c\rangle$ with
+e, q, n, \mathit{aw}, w, \mathit{ac},c\rangle$ with
 \begin{itemize}[noitemsep]
   \vspace{-1ex}
   \item \makebox[6em][l]{$e \in \{0, 1\}$}
     number of erroneous results (usually~$e = 0$)
+  \item \makebox[6em][l]{$0 \leq q \leq Q$}
+    number of correct query results
   \item \makebox[6em][l]{$0 \leq n \leq N$}
     number of correct results (resp.~\emph{reduction} for the \ucoretrack)
-  \item \makebox[6em][l]{$\it{aw} \in [0,T]$}
+  \item \makebox[6em][l]{$\mathit{aw} \in [0,T]$}
     actual wall-clock time in seconds (real-valued)
   \item \makebox[6em][l]{$w \in [0,T]$}
     wall-clock time score in seconds (real-valued)
-  \item \makebox[6em][l]{$\it{ac} \in [0, mT]$}
+  \item \makebox[6em][l]{$\mathit{ac} \in [0, mT]$}
     actual CPU time in seconds (real-valued)
   \item \makebox[6em][l]{$c \in [0, mT]$}
     CPU time score in seconds (real-valued)
@@ -1054,10 +1056,13 @@ validated by a selection of other solvers selected by organizers).  For the
 \mvaltrack, $e$ includes, in addition, the number of returned models that are
 not full satisfiable models.
 
+\header{Correctly Solved Queries Score ($\mathbf{q}$).}
+$Q$ is defined as the number of \akey{check-sat} commands (i.e., queries), and
+$q$ is defined as the number of correctly solved queries.
+
 \header{Correctly Solved Score ($\mathbf{n}$).}
 For the \maintrack, \inctrack, \mvaltrack, and \paralleltrack,
-$N$ is defined as the number of \akey{check-sat} commands, and
-$n$ is defined as the number of correct results.
+$N = Q$ and $n = q$.
 For the \ucoretrack, $N$ is defined as the number of named top-level assertions,
 and $n$ is defined as the \emph{reduction}, i.e., the difference between $N$
 and the size of the unsat core.
@@ -1102,11 +1107,11 @@ all available processor cores.  To evaluate sequential performance, we derive a
 the wall-clock time limit~$T$.  A solver result is taken into consideration for
 the sequential score only if the solver process terminates \emph{within} this
 CPU time limit.  More specifically, for a given parallel performance $\langle
-e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined
-as~$\langle e_S, n_S, c_S\rangle$, where
+e, q, n, \mathit{aw}, w, \mathit{ac}, c\rangle$, the corresponding sequential performance is defined
+as~$\langle e_S, q_S, n_S, c_S\rangle$, where
 \begin{itemize}
-\item $e_S = 0$, $n_S = 0$, and $c_S = 0$ if $c > T$;
-\item $e_S = e$, $n_S = n$, and $c_S = c$
+\item $e_S = 0$, $q_S = 0$, $n_S = 0$, and $c_S = 0$ if $c > T$;
+\item $e_S = e$, $q_S = q$, $n_S = n$, and $c_S = c$
   otherwise.\footnote{Under this
   measure, a solver should not benefit from using multiple processor
   cores.  Conceptually, the sequential performance should be (nearly)
@@ -1116,14 +1121,14 @@ as~$\langle e_S, n_S, c_S\rangle$, where
 
 \subsubsection{\maintrack and \paralleltrack}
   For the \maintrack and \paralleltrack, the error score
-  $e$ and the correctly solved score $n$ are defined as
+  $e$ and the correctly solved queries score $q$ are defined as
   \begin{itemize}
-  \item $e=0$ and $n=0$ if the solver
+  \item $e=0$ and $q=0$ if the solver
     \begin{itemize}[noitemsep,nolistsep]
       \item aborts without a response, or
       \item  the result of the \akey{check-sat} command is \texttt{unknown},
     \end{itemize}
-  \item $e=0$ and $n=1$ if the result of the \akey{check-sat} command is
+  \item $e=0$ and $q=1$ if the result of the \akey{check-sat} command is
       \texttt{sat} or \texttt{unsat} and either
     \begin{itemize}[noitemsep,nolistsep]
       \item agrees with the benchmark status,
@@ -1133,7 +1138,7 @@ as~$\langle e_S, n_S, c_S\rangle$, where
         solvers on benchmarks with unknown status are governed in
         Section~\ref{sec:division-scoring}.}
     \end{itemize}
-  \item $e=1$ and $n=0$ if the result of the \akey{check-sat} command is
+  \item $e=1$ and $q=0$ if the result of the \akey{check-sat} command is
     incorrect.
   \end{itemize}
 %
@@ -1157,39 +1162,39 @@ response to \akey{check-sat} commands, but \akey{assert}, \akey{push}
 or \akey{pop} commands might also entail a reasonable amount of
 processing.  For the \inctrack, we have
 \begin{itemize}
-\item $e=1$ and $n=0$ if the solver returns an incorrect result for any
+\item $e=1$ and $q=0$ if the solver returns an incorrect result for any
   \akey{check-sat} command within the time limit,
-\item otherwise, $e=0$ and $n$ is the number of correct results for
+\item otherwise, $e=0$ and $q$ is the number of correct results for
   \akey{check-sat} commands returned by the solver before the time
   limit is reached.
 \end{itemize}
 
 \subsubsection{\ucoretrack}
-  For the \ucoretrack, the error score $e$ and the correctly solved score $n$
+  For the \ucoretrack, the error score $e$, the correctly solved queries score $q$ and the correctly solved score $n$
   are defined as
   \begin{itemize}
-  \item $e=0$ and $n=0$ if the solver
+  \item $e=0$, $q=0$ and $n=0$ if the solver
     \begin{itemize}[noitemsep,nolistsep]
       \item aborts without a response to \akey{check-sat}, or
       \item the result of the \akey{check-sat} command is \texttt{unknown},
       \item the result of the \akey{get-unsat-core} command is not wellformed.
     \end{itemize}
-  \item $e=1$ and  $n=0$ if the result is erroneous according to
+  \item $e=1$, $q=0$ and $n=0$ if the result is erroneous according to
     Section~\ref{sec:exec:unsat-core},
-  \item otherwise, $e=0$ and $n$ is the \emph{reduction} in the number of
+  \item otherwise, $e=0$, $q=1$, and $n$ is the \emph{reduction} in the number of
     formulas, i.e., $n = N$ minus the number of formula names in the
     reported unsatisfiable core.
   \end{itemize}
 
 \subsubsection{\mvaltrack}
-  For the \mvaltrack, the error score $e$ and the correctly solved score $n$
+  For the \mvaltrack, the error score $e$ and the correctly solved score $q$
   are defined as
   \begin{itemize}
-  \item $e=0$ and $n=0$ if the result is UNKNOWN according to the output of
+  \item $e=0$ and $q=0$ if the result is UNKNOWN according to the output of
     the model validating tool described in Section~\ref{sec:exec:model},
-  \item $e=1$ and $n=0$ if the result is INVALID according to the output of
+  \item $e=1$ and $q=0$ if the result is INVALID according to the output of
     the model validating tool described in Section~\ref{sec:exec:model},
-  \item otherwise, $e=0$ and $n=1$.
+  \item otherwise, $e=0$ and $q=1$.
   \end{itemize}
 
 \subsection{Division scoring}
@@ -1213,7 +1218,7 @@ the division.
 \header{Sound Solver.}
 A solver is \emph{sound} on benchmarks with \emph{known status} for a division
 if its parallel performance (Section~\ref{sec:benchmark-scoring}) is of the
-form $\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each benchmark in the division, i.e., if
+form $\langle 0, q, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ for each benchmark in the division, i.e., if
 it did not produce any erroneous results.
 
 \header{Disagreeing Solvers.}
@@ -1239,22 +1244,44 @@ purposes).
 The parallel score for a division is computed for \emph{all} tracks.  It is
 defined for a participating solver in a division with $M$ benchmarks as the sum
 of all the individual parallel benchmark scores:
-$$\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
+$$\sum_{b\in M} \langle e_b , q_b, n_b , \mathit{aw}_b, w_b, \mathit{ac}_b, c_b\rangle.$$
 
 \noindent
 A parallel division score $\langle
-e, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel
-division score\newline $\langle e', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$
+e, q, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ is better than a parallel
+division score\newline $\langle e', q', n', \mathit{aw}', w', \mathit{ac}', c'\rangle$
 iff $e < e'$ or ($e = e'$ and $n
 > n'$) or ($e = e'$ and $n = n'$ and $w < w'$) or ($e = e'$ and $n = n'$ and $w
 = w'$ and $c < c'$).  That is, fewer errors takes precedence over more correct
 solutions, which takes precedence over less wall-clock time taken, which takes
 precedence over less CPU time taken.
 
+Additional \emph{presentation-only} metrics computed from
+$\sum_{b\in M} \langle e_b , q_b, n_b , \mathit{aw}_b, w_b, \mathit{ac}_b, c_b\rangle$
+are
+\begin{itemize}[noitemsep]
+  \vspace{-1ex}
+  \item \makebox[6em][l]{$w_{avg} \in [0,T]$}
+    average wall-clock time score in seconds (real-valued)
+  \item \makebox[6em][l]{$c_{avg} \in [0,mT]$}
+    average CPU time score in seconds (real-valued)
+\end{itemize}
+
+\header{Average Wall-Clock Time Score ($\mathbf{w_{avg}}$).}
+The Wall-Clock Time Score averaged among the correctly solved queries,
+that is,
+$w_{avg} = 0$ if $\sum_{b\in M} q_b = 0$,
+otherwise $w_{avg} = (\sum_{b\in M} w_b)/(\sum_{b\in M} q_b)$.
+
+\header{Average CPU Time Score ($\mathbf{c_{avg}}$).}
+The CPU Time Score averaged among the correctly solved queries,
+that is,
+$c_{avg} = 0$ if $\sum_{b\in M} q_b = 0$,
+otherwise $c_{avg} = (\sum_{b\in M} c_b)/(\sum_{b\in M} q_b)$.
 
 \subsubsection{PAR-2 Score}
 The PAR-2 score for a solver in a division is its parallel division score
-$\langle e, n, \mathit{aw}, w, \mathit{ac}, c \rangle$ where the individual
+$\langle e, q, n, \mathit{aw}, w, \mathit{ac}, c \rangle$ where the individual
 benchmark score components $w_b$ and $c_b$ are penalized by a factor of 2 for
 unsolved benchmarks:
 
@@ -1266,20 +1293,20 @@ and analogously $c_b = \mathit{ac}_b$ if solved, $2mT$ otherwise.
 \subsubsection{Sequential Score}
 
 The sequential score for a division is computed for \emph{all} tracks
-\emph{except} the \inctrack and \paralleltrack.
+\emph{except} the \inctrack and \paralleltrack
 \footnote{Since incremental track benchmarks may be partially
 solved, defining a useful sequential performance for the incremental track
 would require information not provided by the parallel performance, e.g.,
 detailed timing information for each result.  Due to the nature of
 \paralleltrack, we will not consider the sequential
-scores}.  It is defined for a
+scores.}.  It is defined for a
 participating solver in a division with $M$ benchmarks as the sum of all the
 individual sequential benchmark scores:
-$$\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle.$$
+$$\sum_{b\in M} \langle e_b^s, q_b^s, n_b^s, c_b^s\rangle.$$
 
 \noindent
-A sequential division score $\langle e^s, n^s, c^s\rangle$ is better than a
-sequential division score $\langle e^{s'}, n^{s'}, c^{s'}\rangle$ iff
+A sequential division score $\langle e^s, q^s, n^s, c^s\rangle$ is better than a
+sequential division score $\langle e^{s'}, q^{s'}, n^{s'}, c^{s'}\rangle$ iff
 $e^s < e^{s'}$ or ($e^s = e^{s'}$ and $n^s > n^{s'}$) or ($e^s = e^{s'}$ and
 $n_S = n^{s'}$ and $c^s < c^{s'}$).
 That is, fewer errors takes precedence over more correct solutions,
@@ -1322,7 +1349,7 @@ This ranking aims to select the solver that \emph{is most universal}, i.e.,
 solved the largest number of benchmarks after taking the division sizes into
 account.
 
-Let $\langle e^D, n^D, \mathit{aw}^D, w^D, \mathit{ac}^D, c^D \rangle$ be the
+Let $\langle e^D, q_D, n^D, \mathit{aw}^D, w^D, \mathit{ac}^D, c^D \rangle$ be the
 parallel division score for the given solver in the division $D$ (for a given
 scoring system, e.g., number of correct results or reduction). Let $N^D$ be total
 number of benchmarks in division $D$ that were used in the competition. The
@@ -1404,7 +1431,7 @@ solver that would be most missed. This is achieved by computing a
 solver's contribution to the \emph{virtual best solver} for a
 division.
 
-Let $\langle e^s, n^s, \mathit{aw}^s, w^s, \mathit{ac}^s, c^s \rangle$ be the parallel division score
+Let $\langle e^s, q^s, n^s, \mathit{aw}^s, w^s, \mathit{ac}^s, c^s \rangle$ be the parallel division score
 for solver $s$ (for a given scoring system, i.e., $n$ is either number of correct
 results or reduction).
 If the division error score $e^s > 0$, then solver $s$ is considered unsound
@@ -1412,7 +1439,7 @@ and excluded from the ranking.
 If the number of sound competitive solvers~$S$ in a division $D$ is $|S| \leq 2$,
 the division is excluded from the ranking.
 
-Let $\langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s \rangle$ be the parallel benchmark
+Let $\langle e_b^s, q_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s \rangle$ be the parallel benchmark
 score for benchmark $b$ and solver $s$ (for a given scoring system).
 The virtual best solver \emph{correctness score} for a division $D$ with
 competitive sound solvers $S$ is given as
