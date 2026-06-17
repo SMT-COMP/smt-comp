@@ -1266,16 +1266,16 @@ and analogously $c_b = \mathit{ac}_b$ if solved, $2mT$ otherwise.
 \subsubsection{Sequential Score}
 
 The sequential score for a division is computed for \emph{all} tracks
-\emph{except} the \inctrack and \paralleltrack.
+\emph{except} the \inctrack and \paralleltrack
 \footnote{Since incremental track benchmarks may be partially
 solved, defining a useful sequential performance for the incremental track
 would require information not provided by the parallel performance, e.g.,
 detailed timing information for each result.  Due to the nature of
 \paralleltrack, we will not consider the sequential
-scores}.  It is defined for a
+scores.}.  It is defined for a
 participating solver in a division with $M$ benchmarks as the sum of all the
 individual sequential benchmark scores:
-$$\sum_{b\in M} \langle e_b^s, n_b^s, \mathit{aw}_b^s, w_b^s, \mathit{ac}_b^s, c_b^s\rangle.$$
+$$\sum_{b\in M} \langle e_b^s, n_b^s, c_b^s\rangle.$$
 
 \noindent
 A sequential division score $\langle e^s, n^s, c^s\rangle$ is better than a
