@@ -1026,18 +1026,18 @@ particular submitted solver.
 \label{sec:benchmark-scoring}
 
 The \textbf{parallel benchmark score} of a solver is a tuple $\langle
-e, n, \it{aw}, w, \it{ac},c\rangle$ with
+e, n, \mathit{aw}, w,  \mathit{ac},c\rangle$ with
 \begin{itemize}[noitemsep]
   \vspace{-1ex}
   \item \makebox[6em][l]{$e \in \{0, 1\}$}
     number of erroneous results (usually~$e = 0$)
   \item \makebox[6em][l]{$0 \leq n \leq N$}
     number of correct results (resp.~\emph{reduction} for the \ucoretrack)
-  \item \makebox[6em][l]{$\it{aw} \in [0,T]$}
+  \item \makebox[6em][l]{$\mathit{aw} \in [0,T]$}
     actual wall-clock time in seconds (real-valued)
   \item \makebox[6em][l]{$w \in [0,T]$}
     wall-clock time score in seconds (real-valued)
-  \item \makebox[6em][l]{$\it{ac} \in [0, mT]$}
+  \item \makebox[6em][l]{$\mathit{ac} \in [0, mT]$}
     actual CPU time in seconds (real-valued)
   \item \makebox[6em][l]{$c \in [0, mT]$}
     CPU time score in seconds (real-valued)
@@ -1213,7 +1213,7 @@ the division.
 \header{Sound Solver.}
 A solver is \emph{sound} on benchmarks with \emph{known status} for a division
 if its parallel performance (Section~\ref{sec:benchmark-scoring}) is of the
-form $\langle 0, n, \it{aw}, w, \it{ac}, c\rangle$ for each benchmark in the division, i.e., if
+form $\langle 0, n, \mathit{aw}, w, \mathit{ac}, c\rangle$ for each benchmark in the division, i.e., if
 it did not produce any erroneous results.
 
 \header{Disagreeing Solvers.}
@@ -1239,7 +1239,7 @@ purposes).
 The parallel score for a division is computed for \emph{all} tracks.  It is
 defined for a participating solver in a division with $M$ benchmarks as the sum
 of all the individual parallel benchmark scores:
-$$\sum_{b\in M} \langle e_b , n_b , \it{aw}_b, w_b, \it{ac}_b, c_b\rangle.$$
+$$\sum_{b\in M} \langle e_b , n_b , \mathit{aw}_b, w_b, \mathit{ac}_b, c_b\rangle.$$
 
 \noindent
 A parallel division score $\langle
